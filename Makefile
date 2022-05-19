@@ -40,11 +40,13 @@ PANDOC = $(DOCKER_COMMAND) $(DOCKER_VOLUME)     $(DOCKER_USER) --entrypoint="pan
 HUGO   = $(DOCKER_COMMAND) $(DOCKER_VOLUME)     $(DOCKER_USER) --entrypoint="hugo"   $(DOCKER_IMAGE)
 DOT    = $(DOCKER_COMMAND) $(DOCKER_VOLUME)     $(DOCKER_USER) --entrypoint="dot"    $(DOCKER_IMAGE)
 LATEX  = $(DOCKER_COMMAND) $(DOCKER_TEX_VOLUME) $(DOCKER_USER) --entrypoint="latex"  $(DOCKER_IMAGE)
+DELETE-SCRIPT = $(DOCKER_COMMAND) $(DOCKER_VOLUME) $(DOCKER_USER) --entrypoint="/opt/delete-script.rb" $(DOCKER_IMAGE)
 else
 PANDOC = pandoc
 HUGO   = hugo
 DOT    = dot
 LATEX  = cd $(dir $(realpath $<)) && latex
+DELETE-SCRIPT = ./.github/actions/alpine-pandoc-hugo/delete-script.rb
 endif
 
 ## Data-Dir: Path to the Git submodule of Pandoc-Lecture
@@ -225,6 +227,10 @@ distclean: clean-all ## Same as clean-all
 
 .PHONY: clean
 clean: clean-temp ## Same as clean-temp
+
+.PHONY: clean-rem-tags
+clean-rem-tags: ## Run delete-script.rb to remove all <--REM--> blocks
+	$(DELETE-SCRIPT) $(SRC_DIR)
 
 ##@ New Elements
 
