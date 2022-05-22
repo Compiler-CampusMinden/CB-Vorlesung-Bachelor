@@ -207,6 +207,11 @@ web: $(WEB_MARKDOWN_TARGETS) $(WEB_IMAGE_TARGETS) $(WEB_STATIC_TARGETS) $(READIN
 web_zip: web ## Create website and archive
 	cd $(WEB_OUTPUT_DIR) && rm -rf site.zip && zip -r site.zip *
 
+## TODO: temp, should remove
+.PHONY: web_sources
+web_sources:
+	find $(SRC_DIR) -type f -iname '*.md'
+
 ## Build Docker image "alpine-pandoc-hugo"
 .PHONY: docker
 docker: ## Build Docker image "alpine-pandoc-hugo"
