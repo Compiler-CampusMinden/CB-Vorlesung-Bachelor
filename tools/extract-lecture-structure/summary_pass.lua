@@ -131,7 +131,7 @@ function compare_by_weight(a,b)
 	return a.weight < b.weight
 end
 
-function emit_sorted_blocks(bucket)
+function sort_bucket(bucket)
 	if bucket == nil or bucket.chapters == nil then
 		return
 	end
@@ -139,7 +139,57 @@ function emit_sorted_blocks(bucket)
 
 	for i,el in pairs(bucket) do
 		if (type(el)=="table" and el.chapters ~= nil) then
-			emit_sorted_blocks(el)
+			sort_bucket(el)
+		end
+	end
+end
+
+function get_bucket(split_dir, parent_bucket)
+	local count = 0
+	for _ in pairs(split_dir) do count = count + 1 end
+
+	if count == 0 then
+		return parent_bucket
+	end
+
+	if count > 0 then
+		local bucket_name = split_dir[1]
+		print("bucket_name: " .. bucket_name)
+		local bucket = parent_bucket[bucket_name]
+		-- TODO: handle missing bucket
+
+		table.remove(split_dir, 1)
+		return get_bucket(split_dir, bucket)
+	end
+end
+
+function emit_blocks(bucket)
+	-- if bucket has chapters
+	-- 		iterate over chapters
+	-- 		if chapter-entry is index
+	-- 			emit index-block
+	-- 			iterate over chapters of topic denoted by index
+	-- 		if chapter-entry is chapter
+	-- 			emit chapter-slides
+
+	if (bucket["chapters"] ~= nil) then
+		for i, el in pairs(bucket["chapters"]) do
+			if el.index ~= nil then
+				table.insert(blocks, el.index)
+				local split_dir = pandoc.path.split(el.index.attributes.dir)
+				print("getting bucket for " .. el.index.attributes.dir)
+				index_bucket = get_bucket(split_dir, directory_buckets)
+				rPrint(index_bucket)
+				emit_blocks(index_bucket)
+			elseif el.chapter ~= nil then
+				table.insert(blocks, el.chapter)
+				local slide_container_name = get_slide_container_name(el.chapter)
+				print("container name: ".. slide_container_name)
+				local slides = slide_container[slide_container_name]
+				for i,slide in pairs(slides) do
+					table.insert(blocks, slide)
+				end
+			end
 		end
 	end
 end
@@ -212,6 +262,10 @@ function put_chapter(chapter)
 	})
 end
 
+function get_slide_container_name(header)
+	return header.attributes.dir .. pandoc.utils.stringify(header.content)
+end
+
 function Pandoc(doc)
 	local top_level_headings = {}
 	local last_chapter_or_index_name = "none"
@@ -224,13 +278,13 @@ function Pandoc(doc)
 			local split_dir =  pandoc.path.split(el.attributes.dir)
 			create_dir_buckets(split_dir,nil)
 
-			last_chapter_or_index_name = el.attributes.dir .. pandoc.utils.stringify(el.content)
+			last_chapter_or_index_name = get_slide_container_name(el)
 			print(last_chapter_or_index_name)
 
 			put_index(el)
 			--table.insert(top_level_headings, el)
 		elseif el.t == "Header" and el.level == 2 then
-			last_chapter_or_index_name = el.attributes.dir .. pandoc.utils.stringify(el.content)
+			last_chapter_or_index_name = get_slide_container_name(el)
 
 			local split_dir =  pandoc.path.split(el.attributes.dir)
 			create_dir_buckets(split_dir,nil)
@@ -256,14 +310,17 @@ function Pandoc(doc)
 	print("----------------------AFTER TRANSFORMATION----------------------")
 	rPrint(directory_buckets)
 
-	emit_sorted_blocks(directory_buckets["markdown"])
+	sort_bucket(directory_buckets["markdown"])
 	print("----------------------AFTER SORTING----------------------")
 
 	rPrint(directory_buckets)
 	--print("AFTER TRANSFORMATION")
 	--print_subbuckets(directory_buckets,0)
+	print("----------------------EMITTING BLOCKS----------------------")
+	emit_blocks(directory_buckets["markdown"])
 
-	return doc
+	return pandoc.Pandoc(blocks)
+	--return doc
 end
 
 return {
