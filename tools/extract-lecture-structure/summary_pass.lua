@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 -- how to handle subtopics?
 -- put index-headlines into buckets -> based on directory parts
 -- 		for each level! -> store chapter_weights of index-headlines in
@@ -6,6 +7,51 @@
 -- after that, we have the order, but we need to collect the slides and sort all
 -- accordingly -> could be done in same pass as bucketing -> if it is not a
 -- topic or title, it is a slide -> put in table for last encountered chapter / topic
+
+
+
+-- TODO: update
+	-- aktuelle Struktur:
+	-- bucket: markdown
+	-- {
+	--   bucket: semantics
+	--   {
+	--   	index = {..., chapater_weight = 4}
+	--   	bucket: symboltables
+	--   	{
+	--			index = {..., chapter_weight = 4},
+	--			chapters =
+	--			{
+	--				1 = {..., chapter_weight = 1},
+	--				2 = {..., chapter_weight = 2}
+	--			}
+	--   	},
+	--   	chapters =
+	--   	{
+	--   		1 = {..., chapter_weight = 1},
+	--   		2 = {..., chapter_weight = 3}
+	--   	}
+	--   }
+	-- }
+	--
+	-- Lösung:;
+	-- - jeder chapters-eintrag bekommt ein weight-feld
+	-- - jeder subbucket mit index wird auch als chapters-eintrag mit weight
+	-- hinzugefügt
+	--#
+function rPrint(s, l, i) -- recursive Print (structure, limit, indent)
+	l = (l) or 100; i = i or "";	-- default item limit, indent string
+	if (l<1) then print "ERROR: Item limit reached."; return l-1 end;
+	local ts = type(s);
+	if (ts ~= "table") then print (i,ts,s); return l-1 end
+	print (i,ts);           -- print "table"
+	for k,v in pairs(s) do  -- print "[KEY] VALUE"
+		l = rPrint(v, l, i.."\t["..tostring(k).."]");
+		if (l < 0) then break end
+	end
+	return l
+end
+
 
 directory_buckets = {}
 slide_container = {}
@@ -36,28 +82,63 @@ function create_dir_buckets(split_dir, parent)
 	end
 end
 
-function compare_buckets_by_index(a,b)
-	return a.index.attributes.chapter_weight < b.index.attributes.chapter_weight
-end
+function subbucket_to_chapter(bucket)
+	local indices_to_add = {}
+	local add_count = 0
 
-function compare_by_chapter_weight(a,b)
-	return a.attributes.chapter_weight < b.attributes.chapter_weight
-end
+	for i,el in pairs(bucket) do
+		print("visitting key-value: " .. tostring(i))
+		if i ~= "index" and i ~= "chapters" then
+			print("entering: " .. tostring(i))
+			if (el.index ~= nil) then
 
-function emit_sorted_blocks(bucket)
-	-- every bucket has potentially an index and chapters
-	-- chapters are stored in one list
-	-- topics (indices) are stored in multiple lists..
-	-- TODO: to improve comparability, should store a "weight" field for all, that
-	-- should be sorted..
+				print("converting index of " .. tostring(i))
+				local weight = el.index.attributes.chapter_weight
 
-	if (bucket.index ~= nil) then
-		print("sorting")
-		table.sort(bucket, compare_by_chapter_weight)
+				table.insert(
+				indices_to_add,
+				{
+					weight=weight,
+					index=el.index
+				})
+				add_count = add_count + 1
+			end
+		end
 	end
 
 	for i,el in pairs(bucket) do
-		if (type(el)=="table" and el.index ~= nil) then
+		if i ~= "index" and i ~= "chapters" then
+			if (el.index ~= nil) then
+				subbucket_to_chapter(el)
+			end
+		end
+	end
+
+	if add_count > 0 then
+		if (bucket["chapters"] == nil) then
+			bucket["chapters"] = {}
+		end
+		for i,el in pairs(indices_to_add) do
+			table.insert(
+			bucket["chapters"],
+			el
+			)
+		end
+	end
+end
+
+function compare_by_weight(a,b)
+	return a.weight < b.weight
+end
+
+function emit_sorted_blocks(bucket)
+	if bucket == nil or bucket.chapters == nil then
+		return
+	end
+	table.sort(bucket["chapters"], compare_by_weight)
+
+	for i,el in pairs(bucket) do
+		if (type(el)=="table" and el.chapters ~= nil) then
 			emit_sorted_blocks(el)
 		end
 	end
@@ -78,11 +159,20 @@ function print_subbuckets(bucket, indentation)
 		end
 		if (i=="chapters") then
 			for n, c in pairs(bucket[i]) do
-				local chapter_str = pandoc.utils.stringify(c)
-				local weight = pandoc.utils.stringify(c.attributes.chapter_weight)
-				print(prefix.."chapter: " .. chapter_str .. " " .. weight)
+				local chapter_str
+				= c.chapter ~= nil
+				and pandoc.utils.stringify(c.chapter)
+				or pandoc.utils.stringify(c.index)
+
+				local weight = pandoc.utils.stringify(c.weight)
+				local msg = prefix.."chapter: " .. chapter_str .. " " .. weight
+				if (c.index ~= nil) then
+					msg = msg .. " (was index)"
+				end
+				print(msg)
 			end
 		end
+
 		if (i~= "chapters" and i~= "index" and  type(el) == "table") then
 			print_subbuckets(el, indentation + 1)
 		end
@@ -113,7 +203,13 @@ function put_chapter(chapter)
 	if (bucket["chapters"] == nil) then
 		bucket["chapters"] = {}
 	end
-	table.insert(bucket["chapters"], chapter)
+
+	table.insert
+	(bucket["chapters"],
+	{
+		weight=chapter.attributes.chapter_weight,
+		chapter=chapter
+	})
 end
 
 function Pandoc(doc)
@@ -151,12 +247,21 @@ function Pandoc(doc)
 		end
 	end
 
-	print_subbuckets(directory_buckets,0)
+	rPrint(directory_buckets)
+
+	--print_subbuckets(directory_buckets,0)
+
+	subbucket_to_chapter(directory_buckets["markdown"])
+
+	print("----------------------AFTER TRANSFORMATION----------------------")
+	rPrint(directory_buckets)
 
 	emit_sorted_blocks(directory_buckets["markdown"])
+	print("----------------------AFTER SORTING----------------------")
 
-	print("AFTER SORTING")
-	print_subbuckets(directory_buckets,0)
+	rPrint(directory_buckets)
+	--print("AFTER TRANSFORMATION")
+	--print_subbuckets(directory_buckets,0)
 
 	return doc
 end
