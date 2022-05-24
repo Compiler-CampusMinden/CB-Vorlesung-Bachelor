@@ -13,10 +13,9 @@ pandoc.path = require 'pandoc.path'
 Blocks = {}
 
 function Header(header)
-	-- TODO: don't use magic number
+	-- header level 1 is used for topics ("lexer", "parser")
+	-- header level 2 is used for chapters("LL-Parsing", "LR-Parsing")
 	header.level = header.level + 2
-	local str = pandoc.utils.stringify(header)
-	print("insert header" .. str)
 	table.insert(Blocks, header)
 end
 
@@ -53,7 +52,7 @@ function Meta(meta)
 		{
 			chapter_weight=weight,
 			dir=directory,
-			is_index=is_index_str--,
+			is_index=is_index_str
 		})
 		table.insert(Blocks, meta_header)
 	end
