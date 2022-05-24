@@ -1,57 +1,18 @@
 ---@diagnostic disable: undefined-global
--- how to handle subtopics?
--- put index-headlines into buckets -> based on directory parts
--- 		for each level! -> store chapter_weights of index-headlines in
--- after that, sort the entries in each bucket only in the bucket (based on weight)
--- 		for each bucket level
--- after that, we have the order, but we need to collect the slides and sort all
--- accordingly -> could be done in same pass as bucketing -> if it is not a
--- topic or title, it is a slide -> put in table for last encountered chapter / topic
-
-
-
--- TODO: update
-	-- aktuelle Struktur:
-	-- bucket: markdown
-	-- {
-	--   bucket: semantics
-	--   {
-	--   	index = {..., chapater_weight = 4}
-	--   	bucket: symboltables
-	--   	{
-	--			index = {..., chapter_weight = 4},
-	--			chapters =
-	--			{
-	--				1 = {..., chapter_weight = 1},
-	--				2 = {..., chapter_weight = 2}
-	--			}
-	--   	},
-	--   	chapters =
-	--   	{
-	--   		1 = {..., chapter_weight = 1},
-	--   		2 = {..., chapter_weight = 3}
-	--   	}
-	--   }
-	-- }
-	--
-	-- Lösung:;
-	-- - jeder chapters-eintrag bekommt ein weight-feld
-	-- - jeder subbucket mit index wird auch als chapters-eintrag mit weight
-	-- hinzugefügt
-	--#
-function rPrint(s, l, i) -- recursive Print (structure, limit, indent)
-	l = (l) or 100; i = i or "";	-- default item limit, indent string
-	if (l<1) then print "ERROR: Item limit reached."; return l-1 end;
-	local ts = type(s);
-	if (ts ~= "table") then print (i,ts,s); return l-1 end
-	print (i,ts);           -- print "table"
-	for k,v in pairs(s) do  -- print "[KEY] VALUE"
-		l = rPrint(v, l, i.."\t["..tostring(k).."]");
-		if (l < 0) then break end
-	end
-	return l
-end
-
+--
+-- This filter will take several steps to create the summary of the lecture structure
+-- in the correct ordering (because processing order of the files seems to be non-deterministic
+-- and generally does not represent the order of chapters in the lecture)
+--
+-- 1. create "buckets" based on path of the heading; this helps associating slides
+-- 	  with subtopics
+-- 2. collect all normal slides and store them in `slide_container` to create an
+--    an association between chapter title and slides
+-- 3. add _index.md in the "chapters"-key of the bucket, which corresponds to the
+-- 	  parent-directory
+-- 4. add chapters to the "chapters"-key of buckets
+-- 5. sort chapters, based on weight (extracted from original meta-blocks)
+-- 6. emit blocks according to sorted buckets (lookup in `slide_container`)
 
 directory_buckets = {}
 slide_container = {}
@@ -60,17 +21,98 @@ blocks = {}
 pandoc.utils = require 'pandoc.utils'
 pandoc.path = require 'pandoc.path'
 
-function Header(header)
-	local title = pandoc.utils.stringify(header.content)
-	local level = pandoc.utils.stringify(header.level)
-	print(title .. " " .. level)
+function Pandoc(doc)
+	local last_chapter_or_index_name = "none"
+
+	for _,el in pairs(doc.blocks) do
+		if el.t == "Header" and el.attributes.is_index == "true" then
+			-- bucketing
+			local split_dir =  pandoc.path.split(el.attributes.dir)
+			Create_dir_buckets(split_dir,nil)
+
+			last_chapter_or_index_name = Get_slide_container_name(el)
+
+			Put_index(el)
+		elseif el.t == "Header" and el.level == 2 then
+			last_chapter_or_index_name = Get_slide_container_name(el)
+
+			local split_dir =  pandoc.path.split(el.attributes.dir)
+			Create_dir_buckets(split_dir,nil)
+
+			Put_chapter(el)
+		elseif el.t == "Header" and el.level > 2 then
+			if (slide_container[last_chapter_or_index_name] == nil) then
+				slide_container[last_chapter_or_index_name] = {el}
+			else
+				table.insert(slide_container[last_chapter_or_index_name], el)
+			end
+		end
+	end
+
+	Sort_bucket(directory_buckets["markdown"])
+	print("----------------------EXTRACTED STRUCTURE----------------------")
+	RecPrint(directory_buckets)
+	print("----------------------EMITTING BLOCKS----------------------")
+	Emit_blocks(directory_buckets["markdown"])
+
+	local blocks_without_attrs = {}
+	for _,b in pairs(blocks) do
+		local new_block = pandoc.Header(b.level, b.content)
+		table.insert(blocks_without_attrs, new_block)
+	end
+
+	return pandoc.Pandoc(blocks_without_attrs)
 end
 
-function create_dir_buckets(split_dir, parent)
+function Emit_blocks(bucket, root_level)
+	-- if bucket has chapters
+	-- 		iterate over chapters
+	-- 		if chapter-entry is index
+	-- 			emit index-block
+	-- 			iterate over chapters of topic denoted by index
+	-- 		if chapter-entry is chapter
+	-- 			emit chapter-slides
+
+	local level_offset = root_level ~= nil and root_level or 0
+
+	if (bucket["chapters"] ~= nil) then
+		for _, el in pairs(bucket["chapters"]) do
+			if el.index ~= nil then
+				local index_block = el.index
+				index_block.level = index_block.level + level_offset
+
+				local content = pandoc.utils.stringify(index_block.content)
+				index_block.content = "Topic: "..content
+
+				table.insert(blocks, el.index)
+				local split_dir = pandoc.path.split(el.index.attributes.dir)
+
+				local index_bucket = Get_bucket(split_dir, directory_buckets)
+				Emit_blocks(index_bucket, level_offset + 1)
+			elseif el.chapter ~= nil then
+				local chapter = el.chapter
+				chapter.level = chapter.level + level_offset - 1
+
+				local slide_container_name = Get_slide_container_name(el.chapter)
+				local slides = slide_container[slide_container_name]
+
+				local content = pandoc.utils.stringify(chapter.content)
+				chapter.content = "Chapter: "..content
+				table.insert(blocks, chapter)
+
+				for _,slide in pairs(slides) do
+					slide.level = slide.level + level_offset - 1
+					table.insert(blocks, slide)
+				end
+			end
+		end
+	end
+end
+
+function Create_dir_buckets(split_dir, parent)
 	local count = 0
 	for _ in pairs(split_dir) do count = count + 1 end
 	if count > 0 then
-		local str = pandoc.utils.stringify(split_dir)
 		local bucket_name = split_dir[1]
 		table.remove(split_dir, 1)
 
@@ -78,73 +120,28 @@ function create_dir_buckets(split_dir, parent)
 		if (bucket[bucket_name] == nil) then
 			bucket[bucket_name] = {}
 		end
-		create_dir_buckets(split_dir, bucket[bucket_name])
+		Create_dir_buckets(split_dir, bucket[bucket_name])
 	end
 end
 
-function subbucket_to_chapter(bucket)
-	local indices_to_add = {}
-	local add_count = 0
-
-	for i,el in pairs(bucket) do
-		print("visitting key-value: " .. tostring(i))
-		if i ~= "index" and i ~= "chapters" then
-			print("entering: " .. tostring(i))
-			if (el.index ~= nil) then
-
-				print("converting index of " .. tostring(i))
-				local weight = el.index.attributes.chapter_weight
-
-				table.insert(
-				indices_to_add,
-				{
-					weight=weight,
-					index=el.index
-				})
-				add_count = add_count + 1
-			end
-		end
-	end
-
-	for i,el in pairs(bucket) do
-		if i ~= "index" and i ~= "chapters" then
-			if (el.index ~= nil) then
-				subbucket_to_chapter(el)
-			end
-		end
-	end
-
-	if add_count > 0 then
-		if (bucket["chapters"] == nil) then
-			bucket["chapters"] = {}
-		end
-		for i,el in pairs(indices_to_add) do
-			table.insert(
-			bucket["chapters"],
-			el
-			)
-		end
-	end
-end
-
-function compare_by_weight(a,b)
+function Compare_by_weight(a,b)
 	return a.weight < b.weight
 end
 
-function sort_bucket(bucket)
+function Sort_bucket(bucket)
 	if bucket == nil or bucket.chapters == nil then
 		return
 	end
-	table.sort(bucket["chapters"], compare_by_weight)
+	table.sort(bucket["chapters"], Compare_by_weight)
 
-	for i,el in pairs(bucket) do
+	for _,el in pairs(bucket) do
 		if (type(el)=="table" and el.chapters ~= nil) then
-			sort_bucket(el)
+			Sort_bucket(el)
 		end
 	end
 end
 
-function get_bucket(split_dir, parent_bucket)
+function Get_bucket(split_dir, parent_bucket)
 	local count = 0
 	for _ in pairs(split_dir) do count = count + 1 end
 
@@ -154,100 +151,43 @@ function get_bucket(split_dir, parent_bucket)
 
 	if count > 0 then
 		local bucket_name = split_dir[1]
-		print("bucket_name: " .. bucket_name)
 		local bucket = parent_bucket[bucket_name]
 		-- TODO: handle missing bucket
 
 		table.remove(split_dir, 1)
-		return get_bucket(split_dir, bucket)
+		return Get_bucket(split_dir, bucket)
 	end
 end
 
-function emit_blocks(bucket)
-	-- if bucket has chapters
-	-- 		iterate over chapters
-	-- 		if chapter-entry is index
-	-- 			emit index-block
-	-- 			iterate over chapters of topic denoted by index
-	-- 		if chapter-entry is chapter
-	-- 			emit chapter-slides
 
-	if (bucket["chapters"] ~= nil) then
-		for i, el in pairs(bucket["chapters"]) do
-			if el.index ~= nil then
-				table.insert(blocks, el.index)
-				local split_dir = pandoc.path.split(el.index.attributes.dir)
-				print("getting bucket for " .. el.index.attributes.dir)
-				index_bucket = get_bucket(split_dir, directory_buckets)
-				rPrint(index_bucket)
-				emit_blocks(index_bucket)
-			elseif el.chapter ~= nil then
-				table.insert(blocks, el.chapter)
-				local slide_container_name = get_slide_container_name(el.chapter)
-				print("container name: ".. slide_container_name)
-				local slides = slide_container[slide_container_name]
-				for i,slide in pairs(slides) do
-					table.insert(blocks, slide)
-				end
-			end
-		end
-	end
-end
-
-function print_subbuckets(bucket, indentation)
-	local prefix = ""
-	for i=0, tonumber(indentation) do
-		prefix = prefix.."  "
-	end
-	for i,el in pairs(bucket) do
-
-		print(prefix.."bucket: "..i)
-		if (el.index ~= nil) then
-			local index_str = pandoc.utils.stringify(el.index)
-			local index_weight = pandoc.utils.stringify(el.index.attributes.chapter_weight)
-			print(prefix.."index: ".. index_str .. " " .. index_weight)
-		end
-		if (i=="chapters") then
-			for n, c in pairs(bucket[i]) do
-				local chapter_str
-				= c.chapter ~= nil
-				and pandoc.utils.stringify(c.chapter)
-				or pandoc.utils.stringify(c.index)
-
-				local weight = pandoc.utils.stringify(c.weight)
-				local msg = prefix.."chapter: " .. chapter_str .. " " .. weight
-				if (c.index ~= nil) then
-					msg = msg .. " (was index)"
-				end
-				print(msg)
-			end
-		end
-
-		if (i~= "chapters" and i~= "index" and  type(el) == "table") then
-			print_subbuckets(el, indentation + 1)
-		end
-	end
-end
-
-function put_index(index)
-	print("put index")
-
+function Put_index(index)
+	-- put in "chapters" key of bucket "above"
 	local bucket = directory_buckets
 	local split_dir = pandoc.path.split(index.attributes.dir)
-	for i,el in pairs(split_dir) do
-		print (el)
+	local split_dir_count = 0
+	for _ in pairs(split_dir) do split_dir_count = split_dir_count + 1 end
+	table.remove(split_dir, split_dir_count)
+
+	for _,el in pairs(split_dir) do
 		bucket = bucket[el]
 	end
-	bucket["index"] = index
+	if (bucket["chapters"] == nil) then
+		bucket["chapters"] = {}
+	end
+
+	local weight = index.attributes.chapter_weight
+	table.insert(
+	bucket["chapters"],
+	{
+		weight=weight,
+		index=index
+	})
 end
 
-function put_chapter(chapter)
-	print("put chapter")
-
+function Put_chapter(chapter)
 	local bucket = directory_buckets
 	local split_dir = pandoc.path.split(chapter.attributes.dir)
-	for i,el in pairs(split_dir) do
-		print (el)
+	for _,el in pairs(split_dir) do
 		bucket = bucket[el]
 	end
 	if (bucket["chapters"] == nil) then
@@ -262,69 +202,25 @@ function put_chapter(chapter)
 	})
 end
 
-function get_slide_container_name(header)
+function Get_slide_container_name(header)
 	return header.attributes.dir .. pandoc.utils.stringify(header.content)
 end
 
-function Pandoc(doc)
-	local top_level_headings = {}
-	local last_chapter_or_index_name = "none"
-
-	for i,el in pairs(doc.blocks) do
-		if el.t == "Header" and el.attributes.is_index == "true" then
-			-- bucketing
-
-			print("index")
-			local split_dir =  pandoc.path.split(el.attributes.dir)
-			create_dir_buckets(split_dir,nil)
-
-			last_chapter_or_index_name = get_slide_container_name(el)
-			print(last_chapter_or_index_name)
-
-			put_index(el)
-			--table.insert(top_level_headings, el)
-		elseif el.t == "Header" and el.level == 2 then
-			last_chapter_or_index_name = get_slide_container_name(el)
-
-			local split_dir =  pandoc.path.split(el.attributes.dir)
-			create_dir_buckets(split_dir,nil)
-
-			print(last_chapter_or_index_name)
-
-			put_chapter(el)
-		elseif el.t == "Header" and el.level > 2 then
-			if (slide_container[last_chapter_or_index_name] == nil) then
-				slide_container[last_chapter_or_index_name] = {el}
-			else
-				table.insert(slide_container[last_chapter_or_index_name], el)
-			end
-		end
+-- for debug
+function RecPrint(s, l, i) -- recursive Print (structure, limit, indent)
+	l = (l) or 100; i = i or "";	-- default item limit, indent string
+	if (l<1) then print "ERROR: Item limit reached."; return l-1 end;
+	local ts = type(s);
+	if (ts ~= "table") then print (i,ts,s); return l-1 end
+	print (i,ts);           -- print "table"
+	for k,v in pairs(s) do  -- print "[KEY] VALUE"
+		l = RecPrint(v, l, i.."\t["..tostring(k).."]");
+		if (l < 0) then break end
 	end
-
-	rPrint(directory_buckets)
-
-	--print_subbuckets(directory_buckets,0)
-
-	subbucket_to_chapter(directory_buckets["markdown"])
-
-	print("----------------------AFTER TRANSFORMATION----------------------")
-	rPrint(directory_buckets)
-
-	sort_bucket(directory_buckets["markdown"])
-	print("----------------------AFTER SORTING----------------------")
-
-	rPrint(directory_buckets)
-	--print("AFTER TRANSFORMATION")
-	--print_subbuckets(directory_buckets,0)
-	print("----------------------EMITTING BLOCKS----------------------")
-	emit_blocks(directory_buckets["markdown"])
-
-	return pandoc.Pandoc(blocks)
-	--return doc
+	return l
 end
 
 return {
   traverse = 'topdown',
-  --{ Header = Header},
   { Pandoc = Pandoc},
 }

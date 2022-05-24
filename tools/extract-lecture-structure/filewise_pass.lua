@@ -6,10 +6,7 @@
 -- If the file is an "_index.md" file, it is a top-level
 -- topic landing page, which can be used to extract the
 -- chapter-name
-
--- TODO: how to handle sub-topics (e.g. symboltables)
--- 	use path length somehow
-
+--
 ---@diagnostic disable: undefined-global
 pandoc.utils = require 'pandoc.utils'
 pandoc.path = require 'pandoc.path'
@@ -27,10 +24,11 @@ function Meta(meta)
 	local input_file = PANDOC_STATE.input_files
 	local input_file_as_str = pandoc.utils.stringify(input_file)
 	print("Called filewise_filter for: " .. input_file_as_str)
+
 	local split_path = pandoc.path.split(input_file_as_str)
 	local path_length = 0
 	for _ in pairs(split_path) do path_length = path_length + 1 end
-	--print("Path length: " .. path_length)
+
 	local directory = pandoc.path.directory(input_file_as_str)
 	local file_name = pandoc.path.filename(input_file_as_str)
 	local is_index = file_name == "_index.md"
@@ -56,13 +54,7 @@ function Meta(meta)
 			chapter_weight=weight,
 			dir=directory,
 			is_index=is_index_str--,
-			--path_length=path_length
 		})
-
-		local str = pandoc.utils.stringify(meta_header)
-		print("inserting meta-header" .. str)
-
-		--print(pandoc.utils.stringify(meta_header.content))
 		table.insert(Blocks, meta_header)
 	end
 end
