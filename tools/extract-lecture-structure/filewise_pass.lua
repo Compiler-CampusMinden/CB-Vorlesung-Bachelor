@@ -11,6 +11,7 @@
 pandoc.utils = require 'pandoc.utils'
 pandoc.path = require 'pandoc.path'
 Blocks = {}
+Skip = false
 
 function Header(header)
 	-- header level 1 is used for topics ("lexer", "parser")
@@ -40,8 +41,10 @@ function Meta(meta)
 	-- skip files with hidden attribute or no title
 	if (meta.hidden ~= nil and meta.hidden == true) then
 		print("Skipping file due to 'hidden' attribute")
+		Skip = true
 	elseif (meta.title == nil) then
 		print("Skipping file due to missing title")
+		Skip = true
 	else
 		local weight = meta.weight ~= nil and pandoc.utils.stringify(meta.weight) or "0"
 		local title = meta.title ~= nil and pandoc.utils.stringify(meta.title) or "no title"
@@ -60,7 +63,11 @@ end
 
 ---@diagnostic disable-next-line: unused-local
 function Pandoc(doc)
-	return pandoc.Pandoc(Blocks)
+	if (Skip) then
+		return pandoc.Pandoc({})
+	else
+		return pandoc.Pandoc(Blocks)
+	end
 end
 
 return {
