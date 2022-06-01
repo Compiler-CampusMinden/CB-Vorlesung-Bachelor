@@ -200,9 +200,6 @@ list-slides: ## List available targets for individual slides
 	$(foreach target,$(SLIDES_SHORT_TARGETS), $(info $(target)))
 	@: ## Suppress 'Nothing to be done for ...' message
 
-.PHONY: structure
-structure: $(STRUCTURE_SUMMARY_PDF) ## Extract structure of the whole lecture series to a pdf
-
 ##@ Building
 
 ## Make everything
@@ -326,23 +323,6 @@ $(WEB_MARKDOWN_TARGETS): $(WEB_INTERMEDIATE_DIR)/%: $(SRC_DIR)/%
 	$(create-folder)
 	$(PANDOC) $(PANDOC_DIRS) -d hugo $< -o $@
 
-## Extract the structure (title and headings) from each session
-$(STRUCTURE_TARGETS): $(STRUCTURE_TEMP_DIR)/%: $(SRC_DIR)/%
-	$(create-folder)
-	$(PANDOC) $(PANDOC_DIRS) $< --lua-filter=extract_filewise.lua -o $@
-
-## Summarize the structure of the whole lecture series in one markdown file
-$(STRUCTURE_SUMMARY): $(STRUCTURE_TARGETS)
-	$(PANDOC) $(PANDOC_DIRS) $(STRUCTURE_TARGETS) --lua-filter=extract_summary.lua -o $@
-
-## Convert summery of whole lecture to pdf
-$(STRUCTURE_SUMMARY_TEMP_PDF): $(STRUCTURE_SUMMARY)
-	$(PANDOC) $(PANDOC_DIRS) $(STRUCTURE_SUMMARY) -o $(STRUCTURE_SUMMARY_TEMP_PDF) --number-sections
-
-## Copy structure from temp directory to 'structure' directory
-$(STRUCTURE_SUMMARY_PDF): $(STRUCTURE_SUMMARY_TEMP_PDF) ## extract structure of all lectures to a pdf
-	$(create-dir-and-copy)
-
 ## Copy static files to $(WEB_INTERMEDIATE_DIR)
 $(WEB_STATIC_TARGETS): $(WEB_INTERMEDIATE_DIR)/%: $(SRC_DIR)/%
 	$(create-dir-and-copy)
@@ -377,3 +357,22 @@ $(SLIDES_SINGLE_PDF_TARGETS): $$(filter $$(dir $$(patsubst $(SLIDES_OUTPUT_DIR)/
 delete-rem-tags: ## Run delete-script.rb to remove all <--REM--> blocks
 	$(DELETE_SCRIPT) $(SRC_DIR)
 
+.PHONY: structure
+structure: $(STRUCTURE_SUMMARY_PDF) ## Extract structure of the whole lecture series to a pdf
+
+## Extract the structure (title and headings) from each session
+$(STRUCTURE_TARGETS): $(STRUCTURE_TEMP_DIR)/%: $(SRC_DIR)/%
+	$(create-folder)
+	$(PANDOC) $(PANDOC_DIRS) $< --lua-filter=extract_filewise.lua -o $@
+
+## Summarize the structure of the whole lecture series in one markdown file
+$(STRUCTURE_SUMMARY): $(STRUCTURE_TARGETS)
+	$(PANDOC) $(PANDOC_DIRS) $(STRUCTURE_TARGETS) --lua-filter=extract_summary.lua -o $@
+
+## Convert summery of whole lecture to pdf
+$(STRUCTURE_SUMMARY_TEMP_PDF): $(STRUCTURE_SUMMARY)
+	$(PANDOC) $(PANDOC_DIRS) $(STRUCTURE_SUMMARY) -o $(STRUCTURE_SUMMARY_TEMP_PDF) --number-sections
+
+## Copy structure from temp directory to 'structure' directory
+$(STRUCTURE_SUMMARY_PDF): $(STRUCTURE_SUMMARY_TEMP_PDF) ## extract structure of all lectures to a pdf
+	$(create-dir-and-copy)
