@@ -163,8 +163,8 @@ SLIDES_SINGLE_PDF_TARGETS      = $(addprefix $(SLIDES_OUTPUT_DIR)/,$(subst /,_, 
 ## Convenience targets
 SLIDES_MARKDOWN_TARGETS        = $(SLIDES_BUNDLE_MARKDOWN_SOURCES:$(SRC_DIR)%=$(SLIDES_INTERMEDIATE_DIR)%) $(SLIDES_SINGLE_MARKDOWN_SOURCES:$(SRC_DIR)%=$(SLIDES_INTERMEDIATE_DIR)%)
 SLIDES_SHORT_TARGETS           = $(patsubst $(SLIDES_OUTPUT_DIR)/%.pdf,%,$(SLIDES_BUNDLE_PDF_TARGETS)) $(patsubst $(SLIDES_OUTPUT_DIR)/%.pdf,%,$(SLIDES_SINGLE_PDF_TARGETS))
-## Lecture structure extraction targets (temporary files, which will contain only the session-title and headings)
-STRUCTURE_TARGETS = $(WEB_MARKDOWN_SOURCES:$(SRC_DIR)%=$(STRUCTURE_TEMP_DIR)%)
+## Lecture structure extraction targets
+STRUCTURE_TARGETS              = $(WEB_MARKDOWN_SOURCES:$(SRC_DIR)%=$(STRUCTURE_TEMP_DIR)%)
 
 ## Readings data template
 READINGS = data/readings.yaml
