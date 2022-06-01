@@ -228,10 +228,6 @@ distclean: clean-all ## Same as clean-all
 .PHONY: clean
 clean: clean-temp ## Same as clean-temp
 
-.PHONY: clean-rem-tags
-clean-rem-tags: ## Run delete-script.rb to remove all <--REM--> blocks
-	$(DELETE-SCRIPT) $(SRC_DIR)
-
 ##@ New Elements
 
 ## Create new lecture stub based on archetype
@@ -337,3 +333,10 @@ $(SLIDES_SINGLE_PDF_TARGETS): $$(patsubst $(SLIDES_OUTPUT_DIR)/%.pdf,$(SLIDES_IN
 	$(create-folder)
 	$(PANDOC) $(PANDOC_DIRS) -d slides $< -o $@
 $(SLIDES_SINGLE_PDF_TARGETS): $$(filter $$(dir $$(patsubst $(SLIDES_OUTPUT_DIR)/%.pdf,$(SLIDES_INTERMEDIATE_DIR)/%, $$(subst _,/,$$@)))%, $(SLIDES_IMAGE_TARGETS))
+
+##@ Structure
+
+.PHONY: delete-rem-tags
+delete-rem-tags: ## Run delete-script.rb to remove all <--REM--> blocks
+	$(DELETE-SCRIPT) $(SRC_DIR)
+
