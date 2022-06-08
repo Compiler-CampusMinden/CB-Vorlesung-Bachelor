@@ -1,3 +1,4 @@
+<!-- REM
 ---
 type: lecture-cg
 title: "Bytecode und Virtuelle Maschinen"
@@ -9,3 +10,4 @@ weight: 4
 ## Bytecode und Virtuelle Maschinen
 
 -- Vortragsthema --
+REM -->

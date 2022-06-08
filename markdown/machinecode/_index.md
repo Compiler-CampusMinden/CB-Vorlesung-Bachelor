@@ -1,3 +1,4 @@
+<!-- REM
 ---
 chapter: true
 title: "Generierung von Maschinencode"
@@ -12,3 +13,4 @@ Dieses Kapitel betrachtet verschiedene Aspekte bei der Generierung von Maschinen
 
 
 `{{< children showhidden="true" >}}`{=markdown}
+REM -->

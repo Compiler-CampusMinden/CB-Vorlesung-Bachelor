@@ -1,3 +1,4 @@
+<!-- REM
 ---
 type: lecture-cg
 title: "Garbage Collection"
@@ -518,7 +519,7 @@ Das folgende Beispiel erläutert dieses Problem:
 
 
 
-<!-- DO NOT REMOVE - THIS IS A LAST SLIDE TO INDICATE THE LICENSE AND POSSIBLE EXCEPTIONS (IMAGES, ...). -->
+<!- DO NOT REMOVE - THIS IS A LAST SLIDE TO INDICATE THE LICENSE AND POSSIBLE EXCEPTIONS (IMAGES, ...). ->
 ::: slides
 ## LICENSE
 ![](https://licensebuttons.net/l/by-sa/4.0/88x31.png)
@@ -538,3 +539,4 @@ Unless otherwise noted, this work is licensed under CC BY-SA 4.0.
     (https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/latency-throughput.png),
     by [Bob Nystrom](https://github.com/munificent), licensed under [MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE)
 :::
+REM -->

@@ -1,3 +1,4 @@
+<!-- REM
 ---
 type: lecture-cg
 title: "Generierung von Maschinencode (Skizze)"
@@ -56,10 +57,10 @@ Hier der Vollständigkeit halber ein Ausblick ...
 
 ## Prozessorarchitektur
 
-<!-- TODO Image stopped working w/ Pandoc/Beamer (Slides) -->
-<!--
+<!- TODO Image stopped working w/ Pandoc/Beamer (Slides) ->
+<!-
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Intel_i80286_arch.svg/1024px-Intel_i80286_arch.svg.png){width="80%"}
--->
+->
 
 [Quelle: ["Intel i80286 arch"](https://commons.wikimedia.org/wiki/File:Intel_i80286_arch.svg) by [Appaloosa](https://commons.wikimedia.org/wiki/User:Appaloosa), licensed under [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0)]{.origin}
 
@@ -463,7 +464,7 @@ Skizze zur Erzeugung von Assembler-Code
 
 
 
-<!-- DO NOT REMOVE - THIS IS A LAST SLIDE TO INDICATE THE LICENSE AND POSSIBLE EXCEPTIONS (IMAGES, ...). -->
+<!- DO NOT REMOVE - THIS IS A LAST SLIDE TO INDICATE THE LICENSE AND POSSIBLE EXCEPTIONS (IMAGES, ...). ->
 ::: slides
 ## LICENSE
 ![](https://licensebuttons.net/l/by-sa/4.0/88x31.png)
@@ -478,3 +479,4 @@ Unless otherwise noted, this work is licensed under CC BY-SA 4.0.
     (https://commons.wikimedia.org/wiki/File:Intel_i80286_arch.svg), by [Appaloosa](https://commons.wikimedia.org/wiki/User:Appaloosa), licensed
     under [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0)
 :::
+REM -->
