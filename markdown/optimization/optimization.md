@@ -1,3 +1,4 @@
+<!--
 ---
 type: lecture-bc
 title: "Optimierung und Datenflussanalyse"
@@ -28,7 +29,7 @@ attachments:
 # Motivation
 
 ## Was geschieht hier?
-<!-- 5 Minuten -->
+<!- 5 Minuten ->
 
 ```
 01  {
@@ -80,7 +81,7 @@ L2: ...
 ::::::
 
 # Optimierungen
-<!-- 20 Minuten: 7 Folien (3 Minuten je Folie) -->
+<!- 20 Minuten: 7 Folien (3 Minuten je Folie) ->
 
 ## Was ist Optimierung in Compilern?
 
@@ -565,10 +566,11 @@ Die Verringerung der Spannung um 20% führt zu einer um  20% geringeren Prozesso
 
 
 
-<!-- DO NOT REMOVE - THIS IS A LAST SLIDE TO INDICATE THE LICENSE AND POSSIBLE EXCEPTIONS (IMAGES, ...). -->
+<!- DO NOT REMOVE - THIS IS A LAST SLIDE TO INDICATE THE LICENSE AND POSSIBLE EXCEPTIONS (IMAGES, ...). ->
 ::: slides
 ## LICENSE
 ![](https://licensebuttons.net/l/by-sa/4.0/88x31.png)
 
 Unless otherwise noted, this work is licensed under CC BY-SA 4.0.
 :::
+REM -->

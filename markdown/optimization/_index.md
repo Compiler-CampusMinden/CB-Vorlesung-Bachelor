@@ -1,3 +1,4 @@
+<!-- REM
 ---
 chapter: true
 title: "Optimierung"
@@ -13,3 +14,4 @@ verschiedene Varianten der Datenflussanalyse.
 
 
 `{{< children showhidden="true" >}}`{=markdown}
+REM -->
