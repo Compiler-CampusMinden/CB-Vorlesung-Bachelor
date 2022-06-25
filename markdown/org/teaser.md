@@ -15,7 +15,7 @@ fhmedia:
 
 ## Sprachen verstehen, (formale) Texte transformieren
 
-![](https://raw.githubusercontent.com/munificent/craftinginterpreters/master/site/image/a-map-of-the-territory/mountain.png){width="80%"}
+![](https://raw.githubusercontent.com/munificent/craftinginterpreters/master/site/image/a-map-of-the-territory/mountain.png){width="92%"}
 
 [Quelle: ["A Map of the Territory (mountain.png)"](https://github.com/munificent/craftinginterpreters/blob/master/site/image/a-map-of-the-territory/mountain.png) by [Bob Nystrom](https://github.com/munificent), licensed under [MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE)]{.origin}
 
