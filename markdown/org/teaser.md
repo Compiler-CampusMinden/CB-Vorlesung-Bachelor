@@ -1,7 +1,7 @@
 ---
 type: lecture-cg
 title: "Modulvorstellung CB (Wahlfach Liste 1)"
-author: "Carsten Gips (FH Bielefeld)"
+author: "BC George & Carsten Gips (FH Bielefeld)"
 weight: 6
 hidden: true
 youtube:
