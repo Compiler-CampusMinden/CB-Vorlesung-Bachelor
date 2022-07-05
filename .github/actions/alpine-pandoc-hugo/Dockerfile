@@ -7,6 +7,4 @@ RUN apk --no-cache add ruby git
 COPY delete-script.rb /opt/delete-script.rb
 RUN chmod +x /opt/delete-script.rb
 
-RUN git config --global --add safe.directory /data
-
 ENTRYPOINT ["sh", "-c"]
