@@ -43,7 +43,7 @@ DOCKER_TEX_VOLUME    = -v "$(dir $(realpath $<)):$(DOCKER_REPO_MNTPOINT)" -w "$(
 # https://github.blog/2022-04-12-git-security-vulnerability-announced/ &
 # https://stackoverflow.com/questions/71901632/fatal-error-unsafe-repository-home-repon-is-owned-by-someone-else
 # for a general overview of the issue.
-DOCKER_GIT_ENV = --env GIT_DIR="$(DOCKER_REPO_MNTPOINT)/.git"
+DOCKER_GIT_ENV = --env GIT_DIR="$(DOCKER_REPO_MNTPOINT)/.git" --env GIT_AUTHOR_NAME="$(shell git config user.name)" --env GIT_AUTHOR_EMAIL="$(shell git config user.email)"
 
 PANDOC        = $(DOCKER_COMMAND) $(DOCKER_VOLUME)     $(DOCKER_USER) --entrypoint="pandoc"                                  $(DOCKER_IMAGE)
 HUGO          = $(DOCKER_COMMAND) $(DOCKER_VOLUME)     $(DOCKER_USER) --entrypoint="hugo"                                    $(DOCKER_IMAGE)
