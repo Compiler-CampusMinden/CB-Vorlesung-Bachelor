@@ -1,8 +1,10 @@
-- week: "KW40"
+- week: "KW40"  # Feiertag: Montag, 03.10.
   lecture:
+    # Teil 1
     - topic: "/misc/syllabus"
       leader: "BC, cagi"
       notes: "Kick-Off (Zoom)"
+    # Teil 2
     - topic: "/intro/overview"
       leader: "cagi"
     - topic: "/intro/languages"
@@ -12,31 +14,37 @@
 
 - week: "KW41"
   lecture:
-    - topic: "/lexing/regular"
+    # Teil 1
+    - topic: "/lexing/regular"  # ohne Automaten, dafür mit neuem Beispiel
       leader: "BC"
-    - topic: "/lexing/table"
-      leader: "cagi"
+    # Teil 2
     - topic: "/lexing/recursive"
+      leader: "cagi"
+    - topic: "/lexing/table"  # ?? (nur Begriffe?!), stattdessen "3. Lexer mit ANTLR" (neu)
       leader: "cagi"
   misc_assignment:
     - notes: "zweiter Teil der VL in Praktikumszeit"
 
 - week: "KW42"
   lecture:
-    - topic: "/parsing/cfg"
+    # Teil 1
+    - topic: "/parsing/cfg"  # Splitten in "4. CFG" und "5. LL-Parser"
       leader: "BC"
-    - topic: "/parsing/ll-parser"
-      leader: "cagi"
-    - topic: "/parsing/ll-advanced"
-      leader: "cagi"
+    # Teil 2
+    - topic: "/parsing/cfg"  # Splitten in "4. CFG" und "5. LL-Parser"
+      leader: "BC"
   misc_assignment:
     - notes: "zweiter Teil der VL in Praktikumszeit"
 
 - week: "KW43"
   lecture:
-    - topic: "/parsing/lr-part"
-      leader: "BC"
-    - topic: "/parsing/recovery"
+    # Teil 1
+    - topic: "/parsing/ll-parser"
+      leader: "cagi"
+    - topic: "Parser mit ANTLR"  # neu
+      leader: "cagi"
+    # Teil 2
+    - topic: "/parsing/recovery"  # ohne Bison/Flex, mit zus. praktischem Beispiel
       leader: "cagi"
     - topic: "/parsing/finalwords"
       leader: "cagi"
@@ -46,27 +54,36 @@
     - notes: "COIL: ANTLR + Live-Coding (CA): Mo, 25.10.21, 17:00-18:30 Uhr"
 
 - week: "KW44"
+  # Feiertag: Dienstag, 01.11.
   misc_lecture:
     - notes: ">> Happy Feiertach (01.11.)"
 
 - week: "KW45"
   lecture:
+    # Teil 1
     - topic: "/semantics/symboltables/intro"
       leader: "cagi"
     - topic: "/semantics/symboltables/scopes"
       leader: "cagi"
     - topic: "/semantics/symboltables/functions"
       leader: "cagi"
-    - topic: "/semantics/symboltables/classes"
+    # Teil 2
+    - topic: "/semantics/symboltables/classes"  # ausbauen
       leader: "cagi"
-    - topic: "/semantics/attribgrammars"
-      leader: "BC"
+    - topic: "Symboltabellen mit ANTLR"  # neu
+      leader: "cagi"
   misc_assignment:
     - notes: "zweiter Teil der VL in Praktikumszeit"
 
 - week: "KW46"
   lecture:
-    - topic: "/optimization/optimization"
+    # Teil 1
+    - topic: "/semantics/attribgrammars"  # ohne Bison/Flex
+      leader: "BC"
+    # Teil 2
+    - topic: "/intermediate/intro"
+      leader: "cagi"
+    - topic: "/intermediate/llvm-ir"  # ??
       leader: "BC"
   assignment:
     - topic: "sheet01"
@@ -82,20 +99,19 @@
 
 - week: "KW48"
   lecture:
-    - topic: "/intermediate/intro"
+    # Teil 1
+    - topic: "/interpretation/syntaxdriven"
       leader: "cagi"
-  misc_lecture:
-    - notes: "Vortrag: LLVM: Überblick, LLVM-IR, Möglichkeiten der Optimierung"
+    - topic: "/interpretation/astdriven-part1"
+      leader: "cagi"
+    - topic: "/interpretation/astdriven-part2"
+      leader: "cagi"
   assignment:
     - topic: "sheet02"
       due: "29.11.21, cagi"
 
 - week: "KW49"
   lecture:
-    - topic: "/parsing/parsercombinator"
-      leader: "BC"
-  misc_lecture:
-    - notes: "~~Vortrag: PEG-Parser, Pratt-Parser und Parser Combinators~~"
   assignment:
     - topic: "sheet03"
       due: "06.12.21, BC"
@@ -104,12 +120,6 @@
 
 - week: "KW50"
   lecture:
-    - topic: "/interpretation/syntaxdriven"
-      leader: "cagi"
-    - topic: "/interpretation/astdriven-part1"
-      leader: "cagi"
-    - topic: "/interpretation/astdriven-part2"
-      leader: "cagi"
   assignment:
     - topic: "sheet04"
       due: "13.12.21, BC"
@@ -124,8 +134,6 @@
 
 - week: "KW01"
   misc_lecture:
-    - notes: "~~Vortrag: Generierung von Maschinencode~~"
-    - notes: "Wiederholung (BC, cagi)"
     - notes: ">> Alles Gute im neuen Jahr!"
   assignment:
     - topic: "sheet05"
@@ -133,16 +141,12 @@
 
 - week: "KW02"
   misc_lecture:
-    - notes: "Vortrag: VM und Bytecode"
-    - notes: "~~Vortrag: Garbage Collection~~"
   lecture:
-    - topic: "/interpretation/gc"
-      leader: "cagi"
-    - topic: "/machinecode/machinecode"
-      leader: "cagi"
     - topic: "/org/exam"
 
 - week: "KW03"
+  # letzte Vorlesungswoche
+  # Prüfungswochen: KW04, KW05
   misc_lecture:
     - notes: "mdl. Prüfung II"
   misc_assignment:
