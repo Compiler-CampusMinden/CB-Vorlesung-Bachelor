@@ -33,6 +33,8 @@ ifneq ($(DOCKER), false)
 DOCKER_IMAGE      = alpine-pandoc-hugo
 DOCKER_COMMAND    = docker run --rm -i
 DOCKER_USER       = -u "$(shell id -u):$(shell id -g)"
+DOCKER_VOLUME     = -v "$(shell pwd):/data" -w "/data"
+DOCKER_TEX_VOLUME = -v "$(dir $(realpath $<)):/data" -w "/data"
 # GIT_DIR ensures that git works with the repository
 # no matter the owning user of the directory.
 # see https://github.com/Compilerbau/CB-Lecture-Bachelor/pull/16 for the discussion
@@ -42,14 +44,13 @@ DOCKER_USER       = -u "$(shell id -u):$(shell id -g)"
 # for a general overview of the issue.
 #
 # ***Important***: keep the location of GIT_DIR in sync with the mountpoint of the repository inside the container.
-DOCKER_VOLUME     = -v "$(shell pwd):/data" -w "/data" --env GIT_DIR=/data/.git
-DOCKER_TEX_VOLUME = -v "$(dir $(realpath $<)):/data" -w "/data" --env GIT_DIR=/data/.git
+DOCKER_GIT_ENV = --env GIT_DIR=/data/.git
 
-PANDOC        = $(DOCKER_COMMAND) $(DOCKER_VOLUME)     $(DOCKER_USER) --entrypoint="pandoc"                $(DOCKER_IMAGE)
-HUGO          = $(DOCKER_COMMAND) $(DOCKER_VOLUME)     $(DOCKER_USER) --entrypoint="hugo"                  $(DOCKER_IMAGE)
-DOT           = $(DOCKER_COMMAND) $(DOCKER_VOLUME)     $(DOCKER_USER) --entrypoint="dot"                   $(DOCKER_IMAGE)
-LATEX         = $(DOCKER_COMMAND) $(DOCKER_TEX_VOLUME) $(DOCKER_USER) --entrypoint="latex"                 $(DOCKER_IMAGE)
-DELETE_SCRIPT = $(DOCKER_COMMAND) $(DOCKER_VOLUME)     $(DOCKER_USER) --entrypoint="/opt/delete-script.rb" $(DOCKER_IMAGE)
+PANDOC        = $(DOCKER_COMMAND) $(DOCKER_VOLUME)     $(DOCKER_USER) --entrypoint="pandoc"                                  $(DOCKER_IMAGE)
+HUGO          = $(DOCKER_COMMAND) $(DOCKER_VOLUME)     $(DOCKER_USER) --entrypoint="hugo"                                    $(DOCKER_IMAGE)
+DOT           = $(DOCKER_COMMAND) $(DOCKER_VOLUME)     $(DOCKER_USER) --entrypoint="dot"                                     $(DOCKER_IMAGE)
+LATEX         = $(DOCKER_COMMAND) $(DOCKER_TEX_VOLUME) $(DOCKER_USER) --entrypoint="latex"                                   $(DOCKER_IMAGE)
+DELETE_SCRIPT = $(DOCKER_COMMAND) $(DOCKER_VOLUME)     $(DOCKER_USER) --entrypoint="/opt/delete-script.rb" $(DOCKER_GIT_ENV) $(DOCKER_IMAGE)
 else
 PANDOC        = pandoc
 HUGO          = hugo
