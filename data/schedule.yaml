@@ -14,23 +14,12 @@
     - topic: "/intro/applications"
       leader: "cagi"
     # Teil 2
-    - topic: "Lisp/Scheme/Racket/Clojure 1"  # neu
-      leader: ""
+    - topic: "/lexing/regular"  # ohne Automaten, dafür mit neuem Beispiel
+      leader: "BC"
   misc_assignment:
     - notes: "zweiter Teil der VL in Praktikumszeit"
 
 - week: "KW42"
-  lecture:
-    # Teil 1
-    - topic: "/lexing/regular"  # ohne Automaten, dafür mit neuem Beispiel
-      leader: "BC"
-    # Teil 2
-    - topic: "Lisp/Scheme/Racket/Clojure 2"  # neu
-      leader: ""
-  misc_assignment:
-    - notes: "zweiter Teil der VL in Praktikumszeit"
-
-- week: "KW43"
   lecture:
     # Teil 1
     - topic: "/lexing/recursive"
@@ -38,23 +27,20 @@
     - topic: "/lexing/table"  # ?? (nur Begriffe?!), stattdessen "3. Lexer mit ANTLR" (neu)
       leader: "cagi"
     # Teil 2
-    - topic: "Lisp/Scheme/Racket/Clojure 3"  # neu
-      leader: ""
+    - topic: "/parsing/cfg"  # Splitten in "4. CFG" und "5. LL-Parser"
+      leader: "BC"
   misc_assignment:
     - notes: "zweiter Teil der VL in Praktikumszeit"
+
+- week: "KW43"
+  lecture:
+    - topic: "/parsing/cfg"  # Splitten in "4. CFG" und "5. LL-Parser"
+      leader: "BC"
+  assignment:
+    - topic: "sheet01"  # Mini-Python, Grammatik, Lexer
+      due: "XX.XX.22, tbd"
 
 - week: "KW44"  # Feiertag: Dienstag, 01.11.
-  lecture:
-    # Teil 1
-    - topic: "/parsing/cfg"  # Splitten in "4. CFG" und "5. LL-Parser"
-      leader: "BC"
-    # Teil 2
-    - topic: "/parsing/cfg"  # Splitten in "4. CFG" und "5. LL-Parser"
-      leader: "BC"
-  misc_assignment:
-    - notes: "zweiter Teil der VL in Praktikumszeit"
-
-- week: "KW45"
   lecture:
     - topic: "/parsing/ll-parser"
       leader: "cagi"
@@ -67,7 +53,7 @@
   misc_column:
     - notes: "COIL: ANTLR + Live-Coding (CA): Mo, 25.10.21, 17:00-18:30 Uhr"
 
-- week: "KW46"
+- week: "KW45"
   lecture:
     - topic: "/semantics/symboltables/intro"
       leader: "cagi"
@@ -75,23 +61,20 @@
       leader: "cagi"
     - topic: "/semantics/symboltables/functions"
       leader: "cagi"
-  misc_assignment:
-    - topic: "sheet01"  # Lisp, Grammatik, ANTLR
+  assignment:
+    - topic: "sheet02"  # ANTLR, Parser
       due: "XX.XX.22, tbd"
 
-- week: "KW47"
+- week: "KW46"
   lecture:
     - topic: "/semantics/symboltables/classes"  # ausbauen
       leader: "cagi"
     - topic: "Symboltabellen mit ANTLR"  # neu
       leader: "cagi"
-  assignment:
-    - topic: "sheet02"  # ANTLR, Parser
-      due: "XX.XX.22, tbd"
   misc_column:
     - notes: "COIL: Vorstellung der Projekte (DE): XX, XX.XX.22, 17:00-18:30 Uhr"
 
-- week: "KW48"
+- week: "KW47"
   lecture:
     - topic: "/semantics/attribgrammars"  # ohne Bison/Flex
       leader: "BC"
@@ -99,7 +82,7 @@
     - topic: "sheet03"  # Symboltabellen
       due: "XX.XX.22, tbd"
 
-- week: "KW49"
+- week: "KW48"
   lecture:
     - topic: "/interpretation/syntaxdriven"
       leader: "cagi"
@@ -107,20 +90,25 @@
       leader: "cagi"
     - topic: "/interpretation/astdriven-part2"
       leader: "cagi"
-  assignment:
-    - topic: "sheet04"  # TODO
-      due: "XX.XX.22, tbd"
   misc_column:
     - notes: "COIL: Vorstellung der Projekte (CA): XX, XX.XX.22, 17:00-18:30 Uhr"
 
-- week: "KW50"
+- week: "KW49"
   lecture:
     - topic: "/intermediate/intro"
       leader: "cagi"
     - topic: "/intermediate/llvm-ir"  # ??
       leader: "BC"
   assignment:
-    - topic: "sheet05"  # TODO
+    - topic: "sheet04"  # Interpreter
+      due: "XX.XX.22, tbd"
+
+- week: "KW50"
+  lecture:
+    - topic: "interpretation/gc"  # Garbage Collection, Laufzeitumgebungen: Anpassen an C-Target
+      leader: "cagi"
+  assignment:
+    - topic: "sheet05"  # Freie Aufgabe: Konzepte vorstellen und diskutieren
       due: "XX.XX.22, tbd"
 
 - week: "KW51"  # Weihnachten
