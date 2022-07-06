@@ -1,105 +1,106 @@
 - week: "KW40"  # Feiertag: Montag, 03.10.
   lecture:
-    # Teil 1
     - topic: "/misc/syllabus"
       leader: "BC, cagi"
       notes: "Kick-Off (Zoom)"
-    # Teil 2
+
+- week: "KW41"
+  lecture:
+    # Teil 1
     - topic: "/intro/overview"
       leader: "cagi"
     - topic: "/intro/languages"
       leader: "cagi"
     - topic: "/intro/applications"
       leader: "cagi"
-
-- week: "KW41"
-  lecture:
-    # Teil 1
-    - topic: "/lexing/regular"  # ohne Automaten, dafür mit neuem Beispiel
-      leader: "BC"
     # Teil 2
-    - topic: "/lexing/recursive"
-      leader: "cagi"
-    - topic: "/lexing/table"  # ?? (nur Begriffe?!), stattdessen "3. Lexer mit ANTLR" (neu)
-      leader: "cagi"
+    - topic: "Lisp/Scheme/Racket/Clojure 1"  # neu
+      leader: ""
   misc_assignment:
     - notes: "zweiter Teil der VL in Praktikumszeit"
 
 - week: "KW42"
   lecture:
     # Teil 1
-    - topic: "/parsing/cfg"  # Splitten in "4. CFG" und "5. LL-Parser"
+    - topic: "/lexing/regular"  # ohne Automaten, dafür mit neuem Beispiel
       leader: "BC"
     # Teil 2
-    - topic: "/parsing/cfg"  # Splitten in "4. CFG" und "5. LL-Parser"
-      leader: "BC"
+    - topic: "Lisp/Scheme/Racket/Clojure 2"  # neu
+      leader: ""
   misc_assignment:
     - notes: "zweiter Teil der VL in Praktikumszeit"
 
 - week: "KW43"
   lecture:
     # Teil 1
+    - topic: "/lexing/recursive"
+      leader: "cagi"
+    - topic: "/lexing/table"  # ?? (nur Begriffe?!), stattdessen "3. Lexer mit ANTLR" (neu)
+      leader: "cagi"
+    # Teil 2
+    - topic: "Lisp/Scheme/Racket/Clojure 3"  # neu
+      leader: ""
+  misc_assignment:
+    - notes: "zweiter Teil der VL in Praktikumszeit"
+
+- week: "KW44"  # Feiertag: Dienstag, 01.11.
+  lecture:
+    # Teil 1
+    - topic: "/parsing/cfg"  # Splitten in "4. CFG" und "5. LL-Parser"
+      leader: "BC"
+    # Teil 2
+    - topic: "/parsing/cfg"  # Splitten in "4. CFG" und "5. LL-Parser"
+      leader: "BC"
+  misc_assignment:
+    - notes: "zweiter Teil der VL in Praktikumszeit"
+
+- week: "KW45"
+  lecture:
     - topic: "/parsing/ll-parser"
       leader: "cagi"
     - topic: "Parser mit ANTLR"  # neu
       leader: "cagi"
-    # Teil 2
     - topic: "/parsing/recovery"  # ohne Bison/Flex, mit zus. praktischem Beispiel
       leader: "cagi"
     - topic: "/parsing/finalwords"
       leader: "cagi"
-  misc_assignment:
-    - notes: "zweiter Teil der VL in Praktikumszeit"
   misc_column:
     - notes: "COIL: ANTLR + Live-Coding (CA): Mo, 25.10.21, 17:00-18:30 Uhr"
 
-- week: "KW44"
-  # Feiertag: Dienstag, 01.11.
-  misc_lecture:
-    - notes: ">> Happy Feiertach (01.11.)"
-
-- week: "KW45"
+- week: "KW46"
   lecture:
-    # Teil 1
     - topic: "/semantics/symboltables/intro"
       leader: "cagi"
     - topic: "/semantics/symboltables/scopes"
       leader: "cagi"
     - topic: "/semantics/symboltables/functions"
       leader: "cagi"
-    # Teil 2
+  misc_assignment:
+    - topic: "sheet01"  # Lisp, Grammatik, ANTLR
+      due: "XX.XX.22, tbd"
+
+- week: "KW47"
+  lecture:
     - topic: "/semantics/symboltables/classes"  # ausbauen
       leader: "cagi"
     - topic: "Symboltabellen mit ANTLR"  # neu
       leader: "cagi"
-  misc_assignment:
-    - notes: "zweiter Teil der VL in Praktikumszeit"
-
-- week: "KW46"
-  lecture:
-    # Teil 1
-    - topic: "/semantics/attribgrammars"  # ohne Bison/Flex
-      leader: "BC"
-    # Teil 2
-    - topic: "/intermediate/intro"
-      leader: "cagi"
-    - topic: "/intermediate/llvm-ir"  # ??
-      leader: "BC"
   assignment:
-    - topic: "sheet01"
-      due: "15.11.21, BC"
+    - topic: "sheet02"  # ANTLR, Parser
+      due: "XX.XX.22, tbd"
   misc_column:
-    - notes: "COIL / Vortrag (2P): Flex und YACC/Bison + Live-Coding (DE): Mo, 15.11.21, 17:00-18:30 Uhr"
-
-- week: "KW47"
-  misc_lecture:
-    - notes: "mdl. Prüfung I"
-  misc_assignment:
-    - notes: "mdl. Prüfung I"
+    - notes: "COIL: Vorstellung der Projekte (DE): XX, XX.XX.22, 17:00-18:30 Uhr"
 
 - week: "KW48"
   lecture:
-    # Teil 1
+    - topic: "/semantics/attribgrammars"  # ohne Bison/Flex
+      leader: "BC"
+  assignment:
+    - topic: "sheet03"  # Symboltabellen
+      due: "XX.XX.22, tbd"
+
+- week: "KW49"
+  lecture:
     - topic: "/interpretation/syntaxdriven"
       leader: "cagi"
     - topic: "/interpretation/astdriven-part1"
@@ -107,49 +108,40 @@
     - topic: "/interpretation/astdriven-part2"
       leader: "cagi"
   assignment:
-    - topic: "sheet02"
-      due: "29.11.21, cagi"
-
-- week: "KW49"
-  lecture:
-  assignment:
-    - topic: "sheet03"
-      due: "06.12.21, BC"
+    - topic: "sheet04"  # TODO
+      due: "XX.XX.22, tbd"
   misc_column:
-    - notes: "COIL: Optimierung (CA): Mo, 06.12.21, 17:00-18:30 Uhr"
+    - notes: "COIL: Vorstellung der Projekte (CA): XX, XX.XX.22, 17:00-18:30 Uhr"
 
 - week: "KW50"
   lecture:
+    - topic: "/intermediate/intro"
+      leader: "cagi"
+    - topic: "/intermediate/llvm-ir"  # ??
+      leader: "BC"
   assignment:
-    - topic: "sheet04"
-      due: "13.12.21, BC"
+    - topic: "sheet05"  # TODO
+      due: "XX.XX.22, tbd"
 
-- week: "KW51"
+- week: "KW51"  # Weihnachten
   misc_lecture:
     - notes: ">> Frohe Weihnachten!"
 
-- week: "KW52"
+- week: "KW52"  # Weihnachten
   misc_lecture:
     - notes: ">> Weihnachtsferien!"
 
-- week: "KW01"
+- week: "KW01"  # Freies Arbeiten, Sprechstunde
   misc_lecture:
     - notes: ">> Alles Gute im neuen Jahr!"
-  assignment:
-    - topic: "sheet05"
-      due: "03.01.22, cagi"
+    - notes: ">> Freies Arbeiten, Sprechstunde"
 
-- week: "KW02"
+- week: "KW02"   # Freies Arbeiten, Sprechstunde
   misc_lecture:
-  lecture:
-    - topic: "/org/exam"
+    - notes: ">> Freies Arbeiten, Sprechstunde"
 
 - week: "KW03"
-  # letzte Vorlesungswoche
+  # letzte Vorlesungswoche: Präsentation der Projekte
   # Prüfungswochen: KW04, KW05
   misc_lecture:
-    - notes: "mdl. Prüfung II"
-  misc_assignment:
-    - notes: "mdl. Prüfung II"
-  misc_column:
-    - notes: "Die zweite mündliche Prüfung kann abweichend auch im zweiten Prüfungszeitraum durchgeführt werden."
+    - notes: ">> Präsentation der Projekte"
