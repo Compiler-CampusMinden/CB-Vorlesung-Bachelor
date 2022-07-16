@@ -30,11 +30,12 @@
 ## set to the folder of the current .tex file. When called directly, we
 ## need to first change-dir to this folder.
 ifneq ($(DOCKER), false)
-DOCKER_IMAGE      = alpine-pandoc-hugo
-DOCKER_COMMAND    = docker run --rm -i
-DOCKER_USER       = -u "$(shell id -u):$(shell id -g)"
-DOCKER_VOLUME     = -v "$(shell pwd):/data" -w "/data"
-DOCKER_TEX_VOLUME = -v "$(dir $(realpath $<)):/data" -w "/data"
+DOCKER_REPO_MNTPOINT = /data
+DOCKER_IMAGE         = alpine-pandoc-hugo
+DOCKER_COMMAND       = docker run --rm -i
+DOCKER_USER          = -u "$(shell id -u):$(shell id -g)"
+DOCKER_VOLUME        = -v "$(shell pwd):/data" -w "$(DOCKER_REPO_MNTPOINT)"
+DOCKER_TEX_VOLUME    = -v "$(dir $(realpath $<)):$(DOCKER_REPO_MNTPOINT)" -w "$(DOCKER_REPO_MNTPOINT)"
 # GIT_DIR ensures that git works with the repository
 # no matter the owning user of the directory.
 # see https://github.com/Compilerbau/CB-Lecture-Bachelor/pull/16 for the discussion
@@ -42,9 +43,7 @@ DOCKER_TEX_VOLUME = -v "$(dir $(realpath $<)):/data" -w "/data"
 # https://github.blog/2022-04-12-git-security-vulnerability-announced/ &
 # https://stackoverflow.com/questions/71901632/fatal-error-unsafe-repository-home-repon-is-owned-by-someone-else
 # for a general overview of the issue.
-#
-# ***Important***: keep the location of GIT_DIR in sync with the mountpoint of the repository inside the container.
-DOCKER_GIT_ENV = --env GIT_DIR=/data/.git
+DOCKER_GIT_ENV = --env GIT_DIR="$(DOCKER_REPO_MNTPOINT)/.git"
 
 PANDOC        = $(DOCKER_COMMAND) $(DOCKER_VOLUME)     $(DOCKER_USER) --entrypoint="pandoc"                                  $(DOCKER_IMAGE)
 HUGO          = $(DOCKER_COMMAND) $(DOCKER_VOLUME)     $(DOCKER_USER) --entrypoint="hugo"                                    $(DOCKER_IMAGE)
