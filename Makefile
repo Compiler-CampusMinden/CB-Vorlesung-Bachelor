@@ -34,7 +34,7 @@ DOCKER_REPO_MNTPOINT = /data
 DOCKER_IMAGE         = alpine-pandoc-hugo
 DOCKER_COMMAND       = docker run --rm -i
 DOCKER_USER          = -u "$(shell id -u):$(shell id -g)"
-DOCKER_VOLUME        = -v "$(shell pwd):/data" -w "$(DOCKER_REPO_MNTPOINT)"
+DOCKER_VOLUME        = -v "$(shell pwd):$(DOCKER_REPO_MNTPOINT)" -w "$(DOCKER_REPO_MNTPOINT)"
 DOCKER_TEX_VOLUME    = -v "$(dir $(realpath $<)):$(DOCKER_REPO_MNTPOINT)" -w "$(DOCKER_REPO_MNTPOINT)"
 # GIT_DIR ensures that git works with the repository
 # no matter the owning user of the directory.
