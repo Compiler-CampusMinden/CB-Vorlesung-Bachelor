@@ -46,7 +46,7 @@ DOCKER_TEX_VOLUME    = -v "$(dir $(realpath $<)):$(DOCKER_REPO_MNTPOINT)" -w "$(
 DOCKER_GIT_ENV = --env GIT_DIR="$(DOCKER_REPO_MNTPOINT)/.git" \
 				 --env GIT_AUTHOR_NAME="$(shell git config user.name)" \
 				 --env GIT_AUTHOR_EMAIL="$(shell git config user.email)" \
-				 --env GIT_COMMITTER_NAME="$(shell git config user.name)" \
+				 --env GIT_COMMITTER_NAME="$(shell git config user.name)"   \
 				 --env GIT_COMMITTER_EMAIL="$(shell git config user.email)"
 
 PANDOC        = $(DOCKER_COMMAND) $(DOCKER_VOLUME)     $(DOCKER_USER) --entrypoint="pandoc"                                  $(DOCKER_IMAGE)
