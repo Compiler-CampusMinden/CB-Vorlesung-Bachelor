@@ -64,7 +64,7 @@ ADD -->
 
 ![](images/bc_xml-parsing-error.png)
 
-[Quelle: BC George, Vorlesung "Einführung in die Programmierung mit Skriptsprachen", [CC BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)]{.origin}
+[Quelle: Vorlesung "Einführung in die Programmierung mit Skriptsprachen" by [BC George](mailto:bc.george@fh-bielefeld.de) ([CC BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/))]{.origin}
 
 ::: notes
 *   Compiler ist ein schnelles Mittel zum Finden von (syntaktischen) Fehlern
