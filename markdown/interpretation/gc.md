@@ -115,7 +115,7 @@ Das führt zu einem zweistufigen Algorithmus:
 
 ![](https://raw.githubusercontent.com/munificent/craftinginterpreters/master/site/image/garbage-collection/mark-sweep.png)
 
-[Quelle: [`mark-sweep.png`](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/mark-sweep.png) by [Bob Nystrom](https://github.com/munificent), licensed under [MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE)]{.origin}
+[Quelle: [mark-sweep.png](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/mark-sweep.png) by [Bob Nystrom](https://github.com/munificent) ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
 
 ::: notes
 Die Strukturen für Objekte und die VM werden ergänzt: Objekte erhalten noch
@@ -531,8 +531,6 @@ Unless otherwise noted, this work is licensed under CC BY-SA 4.0.
 *   Image [`reachable.png`](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/reachable.png)
     (https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/reachable.png),
     by [Bob Nystrom](https://github.com/munificent), licensed under [MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE)
-*   Image [`mark-sweep.png`](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/mark-sweep.png)
-    (https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/mark-sweep.png),
-    by [Bob Nystrom](https://github.com/munificent), licensed under [MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE)
+*   Image [mark-sweep.png](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/mark-sweep.png) by [Bob Nystrom](https://github.com/munificent) ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))
 *   Image [latency-throughput.png](https://github.com/munificent/craftinginterpreters/blob/master/site/image/garbage-collection/latency-throughput.png) by [Bob Nystrom](https://github.com/munificent) ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))
 :::
