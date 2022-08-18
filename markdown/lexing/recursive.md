@@ -19,7 +19,7 @@ tldr: |
 
   Von Hand implementierte Lexer arbeiten üblicherweise rekursiv und verarbeiten immer
   das nächste Zeichen im Eingabestrom. Die Arbeitsweise erinnert an LL-Parser (vgl.
-  `["LL-Parser"]({{<ref "/parsing/ll-parser" >}})`{=markdown}).
+  `["LL-Parser"]({{<ref "/parsing/ll-parser-impl" >}})`{=markdown}).
 
   Lexer müssen sehr effizient sein, da sie noch direkt auf der niedrigsten Abstraktionsstufe
   arbeiten und u.U. oft durchlaufen werden. Deshalb setzt man hier gern spezielle Techniken
