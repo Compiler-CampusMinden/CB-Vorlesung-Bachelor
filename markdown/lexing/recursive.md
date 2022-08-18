@@ -1,5 +1,5 @@
 ---
-type: lecture-cg
+archetype: lecture-cg
 title: "Lexer: Handcodierte Implementierung"
 menuTitle: "Handcodierte Implementierung"
 author: "Carsten Gips (FH Bielefeld)"

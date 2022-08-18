@@ -1,5 +1,5 @@
 ---
-type: lecture-cg
+archetype: lecture-cg
 title: "Lexer: Tabellenbasierte Implementierung"
 menuTitle: "Tabellenbasierte Implementierung"
 author: "Carsten Gips (FH Bielefeld)"
