@@ -98,7 +98,6 @@ When creating a new subfolder, you should also provide a landing page named
 `_index.md` (you could use `.hugo/hugo-lecture/archetypes/chapter.md` as
 template).
 
-
 ## Providing annotated Slides
 
 1.  Build the slides before class as described above.
