@@ -2,7 +2,8 @@
 
 ## Overview
 
-tbd
+This represents the lecture material for the lecture "Compilerbau" (B.Sc.),
+a course developed and taught at Bielefeld University of Applied Sciences.
 
 
 ## Contributing
@@ -20,6 +21,8 @@ We CAN VirtuOWL.
 
 See the [credits](CREDITS.md) for a detailed list of contributing projects.
 
+
+---
 
 ## License
 
