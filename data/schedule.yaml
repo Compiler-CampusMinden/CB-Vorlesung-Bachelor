@@ -1,135 +1,138 @@
-- week: "KW40"  # Feiertag: Montag, 03.10.
-  lecture:
-    - topic: "/misc/syllabus"
-      leader: "BC, cagi"
-      notes: "Kick-Off (Zoom)"
+-   week: "KW40"  # Feiertag: Montag, 03.10.
+    lecture:
+        -   topic: "/misc/syllabus"
+            leader: "BC, cagi"
+    misc_lecture:
+        -   notes: "Kick-Off (Zoom)"
 
-- week: "KW41"
-  lecture:
-    # Teil 1
-    - topic: "/intro/overview"
-      leader: "cagi"
-    - topic: "/intro/languages"
-      leader: "cagi"
-    - topic: "/intro/applications"
-      leader: "cagi"
-    # Teil 2
-    - topic: "/lexing/regular"  # ohne Automaten, dafür mit neuem Beispiel
-      leader: "BC"
-  misc_assignment:
-    - notes: "zweiter Teil der VL in Praktikumszeit"
+-   week: "KW41"
+    lecture:
+        # Teil 1
+        -   topic: "/intro/overview"
+            leader: "cagi"
+        -   topic: "/intro/languages"
+            leader: "cagi"
+        -   topic: "/intro/applications"
+            leader: "cagi"
+        # Teil 2
+        -   topic: "/lexing/regular"  # ohne Automaten, dafür mit neuem Beispiel
+            leader: "BC"
+    misc_assignment:
+        -   notes: "zweiter Teil der VL (BC) in Praktikumszeit"
 
-- week: "KW42"
-  lecture:
-    # Teil 1
-    - topic: "/lexing/recursive"
-      leader: "cagi"
-    - topic: "/lexing/table"  # ?? (nur Begriffe?!), stattdessen "3. Lexer mit ANTLR" (neu)
-      leader: "cagi"
-    # Teil 2
-    - topic: "/parsing/cfg"  # Splitten in "4. CFG" und "5. LL-Parser"
-      leader: "BC"
-  misc_assignment:
-    - notes: "zweiter Teil der VL in Praktikumszeit"
+-   week: "KW42"
+    lecture:
+        # Teil 1
+        -   topic: "/lexing/recursive"
+            leader: "cagi"
+        -   topic: "/lexing/table"  # ?? (nur Begriffe?!), stattdessen "3. Lexer mit ANTLR" (neu)
+            leader: "cagi"
+        -   topic: "/lexing/antlr"
+            leader: "cagi"
+        # Teil 2
+        -   topic: "/parsing/cfg"  # Splitten in "4. CFG" und "5. LL-Parser"
+            leader: "BC"
+    misc_assignment:
+        -   notes: "zweiter Teil der VL (BC) in Praktikumszeit"
 
-- week: "KW43"
-  lecture:
-    - topic: "/parsing/cfg"  # Splitten in "4. CFG" und "5. LL-Parser"
-      leader: "BC"
-  assignment:
-    - topic: "sheet01"  # Mini-Python, Grammatik, Lexer
-      due: "XX.XX.22, tbd"
+-   week: "KW43"
+    lecture:
+        -   topic: "/parsing/cfg"  # Splitten in "4. CFG" und "5. LL-Parser"
+            leader: "BC"
+    assignment:
+        -   topic: "sheet01"  # Mini-Python, Grammatik, Lexer
+            due: "xx.xx.22, tbd"
 
-- week: "KW44"  # Feiertag: Dienstag, 01.11.
-  lecture:
-    - topic: "/parsing/ll-parser"
-      leader: "cagi"
-    - topic: "Parser mit ANTLR"  # neu
-      leader: "cagi"
-    - topic: "/parsing/recovery"  # ohne Bison/Flex, mit zus. praktischem Beispiel
-      leader: "cagi"
-    - topic: "/parsing/finalwords"
-      leader: "cagi"
-  misc_column:
-    - notes: "COIL: ANTLR + Live-Coding (CA): Mo, 25.10.21, 17:00-18:30 Uhr"
+-   week: "KW44"  # Feiertag: Dienstag, 01.11.
+    lecture:
+        -   topic: "/parsing/ll-parser"
+            leader: "cagi"
+        -   topic: "Parser mit ANTLR"  # neu
+            leader: "cagi"
+        -   topic: "/parsing/recovery"  # ohne Bison/Flex, mit zus. praktischem Beispiel
+            leader: "cagi"
+        -   topic: "/parsing/finalwords"
+            leader: "cagi"
+    misc_column:
+        -   notes: "Edmonton: ANTLR + Live-Coding (CA): xx, xx.xx.22, 17:00-18:30 Uhr"
 
-- week: "KW45"
-  lecture:
-    - topic: "/semantics/symboltables/intro"
-      leader: "cagi"
-    - topic: "/semantics/symboltables/scopes"
-      leader: "cagi"
-    - topic: "/semantics/symboltables/functions"
-      leader: "cagi"
-  assignment:
-    - topic: "sheet02"  # ANTLR, Parser
-      due: "XX.XX.22, tbd"
+-   week: "KW45"
+    lecture:
+        -   topic: "/semantics/symboltables/intro"
+            leader: "cagi"
+        -   topic: "/semantics/symboltables/scopes"
+            leader: "cagi"
+        -   topic: "/semantics/symboltables/functions"
+            leader: "cagi"
+    assignment:
+        -   topic: "sheet02"  # ANTLR, Parser
+            due: "xx.xx.22, tbd"
 
-- week: "KW46"
-  lecture:
-    - topic: "/semantics/symboltables/classes"  # ausbauen
-      leader: "cagi"
-    - topic: "Symboltabellen mit ANTLR"  # neu
-      leader: "cagi"
-  misc_column:
-    - notes: "COIL: Vorstellung der Projekte (DE): XX, XX.XX.22, 17:00-18:30 Uhr"
+-   week: "KW46"
+    lecture:
+        -   topic: "/semantics/symboltables/classes"  # ausbauen
+            leader: "cagi"
+        -   topic: "Symboltabellen mit ANTLR"  # neu
+            leader: "cagi"
+    misc_column:
+        -   notes: "Edmonton: Vorstellung der Projekte (DE): xx, xx.xx.22, 17:00-18:30 Uhr"
 
-- week: "KW47"
-  lecture:
-    - topic: "/semantics/attribgrammars"  # ohne Bison/Flex
-      leader: "BC"
-  assignment:
-    - topic: "sheet03"  # Symboltabellen
-      due: "XX.XX.22, tbd"
+-   week: "KW47"
+    lecture:
+        -   topic: "/semantics/attribgrammars"  # ohne Bison/Flex
+            leader: "BC"
+    assignment:
+        -   topic: "sheet03"  # Symboltabellen
+            due: "xx.xx.22, tbd"
 
-- week: "KW48"
-  lecture:
-    - topic: "/interpretation/syntaxdriven"
-      leader: "cagi"
-    - topic: "/interpretation/astdriven-part1"
-      leader: "cagi"
-    - topic: "/interpretation/astdriven-part2"
-      leader: "cagi"
-  misc_column:
-    - notes: "COIL: Vorstellung der Projekte (CA): XX, XX.XX.22, 17:00-18:30 Uhr"
+-   week: "KW48"
+    lecture:
+        -   topic: "/interpretation/syntaxdriven"
+            leader: "cagi"
+        -   topic: "/interpretation/astdriven-part1"
+            leader: "cagi"
+        -   topic: "/interpretation/astdriven-part2"
+            leader: "cagi"
+    misc_column:
+        -   notes: "Edmonton: Vorstellung der Projekte (CA): xx, xx.xx.22, 17:00-18:30 Uhr"
 
-- week: "KW49"
-  lecture:
-    - topic: "/intermediate/intro"
-      leader: "cagi"
-    - topic: "/intermediate/llvm-ir"  # ??
-      leader: "BC"
-  assignment:
-    - topic: "sheet04"  # Interpreter
-      due: "XX.XX.22, tbd"
+-   week: "KW49"
+    lecture:
+        -   topic: "/intermediate/intro"
+            leader: "cagi"
+        -   topic: "/intermediate/llvm-ir"  # ??
+            leader: "BC"
+    assignment:
+        -   topic: "sheet04"  # Interpreter
+            due: "xx.xx.22, tbd"
 
-- week: "KW50"
-  lecture:
-    - topic: "interpretation/gc"  # Garbage Collection, Laufzeitumgebungen: Anpassen an C-Target
-      leader: "cagi"
-  assignment:
-    - topic: "sheet05"  # Freie Aufgabe: Konzepte vorstellen und diskutieren
-      due: "XX.XX.22, tbd"
+-   week: "KW50"
+    lecture:
+        -   topic: "interpretation/gc"  # Garbage Collection, Laufzeitumgebungen: Anpassen an C-Target
+            leader: "cagi"
+    assignment:
+        -   topic: "sheet05"  # Freie Aufgabe: Konzepte vorstellen und diskutieren
+            due: "xx.xx.22, tbd"
 
-- week: "KW51"  # Weihnachten
-  misc_lecture:
-    - notes: ">> Frohe Weihnachten!"
+-   week: "KW51"  # Weihnachten
+    misc_lecture:
+        -   notes: ">> Frohe Weihnachten!"
 
-- week: "KW52"  # Weihnachten
-  misc_lecture:
-    - notes: ">> Weihnachtsferien!"
+-   week: "KW52"  # Weihnachten
+    misc_lecture:
+        -   notes: ">> Weihnachtsferien!"
 
-- week: "KW01"  # Freies Arbeiten, Sprechstunde
-  misc_lecture:
-    - notes: ">> Alles Gute im neuen Jahr!"
-    - notes: ">> Freies Arbeiten, Sprechstunde"
+-   week: "KW01"  # Freies Arbeiten, Sprechstunde
+    misc_lecture:
+        -   notes: ">> Alles Gute im neuen Jahr!"
+        -   notes: ">> Freies Arbeiten, Sprechstunde"
 
-- week: "KW02"   # Freies Arbeiten, Sprechstunde
-  misc_lecture:
-    - notes: ">> Freies Arbeiten, Sprechstunde"
+-   week: "KW02"   # Freies Arbeiten, Sprechstunde
+    misc_lecture:
+        -   notes: ">> Freies Arbeiten, Sprechstunde"
 
-- week: "KW03"
-  # letzte Vorlesungswoche: Präsentation der Projekte
-  # Prüfungswochen: KW04, KW05
-  misc_lecture:
-    - notes: ">> Präsentation der Projekte"
+-   week: "KW03"
+    # letzte Vorlesungswoche: Präsentation der Projekte
+    # Prüfungswochen: KW04, KW05
+    misc_lecture:
+        -   notes: ">> Präsentation der Projekte"
