@@ -1,6 +1,6 @@
 ---
 archetype: assignment
-title: "Blatt 04: LLVM-IR"
+title: "Blatt 04: Mini-Python: Interpreter"
 author: "BC George, Carsten Gips (FH Bielefeld)"
 weight: 4
 
@@ -8,16 +8,22 @@ hidden: true
 ---
 
 
-## A4.1: Sprachumfang im LLVM-IR
+## A4.1: Interpreter
 
-Legen Sie fest, welche LLVM-IR-Befehle Sie für Ihr Projekt benötigen.
+Bauen Sie einen Tree-Walking-Interpreter in Ihr Projekt ein:
 
-*   [https://releases.llvm.org/1.6/docs/CommandGuide/html/llc.html](https://releases.llvm.org/1.6/docs/CommandGuide/html/llc.html)
-*   [https://releases.llvm.org/1.6/docs/CommandGuide/html/lli.html](https://releases.llvm.org/1.6/docs/CommandGuide/html/lli.html)
-*   [http://llvm.org/devmtg/2010-11/Naumann-Cling.pdf](http://llvm.org/devmtg/2010-11/Naumann-Cling.pdf)
+*   Lesen Sie zunächst den zu interpretierenden Small-C-Code aus einer Datei ein.
+*   Realisieren Sie die Funktionen `readint` und `writeint` als *native* Funktionen im Interpreter.
 
 
-## A4.2: Erzeugung von LLVM-IR
+## A4.2: Interaktivität
 
-Vervollständigen Sie den Compiler mit LLVM-Werkzeugen: Ihr Compiler soll LLVM-IR ausgeben,
-der mit den LLVM-Werkzeugen in ein ausführbares Programm übersetzt werden kann.
+Erweitern Sie Ihren Interpreter um Interaktivität:
+
+*   Der Interpreter soll einen Prompt in der Konsole anbieten
+*   Der Interpreter soll Code zeilenweise von der Standard-Eingabe lesen und verarbeiten
+*   Zur Eingabe mehrzeiliger Konstrukte sehen Sie entweder das Einlesen von
+    Codeblöcken aus Dateien vor oder implementieren Sie entsprechend eine "logische
+    Einrückung" für den Prompt als visuelles Feedback für den User
+
+Sie können sich hier am [Interpreter für Lox](https://craftinginterpreters.com/a-tree-walk-interpreter.html) orientieren.

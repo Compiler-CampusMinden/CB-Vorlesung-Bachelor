@@ -1,6 +1,6 @@
 ---
 archetype: assignment
-title: "Blatt 02: Semantische Analyse"
+title: "Blatt 02: Mini-Python: Parser mit ANTLR"
 author: "BC George, Carsten Gips (FH Bielefeld)"
 weight: 2
 
@@ -18,24 +18,7 @@ können.
 Hinweis: Sogenannte Vorwärtsdeklarationen sind nicht nötig.
 
 
-## A2.2: Grammatik und Scanner-/Parser-Generatoren
+## A2.2: Grammatik und Parser-Generatoren
 
 Erzeugen Sie mithilfe der Grammatik und ANTLR einen Scanner und Parser, den Sie für die folgenden
 Aufgaben nutzen.
-
-
-## A2.3: Symboltabellen
-
-Fügen Sie Symboltabellen in Ihren Compiler ein.
-
-Ergänzen Sie Ihre Ausgabefunktion, so dass auch die Symboltabelle als DOT-Code formatiert ausgegeben wird.
-Nutzen Sie diese Ausgabe auch zum Debuggen und zum Erklären Ihres Codes.
-
-
-## A2.4: Type Checking
-
-Attributieren Sie Ihren AST und führen Sie mit Hilfe der Attribute und der Symboltabellen ein *Type Checking*
-durch.
-
-Bestimmen Sie zunächst, wo ein Type Checking möglich und/oder nötig ist. Welche Attribute benötigen Sie,
-wo können Sie Ableitungsregeln geeignet einsetzen/anpassen?

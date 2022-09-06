@@ -1,6 +1,6 @@
 ---
 archetype: assignment
-title: "Blatt 03: Optimierung"
+title: "Blatt 03: Mini-Python: Symboltabellen"
 author: "BC George, Carsten Gips (FH Bielefeld)"
 weight: 3
 
@@ -8,16 +8,9 @@ hidden: true
 ---
 
 
-## A3.1: Konstruktion Kontrollflussgraph
+## A3.1: Symboltabellen
 
-Konstruieren Sie aus Ihrem AST einen Kontrollflussgraphen. Ergänzen Sie Ihre Ausgabefunktion, so dass auch
-der Kontrollflussgraph als DOT-Code formatiert ausgegeben wird.
+Fügen Sie Symboltabellen in Ihren Compiler ein.
 
-Hinweis: Geben Sie sowohl den ursprünglichen Kontrollflussgraphen als auch den Kontrollflussgraphen nach
-der Optimierung (siehe nächste Aufgabe) aus.
-
-
-## A3.2: Optimierung
-
-Welche der in der Vorlesung besprochenen Optimierungen sind in der betrachteten Sprache sinnvoll?
-Begründen Sie Ihre Analyse und führen Sie diese Optimierungen auf dem Kontrollflussgraphen durch.
+Ergänzen Sie Ihre Ausgabefunktion, so dass auch die Symboltabelle als DOT-Code formatiert ausgegeben wird.
+Nutzen Sie diese Ausgabe auch zum Debuggen und zum Erklären Ihres Codes.

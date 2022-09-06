@@ -1,6 +1,6 @@
 ---
 archetype: assignment
-title: "Blatt 01: Scanner und Parser"
+title: "Blatt 01: Mini-Python: Grammatik und Lexer"
 author: "BC George, Carsten Gips (FH Bielefeld)"
 weight: 1
 
@@ -32,21 +32,11 @@ folgendermaßen:
 
 ## A1.2: Scanner
 
-Entwickeln Sie einen Scanner (Lexer) für Ihren Compiler. Nutzen Sie keinen Scanner-Generator (manuelle
-Implementierung gesucht).
+Erzeugen Sie mithilfe der Grammatik und ANTLR einen Scanner, den Sie in den folgenden Aufgaben
+erweitern.
 
 
-## A1.3: Parser
-
-Entwickeln Sie einen LL-Parser für Ihre Grammatik. Nutzen Sie keinen Parser-Generator (manuelle
-Implementierung gesucht).
-
-*   Modifizieren Sie dafür Ihre Grammatik, wenn nötig.
-*   Legen Sie fest, wie Ihr AST strukturiert sein soll.
-*   Bauen Sie einen AST auf.
-
-
-## A1.4: Visualisierung des AST
+## A1.3: Visualisierung des AST
 
 Visualisieren Sie Ihren AST mit DOT:
 
