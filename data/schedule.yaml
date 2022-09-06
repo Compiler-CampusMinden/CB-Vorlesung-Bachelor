@@ -1,9 +1,9 @@
 -   week: "KW40"  # Feiertag: Montag, 03.10.
     lecture:
-        -   topic: "/misc/syllabus"
+        -   topic: "/org/syllabus"
             leader: "BC, cagi"
     misc_lecture:
-        -   notes: "Kick-Off (Zoom)"
+        -   notes: ">> Kick-Off (Zoom)"
 
 -   week: "KW41"
     lecture:
@@ -18,7 +18,7 @@
         -   topic: "/lexing/regular"  # ohne Automaten, dafür mit neuem Beispiel
             leader: "BC"
     misc_assignment:
-        -   notes: "zweiter Teil der VL (BC) in Praktikumszeit"
+        -   notes: ">> Zweiter Teil der VL (BC) in Praktikumszeit"
 
 -   week: "KW42"
     lecture:
@@ -33,7 +33,7 @@
         -   topic: "/parsing/cfg"  # Splitten in "4. CFG" und "5. LL-Parser"
             leader: "BC"
     misc_assignment:
-        -   notes: "zweiter Teil der VL (BC) in Praktikumszeit"
+        -   notes: ">> Zweiter Teil der VL (BC) in Praktikumszeit"
 
 -   week: "KW43"
     lecture:
@@ -74,8 +74,6 @@
             leader: "cagi"
         -   topic: "Symboltabellen mit ANTLR"  # neu
             leader: "cagi"
-    misc_column:
-        -   notes: "Edmonton: Vorstellung der Projekte (DE): xx, xx.xx.22, 17:00-18:30 Uhr"
 
 -   week: "KW47"
     lecture:
@@ -93,8 +91,6 @@
             leader: "cagi"
         -   topic: "/interpretation/astdriven-part2"
             leader: "cagi"
-    misc_column:
-        -   notes: "Edmonton: Vorstellung der Projekte (CA): xx, xx.xx.22, 17:00-18:30 Uhr"
 
 -   week: "KW49"
     lecture:
@@ -105,14 +101,17 @@
     assignment:
         -   topic: "sheet04"  # Interpreter
             due: "xx.xx.22, tbd"
+    misc_assignment:
+        -   notes: ">> Kein Praktikum! Vorstellung der Ergebnisse in gemeinsamer Sitzung mit Edmonton."
+    misc_column:
+        -   notes: "Edmonton: Vorstellung der Projekte: OOP und Interpreter (DE): xx, xx.xx.22, 17:00-18:30 Uhr"
 
 -   week: "KW50"
     lecture:
         -   topic: "interpretation/gc"  # Garbage Collection, Laufzeitumgebungen: Anpassen an C-Target
             leader: "cagi"
-    assignment:
-        -   topic: "sheet05"  # Freie Aufgabe: Konzepte vorstellen und diskutieren
-            due: "xx.xx.22, tbd"
+    misc_column:
+        -   notes: "Edmonton: Vorstellung der Projekte 'Dress Rehearsal' (CA): xx, xx.xx.22, 17:00-18:30 Uhr"
 
 -   week: "KW51"  # Weihnachten
     misc_lecture:
@@ -126,13 +125,20 @@
     misc_lecture:
         -   notes: ">> Alles Gute im neuen Jahr!"
         -   notes: ">> Freies Arbeiten, Sprechstunde"
+    assignment:
+        -   topic: "sheet05"  # Freie Aufgabe: Konzepte vorstellen und diskutieren
+            due: "xx.xx.23, tbd"
 
 -   week: "KW02"   # Freies Arbeiten, Sprechstunde
     misc_lecture:
         -   notes: ">> Freies Arbeiten, Sprechstunde"
+    misc_assignment:
+        -   notes: ">> Freies Arbeiten"
 
 -   week: "KW03"
     # letzte Vorlesungswoche: Präsentation der Projekte
     # Prüfungswochen: KW04, KW05
     misc_lecture:
+        -   notes: ">> Präsentation der Projekte"
+    misc_assignment:
         -   notes: ">> Präsentation der Projekte"
