@@ -13,6 +13,18 @@ themesDir: ".hugo"
 contentDir: "temp/content"
 publishDir: "docs"
 
+defaultContentLanguage: "ba"
+defaultContentLanguageInSubdir: true
+languages:
+  ba:
+    languageName: "Bachelor"
+    title: "Bachelor"
+    weight: 1
+  ma:
+    languageName: "Master"
+    title: "Master"
+    weight: 2
+
 params:
   editURL: "https://github.com/Compilerbau/CB-Lecture-Bachelor/edit/master/markdown/"
   author: "cagix"
