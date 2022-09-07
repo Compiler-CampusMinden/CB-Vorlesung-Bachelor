@@ -2,8 +2,7 @@
     lecture:
         -   topic: "/org/syllabus"
             leader: "BC, cagi"
-    misc_lecture:
-        -   notes: ">> Kick-Off (Zoom)"
+            notes: "Kick-Off (Zoom)"
 
 -   week: "KW41"
     lecture:
