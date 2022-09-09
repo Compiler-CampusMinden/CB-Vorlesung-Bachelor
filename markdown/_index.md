@@ -43,7 +43,7 @@ Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
 **Performanzprüfung**, 5 ECTS
 
-Hier finden Sie Informationen zum Ablauf der Praktika sowie zur Prüfungsform: `["Note und Credits"]({{< ref "/org/grading" >}})`{=markdown}.
+Hier finden Sie Informationen zum Ablauf des Praktikums sowie zur Prüfungsform: `["Note und Credits"]({{< ref "/org/grading" >}})`{=markdown}.
 
 ### Kooperation mit University of Alberta, Edmonton (Kanada)
 
@@ -57,7 +57,20 @@ Hochschulen anbieten zu können. (Diese Termine werden in englischer Sprache dur
 
 ## Materialien
 
-Siehe `["Ressourcen"]({{< ref "/org/resources" >}})`{=markdown} zu Details.
+1.  "**Compiler: Prinzipien, Techniken und Werkzeuge**".
+    Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D., Pearson Studium, 2008.
+    ISBN [978-3-8273-7097-6](https://www.digibib.net/openurl/Bi10?isbn=978-3-8273-7097-6).
+
+2.  ["**Crafting Interpreters**"](https://github.com/munificent/craftinginterpreters).
+    Nystrom, R., Genever Benning, 2021.
+    ISBN [978-0-9905829-3-9](https://www.digibib.net/openurl/Bi10?isbn=978-0-9905829-3-9).
+
+3.  **Introduction to Compiler Design**.
+    Mogensen, T., Springer, 2017.
+    ISBN [978-3-319-66966-3](https://www.digibib.net/openurl/Bi10?isbn=978-3-319-66966-3).
+    DOI [10.1007/978-3-319-66966-3](https://doi.org/10.1007/978-3-319-66966-3).
+
+Weitere empfohlene Literatur siehe `["Ressourcen"]({{< ref "/org/resources" >}})`{=markdown}.
 
 
 ## Fahrplan
