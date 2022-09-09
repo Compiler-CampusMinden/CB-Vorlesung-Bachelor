@@ -31,8 +31,8 @@ Siehe `["Syllabus"]({{< ref "/org/syllabus" >}})`{=markdown} zu Details.
 
 | Vorlesung (2 SWS)     | Praktikum (2 SWS)     |
 |:----------------------|:----------------------|
-| xx, xx:xx - xx:xx Uhr | xx, xx:xx - xx:xx Uhr |
-| online/xxx            | online/xxx            |
+| Di, 14:00 - 15:30 Uhr | Di, 15:45 - 17:15 Uhr |
+| online/J106           | online/J106           |
 
 Durchführung als **Flipped Classroom** (Carsten) bzw. **Online-Vorlesung** (BC):
 Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**)
