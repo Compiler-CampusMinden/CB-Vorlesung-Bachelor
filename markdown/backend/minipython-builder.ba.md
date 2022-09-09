@@ -21,6 +21,7 @@ assignments:
 attachments:
     -   link: "https://www.fh-bielefeld.de"
         name: "Extra Material, e.g. annotated slides"
+
 sketch: true
 ---
 
