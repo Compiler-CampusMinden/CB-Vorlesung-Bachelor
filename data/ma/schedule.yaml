@@ -20,6 +20,9 @@
         -   notes: ">> Zweiter Teil der VL (BC) in Praktikumszeit"
 
 -   week: "KW42"
+    misc_lecture:
+        -   notes: ">> Happy Feiertach!"
+
     lecture:
         # Teil 1
         -   topic: "/lexing/table"
@@ -96,7 +99,7 @@
     lecture:
         -   topic: "/intermediate/intro"
             leader: "Carsten"
-        -   topic: "/intermediate/llvm-ir" 
+        -   topic: "/intermediate/llvm-ir"
             leader: "BC"
     assignment:
         -   topic: "sheet04"
