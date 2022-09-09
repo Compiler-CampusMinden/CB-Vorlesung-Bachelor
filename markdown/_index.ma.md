@@ -1,72 +1,76 @@
 ---
-chapter: true
-title: "CB W21"
-hidden: true
+archetype: "home"
+title: "CB W22 M.Sc."
 ---
 
 
-# Willkommen zur Lehrveranstaltung Compilerbau im Winter 2021/22
+# IFM 5.21: Compilerbau (Winter 2022/23, Master)
 
-## Team, Kontakt und Kommunikation
+## Kursbeschreibung
 
-### Dozenten
+![](org/images/architektur_cb.png){width="80%"}
+
+Der Compiler ist das wichtigste Werkzeug in der Informatik. In der Königsdisziplin der
+Informatik schließt sich der Kreis, hier kommen die unterschiedlichen Algorithmen und
+Datenstrukturen und Programmiersprachenkonzepte zur Anwendung.
+
+In diesem Modul geht es um ein grundlegendes Verständnis für die wichtigsten Konzepte
+im Compilerbau. Wir schauen uns dazu relevante aktuelle Tools und Frameworks an und
+setzen diese bei der Erstellung eines kleinen Compiler-Frontends für _Mini-Python_ ein.
+
+Siehe `["Syllabus"]({{< ref "/org/syllabus" >}})`{=markdown} zu Details.
+
+
+## Team
 
 -   [BC George](https://www.fh-bielefeld.de/minden/ueber-uns/personenverzeichnis/birgit-christina-george)
 -   [Carsten Gips](https://www.fh-bielefeld.de/minden/ueber-uns/personenverzeichnis/carsten-gips)
 
-### Sprechstunde ("Flipped"-Teil der Vorlesung)
-
-Wir nutzen den jeweiligen Vorlesungs- bzw. Praktikumsslot als Sprechstunde für den
-"Flipped"-Teil der Vorlesung.
-
-### Kommunikation
-
--   **Sie-an-uns**: Praktikum, Sprechstunde (per Zoom), E-Mail,
-    [Issue](https://github.com/Compilerbau/Lecture/issues/new/choose) im
-    [Github](https://github.com/Compilerbau/Lecture)
--   **Wir-an-Sie**: "News" im ILIAS, Antwort auf Issues
-
-### Hinweis zur Kooperation mit University of Alberta, Edmonton
-
-Über das Projekt "We CAN virtuOWL" der Fachhochschule Bielefeld ist im Frühjahr 2021
-eine Kooperation mit der University of Alberta (Edmonton/Alberta, Kanada) im Modul
-"Compilerbau" gestartet.
-
-Wir werden in diesem Semester drei Sitzungen gemeinsam für beide Hochschulen durchführen.
-Diese Termine werden deshalb in englischer Sprache durchgeführt, ansonsten ist die
-Unterrichtssprache Deutsch. Die Unterlagen werden als *Open Educational Resources* über
-[Github](https://github.com/Compilerbau/Lecture) entwickelt und bereitgestellt.
-
-Zur Verteilung der Themen siehe auch den `["Fahrplan"]({{<ref "/org/schedule" >}})`{=markdown}.
-
 
 ## Kursformat
 
-### Vorlesung: 2 SWS
+| Vorlesung (2 SWS)     | Praktikum (2 SWS)     |
+|:----------------------|:----------------------|
+| xx, xx:xx - xx:xx Uhr | xx, xx:xx - xx:xx Uhr |
+| online/xxx            | online/xxx            |
 
-=> Mo, 14:00 - 15:30 Uhr (D320)
+Durchführung als **Flipped Classroom** (Carsten) bzw. **Online-Vorlesung** (BC):
+Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
-*   **BC**: Durchführung als **hybride Vorlesung**
-*   **cagi**: Durchführung als **Flipped Classroom**:
-    *   Vorbereitung individuell \@home mit ausführlich kommentierten Skripten plus
-        Screencasts (**Selbststudium**)
-    *   Sprechstunde ("Flipped"-Teil der Vorlesung) per Zoom (**Zugangsdaten siehe ILIAS**)
+[ILIAS]: https://www.fh-bielefeld.de/elearning/goto.php?target=crs_1091711&client_id=FH-Bielefeld
 
-### Praktikum: 2 SWS
+### Prüfungsform, Note und Credits
 
-=> Mo, 15:45 - 17:15 Uhr (D320)
+**Performanzprüfung**, 5 ECTS
 
--   Bearbeitung der Aufgaben in **2er Teams** vor dem Praktikum
--   Abgabe der gelösten Aufgaben **vor** der Deadline im ILIAS
--   Vorstellung und Diskussion der Lösung **im** Praktikum (hybrid/Zoom)
+Hier finden Sie Informationen zum Ablauf des Praktikums sowie zur Prüfungsform:
+`["Note und Credits"]({{< ref "/org/grading" >}})`{=markdown}.
 
-In ausgewählten Wochen finden statt der Praktika zusätzliche Vorlesungen statt
-(Durchführungsmodus dann wie bei den Vorlesungen).
+### Kooperation mit University of Alberta, Edmonton (Kanada)
 
-Siehe auch `["Hinweise zum Praktikum"]({{< ref "/org/grading" >}})`{=markdown}
+Über das Projekt "We CAN virtuOWL" der Fachhochschule Bielefeld ist im Frühjahr 2021 eine
+Kooperation mit der University of Alberta (Edmonton/Alberta, Kanada) im Modul "Compilerbau"
+gestartet.
 
-### Prüfungsform
+Wir freuen uns, auch in diesem Semester wieder drei gemeinsame Sitzungen für beide
+Hochschulen anbieten zu können. (Diese Termine werden in englischer Sprache durchgeführt.)
 
-**Performanzprüfung**, 7 ECTS
 
-Siehe auch `["Hinweise zur Prüfung"]({{< ref "/org/grading" >}})`{=markdown}
+## Materialien
+
+1.  "**Compiler: Prinzipien, Techniken und Werkzeuge**".
+    Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D., Pearson Studium, 2008.
+    ISBN [978-3-8273-7097-6](https://www.digibib.net/openurl/Bi10?isbn=978-3-8273-7097-6).
+
+2.  ["**Crafting Interpreters**"](https://github.com/munificent/craftinginterpreters).
+    Nystrom, R., Genever Benning, 2021.
+    ISBN [978-0-9905829-3-9](https://www.digibib.net/openurl/Bi10?isbn=978-0-9905829-3-9).
+
+Weitere empfohlene Literatur siehe `["Ressourcen"]({{< ref "/org/resources" >}})`{=markdown}.
+
+
+## Fahrplan
+
+`{{< schedule >}}`{=markdown}
+
+**Hinweis**: Abgabe der Hausaufgaben bis jeweils XX.XX Uhr im ILIAS.
