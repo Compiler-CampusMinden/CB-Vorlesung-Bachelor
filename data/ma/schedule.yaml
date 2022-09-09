@@ -52,7 +52,10 @@
 -   week: "KW44"  # Feiertag: Dienstag, 01.11.
     misc_lecture:
         -   notes: ">> Happy Feiertach!"
+    misc_column:
+        -   notes: "Edmonton: ANTLR + Live-Coding (CA): xx, xx.xx.22, 17:00-18:30 Uhr"
 
+-   week: "KW45"
     lecture:
         # Teil 1
         -   topic: "/frontend/parsing/lr-parser"
@@ -66,10 +69,8 @@
             leader: "Carsten"
     misc_assignment:
         -   notes: ">> Zweiter Teil der VL (Carsten) in Praktikumszeit"
-    misc_column:
-        -   notes: "Edmonton: ANTLR + Live-Coding (CA): xx, xx.xx.22, 17:00-18:30 Uhr"
 
--   week: "KW45"
+-   week: "KW46"
     lecture:
         -   topic: "/frontend/semantics/symboltables/intro"
             leader: "Carsten"
@@ -83,7 +84,7 @@
         -   topic: "sheet01"  # Mini-Python, Grammatik, Lexer
             due: "xx.xx.22, tbd"
 
--   week: "KW46"
+-   week: "KW47"
     lecture:
         -   topic: "/frontend/semantics/attribgrammars"
             leader: "BC"
@@ -91,52 +92,39 @@
         -   topic: "sheet02"  # ANTLR, Parser
             due: "xx.xx.22, tbd"
 
--   week: "KW47"
+-   week: "KW48"
     lecture:
         -   topic: "/backend/optimization"
             leader: "BC"
-    assignment:
-        -   topic: "sheet03"  # Symboltabellen
-            due: "xx.xx.22, tbd"
+    misc_assignment:
+        -   notes: ">> Freies Arbeiten"
     misc_column:
         -   notes: "Vortrag: Flex und YACC/Bison + Live-Coding"  # Edmonton?
 
--   week: "KW48"
+-   week: "KW49"
     lecture:
         -   topic: "/intermediate/intro"
             leader: "Carsten"
         -   topic: "/intermediate/llvm-ir"
             leader: "BC"
     assignment:
-        -   topic: "sheet04"
+        -   topic: "sheet03"  # Symboltabellen
             due: "xx.xx.22, tbd"
+    misc_assignment:
+        -   notes: ">> Kein Praktikum! Vorstellung der Ergebnisse in gemeinsamer Sitzung mit Edmonton."
     misc_column:
         -   notes: "Vortrag: LLVM: Überblick, LLVM-IR, Möglichkeiten der Optimierung"
+        -   notes: "Edmonton: Vorstellung der Projekte: OOP und Interpreter (DE): xx, xx.xx.22, 17:00-18:30 Uhr"
 
--   week: "KW49"
+-   week: "KW50"
     lecture:
         -   topic: "/frontend/parsing/parsercombinator"
             leader: "BC"
     assignment:
         -   topic: "sheet04"  # Interpreter
             due: "xx.xx.22, tbd"
-    misc_assignment:
-        -   notes: ">> Kein Praktikum! Vorstellung der Ergebnisse in gemeinsamer Sitzung mit Edmonton."
     misc_column:
         -   notes: "Vortrag: PEG-Parser, Pratt-Parser und Parser Combinators"
-        -   notes: "Edmonton: Vorstellung der Projekte: OOP und Interpreter (DE): xx, xx.xx.22, 17:00-18:30 Uhr"
-
--   week: "KW50"
-    lecture:
-        -   topic: "/backend/interpretation/syntaxdriven"
-            leader: "Carsten"
-        -   topic: "/backend/interpretation/astdriven-part1"
-            leader: "Carsten"
-        -   topic: "/backend/interpretation/astdriven-part2"
-            leader: "Carsten"
-    misc_assignment:
-        -   notes: ">> Kein Praktikum!"
-    misc_column:
         -   notes: "Edmonton: Vorstellung der Projekte 'Dress Rehearsal' (CA): xx, xx.xx.22, 17:00-18:30 Uhr"
 
 -   week: "KW51"  # Weihnachten
@@ -149,25 +137,30 @@
 
 -   week: "KW01"  # Freies Arbeiten, Sprechstunde
     lecture:
+        -   topic: "/backend/interpretation/syntaxdriven"
+            leader: "Carsten"
+        -   topic: "/backend/interpretation/astdriven-part1"
+            leader: "Carsten"
+        -   topic: "/backend/interpretation/astdriven-part2"
+            leader: "Carsten"
+    misc_assignment:
+        -   notes: ">> Freies Arbeiten"
+
+-   week: "KW02"   # Freies Arbeiten, Sprechstunde
+    lecture:
         -   topic: "/backend/interpretation/vm"
             leader: "Carsten"
         -   topic: "/backend/interpretation/gc"
             leader: "Carsten"
         -   topic: "/backend/machinecode"
             leader: "Carsten"
+    assignment:
+        -   topic: "sheet05"  # Freie Aufgabe: Konzepte vorstellen und diskutieren
+            due: "xx.xx.23, tbd"
     misc_column:
         -   notes: "Vortrag: VM und Bytecode"
         -   notes: "Vortrag: Garbage Collection"
         -   notes: "Vortrag: Generierung von Maschinencode"
-    assignment:
-        -   topic: "sheet05"  # Freie Aufgabe: Konzepte vorstellen und diskutieren
-            due: "xx.xx.23, tbd"
-
--   week: "KW02"   # Freies Arbeiten, Sprechstunde
-    misc_lecture:
-        -   notes: ">> Freies Arbeiten, Sprechstunde"
-    misc_assignment:
-        -   notes: ">> Freies Arbeiten"
 
 -   week: "KW03"
     # letzte Vorlesungswoche: Präsentation der Projekte
