@@ -1,9 +1,12 @@
 ---
-type: assignment
+archetype: assignment
 title: "Blatt 05: Interpreter"
 author: "BC George, Carsten Gips (FH Bielefeld)"
-hidden: true
 weight: 5
+
+hidden: true
+
+sketch: true
 ---
 
 

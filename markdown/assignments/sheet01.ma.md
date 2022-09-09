@@ -1,9 +1,12 @@
 ---
-type: assignment
+archetype: assignment
 title: "Blatt 01: Scanner und Parser"
 author: "BC George, Carsten Gips (FH Bielefeld)"
-hidden: true
 weight: 1
+
+hidden: true
+
+sketch: true
 ---
 
 
