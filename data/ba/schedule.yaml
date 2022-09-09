@@ -24,9 +24,9 @@
         # Teil 1
         -   topic: "/lexing/recursive"
             leader: "Carsten"
-        -   topic: "/lexing/table"  # ?? (nur Begriffe?!), stattdessen "3. Lexer mit ANTLR" (neu)
-            leader: "Carsten"
-        -   topic: "/lexing/antlr"
+#        -   topic: "/lexing/table"  # ?? (nur Begriffe?!), stattdessen "3. Lexer mit ANTLR" (neu)
+#            leader: "Carsten"
+        -   topic: "/lexing/antlr"  # neu
             leader: "Carsten"
         # Teil 2
         -   topic: "/parsing/cfg"  # Splitten in "4. CFG" und "5. LL-Parser"
@@ -46,7 +46,7 @@
     lecture:
         -   topic: "/parsing/ll-parser"
             leader: "Carsten"
-        -   topic: "Parser mit ANTLR"  # neu
+        -   topic: "/parsing/antlr"  # neu
             leader: "Carsten"
         -   topic: "/parsing/recovery"  # ohne Bison/Flex, mit zus. praktischem Beispiel
             leader: "Carsten"
