@@ -1,9 +1,9 @@
 ---
-type: lecture-cg
+archetype: lecture-cg
 title: "Generierung von Maschinencode (Skizze)"
 menuTitle: "Maschinencode"
 author: "Carsten Gips (FH Bielefeld)"
-weight: 1
+weight: 4
 readings:
   - key: "Mogensen2017"
     comment: "Kapitel 7 Machine-Code Generation"
@@ -39,7 +39,7 @@ fhmedia:
 
 ![](https://raw.githubusercontent.com/munificent/craftinginterpreters/master/site/image/a-map-of-the-territory/mountain.png)
 
-[Quelle: ["A Map of the Territory (mountain.png)"](https://github.com/munificent/craftinginterpreters/blob/master/site/image/a-map-of-the-territory/mountain.png) by [Bob Nystrom](https://github.com/munificent), licensed under [MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE)]{.origin}
+[Quelle: [A Map of the Territory (mountain.png)](https://github.com/munificent/craftinginterpreters/blob/master/site/image/a-map-of-the-territory/mountain.png) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
 
 ::: notes
 Die Erzeugung von Maschinencode ist in gewisser Weise ein "Parallelweg" zum Erzeugen von
@@ -61,7 +61,7 @@ Hier der Vollständigkeit halber ein Ausblick ...
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Intel_i80286_arch.svg/1024px-Intel_i80286_arch.svg.png){width="80%"}
 -->
 
-[Quelle: ["Intel i80286 arch"](https://commons.wikimedia.org/wiki/File:Intel_i80286_arch.svg) by [Appaloosa](https://commons.wikimedia.org/wiki/User:Appaloosa), licensed under [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0)]{.origin}
+[Quelle: [Intel i80286 arch](https://commons.wikimedia.org/wiki/File:Intel_i80286_arch.svg) by [Appaloosa](https://commons.wikimedia.org/wiki/User:Appaloosa) on Wikimedia.org ([CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0))]{.origin}
 
 ::: notes
 Am Beispiel der noch übersichtlichen Struktur des Intel i80286 lassen sich verschiedene
@@ -471,10 +471,6 @@ Skizze zur Erzeugung von Assembler-Code
 Unless otherwise noted, this work is licensed under CC BY-SA 4.0.
 
 ### Exceptions
-*   Image ["A Map of the Territory (mountain.png)"](https://github.com/munificent/craftinginterpreters/blob/master/site/image/a-map-of-the-territory/mountain.png)
-    (https://github.com/munificent/craftinginterpreters/blob/master/site/image/a-map-of-the-territory/mountain.png),
-    by [Bob Nystrom](https://github.com/munificent), licensed under [MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE)
-*   Image ["Intel i80286 arch"](https://commons.wikimedia.org/wiki/File:Intel_i80286_arch.svg)
-    (https://commons.wikimedia.org/wiki/File:Intel_i80286_arch.svg), by [Appaloosa](https://commons.wikimedia.org/wiki/User:Appaloosa), licensed
-    under [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0)
+*   Figure [A Map of the Territory (mountain.png)](https://github.com/munificent/craftinginterpreters/blob/master/site/image/a-map-of-the-territory/mountain.png) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))
+*   Figure [Intel i80286 arch](https://commons.wikimedia.org/wiki/File:Intel_i80286_arch.svg) by [Appaloosa](https://commons.wikimedia.org/wiki/User:Appaloosa) on Wikimedia.org ([CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0))
 :::

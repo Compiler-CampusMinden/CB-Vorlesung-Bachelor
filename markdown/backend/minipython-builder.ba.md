@@ -3,7 +3,7 @@ archetype: lecture-bc
 title: "Einstieg Builder für Mini-Python"
 menuTitle: "Mini-Python (Builder)"
 author: "BC George (FH Bielefeld)"
-weight: 5
+weight: 3
 readings:
     -   key: "aho2013compilers"
         comment: "Kapitel 2 und 3"

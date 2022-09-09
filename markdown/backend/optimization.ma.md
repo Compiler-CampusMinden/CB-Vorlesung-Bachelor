@@ -1,9 +1,9 @@
 ---
-type: lecture-bc
+archetype: lecture-bc
 title: "Optimierung und Datenflussanalyse"
 menuTitle: "Optimierung u. Datenflussanalyse"
 author: "BC George (FH Bielefeld)"
-weight: 1
+weight: 2
 readings:
   - key: "Güting1999"
     comment: "Kapitel 8"

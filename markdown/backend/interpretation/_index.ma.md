@@ -1,11 +1,9 @@
 ---
-chapter: true
+archetype: "chapter"
 title: "Interpreter"
-weight: 6
+weight: 1
 ---
 
-
-# Interpreter
 
 Ein Interpreter erzeugt keinen Code, sondern führt Source-Code (interaktiv) aus. Die einfachste
 Möglichkeit ist der Einsatz von attributierten Grammatiken, wo der Code bereits beim Parsen
