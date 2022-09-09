@@ -1,9 +1,9 @@
 ---
-type: lecture-bc
+archetype: lecture-bc
 title: "Syntaxanalyse: LR-Parser"
 menuTitle: "LR-Parser"
 author: "BC George (FH Bielefeld)"
-weight: 4
+weight: 6
 readings:
   - key: "Aho2008"
     comment: "Kapitel 4.5 bis 4.8"

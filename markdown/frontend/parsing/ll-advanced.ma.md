@@ -1,9 +1,9 @@
 ---
-type: lecture-cg
+archetype: lecture-cg
 title: "LL-Parser: Fortgeschrittene Techniken"
 menuTitle: "LL: Fortgeschrittene Techniken"
 author: "Carsten Gips (FH Bielefeld)"
-weight: 3
+weight: 4
 readings:
   - key: "Parr2010"
     comment: "Kapitel 3"

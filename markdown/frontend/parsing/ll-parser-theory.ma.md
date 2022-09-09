@@ -1,8 +1,8 @@
 ---
 archetype: lecture-bc
-title: "CFG"
+title: "LL-Parser"
 author: "BC George (FH Bielefeld)"
-weight: 1
+weight: 2
 readings:
   - key: "aho2013compilers"
   - key: "hopcroft2003"

@@ -1,10 +1,8 @@
 ---
-type: lecture-cg
+archetype: lecture-cg
 title: "Bison (Parsergenerator)"
-weight: 6
+weight: 7
 ---
 
-
-## YACC und Bison (Parsergeneratoren)
 
 -- Vortragsthema -- (gehört zu `["Flex: Lexer generieren)"]({{<ref "/frontend/lexing/flex" >}})`{=markdown})

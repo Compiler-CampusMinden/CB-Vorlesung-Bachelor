@@ -1,11 +1,9 @@
 ---
-chapter: true
+archetype: "chapter"
 title: "Parser"
-weight: 3
+weight: 2
 ---
 
-
-# Parser
 
 Der Parser arbeitet mit dem Tokenstrom, der vom Lexer kommt. Mit Hilfe einer Grammatik wird
 geprüft, ob hier gültige Sätze im Sinne der Sprache/Grammatik gebildet wurden. Der Parser

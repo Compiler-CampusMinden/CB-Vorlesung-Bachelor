@@ -5,6 +5,4 @@ weight: 4
 ---
 
 
-## Flex: Lexer generieren
-
 -- Vortragsthema --  (gehört zu `["Bison (Parsergenerator)"]({{<ref "/frontend/parsing/bison" >}})`{=markdown})

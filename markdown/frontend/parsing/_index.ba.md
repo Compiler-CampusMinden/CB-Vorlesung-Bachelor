@@ -1,7 +1,7 @@
 ---
 archetype: "chapter"
 title: "Parser"
-weight: 3
+weight: 2
 ---
 
 
