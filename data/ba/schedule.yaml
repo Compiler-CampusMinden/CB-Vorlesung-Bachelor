@@ -29,14 +29,14 @@
         -   topic: "/frontend/lexing/antlr"  # neu
             leader: "Carsten"
         # Teil 2
-        -   topic: "/frontend/parsing/cfg"  # Splitten in "4. CFG" und "5. LL-Parser"
+        -   topic: "/frontend/parsing/cfg"
             leader: "BC"
     misc_assignment:
         -   notes: ">> Zweiter Teil der VL (BC) in Praktikumszeit"
 
 -   week: "KW43"
     lecture:
-        -   topic: "/frontend/parsing/cfg"  # Splitten in "4. CFG" und "5. LL-Parser"
+        -   topic: "/frontend/parsing/ll-parser-theory"
             leader: "BC"
     assignment:
         -   topic: "sheet01"  # Mini-Python, Grammatik, Lexer
@@ -44,7 +44,7 @@
 
 -   week: "KW44"  # Feiertag: Dienstag, 01.11.
     lecture:
-        -   topic: "/frontend/parsing/ll-parser"
+        -   topic: "/frontend/parsing/ll-parser-impl"
             leader: "Carsten"
         -   topic: "/frontend/parsing/antlr"  # neu
             leader: "Carsten"

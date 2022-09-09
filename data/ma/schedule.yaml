@@ -26,8 +26,10 @@
             leader: "Carsten"
         -   topic: "/frontend/lexing/recursive"
             leader: "Carsten"
+        -   topic: "/frontend/lexing/flex"
+            leader: "Carsten"
         # Teil 2
-        -   topic: "/frontend/parsing/cfg"  # Splitten in "4. CFG" und "5. LL-Parser"
+        -   topic: "/frontend/parsing/cfg"
             leader: "BC"
     misc_assignment:
         -   notes: ">> Zweiter Teil der VL (BC) in Praktikumszeit"
@@ -35,12 +37,14 @@
 -   week: "KW43"
     lecture:
         # Teil 1
-        -   topic: "/frontend/parsing/cfg"  # Splitten in "4. CFG" und "5. LL-Parser"
+        -   topic: "/frontend/parsing/ll-parser-theory"
             leader: "BC"
         # Teil 2
-        -   topic: "/frontend/parsing/ll-parser"
+        -   topic: "/frontend/parsing/ll-parser-impl"
             leader: "Carsten"
         -   topic: "/frontend/parsing/ll-advanced"
+            leader: "Carsten"
+        -   topic: "/frontend/parsing/antlr"  # neu
             leader: "Carsten"
     misc_assignment:
         -   notes: ">> Zweiter Teil der VL (Carsten) in Praktikumszeit"
@@ -51,9 +55,11 @@
 
     lecture:
         # Teil 1
-        -   topic: "/frontend/parsing/lr-part"
+        -   topic: "/frontend/parsing/lr-parser"
             leader: "BC"
         # Teil 2
+        -   topic: "/frontend/parsing/bison"
+            leader: "Carsten"
         -   topic: "/frontend/parsing/recovery"
             leader: "Carsten"
         -   topic: "/frontend/parsing/finalwords"
@@ -147,7 +153,7 @@
             leader: "Carsten"
         -   topic: "/backend/interpretation/gc"
             leader: "Carsten"
-        -   topic: "/codegen/machinecode"
+        -   topic: "/backend/machinecode"
             leader: "Carsten"
     misc_column:
         -   notes: "Vortrag: VM und Bytecode"
