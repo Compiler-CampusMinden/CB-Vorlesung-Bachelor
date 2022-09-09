@@ -1,18 +1,18 @@
 -   week: "KW40"  # Feiertag: Montag, 03.10.
     lecture:
         -   topic: "/org/syllabus"
-            leader: "BC, cagi"
+            leader: "BC, Carsten"
             notes: "Kick-Off (Zoom)"
 
 -   week: "KW41"
     lecture:
         # Teil 1
         -   topic: "/intro/overview"
-            leader: "cagi"
+            leader: "Carsten"
         -   topic: "/intro/languages"
-            leader: "cagi"
+            leader: "Carsten"
         -   topic: "/intro/applications"
-            leader: "cagi"
+            leader: "Carsten"
         # Teil 2
         -   topic: "/lexing/regular"  # ohne Automaten, dafür mit neuem Beispiel
             leader: "BC"
@@ -23,11 +23,11 @@
     lecture:
         # Teil 1
         -   topic: "/lexing/recursive"
-            leader: "cagi"
+            leader: "Carsten"
         -   topic: "/lexing/table"  # ?? (nur Begriffe?!), stattdessen "3. Lexer mit ANTLR" (neu)
-            leader: "cagi"
+            leader: "Carsten"
         -   topic: "/lexing/antlr"
-            leader: "cagi"
+            leader: "Carsten"
         # Teil 2
         -   topic: "/parsing/cfg"  # Splitten in "4. CFG" und "5. LL-Parser"
             leader: "BC"
@@ -45,24 +45,24 @@
 -   week: "KW44"  # Feiertag: Dienstag, 01.11.
     lecture:
         -   topic: "/parsing/ll-parser"
-            leader: "cagi"
+            leader: "Carsten"
         -   topic: "Parser mit ANTLR"  # neu
-            leader: "cagi"
+            leader: "Carsten"
         -   topic: "/parsing/recovery"  # ohne Bison/Flex, mit zus. praktischem Beispiel
-            leader: "cagi"
+            leader: "Carsten"
         -   topic: "/parsing/finalwords"
-            leader: "cagi"
+            leader: "Carsten"
     misc_column:
         -   notes: "Edmonton: ANTLR + Live-Coding (CA): xx, xx.xx.22, 17:00-18:30 Uhr"
 
 -   week: "KW45"
     lecture:
         -   topic: "/semantics/symboltables/intro"
-            leader: "cagi"
+            leader: "Carsten"
         -   topic: "/semantics/symboltables/scopes"
-            leader: "cagi"
+            leader: "Carsten"
         -   topic: "/semantics/symboltables/functions"
-            leader: "cagi"
+            leader: "Carsten"
     assignment:
         -   topic: "sheet02"  # ANTLR, Parser
             due: "xx.xx.22, tbd"
@@ -70,9 +70,9 @@
 -   week: "KW46"
     lecture:
         -   topic: "/semantics/symboltables/classes"  # ausbauen
-            leader: "cagi"
+            leader: "Carsten"
         -   topic: "Symboltabellen mit ANTLR"  # neu
-            leader: "cagi"
+            leader: "Carsten"
 
 -   week: "KW47"
     lecture:
@@ -85,16 +85,16 @@
 -   week: "KW48"
     lecture:
         -   topic: "/interpretation/syntaxdriven"
-            leader: "cagi"
+            leader: "Carsten"
         -   topic: "/interpretation/astdriven-part1"
-            leader: "cagi"
+            leader: "Carsten"
         -   topic: "/interpretation/astdriven-part2"
-            leader: "cagi"
+            leader: "Carsten"
 
 -   week: "KW49"
     lecture:
         -   topic: "/intermediate/intro"
-            leader: "cagi"
+            leader: "Carsten"
         -   topic: "/intermediate/llvm-ir"  # ??
             leader: "BC"
     assignment:
@@ -108,7 +108,7 @@
 -   week: "KW50"
     lecture:
         -   topic: "interpretation/gc"  # Garbage Collection, Laufzeitumgebungen: Anpassen an C-Target
-            leader: "cagi"
+            leader: "Carsten"
     misc_column:
         -   notes: "Edmonton: Vorstellung der Projekte 'Dress Rehearsal' (CA): xx, xx.xx.22, 17:00-18:30 Uhr"
 
