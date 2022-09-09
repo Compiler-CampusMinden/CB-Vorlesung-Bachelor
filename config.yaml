@@ -27,7 +27,7 @@ languages:
     weight: 2
 
 params:
-  editURL: "https://github.com/Compilerbau/CB-Lecture-Bachelor/edit/master/markdown/"
+  editURL: "https://github.com/Compiler-CampusMinden/CB-Vorlesung/edit/master/markdown/"
   author: "cagix"
   themeVariant: "green"
   titleSeparator: " "
