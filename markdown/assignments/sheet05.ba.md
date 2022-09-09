@@ -1,6 +1,6 @@
 ---
 archetype: assignment
-title: "Blatt 05: Mini-Python: Freie Aufgabe"
+title: "Blatt 05: Mini-Python: Builder"
 author: "BC George, Carsten Gips (FH Bielefeld)"
 weight: 5
 

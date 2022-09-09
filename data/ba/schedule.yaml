@@ -100,11 +100,12 @@
             leader: "Carsten"
         -   topic: "/backend/minipython-builder"  # Einstieg Builder f. Mini-Python (BC)
             leader: "BC"
-
+    misc_assignment:
+        -   notes: ">> Freies Arbeiten"
 
 -   week: "KW49"
     lecture:
-        -   topic: "interpretation/gc"  # Garbage Collection, Laufzeitumgebungen: Anpassen an C-Target
+        -   topic: "backend/interpretation/gc"  # Garbage Collection, Laufzeitumgebungen: Anpassen an C-Target
             leader: "Carsten"
     assignment:
         -   topic: "sheet04"  # Interpreter
@@ -115,6 +116,11 @@
         -   notes: "Edmonton: Vorstellung der Projekte: OOP und Interpreter (DE): xx, xx.xx.22, 17:00-18:30 Uhr"
 
 -   week: "KW50"
+    misc_lecture:
+        -   notes: ">> Besprechung Projektideen (per Team)"
+    assignment:
+        -   topic: "sheet05"
+            due: "xx.xx.23, tbd"
     misc_column:
         -   notes: "Edmonton: Vorstellung der Projekte 'Dress Rehearsal' (CA): xx, xx.xx.22, 17:00-18:30 Uhr"
 
@@ -130,9 +136,8 @@
     misc_lecture:
         -   notes: ">> Alles Gute im neuen Jahr!"
         -   notes: ">> Freies Arbeiten, Sprechstunde"
-    assignment:
-        -   topic: "sheet05"  # Freie Aufgabe: Konzepte vorstellen und diskutieren
-            due: "xx.xx.23, tbd"
+    misc_assignment:
+        -   notes: ">> Freies Arbeiten"
 
 -   week: "KW02"   # Freies Arbeiten, Sprechstunde
     misc_lecture:
