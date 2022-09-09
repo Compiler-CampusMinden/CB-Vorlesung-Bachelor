@@ -3,7 +3,7 @@ archetype: lecture-cg
 title: "Lexer: Handcodierte Implementierung"
 menuTitle: "Handcodierte Implementierung"
 author: "Carsten Gips (FH Bielefeld)"
-weight: 3
+weight: 2
 readings:
   - key: "Aho2008"
     comment: " Abschnitt 2.6 und Kapitel 3"

@@ -1,11 +1,9 @@
 ---
-chapter: true
+archetype: "chapter"
 title: "Lexer"
-weight: 2
+weight: 1
 ---
 
-
-# Lexer
 
 Der Lexer (auch "Scanner") soll den Zeichenstrom in eine Folge von Token
 zerlegen. Zur Spezifikation der Token werden in der Regel reguläre Ausdrücke

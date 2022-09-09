@@ -3,7 +3,7 @@ archetype: lecture-cg
 title: "Lexer: Tabellenbasierte Implementierung"
 menuTitle: "Tabellenbasierte Implementierung"
 author: "Carsten Gips (FH Bielefeld)"
-weight: 2
+weight: 3
 readings:
   - key: "Aho2008"
     comment: " Abschnitt 2.6 und Kapitel 3"

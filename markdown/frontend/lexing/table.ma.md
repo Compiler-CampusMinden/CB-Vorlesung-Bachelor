@@ -1,5 +1,5 @@
 ---
-type: lecture-cg
+archetype: lecture-cg
 title: "Lexer: Tabellenbasierte Implementierung"
 menuTitle: "Tabellenbasierte Implementierung"
 author: "Carsten Gips (FH Bielefeld)"
@@ -25,7 +25,7 @@ tldr: |
   der Effizienz kann die Tabelle in den Code integriert werden (etwa mit Sprungbefehlen,
   "direkt codierte Implementierung"). Diese Lexer sind nur schwer nachvollziehbar und
   werden üblicherweise generiert (vgl. `["Flex"]({{<ref "/frontend/lexing/flex" >}})`{=markdown}
-  und `["ANTLR"]({{<ref "/parsing/antlr" >}})`{=markdown}).
+  und `["ANTLR"]({{<ref "/frontend/parsing/antlr" >}})`{=markdown}).
 outcomes:
   - k1: "Aufgaben eines Lexers"
   - k2: "Erkennen von Lexemen mit RE und DFA"
