@@ -19,6 +19,8 @@ youtube:
 fhmedia:
   - link: ""
     name: "VL Lexer mit ANTLR"
+
+sketch: true
 ---
 
 

@@ -21,6 +21,8 @@ youtube:
 fhmedia:
   - link: "TODO"
     name: "VL Symboltabellen mit ANTLR"
+
+sketch: true
 ---
 
 
