@@ -39,11 +39,11 @@ Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
 [ILIAS]: https://www.fh-bielefeld.de/elearning/goto.php?target=crs_1091711&client_id=FH-Bielefeld
 
-### Prüfungsform
+### Prüfungsform, Note und Credits
 
 **Performanzprüfung**, 5 ECTS
 
-Siehe `["Hinweise zur Prüfung"]({{< ref "/org/grading" >}})`{=markdown} zu Details.
+Hier finden Sie Informationen zum Ablauf der Praktika sowie zur Prüfungsform: `["Note und Credits"]({{< ref "/org/grading" >}})`{=markdown}.
 
 ### Kooperation mit University of Alberta, Edmonton (Kanada)
 
