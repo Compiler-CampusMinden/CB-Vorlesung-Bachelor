@@ -21,6 +21,8 @@ outcomes:
 attachments:
   - link: "https://github.com/Compilerbau/AnnotatedSlides/blob/master/parsing_cfg.ann.pdf"
     name: "Annotierte Folien: CFG, LL-Parser"
+
+sketch: true
 ---
 
 
