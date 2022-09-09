@@ -1,14 +1,12 @@
 ---
-chapter: true
+archetype: "chapter"
 title: "Zwischencode"
-weight: 5
+weight: 3
 ---
 
 
-# Zwischencode
-
-Die Schnittstelle zwischen dem Frontend und dem Backend ist der Zwischencode
-(*intermediate code* (*IC*), auch *intermediate representation* (*IR*) genannt).
+Die Schnittstelle zwischen dem "Frontend" und dem "Backend" ist der "Zwischencode"
+(_intermediate code_ (_IC_), auch _intermediate representation_ (_IR_) genannt).
 
 Für den Zwischencode gibt es kein allgemein definiertes Format. In der Praxis
 trifft man auf eine große Bandbreite an verschiedenen Formaten.
