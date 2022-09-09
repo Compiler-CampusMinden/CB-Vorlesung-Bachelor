@@ -60,12 +60,72 @@ a= [5  , 6]     ;
 
 [erstellt der Lexer (oder auch Scanner genannt) eine Sequenz von Token:]{.notes}
 
+\pause
 \bigskip
 \bigskip
 
 ```
 <ID, "a"> <ASSIGN> <LBRACK> <NUM, 5> <COMMA> <NUM, 6> <RBRACK> <SEMICOL>
 ```
+
+::: notes
+*   Input: Zeichenstrom (Eingabedatei o.ä.)
+*   Verarbeitung: Finden sinnvoller Sequenzen im Zeichenstrom ("Lexeme"),
+    Einteilung in Kategorien und Erzeugen von Token (Paare: Typ/Name, Wert)
+*   Ausgabe: Tokenstrom
+
+Normalerweise werden für spätere Phasen unwichtige Elemente wie White-Space
+oder Kommentare entfernt.
+
+Durch diese Vorverarbeitung wird eine höhere Abstraktionsstufe erreicht und es
+können erste grobe Fehler gefunden werden. Dadurch kann der Parser auf einer
+abstrakteren Stufe arbeiten und muss nicht mehr den gesamten ursprünglichen
+Zeichenstrom verarbeiten.
+
+
+*Anmerkung*: In dieser Phase steht die Geschwindigkeit stark im Vordergrund:
+Der Lexer "sieht" *alle* Zeichen im Input. Deshalb findet man häufig von
+Hand kodierte Lexer, obwohl die Erstellung der Lexer auch durch Generatoren
+erledigt werden könnte ...
+
+
+*Anmerkung*: Die Token sind die Terminalsymbole in den Parserregeln (Grammatik).
+:::
+
+
+## Definition wichtiger Begriffe
+
+*   **Token**: Tupel (Tokenname, optional: Wert)
+
+    ::: notes
+    Der Tokenname ist ein abstraktes Symbol, welches eine lexikalische
+    Einheit repräsentiert (Kategorie). Die Tokennamen sind die Eingabesymbole
+    für den Parser.
+
+    Token werden i.d.R. einfach über ihren Namen referenziert. Token werden
+    häufig zur Unterscheidung von anderen Symbolen in der Grammatik in
+    Fettschrift oder mit großen Anfangsbuchstaben geschrieben.
+
+    Ein Token kann einen Wert haben, etwa eine Zahl oder einen Bezeichner, der
+    auf das zum Token gehörende Pattern gematcht hatte (also das Lexem). Wenn
+    der Wert des Tokens eindeutig über den Namen bestimmt ist (im Beispiel oben
+    beim Komma oder den Klammern), dann wird häufig auf den Wert verzichtet.
+    :::
+
+\smallskip
+
+*   **Lexeme**: Sequenz von Zeichen im Eingabestrom, die auf ein Tokenpattern
+    matcht und vom Lexer als Instanz dieses Tokens identifiziert wird.
+
+\smallskip
+
+*   **Pattern**: Beschreibung der Form eines Lexems
+
+    ::: notes
+    Bei Schlüsselwörtern oder Klammern etc. sind dies die Schlüsselwörter oder
+    Klammern selbst. Bei Zahlen oder Bezeichnern (Namen) werden i.d.R.
+    reguläre Ausdrücke zur Beschreibung der Form des Lexems formuliert.
+    :::
 
 
 ## Manuelle Implementierung: Rekursiver Abstieg

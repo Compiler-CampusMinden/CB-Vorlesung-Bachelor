@@ -24,8 +24,6 @@
         # Teil 1
         -   topic: "/frontend/lexing/recursive"
             leader: "Carsten"
-#        -   topic: "/frontend/lexing/table"  # ?? (nur Begriffe?!), stattdessen "3. Lexer mit ANTLR" (neu)
-#            leader: "Carsten"
         -   topic: "/frontend/lexing/antlr"  # neu
             leader: "Carsten"
         # Teil 2
