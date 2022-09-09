@@ -14,7 +14,7 @@
         -   topic: "/intro/applications"
             leader: "Carsten"
         # Teil 2
-        -   topic: "/lexing/regular"  # ohne Automaten, dafür mit neuem Beispiel
+        -   topic: "/frontend/lexing/regular"  # ohne Automaten, dafür mit neuem Beispiel
             leader: "BC"
     misc_assignment:
         -   notes: ">> Zweiter Teil der VL (BC) in Praktikumszeit"
@@ -22,21 +22,21 @@
 -   week: "KW42"
     lecture:
         # Teil 1
-        -   topic: "/lexing/recursive"
+        -   topic: "/frontend/lexing/recursive"
             leader: "Carsten"
-#        -   topic: "/lexing/table"  # ?? (nur Begriffe?!), stattdessen "3. Lexer mit ANTLR" (neu)
+#        -   topic: "/frontend/lexing/table"  # ?? (nur Begriffe?!), stattdessen "3. Lexer mit ANTLR" (neu)
 #            leader: "Carsten"
-        -   topic: "/lexing/antlr"  # neu
+        -   topic: "/frontend/lexing/antlr"  # neu
             leader: "Carsten"
         # Teil 2
-        -   topic: "/parsing/cfg"  # Splitten in "4. CFG" und "5. LL-Parser"
+        -   topic: "/frontend/parsing/cfg"  # Splitten in "4. CFG" und "5. LL-Parser"
             leader: "BC"
     misc_assignment:
         -   notes: ">> Zweiter Teil der VL (BC) in Praktikumszeit"
 
 -   week: "KW43"
     lecture:
-        -   topic: "/parsing/cfg"  # Splitten in "4. CFG" und "5. LL-Parser"
+        -   topic: "/frontend/parsing/cfg"  # Splitten in "4. CFG" und "5. LL-Parser"
             leader: "BC"
     assignment:
         -   topic: "sheet01"  # Mini-Python, Grammatik, Lexer
@@ -44,24 +44,26 @@
 
 -   week: "KW44"  # Feiertag: Dienstag, 01.11.
     lecture:
-        -   topic: "/parsing/ll-parser"
+        -   topic: "/frontend/parsing/ll-parser"
             leader: "Carsten"
-        -   topic: "/parsing/antlr"  # neu
+        -   topic: "/frontend/parsing/antlr"  # neu
             leader: "Carsten"
-        -   topic: "/parsing/recovery"  # ohne Bison/Flex, mit zus. praktischem Beispiel
+        -   topic: "/frontend/parsing/recovery"  # ohne Bison/Flex, mit zus. praktischem Beispiel
             leader: "Carsten"
-        -   topic: "/parsing/finalwords"
+        -   topic: "/frontend/parsing/finalwords"
             leader: "Carsten"
+    misc_assignment:
+        -   notes: ">> Kein Praktikum: Treffen mit Kanada!"
     misc_column:
         -   notes: "Edmonton: ANTLR + Live-Coding (CA): xx, xx.xx.22, 17:00-18:30 Uhr"
 
 -   week: "KW45"
     lecture:
-        -   topic: "/semantics/symboltables/intro"
+        -   topic: "/frontend/semantics/symboltables/intro"
             leader: "Carsten"
-        -   topic: "/semantics/symboltables/scopes"
+        -   topic: "/frontend/semantics/symboltables/scopes"
             leader: "Carsten"
-        -   topic: "/semantics/symboltables/functions"
+        -   topic: "/frontend/semantics/symboltables/functions"
             leader: "Carsten"
     assignment:
         -   topic: "sheet02"  # ANTLR, Parser
@@ -69,34 +71,41 @@
 
 -   week: "KW46"
     lecture:
-        -   topic: "/semantics/symboltables/classes"  # ausbauen
+        # Teil 1
+        -   topic: "/frontend/semantics/symboltables/classes"  # ausbauen
             leader: "Carsten"
-        -   topic: "Symboltabellen mit ANTLR"  # neu
+        -   topic: "/frontend/semantics/symboltables/antlr"  # neu
             leader: "Carsten"
+        # Teil 2
+        -   topic: "/frontend/semantics/attribgrammars"  # ohne Bison/Flex
+            leader: "BC"
+    misc_assignment:
+        -   notes: ">> Zweiter Teil der VL (BC) in Praktikumszeit"
 
 -   week: "KW47"
     lecture:
-        -   topic: "/semantics/attribgrammars"  # ohne Bison/Flex
-            leader: "BC"
+        -   topic: "/backend/interpretation/syntaxdriven"
+            leader: "Carsten"
+        -   topic: "/backend/interpretation/astdriven-part1"
+            leader: "Carsten"
+        -   topic: "/backend/interpretation/astdriven-part2"
+            leader: "Carsten"
     assignment:
         -   topic: "sheet03"  # Symboltabellen
             due: "xx.xx.22, tbd"
 
 -   week: "KW48"
     lecture:
-        -   topic: "/interpretation/syntaxdriven"
+        -   topic: "/intermediate/intro"
             leader: "Carsten"
-        -   topic: "/interpretation/astdriven-part1"
-            leader: "Carsten"
-        -   topic: "/interpretation/astdriven-part2"
-            leader: "Carsten"
+        -   topic: "/backend/minipython-builder"  # Einstieg Builder f. Mini-Python (BC)
+            leader: "BC"
+
 
 -   week: "KW49"
     lecture:
-        -   topic: "/intermediate/intro"
+        -   topic: "interpretation/gc"  # Garbage Collection, Laufzeitumgebungen: Anpassen an C-Target
             leader: "Carsten"
-        -   topic: "/intermediate/llvm-ir"  # ??
-            leader: "BC"
     assignment:
         -   topic: "sheet04"  # Interpreter
             due: "xx.xx.22, tbd"
@@ -106,9 +115,6 @@
         -   notes: "Edmonton: Vorstellung der Projekte: OOP und Interpreter (DE): xx, xx.xx.22, 17:00-18:30 Uhr"
 
 -   week: "KW50"
-    lecture:
-        -   topic: "interpretation/gc"  # Garbage Collection, Laufzeitumgebungen: Anpassen an C-Target
-            leader: "Carsten"
     misc_column:
         -   notes: "Edmonton: Vorstellung der Projekte 'Dress Rehearsal' (CA): xx, xx.xx.22, 17:00-18:30 Uhr"
 

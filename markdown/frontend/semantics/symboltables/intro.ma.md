@@ -1,5 +1,5 @@
 ---
-archetype: lecture-cg
+type: lecture-cg
 title: "Semantische Analyse: Symboltabellen"
 menuTitle: "Überblick Symboltabellen"
 author: "Carsten Gips (FH Bielefeld)"
@@ -73,7 +73,7 @@ Nach der Syntaxanalyse braucht der Compiler für die  darauf folgenden Phasen
 Auf dem Weg zum Interpreter/Compiler müssen die Symbole im AST korrekt zugeordnet
 werden. Dies geschieht über Symboltabellen. Im Folgenden werden wir verschiedene
 Aspekte von Symboltabellen betrachten und eine mögliche Implementierung erarbeiten,
-bevor wir uns (in `["Interpreter"]({{<ref "/interpretation/syntaxdriven" >}})`{=markdown})
+bevor wir uns (in `["Interpreter"]({{<ref "/backend/interpretation/syntaxdriven" >}})`{=markdown})
 um die Auswertung (Interpretation) des AST kümmern können.
 
 ### Logische Compilierungsphasen
@@ -175,7 +175,7 @@ Typen bestimmt oder angepasst werden können, müssen Bezeichner zunächst ident
 werden, d.h. bei namensgleichen Bezeichnern der richtige Bezug bestimmt werden.
 
 Zu Annotationen/Attributen, Typen und Type-Checks siehe VL
-`["Typprüfungen, Attributgrammatiken"]({{<ref "/semantics/attribgrammars" >}})`{=markdown}!
+`["Typprüfungen, Attributgrammatiken"]({{<ref "/frontend/semantics/attribgrammars" >}})`{=markdown}!
 :::
 
 \bigskip
@@ -208,7 +208,7 @@ Konvertierungen vorgenommen werden, etwa bei `3+4.1` ...
 *   Variablen werden nicht als Funktionen genutzt
 *   Funktionen werden nicht als Variablen genutzt
 
-=> Verweis auf VL `["Typprüfungen, Attributgrammatiken"]({{<ref "/semantics/attribgrammars" >}})`{=markdown}
+=> Verweis auf VL `["Typprüfungen, Attributgrammatiken"]({{<ref "/frontend/semantics/attribgrammars" >}})`{=markdown}
 
 Da Funktionen bereits vor dem Bekanntmachen der Definition aufgerufen werden dürfen, bietet
 sich ein **zweimaliger Durchlauf** (*pass*) an: Beim ersten Traversieren des AST werden alle

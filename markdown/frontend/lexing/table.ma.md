@@ -18,13 +18,13 @@ tldr: |
   zerlegen. Zur Spezifikation der Token werden reguläre Ausdrücke verwendet.
   Diese können über verschiedene Schritte in einen zugehörigen DFA transformiert
   werden, der wiederum über Tabellen dargestellt werden kann (vgl. auch
-  `["Reguläre Sprachen, Ausdrucksstärke"]({{<ref "/lexing/regular" >}})`{=markdown}).
+  `["Reguläre Sprachen, Ausdrucksstärke"]({{<ref "/frontend/lexing/regular" >}})`{=markdown}).
 
   Mit Hilfe der (üblicherweise von Scanner-Generatoren generierten) Tabellen kann
   ein Lexer implementiert werden ("tabellenbasierte Implementierung"). Zur Steigerung
   der Effizienz kann die Tabelle in den Code integriert werden (etwa mit Sprungbefehlen,
   "direkt codierte Implementierung"). Diese Lexer sind nur schwer nachvollziehbar und
-  werden üblicherweise generiert (vgl. `["Flex"]({{<ref "/lexing/flex" >}})`{=markdown}
+  werden üblicherweise generiert (vgl. `["Flex"]({{<ref "/frontend/lexing/flex" >}})`{=markdown}
   und `["ANTLR"]({{<ref "/parsing/antlr" >}})`{=markdown}).
 outcomes:
   - k1: "Aufgaben eines Lexers"
@@ -156,7 +156,7 @@ nachfolgend die *tabellenbasierte Implementierung* sowie als etwas schnellere
 Variante die *direkt codierte Implementierung* betrachtet werden. Während diese
 beiden Varianten noch sehr nah an der Simulation eines DFA sind, ist die
 *manuelle Implementierung*
-(vgl. `["Handcodierte Implementierung"]({{<ref "/lexing/recursive" >}})`{=markdown})
+(vgl. `["Handcodierte Implementierung"]({{<ref "/frontend/lexing/recursive" >}})`{=markdown})
 noch einfacher in bestehenden Code zu integrieren (zum Preis einer erschwerten
 Änderbarkeit).
 

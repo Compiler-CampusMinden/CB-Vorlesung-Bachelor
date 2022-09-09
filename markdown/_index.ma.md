@@ -4,7 +4,7 @@ title: "CB W22 M.Sc."
 ---
 
 
-# IFM 5.21: Compilerbau (Winter 2022/23, Master)
+# MIF 1.10: Compilerbau (Winter 2022/23, Master)
 
 ## Kursbeschreibung
 

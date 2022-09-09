@@ -14,23 +14,20 @@
         -   topic: "/intro/applications"
             leader: "Carsten"
         # Teil 2
-        -   topic: "/lexing/regular"
+        -   topic: "/frontend/lexing/regular"
             leader: "BC"
     misc_assignment:
         -   notes: ">> Zweiter Teil der VL (BC) in Praktikumszeit"
 
 -   week: "KW42"
-    misc_lecture:
-        -   notes: ">> Happy Feiertach!"
-
     lecture:
         # Teil 1
-        -   topic: "/lexing/table"
+        -   topic: "/frontend/lexing/table"
             leader: "Carsten"
-        -   topic: "/lexing/recursive"
+        -   topic: "/frontend/lexing/recursive"
             leader: "Carsten"
         # Teil 2
-        -   topic: "/parsing/cfg"  # Splitten in "4. CFG" und "5. LL-Parser"
+        -   topic: "/frontend/parsing/cfg"  # Splitten in "4. CFG" und "5. LL-Parser"
             leader: "BC"
     misc_assignment:
         -   notes: ">> Zweiter Teil der VL (BC) in Praktikumszeit"
@@ -38,25 +35,28 @@
 -   week: "KW43"
     lecture:
         # Teil 1
-        -   topic: "/parsing/cfg"  # Splitten in "4. CFG" und "5. LL-Parser"
+        -   topic: "/frontend/parsing/cfg"  # Splitten in "4. CFG" und "5. LL-Parser"
             leader: "BC"
         # Teil 2
-        -   topic: "/parsing/ll-parser"
+        -   topic: "/frontend/parsing/ll-parser"
             leader: "Carsten"
-        -   topic: "/parsing/ll-advanced"
+        -   topic: "/frontend/parsing/ll-advanced"
             leader: "Carsten"
     misc_assignment:
         -   notes: ">> Zweiter Teil der VL (Carsten) in Praktikumszeit"
 
 -   week: "KW44"  # Feiertag: Dienstag, 01.11.
+    misc_lecture:
+        -   notes: ">> Happy Feiertach!"
+
     lecture:
         # Teil 1
-        -   topic: "/parsing/lr-part"
+        -   topic: "/frontend/parsing/lr-part"
             leader: "BC"
         # Teil 2
-        -   topic: "/parsing/recovery"
+        -   topic: "/frontend/parsing/recovery"
             leader: "Carsten"
-        -   topic: "/parsing/finalwords"
+        -   topic: "/frontend/parsing/finalwords"
             leader: "Carsten"
     misc_assignment:
         -   notes: ">> Zweiter Teil der VL (Carsten) in Praktikumszeit"
@@ -65,13 +65,13 @@
 
 -   week: "KW45"
     lecture:
-        -   topic: "/semantics/symboltables/intro"
+        -   topic: "/frontend/semantics/symboltables/intro"
             leader: "Carsten"
-        -   topic: "/semantics/symboltables/scopes"
+        -   topic: "/frontend/semantics/symboltables/scopes"
             leader: "Carsten"
-        -   topic: "/semantics/symboltables/functions"
+        -   topic: "/frontend/semantics/symboltables/functions"
             leader: "Carsten"
-        -   topic: "/semantics/symboltables/classes"  # ausbauen
+        -   topic: "/frontend/semantics/symboltables/classes"  # ausbauen
             leader: "Carsten"
     assignment:
         -   topic: "sheet01"  # Mini-Python, Grammatik, Lexer
@@ -79,7 +79,7 @@
 
 -   week: "KW46"
     lecture:
-        -   topic: "/semantics/attribgrammars"
+        -   topic: "/frontend/semantics/attribgrammars"
             leader: "BC"
     assignment:
         -   topic: "sheet02"  # ANTLR, Parser
@@ -87,7 +87,7 @@
 
 -   week: "KW47"
     lecture:
-        -   topic: "/optimization/optimization"
+        -   topic: "/backend/optimization"
             leader: "BC"
     assignment:
         -   topic: "sheet03"  # Symboltabellen
@@ -109,7 +109,7 @@
 
 -   week: "KW49"
     lecture:
-        -   topic: "/parsing/parsercombinator"
+        -   topic: "/frontend/parsing/parsercombinator"
             leader: "BC"
     assignment:
         -   topic: "sheet04"  # Interpreter
@@ -122,11 +122,11 @@
 
 -   week: "KW50"
     lecture:
-        -   topic: "/interpretation/syntaxdriven"
+        -   topic: "/backend/interpretation/syntaxdriven"
             leader: "Carsten"
-        -   topic: "/interpretation/astdriven-part1"
+        -   topic: "/backend/interpretation/astdriven-part1"
             leader: "Carsten"
-        -   topic: "/interpretation/astdriven-part2"
+        -   topic: "/backend/interpretation/astdriven-part2"
             leader: "Carsten"
     misc_assignment:
         -   notes: ">> Kein Praktikum!"
@@ -142,12 +142,12 @@
         -   notes: ">> Weihnachtsferien!"
 
 -   week: "KW01"  # Freies Arbeiten, Sprechstunde
-    misc_lecture:
-        -   topic: "interpretation/vm"
+    lecture:
+        -   topic: "/backend/interpretation/vm"
             leader: "Carsten"
-        -   topic: "interpretation/gc"
+        -   topic: "/backend/interpretation/gc"
             leader: "Carsten"
-        -   topic: "/machinecode/machinecode"
+        -   topic: "/codegen/machinecode"
             leader: "Carsten"
     misc_column:
         -   notes: "Vortrag: VM und Bytecode"

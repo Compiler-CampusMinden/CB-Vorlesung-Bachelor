@@ -20,7 +20,7 @@ tldr: |
 
   Der Wert von Literalen ergibt sich direkt durch die Übersetzung des jeweiligen Werts in den
   passenden Typ der Implementierungssprache. Bei einfachen Ausdrücken kann man auf das in
-  `["Syntaxgesteuerte Interpreter"]({{<ref "/interpretation/syntaxdriven" >}})`{=markdown}
+  `["Syntaxgesteuerte Interpreter"]({{<ref "/backend/interpretation/syntaxdriven" >}})`{=markdown}
   demonstrierte Vorgehen zurückgreifen: Man interpretiert zunächst die Teilausdrücke durch den
   Aufruf von `eval()` für die jeweiligen AST-Kindknoten und berechnet daraus das gewünschte
   Ergebnis.

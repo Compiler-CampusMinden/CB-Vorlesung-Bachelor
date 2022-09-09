@@ -66,7 +66,7 @@ Hochschulen anbieten zu können. (Diese Termine werden in englischer Sprache dur
     Nystrom, R., Genever Benning, 2021.
     ISBN [978-0-9905829-3-9](https://www.digibib.net/openurl/Bi10?isbn=978-0-9905829-3-9).
 
-3.  **Introduction to Compiler Design**.
+3.  "**Introduction to Compiler Design**".
     Mogensen, T., Springer, 2017.
     ISBN [978-3-319-66966-3](https://www.digibib.net/openurl/Bi10?isbn=978-3-319-66966-3).
     DOI [10.1007/978-3-319-66966-3](https://doi.org/10.1007/978-3-319-66966-3).
