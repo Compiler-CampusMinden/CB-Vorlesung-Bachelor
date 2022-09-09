@@ -60,7 +60,7 @@ bekommt das gesamte Übungsblatt als "nicht bestanden" testiert!
 
 ### Stationen 6+7: "mdl. Prüfung"
 
-Die beiden mündlichen Prüfungen (Termine siehe `[Fahrplan]({{<ref "/org/schedule" >}})`{=markdown})
+Die beiden mündlichen Prüfungen
 werden einzeln pro Teilnehmer durchgeführt und dauern ca. 30 Minuten. Wir vereinbaren rechtzeitig
 vorher individuelle Zeitslots an den beiden Prüfungstagen mit Ihnen. Die Prüfungen erfolgen
 über Zoom.
@@ -68,16 +68,29 @@ vorher individuelle Zeitslots an den beiden Prüfungstagen mit Ihnen. Die Prüfu
 Beide Prüfungen können sich auch auf Stoff beziehen, der durch die Bearbeitung der vorangegangenen
 Aufgabenblätter erarbeitet wurde.
 
-**Hinweis**: **Die zweite mündliche Prüfung kann abweichend vom `[Fahrplan]({{<ref "/org/schedule" >}})`{=markdown}
+**Hinweis**: **Die zweite mündliche Prüfung kann abweichend
 auch im zweiten Prüfungszeitraum durchgeführt werden.**
 
 ### Stationen 8: "Vortrag"
 
-Es stehen verschiedene Vortragsthemen zur Auswahl (Termine siehe `[Fahrplan]({{<ref "/org/schedule" >}})`{=markdown}).
+Es stehen verschiedene Vortragsthemen zur Auswahl.
 
 Die Vorträge werden in der Regel als Einzelvortrag mit ca. 45 Minuten Dauer in deutscher Sprache
 gehalten. Ausnahme ist der Vortrag zu Bison, der von zwei Personen in englischer Sprache und mit
 doppelter Länge durchgeführt wird (Teilnahme der kanadischen Studierenden).
+
+
+### Hinweise zur Modulprüfung FHB
+
+Die Modulprüfung erfolgt in Form einer schriftlichen Prüfung ("Klausur"). Diese
+wird in beiden Prüfungszeiträumen in Form eines E-Assessments über eine spezielle
+ILIAS-Instanz durchgeführt. Nähere Informationen siehe
+`["Prüfungsvorbereitung"]({{< ref "/org/exams" >}})`{=markdown}.
+
+Für die Vergabe der Credit-Points ist die regelmäßige und erfolgreiche Teilnahme
+am Praktikum erforderlich, welche am Ende des Semesters durch ein Testat bescheinigt
+wird.
+
 
 ### Praktikum: Verspätete Abgaben
 
