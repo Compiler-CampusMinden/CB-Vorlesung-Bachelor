@@ -1,5 +1,5 @@
 ---
-type: lecture-bc
+archetype: lecture-bc
 title: "PEG-Parser, Pratt-Parser und Parser Combinators"
 menuTitle: "PEG-Parser, Pratt-Parser und Parser Combinators"
 author: "BC George (FH Bielefeld)"
@@ -10,8 +10,6 @@ readings:
   - key: "Mogensen2017"
   - key: "Ford2004Peg"
   - key: "Ford2004Proceedings"
-#attachments:
-#  - link: "https://www.fh-bielefeld.de"
 ---
 
 
