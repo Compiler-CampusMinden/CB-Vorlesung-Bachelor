@@ -76,3 +76,5 @@ Weitere empfohlene Literatur siehe `["Ressourcen"]({{< ref "/org/resources" >}})
 ## Fahrplan
 
 `{{< schedule >}}`{=markdown}
+
+**Hinweis**: Abgabe der Hausaufgaben bis jeweils XX.XX Uhr im ILIAS.
