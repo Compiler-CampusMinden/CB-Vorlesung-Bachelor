@@ -10,8 +10,6 @@ readings:
   - key: "Mogensen2017"
   - key: "Ford2004Peg"
   - key: "Ford2004Proceedings"
-
-sketch: true
 ---
 
 

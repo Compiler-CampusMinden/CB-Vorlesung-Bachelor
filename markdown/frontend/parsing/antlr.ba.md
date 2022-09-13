@@ -15,10 +15,10 @@ assignments:
   - topic: sheet01
 youtube:
   - link: ""
-    name: "VL Lexer mit ANTLR"
+    name: "VL Parsen mit ANTLR"
 fhmedia:
   - link: ""
-    name: "VL Lexer mit ANTLR"
+    name: "VL Parsen mit ANTLR"
 
 sketch: true
 ---
