@@ -7,3 +7,5 @@ weight: 4
 
 
 -- Vortragsthema --
+
+<!-- Material in alter Veranstaltung vorhanden -->

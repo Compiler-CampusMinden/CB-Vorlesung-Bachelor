@@ -6,3 +6,5 @@ weight: 4
 
 
 -- Vortragsthema --  (gehört zu `["Bison (Parsergenerator)"]({{<ref "/frontend/parsing/bison" >}})`{=markdown})
+
+<!-- Material in alter Veranstaltung vorhanden -->
