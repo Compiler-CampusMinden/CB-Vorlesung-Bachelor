@@ -4,7 +4,7 @@ title: "CB W22 B.Sc."
 ---
 
 
-# IFM 5.21: Compilerbau (Winter 2022/23, Bachelor)
+# IFM 5.21: Compilerbau (Winter 2022/23)
 
 ## Kursbeschreibung
 
