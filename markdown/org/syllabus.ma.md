@@ -30,7 +30,6 @@ hidden: true
     *   Generierung mit ANTLR und Flex
     *   Error Recovery
 
-
 2.  Syntaxanalyse: Parser
     *   Kontextfreie Grammatiken (CFG), Chomsky
     *   LL-Parser (Top-Down-Parser)
@@ -48,12 +47,10 @@ hidden: true
     *   Error Recovery
     *   Grenze Lexer und Parser (aus praktischen Gesichtspunkten)
 
-
 3.  Symboltabellen
     *   Berücksichtigung unterschiedlicher Sprachparadigmen
     *   Typen, Klassen, Polymorphie
     *   Namen und Scopes
-
 
 4.  Semantische Analyse und Optimierungen
     *   Attributierte Grammatiken: L-attributed vs. R-attributed grammars
@@ -61,15 +58,12 @@ hidden: true
     *   Datenfluss-Analyse
     *   Optimierungen: Peephole u.a.
 
-
 5.  Zwischencode: Intermediate Representation (IR), LLVM
-
 
 6.  Interpreter
     *   AST-Traversierung
     *   Read-Eval-Schleife
     *   Resolver: Beschleunigung bei der Interpretation
-
 
 7.  Compiler
     *   Speicherlayout
