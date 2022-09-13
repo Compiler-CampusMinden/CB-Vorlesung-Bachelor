@@ -13,6 +13,9 @@ outcomes:
   - k2: "Unterschied zwischen geerbten und berechneten Attributen"
   - k2: "Umsetzung von SDD mit Hilfe von SDT"
   - k3: "Einfache semantische Analyse mit Hilfe von attributierten Grammatiken"
+attachments:
+  - link: "https://github.com/Compiler-CampusMinden/AnnotatedSlides/blob/master/semantics_attribgrammars.ann.pdf"
+    name: "Annotierte Folien: Typen und Attributierte Grammatiken"
 ---
 
 # Motivation
