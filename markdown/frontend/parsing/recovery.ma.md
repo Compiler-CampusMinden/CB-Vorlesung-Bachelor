@@ -83,7 +83,7 @@ stmt  : 'int' ID ';' ;
 stmt2 : 'int' ID '=' ID ';'  ;
 ```
 
-[ANTLR4: [VarDef.g4](https://github.com/Compilerbau/Lecture/blob/master/markdown/parsing/src/VarDef.g4), Beispiele: [VarDef.txt](https://github.com/Compilerbau/Lecture/blob/master/markdown/parsing/src/VarDef.txt)]{.bsp}
+[ANTLR4: [VarDef.g4](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/parsing/src/VarDef.g4), Beispiele: [VarDef.txt](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/parsing/src/VarDef.txt)]{.bsp}
 
 
 ::::::::: notes

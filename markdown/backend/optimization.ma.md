@@ -19,7 +19,7 @@ outcomes:
   - k1: "Maschinenabhängige Optimierungen"
   - k1: "Datenflussanalyse auf 3-Adress-Code"
 attachments:
-  - link: "https://github.com/Compilerbau/AnnotatedSlides/blob/master/optimization.ann.pdf"
+  - link: "https://github.com/Compiler-CampusMinden/AnnotatedSlides/blob/master/optimization.ann.pdf"
     name: "Annotierte Folien: Optimierung und Datenflussanalyse"
 ---
 

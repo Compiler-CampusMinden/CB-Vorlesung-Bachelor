@@ -14,7 +14,7 @@ outcomes:
   - k2: "Schreiben von LL-Parsern"
   - k3: "Top-Down Analyse programmieren"
 attachments:
-  - link: "https://github.com/Compilerbau/AnnotatedSlides/blob/master/parsing_cfg.ann.pdf"
+  - link: "https://github.com/Compiler-CampusMinden/AnnotatedSlides/blob/master/parsing_cfg.ann.pdf"
     name: "Annotierte Folien: CFG, LL-Parser"
 ---
 

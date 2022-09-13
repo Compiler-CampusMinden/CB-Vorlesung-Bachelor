@@ -374,7 +374,7 @@ public class TestMyListener {
 }
 ```
 
-[Beispiel: [TestMyListener.java](https://github.com/Compilerbau/Lecture/blob/master/markdown/interpretation/src/TestMyListener.java) und [calc.g4](https://github.com/Compilerbau/Lecture/blob/master/markdown/interpretation/src/calc.g4)]{.bsp}
+[Beispiel: [TestMyListener.java](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/interpretation/src/TestMyListener.java) und [calc.g4](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/interpretation/src/calc.g4)]{.bsp}
 :::
 
 
@@ -452,7 +452,7 @@ public class TestMyVisitor {
 }
 ```
 
-[Beispiel: [TestMyVisitor.java](https://github.com/Compilerbau/Lecture/blob/master/markdown/interpretation/src/TestMyVisitor.java) und [calc.g4](https://github.com/Compilerbau/Lecture/blob/master/markdown/interpretation/src/calc.g4)]{.bsp}
+[Beispiel: [TestMyVisitor.java](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/interpretation/src/TestMyVisitor.java) und [calc.g4](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/interpretation/src/calc.g4)]{.bsp}
 :::
 
 

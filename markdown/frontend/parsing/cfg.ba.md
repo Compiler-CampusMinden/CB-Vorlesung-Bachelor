@@ -13,7 +13,7 @@ outcomes:
   - k1: "Deterministisch kontextfreie Grammatiken"
   - k2: "Zusammenhang zwischen PDAs und kontextfreien Grammatiken"
 attachments:
-  - link: "https://github.com/Compilerbau/AnnotatedSlides/blob/master/parsing_cfg.ann.pdf"
+  - link: "https://github.com/Compiler-CampusMinden/AnnotatedSlides/blob/master/parsing_cfg.ann.pdf"
     name: "Annotierte Folien: CFG, LL-Parser"
 ---
 
