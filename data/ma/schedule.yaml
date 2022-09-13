@@ -26,8 +26,8 @@
             leader: "Carsten"
         -   topic: "/frontend/lexing/recursive"
             leader: "Carsten"
-        -   topic: "/frontend/lexing/flex"
-            leader: "Carsten"
+        # -   topic: "/frontend/lexing/flex"
+        #     leader: "Carsten"
         # Teil 2
         -   topic: "/frontend/parsing/cfg"
             leader: "BC"
@@ -58,19 +58,29 @@
 -   week: "KW45"
     lecture:
         # Teil 1
-        -   topic: "/frontend/parsing/lr-parser"
+        -   topic: "/frontend/parsing/lr-parser"  # Splitten: Teil 1 (Intro)
             leader: "BC"
         # Teil 2
-        -   topic: "/frontend/parsing/bison"
-            leader: "Carsten"
+        -   topic: "/frontend/semantics/attribgrammars"
+            leader: "BC"
+    misc_assignment:
+        -   notes: ">> Zweiter Teil der VL (BC) in Praktikumszeit"
+
+-   week: "KW46"
+    lecture:
+        # -   topic: "/frontend/parsing/bison"
+        #     leader: "Carsten"
+        -   topic: "/frontend/parsing/lr-parser"  # Splitten: Teil 2
+            leader: "BC"
         -   topic: "/frontend/parsing/recovery"
             leader: "Carsten"
         -   topic: "/frontend/parsing/finalwords"
             leader: "Carsten"
-    misc_assignment:
-        -   notes: ">> Zweiter Teil der VL (Carsten) in Praktikumszeit"
+    assignment:
+        -   topic: "sheet01"  # Scanner, Parser
+            due: "xx.xx.22, tbd"
 
--   week: "KW46"
+-   week: "KW47"
     lecture:
         -   topic: "/frontend/semantics/symboltables/intro"
             leader: "Carsten"
@@ -80,26 +90,16 @@
             leader: "Carsten"
         -   topic: "/frontend/semantics/symboltables/classes"  # ausbauen
             leader: "Carsten"
-    assignment:
-        -   topic: "sheet01"  # Mini-Python, Grammatik, Lexer
-            due: "xx.xx.22, tbd"
-
--   week: "KW47"
-    lecture:
-        -   topic: "/frontend/semantics/attribgrammars"
-            leader: "BC"
-    assignment:
-        -   topic: "sheet02"  # ANTLR, Parser
-            due: "xx.xx.22, tbd"
+    misc_assignment:
+        -   notes: ">> Freies Arbeiten"
 
 -   week: "KW48"
     lecture:
         -   topic: "/backend/optimization"
             leader: "BC"
-    misc_assignment:
-        -   notes: ">> Freies Arbeiten"
-    misc_column:
-        -   notes: "Vortrag: Flex und YACC/Bison + Live-Coding"  # Edmonton?
+    assignment:
+        -   topic: "sheet02"  # Semantische Analyse
+            due: "xx.xx.22, tbd"
 
 -   week: "KW49"
     lecture:
@@ -108,23 +108,20 @@
         -   topic: "/intermediate/llvm-ir"
             leader: "BC"
     assignment:
-        -   topic: "sheet03"  # Symboltabellen
+        -   topic: "sheet03"  # Optimierung
             due: "xx.xx.22, tbd"
-    misc_assignment:
-        -   notes: ">> Kein Praktikum! Vorstellung der Ergebnisse in gemeinsamer Sitzung mit Edmonton."
     misc_column:
-        -   notes: "Vortrag: LLVM: Überblick, LLVM-IR, Möglichkeiten der Optimierung"
-        -   notes: "Edmonton: Vorstellung der Projekte: OOP und Interpreter (DE): xx, xx.xx.22, 17:00-18:30 Uhr"
+        -   notes: "Edmonton: Vortrag (MA): Flex und Bison + Live-Coding"
+        -   notes: "Edmonton: Vorstellung der Projekte (BA): OOP und Interpreter (DE): xx, xx.xx.22, 17:00-18:30 Uhr"
 
 -   week: "KW50"
     lecture:
         -   topic: "/frontend/parsing/parsercombinator"
             leader: "BC"
     assignment:
-        -   topic: "sheet04"  # Interpreter
+        -   topic: "sheet04"  # LLVM? oder Interpreter?
             due: "xx.xx.22, tbd"
     misc_column:
-        -   notes: "Vortrag: PEG-Parser, Pratt-Parser und Parser Combinators"
         -   notes: "Edmonton: Vorstellung der Projekte 'Dress Rehearsal' (CA): xx, xx.xx.22, 17:00-18:30 Uhr"
 
 -   week: "KW51"  # Weihnachten
@@ -148,8 +145,8 @@
 
 -   week: "KW02"   # Freies Arbeiten, Sprechstunde
     lecture:
-        -   topic: "/backend/interpretation/vm"
-            leader: "Carsten"
+        # -   topic: "/backend/interpretation/vm"
+        #     leader: "Carsten"
         -   topic: "/backend/interpretation/gc"
             leader: "Carsten"
         -   topic: "/backend/machinecode"
@@ -158,9 +155,9 @@
         -   topic: "sheet05"  # Freie Aufgabe: Konzepte vorstellen und diskutieren
             due: "xx.xx.23, tbd"
     misc_column:
+        -   notes: "Vortrag: LLVM (Beispiel, in die Tiefe)"
+        -   notes: "Vortrag: Parser-Kombinatoren (Beispiel, in die Tiefe)"
         -   notes: "Vortrag: VM und Bytecode"
-        -   notes: "Vortrag: Garbage Collection"
-        -   notes: "Vortrag: Generierung von Maschinencode"
 
 -   week: "KW03"
     # letzte Vorlesungswoche: Präsentation der Projekte

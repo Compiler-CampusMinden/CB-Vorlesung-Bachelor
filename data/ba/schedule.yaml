@@ -57,12 +57,8 @@
 
 -   week: "KW45"
     lecture:
-        -   topic: "/frontend/semantics/symboltables/intro"
-            leader: "Carsten"
-        -   topic: "/frontend/semantics/symboltables/scopes"
-            leader: "Carsten"
-        -   topic: "/frontend/semantics/symboltables/functions"
-            leader: "Carsten"
+        -   topic: "/frontend/semantics/attribgrammars"  # ohne Bison/Flex
+            leader: "BC"
     assignment:
         -   topic: "sheet02"  # ANTLR, Parser
             due: "xx.xx.22, tbd"
@@ -70,15 +66,19 @@
 -   week: "KW46"
     lecture:
         # Teil 1
+        -   topic: "/frontend/semantics/symboltables/intro"
+            leader: "Carsten"
+        -   topic: "/frontend/semantics/symboltables/scopes"
+            leader: "Carsten"
+        -   topic: "/frontend/semantics/symboltables/functions"
+            leader: "Carsten"
+        # Teil 2
         -   topic: "/frontend/semantics/symboltables/classes"  # ausbauen
             leader: "Carsten"
         -   topic: "/frontend/semantics/symboltables/antlr"  # neu
             leader: "Carsten"
-        # Teil 2
-        -   topic: "/frontend/semantics/attribgrammars"  # ohne Bison/Flex
-            leader: "BC"
     misc_assignment:
-        -   notes: ">> Zweiter Teil der VL (BC) in Praktikumszeit"
+        -   notes: ">> Zweiter Teil der VL (Carsten) in Praktikumszeit"
 
 -   week: "KW47"
     lecture:
@@ -88,9 +88,8 @@
             leader: "Carsten"
         -   topic: "/backend/interpretation/astdriven-part2"
             leader: "Carsten"
-    assignment:
-        -   topic: "sheet03"  # Symboltabellen
-            due: "xx.xx.22, tbd"
+    misc_assignment:
+        -   notes: ">> Freies Arbeiten"
 
 -   week: "KW48"
     lecture:
@@ -98,8 +97,9 @@
             leader: "Carsten"
         -   topic: "/backend/minipython-builder"  # Einstieg Builder f. Mini-Python (BC)
             leader: "BC"
-    misc_assignment:
-        -   notes: ">> Freies Arbeiten"
+    assignment:
+        -   topic: "sheet03"  # Symboltabellen
+            due: "xx.xx.22, tbd"
 
 -   week: "KW49"
     lecture:
@@ -111,7 +111,8 @@
     misc_assignment:
         -   notes: ">> Kein Praktikum! Vorstellung der Ergebnisse in gemeinsamer Sitzung mit Edmonton."
     misc_column:
-        -   notes: "Edmonton: Vorstellung der Projekte: OOP und Interpreter (DE): xx, xx.xx.22, 17:00-18:30 Uhr"
+        -   notes: "Edmonton: Vortrag (MA): Flex und YACC/Bison + Live-Coding"
+        -   notes: "Edmonton: Vorstellung der Projekte (BA): OOP und Interpreter (DE): xx, xx.xx.22, 17:00-18:30 Uhr"
 
 -   week: "KW50"
     misc_lecture:
