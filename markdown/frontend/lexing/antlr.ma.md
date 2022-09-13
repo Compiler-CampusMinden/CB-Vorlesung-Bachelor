@@ -2,7 +2,7 @@
 archetype: lecture-cg
 title: "Lexer mit ANTLR generieren"
 author: "Carsten Gips (FH Bielefeld)"
-weight: 3
+weight: 5
 readings:
   - key: "Aho2008"
     comment: " Abschnitt 2.6 und Kapitel 3"

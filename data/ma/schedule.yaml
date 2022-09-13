@@ -28,6 +28,8 @@
             leader: "Carsten"
         # -   topic: "/frontend/lexing/flex"
         #     leader: "Carsten"
+        -   topic: "/frontend/lexing/antlr"
+            leader: "Carsten"
         # Teil 2
         -   topic: "/frontend/parsing/cfg"
             leader: "BC"
