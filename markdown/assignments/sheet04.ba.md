@@ -1,6 +1,6 @@
 ---
 archetype: assignment
-title: "Blatt 04: Mini-Python: Interpreter"
+title: "Meilenstein 04: Builder (Mini-Python)"
 author: "BC George, Carsten Gips (FH Bielefeld)"
 weight: 4
 
@@ -10,22 +10,20 @@ sketch: true
 ---
 
 
-## A4.1: Interpreter
+## A4.1: Mini-Python, Builder
 
-Bauen Sie einen Tree-Walking-Interpreter in Ihr Projekt ein:
-
-*   Lesen Sie zunächst den zu interpretierenden Small-C-Code aus einer Datei ein.
-*   Realisieren Sie die Funktionen `readint` und `writeint` als *native* Funktionen im Interpreter.
+TBD
 
 
-## A4.2: Interaktivität
+## A4.2: Konzepte und Features
 
-Erweitern Sie Ihren Interpreter um Interaktivität:
+Überlegen Sie sich zusätzliche Konzepte und Features, die Sie in Ihren Interpreter
+einbauen wollen.
 
-*   Der Interpreter soll einen Prompt in der Konsole anbieten
-*   Der Interpreter soll Code zeilenweise von der Standard-Eingabe lesen und verarbeiten
-*   Zur Eingabe mehrzeiliger Konstrukte sehen Sie entweder das Einlesen von
-    Codeblöcken aus Dateien vor oder implementieren Sie entsprechend eine "logische
-    Einrückung" für den Prompt als visuelles Feedback für den User
+Stellen Sie diese Ideen im Praktikum vor und verteidigen Sie diese.
 
-Sie können sich hier am [Interpreter für Lox](https://craftinginterpreters.com/a-tree-walk-interpreter.html) orientieren.
+
+## A4.4: Umsetzung
+
+Setzen Sie die im Praktikum vorgestellten Features bis zur Projektvorstellung in der
+letzten Sitzung um.

@@ -103,7 +103,7 @@
         -   topic: "sheet02"  # Semantische Analyse
             due: "xx.xx.22, tbd"
     misc_column:
-        -   notes: "Edmonton: Vortrag: Flex und YACC/Bison + Live-Coding (DE): Di, 29.11.2022, 18:00-19:30 Uhr"
+        -   notes: "Edmonton: Vortrag: Flex und Bison + Live-Coding (DE): Di, 29.11.2022, 18:00-19:30 Uhr"
 
 -   week: "KW49"
     lecture:

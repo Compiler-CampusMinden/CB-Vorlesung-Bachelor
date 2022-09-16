@@ -1,6 +1,6 @@
 ---
 archetype: assignment
-title: "Blatt 01: Mini-Python: Grammatik und Lexer"
+title: "Meilenstein 01: Grammatik, ANTLR, AST (Mini-Python)"
 author: "BC George, Carsten Gips (FH Bielefeld)"
 weight: 1
 
@@ -32,18 +32,18 @@ folgendermaßen:
     dies auf die erlaubten Programme hat.
 
 
-## A1.2: Scanner
 
-Erzeugen Sie mithilfe der Grammatik und ANTLR einen Scanner, den Sie in den folgenden Aufgaben
-erweitern.
+## A1.2: Erweiterung der Grammatik: Funktionen
+
+Erweitern Sie die Grammatik von Blatt 01 um die Möglichkeit, Funktionen definieren und aufrufen zu
+können. Funktionen sollen (wie in C) nicht innerhalb von Funktionen definiert werden können.
+Globale Variablen sollen ebenfalls zwischen den Funktionsdefinitionen/-aufrufen definiert werden
+können.
+
+Hinweis: Sogenannte Vorwärtsdeklarationen sind nicht nötig.
 
 
-## A1.3: Visualisierung des AST
+## A1.3: Grammatik und Parser-Generatoren
 
-Visualisieren Sie Ihren AST mit DOT:
-
-*    [https://de.wikipedia.org/wiki/DOT_(GraphViz)](https://de.wikipedia.org/wiki/DOT_(GraphViz))
-*    [http://www.graphviz.org/doc/info/lang.html](http://www.graphviz.org/doc/info/lang.html)
-
-Analysieren Sie die Grammatik, die dem DOT-System zugrunde liegt und programmieren Sie für Ihren Parser
-eine Ausgabefunktion, die den AST als DOT-Code ausgibt.
+Erzeugen Sie mithilfe der Grammatik und ANTLR einen Scanner und Parser, den Sie für die folgenden
+Aufgaben nutzen.

@@ -1,6 +1,6 @@
 ---
 archetype: assignment
-title: "Blatt 03: Mini-Python: Symboltabellen"
+title: "Meilenstein 03: Interpreter (Mini-Python)"
 author: "BC George, Carsten Gips (FH Bielefeld)"
 weight: 3
 
@@ -10,9 +10,22 @@ sketch: true
 ---
 
 
-## A3.1: Symboltabellen
+## A3.1: Interpreter
 
-Fügen Sie Symboltabellen in Ihren Compiler ein.
+Bauen Sie einen Tree-Walking-Interpreter in Ihr Projekt ein:
 
-Ergänzen Sie Ihre Ausgabefunktion, so dass auch die Symboltabelle als DOT-Code formatiert ausgegeben wird.
-Nutzen Sie diese Ausgabe auch zum Debuggen und zum Erklären Ihres Codes.
+*   Lesen Sie zunächst den zu interpretierenden Small-C-Code aus einer Datei ein.
+*   Realisieren Sie die Funktionen `readint` und `writeint` als *native* Funktionen im Interpreter.
+
+
+## A3.2: Interaktivität
+
+Erweitern Sie Ihren Interpreter um Interaktivität:
+
+*   Der Interpreter soll einen Prompt in der Konsole anbieten
+*   Der Interpreter soll Code zeilenweise von der Standard-Eingabe lesen und verarbeiten
+*   Zur Eingabe mehrzeiliger Konstrukte sehen Sie entweder das Einlesen von
+    Codeblöcken aus Dateien vor oder implementieren Sie entsprechend eine "logische
+    Einrückung" für den Prompt als visuelles Feedback für den User
+
+Sie können sich hier am [Interpreter für Lox](https://craftinginterpreters.com/a-tree-walk-interpreter.html) orientieren.
