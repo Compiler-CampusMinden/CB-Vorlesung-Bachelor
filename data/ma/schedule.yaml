@@ -55,7 +55,7 @@
     misc_lecture:
         -   notes: ">> Happy Feiertach!"
     misc_column:
-        -   notes: "Edmonton: ANTLR + Live-Coding (CA): xx, xx.xx.22, 17:00-18:30 Uhr"
+        -   notes: "Edmonton: ANTLR + Live-Coding (CA): Mo, 31.10.2022, 17:00-18:30 Uhr"
 
 -   week: "KW45"
     lecture:
@@ -102,6 +102,8 @@
     assignment:
         -   topic: "sheet02"  # Semantische Analyse
             due: "xx.xx.22, tbd"
+    misc_column:
+        -   notes: "Edmonton: Vortrag: Flex und YACC/Bison + Live-Coding (DE): Di, 29.11.2022, 18:00-19:30 Uhr"
 
 -   week: "KW49"
     lecture:
@@ -113,8 +115,7 @@
         -   topic: "sheet03"  # Optimierung
             due: "xx.xx.22, tbd"
     misc_column:
-        -   notes: "Edmonton: Vortrag (MA): Flex und Bison + Live-Coding"
-        -   notes: "Edmonton: Vorstellung der Projekte (BA): OOP und Interpreter (DE): xx, xx.xx.22, 17:00-18:30 Uhr"
+        -   notes: "Edmonton: Vorstellung der Projekte 'Dress Rehearsal' (CA): Mi, 07.12.2022, 18:00-19:30 Uhr"
 
 -   week: "KW50"
     lecture:
@@ -123,8 +124,6 @@
     assignment:
         -   topic: "sheet04"  # LLVM? oder Interpreter?
             due: "xx.xx.22, tbd"
-    misc_column:
-        -   notes: "Edmonton: Vorstellung der Projekte 'Dress Rehearsal' (CA): xx, xx.xx.22, 17:00-18:30 Uhr"
 
 -   week: "KW51"  # Weihnachten
     misc_lecture:

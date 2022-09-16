@@ -53,7 +53,7 @@
     misc_assignment:
         -   notes: ">> Kein Praktikum: Treffen mit Kanada!"
     misc_column:
-        -   notes: "Edmonton: ANTLR + Live-Coding (CA): xx, xx.xx.22, 17:00-18:30 Uhr"
+        -   notes: "Edmonton: ANTLR + Live-Coding (CA): Mo, 31.10.2022, 17:00-18:30 Uhr"
 
 -   week: "KW45"
     lecture:
@@ -100,6 +100,10 @@
     assignment:
         -   topic: "sheet03"  # Symboltabellen
             due: "xx.xx.22, tbd"
+    misc_assignment:
+        -   notes: ">> Kein Praktikum! Vorstellung der Ergebnisse in gemeinsamer Sitzung mit Edmonton."
+    misc_column:
+        -   notes: "Edmonton: Vorstellung Blatt 04: Umsetzung OOP in Grammatik, Symboltabellen und Interpreter (DE): Di, 29.11.2022, 18:00-19:30 Uhr"
 
 -   week: "KW49"
     lecture:
@@ -108,11 +112,8 @@
     assignment:
         -   topic: "sheet04"  # Interpreter
             due: "xx.xx.22, tbd"
-    misc_assignment:
-        -   notes: ">> Kein Praktikum! Vorstellung der Ergebnisse in gemeinsamer Sitzung mit Edmonton."
     misc_column:
-        -   notes: "Edmonton: Vortrag (MA): Flex und YACC/Bison + Live-Coding"
-        -   notes: "Edmonton: Vorstellung der Projekte (BA): OOP und Interpreter (DE): xx, xx.xx.22, 17:00-18:30 Uhr"
+        -   notes: "Edmonton: Vorstellung der Projekte 'Dress Rehearsal' (CA): Mi, 07.12.2022, 18:00-19:30 Uhr"
 
 -   week: "KW50"
     misc_lecture:
@@ -120,8 +121,6 @@
     assignment:
         -   topic: "sheet05"
             due: "xx.xx.23, tbd"
-    misc_column:
-        -   notes: "Edmonton: Vorstellung der Projekte 'Dress Rehearsal' (CA): xx, xx.xx.22, 17:00-18:30 Uhr"
 
 -   week: "KW51"  # Weihnachten
     misc_lecture:
