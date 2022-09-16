@@ -41,3 +41,8 @@ durch.
 
 Bestimmen Sie zunächst, wo ein Type Checking möglich und/oder nötig ist. Welche Attribute benötigen Sie,
 wo können Sie Ableitungsregeln geeignet einsetzen/anpassen?
+
+
+## A2.5: Pitch der Projekt-Ideen
+
+**TODO**: An diesem Termin die Ideen für die restliche Bearbeitungszeit "pitchen".

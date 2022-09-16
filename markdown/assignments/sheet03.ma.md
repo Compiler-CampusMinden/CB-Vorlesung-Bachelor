@@ -1,6 +1,6 @@
 ---
 archetype: assignment
-title: "Blatt 03: Optimierung"
+title: "Blatt 03: Optimierung und Datenflussanalyse / Interpreter"
 author: "BC George, Carsten Gips (FH Bielefeld)"
 weight: 3
 
@@ -23,3 +23,8 @@ der Optimierung (siehe nächste Aufgabe) aus.
 
 Welche der in der Vorlesung besprochenen Optimierungen sind in der betrachteten Sprache sinnvoll?
 Begründen Sie Ihre Analyse und führen Sie diese Optimierungen auf dem Kontrollflussgraphen durch.
+
+
+## A3.4: Fixierung der Projekt-Ideen
+
+**TODO**: An diesem Termin die Ideen für die restliche Bearbeitungszeit final abstimmen.

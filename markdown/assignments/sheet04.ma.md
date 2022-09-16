@@ -1,6 +1,6 @@
 ---
 archetype: assignment
-title: "Blatt 04: LLVM-IR"
+title: "Blatt 04: Freie Aufgabe"
 author: "BC George, Carsten Gips (FH Bielefeld)"
 weight: 4
 
@@ -10,16 +10,6 @@ sketch: true
 ---
 
 
-## A4.1: Sprachumfang im LLVM-IR
+## A4.1: Freie Aufgabe
 
-Legen Sie fest, welche LLVM-IR-Befehle Sie für Ihr Projekt benötigen.
-
-*   [https://releases.llvm.org/1.6/docs/CommandGuide/html/llc.html](https://releases.llvm.org/1.6/docs/CommandGuide/html/llc.html)
-*   [https://releases.llvm.org/1.6/docs/CommandGuide/html/lli.html](https://releases.llvm.org/1.6/docs/CommandGuide/html/lli.html)
-*   [http://llvm.org/devmtg/2010-11/Naumann-Cling.pdf](http://llvm.org/devmtg/2010-11/Naumann-Cling.pdf)
-
-
-## A4.2: Erzeugung von LLVM-IR
-
-Vervollständigen Sie den Compiler mit LLVM-Werkzeugen: Ihr Compiler soll LLVM-IR ausgeben,
-der mit den LLVM-Werkzeugen in ein ausführbares Programm übersetzt werden kann.
+**TODO**: An diesem Termin werden die Ergebnisse der in B03 und B04 abgestimmten selbstdefinierten Aufgaben vorgestellt.

@@ -84,6 +84,7 @@
 
 -   week: "KW47"
     lecture:
+        # Teil 1
         -   topic: "/frontend/semantics/symboltables/intro"
             leader: "Carsten"
         -   topic: "/frontend/semantics/symboltables/scopes"
@@ -92,12 +93,17 @@
             leader: "Carsten"
         -   topic: "/frontend/semantics/symboltables/classes"  # ausbauen
             leader: "Carsten"
+        # Teil 2
+        -   topic: "/backend/optimization"
+            leader: "BC"
     misc_assignment:
-        -   notes: ">> Freies Arbeiten"
+        -   notes: ">> Zweiter Teil der VL (BC) in Praktikumszeit"
 
 -   week: "KW48"
     lecture:
-        -   topic: "/backend/optimization"
+        -   topic: "/intermediate/intro"
+            leader: "Carsten"
+        -   topic: "/intermediate/llvm-ir"
             leader: "BC"
     assignment:
         -   topic: "sheet02"  # Semantische Analyse
@@ -107,9 +113,7 @@
 
 -   week: "KW49"
     lecture:
-        -   topic: "/intermediate/intro"
-            leader: "Carsten"
-        -   topic: "/intermediate/llvm-ir"
+        -   topic: "/frontend/parsing/parsercombinator"
             leader: "BC"
     assignment:
         -   topic: "sheet03"  # Optimierung
@@ -119,11 +123,20 @@
 
 -   week: "KW50"
     lecture:
-        -   topic: "/frontend/parsing/parsercombinator"
-            leader: "BC"
-    assignment:
-        -   topic: "sheet04"  # LLVM? oder Interpreter?
-            due: "xx.xx.22, tbd"
+        # Teil 1
+        -   topic: "/backend/interpretation/syntaxdriven"
+            leader: "Carsten"
+        -   topic: "/backend/interpretation/astdriven-part1"
+            leader: "Carsten"
+        -   topic: "/backend/interpretation/astdriven-part2"
+            leader: "Carsten"
+        # Teil 2
+        -   topic: "/backend/interpretation/gc"
+            leader: "Carsten"
+        -   topic: "/backend/machinecode"
+            leader: "Carsten"
+    misc_assignment:
+        -   notes: ">> Zweiter Teil der VL (Carsten) in Praktikumszeit"
 
 -   week: "KW51"  # Weihnachten
     misc_lecture:
@@ -134,36 +147,24 @@
         -   notes: ">> Weihnachtsferien!"
 
 -   week: "KW01"  # Freies Arbeiten, Sprechstunde
-    lecture:
-        -   topic: "/backend/interpretation/syntaxdriven"
-            leader: "Carsten"
-        -   topic: "/backend/interpretation/astdriven-part1"
-            leader: "Carsten"
-        -   topic: "/backend/interpretation/astdriven-part2"
-            leader: "Carsten"
+    misc_lecture:
+        -   notes: ">> Freies Arbeiten"
+        -   notes: ">> ggf. Vorträge"
     misc_assignment:
         -   notes: ">> Freies Arbeiten"
+        -   notes: ">> ggf. Vorträge"
 
 -   week: "KW02"   # Freies Arbeiten, Sprechstunde
-    lecture:
-        # -   topic: "/backend/interpretation/vm"
-        #     leader: "Carsten"
-        -   topic: "/backend/interpretation/gc"
-            leader: "Carsten"
-        -   topic: "/backend/machinecode"
-            leader: "Carsten"
+    misc_lecture:
+        -   notes: ">> Vorträge"
     assignment:
-        -   topic: "sheet05"  # Freie Aufgabe: Konzepte vorstellen und diskutieren
+        -   topic: "sheet04"  # Freie Aufgabe
             due: "xx.xx.23, tbd"
-    misc_column:
-        -   notes: "Vortrag: LLVM (Beispiel, in die Tiefe)"
-        -   notes: "Vortrag: Parser-Kombinatoren (Beispiel, in die Tiefe)"
-        -   notes: "Vortrag: VM und Bytecode"
 
 -   week: "KW03"
     # letzte Vorlesungswoche: Präsentation der Projekte
     # Prüfungswochen: KW04, KW05
     misc_lecture:
-        -   notes: ">> Präsentation der Projekte"
+        -   notes: ">> Vorträge"
     misc_assignment:
-        -   notes: ">> Präsentation der Projekte"
+        -   notes: ">> Vorträge"

@@ -1,6 +1,6 @@
 ---
 archetype: assignment
-title: "Blatt 01: Scanner und Parser"
+title: "Blatt 01: Grammatik, Parser und AST"
 author: "BC George, Carsten Gips (FH Bielefeld)"
 weight: 1
 
