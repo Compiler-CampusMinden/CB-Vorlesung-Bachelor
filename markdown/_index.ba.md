@@ -41,7 +41,7 @@ Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
 ### Prüfungsform, Note und Credits
 
-**Projektarbeit plus Testat**, 5 ECTS
+**Projektarbeit**, 5 ECTS
 
 Hier finden Sie Informationen zum Ablauf des Praktikums sowie zur Prüfungsform:
 `["Note und Credits"]({{< ref "/org/grading" >}})`{=markdown}.
