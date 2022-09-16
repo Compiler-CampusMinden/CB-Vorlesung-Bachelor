@@ -88,8 +88,9 @@
             leader: "Carsten"
         -   topic: "/backend/interpretation/astdriven-part2"
             leader: "Carsten"
-    misc_assignment:
-        -   notes: ">> Freies Arbeiten"
+    assignment:
+        -   topic: "sheet03"  # Symboltabellen
+            due: "xx.xx.22, tbd"
 
 -   week: "KW48"
     lecture:
@@ -98,7 +99,7 @@
         -   topic: "/backend/minipython-builder"  # Einstieg Builder f. Mini-Python (BC)
             leader: "BC"
     assignment:
-        -   topic: "sheet03"  # Symboltabellen
+        -   topic: "sheet04"  # Interpreter
             due: "xx.xx.22, tbd"
     misc_assignment:
         -   notes: ">> Kein Praktikum! Vorstellung der Ergebnisse in gemeinsamer Sitzung mit Edmonton."
@@ -109,9 +110,8 @@
     lecture:
         -   topic: "backend/interpretation/gc"  # Garbage Collection, Laufzeitumgebungen: Anpassen an C-Target
             leader: "Carsten"
-    assignment:
-        -   topic: "sheet04"  # Interpreter
-            due: "xx.xx.22, tbd"
+    misc_assignment:
+        -   notes: ">> Kein Praktikum: Treffen mit Kanada!"
     misc_column:
         -   notes: "Edmonton: Vorstellung der Projekte 'Dress Rehearsal' (CA): Mi, 07.12.2022, 18:00-19:30 Uhr"
 
