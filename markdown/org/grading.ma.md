@@ -8,97 +8,66 @@ hidden: true
 ---
 
 
-## Prüfungsform: Parcours-Prüfung, 5 ECTS
+## Prüfungsform
 
--   Stationen 1-5: Erfolgreiche Bearbeitung der Aufgabenblätter
--   Station 6+7: Mündliche Prüfung mit je 30 Minuten Dauer
--   Station 8: Vortrag mit 45 Minuten Dauer
+**Mündliche Prüfung plus Testat, 5 ECTS**
 
-**Gesamtnote: Mittelwert(mdl. Prüfung I, mdl. Prüfung II, Vortrag)**
+-   **Testat**:
+    Für die Vergabe der Credit-Points ist die regelmäßige und erfolgreiche
+    Teilnahme am Praktikum erforderlich, welche am Ende des Semesters durch
+    ein Testat bescheinigt wird.
 
+    Kriterien: Ein Vortrag wurde gehalten. Zusätzlich müssen Sie durch alle
+    vier Übungsblätter fristgerecht bearbeitet haben.
 
-### Parcours-Prüfung: Was ist das?
-
-Sie legen die **Prüfung in mehreren Stationen** zurück und sammeln jeweils Teilnoten, die
-gemittelt in **eine Gesamtnote** für das Modul münden.
-
-Um eine Note und die Credit-Points zu erhalten, müssen Sie sich (wie bei allen anderen
-Prüfungen) für die Gesamtprüfung im LSF anmelden.
-
-Die Parcours-Prüfung im W21 in Compilerbau setzt sich aus insgesamt 8 Stationen zusammen:
-Die ersten fünf Stationen entsprechen der erfolgreichen Bearbeitung der Aufgabenblätter.
-Die Stationen 6 und 7 werden als mündliche Prüfungen durchgeführt, Station 8 wird als
-Vortrag durchgeführt.
-
-Für die beiden mündlichen Prüfungen und den Vortrag gibt es je eine Teilnote, wobei der
-Mittelwert der drei Teilnoten am Ende die Gesamtnote ergibt.
-
-Eine nicht bestandene Teilprüfung/Station (Aufgabenblätter, mdl. Prüfungen) führt zur
-Gesamtnote "nicht bestanden".
-
-### Stationen 1-5: "Aufgabenblätter"
-
-Die 5 Aufgabenblätter werden in 2er Teams als Hausaufgabe vor dem jeweiligen Praktikum
-gelöst, die Lösung muss jeweils vor Ablauf der Abgabefrist in die entsprechende ILIAS-Aufgabe
-hochgeladen werden (je Team ein Zip mit den kommentierten Sourcen ins ILIAS hochladen und
-alle Team-Mitglieder in der Abgabe mit eintragen).
-
-In jeder Praktikumssitzung stellen die Teams ihre Lösung den anderen Teams in Form eines
-ca. 20-minütigen "Walk-Through" vor. Die anderen Teams stellen dazu Fragen und denken sich
-Beispiele aus, auf die die vorgestellte Lösung angewendet wird.
-
-Die erfolgreiche Bearbeitung der Aufgabenblätter ist Bestandteil der Parcoursprüfung, ergibt
-aber keine eigene Teilnote. (Wir wollen nicht den Lernprozess bewerten!) Ab mind. 4 erfolgreich
-bearbeiteten Aufgabenblättern gilt diese Station als "bestanden".
-
-Für das Bestehen der Gesamtprüfung ist die erfolgreiche Bearbeitung der Station
-"Aufgabenblätter" erforderlich.
-
-**Achtung**: Wer angibt, eine Aufgabe gelöst zu haben, aber im Praktikum nicht
-(oder zu spät) erscheint oder die Lösung im Praktikum nicht vorstellen kann/will,
-bekommt das gesamte Übungsblatt als "nicht bestanden" testiert!
-
-### Stationen 6+7: "mdl. Prüfung"
-
-Die beiden mündlichen Prüfungen
-werden einzeln pro Teilnehmer durchgeführt und dauern ca. 30 Minuten. Wir vereinbaren rechtzeitig
-vorher individuelle Zeitslots an den beiden Prüfungstagen mit Ihnen. Die Prüfungen erfolgen
-über Zoom.
-
-Beide Prüfungen können sich auch auf Stoff beziehen, der durch die Bearbeitung der vorangegangenen
-Aufgabenblätter erarbeitet wurde.
-
-**Hinweis**: **Die zweite mündliche Prüfung kann abweichend
-auch im zweiten Prüfungszeitraum durchgeführt werden.**
-
-### Stationen 8: "Vortrag"
-
-Es stehen verschiedene Vortragsthemen zur Auswahl.
-
-Die Vorträge werden in der Regel als Einzelvortrag mit ca. 45 Minuten Dauer in deutscher Sprache
-gehalten. Ausnahme ist der Vortrag zu Bison, der von zwei Personen in englischer Sprache und mit
-doppelter Länge durchgeführt wird (Teilnahme der kanadischen Studierenden).
+-   **Gesamtnote**:
+    Mündliche Prüfung am Ende des Semesters, angeboten in beiden
+    Prüfungszeiträumen.
 
 
-### Hinweise zur Modulprüfung FHB
+## Hinweise zum Praktikum
 
-Die Modulprüfung erfolgt in Form einer schriftlichen Prüfung ("Klausur"). Diese
-wird in beiden Prüfungszeiträumen in Form eines E-Assessments über eine spezielle
-ILIAS-Instanz durchgeführt. Nähere Informationen siehe
-`["Prüfungsvorbereitung"]({{< ref "/org/exams" >}})`{=markdown}.
+### Bearbeitung der Aufgaben
 
-Für die Vergabe der Credit-Points ist die regelmäßige und erfolgreiche Teilnahme
-am Praktikum erforderlich, welche am Ende des Semesters durch ein Testat bescheinigt
-wird.
+Die Bearbeitung der Aufgaben erfolgt in 2er-Teams oder individuell.
+
+### Abgabe der Lösungen
+
+Bei Textaufgaben laden Sie Ihre Lösungen als **PDF-Datei** im ILIAS hoch. Sie
+können die Lösung in einer Textdatei (Markdown, LaTeX, Word, ...) bearbeiten
+und als PDF exportieren. Alternativ können Sie Ihre Lösung auf Papier
+aufschreiben und mit einer App wie zum Beispiel CamScanner ein PDF erzeugen.
+
+Programmieraufgaben laden Sie bitte als **Zip-Archiv** der jeweiligen
+Quell-Dateien im ILIAS hoch.
+
+### Vorstellung der Lösung im Praktikum
+
+Die Vorstellung Ihrer Lösung im Praktikum kann mit einem Medium Ihrer Wahl
+stattfinden. Sie können zum Beispiel Ihren Bildschirm teilen und Ihre Lösung
+erklären. Sie brauchen nicht extra eine Präsentation anfertigen!
+
+### Punktevergabe
+
+Sie haben ein Übungsblatt bestanden, wenn Sie Ihre Lösung fristgerecht
+im ILIAS hochgeladen haben und im Praktikum vorgestellt und diskutiert
+haben und Ihre Bearbeitung der Aufgabe eine ernsthafte Beschäftigung
+erkennen lässt.
 
 
-### Praktikum: Verspätete Abgaben
+## Hinweise zum Vortrag
 
-Es gibt keine verspäteten Abgaben. Das sind 0P.
+Es werden verschiedene Vorträge zu verschiedenen Themen angeboten, die
+teilweise einzeln oder in 2er Teams gehalten werden können.
 
-Bei Krankheit/familiären Notfällen: Setzen Sie sich **zeitnah** und **selbstständig** mit den
-Dozenten in Verbindung. "Zeitnah" bedeutet: Nehmen Sie noch vor dem Praktikum den Kontakt auf.
-Je nach Situation vereinbaren wir einen kurzfristigen Sondertermin als Ersatz für die verpasste
-Praktikums-Station (mündliche Prüfung). Diese Regelung kann pro Person **einmal pro Semester**
-genutzt werden. Wenn die persönliche Ausnahmesituation länger vorliegen sollte, müssen ggf. andere
-Lösungen gefunden werden, um das Semester erfolgreich abschließen zu können.
+Die Vorträge sollen 30 Minuten (1 Person) bzw. 60 Minuten (2 Personen)
+dauern. Planen Sie eine Diskussion von ca. 10 Minuten am Ende ein.
+
+-   Vortrag 1:
+    Flex und Bison + Live-Coding,
+    Di, 29.11.2022, 18:00-19:30 Uhr (im gemeinsamen Meeting mit Edmonton),
+    Sprache: Englisch,
+    2 Personen
+
+-   Vortrag 2: TBD
+
