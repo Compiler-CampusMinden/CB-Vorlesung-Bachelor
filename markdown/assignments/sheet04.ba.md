@@ -14,6 +14,8 @@ sketch: true
 
 TBD
 
+<!-- TODO Abstimmung mit Florian/Sebastian/Michael -->
+
 
 ## A4.2: Konzepte und Features
 
@@ -23,7 +25,14 @@ einbauen wollen.
 Stellen Sie diese Ideen im Praktikum vor und verteidigen Sie diese.
 
 
-## A4.4: Umsetzung
+## A4.3: Umsetzung
 
-Setzen Sie die im Praktikum vorgestellten Features bis zur Projektvorstellung in der
-letzten Sitzung um.
+Setzen Sie die im Praktikum vorgestellten Features bis zur Projektvorstellung in
+der letzten Sitzung um.
+
+
+## A4.4: Vortrag II
+
+Bereiten Sie Ihren Vortrag für die Vorstellung Ihrer zusätzlichen Features vor.
+
+Siehe `["Note und Credits > Vortrag II"]({{< ref "/org/grading" >}})`{=markdown}.

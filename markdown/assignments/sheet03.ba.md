@@ -14,18 +14,20 @@ sketch: true
 
 Bauen Sie einen Tree-Walking-Interpreter in Ihr Projekt ein:
 
-*   Lesen Sie zunächst den zu interpretierenden Small-C-Code aus einer Datei ein.
-*   Realisieren Sie die Funktionen `readint` und `writeint` als *native* Funktionen im Interpreter.
+*   Lesen Sie den zu interpretierenden Mini-Python-Code aus einer Datei ein.
+*   Realisieren Sie die Funktionen `READ()` und `WRITE()` als _native_ Funktionen
+    in Ihrem Interpreter.
+
+<!-- TODO Abstimmung mit Florian/Sebastian/Michael -->
 
 
-## A3.2: Interaktivität
+## A3.2: Vortrag I
 
-Erweitern Sie Ihren Interpreter um Interaktivität:
+Bereiten Sie Ihren Vortrag für die gemeinsame Sitzung mit Edmonton vor.
 
-*   Der Interpreter soll einen Prompt in der Konsole anbieten
-*   Der Interpreter soll Code zeilenweise von der Standard-Eingabe lesen und verarbeiten
-*   Zur Eingabe mehrzeiliger Konstrukte sehen Sie entweder das Einlesen von
-    Codeblöcken aus Dateien vor oder implementieren Sie entsprechend eine "logische
-    Einrückung" für den Prompt als visuelles Feedback für den User
+Tragen Sie Ihre Arbeitsergebnisse bei der Implementierung der OOP-Features im
+Interpreter vor. Sie gehen dabei insbesondere auf die Umsetzung von Klassen
+und Vererbung und Methoden in der Grammatik, in der Symboltabelle und
+schließlich im Interpreter ein.
 
-Sie können sich hier am [Interpreter für Lox](https://craftinginterpreters.com/a-tree-walk-interpreter.html) orientieren.
+Siehe `["Note und Credits > Vortrag I"]({{< ref "/org/grading" >}})`{=markdown}.

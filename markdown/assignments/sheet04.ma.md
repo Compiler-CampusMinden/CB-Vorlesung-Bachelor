@@ -12,4 +12,5 @@ sketch: true
 
 ## A4.1: Freie Aufgabe
 
-**TODO**: An diesem Termin werden die Ergebnisse der in B03 und B04 abgestimmten selbstdefinierten Aufgaben vorgestellt.
+**TODO**: An diesem Termin werden die Ergebnisse der in B03 und B04 abgestimmten
+selbstdefinierten Aufgaben vorgestellt.

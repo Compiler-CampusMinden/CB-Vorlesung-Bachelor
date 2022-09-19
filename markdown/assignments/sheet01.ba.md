@@ -12,38 +12,27 @@ sketch: true
 
 ## A1.1: Grammatik
 
-Modifizieren Sie die Grammatik für [**Small C**](https://medium.com/\@efutch/a-small-c-language-definition-for-teaching-compiler-design-b70198531a2f)
-folgendermaßen:
+Erstellen Sie eine Grammatik für **Mini-Python**. An folgenden Code-Beispielen können
+Sie den minimalen Funktionsumfang ablesen.
 
-1.  Entfernen Sie folgende Elemente:
-    *   die `for`-Schleife
-    *   das `break`-Statement
-    *   die Zufallszahlengenerierung mit `?n`
-    *   die Zuweisungsoperatoren `+=`, `-=`, `*=` und `/=`
-    *   die Modulo-Operation `%`
-    *   den "Elvis"-Operator `?:` (ternäre Abfrage)
-    *   die Auto-Inkrement-/-Dekrement-Operatoren `++` und `--`
+```python
+TODO: Code-Beispiele: Wie funktioniert die Sprache?!
+Alternativ Link auf Wiki (Repo-Split, nur Builder!)
+```
+
+<!-- TODO Abstimmung mit Florian/Sebastian/Michael -->
 
 
-2.  Bestimmen Sie die terminalen Symbole Ihrer Grammatik und deren Aufbau.
+## A1.2: ANTLR
+
+Erzeugen Sie mithilfe der Grammatik und ANTLR einen Scanner und Parser, den Sie für
+die folgenden Aufgaben nutzen.
 
 
-3.  Erklären Sie, wo in der Grammatik das Konzept der Zuweisung auftaucht und welche Auswirkungen
-    dies auf die erlaubten Programme hat.
+## A1.3: AST
 
+Entwickeln Sie ein Konzept für einen AST.
 
-
-## A1.2: Erweiterung der Grammatik: Funktionen
-
-Erweitern Sie die Grammatik von Blatt 01 um die Möglichkeit, Funktionen definieren und aufrufen zu
-können. Funktionen sollen (wie in C) nicht innerhalb von Funktionen definiert werden können.
-Globale Variablen sollen ebenfalls zwischen den Funktionsdefinitionen/-aufrufen definiert werden
-können.
-
-Hinweis: Sogenannte Vorwärtsdeklarationen sind nicht nötig.
-
-
-## A1.3: Grammatik und Parser-Generatoren
-
-Erzeugen Sie mithilfe der Grammatik und ANTLR einen Scanner und Parser, den Sie für die folgenden
-Aufgaben nutzen.
+Begründen und diskutieren Sie im Praktikum Ihre Entscheidungen: Warum haben Sie
+welche Elemente weggelassen, warum sieht Ihr AST so aus, wie er aussieht? Wie
+kommen Sie vom Parse-Tree zum AST?
