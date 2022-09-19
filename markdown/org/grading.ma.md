@@ -69,5 +69,41 @@ dauern. Planen Sie eine Diskussion von ca. 10 Minuten am Ende ein.
     Sprache: Englisch,
     2 Personen
 
--   Vortrag 2: TBD
+-   Vortrag 2:
+    LLVM (Beispiel, in die Tiefe),
+    KW02/KW03,
+    Sprache: Deutsch,
+    1 oder 2 Personen
 
+-   Vortrag 3:
+    LLVM (Beispiel, in die Tiefe),
+    KW02/KW03,
+    Sprache: Deutsch,
+    1 oder 2 Personen
+
+-   Vortrag 4:
+    Parser-Kombinatoren,
+    KW02/KW03,
+    Sprache: Deutsch,
+    1 Person
+
+-   Vortrag 5:
+    M und Bytecode,
+    KW02/KW03,
+    Sprache: Deutsch,
+    2 Personen
+
+-   Vortrag 6:
+    Just-in-Time Compilation (Python, Javascript),
+    KW02/KW03,
+    Sprache: Deutsch,
+    1 Person
+
+-   Vortrag 7:
+    Garbage Collection
+    ([Unified Theory of Garbage Collection](https://www.cs.cornell.edu/courses/cs6120/2020fa/blog/unified-theory-gc/),
+    [Fast Conservative Garbage Collection](https://www.cs.cornell.edu/courses/cs6120/2020fa/blog/modern-gc/)):
+    Java vs. CPython,
+    KW02/KW03,
+    Sprache: Deutsch,
+    1 Person
