@@ -38,6 +38,13 @@
         -   topic: "/frontend/parsing/ll-parser-theory"
             leader: "BC"
         # Teil 2
+        -   topic: "/frontend/semantics/attribgrammars"  # ohne Bison/Flex
+            leader: "BC"
+    misc_assignment:
+        -   notes: ">> Zweiter Teil der VL (BC) in Praktikumszeit"
+
+-   week: "KW44"  # Feiertag: Dienstag, 01.11.
+    lecture:
         -   topic: "/frontend/parsing/ll-parser-impl"
             leader: "Carsten"
         -   topic: "/frontend/parsing/antlr"  # neu
@@ -46,13 +53,8 @@
             leader: "Carsten"
         -   topic: "/frontend/parsing/finalwords"
             leader: "Carsten"
-    misc_assignment:
-        -   notes: ">> Zweiter Teil der VL (Carsten) in Praktikumszeit"
-
--   week: "KW44"  # Feiertag: Dienstag, 01.11.
-    lecture:
-        -   topic: "/frontend/semantics/attribgrammars"  # ohne Bison/Flex
-            leader: "BC"
+    misc_lecture:
+        -   notes: ">> Material bitte bis MONTAG durcharbeiten!"
     misc_assignment:
         -   notes: ">> Kein Praktikum: Treffen mit Kanada!"
     misc_column:

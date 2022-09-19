@@ -42,14 +42,10 @@
         -   topic: "/frontend/parsing/ll-parser-theory"
             leader: "BC"
         # Teil 2
-        -   topic: "/frontend/parsing/ll-parser-impl"
-            leader: "Carsten"
-        -   topic: "/frontend/parsing/ll-advanced"
-            leader: "Carsten"
-        -   topic: "/frontend/parsing/antlr"  # neu
-            leader: "Carsten"
+        -   topic: "/frontend/semantics/attribgrammars"
+            leader: "BC"
     misc_assignment:
-        -   notes: ">> Zweiter Teil der VL (Carsten) in Praktikumszeit"
+        -   notes: ">> Zweiter Teil der VL (BC) in Praktikumszeit"
 
 -   week: "KW44"  # Feiertag: Dienstag, 01.11.
     misc_lecture:
@@ -60,11 +56,17 @@
 -   week: "KW45"
     lecture:
         # Teil 1
+        -   topic: "/frontend/parsing/ll-parser-impl"
+            leader: "Carsten"
+        -   topic: "/frontend/parsing/ll-advanced"
+            leader: "Carsten"
+        -   topic: "/frontend/parsing/antlr"  # neu
+            leader: "Carsten"
+        # Teil 2
         -   topic: "/frontend/parsing/lr-parser"  # Splitten: Teil 1 (Intro)
             leader: "BC"
-        # Teil 2
-        -   topic: "/frontend/semantics/attribgrammars"
-            leader: "BC"
+    misc_lecture:
+        -   notes: ">> Material bitte bis MONTAG durcharbeiten!"
     misc_assignment:
         -   notes: ">> Zweiter Teil der VL (BC) in Praktikumszeit"
 
