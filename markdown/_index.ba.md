@@ -78,4 +78,4 @@ Weitere empfohlene Literatur siehe `["Ressourcen"]({{< ref "/org/resources" >}})
 
 `{{< schedule >}}`{=markdown}
 
-**Hinweis**: Abgabe der Hausaufgaben bis jeweils XX.XX Uhr im ILIAS.
+**Hinweis**: Abgabe der Hausaufgaben bis jeweils 08.00 Uhr im ILIAS.
