@@ -20,7 +20,7 @@ Bauen Sie einen Tree-Walking-Interpreter in Ihr Projekt ein:
 *   Die Funktionen sind im Sprachumfang anders definiert (siehe Beispiel)
 
 ```python3
-input() #READ() Liest eine Zeile aus der Konsole als String ein
+input()         #READ() Liest eine Zeile aus der Konsole als String ein
 print("String") #WRITE() Gibt den übergebenen String auf der Konsole aus
 ```
 
