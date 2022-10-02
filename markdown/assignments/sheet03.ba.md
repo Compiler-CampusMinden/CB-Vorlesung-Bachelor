@@ -17,6 +17,12 @@ Bauen Sie einen Tree-Walking-Interpreter in Ihr Projekt ein:
 *   Lesen Sie den zu interpretierenden Mini-Python-Code aus einer Datei ein.
 *   Realisieren Sie die Funktionen `READ()` und `WRITE()` als _native_ Funktionen
     in Ihrem Interpreter.
+*   Die Funktionen sind im Sprachumfang anders definiert (siehe Beispiel)
+
+```python3
+input() #READ() Liest eine Zeile aus der Konsole als String ein
+print("String") #WRITE() Gibt den übergebenen String auf der Konsole aus
+```
 
 <!-- TODO Abstimmung mit Florian/Sebastian/Michael -->
 
