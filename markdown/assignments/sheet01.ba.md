@@ -17,7 +17,7 @@ Sie den minimalen Funktionsumfang ablesen.
 
 Folgender Sprachumfang soll mit Ihrer Grammatik mindestens unterstützt werden:
 * [Sprachumfang](https://github.com/Compiler-CampusMinden/Mini-Python)
-* Funktionailät soll wie in Python erfolgen. Folgende Ausnahmen gelten:
+* Funktionalität soll wie in Python erfolgen. Folgende Ausnahmen gelten:
   * Einrückung für die Funktionalität irrelevant
   * Schleifen, Funktionen und Klassen werden mit #end beendet!
 
