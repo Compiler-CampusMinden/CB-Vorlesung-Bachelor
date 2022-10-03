@@ -20,7 +20,7 @@ Folgender Sprachumfang soll mit Ihrer Grammatik mindestens unterstützt werden:
   * Einrückung für die Funktionalität irrelevant
   * Schleifen, Funktionen und Klassen werden mit #end beendet!
 
-Beispiel für IF-Statements:
+Beispiele für IF-Statements:
 ```python3
 a= 2
 if a == 2:
