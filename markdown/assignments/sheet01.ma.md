@@ -12,15 +12,58 @@ sketch: true
 
 ## A1.1: Grammatik
 
-Erstellen Sie eine Grammatik für **Mini-Python**. An folgenden Code-Beispielen können
-Sie den minimalen Funktionsumfang ablesen.
+Erstellen Sie eine Grammatik für **Mini-Python**.
 
-```python
-TODO: Code-Beispiele: Wie funktioniert die Sprache?!
-Alternativ Link auf Wiki (Repo-Split, nur Builder!)
+Folgender Sprachumfang soll mit Ihrer Grammatik mindestens unterstützt werden:
+* [Sprachumfang](https://github.com/Compiler-CampusMinden/Mini-Python)
+* Funktionalität soll wie in Python erfolgen. Folgende Ausnahmen gelten:
+  * Einrückung für die Funktionalität irrelevant
+  * Schleifen, Funktionen und Klassen werden mit #end beendet!
+
+Beispiel für IF-Statements:
+```python3
+a= 2
+if a == 2:
+    print("a is ", a)
+#end
 ```
-
-<!-- TODO Abstimmung mit Florian/Sebastian/Michael -->
+```python3
+if a == 2:
+  print("a is ", a)  
+elif a == 3:
+  print("a is ", a)  
+else:
+  print("a is neither 2 and 3")
+#end
+```
+Beispiel für Schleifen:
+```python3
+while(x>y):
+	print(x ,"is bigger than ",y)
+	x=x-1
+#end
+```
+Beispiel für Funktionen:
+```python3
+def foo():
+  print("ich bin eine Funktion")
+#end
+```
+Beispiele für Klassen:
+```python3
+class A:
+  def foo():
+    print("Ich bin eine Methode von A")
+  #end
+#end
+```
+```python3
+class B(A): #Vererbung B erbt von A
+  def foo():
+    print("Ich bin eine Methode von B")
+  #end
+#end
+```
 
 
 ## A1.2: ANTLR
