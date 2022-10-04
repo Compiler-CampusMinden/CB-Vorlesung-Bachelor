@@ -5,8 +5,6 @@ author: "Carsten Gips (FH Bielefeld)"
 weight: 6
 
 hidden: true
-
-sketch: true
 ---
 
 
