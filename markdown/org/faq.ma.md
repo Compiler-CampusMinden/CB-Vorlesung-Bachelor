@@ -15,6 +15,9 @@ dabei normale Vorlesungen, Carsten setzt auf das Konzept "Flipped Classroom".
 
 Bitte im Fahrplan aufpassen, wer was macht und dann entsprechend vorbereitet sein.
 
+Gerade am Anfang nutzen wir die Praktikumszeit für eine extra Vorlesungseinheit, dafür
+ist dann im letzten Drittel des Semesters mehr Zeit zum Arbeiten im Praktikum eingeplant.
+
 
 ## Flipped Classroom
 
