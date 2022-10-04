@@ -65,7 +65,8 @@ Beschäftigung mit der Aufgabe erkennbar sein.
 ## Projekte
 
 Blatt 04 ist eine freie Aufgabe - hier können Sie eigene Ideen ausprobieren und
-selbstgewählte Konzepte und Features umsetzen.
+selbstgewählte Konzepte und Features umsetzen. Sie sind herzlich eingeladen, sich
+auch Ideen und Anregungen aus aktueller Literatur zu holen.
 
 Erstellen Sie dazu bitte bis Blatt 02 eine kurze Konzeptskizze und stellen Sie
 diese im Praktikum von Blatt 02 vor. Wir werden gemeinsam darüber diskutieren
@@ -73,7 +74,7 @@ und im Praktikum zu Blatt 03 die Arbeiten für das restliche Semester gemeinsam
 festlegen.
 
 Geben Sie die Konzeptskizze (PDF) bitte zusammen mit der Lösung zu Blatt 02 im
-ILIAS ab.
+ILIAS ab, die finale Skizze entsprechend gemeinsam mit der Lösung für Blatt 03.
 
 
 ## Vortrag
