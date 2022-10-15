@@ -29,8 +29,8 @@ outcomes:
   - k3: "Lexer-Regeln in ANTLR formulieren und einsetzen"
   - k2: "Verhalten des Lexers: längste Matches, Reihenfolge"
   - k3: "Nutzung von Lexer-Aktionen"
-  - k3: "Nutzung von Lexer-Kommandos"
   - k3: "Einsatz von Fragmenten"
+  - k3: "Nutzung von Lexer-Kommandos"
   - k3: "Zustandsbehaftete Lexer (Modes)"
   - k3: "Nutzung von Channels"
   - k2: "Importieren von Grammatiken"
@@ -184,7 +184,7 @@ Die erkannten Token werden jeweils auf einer eigenen Zeile ausgegeben.
 *   `='hello'`: Das gefundene Lexem (Wert des Tokens)
 *   `<'hello'>`: Das Token (Name/Typ des Tokens)
 *   `1:0`: Das Token wurde in Zeile 1 gefunden (Start der Nummerierung mit
-    Zeile 1), und startet in dieser Zeile an Position 8
+    Zeile 1), und startet in dieser Zeile an Position 0
 
 Entsprechend bekommt man mit
 
@@ -253,6 +253,9 @@ versuchen soviel Input wie möglich zu matchen.
 Falls dies nicht sinnvoll sein sollte, kann man mit einem weiteren `?` das
 Verhalten auf _non-greedy_ umschalten. Allerdings können non-greedy Regeln
 das Verhalten des Lexers u.U. schwer vorhersehbar machen!
+
+Die Empfehlung ist, non-greedy Lexer-Regeln nur sparsam einzusetzen
+(vgl. [github.com/antlr/antlr4/blob/master/doc/wildcard.md](https://github.com/antlr/antlr4/blob/master/doc/wildcard.md)).
 :::::::::
 
 
@@ -261,8 +264,6 @@ das Verhalten des Lexers u.U. schwer vorhersehbar machen!
 Primäres Ziel: Erkennen der längsten Zeichenkette
 
 ```antlr
-start   : (CHARS DIGITS | FOO) ;
-
 CHARS   : [a-z]+ ;
 DIGITS  : [0-9]+ ;
 FOO     : [a-z]+ [0-9]+ ;
@@ -281,8 +282,6 @@ Im Beispiel würde  ein "foo42" als `FOO` erkannt und nicht als `CHARS DIGITS`.
 Reihenfolge in Grammatik definiert Priorität
 
 ```antlr
-start   : (BAR | FOO) ;
-
 FOO     : 'f' .*? 'r' ;
 BAR     : 'foo' .*? 'bar' ;
 ```
@@ -302,8 +301,6 @@ Match liefern - die Regel `FOO` ist in der Grammatik früher definiert und
 Non-greedy Regeln versuchen _so wenig_ Zeichen wie möglich zu matchen
 
 ```antlr
-start   : FOO BAR ;
-
 FOO     : 'foo' .*? 'bar' ;
 BAR     : 'bar' ;
 ```
@@ -401,6 +398,32 @@ Klammern eingeschlossen werden.
 :::
 
 
+## Hilfsregeln mit Fragmenten
+
+::: notes
+Fragmente sind Lexer-Regeln, die keine Token darstellen/erzeugen, aber
+bei der Formulierung von Regeln für mehr Übersicht oder Wiederverwendung
+sorgen. Fragmente werden mit dem Schlüsselwort `fragment` eingeleitet.
+
+**Beispiel**:
+:::
+
+```antlr
+NUM         : DIGIT+ ;
+
+fragment
+DIGIT       : [0-9] ;
+```
+
+\bigskip
+
+=> Keine Token (für den Parser)!
+
+::: notes
+Hier würde der Parser nur `NUM` "bekommen", aber keine `DIGIT`-Token.
+:::
+
+
 ## Lexer Kommandos (Auswahl)
 
 ```antlr
@@ -432,32 +455,6 @@ TokenName : Alternative -> command-name
 
 ::: notes
 (vgl. [github.com/antlr/antlr4/blob/master/doc/lexer-rules.md](https://github.com/antlr/antlr4/blob/master/doc/lexer-rules.md))
-:::
-
-
-## Hilfsregeln mit Fragmenten
-
-::: notes
-Fragmente sind Lexer-Regeln, die keine Token darstellen/erzeugen, aber
-bei der Formulierung von Regeln für mehr Übersicht oder Wiederverwendung
-sorgen. Fragmente werden mit dem Schlüsselwort `fragment` eingeleitet.
-
-**Beispiel**:
-:::
-
-```antlr
-NUM         : DIGIT+ ;
-
-fragment
-DIGIT       : [0-9] ;
-```
-
-\bigskip
-
-=> Keine Token (für den Parser)!
-
-::: notes
-Hier würde der Parser nur `NUM` "bekommen", aber keine `DIGIT`-Token.
 :::
 
 
@@ -559,11 +556,13 @@ dann wird per _Tiefensuche_ der Einbindungsbaum durchlaufen.
 
 Lexer mit ANTLR generieren: Lexer-Regeln werden mit **Großbuchstaben** geschrieben
 
+\bigskip
+
 *   Längster Match gewinnt, Gleichstand: zuerst definierte Regel
 *   _non greedy_-Regeln: versuche so _wenig_ Zeichen zu matchen wie möglich
-*   Lexer Kommandos: `skip`, `more`, ...
 *   Aktionen beim Matchen
 *   Hilfsregeln mit "Fragments"
+*   Lexer Kommandos: `skip`, `more`, ...
 *   Modes für Insel-Grammatiken
 *   Channels als parallele Tokenstreams (Vorsortieren)
 *   Teilgrammatiken importieren
