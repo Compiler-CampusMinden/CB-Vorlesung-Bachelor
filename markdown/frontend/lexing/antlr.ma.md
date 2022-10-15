@@ -311,8 +311,9 @@ Hier würde ein "foo42barbar" zu `FOO` gefolgt von `BAR` erkannt werden.
 
 \pause
 \bigskip
+\bigskip
 
-Nach [dem Abarbeiten]{.notes} einer non-greedy Sub-Regel [in einer Lexer-Regel]{.notes}
+[Achtung]{.alert}: Nach [dem Abarbeiten]{.notes} einer non-greedy Sub-Regel [in einer Lexer-Regel]{.notes}
 gilt "_first match wins_"
 
 `.*? ('4' | '42')`
