@@ -12,12 +12,15 @@ sketch: true
 
 ## A1.1: Grammatik
 
-Erstellen Sie eine Grammatik für **Mini-Python**.
+Erstellen Sie eine Grammatik für **Mini-Python**. An folgenden Code-Beispielen können
+Sie den minimalen Funktionsumfang ablesen.
 
 ```python
 TODO: Code-Beispiele: Wie funktioniert die Sprache?!
 Alternativ Link auf Wiki (Repo-Split, nur Builder!)
 ```
+
+<!-- TODO Abstimmung mit Florian/Sebastian/Michael -->
 
 
 ## A1.2: ANTLR
