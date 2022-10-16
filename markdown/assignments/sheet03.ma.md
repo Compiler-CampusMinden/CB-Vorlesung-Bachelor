@@ -5,8 +5,6 @@ author: "BC George, Carsten Gips (FH Bielefeld)"
 weight: 3
 
 hidden: true
-
-sketch: true
 ---
 
 
