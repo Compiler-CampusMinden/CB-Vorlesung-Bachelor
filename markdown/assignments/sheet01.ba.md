@@ -5,8 +5,6 @@ author: "BC George, Carsten Gips (FH Bielefeld)"
 weight: 1
 
 hidden: true
-
-sketch: true
 ---
 
 
@@ -29,9 +27,9 @@ if a == 2:
 ```
 ```python3
 if a == 2:
-  print("a is ", a)  
+  print("a is ", a)
 elif a == 3:
-  print("a is ", a)  
+  print("a is ", a)
 else:
   print("a is neither 2 and 3")
 #end
