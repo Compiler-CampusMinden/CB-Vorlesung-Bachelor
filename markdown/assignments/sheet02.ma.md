@@ -31,8 +31,7 @@ Symboltabellen ein _Type Checking_ durch.
 Bestimmen Sie zunächst, wo ein Type Checking möglich und/oder nötig ist. Welche
 Attribute benötigen Sie, wo können Sie Ableitungsregeln geeignet einsetzen/anpassen?
 
-<!-- TODO Macht das hier überhaupt Sinn? Sieht man das nicht erst zur Laufzeit => Interpreter? -->
-<!-- TODO Abstimmung mit Florian/Sebastian/Michael -->
+**TODO**: Macht das hier überhaupt Sinn? Sieht man das nicht erst zur Laufzeit => Interpreter?
 
 
 ## A2.4: Pitch der Projekt-Ideen
