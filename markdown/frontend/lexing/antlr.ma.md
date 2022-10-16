@@ -37,16 +37,16 @@ outcomes:
 assignments:
   - topic: sheet01
 youtube:
-  - link: ""
+  - link: "https://youtu.be/I119N04WIYA"
     name: "VL Lexer mit ANTLR"
-  - link: ""
+  - link: "https://youtu.be/pbjGThqVLkU"
     name: "Demo ANTLR Basics"
-  - link: ""
+  - link: "https://youtu.be/vnJIm6S-898"
     name: "Demo Verhalten Lexer-Regeln"
-  - link: ""
+  - link: "https://youtu.be/bNpgqctiQM8"
     name: "Demo Lexer-Regeln mit Aktionen"
 fhmedia:
-  - link: ""
+  - link: "https://www.fh-bielefeld.de/medienportal/m/10e0ed907bb767e8304c0cf197293588f9497a217e0dee792c458887ec73299a415da96fd2ea12e0f054ba478772239ec2581db5cedadb3aba14203c590493d1"
     name: "VL Lexer mit ANTLR"
 ---
 
