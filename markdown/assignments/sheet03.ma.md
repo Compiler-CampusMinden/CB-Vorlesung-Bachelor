@@ -17,8 +17,7 @@ ausgegeben wird.
 Hinweis: Geben Sie sowohl den ursprünglichen Kontrollflussgraphen als auch
 den Kontrollflussgraphen nach der Optimierung (siehe nächste Aufgabe) aus.
 
-<!-- TODO Macht das hier überhaupt Sinn? Sieht man das nicht erst zur Laufzeit => Interpreter? -->
-<!-- TODO Abstimmung mit Florian/Sebastian/Michael -->
+**TODO**: Macht das hier überhaupt Sinn? Sieht man das nicht erst zur Laufzeit => Interpreter?
 
 
 ## A3.2: Optimierung
@@ -27,8 +26,7 @@ Welche der in der Vorlesung besprochenen Optimierungen sind in der betrachteten
 Sprache sinnvoll? Begründen Sie Ihre Analyse und führen Sie diese Optimierungen
 auf dem Kontrollflussgraphen durch.
 
-<!-- TODO Macht das hier überhaupt Sinn? Sieht man das nicht erst zur Laufzeit => Interpreter? -->
-<!-- TODO Abstimmung mit Florian/Sebastian/Michael -->
+**TODO**: Macht das hier überhaupt Sinn? Sieht man das nicht erst zur Laufzeit => Interpreter?
 
 
 ## A3.3: Fixierung der Projekt-Ideen
