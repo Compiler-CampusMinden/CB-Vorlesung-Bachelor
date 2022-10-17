@@ -25,13 +25,13 @@ zum Erklären Ihres Codes.
 
 ## A2.3: Type Checking
 
-Attributieren Sie Ihren AST und führen Sie mit Hilfe der Attribute und der
-Symboltabellen ein _Type Checking_ durch.
+Geben Sie mindestens zwei Beispiele an für Typprüfungen, die in Sprachen wie
+C oder Java notwendig sind, in Python aber nicht möglich sind. Begründen Sie
+Ihre Wahl?
 
-Bestimmen Sie zunächst, wo ein Type Checking möglich und/oder nötig ist. Welche
-Attribute benötigen Sie, wo können Sie Ableitungsregeln geeignet einsetzen/anpassen?
-
-**TODO**: Macht das hier überhaupt Sinn? Sieht man das nicht erst zur Laufzeit => Interpreter?
+Wie könnten für diese Typprüfungen Attribute eingesetzt werden? Gehen Sie von
+einer Grammatik aus, die den betreffenden Teil der Programmiersprache beschreibt.
+Wenn möglich, orientieren Sie sich an Ihrer Grammatik für Mini-Python.
 
 
 ## A2.4: Pitch der Projekt-Ideen
