@@ -31,4 +31,11 @@ auf dem Kontrollflussgraphen durch.
 
 ## A3.3: Fixierung der Projekt-Ideen
 
-**TODO**: An diesem Termin die Ideen für die restliche Bearbeitungszeit final abstimmen.
+Blatt 04 ist ein "freies Blatt" - hier können Sie sich selbst eine interessante
+Aufgabe überlegen. Orientieren Sie sich bitte am Umfang der anderen Blätter.
+
+Sie haben Ihre Idee(n) bereits im Praktikum zu Blatt 02 vorgestellt. Bitte
+überarbeiten und verfeinern Sie nun Ihr Exposé und geben Sie das neue PDF mit
+Blatt 03 im ILIAS ab.
+
+Wir werden gemeinsam die Arbeiten für Blatt 04 final diskutieren und beschließen.
