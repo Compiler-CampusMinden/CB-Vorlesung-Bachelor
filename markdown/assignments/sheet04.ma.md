@@ -10,5 +10,7 @@ hidden: true
 
 ## A4.1: Freie Aufgabe
 
-**TODO**: An diesem Termin werden die Ergebnisse der in B03 und B04 abgestimmten
-selbstdefinierten Aufgaben vorgestellt.
+In Blatt 02 und Blatt 03 haben Sie Ihre Aufgaben für dieses Blatt abgestimmt.
+
+Stellen Sie nun im Praktikum zu Blatt 04 die Ergebnisse dieser selbstdefinierten
+Aufgaben vor.
