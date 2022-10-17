@@ -34,6 +34,25 @@ sketch: true
 <!-- ADD
 - "altes Material" wieder einbauen
 - soll mal eine 20 min Einheit werden
+
+1.  backend/interpretation/syntaxdriven:
+    -   Eingebettete Aktionen
+    -   Traversierung AST
+    -   Kontextobjekte
+    -   Listener und Visitor
+2.  frontend/parsing/ll-advanced (nur Master):
+    -   Semantische Prädikate
+
+=> Rest: https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md
+-   Hello World mit Parser-Regeln
+-   Verhalten der Parser-Regeln
+    -   Startregel (https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md#start-rules-and-eof)
+    -   Formen der Subregeln (https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md#subrules)
+    -   EOF vs. kein EOF (https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md#start-rules-and-eof)
+    -   Vorrang
+-   Direkte vs. indirekte Linksrekursion: https://github.com/antlr/antlr4/blob/master/doc/left-recursion.md
+-   Attribute/Aktionen: Verweis auf backend/interpretation/syntaxdriven
+-   Exceptions: Verweis auf frontend/parsing/recovery
 -->
 
 <!-- ADD Content copied from old session "LL-Parser: Fortgeschrittene Techniken"
