@@ -22,11 +22,13 @@ den Kontrollflussgraphen nach der Optimierung (siehe nächste Aufgabe) aus.
 
 ## A3.2: Optimierung
 
-Welche der in der Vorlesung besprochenen Optimierungen sind in der betrachteten
-Sprache sinnvoll? Begründen Sie Ihre Analyse und führen Sie diese Optimierungen
-auf dem Kontrollflussgraphen durch.
+Überlegen Sie sich ein Code-Snippet in C oder Java, das vom Umfang her geeignet
+ist, Optimierungen durchzuführen.
 
-**TODO**: Macht das hier überhaupt Sinn? Sieht man das nicht erst zur Laufzeit => Interpreter?
+Führen Sie auf dem Papier algebraische, maschinenunabhängige und maschinenabhängige
+Optimierungen durch. Benutzen Sie dabei, wenn nötig, Dreiadresscode. Geben Sie den
+Kontrollflussgrafen an und führen Sie alle vier Variationen einer Datenflussanalyse
+durch.
 
 
 ## A3.3: Fixierung der Projekt-Ideen
