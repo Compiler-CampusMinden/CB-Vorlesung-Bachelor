@@ -13,10 +13,9 @@ outcomes:
   - k1: "Deterministisch kontextfreie Grammatiken"
   - k2: "Zusammenhang zwischen PDAs und kontextfreien Grammatiken"
 attachments:
-  - link: "https://github.com/Compiler-CampusMinden/AnnotatedSlides/blob/master/parsing_cfg.ann.pdf"
+  - link: "https://github.com/Compiler-CampusMinden/AnnotatedSlides/blob/master/parsing_cfg.ma.ann.pdf"
     name: "Annotierte Folien: CFG, LL-Parser"
 
-sketch: true
 ---
 
 # Wiederholung
@@ -39,7 +38,7 @@ Für z. B. alle Sprachen, in deren Wörtern Zeichen über eine Konstante hinaus 
 *    $a^ib^{2*i}$ ist nicht regulär
 *    $a^ib^{2*i}$ für $0 \leq i \leq 3$ ist regulär
 
-*    Wo finden sich die oben genannten Konstanten bei einem DFA wieder?
+*    Wo finden sich die oben genannten VAriablen bei einem DFA wieder?
 *    Warum ist die erste Sprache oben nicht regulär, die zweite aber?
 
 
@@ -62,7 +61,7 @@ Wir spendieren den DFAs einen möglichst einfachen, aber beliebig großen, Speic
 ## Kellerautomaten (Push-Down-Automata, PDAs)
 
 **Def.:** Ein Kellerautomat (PDA) $P = (Q,\ \Sigma,\ \Gamma,\  \delta,\ q_0,\ \perp,\ F)$
-ist ein Quintupel mit:
+ist ein Septupel mit:
 
 
 ![Definition eines PDAs](images/Def_PDA.png){width="60%"}
@@ -76,6 +75,8 @@ Ein PDA ist per Definition nichtdeterministisch und kann spontane Zustandsüberg
 Strukturen mit paarweise zu matchenden Symbolen.
 
 Bei jedem Zustandsübergang wird ein Zeichen (oder $\epsilon$) aus der Eingabe gelesen, ein Symbol von Keller genommen. Diese und das Eingabezeichen bestimmen den Folgezustand und eine Zeichenfolge, die auf den Stack gepackt wird. Dabei wird ein Symbol, das später mit einem Eingabesymbol zu matchen ist, auf den Stack gepackt.
+
+Soll das automatisch vom Stack genommene Symbol auf dem Stack bleiben, muss es wieder gepusht werden.
 
 ## Beispiel
 
@@ -269,15 +270,15 @@ Sie sind nicht abgeschlossen unter
 *   Konkatenation
 
 
+# Wrap-Up
 
-
-## Wrap-Up
+## Das sollen Sie mitnehmen
 
 *   Die Struktur von gängigen Programmiersprachen lässt sich nicht mit regulären Ausdrücken beschreiben und damit nicht mit DFAs akzeptieren.
-*   Das Automatenmodell der DFAs wird um einen endlosen Stack erweitert, das ergbit PDASs.
+*   Das Automatenmodell der DFAs wird um einen endlosen Stack erweitert, das ergibt PDAs.
 *   Kontextfreie Grammatiken (CFGs) erweitern die regulären Grammatiken.
 *   Deterministisch parsebare Sprachen haben eine eindeutige kontextfreie Grammatik.
-*   Es ist nicht entscheidbar, ob eine gegebnene kontextfreie Grammatik eindeutig ist.
+*   Es ist nicht entscheidbar, ob eine gegebene kontextfreie Grammatik eindeutig ist.
 
 
 
