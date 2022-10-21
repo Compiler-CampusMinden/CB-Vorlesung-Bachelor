@@ -27,7 +27,7 @@ ist, Optimierungen durchzuführen.
 
 Führen Sie auf dem Papier algebraische, maschinenunabhängige und maschinenabhängige
 Optimierungen durch. Benutzen Sie dabei, wenn nötig, Dreiadresscode. Geben Sie den
-Kontrollflussgrafen an und führen Sie alle vier Variationen einer Datenflussanalyse
+Kontrollflussgraphen an und führen Sie alle vier Variationen einer Datenflussanalyse
 durch.
 
 
