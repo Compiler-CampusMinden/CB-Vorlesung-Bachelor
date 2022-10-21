@@ -14,11 +14,6 @@ Konstruieren Sie aus Ihrem AST einen Kontrollflussgraphen. Ergänzen Sie Ihre
 Ausgabefunktion, so dass auch der Kontrollflussgraph als geeignet formatiert
 ausgegeben wird.
 
-Hinweis: Geben Sie sowohl den ursprünglichen Kontrollflussgraphen als auch
-den Kontrollflussgraphen nach der Optimierung (siehe nächste Aufgabe) aus.
-
-**TODO**: Macht das hier überhaupt Sinn? Sieht man das nicht erst zur Laufzeit => Interpreter?
-
 
 ## A3.2: Optimierung
 
