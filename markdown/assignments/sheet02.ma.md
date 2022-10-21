@@ -27,7 +27,7 @@ zum Erklären Ihres Codes.
 
 Geben Sie mindestens zwei Beispiele an für Typprüfungen, die in Sprachen wie
 C oder Java notwendig sind, in Python aber nicht möglich sind. Begründen Sie
-Ihre Wahl?
+Ihre Wahl.
 
 Wie könnten für diese Typprüfungen Attribute eingesetzt werden? Gehen Sie von
 einer Grammatik aus, die den betreffenden Teil der Programmiersprache beschreibt.
