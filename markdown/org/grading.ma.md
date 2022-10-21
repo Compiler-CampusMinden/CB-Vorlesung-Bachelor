@@ -116,7 +116,8 @@ dauern. Planen Sie eine Diskussion von ca. 10 Minuten am Ende ein.
 
 -   Vortrag 9:
     LL(\*) und Adaptive LL(\*) in ANTLR v4,
-    (T. Parr: "_LL(\*): The Foundation of the ANTLR Parser Generator_" und "_Adaptive LL(\*) Parsing: The Power of Dynamic Analysis_")
+    (T. Parr: "_LL(\*): The Foundation of the ANTLR Parser Generator_" und "_Adaptive LL(\*) Parsing: The Power of Dynamic Analysis_"
+    und [_LL(\*) grammar analysis_](https://theantlrguy.atlassian.net/wiki/spaces/~admin/pages/524294/LL+grammar+analysis))
     KW02/KW03,
     Sprache: Deutsch,
     2 Personen
