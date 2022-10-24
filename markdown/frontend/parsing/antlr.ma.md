@@ -44,14 +44,19 @@ sketch: true
     -   Semantische Prädikate
 
 => Rest: https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md
--   Hello World mit Parser-Regeln
+-   Hello World mit Parser-Regeln, `grun Hello start -tree` und `grun Hello start -gui`
 -   Verhalten der Parser-Regeln
     -   Startregel (https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md#start-rules-and-eof)
     -   Formen der Subregeln (https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md#subrules)
+        Eine Slide mit vielen Formen als Beispiel
     -   EOF vs. kein EOF (https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md#start-rules-and-eof)
-    -   Vorrang
--   Direkte vs. indirekte Linksrekursion: https://github.com/antlr/antlr4/blob/master/doc/left-recursion.md
+    -   Expressions, Vorrang (Operatoren)
+    -   Konflikte in Regeln (lexikalische Regeln in Parser-Regeln): S. 76
+    -   Direkte vs. indirekte Linksrekursion: https://github.com/antlr/antlr4/blob/master/doc/left-recursion.md
+-   Parsetree, API, Visitor/Listener (Überblick, mit Verweis auf backend/interpretation/syntaxdriven)
+-   Label für Teilausdrücke und Alternativen (S.119, S.265)
 -   Attribute/Aktionen: Verweis auf backend/interpretation/syntaxdriven
+-   (NUR MASTER): Semantische Prädikate: Verweis auf frontend/parsing/ll-advanced
 -   Exceptions: Verweis auf frontend/parsing/recovery
 -->
 
