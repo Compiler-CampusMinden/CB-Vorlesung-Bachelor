@@ -24,27 +24,14 @@ sketch: true
 ---
 
 
-<!-- ADD
-20' Sitzung als Teil von Vorlesung 6 unter Verwendung vom existierenden Material
--->
-
 ## ANTLR (Parsergenerator)
 
 
-<!-- ADD
-- "altes Material" wieder einbauen
-- soll mal eine 20 min Einheit werden
-
-1.  backend/interpretation/syntaxdriven:
-    -   Eingebettete Aktionen
-    -   Traversierung AST
-    -   Kontextobjekte
-    -   Listener und Visitor
-2.  frontend/parsing/ll-advanced (nur Master):
-    -   Semantische Prädikate
-
+<!-- TODO
 => Rest: https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md
+
 -   Hello World mit Parser-Regeln, `grun Hello start -tree` und `grun Hello start -gui`
+
 -   Verhalten der Parser-Regeln
     -   Startregel (https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md#start-rules-and-eof)
     -   Formen der Subregeln (https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md#subrules)
@@ -53,86 +40,256 @@ sketch: true
     -   Expressions, Vorrang (Operatoren)
     -   Konflikte in Regeln (lexikalische Regeln in Parser-Regeln): S. 76
     -   Direkte vs. indirekte Linksrekursion: https://github.com/antlr/antlr4/blob/master/doc/left-recursion.md
--   Parsetree, API, Visitor/Listener (Überblick, mit Verweis auf backend/interpretation/syntaxdriven)
--   Label für Teilausdrücke und Alternativen (S.119, S.265)
--   Attribute/Aktionen: Verweis auf backend/interpretation/syntaxdriven
--   (NUR MASTER): Semantische Prädikate: Verweis auf frontend/parsing/ll-advanced
--   Exceptions: Verweis auf frontend/parsing/recovery
+
+-   Parsetree, API, Kontextobjekte, Visitor/Listener (Überblick, mit Verweis auf backend/interpretation/syntaxdriven: dort Kontextobjekte nur Skript!)
+-   Label für Teilausdrücke und Alternativen (S.119, S.265) => Teil-Kopie aus backend/interpretation/syntaxdriven (dort nur Skript!)
+
 -->
 
-<!-- ADD Content copied from old session "LL-Parser: Fortgeschrittene Techniken"
 
-## Semantische Prädikate
+## Parsetree
 
-Problem in Java: `enum` ab Java5 Schlüsselwort [(vorher als Identifier-Name verwendbar)]{.notes}
+TODO: Beispiel: Grammatik, Eingabe, Parse-Tree
+
+
+## ANTLR: Kontext-Objekte für Parser-Regeln
 
 ```yacc
-prog : (enumDecl | stat)+ ;
-stat : ... ;
-
-enumDecl : ENUM id '{' id (',' id)* '}' ;
+s    : expr         {List<EContext> x = $expr.ctx.e();} ;
+expr : e '*' e ;
 ```
-
-::: notes
-Wie kann ich eine Grammatik bauen, die sowohl für Java5 und später als auch für die Vorgänger
-von Java5 funktioniert?
-
-Angenommen, man hätte eine Hilfsfunktion ("Prädikat"), mit denen man aus dem Kontext heraus
-die Unterscheidung treffen kann, dann würde die Umsetzung der Regel ungefähr so aussehen:
-:::
 
 \bigskip
-\pause
+\bigskip
 
-```python
-def prog():
-    if lookahead(1) == ENUM and java5: enumDecl()
-    else: stat()
-```
-
-
-## Semantische Prädikate in ANTLR
+![](images/ParserRuleContext.png)
 
 ::: notes
-### Semantische Prädikate in Parser-Regeln
+Jede Regel liefert ein passend zu dieser Regel generiertes Kontext-Objekt
+zurück. Darüber kann man das/die Kontextobjekt(e) der Sub-Regeln abfragen.
+
+Die Regel `s()` liefert entsprechend ein `SContext`-Objekt und die Regel
+`expr()` liefert ein `ExprContext`-Objekt zurück.
+
+In der Aktion fragt man das Kontextobjekt über `ctx` ab.
+
+Für einfache Regel-Aufrufe liefert die parameterlose Methode nur ein
+einziges Kontextobjekt (statt einer Liste) zurück.
+
+**Anmerkung**: ANTLR generiert nur dann Felder für die Regel-Elemente im
+Kontextobjekt, wenn diese in irgendeiner Form referenziert werden. Dies
+kann beispielsweise durch Benennung (Definition eines Labels, siehe nächste
+Folie) oder durch Nutzung in einer Aktion (siehe obiges Beispiel) geschehen.
 :::
+
+
+::: notes
+### ANTLR: Benannte Regel-Elemente oder Alternativen
 
 ```yacc
-@parser::members {public static boolean java5;}
+stat  : 'return' value=e ';'    # Return
+      | 'break' ';'             # Break
+      ;
+```
 
-prog : ({java5}? enumDecl | stat)+ ;
-stat : ... ;
+\bigskip
 
-enumDecl : ENUM id '{' id (',' id)* '}' ;
+```java
+public static class StatContext extends ParserRuleContext { ... }
+public static class ReturnContext extends StatContext {
+    public EContext value;
+    public EContext e() { ... }
+}
+public static class BreakContext extends StatContext { ... }
+```
+
+Mit `value=e` wird der Aufruf der Regel `e` mit dem Label `value` belegt,
+d.h. man kann mit `$e.text` oder `$value.text` auf das `text`-Attribut von
+`e` zugreifen. Falls es in einer Produktion mehrere Aufrufe einer anderen
+Regel gibt, **muss** man für den Zugriff auf die Attribute eindeutige Label
+vergeben.
+
+Analog wird für die beiden Alternativen je ein eigener Kontext erzeugt.
+:::
+
+
+## ANTLR: Arbeiten mit dem Listener-Pattern
+
+::: notes
+ANTLR (generiert auf Wunsch) zur Grammatik passende Listener (Interface und
+leere Basisimplementierung). Beim Traversieren mit dem Default-`ParseTreeWalker`
+wird der Parse-Tree mit Tiefensuche abgelaufen und jeweils beim Eintritt in
+bzw. beim Austritt aus einen/m Knoten der passende Listener mit dem passenden
+Kontext-Objekt aufgerufen.
+
+Damit kann man die Grammatik "für sich" halten, d.h. unabhängig von einer
+konkreten Zielsprache und die Aktionen über die Listener (oder Visitors, s.u.)
+ausführen.
+:::
+
+```{.yacc size="footnotesize"}
+expr : e1=expr '*' e2=expr      # MULT
+     | e1=expr '+' e2=expr      # ADD
+     | DIGIT                    # ZAHL
+     ;
+```
+
+\smallskip
+
+::: notes
+ANTLR kann zu dieser Grammatik einen passenden Listener (Interface `calcListener`)
+generieren. Weiterhin generiert ANTLR eine leere Basisimplementierung (Klasse
+`calcBaseListener`):
+
+![](images/ParseTreeListener.png)
+
+Von dieser Basisklasse leitet man einen eigenen Listener ab und implementiert
+die Methoden, die man benötigt.
+:::
+
+```{.java size="footnotesize"}
+public static class MyListener extends calcBaseListener {
+    Stack<Integer> stack = new Stack<Integer>();
+
+    public void exitMULT(calcParser.MULTContext ctx) {
+        int right = stack.pop();
+        int left = stack.pop();
+        stack.push(left * right);   // {$v = $e1.v * $e2.v;}
+    }
+    public void exitADD(calcParser.ADDContext ctx) {
+        int right = stack.pop();
+        int left = stack.pop();
+        stack.push(left + right);   // {$v = $e1.v + $e2.v;}
+    }
+    public void exitZAHL(calcParser.ZAHLContext ctx) {
+        stack.push(Integer.valueOf(ctx.DIGIT().getText()));
+    }
+}
 ```
 
 ::: notes
-Prädikate in Parser-Regeln aktivieren bzw. deaktivieren alles, was nach der Abfrage
-des Prädikats gematcht werden könnte.
+Anschließend baut man das alles in eine Traversierung des Parse-Trees ein:
 
-### Semantische Prädikate in Lexer-Regeln
+```java
+public class TestMyListener {
+    public static class MyListener extends calcBaseListener {
+        ...
+    }
 
-Alternativ für Lexer-Regeln:
+    public static void main(String[] args) throws Exception {
+        calcLexer lexer = new calcLexer(CharStreams.fromStream(System.in));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        calcParser parser = new calcParser(tokens);
+
+        ParseTree tree = parser.s();    // Start-Regel
+        System.out.println(tree.toStringTree(parser));
+
+        ParseTreeWalker walker = new ParseTreeWalker();
+        MyListener eval = new MyListener();
+        walker.walk(eval, tree);
+        System.out.println(eval.stack.pop());
+    }
+}
+```
+
+[Beispiel: [TestMyListener.java](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/interpretation/src/TestMyListener.java) und [calc.g4](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/interpretation/src/calc.g4)]{.bsp}
 :::
 
-```yacc
-ENUM : 'enum' {java5}? ;
-ID   : [a-zA-Z]+ ;
+
+::: slides
+## ANTLR: Arbeiten mit dem Visitor-Pattern
+:::
+
+::: notes
+ANTLR (generiert ebenfalls auf Wunsch) zur Grammatik passende Visitoren
+(Interface und leere Basisimplementierung). Hier muss man allerdings selbst
+für eine geeignete Traversierung des Parse-Trees sorgen. Dafür hat man mehr
+Freiheiten im Vergleich zum Listener-Pattern, insbesondere im Hinblick auf
+Rückgabewerte.
+:::
+
+```{.yacc size="footnotesize"}
+expr : e1=expr '*' e2=expr      # MULT
+     | e1=expr '+' e2=expr      # ADD
+     | DIGIT                    # ZAHL
+     ;
+```
+
+\bigskip
+
+::: notes
+ANTLR kann zu dieser Grammatik einen passenden Visitor (Interface `calcVisitor<T>`)
+generieren. Weiterhin generiert ANTLR eine leere Basisimplementierung (Klasse
+`calcBaseVisitor<T>`):
+
+![](images/ParseTreeVisitor.png)
+
+Von dieser Basisklasse leitet man einen eigenen Visitor ab und überschreibt
+die Methoden, die man benötigt. Wichtig ist, dass man selbst für das "Besuchen"
+der Kindknoten sorgen muss (rekursiver Aufruf der geerbten Methode `visit()`).
+:::
+
+```{.java size="footnotesize"}
+public static class MyVisitor extends calcBaseVisitor<Integer> {
+    public Integer visitMULT(calcParser.MULTContext ctx) {
+        return visit(ctx.e1) * visit(ctx.e2);   // {$v = $e1.v * $e2.v;}
+    }
+    public Integer visitADD(calcParser.ADDContext ctx) {
+        return visit(ctx.e1) + visit(ctx.e2);   // {$v = $e1.v + $e2.v;}
+    }
+    public Integer visitZAHL(calcParser.ZAHLContext ctx) {
+        return Integer.valueOf(ctx.DIGIT().getText());
+    }
+}
 ```
 
 ::: notes
-Bei Token kommt das Prädikat erst am rechten Ende einer Lexer-Regel vor, da der Lexer keine
-Vorhersage macht, sondern nach dem längsten Match sucht und die Entscheidung erst trifft,
-wenn das ganze Token gesehen wurde. Bei Parser-Regeln steht das Prädikat links vor der
-entsprechenden Alternative, da der Parser mit Hilfe des Lookaheads Vorhersagen trifft, welche
-Regel/Alternative zutrifft.
+Anschließend baut man das alles in eine manuelle Traversierung des Parse-Trees ein:
 
-*Anmerkung*: Hier wurden nur Variablen eingesetzt, es können aber auch Methoden/Funktionen
-genutzt werden. In Verbindung mit einer Symboltabelle (["Symboltabellen"](cb_symboltabellen1.html))
-und/oder mit Attributen und Aktionen in der Grammatik (["Attribute"](cb_attribute.html) und
-["Interpreter: Attribute+Aktionen"](cb_interpreter2.html)) hat man hier ein mächtiges Hilfswerkzeug!
+```java
+public class TestMyVisitor {
+    public static class MyVisitor extends calcBaseVisitor<Integer> {
+        ...
+    }
+
+    public static void main(String[] args) throws Exception {
+        calcLexer lexer = new calcLexer(CharStreams.fromStream(System.in));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        calcParser parser = new calcParser(tokens);
+
+        ParseTree tree = parser.s();    // Start-Regel
+        System.out.println(tree.toStringTree(parser));
+
+        MyVisitor eval = new MyVisitor();
+        System.out.println(eval.visit(tree));
+    }
+}
+```
+
+[Beispiel: [TestMyVisitor.java](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/interpretation/src/TestMyVisitor.java) und [calc.g4](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/interpretation/src/calc.g4)]{.bsp}
 :::
--->
+
+
+::: notes
+## Eingebettete Aktionen und Attribute
+
+TODO: Beispiel und Verweis auf backend/interpretation/syntaxdriven
+:::
+
+
+::: notes
+## Semantische Prädikate
+
+TODO: Beispiel und Verweis auf frontend/parsing/ll-advanced
+TODO: NUR MASTER
+:::
+
+
+::: notes
+## Exceptions
+
+TODO: Beispiel und Verweis auf frontend/parsing/recovery
+:::
 
 
 ## Wrap-Up
