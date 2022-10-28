@@ -24,35 +24,52 @@ sketch: true
 ---
 
 
-## ANTLR (Parsergenerator)
+## Hello World
 
+TODO: Hello World mit Parser-Regeln, eine Slide mit vielen Formen von Regeln als Beispiel
+https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md
 
-<!-- TODO
-=> Rest: https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md
+::::::::: notes
+### Starten des Parsers
 
--   Hello World mit Parser-Regeln, `grun Hello start -tree` und `grun Hello start -gui`
+TODO: `grun Hello start -tree` und `grun Hello start -gui`
 
--   Verhalten der Parser-Regeln
-    -   Startregel (https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md#start-rules-and-eof)
-    -   Formen der Subregeln (https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md#subrules)
-        Eine Slide mit vielen Formen als Beispiel
-    -   EOF vs. kein EOF (https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md#start-rules-and-eof)
-    -   Expressions, Vorrang (Operatoren)
-    -   Konflikte in Regeln (lexikalische Regeln in Parser-Regeln): S. 76
-    -   Direkte vs. indirekte Linksrekursion: https://github.com/antlr/antlr4/blob/master/doc/left-recursion.md
+### Startregeln
 
--   Parsetree, API, Kontextobjekte, Visitor/Listener (Überblick, mit Verweis auf backend/interpretation/syntaxdriven: dort Kontextobjekte nur Skript!)
--   Label für Teilausdrücke und Alternativen (S.119, S.265) => Teil-Kopie aus backend/interpretation/syntaxdriven (dort nur Skript!)
+TODO: Startregel (https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md#start-rules-and-eof)
 
--->
+### Formen der Subregeln
 
+TODO: Formen der Subregeln (https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md#subrules)
 
-## Parsetree
+### Parse-Tree
 
 TODO: Beispiel: Grammatik, Eingabe, Parse-Tree
 
+### EOF oder kein EOF?
 
-## ANTLR: Kontext-Objekte für Parser-Regeln
+TODO: EOF vs. kein EOF (https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md#start-rules-and-eof)
+:::::::::
+
+
+## Expressions und Vorrang (Operatoren)
+
+TODO: Beispiel von oben vereinfachen
+
+::: notes
+### Direkte vs. indirekte Linksrekursion
+
+TODO: https://github.com/antlr/antlr4/blob/master/doc/left-recursion.md
+
+### Konflikte in Regeln
+
+TODO: Konflikte in Regeln (lexikalische Regeln in Parser-Regeln): S. 76
+:::
+
+
+## Kontext-Objekte für Parser-Regeln
+
+TODO: Überblick, mit Verweis auf backend/interpretation/syntaxdriven: dort Kontextobjekte nur Skript!
 
 ```yacc
 s    : expr         {List<EContext> x = $expr.ctx.e();} ;
@@ -83,8 +100,9 @@ Folie) oder durch Nutzung in einer Aktion (siehe obiges Beispiel) geschehen.
 :::
 
 
-::: notes
-### ANTLR: Benannte Regel-Elemente oder Alternativen
+## Benannte Regel-Elemente oder Alternativen
+
+TODO: Label für Teilausdrücke und Alternativen (S.119, S.265) => Teil-Kopie aus backend/interpretation/syntaxdriven (dort nur Skript!)
 
 ```yacc
 stat  : 'return' value=e ';'    # Return
@@ -103,6 +121,7 @@ public static class ReturnContext extends StatContext {
 public static class BreakContext extends StatContext { ... }
 ```
 
+::: notes
 Mit `value=e` wird der Aufruf der Regel `e` mit dem Label `value` belegt,
 d.h. man kann mit `$e.text` oder `$value.text` auf das `text`-Attribut von
 `e` zugreifen. Falls es in einer Produktion mehrere Aufrufe einer anderen
@@ -113,7 +132,9 @@ Analog wird für die beiden Alternativen je ein eigener Kontext erzeugt.
 :::
 
 
-## ANTLR: Arbeiten mit dem Listener-Pattern
+## Arbeiten mit dem Listener-Pattern
+
+TODO: Überblick, mit Verweis auf backend/interpretation/syntaxdriven: dort Kontextobjekte nur Skript!
 
 ::: notes
 ANTLR (generiert auf Wunsch) zur Grammatik passende Listener (Interface und
@@ -196,9 +217,9 @@ public class TestMyListener {
 :::
 
 
-::: slides
-## ANTLR: Arbeiten mit dem Visitor-Pattern
-:::
+## Arbeiten mit dem Visitor-Pattern
+
+TODO: Überblick, mit Verweis auf backend/interpretation/syntaxdriven: dort Kontextobjekte nur Skript!
 
 ::: notes
 ANTLR (generiert ebenfalls auf Wunsch) zur Grammatik passende Visitoren
