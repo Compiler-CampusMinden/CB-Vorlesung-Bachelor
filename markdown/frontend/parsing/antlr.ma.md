@@ -42,9 +42,6 @@ WS    : [ \t\n]+ -> skip ;
 
 [Konsole: Hello (grun, Parse-Tree)]{.bsp}
 
-TODO: Hello World mit Parser-Regeln, eine Slide mit vielen Formen von Regeln als Beispiel
-https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md
-
 ::::::::: notes
 ### Starten des Parsers
 
@@ -80,8 +77,52 @@ https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md
 
 ### Formen der Subregeln
 
+```antlr
+stmt  : ID '=' expr ';' ;
+```
 
-TODO: Formen der Subregeln (https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md#subrules)
+Um die Regel `stmt` anwenden zu können, müssen alle Elemente auf der rechten
+Seite der Regel erfüllt werden. Dabei müssen die Token wie `ID`, `=` und `;`
+matchen und die Subregel `expr` muss erfüllt werden können. Beachten Sie das
+abschließende Semikolon am Ende einer ANTLR-Regel!
+
+```antlr
+stmt  : ID '=' expr ';' | expr ';' ;
+```
+
+Alternativen werden durch ein `|` getrennt. Hier muss genau eine Alternative
+erfüllt werden. Falls nötig, trennt man die Alternativen durch Einschließung
+in runden Klammern vom Rest der Regel ab: `r : a (b | c) d ;`.
+
+```antlr
+expr  : term ('+' term)* ;
+```
+
+Der durch den `*` gekennzeichnete Teil kann beliebig oft vorkommen oder auch
+fehlen. Bei einem `+` müsste der Teil mind. einmal vorkommen und bei einem
+`?` entsprechend einmal oder keinmal.
+
+Auch hier kann man die Operatoren durch ein zusätzliches `?` auf non-greedy
+umschalten (analog zu den Lexer-Regeln).
+
+(vgl. [github.com/antlr/antlr4/blob/master/doc/parser-rules.md](https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md#subrules))
+
+### Reihenfolge in Grammatik definiert Priorität
+
+Falls mehr als eine Parser-Regel die selbe Inputsequenz matcht, löst ANTLR
+diese Mehrdeutigkeit auf, indem es die erste Alternative nimmt, die an der
+Entscheidung beteiligt ist.
+
+```antlr
+start : stmt ;
+
+stmt  : expr | ID  ;
+expr  : ID   | NUM ;
+```
+
+Bei der Eingabe "foo" würde die Alternative `ID` in der Regel `expr` "gewinnen",
+weil sie in der Grammatik vor der Alternative `ID` in der Regel `stmt` kommt und
+damit Vorrang hat.
 
 ### Parse-Tree
 
@@ -103,6 +144,7 @@ expr  : term ('+' term)* ;
 term  : atom ('*' atom)* ;
 atom  : ID | NUM ;
 ```
+
 Die Startregel wurde so geändert, dass sie nur noch genau ein Statement
 akzeptieren soll.
 
@@ -116,7 +158,7 @@ werden:
 
 ```antlr
 start : stmt EOF;
-``
+```
 
 Hier würde die Eingabe "aa; bb;" zu einem Fehler führen, da nur der Teil "aa;"
 durch die Startregel abgedeckt ist (Token `ID`), und der Rest "bb;" zwar sogar
@@ -130,6 +172,23 @@ führt.
 
 
 ## Expressions und Vorrang (Operatoren)
+
+```antlr
+expr  : term ('+' term)* ;
+term  : atom ('*' atom)* ;
+atom  : ID | NUM ;
+```
+
+\pause
+\bigskip
+
+```antlr
+expr  : expr '*' expr
+      | expr '+' expr
+      | ID
+      | NUM
+      ;
+```
 
 TODO: Beispiel von oben vereinfachen
 
