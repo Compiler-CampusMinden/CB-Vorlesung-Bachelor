@@ -1,11 +1,10 @@
 ---
 archetype: lecture-cg
-title: "ANTLR (Parsergenerator)"
+title: "Parser mit ANTLR generieren"
 author: "Carsten Gips (FH Bielefeld)"
 weight: 5
 readings:
-  - key: "Aho2008"
-    comment: " Abschnitt 2.6 und Kapitel 3"
+  - key: "@Parr2014"
 tldr: |
   TODO
 outcomes:
@@ -15,16 +14,33 @@ assignments:
   - topic: sheet01
 youtube:
   - link: ""
-    name: "VL Parsen mit ANTLR"
+    name: "VL Parser mit ANTLR"
 fhmedia:
   - link: ""
-    name: "VL Parsen mit ANTLR"
-
-sketch: true
+    name: "VL Parser mit ANTLR"
 ---
 
 
 ## Hello World
+
+```antlr
+grammar Hello;
+
+start : stmt* ;
+
+stmt  : ID '=' expr ';' | expr ';' ;
+
+expr  : term ('+' term)* ;
+term  : atom ('*' atom)* ;
+
+atom  : ID | NUM ;
+
+ID    : [a-z][a-zA-Z]* ;
+NUM   : [0-9]+ ;
+WS    : [ \t\n]+ -> skip ;
+```
+
+[Konsole: Hello (grun, Parse-Tree)]{.bsp}
 
 TODO: Hello World mit Parser-Regeln, eine Slide mit vielen Formen von Regeln als Beispiel
 https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md
@@ -32,13 +48,38 @@ https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md
 ::::::::: notes
 ### Starten des Parsers
 
-TODO: `grun Hello start -tree` und `grun Hello start -gui`
+1.  Grammatik übersetzen und Code generieren: `antlr Hello.g4`
+2.  Java-Code kompilieren: `javac *.java`
+3.  Parser ausführen:
+    *   `grun Hello start -tree` oder `grun Hello start -gui` (Grammatik "Hello", Startregel "start")
+    *   Alternativ mit kleinem Java-Programm:
+        ```java
+        import org.antlr.v4.runtime.CharStreams;
+        import org.antlr.v4.runtime.CommonTokenStream;
+        import org.antlr.v4.runtime.tree.ParseTree;
+
+        public class Main {
+            public static void main(String[] args) throws Exception {
+                HelloLexer lexer = new HelloLexer(CharStreams.fromStream(System.in));
+                CommonTokenStream tokens = new CommonTokenStream(lexer);
+                HelloParser parser = new HelloParser(tokens);
+
+                ParseTree tree = parser.start();  // Start-Regel
+                System.out.println(tree.toStringTree(parser));
+            }
+        }
+        ```
 
 ### Startregeln
 
-TODO: Startregel (https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md#start-rules-and-eof)
+*   `start` ist eine [Parser-Regel]{.alert}
+    => Eine Parser-Regel pro Grammatik wird benötigt, damit man den generierten
+    Parser am Ende auch starten kann ...
+*   Alle Regeln mit kleinem Anfangsbuchstaben sind Parser-Regeln
+*   Alle Regeln mit großem Anfangsbuchstaben sind Lexer-Regeln
 
 ### Formen der Subregeln
+
 
 TODO: Formen der Subregeln (https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md#subrules)
 
@@ -48,7 +89,39 @@ TODO: Beispiel: Grammatik, Eingabe, Parse-Tree
 
 ### EOF oder kein EOF?
 
-TODO: EOF vs. kein EOF (https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md#start-rules-and-eof)
+Startregeln müssen nicht unbedingt den gesamten Input "konsumieren". Sie müssen
+nur eine der Alternativen in der Startregel erfüllen.
+
+Betrachten wir noch einmal einen leicht modifizierten Ausschnitt aus der obigen
+Grammatik:
+
+```antlr
+start : stmt ;
+
+stmt  : ID '=' expr ';' | expr ';' ;
+expr  : term ('+' term)* ;
+term  : atom ('*' atom)* ;
+atom  : ID | NUM ;
+```
+
+In diesem Fall würde die Startregel bei der Eingabe "aa bb" nur "aa" konsumieren
+(als Token `ID`) und das folgende `bb` ignorieren. (Die Startregel wurde so
+geändert, dass sie nur noch genau ein Statement akzeptieren soll.)
+
+Wenn der gesamte Eingabestrom durch die Startregel verarbeitet werden soll, dann
+muss das vordefinierte Token `EOF` eingesetzt werden:
+
+```antlr
+start : stmt EOF;
+``
+
+Hier würde die Eingabe "aa bb" zu einem Fehler führen, da nur der Teil "aa"
+durch die Startregel abgedeckt ist (Token `ID`), und der Rest "bb" zwar sogar
+ein gültiges Token wäre (ebenfalls `ID`), aber eben nicht mehr von der
+Startregel akzeptiert. (Die Startregel wurde ja so geändert, dass sie nur noch
+genau ein Statement akzeptieren soll.)
+
+(vgl. [github.com/antlr/antlr4/blob/master/doc/parser-rules.md](https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md#start-rules-and-eof))
 :::::::::
 
 
