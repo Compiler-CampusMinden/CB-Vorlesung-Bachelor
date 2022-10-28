@@ -87,10 +87,10 @@ TODO: Formen der Subregeln (https://github.com/antlr/antlr4/blob/master/doc/pars
 
 TODO: Beispiel: Grammatik, Eingabe, Parse-Tree
 
-### EOF oder kein EOF?
+### To EOF not to EOF?
 
 Startregeln müssen nicht unbedingt den gesamten Input "konsumieren". Sie müssen
-nur eine der Alternativen in der Startregel erfüllen.
+per Default nur eine der Alternativen in der Startregel erfüllen.
 
 Betrachten wir noch einmal einen leicht modifizierten Ausschnitt aus der obigen
 Grammatik:
@@ -103,23 +103,27 @@ expr  : term ('+' term)* ;
 term  : atom ('*' atom)* ;
 atom  : ID | NUM ;
 ```
+Die Startregel wurde so geändert, dass sie nur noch genau ein Statement
+akzeptieren soll.
 
-In diesem Fall würde die Startregel bei der Eingabe "aa bb" nur "aa" konsumieren
-(als Token `ID`) und das folgende `bb` ignorieren. (Die Startregel wurde so
-geändert, dass sie nur noch genau ein Statement akzeptieren soll.)
+In diesem Fall würde die Startregel bei der Eingabe "aa; bb;" nur den ersten
+Teil "aa;" konsumieren (als Token `ID`) und das folgende "bb;" ignorieren.
+Das wäre in diesem Fall aber auch kein Fehler.
 
-Wenn der gesamte Eingabestrom durch die Startregel verarbeitet werden soll, dann
-muss das vordefinierte Token `EOF` eingesetzt werden:
+Wenn der gesamte Eingabestrom durch die Startregel erklärt werden soll,
+dann muss das vordefinierte Token `EOF` am Ende der Startregel eingesetzt
+werden:
 
 ```antlr
 start : stmt EOF;
 ``
 
-Hier würde die Eingabe "aa bb" zu einem Fehler führen, da nur der Teil "aa"
-durch die Startregel abgedeckt ist (Token `ID`), und der Rest "bb" zwar sogar
-ein gültiges Token wäre (ebenfalls `ID`), aber eben nicht mehr von der
-Startregel akzeptiert. (Die Startregel wurde ja so geändert, dass sie nur noch
-genau ein Statement akzeptieren soll.)
+Hier würde die Eingabe "aa; bb;" zu einem Fehler führen, da nur der Teil "aa;"
+durch die Startregel abgedeckt ist (Token `ID`), und der Rest "bb;" zwar sogar
+ein gültiges Token wären (ebenfalls `ID` und `;`), aber eben nicht mehr von der
+Startregel akzeptiert. Durch das `EOF` soll die Startregel aber den gesamten
+Input konsumieren und erklären, was hier nicht geht und entsprechend zum Fehler
+führt.
 
 (vgl. [github.com/antlr/antlr4/blob/master/doc/parser-rules.md](https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md#start-rules-and-eof))
 :::::::::
