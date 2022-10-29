@@ -263,13 +263,60 @@ hat Vorrang von der Addition, und diese hat wiederum Vorrang von einer einfachen
 :::
 
 ::: notes
-### Direkte vs. indirekte Linksrekursion
+### Direkte vs. indirekte Links-Rekursion
 
-TODO: https://github.com/antlr/antlr4/blob/master/doc/left-recursion.md
+ANTLR kann nur _direkte_ Links-Rekursion auflösen. Regeln wie `r : r T U V ;` stellen
+in ANTLR also kein Problem dar.
+
+_Indirekte_ Links-Rekursion erkennt ANTLR dagegen nicht:
+
+```antlr
+r : s T U V ;
+s : r W X ;
+```
+
+Hier würden sich die Regeln `r` und `s` gegenseitig aufrufen und kein Token aus dem
+Tokenstrom entfernen, so dass der generierte LL-Parser hier in einer Endlosschleife
+stecken bleiben würde. Mit indirekter Links-Rekursion kann ANTLR nicht umgehen.
 
 ### Konflikte in Regeln
 
-TODO: Konflikte in Regeln (lexikalische Regeln in Parser-Regeln): S. 76
+Wenn mehrere Alternativen einer Regel anwendbar sind, entscheidet sich ANTLR für die
+erste Alternative.
+
+Wenn sich mehrere Tokenregeln überlappen, "gewinnt" auch hier die zuerst definierte
+Regel.
+
+```antlr
+def : 'func' ID '(' ')' block ;
+
+FOR : 'for' ;
+ID  : [a-z][a-zA-Z]* ;
+```
+
+Hier werden ein implizites Token `'func'` sowie die expliziten Token `FOR` und `ID`
+definiert. Dabei sind die Lexeme für `'func'` und `FOR` auch in `ID` enthalten.
+Dennoch werden `'func'` und `FOR` erkannt und nicht über `ID` gematcht, weil sie
+_vor_ der Regel `ID` definiert sind.
+
+Tatsächlich sortiert ANTLR die Regeln intern um, so dass alle Parser-Regeln _vor_ den
+Lexer-Regeln definiert sind. Die impliziten Token werden dabei noch vor den expliziten
+Token-Regeln angeordnet. Im obigen Beispiel hat also `'func'` eine höhere Priorität
+als `FOR`, und `FOR` hat eine höhere Priorität als `ID`. Aus diesem Grund gibt es die
+Konvention, die Parser-Regeln in der Grammatik vor den Lexer-Regeln zu definieren - dies
+entspricht quasi der Anordnung, die ANTLR bei der Verarbeitung sowieso erzeugen würde.
+
+Aus diesem Grund würde auch eine Umsortierung der obigen Grammatik funktionieren:
+
+```antlr
+FOR : 'for' ;
+ID  : [a-z][a-zA-Z]* ;
+
+def : 'func' ID '(' ')' block ;
+```
+
+Intern würde ANTLR die Parser-Regel `def` wieder vor den beiden Lexer-Regeln anordnen,
+und zwischen den Parser-Regeln und den Lexer-Regeln die impliziten Token (hier `'func'`).
 :::
 
 
