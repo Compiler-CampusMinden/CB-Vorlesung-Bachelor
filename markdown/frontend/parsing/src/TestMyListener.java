@@ -1,40 +1,34 @@
-import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.tree.*;
-
-import java.util.*;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 public class TestMyListener {
     public static void main(String[] args) throws Exception {
-        calcLexer lexer = new calcLexer(CharStreams.fromStream(System.in));
+        CharStream in = CharStreams.fromString("2+3*4");
+        calcLexer lexer = new calcLexer(in);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         calcParser parser = new calcParser(tokens);
 
         ParseTree tree = parser.s();    // Start-Regel
-        System.out.println(tree.toStringTree(parser));
 
         ParseTreeWalker walker = new ParseTreeWalker();
         MyListener eval = new MyListener();
         walker.walk(eval, tree);
-        System.out.println(eval.stack.pop());
     }
 
     public static class MyListener extends calcBaseListener {
-        Stack<Integer> stack = new Stack<Integer>();
-
         public void exitMULT(calcParser.MULTContext ctx) {
-            int right = stack.pop();
-            int left = stack.pop();
-            stack.push(left * right);   // {$v = $e1.v * $e2.v;}
+            System.out.println("exitMULT: e1=" + ctx.e1.getText() + ", e2=" + ctx.e1.getText());
         }
 
         public void exitADD(calcParser.ADDContext ctx) {
-            int right = stack.pop();
-            int left = stack.pop();
-            stack.push(left + right);   // {$v = $e1.v + $e2.v;}
+            System.out.println("exitADD:  e1=" + ctx.e1.getText() + ", e2=" + ctx.e1.getText());
         }
 
         public void exitZAHL(calcParser.ZAHLContext ctx) {
-            stack.push(Integer.valueOf(ctx.DIGIT().getText()));
+            System.out.println("exitZAHL: DIGIT=" + ctx.DIGIT().getText());
         }
     }
 }

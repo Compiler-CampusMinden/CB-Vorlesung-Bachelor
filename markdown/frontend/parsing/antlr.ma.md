@@ -346,7 +346,7 @@ und Visitor-Methoden erhält man die Kontextobjekte als Parameter.
 Für einfache Regel-Aufrufe liefert die parameterlose Methode nur ein
 einziges Kontextobjekt (statt einer Liste) zurück.
 
-**Anmerkung**: ANTLR generiert nur dann Felder für die Regel-Elemente im
+**Anmerkung**: ANTLR generiert nur dann _Felder_ für die Regel-Elemente im
 Kontextobjekt, wenn diese in irgendeiner Form referenziert werden. Dies
 kann beispielsweise durch Benennung (Definition eines Labels, siehe nächste
 Folie) oder durch Nutzung in einer Aktion (siehe obiges Beispiel) geschehen.
@@ -412,6 +412,8 @@ ANTLR kann zu dieser Grammatik `calc.g4` einen passenden Listener (Interface
 Weiterhin generiert ANTLR eine leere Basisimplementierung (Klasse `calcBaseListener`):
 
 ![](images/ParseTreeListener.png){width="80%"}
+
+(Nur "interessante" Methoden gezeigt.)
 
 Von dieser Basisklasse leitet man einen eigenen Listener ab und implementiert
 die Methoden, die man benötigt.
@@ -487,6 +489,8 @@ generieren (Option `-visitor` beim Aufruf von `antlr`). Weiterhin generiert ANTL
 eine leere Basisimplementierung (Klasse `calcBaseVisitor<T>`):
 
 ![](images/ParseTreeVisitor.png){width="80%"}
+
+(Nur "interessante" Methoden gezeigt.)
 
 Von dieser Basisklasse leitet man einen eigenen Visitor ab und überschreibt
 die Methoden, die man benötigt. Wichtig ist, dass man selbst für das "Besuchen"
