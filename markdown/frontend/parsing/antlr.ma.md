@@ -231,7 +231,7 @@ selbe Regel immer wieder aufrufen, ohne ein Token aus dem Token-Strom zu entnehm
 
 ANTLR (ab Version 4) kann mit beiden Aspekten automatisch umgehen:
 
--   ANTLR kann direkte Linksrekursion automatisch auflösen. Die Regel `r : r T U V ;`
+-   ANTLR kann direkte Linksrekursion automatisch auflösen. Die Regel `r : r T U | V ;`
     kann also in ANTLR verarbeitet werden.
 -   ANTLR besitzt einen Mechanismus zur Auflösung von Mehrdeutigkeiten. Wie oben
     geschrieben, wird bei der Anwendbarkeit von mehreren Alternativen die erste
@@ -265,13 +265,13 @@ hat Vorrang von der Addition, und diese hat wiederum Vorrang von einer einfachen
 ::: notes
 ### Direkte vs. indirekte Links-Rekursion
 
-ANTLR kann nur _direkte_ Links-Rekursion auflösen. Regeln wie `r : r T U V ;` stellen
+ANTLR kann nur _direkte_ Links-Rekursion auflösen. Regeln wie `r : r T U | V ;` stellen
 in ANTLR also kein Problem dar.
 
 _Indirekte_ Links-Rekursion erkennt ANTLR dagegen nicht:
 
 ```antlr
-r : s T U V ;
+r : s T U | V ;
 s : r W X ;
 ```
 
@@ -397,14 +397,14 @@ konkreten Zielsprache und die Aktionen über die Listener (oder Visitors, s.u.)
 ausführen.
 :::
 
-```{.antlr size="footnotesize"}
+```antlr
 expr : e1=expr '*' e2=expr      # MULT
      | e1=expr '+' e2=expr      # ADD
      | DIGIT                    # ZAHL
      ;
 ```
 
-\smallskip
+\bigskip
 
 ::: notes
 ANTLR kann zu dieser Grammatik `calc.g4` einen passenden Listener (Interface
@@ -419,7 +419,7 @@ Von dieser Basisklasse leitet man einen eigenen Listener ab und implementiert
 die Methoden, die man benötigt.
 :::
 
-```{.java size="footnotesize"}
+```java
 public static class MyListener extends calcBaseListener {
     public void exitMULT(calcParser.MULTContext ctx) {
         ...
@@ -474,7 +474,7 @@ Traversierung des Parse-Trees sorgen. Dafür hat man mehr Freiheiten im Vergleic
 zum Einsatz von Listeners, insbesondere im Hinblick auf Rückgabewerte.
 :::
 
-```{.antlr size="footnotesize"}
+```antlr
 expr : e1=expr '*' e2=expr      # MULT
      | e1=expr '+' e2=expr      # ADD
      | DIGIT                    # ZAHL
@@ -497,7 +497,7 @@ die Methoden, die man benötigt. Wichtig ist, dass man selbst für das "Besuchen
 der Kindknoten sorgen muss (rekursiver Aufruf der geerbten Methode `visit()`).
 :::
 
-```{.java size="footnotesize"}
+```java
 public static class MyVisitor extends calcBaseVisitor<Integer> {
     public Integer visitMULT(calcParser.MULTContext ctx) {
         return ...
@@ -593,7 +593,16 @@ Dem Thema Behandlung von Fehlern ist eine eigene Sitzung gewidmet:
 
 ## Wrap-Up
 
-TODO
+Parser mit ANTLR generieren: Parser-Regeln werden mit **Kleinbuchstaben** geschrieben
+
+\bigskip
+
+*   Regeln können Lexer- und Parser-Regeln "aufrufen"
+*   Regeln können Alternativen haben
+*   Bei Mehrdeutigkeit: zuerst definierte Alternative
+*   ANTLR erlaubt direkte Links-Rekursion
+*   Benannte Alternativen und Regel-Elemente
+*   Traversierung des Parse-Tree: Listener oder Visitoren, Zugriff auf Kontextobjekte
 
 
 
