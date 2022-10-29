@@ -178,11 +178,6 @@ Grammatik:
 
 ```antlr
 start : stmt ;
-
-stmt  : ID '=' expr ';' | expr ';' ;
-expr  : term ('+' term)* ;
-term  : atom ('*' atom)* ;
-atom  : ID | NUM ;
 ```
 
 Die Startregel wurde so geändert, dass sie nur noch genau ein Statement
@@ -213,11 +208,38 @@ führt.
 
 ## Expressions und Vorrang (Operatoren)
 
+::: notes
+Betrachten wir noch einmal den Ausschnitt für die Ausdrücke (_Expressions_) in
+der obigen Beispielgrammatik:
+:::
+
 ```antlr
 expr  : term ('+' term)* ;
 term  : atom ('*' atom)* ;
 atom  : ID ;
 ```
+
+::: notes
+Diese typische, etwas komplex anmutende Struktur soll sicher stellen, dass die
+Vorrangregeln für Addition und Multiplikation korrekt beachtet werden, d.h. dass
+`2+3*4` als `2+(3*4)` geparst wird und nicht fälschlicherweise als `(2+3)*4`
+erkannt wird.
+
+Zusätzlich muss bei LL-Parsern Links-Rekursion vermieden werden: Die Parser-Regeln
+werden in Funktionsaufrufe übersetzt, d.h. bei einer Links-Rekursion würde man die
+selbe Regel immer wieder aufrufen, ohne ein Token aus dem Token-Strom zu entnehmen.
+
+ANTLR (ab Version 4) kann mit beiden Aspekten automatisch umgehen:
+
+-   ANTLR kann direkte Linksrekursion automatisch auflösen. Die Regel `r : r T U V ;`
+    kann also in ANTLR verarbeitet werden.
+-   ANTLR besitzt einen Mechanismus zur Auflösung von Mehrdeutigkeiten. Wie oben
+    geschrieben, wird bei der Anwendbarkeit von mehreren Alternativen die erste
+    Alternative genutzt.
+
+Damit lässt sich die typische Struktur für Expression-Grammatiken deutlich lesbarer
+gestalten:
+:::
 
 \pause
 \bigskip
@@ -229,7 +251,16 @@ expr  : expr '*' expr
       ;
 ```
 
-TODO: Beispiel von oben vereinfachen
+::: notes
+Die Regel `expr` ist links-rekursiv, was normalerweise bei LL-Parsern problematisch
+ist. ANTLR löst diese Links-Rekursion automatisch auf (vgl.
+[github.com/antlr/antlr4/blob/master/doc/left-recursion.md](https://github.com/antlr/antlr4/blob/master/doc/left-recursion.md)).
+
+Da bei Mehrdeutigkeit in der Grammatik, also bei der Anwendbarkeit mehrerer Alternativen
+stets die erste Alternative genommen wird, lassen sich die Vorrangregeln durch die
+Reihenfolge der Alternativen in der `expr`-Regel implementieren: Die Multiplikation
+hat Vorrang von der Addition, und diese hat wiederum Vorrang von einer einfachen `ID`.
+:::
 
 ::: notes
 ### Direkte vs. indirekte Linksrekursion
