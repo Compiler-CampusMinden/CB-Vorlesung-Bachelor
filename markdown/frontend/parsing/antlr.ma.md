@@ -543,7 +543,32 @@ werden wir damit einen einfachen syntaxgesteuerten Interpreter aufbauen.
 ::: notes
 ## Eingebettete Aktionen und Attribute
 
-TODO: Beispiel und Verweis auf backend/interpretation/syntaxdriven
+```antlr
+s   : expr                      {System.err.println($expr.v);}
+    ;
+
+expr returns [int v]
+    : e1=expr '*' e2=expr       {$v = $e1.v * $e2.v;}
+    ;
+```
+
+Auch die Parser-Regeln können mit eingebetteten Aktionen ergänzt werden, die
+in die (für die jeweilige Regel) generierte Methode eingefügt werden und bei
+erfolgreicher Anwendung der Parser-Regel ausgeführt werden.
+
+Über `returns [int v]` fügt man der Regel `expr` ein Attribut `v` (Integer)
+hinzu, welches man im jeweiligen Kontext abfragen bzw. setzen kann (agiert
+als Rückgabewert der generierten Methode). Auf diesen Wert kann in den
+Aktionen mit `$v` zugegriffen werden.
+
+In `["Attributierte Grammatiken"]({{<ref "/frontend/semantics/attribgrammars" >}})`{=markdown}
+werfen wir einen genaueren Blick auf die attributierten Grammatiken. In
+`["Syntaxgesteuerte Interpreter"]({{<ref "/backend/interpretation/syntaxdriven" >}})`{=markdown}
+werden wir eingebettete Aktionen und Attribute nutzen, um einen einfachen
+syntaxgesteuerten Interpreter aufzubauen.
+
+_Anmerkung_: Durch den Einsatz von eingebetteten Aktionen und Attributen wird
+die Grammatik abhängig von der Zielsprache des generierten Lexers/Parsers!
 :::
 
 
