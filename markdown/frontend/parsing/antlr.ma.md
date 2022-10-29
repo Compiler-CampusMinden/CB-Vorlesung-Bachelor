@@ -109,7 +109,7 @@ umschalten (analog zu den Lexer-Regeln).
 
 ### Reihenfolge in Grammatik definiert Priorität
 
-Falls mehr als eine Parser-Regel die selbe Inputsequenz matcht, löst ANTLR
+Falls mehr als eine Parser-Regel die selbe Input-Sequenz matcht, löst ANTLR
 diese Mehrdeutigkeit auf, indem es die erste Alternative nimmt, die an der
 Entscheidung beteiligt ist.
 
@@ -126,7 +126,47 @@ damit Vorrang hat.
 
 ### Parse-Tree
 
-TODO: Beispiel: Grammatik, Eingabe, Parse-Tree
+Betrachten wir erneut die obige Grammatik.
+
+Die Eingabe von "`a = 42;`" führt zu folgendem Parse-Tree:
+
+![](images/hello_ex1.png){width="60%"}
+
+Diese Eingabe führt zur Erkennung der Token `[ID, WS, =, WS, NUM, ;]`, wobei die
+`WS`-Token verworfen werden und der Parser den Tokenstream `[ID, =, NUM, ;]`
+erhält.
+
+Die Startregel hat auf der rechten Seite kein oder mehrere `stmt`-Regeln. Die
+`stmt`-Regel fordert auf der rechten Seite entweder die Token `ID`und `=` sowie
+die Regel `expr` gefolgt vom Token `;`, oder die Regel `expr` gefolgt vom Token
+`;`. In unserem Beispiel kann für das "a" das Token `ID` produziert werden, das
+"=" matcht ebenfalls. Die "42" wird erklärt, indem für `expr` ein `term` und
+dort ein `atom` aufgerufen wird. Für das `atom` muss entweder ein Token `ID`
+oder `NUM` als nächstes Token kommen - hier wird die "42" wird als Token `NUM`
+verarbeitet. Da die weiteren Regelteile in `term` und `expr` optional sind,
+haben wir damit ein `expr` erfüllt und das nachfolgende `;`-Token schließt die
+erste Alternative der Regel `stmt` erfolgreich ab.
+
+Im entstehenden Parse-Tree sind diese Abläufe und grammatikalischen Strukturen
+direkt erkennbar. Jede erfolgreich durchlaufene Parserregel wird zu einem
+Knoten im Parse-Tree. Die Token werden als Terminale (Blätter) in den Baum
+eingehängt.
+
+_Anmerkung_: Der Parse-Tree ist das Ergebnis der Parsers-Phase im Compiler und
+dient damit als Input für die folgenden Compilerstufen. In der Regel benötigt
+man die oft recht komplexen Strukturen aber später nicht mehr und vereinfacht
+den Baum zu einem _Abstract Syntax Tree_ (AST). Im Beispiel könnte man den Zweig
+`stmt - expr - term - atom - 42` zu `stmt - 42` vereinfachen.
+
+
+Betrachten wir nun die Eingabe `foo = 2+3*4; bar = 3*4+2;`. Diese führt zu
+folgendem Parse-Tree:
+
+![](images/hello_ex2.png){width="60%"}
+
+Wie man sehen kann, sind in der Grammatik die üblichen Vorrangregeln für die
+Operationen `+` und `*` berücksichtigt - die Multiplikation wird in beiden
+Fällen korrekt "unter" der Addition im Baum eingehängt.
 
 ### To EOF not to EOF?
 
@@ -176,7 +216,7 @@ führt.
 ```antlr
 expr  : term ('+' term)* ;
 term  : atom ('*' atom)* ;
-atom  : ID | NUM ;
+atom  : ID ;
 ```
 
 \pause
@@ -186,7 +226,6 @@ atom  : ID | NUM ;
 expr  : expr '*' expr
       | expr '+' expr
       | ID
-      | NUM
       ;
 ```
 
