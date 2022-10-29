@@ -601,8 +601,9 @@ Parser mit ANTLR generieren: Parser-Regeln werden mit **Kleinbuchstaben** geschr
 
 *   Regeln können Lexer- und Parser-Regeln "aufrufen"
 *   Regeln können Alternativen haben
-*   Bei Mehrdeutigkeit: zuerst definierte Alternative
+*   Bei Mehrdeutigkeit: Vorrang für erste Alternative
 *   ANTLR erlaubt direkte Links-Rekursion
+*   ANTLR erzeugt Parse-Tree
 *   Benannte Alternativen und Regel-Elemente
 *   Traversierung des Parse-Tree: Listener oder Visitoren, Zugriff auf Kontextobjekte
 
