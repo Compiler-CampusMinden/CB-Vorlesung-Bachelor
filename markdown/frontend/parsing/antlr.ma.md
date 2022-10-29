@@ -15,6 +15,8 @@ assignments:
 youtube:
   - link: ""
     name: "VL Parser mit ANTLR"
+  - link: ""
+    name: "Demo ANTLR Parser"
 fhmedia:
   - link: ""
     name: "VL Parser mit ANTLR"
