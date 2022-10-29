@@ -628,8 +628,6 @@ Mit Hilfe von semantischen Prädikaten (vgl.
 können Parser-Regeln aktiviert oder abgeschaltet werden, je nachdem, was vorher
 gesehen wurde.
 
-TODO: NUR MASTER
-
 Dem Thema Behandlung von Fehlern ist eine eigene Sitzung gewidmet:
 `["Error-Recovery"]({{<ref "/frontend/parsing/recovery" >}})`{=markdown}.
 :::
