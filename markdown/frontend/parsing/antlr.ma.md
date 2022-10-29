@@ -322,26 +322,26 @@ und zwischen den Parser-Regeln und den Lexer-Regeln die impliziten Token (hier `
 
 ## Kontext-Objekte für Parser-Regeln
 
-TODO: Überblick, mit Verweis auf backend/interpretation/syntaxdriven: dort Kontextobjekte nur Skript!
-
-```yacc
-s    : expr         {List<EContext> x = $expr.ctx.e();} ;
+```antlr
+s    : expr         {List<EContext> x = $expr.ctx.e();}
+     ;
 expr : e '*' e ;
 ```
 
 \bigskip
 \bigskip
 
-![](images/ParserRuleContext.png)
+![](images/ParserRuleContext.png){width="80%"}
 
 ::: notes
 Jede Regel liefert ein passend zu dieser Regel generiertes Kontext-Objekt
 zurück. Darüber kann man das/die Kontextobjekt(e) der Sub-Regeln abfragen.
 
-Die Regel `s()` liefert entsprechend ein `SContext`-Objekt und die Regel
-`expr()` liefert ein `ExprContext`-Objekt zurück.
+Die Regel `s` liefert entsprechend ein `SContext`-Objekt und die Regel
+`expr` liefert ein `ExprContext`-Objekt zurück.
 
-In der Aktion fragt man das Kontextobjekt über `ctx` ab.
+In der Aktion fragt man das Kontextobjekt über `ctx` ab, in den Listener-
+und Visitor-Methoden erhält man die Kontextobjekte als Parameter.
 
 Für einfache Regel-Aufrufe liefert die parameterlose Methode nur ein
 einziges Kontextobjekt (statt einer Liste) zurück.
@@ -355,9 +355,7 @@ Folie) oder durch Nutzung in einer Aktion (siehe obiges Beispiel) geschehen.
 
 ## Benannte Regel-Elemente oder Alternativen
 
-TODO: Label für Teilausdrücke und Alternativen (S.119, S.265) => Teil-Kopie aus backend/interpretation/syntaxdriven (dort nur Skript!)
-
-```yacc
+```antlr
 stat  : 'return' value=e ';'    # Return
       | 'break' ';'             # Break
       ;
@@ -385,9 +383,7 @@ Analog wird für die beiden Alternativen je ein eigener Kontext erzeugt.
 :::
 
 
-## Arbeiten mit dem Listener-Pattern
-
-TODO: Überblick, mit Verweis auf backend/interpretation/syntaxdriven: dort Kontextobjekte nur Skript!
+## Arbeiten mit ANTLR-Listeners
 
 ::: notes
 ANTLR (generiert auf Wunsch) zur Grammatik passende Listener (Interface und
@@ -401,7 +397,7 @@ konkreten Zielsprache und die Aktionen über die Listener (oder Visitors, s.u.)
 ausführen.
 :::
 
-```{.yacc size="footnotesize"}
+```{.antlr size="footnotesize"}
 expr : e1=expr '*' e2=expr      # MULT
      | e1=expr '+' e2=expr      # ADD
      | DIGIT                    # ZAHL
@@ -411,11 +407,11 @@ expr : e1=expr '*' e2=expr      # MULT
 \smallskip
 
 ::: notes
-ANTLR kann zu dieser Grammatik einen passenden Listener (Interface `calcListener`)
-generieren. Weiterhin generiert ANTLR eine leere Basisimplementierung (Klasse
-`calcBaseListener`):
+ANTLR kann zu dieser Grammatik `calc.g4` einen passenden Listener (Interface
+`calcListener`) generieren (Option `-listener` beim Aufruf von `antlr`).
+Weiterhin generiert ANTLR eine leere Basisimplementierung (Klasse `calcBaseListener`):
 
-![](images/ParseTreeListener.png)
+![](images/ParseTreeListener.png){width="80%"}
 
 Von dieser Basisklasse leitet man einen eigenen Listener ab und implementiert
 die Methoden, die man benötigt.
@@ -423,20 +419,14 @@ die Methoden, die man benötigt.
 
 ```{.java size="footnotesize"}
 public static class MyListener extends calcBaseListener {
-    Stack<Integer> stack = new Stack<Integer>();
-
     public void exitMULT(calcParser.MULTContext ctx) {
-        int right = stack.pop();
-        int left = stack.pop();
-        stack.push(left * right);   // {$v = $e1.v * $e2.v;}
+        ...
     }
     public void exitADD(calcParser.ADDContext ctx) {
-        int right = stack.pop();
-        int left = stack.pop();
-        stack.push(left + right);   // {$v = $e1.v + $e2.v;}
+        ...
     }
     public void exitZAHL(calcParser.ZAHLContext ctx) {
-        stack.push(Integer.valueOf(ctx.DIGIT().getText()));
+        ...
     }
 }
 ```
@@ -456,33 +446,33 @@ public class TestMyListener {
         calcParser parser = new calcParser(tokens);
 
         ParseTree tree = parser.s();    // Start-Regel
-        System.out.println(tree.toStringTree(parser));
 
         ParseTreeWalker walker = new ParseTreeWalker();
         MyListener eval = new MyListener();
         walker.walk(eval, tree);
-        System.out.println(eval.stack.pop());
     }
 }
 ```
 
-[Beispiel: [TestMyListener.java](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/interpretation/src/TestMyListener.java) und [calc.g4](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/interpretation/src/calc.g4)]{.bsp}
+[Beispiel: [TestMyListener.java](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/frontend/parsing/src/TestMyListener.java) und [calc.g4](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/frontend/parsing/src/calc.g4)]{.bsp}
+
+In `["Syntaxgesteuerte Interpreter"]({{<ref "/backend/interpretation/syntaxdriven" >}})`{=markdown}
+werden wir damit einen einfachen syntaxgesteuerten Interpreter aufbauen.
 :::
 
 
 ## Arbeiten mit dem Visitor-Pattern
 
-TODO: Überblick, mit Verweis auf backend/interpretation/syntaxdriven: dort Kontextobjekte nur Skript!
-
 ::: notes
 ANTLR (generiert ebenfalls auf Wunsch) zur Grammatik passende Visitoren
-(Interface und leere Basisimplementierung). Hier muss man allerdings selbst
-für eine geeignete Traversierung des Parse-Trees sorgen. Dafür hat man mehr
-Freiheiten im Vergleich zum Listener-Pattern, insbesondere im Hinblick auf
-Rückgabewerte.
+(Interface und leere Basisimplementierung).
+
+Hier muss man im Gegensatz zu den Listeners allerdings selbst für eine geeignete
+Traversierung des Parse-Trees sorgen. Dafür hat man mehr Freiheiten im Vergleich
+zum Einsatz von Listeners, insbesondere im Hinblick auf Rückgabewerte.
 :::
 
-```{.yacc size="footnotesize"}
+```{.antlr size="footnotesize"}
 expr : e1=expr '*' e2=expr      # MULT
      | e1=expr '+' e2=expr      # ADD
      | DIGIT                    # ZAHL
@@ -493,10 +483,10 @@ expr : e1=expr '*' e2=expr      # MULT
 
 ::: notes
 ANTLR kann zu dieser Grammatik einen passenden Visitor (Interface `calcVisitor<T>`)
-generieren. Weiterhin generiert ANTLR eine leere Basisimplementierung (Klasse
-`calcBaseVisitor<T>`):
+generieren (Option `-visitor` beim Aufruf von `antlr`). Weiterhin generiert ANTLR
+eine leere Basisimplementierung (Klasse `calcBaseVisitor<T>`):
 
-![](images/ParseTreeVisitor.png)
+![](images/ParseTreeVisitor.png){width="80%"}
 
 Von dieser Basisklasse leitet man einen eigenen Visitor ab und überschreibt
 die Methoden, die man benötigt. Wichtig ist, dass man selbst für das "Besuchen"
@@ -506,13 +496,13 @@ der Kindknoten sorgen muss (rekursiver Aufruf der geerbten Methode `visit()`).
 ```{.java size="footnotesize"}
 public static class MyVisitor extends calcBaseVisitor<Integer> {
     public Integer visitMULT(calcParser.MULTContext ctx) {
-        return visit(ctx.e1) * visit(ctx.e2);   // {$v = $e1.v * $e2.v;}
+        return ...
     }
     public Integer visitADD(calcParser.ADDContext ctx) {
-        return visit(ctx.e1) + visit(ctx.e2);   // {$v = $e1.v + $e2.v;}
+        return ...
     }
     public Integer visitZAHL(calcParser.ZAHLContext ctx) {
-        return Integer.valueOf(ctx.DIGIT().getText());
+        return ...
     }
 }
 ```
@@ -532,15 +522,17 @@ public class TestMyVisitor {
         calcParser parser = new calcParser(tokens);
 
         ParseTree tree = parser.s();    // Start-Regel
-        System.out.println(tree.toStringTree(parser));
 
         MyVisitor eval = new MyVisitor();
-        System.out.println(eval.visit(tree));
+        eval.visit(tree);
     }
 }
 ```
 
-[Beispiel: [TestMyVisitor.java](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/interpretation/src/TestMyVisitor.java) und [calc.g4](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/interpretation/src/calc.g4)]{.bsp}
+[Beispiel: [TestMyVisitor.java](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/frontend/parsing/src/TestMyVisitor.java) und [calc.g4](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/frontend/parsing/src/calc.g4)]{.bsp}
+
+In `["Syntaxgesteuerte Interpreter"]({{<ref "/backend/interpretation/syntaxdriven" >}})`{=markdown}
+werden wir damit einen einfachen syntaxgesteuerten Interpreter aufbauen.
 :::
 
 
