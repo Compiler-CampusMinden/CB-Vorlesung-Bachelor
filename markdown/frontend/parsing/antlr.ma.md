@@ -6,10 +6,52 @@ weight: 5
 readings:
   - key: "@Parr2014"
 tldr: |
-  TODO
+    Mit ANTLR kann aus einer Grammatik ein LL(*)-Parser generiert werden. Die Parser-Regeln
+    in der Grammatik fangen dabei mit einem **Kleinbuchstaben** an (Erinnerung: Lexer-Regel
+    starten mit einem Großbuchstaben).
+
+    Regeln haben einen Namen (linke Seite) und eine Produktion (rechte Seite). Dabei
+    können beliebige Abfolgen von Lexer- und Parser-Regeln auf der rechten Seite
+    einer Parser-Regel auftauchen. Die Token müssen jeweils matchen, die Parser-Regeln
+    werden in einen Aufruf der jeweiligen generierten Funktion übersetzt.
+
+    Parser-Regeln können aus mehreren Alternativen bestehen, diese werden per `|` separiert.
+    Dabei hat bei Mehrdeutigkeiten die erste passende Alternative Vorrang. Wie bei Lexer-Regeln
+    können Teile per `?` ein- oder keinmal vorkommen, per `*` beliebig oft oder per `+` ein-
+    oder mehrfach.
+
+    ANTLR erlaubt im Gegensatz zu allgemeinen LL-Parsern direkte Links-Rekursion. (Indirekte
+    Links-Rekursion funktioniert allerdings nicht.)
+
+    Der von ANTLR generierte Parser erzeugt auf der Eingabe einen Parse-Tree, der die Strukturen
+    der Grammatik widerspiegelt: Die Token bilden die Blätter und jede erfolgreich durchlaufene
+    Parser-Regel bildet einen entsprechenden Knoten im Baum.
+
+    Für die Traversierung des Parse-Tree kann man die generierten Listener- oder Visitor-Klassen
+    nutzen. Beim Einsatz der Listener nutzt man die vorgegebene Klasse `ParseTreeWalker`, die
+    mit dem Parse-Tree und dem Listener den Baum per Tiefensuche traversiert und immer die
+    jeweiligen `enterRegel`- und `exitRegel`-Methoden aufruft. Beim Visitor muss die Traversierung
+    selbst erledigt werden, hier steht die aus der Klassenhierarchie geerbte Methode `visit`
+    als Startpunkt zur Verfügung. In dieser Methode wird basierend auf dem Knotentyp die in den
+    Visitor-Klassen implementierte `visitRegel`-Methode aufgerufen und man muss darauf achten,
+    die Kindknoten durch passende Aufrufe zu traversieren. Sowohl bei den generierten Listener-
+    als auch den Visitor-Klassen kann man die leeren Defaultmethoden bei Bedarf selbst überschreiben.
+    Für den Zugriff auf die Regel-Elemente werden die sogenannten Kontextobjekte als Parameter
+    übergeben.
+
+    Benannte Alternativen und Regel-Elemente sind nützlich, weil für die benannten Alternativen
+    zusätzliche Kontextklassen erzeugt werden, über die dann auf die Bestandteile der Alternativen
+    zugegriffen werden kann. Außerdem werden zusätzlich passende `enterAlternative`- und `exitAlternative`-
+    bzw. `visitAlternative`-Methoden generiert. Für benannte Regel-Elemente wird ein entsprechend
+    benanntes Attribut im Kontextobjekt angelegt, welches `public` sichtbar ist.
 outcomes:
-  - k2: "TODO"
-  - k3: "TODO"
+  - k2: "Aufbau der Parser-Regeln"
+  - k3: "Alternativen und optionale/mehrfache Regelteile in Parser-Regeln"
+  - k3: "Vorrang von Alternativen (bei Mehrdeutigkeiten)"
+  - k3: "Benannte Alternativen und Regel-Elemente"
+  - k2: "Aufbau des Parse-Tree"
+  - k3: "Umgang mit Kontext-Objekten"
+  - k3: "Traversierung des Parse-Tree mit den generierten Listenern oder Visitors"
 assignments:
   - topic: sheet01
 youtube:
