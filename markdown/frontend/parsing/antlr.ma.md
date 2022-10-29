@@ -573,17 +573,21 @@ die Grammatik abhängig von der Zielsprache des generierten Lexers/Parsers!
 
 
 ::: notes
-## Semantische Prädikate
+## Ausblick
 
-TODO: Beispiel und Verweis auf frontend/parsing/ll-advanced
+Damit haben wir die sprichwörtliche "Spitze des Eisbergs" gesehen. Mit ANTLR
+sind noch viele weitere Dinge möglich. Bitte nutzen Sie aktiv die Dokumentation
+auf [github.com/antlr/antlr4](https://github.com/antlr/antlr4).
+
+Mit Hilfe von semantischen Prädikaten (vgl.
+`["LL-Parser: Fortgeschrittene Techniken"]({{<ref "/frontend/parsing/ll-advanced" >}})`{=markdown})
+können Parser-Regeln aktiviert oder abgeschaltet werden, je nachdem, was vorher
+gesehen wurde.
+
 TODO: NUR MASTER
-:::
 
-
-::: notes
-## Exceptions
-
-TODO: Beispiel und Verweis auf frontend/parsing/recovery
+Dem Thema Behandlung von Fehlern ist eine eigene Sitzung gewidmet:
+`["Error-Recovery"]({{<ref "/frontend/parsing/recovery" >}})`{=markdown}.
 :::
 
 
