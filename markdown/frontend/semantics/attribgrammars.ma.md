@@ -15,7 +15,7 @@ outcomes:
   - k3: "Einfache semantische Analyse mit Hilfe von attributierten Grammatiken"
 attachments:
   - link: "https://github.com/Compiler-CampusMinden/AnnotatedSlides/blob/master/semantics_attribgrammars.ann.ma.pdf"
-    name: "Annotierte Folien: Typen, Type Checking und Attributierte Grammatiken"
+    name: "Annotierte Folien: Typen, Type Checking und attributierte Grammatiken"
 ---
 
 # Motivation
