@@ -1,6 +1,6 @@
 ---
 archetype: lecture-bc
-title: "LL-Parser"
+title: "LL-Parser (Theorie)"
 author: "BC George (FH Bielefeld)"
 weight: 2
 readings:
@@ -20,7 +20,7 @@ outcomes:
   - k3: "Top-Down Analyse programmieren"
 attachments:
   - link: "https://github.com/Compiler-CampusMinden/AnnotatedSlides/blob/master/ll-parser-theory.ann.ma.pdf"
-    name: "Annotierte Folien: LL-Parser"
+    name: "Annotierte Folien: LL-Parser (Theorie)"
 
 sketch: true
 ---
