@@ -17,7 +17,6 @@ outcomes:
 attachments:
   - link: "https://github.com/Compiler-CampusMinden/AnnotatedSlides/blob/master/ll-parser-theory.ann.ma.pdf"
     name: "Annotierte Folien: LL-Parser (Theorie)"
-
 ---
 
 
