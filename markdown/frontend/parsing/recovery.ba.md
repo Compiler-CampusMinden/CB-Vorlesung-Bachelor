@@ -80,7 +80,7 @@ ADD -->
 
 ## Typische Fehler beim Parsing
 
-```yacc
+```antlr
 grammar VarDef;
 
 alt   : stmt | stmt2 ;
@@ -170,7 +170,7 @@ aber deutlich schwieriger als bei LL ...
 
 ## Skizze: Generierte Parser-Regeln (ANTLR)
 
-```yacc
+```antlr
 stmt  : 'int' ID ';' ;
 ```
 
@@ -266,7 +266,7 @@ def rule():
 
 \bigskip
 
-```yacc
+```antlr
 stmt : 'if' expr ':' stmt           // Following Set für "expr": {':'}
      | 'while' '(' expr ')' stmt ;  // Following Set für "expr": {')'}
 expr : term '+' INT ;               // Following Set für "term": {'+'}
@@ -373,7 +373,7 @@ Methode `setErrorHandler` des Parsers.
 
 ### Ändern der Fehlerbehandlungs-Strategie (lokal)
 
-```yacc
+```antlr
 r : ...
   ;
   catch[RecognitionException e] { throw e; }
@@ -418,7 +418,7 @@ Da Bison/Flex rausfliegt, sind die verbleibenden ANTRL Überschriften nicht mehr
 ### ANTLR4
 :::
 
-```yacc
+```antlr
 stmt : 'int' ID ';'
      : 'int' ID             {notifyErrorListeners("Missing ';'");}
      : 'int' ID ';' ';'     {notifyErrorListeners("Too many ';'");}
@@ -440,7 +440,7 @@ der passenden Stelle ein Aufruf `notifyErrorListeners(Too many ';'");` ...
 ::: notes
 ## Anmerkung: Nicht eindeutige Grammatiken
 
-```yacc
+```antlr
 stat: expr ';' | ID '+' ID ';' ;
 expr: ID '+' ID | INT ;
 ```

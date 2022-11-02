@@ -75,7 +75,7 @@ fhmedia:
 
 ## Typische Fehler beim Parsing
 
-```yacc
+```antlr
 grammar VarDef;
 
 alt   : stmt | stmt2 ;
@@ -165,7 +165,7 @@ aber deutlich schwieriger als bei LL ...
 
 ## Skizze: Generierte Parser-Regeln (ANTLR)
 
-```yacc
+```antlr
 stmt  : 'int' ID ';' ;
 ```
 
@@ -261,7 +261,7 @@ def rule():
 
 \bigskip
 
-```yacc
+```antlr
 stmt : 'if' expr ':' stmt           // Following Set für "expr": {':'}
      | 'while' '(' expr ')' stmt ;  // Following Set für "expr": {')'}
 expr : term '+' INT ;               // Following Set für "term": {'+'}
@@ -368,7 +368,7 @@ Methode `setErrorHandler` des Parsers.
 
 ### Ändern der Fehlerbehandlungs-Strategie (lokal)
 
-```yacc
+```antlr
 r : ...
   ;
   catch[RecognitionException e] { throw e; }
@@ -394,7 +394,7 @@ Listener und fügt dann den eigenen hinzu, bevor man den Parser startet.
 
 ## Panic Mode in Bison (Error Recovery)
 
-```yacc
+```antlr
 stmt : 'int' ID ';'     { printf("%s\n", $2); }
      | error '\n'       { yyerror(); yyerrok; }
      ;
@@ -439,7 +439,7 @@ Block beendende schließende geschweifte Klammer. Beispielsweise könnte man fü
 die Sprache C bei der Definition von Statements mehrere Synchronisationspunkte
 einbauen:
 
-```yacc
+```antlr
 stmt : ...
      | error ';'    /* Synchronisation für 'return' */
      | error '}'    /* Synchronisation nach Block */
@@ -463,7 +463,7 @@ wurde, aber kein Destruktor.
 
 Beispiel:
 
-```yacc
+```antlr
 %union {
     char* str;
 }
@@ -491,7 +491,7 @@ wird in der folgenden Grammatik über eingebettete Aktionen erledigt.
 ### ANTLR4
 :::
 
-```yacc
+```antlr
 stmt : 'int' ID ';'
      : 'int' ID             {notifyErrorListeners("Missing ';'");}
      : 'int' ID ';' ';'     {notifyErrorListeners("Too many ';'");}
@@ -514,7 +514,7 @@ der passenden Stelle ein Aufruf `notifyErrorListeners(Too many ';'");` ...
 
 :::
 
-```yacc
+```antlr
 stmt : 'int' ID ';'     { $$ = $2; }
      : 'int' ID         { yyerror("unterminated id");
                           $$ = $2; }
@@ -547,7 +547,7 @@ Für weitere Details vergleiche [@Levine2009, Kap. 8].
 ::: notes
 ## Anmerkung: Nicht eindeutige Grammatiken
 
-```yacc
+```antlr
 stat: expr ';' | ID '+' ID ';' ;
 expr: ID '+' ID | INT ;
 ```
