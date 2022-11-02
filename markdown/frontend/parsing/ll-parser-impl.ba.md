@@ -50,7 +50,7 @@ fhmedia:
 ---
 
 
-## Erinnerung Lexer: Zeichenstrom $\to$ Tokenstrom
+## Erinnerung Lexer: Zeichenstrom => Tokenstrom
 
 ``` {.python size="footnotesize"}
 def nextToken():
