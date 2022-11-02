@@ -83,12 +83,12 @@ stmt  : 'int' ID ';' ;
 stmt2 : 'int' ID '=' ID ';'  ;
 ```
 
-[ANTLR4: [VarDef.g4](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/parsing/src/VarDef.g4), Beispiele: [VarDef.txt](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/parsing/src/VarDef.txt)]{.bsp}
+[ANTLR: [VarDef.g4](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/parsing/src/VarDef.g4), Beispiele: [VarDef.txt](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/parsing/src/VarDef.txt)]{.bsp}
 
 
 ::::::::: notes
 *Anmerkung*: Die nachfolgenden Fehler werden am Beispiel der Grammatik
-`[VarDef.g4](src/VarDef.g4)`{=markdown} und ANTLR4 demonstriert.
+`[VarDef.g4](src/VarDef.g4)`{=markdown} und ANTLR demonstriert.
 
 ### Lexikalische Fehler
 
@@ -319,10 +319,10 @@ angenommen, dass das aktuelle Token `':'` nicht passt.
 
 
 ::: notes
-## ANTLR4: Anmerkungen Fehlerbehandlung in Sub-Regeln
+## ANTLR: Anmerkungen Fehlerbehandlung in Sub-Regeln
 
 Bei Sub-Regeln (d.h. eine Regel enthält Alternativen) oder Schleifenkonstrukten
-(d.h. eine Regel enthält `(...)*` oder `(...)+`) geht ANTLR4 etwas anders vor.
+(d.h. eine Regel enthält `(...)*` oder `(...)+`) geht ANTLR etwas anders vor.
 
 1.  Start einer Sub-Regel/Alternative: Versuch einer *single token deletion*
 
@@ -356,7 +356,7 @@ Zu Details zur Fehlerbehandlung durch ANTLR vergleiche [@Parr2014, S. 170 ff.].
 
 
 ::::::::: notes
-## ANTLR4: Ändern der Fehlerbehandlungs-Strategie
+## ANTLR: Ändern der Fehlerbehandlungs-Strategie
 
 ### Ändern der Fehlerbehandlungs-Strategie (global)
 
@@ -488,7 +488,7 @@ wird in der folgenden Grammatik über eingebettete Aktionen erledigt.
 :::
 
 ::: notes
-### ANTLR4
+### ANTLR
 :::
 
 ```antlr
@@ -528,7 +528,7 @@ void yyerror(char *s, ...) {
 ```
 
 ::: notes
-Analog zu ANTLR4 ist es auch in Flex/Bison üblich, für typische Szenarien
+Analog zu ANTLR ist es auch in Flex/Bison üblich, für typische Szenarien
 "nicht ganz korrekte" Eingaben zu akzeptieren. Dazu definiert man zusätzliche
 Lexer- oder Parser-Regeln, die diese Eingaben als das, was gemeint war akzeptieren
 und eine zusätzliche Warnung ausgeben.
@@ -555,7 +555,7 @@ expr: ID '+' ID | INT ;
 => Was passiert bei der Eingabe: `a+b` ??! Welche Regel/Alternative soll
 jetzt matchen, d.h. welcher AST soll am Ende erzeugt werden?!
 
-### ANTLR4
+### ANTLR
 
 Nicht eindeutige Grammatiken führen **nicht** zu einer Fehlermeldung,
 da nicht der Nutzer mit seiner Eingabe Schuld ist, sondern das Problem
@@ -564,7 +564,7 @@ in der Grammatik selbst steckt.
 Während des Debuggings von Grammatiken lohnt es sich aber, diese
 Warnungen zu aktivieren. Dies kann entweder mit der Option "`-diagnostics`"
 beim Aufruf des `grun`-Tools geschehen oder über das Setzen des
-`DiagnosticErrorListener` aus der ANTLR4-Runtime als ErrorListener.
+`DiagnosticErrorListener` aus der ANTLR-Runtime als ErrorListener.
 
 ### Bison
 
@@ -579,10 +579,10 @@ man im über die Option `-v` erzeugten `<name>.output`-File überprüfen.
 
 *   Fehler bei `match()`: *single token deletion* oder *single token insertion*
 
-*   Panic Mode: *sync-and-return* bis Token in *Resynchronization Set* (ANTLR4)
+*   Panic Mode: *sync-and-return* bis Token in *Resynchronization Set* (ANTLR)
     oder `error`-Token shiftbar (Bison)
-    *   ANTLR4: Sonderbehandlung bei Start von Sub-Regeln und in Schleifen
-    *   ANTLR4: Fail-Save zur Vermeidung von Endlosschleifen
+    *   ANTLR: Sonderbehandlung bei Start von Sub-Regeln und in Schleifen
+    *   ANTLR: Fail-Save zur Vermeidung von Endlosschleifen
 
 *   Fehler-Alternativen in Grammatik einbauen
 

@@ -38,7 +38,7 @@ outcomes:
   - k2: "Prinzipieller Aufbau von LL-Parsern"
   - k3: "Implementierung von LL(1)- und LL(k)-Parsern"
   - k3: "Implementierung von Vorrang und Assoziativität"
-  - k3: "Umgang mit Linksrekursion, insbesondere bei ANTLR4"
+  - k3: "Umgang mit Linksrekursion, insbesondere bei ANTLR"
 assignments:
   - topic: sheet01
 youtube:
@@ -312,7 +312,7 @@ multExpr : INT ('*' INT)* ;
 ```
 
 ::: notes
-ANTLR4 kann Grammatiken mit *direkter* Linksrekursion auflösen. Für frühere Versionen von ANTLR muss man die
+ANTLR (v4) kann Grammatiken mit *direkter* Linksrekursion auflösen. Für frühere Versionen von ANTLR muss man die
 Rekursion manuell beseitigen.
 
 Vergleiche ["ALL(\*)" bzw. "Adaptive LL(\*)"](https://www.antlr.org/papers/allstar-techreport.pdf).
@@ -323,7 +323,7 @@ Vergleiche ["ALL(\*)" bzw. "Adaptive LL(\*)"](https://www.antlr.org/papers/allst
 \bigskip
 \pause
 
-**Achtung**: Mit *indirekter* Linksrekursion kann ANTLR4 *nicht* umgehen:
+**Achtung**: Mit *indirekter* Linksrekursion kann ANTLR (v4) *nicht* umgehen:
 
 ```antlr
 expr : expM | ... ;
