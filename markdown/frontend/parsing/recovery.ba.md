@@ -20,7 +20,7 @@ tldr: |
   geschweifte Klammer. Dieses recht einfache, aber grobe Vorgehen kann verfeinert werden, indem man versucht,
   überschüssige Token zu entfernen oder fehlender Token zu ersetzen. In ANTLR wird beispielsweise maximal ein
   fehlendes Token virtuell "ersetzt" bzw. max. ein überschüssiges Token entfernt, damit man den restlichen Code
-  weiter parsen kann. Wenn mehr als ein Token fehlt oder zuviel ist, geht ANTLR in einen "Panic Mode" und
+  weiter parsen kann. Wenn mehr als ein Token fehlt oder zu viel ist, geht ANTLR in einen "Panic Mode" und
   entfernt so lange Token aus dem Eingabestrom, bis das aktuelle Token in einem *Resynchronization Set* enthalten
   ist. Die Bildung dieser Menge erinnert an die Regeln zum Bilden der *FOLLOW*-Mengen, ist aber an den Kontext
   der "aufgerufenen" Parser-Regeln gebunden. Zusätzlich gibt es weitere komplexere Strategien zum Behandeln von
@@ -65,6 +65,8 @@ fhmedia:
         => weitere Fehler anzeigen.
         Problem: Bis wohin "gobbeln", d.h. was als Synchronisationspunkt nehmen? Semikolon?
     *   Syntaktisch fehlerhafte Programme dürfen nicht in die Zielsprache übersetzt werden!
+
+_Anmerkung_: Die folgenden Inhalte beziehen sich auf die Fehlerbehandlung in ANTLR (v4).
 :::
 
 
@@ -78,7 +80,9 @@ stmt  : 'int' ID ';' ;
 stmt2 : 'int' ID '=' ID ';'  ;
 ```
 
-[ANTLR: [VarDef.g4](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/parsing/src/VarDef.g4), Beispiele: [VarDef.txt](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/parsing/src/VarDef.txt)]{.bsp}
+::: slides
+[Grammatik: [VarDef.g4](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/parsing/src/VarDef.g4), Input-Beispiele: [VarDef.txt](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/parsing/src/VarDef.txt)]{.bsp}
+:::
 
 
 ::::::::: notes
@@ -134,9 +138,7 @@ Alternativen (Sub-Regeln) entscheiden muss.
 
 ## Überblick Recovery bei Parser-Fehlern
 
-::: center
 ![](images/recovery.png){width="80%"}
-:::
 
 ::: notes
 *   Fehler im Lexer (hier nicht weiter betrachtet):
@@ -239,7 +241,7 @@ def rule():
 => Entferne solange Token, bis aktuelles Token im "*Resynchronization Set*"
 
 
-## ANTLR: Einsatz des "*Resynchronization Set*"
+## Einsatz des "*Resynchronization Set*"
 
 ::: notes
 *   **Following Set**: Menge der Token, die direkt auf eine Regel-Referenz folgen,
@@ -268,7 +270,7 @@ expr : term '+' INT ;               // Following Set für "term": {'+'}
 
 
 ::: notes
-### Hinweis: *FOLLOW* $\ne$ *Following*
+### Hinweis: *FOLLOW* != *Following*
 
 **FOLLOW** ist die Menge aller Token, die auf eine Regel folgen können
 
@@ -310,7 +312,7 @@ angenommen, dass das aktuelle Token `':'` nicht passt.
 
 
 ::: notes
-## ANTLR: Anmerkungen Fehlerbehandlung in Sub-Regeln
+## Anmerkungen Fehlerbehandlung in Sub-Regeln
 
 Bei Sub-Regeln (d.h. eine Regel enthält Alternativen) oder Schleifenkonstrukten
 (d.h. eine Regel enthält `(...)*` oder `(...)+`) geht ANTLR etwas anders vor.
@@ -347,7 +349,7 @@ Zu Details zur Fehlerbehandlung durch ANTLR vergleiche [@Parr2014, S. 170 ff.].
 
 
 ::::::::: notes
-## ANTLR: Ändern der Fehlerbehandlungs-Strategie
+## Ändern der Fehlerbehandlungs-Strategie in ANTLR
 
 ### Ändern der Fehlerbehandlungs-Strategie (global)
 
