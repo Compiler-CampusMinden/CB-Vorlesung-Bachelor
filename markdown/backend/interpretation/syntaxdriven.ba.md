@@ -61,9 +61,7 @@ fhmedia:
 
 ## Überblick Interpreter
 
-::: center
 ![](images/interpreter.png){width="60%"}
-:::
 
 ::: notes
 Beim Interpreter durchläuft der Sourcecode nur das Frontend, also die Analyse.
