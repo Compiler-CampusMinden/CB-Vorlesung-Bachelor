@@ -6,8 +6,6 @@ weight: 1
 readings:
   - key: "Nystrom2021"
     comment: "Kapitel: A Tree-Walk Interpreter"
-  - key: "Levine2009: Bison"
-    comment: "Kapitel 6"
   - key: "Parr2014"
     comment: "Kapitel 6.4 und 8.4"
   - key: "Parr2010"
@@ -47,7 +45,7 @@ tldr: |
   `["AST-basierte Interpreter: Funktionen und Klassen"]({{<ref "/backend/interpretation/astdriven-part2" >}})`{=markdown}
   betrachten.
 outcomes:
-  - k3: "Attribute und eingebettete Aktionen in Bison und ANTLR"
+  - k3: "Attribute und eingebettete Aktionen in ANTLR"
   - k3: "Traversierung von Parse-Trees und Implementierung von Aktionen mit Hilfe des Listener-Patterns"
   - k3: "Traversierung von Parse-Trees und Implementierung von Aktionen mit Hilfe des Visitor-Patterns"
 assignments:
