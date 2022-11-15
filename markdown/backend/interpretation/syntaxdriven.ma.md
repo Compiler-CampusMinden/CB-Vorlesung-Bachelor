@@ -121,7 +121,7 @@ abarbeiten. Letztlich kommen dabei aber die oben dargestellten Varianten zum Ein
 
 ## Syntaxgesteuerte Interpreter: Attributierte Grammatiken
 
-```yacc
+```antlr
 s     : expr                    {System.err.println($expr.v);} ;
 
 expr returns [int v]
@@ -177,14 +177,14 @@ Beispiel:
 \bigskip
 \bigskip
 
-```yacc
+```antlr
 add[int x] returns [int r] : '+=' INT {$r = $x + $INT.int;} ;
 ```
 
 
 ## Eingebettete Aktionen in ANTLR II
 
-```yacc
+```antlr
 @members {
     int count = 0;
 }
@@ -230,7 +230,7 @@ Die Techniken sollen im Folgenden kurz vorgestellt werden.
 ## ANTLR: Kontext-Objekte für Parser-Regeln
 :::
 
-```yacc
+```antlr
 s    : expr         {List<EContext> x = $expr.ctx.e();} ;
 expr : e '*' e ;
 ```
@@ -262,7 +262,7 @@ Folie) oder durch Nutzung in einer Aktion (siehe obiges Beispiel) geschehen.
 ::: notes
 ### ANTLR: Benannte Regel-Elemente oder Alternativen
 
-```yacc
+```antlr
 stat  : 'return' value=e ';'    # Return
       | 'break' ';'             # Break
       ;
@@ -309,7 +309,7 @@ konkreten Zielsprache und die Aktionen über die Listener (oder Visitors, s.u.)
 ausführen.
 :::
 
-```{.yacc size="footnotesize"}
+```{.antlr size="footnotesize"}
 expr : e1=expr '*' e2=expr      # MULT
      | e1=expr '+' e2=expr      # ADD
      | DIGIT                    # ZAHL
@@ -394,7 +394,7 @@ Freiheiten im Vergleich zum Listener-Pattern, insbesondere im Hinblick auf
 Rückgabewerte.
 :::
 
-```{.yacc size="footnotesize"}
+```{.antlr size="footnotesize"}
 expr : e1=expr '*' e2=expr      # MULT
      | e1=expr '+' e2=expr      # ADD
      | DIGIT                    # ZAHL
