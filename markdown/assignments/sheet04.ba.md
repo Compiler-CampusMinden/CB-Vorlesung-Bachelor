@@ -21,10 +21,21 @@ lauffähiges Programm übersetzen und ausführen können.
 
 ## A4.2: Konzepte und Features
 
-Überlegen Sie sich zusätzliche Konzepte und Features, die Sie in Ihren Interpreter
-einbauen wollen.
+Überlegen Sie sich zusätzliche Konzepte und Features, die Sie in Ihren
+Interpreter/Compiler einbauen wollen. Dies können zusätzliche Features
+auf Sprachebene sein oder Ergänzungen/Erweiterungen Ihres Interpreters
+bzw. Compilers.
+
+Beispiel: Sie könnten neue syntaktische Elemente in Mini-Python einführen,
+die intern auf die existierende Semantik abgebildet werden ([_syntactic sugar_]).
+Hier könnten Sie eine `for`-Schleife einbauen, die intern auf die bereits
+existierende `while`-Schleife abgebildet wird. (Sie sollen sich aber
+selbst Features überlegen - die `for`-Schleife können Sie also nicht
+nehmen :-)
 
 Stellen Sie diese Ideen im Praktikum vor und verteidigen Sie diese.
+
+[_syntactic sugar_]: https://en.wikipedia.org/wiki/Syntactic_sugar
 
 
 ## A4.3: Umsetzung
