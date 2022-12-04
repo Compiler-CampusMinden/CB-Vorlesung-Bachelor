@@ -13,8 +13,8 @@ outcomes:
 assignments:
   - topic: blatt05
 attachments:
-  - link: "https://www.fh-bielefeld.de"
-    name: "Extra Material, e.g. annotated slides"
+  - link: "https://github.com/Compiler-CampusMinden/AnnotatedSlides/blob/master/llvm.ann.ma.pdf"
+  -  name: "Annotierte Folien: LLVM-IR"
 ---
 
 
