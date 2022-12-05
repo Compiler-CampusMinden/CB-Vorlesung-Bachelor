@@ -14,7 +14,7 @@ assignments:
   - topic: blatt05
 attachments:
   - link: "https://github.com/Compiler-CampusMinden/AnnotatedSlides/blob/master/llvm-ir.ann.ma.pdf"
-  -  name: "Annotierte Folien: LLVM-IR"
+    name: "Annotierte Folien: LLVM-IR"
 ---
 
 
