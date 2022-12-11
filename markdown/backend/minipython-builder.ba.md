@@ -49,7 +49,7 @@ attachments:
 
 *   wird am häufigsten durchlaufen (Anzahl Pässe)
 
-*   maschinenunabhängige Analysen und Optimierungen (z. B. dead code elimination)
+*   maschinenunabhängige Analysen und Optimierungen (z. B. _dead code elimination_)
 
 *   bei der Portierung eines Compilers muss nur das Backend neu geschrieben werden
 
