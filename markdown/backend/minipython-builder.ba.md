@@ -284,7 +284,7 @@ builder.addStatement(callPrint);
 
 ## Klassen definieren
 
-*   Typ **`MPyClass`**
+*   Typ `MPyClass`
 
 *   Angabe der Referenz auf Elternklasse (`__MPytype_Object`, wenn keine eigene Oberklasse vorhanden ist)
 
@@ -292,11 +292,11 @@ builder.addStatement(callPrint);
 
 *   in `__init__()` **muss** als erstes `super` (Klasse `SuperCall` aufgerufen werden
 
-*   Alle Methodendefinitinen **müssen** als ersten Parameter **`self`** enthalten, nicht jedoch die Methodenaufrufe.
+*   Alle Methodendefinitionen **müssen** als ersten Parameter `self` enthalten, nicht jedoch die Methodenaufrufe.
 
 ## Methodennamen
 
-Methoden werden vom CBuilder in normale Funktionen umgesetzt, d. h. gleichnamige Methoden in unterschidleichen Klassen würden zu Fehlern führen. Eindeutige Namen werden automatisch durch die Methode `Function#createUniqueCName()` im Konstruktor erzeugt.
+Methoden werden vom CBuilder in normale Funktionen umgesetzt, d. h. gleichnamige Methoden in unterschiedlichen Klassen würden zu Fehlern führen. Eindeutige Namen werden automatisch durch die Methode `Function#createUniqueCName()` im Konstruktor erzeugt.
 
 
 ## Methoden: *\_\_init\_\_(self)* anlegen
