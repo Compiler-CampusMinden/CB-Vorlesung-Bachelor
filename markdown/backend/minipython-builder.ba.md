@@ -115,7 +115,7 @@ zur Nutzung des CBuildes in der [Doku] sowie zur [Runtime](https://github.com/Co
 
 ## Was wird unter Linux benötigt?
 
-*   make
+*   Make
 
 *   gcc oder clang
 
