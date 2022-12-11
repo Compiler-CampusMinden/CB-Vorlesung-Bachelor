@@ -230,10 +230,10 @@ __eq__(), __ne__(),__ge__(),__gt__(), __le__(), __lt__()
 Beispiel mit anschließender Zuweisung:
 
 ``` java
-      // d = a + b
-      AttributeReference addA = new AttributeReference("__add__", varA);
-      Expression add = new Call(addA, List.of(new Expression[] { varB }));
-      Assignment assignD = new Assignment(varD, add);
+// d = a + b
+AttributeReference addA = new AttributeReference("__add__", varA);
+Expression add = new Call(addA, List.of(new Expression[] { varB }));
+Assignment assignD = new Assignment(varD, add);
 ```
 ## Kontrollstrukturen
 
