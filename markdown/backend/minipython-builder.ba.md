@@ -128,7 +128,7 @@ Sie können Make und clang (und einige weitere Kommandozeilen-Tools) mittels
 
 *   das Repo clonen: ergibt CBuilder-Gradle-Projekt (`build.gradle` im Hauptverzeichnis vom Gitrepo)
 *   das ANTLR-Projekt hineinkopieren
-*   Mainklasse festlegen (siehe Doku)
+*   Main-Klasse festlegen (siehe Doku)
 
 
 # Benutzung des CBuilders
