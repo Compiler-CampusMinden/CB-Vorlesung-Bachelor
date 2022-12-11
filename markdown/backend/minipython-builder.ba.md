@@ -137,7 +137,7 @@ Sie können Make und clang (und einige weitere Kommandozeilen-Tools) mittels
 
 *   die Aufufe des CBuilders in Ihr Projekt integrieren
 
-*   den CBuilder ausführen (z. B. über gradle.run). Das generierte C-Programm wird z. B. in das Verzeichnis **./src/program.c** geschrieben.
+*   den CBuilder ausführen (z. B. über `./gradlew run`). Das generierte C-Programm wird z. B. in das Verzeichnis **`./src/program.c`** geschrieben.
 
 *   in diesem Verzeichnis **make** aufrufen: **make all** übersetzt das Programm, **make run** führt es auch aus, **make clean** entfernt überflüssige erzeugte Dateien..
 
