@@ -278,7 +278,7 @@ builder.addStatement(callPrint);
 
 *   in `__init__()` **muss** als erstes `super` (Klasse `SuperCall` aufgerufen werden
 
-*   Alle Methodendefinitinen **müssen** als ersten Parameter **self** enthalten, nicht jedoch die Methodenaufrufe.
+*   Alle Methodendefinitinen **müssen** als ersten Parameter **`self`** enthalten, nicht jedoch die Methodenaufrufe.
 
 ## Methodennamen
 
