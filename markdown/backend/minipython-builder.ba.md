@@ -11,7 +11,7 @@ outcomes:
     -   k1: "**Zwischencode**"
     -   k2: "*CBuilder*"
 assignments:
-    -   topic: Meilenstein 04
+    -   topic: sheet04
 attachments:
   - link: "https://github.com/Compiler-CampusMinden/AnnotatedSlides/blob/master/minipython-builder.ann.ba.pdf"
     name: "Annotierte Folien: Minipython CBuilder"
