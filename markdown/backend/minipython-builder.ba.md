@@ -75,7 +75,7 @@ attachments:
 
 *   compilierter C-Code ist sehr schnell
 
-*   C-compiler existiert für fast alle Plattformen
+*   C-Compiler existiert für fast alle Plattformen
 
 *   Man bekommt die Optimierung umsonst
 
