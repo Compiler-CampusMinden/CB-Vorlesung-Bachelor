@@ -209,9 +209,9 @@ Logische Operatoren können explizit aufgerufen werden:
 ``` java
 // a = a and b
 
-    Expression aAndB = new AndKeyword(varA, varB);
-    Assignment assignA = new Assignment(varA, aAndB);
-    builder.addStatement(assignA);
+Expression aAndB = new AndKeyword(varA, varB);
+Assignment assignA = new Assignment(varA, aAndB);
+builder.addStatement(assignA);
 ```
 
 ## Arithmetische Operatoren und Vergleichsoperatoren
