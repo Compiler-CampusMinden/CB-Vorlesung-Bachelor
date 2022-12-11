@@ -25,6 +25,7 @@ attachments:
 :::notes Hier entsteht ein Tafelbild.:::
 
 
+
 # Motivation
 
 ## Was muss als nächstes getan werden?
@@ -35,6 +36,8 @@ attachments:
 
 *   Zwischencode
 *   CBuilder
+
+
 
 # Zwischencodeerzeugung
 
@@ -67,6 +70,8 @@ attachments:
 
 *   Die meisten Optimierungen finden auf dem Zwischencode statt
 
+
+
 # Unser Zwischencode
 
 ## Und wenn wir C als Zwischencode nehmen?
@@ -82,11 +87,14 @@ attachments:
 *   C ist relativ nah an Python
 
 
+
 # Generierung unseres Zwischencodes
 
 ## Was ist zu tun?
 
 :::notes Hier entsteht ein Tafelbild.:::
+
+
 
 # CBuilder
 
