@@ -270,7 +270,7 @@ builder.addStatement(callPrint);
 
 ## Klassen definieren
 
-*   Typ **MPyClass**
+*   Typ **`MPyClass`**
 
 *   Angabe der Referenz auf Elternklasse (\_\_MPytype_Object, wenn keine eigene Oberklasse vorhanden ist)
 
