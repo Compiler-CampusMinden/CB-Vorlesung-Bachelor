@@ -274,7 +274,7 @@ builder.addStatement(callPrint);
 
 *   Angabe der Referenz auf Elternklasse (`__MPytype_Object`, wenn keine eigene Oberklasse vorhanden ist)
 
-*   \_\_init\_\_ muss **immer** implementiert werden
+*   `__init__()` muss **immer** implementiert werden
 
 *   in \_\_init\_\_ **muss** als erstes *super* (Klasse *SuperCall* aufgerufen werden
 
