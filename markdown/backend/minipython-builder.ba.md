@@ -126,7 +126,7 @@ Sie können Make und clang (und einige weitere Kommandozeilen-Tools) mittels
 
 ## Installation des CBuilders (Linux)
 
-*   das Repo clonen: ergibt CBuilder-Gradle-Projekt (build.gradle im Hauptverzeichnis vom Gitrepo)
+*   das Repo clonen: ergibt CBuilder-Gradle-Projekt (`build.gradle` im Hauptverzeichnis vom Gitrepo)
 *   das Antler-Projekt hineinkopieren
 *   Mainklasse festlegen (siehe Doku)
 
