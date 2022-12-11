@@ -55,7 +55,7 @@ attachments:
 
 *   verschiedene Frontends (Sprachen) können denselben Zwischencode (Backend) benutzen
 
-*   wenn der Zielprozesser nicht sehr mächtig ist
+*   wenn der Zielprozessor nicht sehr mächtig ist
 
 ## Ein Wort zur Optimierung
 
