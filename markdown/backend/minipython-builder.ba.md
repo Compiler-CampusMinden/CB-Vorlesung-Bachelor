@@ -108,6 +108,11 @@ Den CBuilder gibt es schon!
 
 Das Projekt enthält ein Gradle-Buildscript und ein Makefile.
 
+::: notes
+Der [CBuilder](https://github.com/Compiler-CampusMinden/Mini-Python-Builder) bringt eine C-Runtime mit. Sie finden Hinweise
+zur Nutzung des CBuildes in der [Doku] sowie zur [Runtime](https://github.com/Compiler-CampusMinden/Mini-Python-Builder/blob/master/docs/usage_generated_code.md).
+:::
+
 ## Was wird unter Linux benötigt?
 
 *   make
