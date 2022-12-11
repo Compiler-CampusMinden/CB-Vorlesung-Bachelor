@@ -141,7 +141,7 @@ Sie können Make und clang (und einige weitere Kommandozeilen-Tools) mittels
 
 *   in diesem Verzeichnis **Make** aufrufen: **`make all`** übersetzt das Programm, **`make run`** führt es auch aus, **`make clean`** entfernt überflüssige erzeugte Dateien.
 
-*   Das übersetzte Programm (in *./bin/program*) läuft in einer Konsole (mit *input*- und *print*-Anweisungen)
+*   Das übersetzte Programm (*`./bin/program`*) läuft in einer Konsole (mit *`input`*- und *`print`*-Anweisungen)
 
 
 # Java-Interface des CBuilders
