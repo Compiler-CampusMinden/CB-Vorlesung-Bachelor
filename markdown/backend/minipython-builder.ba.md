@@ -53,7 +53,7 @@ attachments:
 
 *   bei der Portierung eines Compilers muss nur das Backend neu geschrieben werden
 
-*   verschiedene Frontends (Sprachen) können denselben Zwischencode (Bakcend) benutzen
+*   verschiedene Frontends (Sprachen) können denselben Zwischencode (Backend) benutzen
 
 *   wenn der Zielprozesser nicht sehr mächtig ist
 
