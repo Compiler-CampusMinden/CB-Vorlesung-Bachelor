@@ -381,8 +381,8 @@ class C:
 
 ``` java
  // Weise "self.x" den Methodenparameter "y" zu
-Statement assignSelfX = new AttributeAssignment(new AttributeReference("x", new Reference("self")), n
-    ew Reference("y"));
+Statement assignSelfX = new AttributeAssignment(new AttributeReference("x", new Reference("self")),
+    new Reference("y"));
 
 // Zugriff auf "self.x" in "getX(self)"
 Expression getSelfX = new AttributeReference("x", new Reference("self"));
