@@ -285,7 +285,7 @@ builder.addStatement(callPrint);
 Methoden werden vom CBuilder in normale Funktionen umgesetzt, d. h. gleichnamige Methoden in unterschidleichen Klassen würden zu Fehlern führen. Eindeutige Namen werden automatisch durch die Methode `Function#createUniqueCName()` im Konstruktor erzeugt.
 
 
-## Methoden: *__init__(self)* anlegen
+## Methoden: *\_\_init\_\_(self)* anlegen
 
 ``` java
 Statement simpleSuperCall = new SuperCall(List.of());
