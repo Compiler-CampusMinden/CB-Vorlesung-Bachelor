@@ -139,8 +139,8 @@ Sie können Make und clang (und einige weitere Kommandozeilen-Tools) mittels
 
 ## Installation des CBuilders (Linux)
 
-*   das Repo clonen: ergibt CBuilder-Gradle-Projekt (`build.gradle` im Hauptverzeichnis vom Gitrepo)
-*   das ANTLR-Projekt hineinkopieren
+*   das [Repo](https://github.com/Compiler-CampusMinden/Mini-Python-Builder) clonen: ergibt Gradle-Projekt (`build.gradle` im Hauptverzeichnis vom Git-Repo)
+*   das ANTLR-Projekt (Ihren bisherigen Quellcode) hineinkopieren
 *   Main-Klasse festlegen (siehe Doku)
 
 
