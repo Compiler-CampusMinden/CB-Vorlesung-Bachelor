@@ -110,7 +110,7 @@ Das Projekt enthält ein Gradle-Buildscript und ein Makefile.
 
 Der generierte Code benötigt Funktionen aus dem POSIX.1-2008-Standard, läuft also nicht direkt unter Windows.
 Abhilfe:
-1)  mit **MSYS2** arbeiten (**pacman -S make** und **pacman -S gcc** aufrufen)  oder
+1)  mit **MSYS2** arbeiten (**`pacman -S make`** und **`pacman -S gcc`** zur Installation von Make und GCC aufrufen)  oder
 
 2)  **WSL** (Windows Subsytem für Linux) benutzen   oder
 
