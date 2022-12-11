@@ -96,7 +96,7 @@ Den CBuilder gibt es schon!
 
 ## Wo ist er zu finden?
 
-https://github.com/Compiler-CampusMinden/Mini-Python-Builder
+[https://github.com/Compiler-CampusMinden/Mini-Python-Builder](https://github.com/Compiler-CampusMinden/Mini-Python-Builder)
 
 Das Projekt enthält ein Gradle-Buildscript und ein Makefile.
 
