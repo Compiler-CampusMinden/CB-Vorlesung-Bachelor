@@ -202,7 +202,7 @@ Logische Operatoren können explizit aufgerufen werden:
 
 ## Arithmetische Operatoren und Vergleichsoperatoren
 
-Arithmetische Operatoren werden in Form von Methodenaufrufen realisiert. Das geht, weil alle Variablen in Python von *object* erben, wo die Operatoren als Methoden definiert sind (und man sie so auch überladen kann).
+Arithmetische Operatoren werden in Form von Methodenaufrufen realisiert. Das geht, weil alle Variablen in Python von `object` erben, wo die Operatoren als Methoden definiert sind (und man sie so auch überladen kann).
 
 Methodennamen:
 
