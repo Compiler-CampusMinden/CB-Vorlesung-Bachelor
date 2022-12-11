@@ -141,7 +141,7 @@ Sie können Make und clang (und einige weitere Kommandozeilen-Tools) mittels
 
 *   das [Repo](https://github.com/Compiler-CampusMinden/Mini-Python-Builder) clonen: ergibt Gradle-Projekt (`build.gradle` im Hauptverzeichnis vom Git-Repo)
 *   das ANTLR-Projekt (Ihren bisherigen Quellcode) hineinkopieren
-*   Main-Klasse festlegen (siehe Doku)
+*   Main-Klasse festlegen (siehe [Doku])
 
 
 # Benutzung des CBuilders
@@ -161,7 +161,7 @@ Sie können Make und clang (und einige weitere Kommandozeilen-Tools) mittels
 # Java-Interface des CBuilders
 ## Anlegen des CBuilders und Definieren der Funktionalität
 
-Auszug aus der Doku:
+Auszug aus der [Doku]:
 
 ``` java
 ProgramBuilder builder = new ProgramBuilder();
@@ -177,7 +177,7 @@ builder.writeProgram(outputFolder); // Erzeugt den C-Code (inkl. Runtime)
 
 ## Definition von Literalen
 
-Auszug aus der Doku:
+Auszug aus der [Doku]:
 
 ``` java
 new StringLiteral("foo");   // String mit Inhalt "foo" erzeugen
@@ -237,12 +237,12 @@ Assignment assignD = new Assignment(varD, add);
 ```
 ## Kontrollstrukturen
 
-siehe Doku
+siehe [Doku]
 
 
 ## Built-In-Funktionen
 
-Auszug aus der Doku:
+Auszug aus der [Doku]:
 
 ``` java
 Reference printRef = new Reference("print");
@@ -434,6 +434,12 @@ builder.addStatement(new Call(printRef, List.of(callGetX)));
 *   Zwischencode ist ein wichtiger Bestandteil eines Compilers, insbesondere für die Optimierung
 
 *   Über die Java-API des CBuilders kann aus dem AST heraus Zwischencode in C erzeugt und mit einem vorhandenen C-Compiler in Maschinencode übersetzt werden.
+
+
+
+
+
+[Doku]: https://github.com/Compiler-CampusMinden/Mini-Python-Builder/blob/master/docs/usage_cbuilder.md
 
 
 
