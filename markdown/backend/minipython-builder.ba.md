@@ -148,13 +148,13 @@ Sie können Make und clang (und einige weitere Kommandozeilen-Tools) mittels
 
 ## Toolchain
 
-*   die Aufufe des CBuilders in Ihr Projekt integrieren
+*   die Aufrufe des CBuilders in Ihr Projekt integrieren
 
 *   den CBuilder ausführen (z. B. über `./gradlew run`). Das generierte C-Programm wird z. B. in das Verzeichnis **`./src/program.c`** geschrieben.
 
-*   in diesem Verzeichnis **Make** aufrufen: **`make all`** übersetzt das Programm, **`make run`** führt es auch aus, **`make clean`** entfernt überflüssige erzeugte Dateien.
+*   in diesem Verzeichnis **Make** aufrufen: `make all` übersetzt das Programm, `make run` führt es auch aus, `make clean` entfernt überflüssige erzeugte Dateien.
 
-*   Das übersetzte Programm (*`./bin/program`*) läuft in einer Konsole (mit *`input`*- und *`print`*-Anweisungen)
+*   Das übersetzte Programm (`./bin/program`) läuft in einer Konsole (mit `input`- und `print`-Anweisungen)
 
 
 # Java-Interface des CBuilders
