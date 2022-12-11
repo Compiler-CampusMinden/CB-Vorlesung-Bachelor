@@ -123,7 +123,7 @@ zur Nutzung des CBuildes in der [Doku] sowie zur [Runtime](https://github.com/Co
 
 Der generierte Code benötigt Funktionen aus dem POSIX.1-2008-Standard, läuft also nicht direkt unter Windows.
 Abhilfe:
-1)  mit **MSYS2** arbeiten (**`pacman -S make`** und **`pacman -S gcc`** zur Installation von Make und GCC aufrufen)  oder
+1)  mit **MSYS2** arbeiten (`pacman -S make` und `pacman -S gcc` zur Installation von Make und gcc aufrufen)  oder
 
 2)  **WSL** (Windows Subsytem für Linux) benutzen   oder
 
