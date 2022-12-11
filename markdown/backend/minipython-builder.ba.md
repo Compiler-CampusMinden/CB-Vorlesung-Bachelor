@@ -22,7 +22,9 @@ attachments:
 
 ## Wo stehen wir?
 
-:::notes Hier entsteht ein Tafelbild.:::
+:::notes
+Hier entsteht ein Tafelbild.
+:::
 
 
 
@@ -30,7 +32,9 @@ attachments:
 
 ## Was muss als nächstes getan werden?
 
-:::notes Hier entsteht ein Tafelbild.:::
+:::notes
+Hier entsteht ein Tafelbild.
+:::
 
 ## Themen für heute
 
@@ -92,7 +96,9 @@ attachments:
 
 ## Was ist zu tun?
 
-:::notes Hier entsteht ein Tafelbild.:::
+:::notes
+Hier entsteht ein Tafelbild.
+:::
 
 
 
