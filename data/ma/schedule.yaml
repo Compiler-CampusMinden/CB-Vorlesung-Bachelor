@@ -149,6 +149,7 @@
 
 -   week: "KW01"  # Freies Arbeiten, Sprechstunde
     misc_lecture:
+        -   notes: ">> Alles Gute im neuen Jahr!"
         -   notes: ">> Sprechstunde (in VL-Zeit)"
     misc_assignment:
         -   notes: ">> Freies Arbeiten"
@@ -166,4 +167,4 @@
     misc_lecture:
         -   notes: ">> Vorträge: Termine siehe Etherpad"
     misc_assignment:
-        -   notes: ">> Rückblick, Prüfungsvorbereitung"
+        -   notes: ">> Rückblick, Prüfungsvorbereitung (Prüfungstermine siehe Etherpad)"

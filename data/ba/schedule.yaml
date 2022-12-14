@@ -139,14 +139,12 @@
         -   notes: ">> Alles Gute im neuen Jahr!"
         -   notes: ">> Freies Arbeiten"
     misc_assignment:
-        -   notes: ">> Freies Arbeiten"
         -   notes: ">> Sprechstunde (in Praktikumszeit)"
 
 -   week: "KW02"   # Freies Arbeiten, Sprechstunde
     misc_lecture:
         -   notes: ">> Freies Arbeiten"
     misc_assignment:
-        -   notes: ">> Freies Arbeiten"
         -   notes: ">> Sprechstunde (in Praktikumszeit)"
 
 -   week: "KW03"
