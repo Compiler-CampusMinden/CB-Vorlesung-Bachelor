@@ -1,0 +1,27 @@
+name: HUGO
+on:
+  # push on master branch: build lecture notes (hugo)
+  push:
+    branches: [master]
+  # manually triggered: build lecture notes (hugo)
+  workflow_dispatch:
+
+
+jobs:
+  # build lecture notes (hugo): "make web_zip"
+  hugo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: cagix/pandoc-lecture@master
+        with:
+          hugo: 'true'
+      - run: make web_zip
+
+      - uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: _hugo
+          publish_dir: docs/
+          force_orphan: true
