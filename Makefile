@@ -129,8 +129,8 @@ WEB_STANDALONE_TARGETS     = $(patsubst $(SRC_DIR)/%,$(WEB_INTERMEDIATE_DIR)/%, 
 SLIDES_STANDALONE_TARGETS  = $(patsubst $(SRC_DIR)/%,$(SLIDES_INTERMEDIATE_DIR)/%, $(STANDALONE_SOURCES))
 
 ## Image targets for web and slides
-WEB_IMAGE_TARGETS    = $(WEB_TEX_TARGETS) $(WEB_DOT_TARGETS) $(WEB_STANDALONE_TARGETS)
-SLIDES_IMAGE_TARGETS = $(SLIDES_TEX_TARGETS) $(SLIDES_DOT_TARGETS) $(SLIDES_STANDALONE_TARGETS)
+WEB_IMAGE_TARGETS    = $(WEB_STANDALONE_TARGETS) $(WEB_TEX_TARGETS) $(WEB_DOT_TARGETS)
+SLIDES_IMAGE_TARGETS = $(SLIDES_STANDALONE_TARGETS) $(SLIDES_TEX_TARGETS) $(SLIDES_DOT_TARGETS)
 
 ## Markdown source and target files
 WEB_MARKDOWN_SOURCES = $(shell find $(SRC_DIR) -type f -iname '*.md')
@@ -215,11 +215,6 @@ web: $(WEB_MARKDOWN_TARGETS) $(WEB_IMAGE_TARGETS) $(WEB_STATIC_TARGETS) $(READIN
 .PHONY: web_zip
 web_zip: web ## Create website and archive
 	cd $(WEB_OUTPUT_DIR) && rm -rf site.zip && zip -r site.zip *
-
-## Build Docker image "alpine-pandoc-hugo"
-.PHONY: docker
-docker: ## Build Docker image "alpine-pandoc-hugo"
-	cd .github/actions/alpine-pandoc-hugo && make clean all
 
 ##@ Cleanup
 
