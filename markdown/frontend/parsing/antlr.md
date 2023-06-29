@@ -2,7 +2,7 @@
 archetype: lecture-cg
 title: "Parser mit ANTLR generieren"
 author: "Carsten Gips (HSBI)"
-weight: 5
+weight: 4
 readings:
   - key: "@Parr2014"
 tldr: |
@@ -500,7 +500,7 @@ public class TestMyListener {
 }
 ```
 
-[Beispiel: [TestMyListener.java](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/frontend/parsing/src/TestMyListener.java) und [calc.g4](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/frontend/parsing/src/calc.g4)]{.bsp}
+[Beispiel: [TestMyListener.java](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/markdown/frontend/parsing/src/TestMyListener.java) und [calc.g4](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/markdown/frontend/parsing/src/calc.g4)]{.bsp}
 
 In `["Syntaxgesteuerte Interpreter"]({{<ref "/backend/interpretation/syntaxdriven" >}})`{=markdown}
 werden wir damit einen einfachen syntaxgesteuerten Interpreter aufbauen.
@@ -577,7 +577,7 @@ public class TestMyVisitor {
 }
 ```
 
-[Beispiel: [TestMyVisitor.java](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/frontend/parsing/src/TestMyVisitor.java) und [calc.g4](https://github.com/Compiler-CampusMinden/CB-Vorlesung/blob/master/markdown/frontend/parsing/src/calc.g4)]{.bsp}
+[Beispiel: [TestMyVisitor.java](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/markdown/frontend/parsing/src/TestMyVisitor.java) und [calc.g4](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/markdown/frontend/parsing/src/calc.g4)]{.bsp}
 
 In `["Syntaxgesteuerte Interpreter"]({{<ref "/backend/interpretation/syntaxdriven" >}})`{=markdown}
 werden wir damit einen einfachen syntaxgesteuerten Interpreter aufbauen.
@@ -622,11 +622,6 @@ die Grammatik abhängig von der Zielsprache des generierten Lexers/Parsers!
 Damit haben wir die sprichwörtliche "Spitze des Eisbergs" gesehen. Mit ANTLR
 sind noch viele weitere Dinge möglich. Bitte nutzen Sie aktiv die Dokumentation
 auf [github.com/antlr/antlr4](https://github.com/antlr/antlr4).
-
-Mit Hilfe von semantischen Prädikaten (vgl.
-`["LL-Parser: Fortgeschrittene Techniken"]({{<ref "/frontend/parsing/ll-advanced" >}})`{=markdown})
-können Parser-Regeln aktiviert oder abgeschaltet werden, je nachdem, was vorher
-gesehen wurde.
 
 Dem Thema Behandlung von Fehlern ist eine eigene Sitzung gewidmet:
 `["Error-Recovery"]({{<ref "/frontend/parsing/recovery" >}})`{=markdown}.
