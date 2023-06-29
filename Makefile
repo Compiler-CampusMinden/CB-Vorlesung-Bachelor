@@ -110,17 +110,19 @@ SLIDES_OUTPUT_DIR = pdf
 #--------------------------------------------------------------------------------
 
 ## TeX source and target files
-TEX_SOURCES        = $(shell find $(SRC_DIR) -type f -iname '*.tex')
-TEX_INTERMEDIATE   = $(patsubst $(SRC_DIR)/%,$(IMAGES_OUTPUT_DIR)/%, $(TEX_SOURCES))
-TEX_TARGETS        = $(patsubst $(SRC_DIR)/%.tex,$(IMAGES_OUTPUT_DIR)/%.png, $(TEX_SOURCES))
-WEB_TEX_TARGETS    = $(patsubst $(SRC_DIR)/%.tex,$(WEB_INTERMEDIATE_DIR)/%.png, $(TEX_SOURCES))
-SLIDES_TEX_TARGETS = $(patsubst $(SRC_DIR)/%.tex,$(SLIDES_INTERMEDIATE_DIR)/%.png, $(TEX_SOURCES))
+## uncomment to convert .tex to .png
+#TEX_SOURCES        = $(shell find $(SRC_DIR) -type f -iname '*.tex')
+#TEX_INTERMEDIATE   = $(patsubst $(SRC_DIR)/%,$(IMAGES_OUTPUT_DIR)/%, $(TEX_SOURCES))
+#TEX_TARGETS        = $(patsubst $(SRC_DIR)/%.tex,$(IMAGES_OUTPUT_DIR)/%.png, $(TEX_SOURCES))
+#WEB_TEX_TARGETS    = $(patsubst $(SRC_DIR)/%.tex,$(WEB_INTERMEDIATE_DIR)/%.png, $(TEX_SOURCES))
+#SLIDES_TEX_TARGETS = $(patsubst $(SRC_DIR)/%.tex,$(SLIDES_INTERMEDIATE_DIR)/%.png, $(TEX_SOURCES))
 
 ## Dot source and target files
-DOT_SOURCES        = $(shell find $(SRC_DIR) -type f -iname '*.dot')
-DOT_TARGETS        = $(patsubst $(SRC_DIR)/%.dot,$(IMAGES_OUTPUT_DIR)/%.png, $(DOT_SOURCES))
-WEB_DOT_TARGETS    = $(patsubst $(SRC_DIR)/%.dot,$(WEB_INTERMEDIATE_DIR)/%.png, $(DOT_SOURCES))
-SLIDES_DOT_TARGETS = $(patsubst $(SRC_DIR)/%.dot,$(SLIDES_INTERMEDIATE_DIR)/%.png, $(DOT_SOURCES))
+## uncomment to convert .dot to .png
+#DOT_SOURCES        = $(shell find $(SRC_DIR) -type f -iname '*.dot')
+#DOT_TARGETS        = $(patsubst $(SRC_DIR)/%.dot,$(IMAGES_OUTPUT_DIR)/%.png, $(DOT_SOURCES))
+#WEB_DOT_TARGETS    = $(patsubst $(SRC_DIR)/%.dot,$(WEB_INTERMEDIATE_DIR)/%.png, $(DOT_SOURCES))
+#SLIDES_DOT_TARGETS = $(patsubst $(SRC_DIR)/%.dot,$(SLIDES_INTERMEDIATE_DIR)/%.png, $(DOT_SOURCES))
 
 ## Standalone image sources and targets
 STANDALONE_SOURCES         = $(shell find $(SRC_DIR) -type f -iname '*.png')
