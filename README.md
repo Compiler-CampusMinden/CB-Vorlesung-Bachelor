@@ -1,8 +1,8 @@
-# Lecture "Compilerbau"
+# Lecture "Compilerbau (Bachelor)"
 
 ## Overview
 
-This represents the lecture material for the lecture "Compilerbau" (B.Sc. and M.Sc.),
+This represents the lecture material for the lecture "Compilerbau" (B.Sc.),
 a course developed and taught at Bielefeld University of Applied Sciences.
 
 
