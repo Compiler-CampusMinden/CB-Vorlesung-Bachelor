@@ -1,4 +1,4 @@
-# Lecture "Compilerbau (Bachelor)"
+# Lecture "Compilerbau" (Bachelor)
 
 ## Overview
 
