@@ -39,7 +39,7 @@
 
 ## Readings data template
 READINGS = data/readings.yaml
-BIBTEX   = pm.bib
+BIBTEX   = cb.bib
 
 ## local.yaml allows to override settings in hugo_conf.yaml
 HUGO_LOCAL = $(wildcard local.yaml)
