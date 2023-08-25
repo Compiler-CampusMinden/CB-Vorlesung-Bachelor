@@ -8,7 +8,7 @@ title: "CB W22 B.Sc."
 
 ## Kursbeschreibung
 
-![](org/images/architektur_cb.png){width="80%"}
+![](admin/images/architektur_cb.png){width="80%"}
 
 Der Compiler ist das wichtigste Werkzeug in der Informatik. In der Königsdisziplin der
 Informatik schließt sich der Kreis, hier kommen die unterschiedlichen Algorithmen und
@@ -18,7 +18,7 @@ In diesem Modul geht es um ein grundlegendes Verständnis für die wichtigsten K
 im Compilerbau. Wir schauen uns dazu relevante aktuelle Tools und Frameworks an und
 setzen diese bei der Erstellung eines kleinen Compiler-Frontends für [_Mini-Python_] ein.
 
-Siehe `["Syllabus"]({{< ref "/org/syllabus" >}})`{=markdown} zu Details.
+Siehe `["Syllabus"]({{< ref "/admin/syllabus" >}})`{=markdown} zu Details.
 
 [_Mini-Python_]: https://github.com/Compiler-CampusMinden/Mini-Python-Builder
 
@@ -46,7 +46,7 @@ Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**)
 **Projektarbeit**, 5 ECTS
 
 Hier finden Sie Informationen zum Ablauf des Praktikums sowie zur Prüfungsform:
-`["Note und Credits"]({{< ref "/org/grading" >}})`{=markdown}.
+`["Note und Credits"]({{< ref "/admin/grading" >}})`{=markdown}.
 
 
 ## Materialien
@@ -64,7 +64,7 @@ Hier finden Sie Informationen zum Ablauf des Praktikums sowie zur Prüfungsform:
     ISBN [978-3-319-66966-3](https://fhb-bielefeld.digibib.net/openurl?isbn=978-3-319-66966-3).
     DOI [10.1007/978-3-319-66966-3](https://doi.org/10.1007/978-3-319-66966-3).
 
-Weitere empfohlene Literatur siehe `["Ressourcen"]({{< ref "/org/resources" >}})`{=markdown}.
+Weitere empfohlene Literatur siehe `["Ressourcen"]({{< ref "/admin/resources" >}})`{=markdown}.
 
 
 ## Fahrplan

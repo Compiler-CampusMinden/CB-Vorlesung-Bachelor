@@ -26,4 +26,4 @@ Interpreter vor. Sie gehen dabei insbesondere auf die Umsetzung von Klassen
 und Vererbung und Methoden in der Grammatik, in der Symboltabelle und
 schließlich im Interpreter ein.
 
-Siehe `["Note und Credits > Vortrag I"]({{< ref "/org/grading" >}})`{=markdown}.
+Siehe `["Note und Credits > Vortrag I"]({{< ref "/admin/grading" >}})`{=markdown}.
