@@ -49,4 +49,4 @@ der letzten Sitzung um.
 
 Bereiten Sie Ihren Vortrag für die Vorstellung Ihrer zusätzlichen Features vor.
 
-Siehe `["Note und Credits > Vortrag II"]({{< ref "/admin/grading" >}})`{=markdown}.
+Siehe [Note und Credits > Vortrag II](../admin/grading.md).
