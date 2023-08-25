@@ -21,7 +21,7 @@
   lecture:
     - topic: /frontend/lexing/recursive
       leader: "Carsten"
-    - topic: /frontend/lexing/antlr
+    - topic: /frontend/lexing/antlr-lexing
       leader: "Carsten"
     - topic: /frontend/parsing/cfg
       leader: "BC"
@@ -41,7 +41,7 @@
   lecture:
     - topic: /frontend/parsing/ll-parser-impl
       leader: "Carsten"
-    - topic: /frontend/parsing/antlr
+    - topic: /frontend/parsing/antlr-parsing
       leader: "Carsten"
     - topic: /frontend/parsing/recovery
       leader: "Carsten"
@@ -56,7 +56,7 @@
 
 - week: "KW45"
   lecture:
-    - topic: /frontend/semantics/symboltables/intro
+    - topic: /frontend/semantics/symboltables/intro-symbtab
       leader: "Carsten"
     - topic: /frontend/semantics/symboltables/scopes
       leader: "Carsten"
@@ -99,7 +99,7 @@
 
 - week: "KW49"
   lecture:
-    - topic: /intermediate/intro
+    - topic: /intermediate/intro-ir
       leader: "Carsten"
     - topic: /backend/minipython-builder
       leader: "BC"

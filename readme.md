@@ -97,14 +97,18 @@ Hochschulen anbieten zu können. (Diese Termine werden in englischer Sprache dur
 [Prüfungsvorbereitung](admin/exams.md)
 [FAQ](admin/faq.md)
 
+[Intro](lecture/intro/readme.md)                                        <!-- because of sub-sub-dirs -->
 [Überblick](lecture/intro/overview.md)
 [Sprachen](lecture/intro/languages.md)
 [Anwendungen](lecture/intro/applications.md)
 
+[Frontend](lecture/frontend/readme.md)                                  <!-- because of sub-sub-dirs -->
+[Lexer](lecture/frontend/lexing/readme.md)                              <!-- because of sub-sub-dirs -->
 [Reguläre Sprachen](lecture/frontend/lexing/regular.md)
 [Handcodierter Lexer](lecture/frontend/lexing/recursive.md)
 [Lexer mit ANTLR](lecture/frontend/lexing/antlr-lexing.md)
 
+[Parser](lecture/frontend/parsing/readme.md)                            <!-- because of sub-sub-dirs -->
 [CFG](lecture/frontend/parsing/cfg.md)
 [LL-Parser (Theorie)](lecture/frontend/parsing/ll-parser-theory.md)
 [LL-Parser (Praxis)](lecture/frontend/parsing/ll-parser-impl.md)
@@ -112,17 +116,22 @@ Hochschulen anbieten zu können. (Diese Termine werden in englischer Sprache dur
 [Error Revocery](lecture/frontend/parsing/recovery.md)
 [Grenze Lexer und Parser](lecture/frontend/parsing/finalwords.md)
 
+[Typen](lecture/frontend/semantics/readme.md)                           <!-- because of sub-sub-dirs -->
 [Attributierte Grammatiken](lecture/frontend/semantics/attribgrammars.md)
 
+[Symboltabellen](lecture/frontend/semantics/symboltables/readme.md)     <!-- because of sub-sub-dirs -->
 [Überblick Symboltabellen](lecture/frontend/semantics/symboltables/intro-symbtab.md)
 [Symboltabellen: Scopes](lecture/frontend/semantics/symboltables/scopes.md)
 [Symboltabellen: Funktionen](lecture/frontend/semantics/symboltables/functions.md)
 [Symboltabellen: Klassen](lecture/frontend/semantics/symboltables/classes.md)
 
+[IR](lecture/intermediate/readme.md)                                    <!-- because of sub-sub-dirs -->
 [Überblick Zwischencode](lecture/intermediate/intro-ir.md)
 
+[Backend](lecture/backend/readme.md)                                    <!-- because of sub-sub-dirs -->
 <!-- [Mini-Python (Builder)](lecture/backend/minipython-builder.md) -->
 
+[Interpreter](lecture/backend/interpretation/readme.md)                 <!-- because of sub-sub-dirs -->
 [Syntaxgesteuerte Interpreter](lecture/backend/interpretation/syntaxdriven.md)
 [AST-basierte Interpreter 1](lecture/backend/interpretation/astdriven-part1.md)
 [AST-basierte Interpreter 2](lecture/backend/interpretation/astdriven-part2.md)
