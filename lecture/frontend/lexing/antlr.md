@@ -2,7 +2,6 @@
 archetype: lecture-cg
 title: "Lexer mit ANTLR generieren"
 author: "Carsten Gips (HSBI)"
-weight: 3
 readings:
   - key: "@Parr2014"
 tldr: |

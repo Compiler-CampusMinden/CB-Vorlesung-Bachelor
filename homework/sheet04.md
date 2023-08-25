@@ -2,7 +2,6 @@
 archetype: assignment
 title: "Meilenstein 04: Builder und freie Aufgabe (Mini-Python)"
 author: "BC George, Carsten Gips (HSBI)"
-weight: 4
 
 hidden: true
 ---
