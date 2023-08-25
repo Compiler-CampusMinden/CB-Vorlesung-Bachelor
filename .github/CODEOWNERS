@@ -1,7 +1,7 @@
 * @cagix
 /homework/ @bcg7 @cagix
-/markdown/frontend/lexing/regular.md @bcg7 @cagix
-/markdown/frontend/parsing/cfg.md @bcg7 @cagix
-/markdown/frontend/parsing/ll-parser-theory.md @bcg7 @cagix
-/markdown/frontend/semantics/attribgrammars.md @bcg7 @cagix
-/markdown/backend/minipython-builder.md @bcg7 @cagix
+/lecture/frontend/lexing/regular.md @bcg7 @cagix
+/lecture/frontend/parsing/cfg.md @bcg7 @cagix
+/lecture/frontend/parsing/ll-parser-theory.md @bcg7 @cagix
+/lecture/frontend/semantics/attribgrammars.md @bcg7 @cagix
+/lecture/backend/minipython-builder.md @bcg7 @cagix
