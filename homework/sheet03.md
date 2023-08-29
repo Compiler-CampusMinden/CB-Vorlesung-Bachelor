@@ -24,5 +24,3 @@ Tragen Sie Ihre Arbeitsergebnisse bei der Implementierung der OOP-Features im
 Interpreter vor. Sie gehen dabei insbesondere auf die Umsetzung von Klassen
 und Vererbung und Methoden in der Grammatik, in der Symboltabelle und
 schließlich im Interpreter ein.
-
-Siehe [Note und Credits > Vortrag I](../admin/grading.md).

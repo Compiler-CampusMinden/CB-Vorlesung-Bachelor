@@ -127,10 +127,6 @@ Hochschulen anbieten zu können. (Diese Termine werden in englischer Sprache dur
 <!-- reference to all markdown pages used in the current semester (to be replaced using a proper schedule table) -->
 ::: slides
 <details>
-[Syllabus](admin/syllabus.md)
-[Resources](admin/resources.md)
-[Grading](admin/grading.md)
-[Prüfungsvorbereitung](admin/exams.md)
 [FAQ](admin/faq.md)
 
 [Intro](lecture/intro/readme.md)                                        <!-- because of sub-sub-dirs -->
