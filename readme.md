@@ -1,6 +1,6 @@
 ---
 archetype: "home"
-title: "CB W22 B.Sc."
+title: "CB W23 B.Sc."
 ---
 
 
@@ -66,7 +66,7 @@ Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
 [ILIAS]: https://www.hsbi.de/elearning/goto.php?target=crs_1091711&client_id=FH-Bielefeld
 
-### Prüfungsform, Note und Credits
+## Prüfungsform, Note und Credits
 
 **Projektarbeit**, 5 ECTS
 
@@ -104,9 +104,74 @@ Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
 ## Fahrplan
 
-`{{< schedule >}}`{=markdown}
+### Vorlesung
 
-**Hinweis**: Abgabe der Hausaufgaben bis jeweils 08.00 Uhr im ILIAS.
+| Woche | Datum                             | Themen                                                                                                              | Lead        | Bemerkung                                     |
+|:-----:|:----------------------------------|:--------------------------------------------------------------------------------------------------------------------|:------------|:----------------------------------------------|
+|  41   | XX, XX.XX.23                      | Orga (**Zoom**) \|\| [Überblick] \| [Sprachen] \| [Anwendungen]                                                     | Carsten, BC |                                               |
+|  42   | XX, XX.XX.23                      | [Reguläre Sprachen]                                                                                                 | BC          |                                               |
+|  42   | XX, XX.XX.23 (**Praktikum**)      | [Handcodierter Lexer] \| [Lexer mit ANTLR]                                                                          | Carsten     |                                               |
+|  43   | XX, XX.XX.23                      | [CFG]                                                                                                               | BC          |                                               |
+|  43   | XX, XX.XX.23 (**Praktikum**)      | [LL-Parser (Theorie)]                                                                                               | BC          |                                               |
+|  44   | XX, XX.XX.23                      | [Attributierte Grammatiken]                                                                                         | BC          |                                               |
+|  44   | XX, XX.XX.23 (**Praktikum**)      | [LL-Parser (Praxis)] \| [Parser mit ANTLR] \| [Error Revocery] \| [Grenze Lexer und Parser]                         | Carsten     |                                               |
+|  44   | XX, XX.XX.23, **17:00-18:30 Uhr** | Edmonton: ANTLR + Live-Coding (CA)                                                                                  |             |                                               |
+|  45   | XX, XX.XX.23                      | [Überblick Symboltabellen] \| [Symboltabellen: Scopes] \| [Symboltabellen: Funktionen] \| [Symboltabellen: Klassen] | Carsten     | [B01]                                         |
+|  46   | XX, XX.XX.23                      | [Überblick Zwischencode] \| [Mini-Python (Builder)]                                                                 | BC          | [B02]                                         |
+|  47   | XX, XX.XX.23                      | [Syntaxgesteuerte Interpreter] \| [AST-basierte Interpreter 1] \| [AST-basierte Interpreter 2]                      | Carsten     |                                               |
+|  48   | XX, XX.XX.23                      | Freies Arbeiten                                                                                                     | Carsten     | [B03] (Kein Praktikum - Termin mit Edmonton!) |
+|  48   | XX, XX.XX.23, **17:00-18:30 Uhr** | Edmonton: Vorstellung Blatt 03: Umsetzung OOP in Grammatik, Symboltabellen und Interpreter (DE)                     |             |                                               |
+|  49   | XX, XX.XX.23                      | [Garbage Collection]                                                                                                | Carsten     | [B04]                                         |
+|  49   | XX, XX.XX.23, **17:00-18:30 Uhr** | Edmonton: Vorstellung der Projekte 'Dress Rehearsal' (CA)                                                           |             |                                               |
+|  50   | XX, XX.XX.23                      | Freies Arbeiten                                                                                                     | Carsten     |                                               |
+|  51   | XX, XX.XX.23                      | Freies Arbeiten                                                                                                     | Carsten     |                                               |
+|  02   | XX, XX.XX.24                      | Freies Arbeiten                                                                                                     | Carsten     |                                               |
+|  03   | XX, XX.XX.24                      | Präsentation der Projekte: Termine siehe Etherpad                                                                   | Carsten, BC |                                               |
+|  04   | XX, XX.XX.24                      | Präsentation der Projekte: Termine siehe Etherpad                                                                   | Carsten, BC |                                               |
+
+[Überblick]: lecture/intro/overview.md
+[Sprachen]: lecture/intro/languages.md
+[Anwendungen]: lecture/intro/applications.md
+
+[Reguläre Sprachen]: lecture/frontend/lexing/regular.md
+[Handcodierter Lexer]: lecture/frontend/lexing/recursive.md
+[Lexer mit ANTLR]: lecture/frontend/lexing/antlr-lexing.md
+
+[CFG]: lecture/frontend/parsing/cfg.md
+[LL-Parser (Theorie)]: lecture/frontend/parsing/ll-parser-theory.md
+[LL-Parser (Praxis)]: lecture/frontend/parsing/ll-parser-impl.md
+[Parser mit ANTLR]: lecture/frontend/parsing/antlr-parsing.md
+[Error Revocery]: lecture/frontend/parsing/recovery.md
+[Grenze Lexer und Parser]: lecture/frontend/parsing/finalwords.md
+
+[Attributierte Grammatiken]: lecture/frontend/semantics/attribgrammars.md
+
+[Überblick Symboltabellen]: lecture/frontend/semantics/symboltables/intro-symbtab.md
+[Symboltabellen: Scopes]: lecture/frontend/semantics/symboltables/scopes.md
+[Symboltabellen: Funktionen]: lecture/frontend/semantics/symboltables/functions.md
+[Symboltabellen: Klassen]: lecture/frontend/semantics/symboltables/classes.md
+
+[Überblick Zwischencode]: lecture/intermediate/intro-ir.md
+[Mini-Python (Builder)]: lecture/backend/minipython-builder.md
+
+[Syntaxgesteuerte Interpreter]: lecture/backend/interpretation/syntaxdriven.md
+[AST-basierte Interpreter 1]: lecture/backend/interpretation/astdriven-part1.md
+[AST-basierte Interpreter 2]: lecture/backend/interpretation/astdriven-part2.md
+[Garbage Collection]: lecture/backend/interpretation/gc.md
+
+### Praktikum
+
+| Woche | Blatt                                          | Abgabe ILIAS                                                                                                                                                                                                       | Vorstellung Praktikum                                |
+|:-----:|:-----------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------|
+|  45   | [B01]: Grammatik, ANTLR, AST (Mini-Python)     | XX, XX.XX.2023, XX:XX Uhr ([Link](https://www.hsbi.de/elearning/ilias.php?ref_id=1258633&target=1258633&cmd=showOverview&cmdClass=ilobjexercisegui&cmdNode=cl:p3&baseClass=ilexercisehandlergui#il_mhead_t_focus)) | XX, XX.XX.2023                                       |
+|  46   | [B02]: AST und Symboltabellen (Mini-Python)    | XX, XX.XX.2023, XX:XX Uhr ([Link](https://www.hsbi.de/elearning/ilias.php?ref_id=1258633&target=1258633&cmd=showOverview&cmdClass=ilobjexercisegui&cmdNode=cl:p3&baseClass=ilexercisehandlergui#il_mhead_t_focus)) | XX, XX.XX.2023                                       |
+|  48   | [B03]: Interpreter (Mini-Python)               | XX, XX.XX.2023, XX:XX Uhr ([Link](https://www.hsbi.de/elearning/ilias.php?ref_id=1258633&target=1258633&cmd=showOverview&cmdClass=ilobjexercisegui&cmdNode=cl:p3&baseClass=ilexercisehandlergui#il_mhead_t_focus)) | XX, XX.XX.23, **17:00-18:30 Uhr** (Edmonton-Sitzung) |
+|  49   | [B04]: Builder und freie Aufgabe (Mini-Python) | XX, XX.XX.2023, XX:XX Uhr ([Link](https://www.hsbi.de/elearning/ilias.php?ref_id=1258633&target=1258633&cmd=showOverview&cmdClass=ilobjexercisegui&cmdNode=cl:p3&baseClass=ilexercisehandlergui#il_mhead_t_focus)) | XX, XX.XX.2023                                       |
+
+[B01]: homework/sheet01.md
+[B02]: homework/sheet02.md
+[B03]: homework/sheet03.md
+[B04]: homework/sheet04.md
 
 
 ## Förderungen und Kooperationen
@@ -122,57 +187,6 @@ Hochschulen anbieten zu können. (Diese Termine werden in englischer Sprache dur
 
 ["We CAN virtuOWL"]: https://www.uni-bielefeld.de/international/profil/netzwerk/alberta-owl/we-can-virtuowl/
 [University of Alberta]: https://www.hsbi.de/en/international-office/alberta-owl-cooperation
-
-
-<!-- reference to all markdown pages used in the current semester (to be replaced using a proper schedule table) -->
-::: slides
-<details>
-[Intro](lecture/intro/readme.md)                                        <!-- because of sub-sub-dirs -->
-[Überblick](lecture/intro/overview.md)
-[Sprachen](lecture/intro/languages.md)
-[Anwendungen](lecture/intro/applications.md)
-
-[Frontend](lecture/frontend/readme.md)                                  <!-- because of sub-sub-dirs -->
-[Lexer](lecture/frontend/lexing/readme.md)                              <!-- because of sub-sub-dirs -->
-[Reguläre Sprachen](lecture/frontend/lexing/regular.md)
-[Handcodierter Lexer](lecture/frontend/lexing/recursive.md)
-[Lexer mit ANTLR](lecture/frontend/lexing/antlr-lexing.md)
-
-[Parser](lecture/frontend/parsing/readme.md)                            <!-- because of sub-sub-dirs -->
-[CFG](lecture/frontend/parsing/cfg.md)
-[LL-Parser (Theorie)](lecture/frontend/parsing/ll-parser-theory.md)
-[LL-Parser (Praxis)](lecture/frontend/parsing/ll-parser-impl.md)
-[Parser mit ANTLR](lecture/frontend/parsing/antlr-parsing.md)
-[Error Revocery](lecture/frontend/parsing/recovery.md)
-[Grenze Lexer und Parser](lecture/frontend/parsing/finalwords.md)
-
-[Typen](lecture/frontend/semantics/readme.md)                           <!-- because of sub-sub-dirs -->
-[Attributierte Grammatiken](lecture/frontend/semantics/attribgrammars.md)
-
-[Symboltabellen](lecture/frontend/semantics/symboltables/readme.md)     <!-- because of sub-sub-dirs -->
-[Überblick Symboltabellen](lecture/frontend/semantics/symboltables/intro-symbtab.md)
-[Symboltabellen: Scopes](lecture/frontend/semantics/symboltables/scopes.md)
-[Symboltabellen: Funktionen](lecture/frontend/semantics/symboltables/functions.md)
-[Symboltabellen: Klassen](lecture/frontend/semantics/symboltables/classes.md)
-
-[IR](lecture/intermediate/readme.md)                                    <!-- because of sub-sub-dirs -->
-[Überblick Zwischencode](lecture/intermediate/intro-ir.md)
-
-[Backend](lecture/backend/readme.md)                                    <!-- because of sub-sub-dirs -->
-<!-- [Mini-Python (Builder)](lecture/backend/minipython-builder.md) -->
-
-[Interpreter](lecture/backend/interpretation/readme.md)                 <!-- because of sub-sub-dirs -->
-[Syntaxgesteuerte Interpreter](lecture/backend/interpretation/syntaxdriven.md)
-[AST-basierte Interpreter 1](lecture/backend/interpretation/astdriven-part1.md)
-[AST-basierte Interpreter 2](lecture/backend/interpretation/astdriven-part2.md)
-[Garbage Collection](lecture/backend/interpretation/gc.md)
-
-[B01](homework/sheet01.md)
-[B02](homework/sheet02.md)
-[B03](homework/sheet03.md)
-[B04](homework/sheet04.md)
-</details>
-:::
 
 
 
