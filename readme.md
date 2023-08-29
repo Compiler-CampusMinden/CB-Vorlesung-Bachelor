@@ -18,9 +18,34 @@ In diesem Modul geht es um ein grundlegendes Verständnis für die wichtigsten K
 im Compilerbau. Wir schauen uns dazu relevante aktuelle Tools und Frameworks an und
 setzen diese bei der Erstellung eines kleinen Compiler-Frontends für [_Mini-Python_] ein.
 
-Siehe [Syllabus](admin/syllabus.md) zu Details.
-
 [_Mini-Python_]: https://github.com/Compiler-CampusMinden/Mini-Python-Builder
+
+
+## Überblick Modulinhalte
+
+1.  Lexikalische Analyse: Scanner/Lexer
+    *   Reguläre Ausdrücke
+    *   Manuelle Implementierung, Generierung mit ANTLR
+
+2.  Syntaxanalyse: Parser
+    *   Kontextfreie Grammatiken (CFG)
+    *   LL-Parser (Top-Down-Parser)
+    *   Generierung mit ANTLR
+    *   Error Recovery
+
+3.  Symboltabellen
+    *   Berücksichtigung unterschiedlicher Sprachparadigmen
+    *   Typen, Klassen, Polymorphie
+    *   Namen und Scopes
+
+4.  Semantische Analyse
+    *   Attributierte Grammatiken
+
+5.  Zwischencode: Intermediate Representation (IR), LLVM
+
+6.  Interpreter
+    *   AST-Traversierung
+    *   Read-Eval-Schleife
 
 
 ## Team
