@@ -127,8 +127,6 @@ Hochschulen anbieten zu können. (Diese Termine werden in englischer Sprache dur
 <!-- reference to all markdown pages used in the current semester (to be replaced using a proper schedule table) -->
 ::: slides
 <details>
-[FAQ](admin/faq.md)
-
 [Intro](lecture/intro/readme.md)                                        <!-- because of sub-sub-dirs -->
 [Überblick](lecture/intro/overview.md)
 [Sprachen](lecture/intro/languages.md)
