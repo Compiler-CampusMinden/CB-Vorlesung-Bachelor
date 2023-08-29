@@ -159,7 +159,7 @@ Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**)
 [AST-basierte Interpreter 2]: lecture/backend/interpretation/astdriven-part2.md
 [Garbage Collection]: lecture/backend/interpretation/gc.md
 
-### Praktikum/Übung
+### Praktikum
 
 | Woche | Blatt                                          | Abgabe ILIAS                                                                                                                                                                                                       | Vorstellung Praktikum                                |
 |:-----:|:-----------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------|
