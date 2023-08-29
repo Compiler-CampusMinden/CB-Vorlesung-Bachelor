@@ -76,6 +76,8 @@ Hier finden Sie Informationen zum Ablauf des Praktikums sowie zur Prüfungsform:
 
 ## Materialien
 
+### Literatur
+
 1.  "**Compiler: Prinzipien, Techniken und Werkzeuge**".
     Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D., Pearson Studium, 2008.
     ISBN [978-3-8273-7097-6](https://fhb-bielefeld.digibib.net/openurl?isbn=978-3-8273-7097-6).
@@ -84,12 +86,17 @@ Hier finden Sie Informationen zum Ablauf des Praktikums sowie zur Prüfungsform:
     Nystrom, R., Genever Benning, 2021.
     ISBN [978-0-9905829-3-9](https://fhb-bielefeld.digibib.net/openurl?isbn=978-0-9905829-3-9).
 
-3.  "**Introduction to Compiler Design**".
+3.  "Introduction to Compiler Design".
     Mogensen, T., Springer, 2017.
     ISBN [978-3-319-66966-3](https://fhb-bielefeld.digibib.net/openurl?isbn=978-3-319-66966-3).
     DOI [10.1007/978-3-319-66966-3](https://doi.org/10.1007/978-3-319-66966-3).
 
-Weitere empfohlene Literatur siehe [Ressourcen](admin/resources.md).
+4.  "The Definitive ANTLR 4 Reference".
+    Parr, T., Pragmatic Bookshelf, 2014. ISBN [978-1-9343-5699-9](https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-9343-5699-9).
+
+### Tools
+
+*   [github.com/antlr](https://github.com/antlr/antlr4)
 
 
 ## Fahrplan
