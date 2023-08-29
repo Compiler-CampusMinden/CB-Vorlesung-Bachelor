@@ -48,5 +48,3 @@ der letzten Sitzung um.
 ## A4.4: Vortrag II
 
 Bereiten Sie Ihren Vortrag für die Vorstellung Ihrer zusätzlichen Features vor.
-
-Siehe [Note und Credits > Vortrag II](../admin/grading.md).

@@ -70,8 +70,11 @@ Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
 **Projektarbeit**, 5 ECTS
 
-Hier finden Sie Informationen zum Ablauf des Praktikums sowie zur Prüfungsform:
-[Note und Credits](admin/grading.md).
+-   **Vortrag I**: Umsetzung von objektorientierten Konzepten in Grammatik,
+    Symboltabelle und Interpreter, 30 Minuten Dauer
+-   **Vortrag II**: Vorstellung der Projektergebnisse, 30 Minuten Dauer
+
+**Gesamtnote: 35% Vortrag I plus 65% Vortrag II**
 
 
 ## Materialien
@@ -124,10 +127,6 @@ Hochschulen anbieten zu können. (Diese Termine werden in englischer Sprache dur
 <!-- reference to all markdown pages used in the current semester (to be replaced using a proper schedule table) -->
 ::: slides
 <details>
-[Syllabus](admin/syllabus.md)
-[Resources](admin/resources.md)
-[Grading](admin/grading.md)
-[Prüfungsvorbereitung](admin/exams.md)
 [FAQ](admin/faq.md)
 
 [Intro](lecture/intro/readme.md)                                        <!-- because of sub-sub-dirs -->
