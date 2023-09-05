@@ -221,9 +221,7 @@ sollte dann der Länge eines Disk-Blocks entsprechen.)
 Vergleiche auch [Wikipedia: "Circular Buffer"](https://en.wikipedia.org/wiki/Circular_buffer).
 :::
 
-::: center
 ![](images/doublebuffer.png){width="80%"}
-:::
 
 
 ```python
