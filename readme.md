@@ -1,10 +1,10 @@
 ---
 archetype: "home"
-title: "CB W23 B.Sc."
+title: "IFM 5.21: CB (W23)"
 ---
 
 
-# IFM 5.21: Compilerbau (Winter 2022/23)
+# IFM 5.21: Compilerbau (Winter 2023/24)
 
 ## Kursbeschreibung
 
