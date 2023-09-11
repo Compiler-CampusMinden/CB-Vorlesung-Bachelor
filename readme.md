@@ -1,10 +1,8 @@
 ---
 archetype: "home"
-title: "IFM 5.21: CB (W23)"
+title: "IFM 5.21: Compilerbau (Winter 2023/24)"
 ---
 
-
-# IFM 5.21: Compilerbau (Winter 2023/24)
 
 ## Kursbeschreibung
 
