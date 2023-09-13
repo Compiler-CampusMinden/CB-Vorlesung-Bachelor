@@ -61,7 +61,7 @@ setzen diese bei der Erstellung eines kleinen Compiler-Frontends für [_Mini-Pyt
 | online/C1             | online/D328           |
 
 Durchführung als **Flipped Classroom** (Carsten) bzw. **Vorlesung** (BC):
-alle Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**)
+alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
 [ILIAS]: https://www.hsbi.de/elearning/goto.php?target=crs_1091711&client_id=FH-Bielefeld
 
