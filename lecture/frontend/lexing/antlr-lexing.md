@@ -429,7 +429,7 @@ hello
     Rekursive Lexer-Regeln sind erlaubt. **Achtung**: Es dürfen keine
     _links-rekursiven_ Regeln genutzt werden, etwa wie `ID : ID '*' ID ;` ...
     (Eine genauere Definition und die Transformation in nicht-linksrekursive
-    Regeln siehe [LL-Parser](../parsing/ll-parser-theory.md)).
+    Regeln siehe [LL-Parser](../parsing/ll-parser.md)).
 
 *   Alle Literale werden in _einfache_ Anführungszeichen eingeschlossen
     (es erfolgt keine Unterscheidung zwischen einzelnen Zeichen und Strings
