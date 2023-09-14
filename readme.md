@@ -30,7 +30,6 @@ setzen diese bei der Erstellung eines kleinen Compiler-Frontends für [_Mini-Pyt
     *   Kontextfreie Grammatiken (CFG)
     *   LL-Parser (Top-Down-Parser)
     *   Generierung mit ANTLR
-    *   Error Recovery
 
 3.  Symboltabellen
     *   Berücksichtigung unterschiedlicher Sprachparadigmen
@@ -115,7 +114,7 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 |  43   | XX, XX.XX.23                      | [CFG]                                                                                                               | BC          |                                               |
 |  43   | XX, XX.XX.23 (**Praktikum**)      | [LL-Parser]                                                                                                         | BC          |                                               |
 |  44   | XX, XX.XX.23                      | [Attributierte Grammatiken]                                                                                         | BC          |                                               |
-|  44   | XX, XX.XX.23 (**Praktikum**)      | [Parser mit ANTLR] \| [Error Revocery] \| [Grenze Lexer und Parser]                                                 | Carsten     |                                               |
+|  44   | XX, XX.XX.23 (**Praktikum**)      | [Parser mit ANTLR] \| [Grenze Lexer und Parser]                                                                     | Carsten     |                                               |
 |  44   | XX, XX.XX.23, **17:00-18:30 Uhr** | Edmonton: ANTLR + Live-Coding (CA)                                                                                  |             |                                               |
 |  45   | XX, XX.XX.23                      | [Überblick Symboltabellen] \| [Symboltabellen: Scopes] \| [Symboltabellen: Funktionen] \| [Symboltabellen: Klassen] | Carsten     | [B01]                                         |
 |  46   | XX, XX.XX.23                      | [Überblick Zwischencode] \| [Mini-Python (Builder)]                                                                 | BC          | [B02]                                         |
@@ -140,7 +139,6 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 [CFG]: lecture/frontend/parsing/cfg.md
 [LL-Parser]: lecture/frontend/parsing/ll-parser.md
 [Parser mit ANTLR]: lecture/frontend/parsing/antlr-parsing.md
-[Error Revocery]: lecture/frontend/parsing/recovery.md
 [Grenze Lexer und Parser]: lecture/frontend/parsing/finalwords.md
 
 [Attributierte Grammatiken]: lecture/frontend/semantics/attribgrammars.md
