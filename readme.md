@@ -24,7 +24,7 @@ setzen diese bei der Erstellung eines kleinen Compiler-Frontends für [_Mini-Pyt
 
 1.  Lexikalische Analyse: Scanner/Lexer
     *   Reguläre Ausdrücke
-    *   Manuelle Implementierung, Generierung mit ANTLR
+    *   Generierung mit ANTLR
 
 2.  Syntaxanalyse: Parser
     *   Kontextfreie Grammatiken (CFG)
@@ -111,7 +111,7 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 |:-----:|:----------------------------------|:--------------------------------------------------------------------------------------------------------------------|:------------|:----------------------------------------------|
 |  41   | XX, XX.XX.23                      | Orga (**Zoom**) \|\| [Überblick] \| [Sprachen] \| [Anwendungen]                                                     | Carsten, BC |                                               |
 |  42   | XX, XX.XX.23                      | [Reguläre Sprachen]                                                                                                 | BC          |                                               |
-|  42   | XX, XX.XX.23 (**Praktikum**)      | [Handcodierter Lexer] \| [Lexer mit ANTLR]                                                                          | Carsten     |                                               |
+|  42   | XX, XX.XX.23 (**Praktikum**)      | [Lexer mit ANTLR]                                                                                                   | Carsten     |                                               |
 |  43   | XX, XX.XX.23                      | [CFG]                                                                                                               | BC          |                                               |
 |  43   | XX, XX.XX.23 (**Praktikum**)      | [LL-Parser (Theorie)]                                                                                               | BC          |                                               |
 |  44   | XX, XX.XX.23                      | [Attributierte Grammatiken]                                                                                         | BC          |                                               |
@@ -135,7 +135,6 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 [Anwendungen]: lecture/intro/applications.md
 
 [Reguläre Sprachen]: lecture/frontend/lexing/regular.md
-[Handcodierter Lexer]: lecture/frontend/lexing/recursive.md
 [Lexer mit ANTLR]: lecture/frontend/lexing/antlr-lexing.md
 
 [CFG]: lecture/frontend/parsing/cfg.md

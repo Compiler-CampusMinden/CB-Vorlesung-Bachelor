@@ -102,6 +102,163 @@ challenges: |
 ---
 
 
+## Lexer: Erzeugen eines Token-Stroms aus einem Zeichenstrom
+
+\vspace{-20mm}
+
+[Aus dem Eingabe(-quell-)text]{.notes}
+
+```c
+/* demo */
+a= [5  , 6]     ;
+```
+
+[erstellt der Lexer (oder auch Scanner genannt) eine Sequenz von Token:]{.notes}
+
+\pause
+\bigskip
+\bigskip
+
+```
+<ID, "a"> <ASSIGN> <LBRACK> <NUM, 5> <COMMA> <NUM, 6> <RBRACK> <SEMICOL>
+```
+
+::: notes
+*   Input: Zeichenstrom (Eingabedatei o.ä.)
+*   Verarbeitung: Finden sinnvoller Sequenzen im Zeichenstrom ("Lexeme"),
+    Einteilung in Kategorien und Erzeugen von Token (Paare: Typ/Name, Wert)
+*   Ausgabe: Tokenstrom
+
+Normalerweise werden für spätere Phasen unwichtige Elemente wie White-Space
+oder Kommentare entfernt.
+
+Durch diese Vorverarbeitung wird eine höhere Abstraktionsstufe erreicht und es
+können erste grobe Fehler gefunden werden. Dadurch kann der Parser auf einer
+abstrakteren Stufe arbeiten und muss nicht mehr den gesamten ursprünglichen
+Zeichenstrom verarbeiten.
+
+
+*Anmerkung*: In dieser Phase steht die Geschwindigkeit stark im Vordergrund:
+Der Lexer "sieht" *alle* Zeichen im Input. Deshalb findet man häufig von
+Hand kodierte Lexer, obwohl die Erstellung der Lexer auch durch Generatoren
+erledigt werden könnte ...
+
+
+*Anmerkung*: Die Token sind die Terminalsymbole in den Parserregeln (Grammatik).
+:::
+
+
+## Definition wichtiger Begriffe
+
+*   **Token**: Tupel (Tokenname, optional: Wert)
+
+    ::: notes
+    Der Tokenname ist ein abstraktes Symbol, welches eine lexikalische
+    Einheit repräsentiert (Kategorie). Die Tokennamen sind die Eingabesymbole
+    für den Parser.
+
+    Token werden i.d.R. einfach über ihren Namen referenziert. Token werden
+    häufig zur Unterscheidung von anderen Symbolen in der Grammatik in
+    Fettschrift oder mit großen Anfangsbuchstaben geschrieben.
+
+    Ein Token kann einen Wert haben, etwa eine Zahl oder einen Bezeichner, der
+    auf das zum Token gehörende Pattern gematcht hatte (also das Lexem). Wenn
+    der Wert des Tokens eindeutig über den Namen bestimmt ist (im Beispiel oben
+    beim Komma oder den Klammern), dann wird häufig auf den Wert verzichtet.
+    :::
+
+\smallskip
+
+*   **Lexeme**: Sequenz von Zeichen im Eingabestrom, die auf ein Tokenpattern
+    matcht und vom Lexer als Instanz dieses Tokens identifiziert wird.
+
+\smallskip
+
+*   **Pattern**: Beschreibung der Form eines Lexems
+
+    ::: notes
+    Bei Schlüsselwörtern oder Klammern etc. sind dies die Schlüsselwörter oder
+    Klammern selbst. Bei Zahlen oder Bezeichnern (Namen) werden i.d.R.
+    reguläre Ausdrücke zur Beschreibung der Form des Lexems formuliert.
+    :::
+
+
+## Typische Muster für Erstellung von Token
+
+1.  Schlüsselwörter
+    *   Ein eigenes Token (RE/DFA) für jedes Schlüsselwort, oder
+    *   Erkennung als Name und Vergleich mit Wörterbuch
+        [und nachträgliche Korrektur des Tokentyps]{.notes}
+
+    ::: notes
+    Wenn Schlüsselwörter über je ein eigenes Token abgebildet werden, benötigt
+    man für jedes Schlüsselwort einen eigenen RE bzw. DFA. Die Erkennung als
+    Bezeichner und das Nachschlagen in einem Wörterbuch (geeignete Hashtabelle)
+    sowie die entsprechende nachträgliche Korrektur des Tokentyps kann die
+    Anzahl der Zustände im Lexer signifikant reduzieren!
+    :::
+
+2.  Operatoren
+    *   Ein eigenes Token für jeden Operator, oder
+    *   Gemeinsames Token für jede Operatoren-Klasse
+
+3.  Bezeichner: Ein gemeinsames Token für alle Namen
+
+4.  Zahlen: Ein gemeinsames Token für alle numerischen Konstante
+    [(ggf. Integer und Float unterscheiden)]{.notes}
+
+    ::: notes
+    Für Zahlen führt man oft ein Token "`NUM`" ein. Als Attribut speichert man
+    das Lexem i.d.R. als String. Alternativ kann man (zusätzlich) das Lexem in
+    eine Zahl konvertieren und als (zusätzliches) Attribut speichern. Dies kann
+    in späteren Stufen viel Arbeit sparen.
+    :::
+
+5.  String-Literale: Ein gemeinsames Token
+
+6.  Komma, Semikolon, Klammern, ...: Je ein eigenes Token
+
+\smallskip
+
+7.  Regeln für White-Space und Kommentare etc. ...
+
+    ::: notes
+    Normalerweise benötigt man Kommentare und White-Spaces in den folgenden
+    Stufen nicht und entfernt diese deshalb aus dem Eingabestrom. Dabei könnte
+    man etwa White-Spaces in den Pattern der restlichen Token berücksichtigen,
+    was die Pattern aber sehr komplex macht. Die Alternative sind zusätzliche
+    Pattern, die auf die White-Space und anderen nicht benötigten Inhalt
+    matchen und diesen "geräuschlos" entfernen. Mit diesen Pattern werden
+    keine Token erzeugt, d.h. der Parser und die anderen Stufen bemerken nichts
+    von diesem Inhalt.
+
+    Gelegentlich benötigt man aber auch Informationen über White-Spaces,
+    beispielsweise in Python. Dann müssen diese Token wie normale Token
+    an den Parser weitergereicht werden.
+    :::
+
+
+::: notes
+Jedes Token hat i.d.R. ein Attribut, in dem das Lexem gespeichert wird. Bei
+eindeutigen Token (etwa bei eigenen Token je Schlüsselwort oder bei den
+Interpunktions-Token) kann man sich das Attribut auch sparen, da das Lexem
+durch den Tokennamen eindeutig rekonstruierbar ist.
+
+| Token     | Beschreibung                                         | Beispiel-Lexeme      |
+|:----------|:-----------------------------------------------------|:---------------------|
+| `if`      | Zeichen `i` und `f`                                  | `if`                 |
+| `relop`   | `<` oder `>` oder `<=` oder `>=` oder `==` oder `!=` | `<`, `<=`            |
+| `id`      | Buchstabe, gefolgt von Buchstaben oder Ziffern       | `pi`, `count`, `x3`  |
+| `num`     | Numerische Konstante                                 | `42`, `3.14159`, `0` |
+| `literal` | Alle Zeichen außer `"`, in `"` eingeschlossen        | `"core dumped"`      |
+
+
+*Anmerkung*: Wenn es mehrere matchende REs gibt, wird in der Regel das längste
+Lexem bevorzugt. Wenn es mehrere gleich lange Alternativen gibt, muss man mit
+Vorrangregeln bzgl. der Token arbeiten.
+:::
+
+
 ## Hello World
 
 ```antlr
