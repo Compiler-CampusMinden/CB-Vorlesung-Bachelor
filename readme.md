@@ -39,7 +39,7 @@ setzen diese bei der Erstellung eines kleinen Compiler-Frontends für [_Mini-Pyt
 4.  Semantische Analyse
     *   Attributierte Grammatiken
 
-5.  Zwischencode: Intermediate Representation (IR), LLVM
+5.  Zwischencode: Intermediate Representation (IR), Builder
 
 6.  Interpreter
     *   AST-Traversierung
