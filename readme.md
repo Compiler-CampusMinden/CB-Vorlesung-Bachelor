@@ -102,26 +102,26 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
 ### Vorlesung
 
-| Woche | Datum                             | Themen                                                                                                              | Lead        | Bemerkung                                     |
-|:-----:|:----------------------------------|:--------------------------------------------------------------------------------------------------------------------|:------------|:----------------------------------------------|
-|  41   | XX, XX.XX.23                      | Orga (**Zoom**) \|\| [Überblick] \| [Sprachen] \| [Anwendungen]                                                     | Carsten, BC |                                               |
-|  42   | XX, XX.XX.23                      | [Reguläre Sprachen]                                                                                                 | BC          |                                               |
-|  42   | XX, XX.XX.23 (**Praktikum**)      | [Lexer mit ANTLR]                                                                                                   | Carsten     |                                               |
-|  43   | XX, XX.XX.23                      | [CFG]                                                                                                               | BC          |                                               |
-|  43   | XX, XX.XX.23 (**Praktikum**)      | [LL-Parser]                                                                                                         | BC          |                                               |
-|  44   | XX, XX.XX.23                      | [Parser mit ANTLR] \| [Grenze Lexer und Parser]                                                                     | Carsten     |                                               |
-|  44   | XX, XX.XX.23 (**Praktikum**)      | [Überblick Symboltabellen] \| [Symboltabellen: Scopes] \| [Symboltabellen: Funktionen] \| [Symboltabellen: Klassen] | Carsten     |                                               |
-|  45   | XX, XX.XX.23, **17:00-18:30 Uhr** | Edmonton: ANTLR + Live-Coding (CA)                                                                                  |             | [B01]                                         |
-|  46   | XX, XX.XX.23                      | [Attributierte Grammatiken]                                                                                         | BC          |                                               |
-|  46   | XX, XX.XX.23 (**Praktikum**)      | [Syntaxgesteuerte Interpreter] \| [AST-basierte Interpreter 1] \| [AST-basierte Interpreter 2]                      | Carsten     |                                               |
-|  47   | XX, XX.XX.23                      | [Überblick Zwischencode] \| [Mini-Python (Builder)]                                                                 | BC          | [B02]                                         |
-|  48   | XX, XX.XX.23, **17:00-18:30 Uhr** | Edmonton: Mini-Panel "Compilers Today" (CA/DE)                                                                      |             |                                               |
-|  49   | XX, XX.XX.23, **17:00-18:30 Uhr** | Edmonton: Vorstellung Blatt 03: Umsetzung OOP in Grammatik, Symboltabellen und Interpreter (DE)                     |             | [B03] (Kein Praktikum - Termin mit Edmonton!) |
-|  50   | XX, XX.XX.23                      | Freies Arbeiten                                                                                                     | Carsten     | [B04]                                         |
-|  51   | XX, XX.XX.23                      | Freies Arbeiten                                                                                                     | Carsten     |                                               |
-|  02   | XX, XX.XX.24                      | Freies Arbeiten                                                                                                     | Carsten     |                                               |
-|  03   | XX, XX.XX.24                      | Präsentation der Projekte: Termine siehe Etherpad                                                                   | Carsten, BC |                                               |
-|  04   | XX, XX.XX.24                      | Präsentation der Projekte: Termine siehe Etherpad                                                                   | Carsten, BC |                                               |
+| Woche | Datum                           | Themen                                                                                                              | Lead        | Bemerkung                                     |
+|:-----:|:--------------------------------|:--------------------------------------------------------------------------------------------------------------------|:------------|:----------------------------------------------|
+|  41   | Di, 10.10.                      | Orga (**Zoom**) \|\| [Überblick] \| [Sprachen] \| [Anwendungen]                                                     | Carsten, BC |                                               |
+|  42   | Di, 17.10.                      | [Reguläre Sprachen]                                                                                                 | BC          |                                               |
+|  42   | Fr, 20.10. (**Praktikum**)      | [Lexer mit ANTLR]                                                                                                   | Carsten     |                                               |
+|  43   | Di, 24.10.                      | [CFG]                                                                                                               | BC          |                                               |
+|  43   | Fr, 27.10. (**Praktikum**)      | [LL-Parser]                                                                                                         | BC          |                                               |
+|  44   | Di, 31.10.                      | [Parser mit ANTLR] \| [Grenze Lexer und Parser]                                                                     | Carsten     |                                               |
+|  44   | Fr, 03.11. (**Praktikum**)      | [Überblick Symboltabellen] \| [Symboltabellen: Scopes] \| [Symboltabellen: Funktionen] \| [Symboltabellen: Klassen] | Carsten     |                                               |
+|  45   | **XX, XX.11., 17:00-18:30 Uhr** | **Edmonton**: ANTLR + Live-Coding (CA)                                                                              |             | [B01]                                         |
+|  46   | Di, 14.11.                      | [Attributierte Grammatiken]                                                                                         | BC          |                                               |
+|  46   | Fr, 17.11. (**Praktikum**)      | [Syntaxgesteuerte Interpreter] \| [AST-basierte Interpreter 1] \| [AST-basierte Interpreter 2]                      | Carsten     |                                               |
+|  47   | Di, 21.11.                      | [Überblick Zwischencode] \| [Mini-Python (Builder)]                                                                 | BC          | [B02]                                         |
+|  48   | **XX, XX.11., 17:00-18:30 Uhr** | **Edmonton**: Mini-Panel "Compilers Today" (CA/DE)                                                                  |             |                                               |
+|  49   | **XX, XX.12., 17:00-18:30 Uhr** | **Edmonton**: Vorstellung Blatt 03: Umsetzung OOP in Grammatik, Symboltabellen und Interpreter (DE)                 |             | [B03] (Kein Praktikum - Termin mit Edmonton!) |
+|  50   | Di, 12.12.                      | Freies Arbeiten                                                                                                     | Carsten     | [B04]                                         |
+|  51   | Di, 19.12.                      | Freies Arbeiten                                                                                                     | Carsten     |                                               |
+|  02   | Di, 09.01.                      | Freies Arbeiten                                                                                                     | Carsten     |                                               |
+|  03   | Di, 16.01.                      | Präsentation der Projekte: Termine siehe Etherpad                                                                   | Carsten, BC |                                               |
+|  04   | Di, 23.01.                      | Präsentation der Projekte: Termine siehe Etherpad                                                                   | Carsten, BC |                                               |
 
 [Überblick]: lecture/intro/overview.md
 [Sprachen]: lecture/intro/languages.md
@@ -151,12 +151,12 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
 ### Praktikum
 
-| Woche | Blatt                                          | Abgabe ILIAS                                                                                                                                                                                                       | Vorstellung Praktikum                                |
-|:-----:|:-----------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------|
-|  45   | [B01]: Grammatik, ANTLR, AST (Mini-Python)     | XX, XX.XX.2023, XX:XX Uhr ([Link](https://www.hsbi.de/elearning/ilias.php?ref_id=1258633&target=1258633&cmd=showOverview&cmdClass=ilobjexercisegui&cmdNode=cl:p3&baseClass=ilexercisehandlergui#il_mhead_t_focus)) | XX, XX.XX.2023                                       |
-|  47   | [B02]: AST und Symboltabellen (Mini-Python)    | XX, XX.XX.2023, XX:XX Uhr ([Link](https://www.hsbi.de/elearning/ilias.php?ref_id=1258633&target=1258633&cmd=showOverview&cmdClass=ilobjexercisegui&cmdNode=cl:p3&baseClass=ilexercisehandlergui#il_mhead_t_focus)) | XX, XX.XX.2023                                       |
-|  49   | [B03]: Interpreter (Mini-Python)               | XX, XX.XX.2023, XX:XX Uhr ([Link](https://www.hsbi.de/elearning/ilias.php?ref_id=1258633&target=1258633&cmd=showOverview&cmdClass=ilobjexercisegui&cmdNode=cl:p3&baseClass=ilexercisehandlergui#il_mhead_t_focus)) | XX, XX.XX.23, **17:00-18:30 Uhr** (Edmonton-Sitzung) |
-|  50   | [B04]: Builder und freie Aufgabe (Mini-Python) | XX, XX.XX.2023, XX:XX Uhr ([Link](https://www.hsbi.de/elearning/ilias.php?ref_id=1258633&target=1258633&cmd=showOverview&cmdClass=ilobjexercisegui&cmdNode=cl:p3&baseClass=ilexercisehandlergui#il_mhead_t_focus)) | XX, XX.XX.2023                                       |
+| Woche | Blatt                                          | Abgabe ILIAS                                                                                                     | Vorstellung Praktikum                              |
+|:-----:|:-----------------------------------------------|:-----------------------------------------------------------------------------------------------------------------|:---------------------------------------------------|
+|  45   | [B01]: Grammatik, ANTLR, AST (Mini-Python)     | Fr, 10.11., 16:00 Uhr ([Link](https://www.hsbi.de/elearning/goto.php?target=exc_1258623&client_id=FH-Bielefeld)) | Fr, 10.11.                                         |
+|  47   | [B02]: AST und Symboltabellen (Mini-Python)    | Fr, 24.11., 16:00 Uhr ([Link](https://www.hsbi.de/elearning/goto.php?target=exc_1258623&client_id=FH-Bielefeld)) | Fr, 24.11.                                         |
+|  49   | [B03]: Interpreter (Mini-Python)               | XX, XX.12., XX:XX Uhr ([Link](https://www.hsbi.de/elearning/goto.php?target=exc_1258623&client_id=FH-Bielefeld)) | **XX, XX.12., 17:00-18:30 Uhr** (Edmonton-Sitzung) |
+|  50   | [B04]: Builder und freie Aufgabe (Mini-Python) | Fr, 15.12., 16:00 Uhr ([Link](https://www.hsbi.de/elearning/goto.php?target=exc_1258623&client_id=FH-Bielefeld)) | Fr, 15.12.                                         |
 
 [B01]: homework/sheet01.md
 [B02]: homework/sheet02.md
