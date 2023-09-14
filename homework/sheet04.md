@@ -25,7 +25,7 @@ auch die [Dokumentation].
 Überlegen Sie sich zusätzliche Konzepte und Features, die Sie in Ihren
 Interpreter/Compiler einbauen wollen. Dies können zusätzliche Features
 auf Sprachebene sein oder Ergänzungen/Erweiterungen Ihres Interpreters
-bzw. Compilers.
+bzw. Compilers. Geben Sie im ILIAS eine kurze Konzeptskizze als PDF ab.
 
 Beispiel: Sie könnten neue syntaktische Elemente in Mini-Python einführen,
 die intern auf die existierende Semantik abgebildet werden ([_syntactic sugar_]).
@@ -39,12 +39,16 @@ Stellen Sie diese Ideen im Praktikum vor und verteidigen Sie diese.
 [_syntactic sugar_]: https://en.wikipedia.org/wiki/Syntactic_sugar
 
 
-## A4.3: Umsetzung
-
-Setzen Sie die im Praktikum vorgestellten Features bis zur Projektvorstellung in
-der letzten Sitzung um.
+---
 
 
-## A4.4: Vortrag II
+## Umsetzung
 
-Bereiten Sie Ihren Vortrag für die Vorstellung Ihrer zusätzlichen Features vor.
+Setzen Sie die im Praktikum abgestimmten Features bis zur Projektvorstellung
+in den letzten beiden Sitzungen um.
+
+
+## Vortrag II
+
+Bereiten Sie Ihren Vortrag zur Vorstellung Ihrer zusätzlichen Features in den
+letzten beiden Sitzungen vor.
