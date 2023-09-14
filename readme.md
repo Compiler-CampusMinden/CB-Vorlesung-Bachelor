@@ -49,8 +49,8 @@ setzen diese bei der Erstellung eines kleinen Compiler-Frontends für [_Mini-Pyt
 
 ## Team
 
--   [BC George](https://www.hsbi.de/minden/ueber-uns/personenverzeichnis/birgit-christina-george)
--   [Carsten Gips](https://www.hsbi.de/minden/ueber-uns/personenverzeichnis/carsten-gips)
+*   [BC George](https://www.hsbi.de/minden/ueber-uns/personenverzeichnis/birgit-christina-george)
+*   [Carsten Gips](https://www.hsbi.de/minden/ueber-uns/personenverzeichnis/carsten-gips)
 
 
 ## Kursformat
@@ -67,13 +67,15 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
 ## Prüfungsform, Note und Credits
 
-**Projektarbeit**, 5 ECTS
+**Parcoursprüfung**, 5 ECTS
 
--   **Vortrag I**: Umsetzung von objektorientierten Konzepten in Grammatik,
-    Symboltabelle und Interpreter, 30 Minuten Dauer
--   **Vortrag II**: Vorstellung der Projektergebnisse, 30 Minuten Dauer
+*   **unbenotet**: 4x Meilenstein/Übungsblatt bearbeitet und vorgestellt/diskutiert
+*   **unbenotet**: Vortrag I mit Edmonton zu objektorientierten Konzepten in Grammatik,
+    Symboltabelle und Interpreter, 30 Minuten Dauer (Meilenstein 03)
+*   **benotet (30%)**: Vortrag II: Vorstellung der Projektergebnisse, 30 Minuten Dauer
+*   **benotet (70%)**: Mündliche Prüfung
 
-**Gesamtnote: 35% Vortrag I plus 65% Vortrag II**
+**Gesamtnote: 30% Vortrag II plus 70% mdl. Prüfung**
 
 
 ## Materialien
