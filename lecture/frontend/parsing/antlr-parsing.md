@@ -645,9 +645,6 @@ die Grammatik abhängig von der Zielsprache des generierten Lexers/Parsers!
 Damit haben wir die sprichwörtliche "Spitze des Eisbergs" gesehen. Mit ANTLR
 sind noch viele weitere Dinge möglich. Bitte nutzen Sie aktiv die Dokumentation
 auf [github.com/antlr/antlr4](https://github.com/antlr/antlr4).
-
-Dem Thema Behandlung von Fehlern ist eine eigene Sitzung gewidmet:
-[Error-Recovery](recovery.md).
 :::
 
 
