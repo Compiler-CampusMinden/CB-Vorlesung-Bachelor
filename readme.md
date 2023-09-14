@@ -113,9 +113,9 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 |  42   | XX, XX.XX.23                      | [Reguläre Sprachen]                                                                                                 | BC          |                                               |
 |  42   | XX, XX.XX.23 (**Praktikum**)      | [Lexer mit ANTLR]                                                                                                   | Carsten     |                                               |
 |  43   | XX, XX.XX.23                      | [CFG]                                                                                                               | BC          |                                               |
-|  43   | XX, XX.XX.23 (**Praktikum**)      | [LL-Parser (Theorie)]                                                                                               | BC          |                                               |
+|  43   | XX, XX.XX.23 (**Praktikum**)      | [LL-Parser]                                                                                                         | BC          |                                               |
 |  44   | XX, XX.XX.23                      | [Attributierte Grammatiken]                                                                                         | BC          |                                               |
-|  44   | XX, XX.XX.23 (**Praktikum**)      | [LL-Parser (Praxis)] \| [Parser mit ANTLR] \| [Error Revocery] \| [Grenze Lexer und Parser]                         | Carsten     |                                               |
+|  44   | XX, XX.XX.23 (**Praktikum**)      | [Parser mit ANTLR] \| [Error Revocery] \| [Grenze Lexer und Parser]                                                 | Carsten     |                                               |
 |  44   | XX, XX.XX.23, **17:00-18:30 Uhr** | Edmonton: ANTLR + Live-Coding (CA)                                                                                  |             |                                               |
 |  45   | XX, XX.XX.23                      | [Überblick Symboltabellen] \| [Symboltabellen: Scopes] \| [Symboltabellen: Funktionen] \| [Symboltabellen: Klassen] | Carsten     | [B01]                                         |
 |  46   | XX, XX.XX.23                      | [Überblick Zwischencode] \| [Mini-Python (Builder)]                                                                 | BC          | [B02]                                         |
@@ -138,8 +138,7 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 [Lexer mit ANTLR]: lecture/frontend/lexing/antlr-lexing.md
 
 [CFG]: lecture/frontend/parsing/cfg.md
-[LL-Parser (Theorie)]: lecture/frontend/parsing/ll-parser-theory.md
-[LL-Parser (Praxis)]: lecture/frontend/parsing/ll-parser-impl.md
+[LL-Parser]: lecture/frontend/parsing/ll-parser.md
 [Parser mit ANTLR]: lecture/frontend/parsing/antlr-parsing.md
 [Error Revocery]: lecture/frontend/parsing/recovery.md
 [Grenze Lexer und Parser]: lecture/frontend/parsing/finalwords.md

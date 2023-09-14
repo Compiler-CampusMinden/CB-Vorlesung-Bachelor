@@ -1,6 +1,6 @@
 ---
 archetype: lecture-bc
-title: "LL-Parser (Theorie)"
+title: "LL-Parser"
 author: "BC George (HSBI)"
 readings:
   - key: "aho2013compilers"
@@ -14,7 +14,7 @@ outcomes:
   - k3: "Top-Down Analyse programmieren"
 attachments:
   - link: "https://raw.githubusercontent.com/Compiler-CampusMinden/AnnotatedSlides/master/ll-parser-theory.ann.ba.pdf"
-    name: "Annotierte Folien: LL-Parser (Theorie)"
+    name: "Annotierte Folien: LL-Parser"
 ---
 
 
