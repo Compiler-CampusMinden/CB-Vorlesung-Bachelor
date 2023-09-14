@@ -31,17 +31,13 @@ setzen diese bei der Erstellung eines kleinen Compiler-Frontends für [_Mini-Pyt
     *   LL-Parser (Top-Down-Parser)
     *   Generierung mit ANTLR
 
-3.  Symboltabellen
-    *   Berücksichtigung unterschiedlicher Sprachparadigmen
-    *   Typen, Klassen, Polymorphie
+3.  Semantische Analyse: Attributierte Grammatiken und Symboltabellen
     *   Namen und Scopes
+    *   Typen, Klassen, Polymorphie
 
-4.  Semantische Analyse
-    *   Attributierte Grammatiken
+4.  Zwischencode: Intermediate Representation (IR), Builder
 
-5.  Zwischencode: Intermediate Representation (IR), Builder
-
-6.  Interpreter
+5.  Interpreter
     *   AST-Traversierung
     *   Read-Eval-Schleife
 
