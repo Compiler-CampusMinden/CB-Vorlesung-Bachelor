@@ -116,12 +116,12 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 |  46   | Fr, 17.11. (**Praktikum**)      | [Syntaxgesteuerte Interpreter] \| [AST-basierte Interpreter 1] \| [AST-basierte Interpreter 2]                      | Carsten     |                                               |
 |  47   | Di, 21.11.                      | [Überblick Zwischencode] \| [Mini-Python (Builder)]                                                                 | BC          | [B02]                                         |
 |  48   | **XX, XX.11., 17:00-18:30 Uhr** | **Edmonton**: Mini-Panel "Compilers Today" (CA/DE)                                                                  |             |                                               |
-|  49   | **XX, XX.12., 17:00-18:30 Uhr** | **Edmonton**: Vorstellung Blatt 03: Umsetzung OOP in Grammatik, Symboltabellen und Interpreter (DE)                 |             | [B03] (Kein Praktikum - Termin mit Edmonton!) |
+|  49   | **XX, XX.12., 17:00-18:30 Uhr** | **Edmonton**: Vortrag I (Blatt 03) (DE)                                                                             |             | [B03] (Kein Praktikum - Termin mit Edmonton!) |
 |  50   | Di, 12.12.                      | Freies Arbeiten                                                                                                     | Carsten     | [B04]                                         |
 |  51   | Di, 19.12.                      | Freies Arbeiten                                                                                                     | Carsten     |                                               |
 |  02   | Di, 09.01.                      | Freies Arbeiten                                                                                                     | Carsten     |                                               |
-|  03   | Di, 16.01.                      | Präsentation der Projekte: Termine siehe Etherpad                                                                   | Carsten, BC |                                               |
-|  04   | Di, 23.01.                      | Präsentation der Projekte: Termine siehe Etherpad                                                                   | Carsten, BC |                                               |
+|  03   | Di, 16.01.                      | Vortrag II: Termine siehe Etherpad                                                                                  | Carsten, BC |                                               |
+|  04   | Di, 23.01.                      | Vortrag II: Termine siehe Etherpad                                                                                  | Carsten, BC |                                               |
 
 [Überblick]: lecture/intro/overview.md
 [Sprachen]: lecture/intro/languages.md
