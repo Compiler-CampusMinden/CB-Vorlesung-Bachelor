@@ -121,7 +121,7 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 |  47   | XX, XX.XX.23                      | [Syntaxgesteuerte Interpreter] \| [AST-basierte Interpreter 1] \| [AST-basierte Interpreter 2]                      | Carsten     |                                               |
 |  48   | XX, XX.XX.23                      | Freies Arbeiten                                                                                                     | Carsten     | [B03] (Kein Praktikum - Termin mit Edmonton!) |
 |  48   | XX, XX.XX.23, **17:00-18:30 Uhr** | Edmonton: Vorstellung Blatt 03: Umsetzung OOP in Grammatik, Symboltabellen und Interpreter (DE)                     |             |                                               |
-|  49   | XX, XX.XX.23                      | [Garbage Collection]                                                                                                | Carsten     | [B04]                                         |
+|  49   | XX, XX.XX.23                      | Freies Arbeiten                                                                                                     | Carsten     | [B04]                                         |
 |  49   | XX, XX.XX.23, **17:00-18:30 Uhr** | Edmonton: Vorstellung der Projekte 'Dress Rehearsal' (CA)                                                           |             |                                               |
 |  50   | XX, XX.XX.23                      | Freies Arbeiten                                                                                                     | Carsten     |                                               |
 |  51   | XX, XX.XX.23                      | Freies Arbeiten                                                                                                     | Carsten     |                                               |
@@ -154,7 +154,6 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 [Syntaxgesteuerte Interpreter]: lecture/backend/interpretation/syntaxdriven.md
 [AST-basierte Interpreter 1]: lecture/backend/interpretation/astdriven-part1.md
 [AST-basierte Interpreter 2]: lecture/backend/interpretation/astdriven-part2.md
-[Garbage Collection]: lecture/backend/interpretation/gc.md
 
 ### Praktikum
 
