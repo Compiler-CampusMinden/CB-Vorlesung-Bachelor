@@ -152,7 +152,7 @@ Vorname Name: +49.571.8385-268
     ``` {.antlr size="scriptsize"}
     addrbk  : row+;
     row     : SURNAME NAME ':' telnr;
-   ```
+    ```
 
 ::: notes
 Die weiterführenden Lexer- und Parser-Regeln (`telnr`, `TELNR`, `SURNAME`, `NAME`)
