@@ -44,7 +44,7 @@ $\epsilon$ ist das leere Wort.
 Die _Länge_ $\vert w \vert$ eines Wortes $w$ ist die Anzahl von Buchstaben, die es enthält (Kardinalität).
 
 **Def.:**
-$\Sigma^k = \{w\ \text{über}\ \Sigma\ \vert\ \vert w \vert = k \}$
+$\Sigma^k = \lbrace w\ \text{über}\ \Sigma\ \vert\ \vert w \vert = k \rbrace$
 
 $\Sigma^{\ast} = \bigcup\limits_{i \in \mathbb{N}_0} \Sigma^i$ (die Kleene-Hülle von $\Sigma$)
 
@@ -81,7 +81,7 @@ $A = (Q, \Sigma, \delta, q_0, F)$ mit
 
  **Def.:** Die Sprache eines DFA $A\ L(A)$ ist definiert durch:
 
-$L(A) =\{w\ \vert \delta^{\ast}(q_0, w) \in F \}$
+$L(A) =\lbrace w\ \vert \delta^{\ast}(q_0, w) \in F \rbrace$
 
 ## Beispiel
 
@@ -98,12 +98,12 @@ $L(A) =\{w\ \vert \delta^{\ast}(q_0, w) \in F \}$
 
  **Def.:** Seien *L* und *M* Sprachen.
 
-*    $L \cup M = \{w \mid w \in L \vee w \in M \}$
-*    $LM = L \cdot M = L \circ M = \{vw \mid v \in L \land w \in M\}$
+*    $L \cup M = \lbrace w \mid w \in L \vee w \in M \rbrace$
+*    $LM = L \cdot M = L \circ M = \lbrace vw \mid v \in L \land w \in M\rbrace$
 *    Die Kleene-Hülle einer Sprache:
-        *    Basis: $L^0 = \{\epsilon\}$
-        *    Induktion: $L^i = \{xw\mid x \in L^{i-1}, w \in L, i >
-             0\}$, \newline $L^{\ast} = \bigcup\limits_{i \ge 0}L^i$, \newline $L^+ = \bigcup\limits_{i > 0}L^i$
+        *    Basis: $L^0 = \lbrace \epsilon\rbrace$
+        *    Induktion: $L^i = \lbrace xw\mid x \in L^{i-1}, w \in L, i >
+             0\rbrace$, \newline $L^{\ast} = \bigcup\limits_{i \ge 0}L^i$, \newline $L^+ = \bigcup\limits_{i > 0}L^i$
 
 
 ## Reguläre Ausdrücke
@@ -112,8 +112,8 @@ $L(A) =\{w\ \vert \delta^{\ast}(q_0, w) \in F \}$
 
 *    Basis:
      *    $\epsilon$ und $\emptyset$ sind reguläre Ausdrücke mit $L(\epsilon) =
-            \{\epsilon\}$, $L(\emptyset)=\emptyset$
-     *    Sei $a$ ein Symbol $\Rightarrow$ $a$ ist ein regex mit $L(a) = \{a\}$
+            \lbrace \epsilon\rbrace$, $L(\emptyset)=\emptyset$
+     *    Sei $a$ ein Symbol $\Rightarrow$ $a$ ist ein regex mit $L(a) = \lbrace a\rbrace$
 *    Induktion: Seien $E,\ F$ reguläre Ausdrücke. Dann gilt:
      *    $E+F$ ist ein regex und bezeichnet die Vereinigung $L(E + F) = L(E)\cup L(F)$
      *    $EF$ ist ein regex und bezeichnet die Konkatenation $L(EF) = L(E)L(F)$
@@ -157,7 +157,7 @@ $\alpha A \beta \Rightarrow \alpha \gamma \beta$ ($\alpha A \beta$ leitet $\alph
         $\beta\Rightarrow \gamma$ dann $\alpha \overset{\ast}{\Rightarrow} \gamma$
 
 **Def.:** {Sei $G = (N, T ,P, S)$ eine formale Grammatik.
-    Dann ist $L(G) = \{w \in T^{\ast} \mid S \overset{\ast}{\Rightarrow} w\}$ die von $G$ erzeugte Sprache.
+    Dann ist $L(G) = \lbrace w \in T^{\ast} \mid S \overset{\ast}{\Rightarrow} w\rbrace$ die von $G$ erzeugte Sprache.
 
 
 ## Reguläre Grammatiken
