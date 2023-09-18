@@ -234,6 +234,11 @@ $\alpha = \beta$
 
 ## LL(1)-Grammatiken
 
+:::notes
+Hier entsteht ein Tafelbild.
+:::
+
+
 
 ## LL(k)-Sprachen
 
