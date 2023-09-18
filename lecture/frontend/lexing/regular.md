@@ -27,6 +27,10 @@ attachments:
 
 ## Was muss ein Compiler wohl als erstes tun?
 
+:::notes
+Hier entsteht ein Tafelbild.
+:::
+
 ## Themen für heute
 - Endliche Automaten
 - Reguläre Ausdrücke
@@ -85,6 +89,9 @@ $L(A) =\lbrace w\ \vert \delta^{\ast}(q_0, w) \in F \rbrace$
 
 ## Beispiel
 
+:::notes
+Hier entsteht ein Tafelbild.
+:::
 
 
 
@@ -231,6 +238,10 @@ Man kann natürlich auch einen Lexer selbst programmieren, d. h. die DFAs für d
 
 
 ## Automatisch oder händisch
+
+:::notes
+Hier entsteht ein Tafelbild.
+:::
 
 
 
