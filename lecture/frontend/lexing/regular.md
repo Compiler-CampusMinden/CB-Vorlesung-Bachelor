@@ -174,7 +174,7 @@ $\alpha A \beta \Rightarrow \alpha \gamma \beta$ ($\alpha A \beta$ leitet $\alph
 
 ## Reguläre Sprachen
 
-**Satz:** Die von rechtsregulären Grammatiken erzeugten Sprachen sind genau die von linksregulären Grammatiken erzeugten Sprachen. Beide werden $reguläre$ Sprachen genannt.
+**Satz:** Die von rechtsregulären Grammatiken erzeugten Sprachen sind genau die von linksregulären Grammatiken erzeugten Sprachen. Beide werden *reguläre* Sprachen genannt.
 
 **Satz:** Die von regulären Ausdrücken beschriebenen Sprachen sind die regulären Sprachen.
 
