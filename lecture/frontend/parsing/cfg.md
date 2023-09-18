@@ -79,8 +79,9 @@ Bei jedem Zustandsübergang wird ein Zeichen (oder $\epsilon$) aus der Eingabe g
 
 ## Beispiel
 
+Ein PDA für $L=\lbrace ww^{R}\mid w\in \lbrace a,b\rbrace^{\ast}\rbrace$:
 
-![Ein PDA für $L=\lbrace ww^{R}\mid w\in \lbrace a,b\rbrace^{\ast}\rbrace$](images/pda2.png){width="45%"}
+![](images/pda2.png){width="45%"}
 
 
 ## Konfigurationen von PDAs
