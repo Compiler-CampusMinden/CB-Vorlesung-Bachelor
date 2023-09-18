@@ -166,6 +166,10 @@ $S \rightarrow a \mid S\ +\  S\ |\  S \ast S$
 Ableitungsbäume für $a + a \ast a$:
 \vfill
 
+:::notes
+Hier entsteht ein Tafelbild.
+:::
+
 
 ## Mehrdeutige Grammatiken
 
