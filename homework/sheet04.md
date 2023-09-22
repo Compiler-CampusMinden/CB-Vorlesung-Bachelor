@@ -42,13 +42,14 @@ Stellen Sie diese Ideen im Praktikum vor und verteidigen Sie diese.
 ---
 
 
-## Umsetzung
+## Ausblick Wochen 01 bis 04 in 2024
+
+### Umsetzung
 
 Setzen Sie die im Praktikum abgestimmten Features bis zur Projektvorstellung
 in den letzten beiden Sitzungen um.
 
-
-## Vortrag II
+### Vortrag
 
 Bereiten Sie Ihren Vortrag zur Vorstellung Ihrer zusätzlichen Features in den
 letzten beiden Sitzungen vor.
