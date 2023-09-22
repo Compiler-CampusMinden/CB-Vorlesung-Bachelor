@@ -47,7 +47,11 @@ Stellen Sie diese Ideen im Praktikum vor und verteidigen Sie diese.
 ### Umsetzung
 
 Setzen Sie die im Praktikum abgestimmten Features bis zur Projektvorstellung
-in den letzten beiden Sitzungen um.
+in den letzten beiden Sitzungen um. Nutzen Sie aktiv die freigewordenen VL-Slots.
+(Wir hatten am Anfang einige Praktikumstermine mit Vorlesungen belegt, damit
+Sie möglichst schnell die Inhalte kennenlernen und dann die Praktikumsaufgaben
+entsprechend planen und umsetzen können. Deshalb sind einige Vorlesungstermine
+am Ende des Semesters zum Ausgleich der freien Arbeit gewidmet.)
 
 ### Vortrag
 
