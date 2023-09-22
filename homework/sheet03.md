@@ -16,11 +16,15 @@ Bauen Sie einen Tree-Walking-Interpreter in Ihr Projekt ein:
     in Ihrem Interpreter.
 
 
-## A3.2: Vortrag I
+## A3.2: Spotlight: Vorstellung der bisherigen Ergebnisse
 
-Bereiten Sie Ihren Vortrag für die gemeinsame Sitzung mit Edmonton vor.
+Im Praktikum zu diesem Blatt soll jedes Team die Ergebnisse der Arbeiten am Interpreter
+in einer Art "Spotlight" vorstellen.
 
-Tragen Sie Ihre Arbeitsergebnisse bei der Implementierung der OOP-Features im
-Interpreter vor. Sie gehen dabei insbesondere auf die Umsetzung von Klassen
-und Vererbung und Methoden in der Grammatik, in der Symboltabelle und
-schließlich im Interpreter ein.
+Suchen Sie sich relevante und interessante Kern-Aspekte Ihrer Arbeit heraus. Gehen Sie
+insbesondere auf die Implementierung der OOP-Features im Interpreter ein. Erstellen Sie
+dazu ein Poster, welches Sie im Praktikum vorstellen. Sie haben für die Vorstellung 5
+bis maximal 6 Minuten Zeit. Das Poster teilen Sie im Zoom, Sie brauchen es nicht ausdrucken.
+
+Die PDF-Version des Posters geben Sie zusammen mit der Lösung der obigen Aufgabe im ILIAS
+ab.

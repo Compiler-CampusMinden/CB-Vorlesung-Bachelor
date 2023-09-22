@@ -154,7 +154,7 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 |  45   | [B01]: Grammatik, ANTLR, AST (Mini-Python)     | Fr, 10.11., 16:00 Uhr ([Link](https://www.hsbi.de/elearning/goto.php?target=exc_1258623&client_id=FH-Bielefeld))     | Fr, 10.11.                      |
 |  47   | [B02]: AST und Symboltabellen (Mini-Python)    | Fr, 24.11., 16:00 Uhr ([Link](https://www.hsbi.de/elearning/goto.php?target=exc_1258623&client_id=FH-Bielefeld))     | Fr, 24.11.                      |
 |  49   | [B03]: Interpreter (Mini-Python)               | Fr, 08.12., 16:00 Uhr ([Link](https://www.hsbi.de/elearning/goto.php?target=exc_1258623&client_id=FH-Bielefeld))     | Fr, 08.12.                      |
-|  51   | [B04]: Builder und freie Aufgabe (Mini-Python) | **Di**, 19.12., 08:00 Uhr ([Link](https://www.hsbi.de/elearning/goto.php?target=exc_1258623&client_id=FH-Bielefeld)) | Di, 19.12. (**Vorlesungsslot**) |
+|  51   | [B04]: Builder und freie Aufgabe (Mini-Python) | **Di, 19.12., 08:00 Uhr** ([Link](https://www.hsbi.de/elearning/goto.php?target=exc_1258623&client_id=FH-Bielefeld)) | Di, 19.12. (**Vorlesungsslot**) |
 
 [B01]: homework/sheet01.md
 [B02]: homework/sheet02.md
