@@ -62,9 +62,9 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
 **Parcoursprüfung**, 5 ECTS
 
-*   **unbenotet**: 4x Übungsblatt bearbeitet und vorgestellt/diskutiert
+*   **unbenotet**: Alle vier Übungsblätter ausreichend bearbeitet und Ergebnisse vorgestellt/diskutiert
 *   **unbenotet**: Aktive Teilnahme an den drei gemeinsamen Terminen mit der University of Alberta (Edmonton)
-*   **benotet (30%)**: Vortrag: Vorstellung der Projektergebnisse, 30 Minuten Dauer
+*   **benotet (30%)**: Vortrag: Vorstellung der Ergebnisse der freien Aufgabe, 30 Minuten Dauer
 *   **benotet (70%)**: Mündliche Prüfung
 
 **Gesamtnote: 30% Vortrag plus 70% mdl. Prüfung**
