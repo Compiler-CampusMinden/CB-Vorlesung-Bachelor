@@ -20,7 +20,7 @@ auch die [Dokumentation].
 [Dokumentation]: https://github.com/Compiler-CampusMinden/Mini-Python-Builder/tree/master/docs
 
 
-## A4.2: Konzepte und Features
+## A4.2: Freie Aufgabe: Zusätzliche Konzepte und Features
 
 Überlegen Sie sich zusätzliche Konzepte und Features, die Sie in Ihren
 Interpreter/Compiler einbauen wollen. Dies können zusätzliche Features
@@ -46,14 +46,16 @@ Stellen Sie diese Ideen im Praktikum vor und verteidigen Sie diese.
 
 ### Umsetzung
 
-Setzen Sie die im Praktikum abgestimmten Features bis zur Projektvorstellung
-in den letzten beiden Sitzungen um. Nutzen Sie aktiv die freigewordenen VL-Slots.
-(Wir hatten am Anfang des Semesters absichtlich einige Praktikumstermine mit
+Setzen Sie die im Praktikum abgestimmten Features bis zum Vortrag in den letzten
+beiden Sitzungen um. Nutzen Sie aktiv die freigewordenen VL-Slots.
+(_Wir hatten am Anfang des Semesters absichtlich einige Praktikumstermine mit
 Vorlesungen belegt, damit Sie möglichst schnell die Inhalte kennenlernen und
-dann die Praktikumsaufgaben entsprechend planen und umsetzen können. Zum Ausgleich
-sind nun einige Vorlesungstermine am Ende des Semesters der freien Arbeit gewidmet.)
+dann die Praktikumsaufgaben entsprechend planen und umsetzen können. Zum
+Ausgleich sind nun einige Vorlesungstermine am Ende des Semesters der freien
+Arbeit gewidmet._)
 
 ### Vortrag
 
-Bereiten Sie Ihren Vortrag zur Vorstellung Ihrer zusätzlichen Features in den
-letzten beiden Sitzungen vor.
+Bereiten Sie Ihren Vortrag zur Vorstellung der Ergebnisse Ihrer freien Aufgabe
+(Konzeption und Umsetzung der zusätzlichen Features in den letzten beiden
+Sitzungen vor.
