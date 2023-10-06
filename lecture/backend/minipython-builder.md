@@ -4,16 +4,16 @@ title: "Einstieg Builder für Mini-Python"
 menuTitle: "Mini-Python (Builder)"
 author: "BC George (HSBI)"
 readings:
-    -   key: "Torczon2012"
-        comment: "Kapitel 5 Intermediate Representation"
+  - key: "Torczon2012"
+    comment: "Kapitel 5 Intermediate Representation"
 outcomes:
-    -   k1: "**Zwischencode**"
-    -   k2: "*CBuilder*"
+  - k1: "**Zwischencode**"
+  - k2: "*CBuilder*"
 assignments:
-    -   topic: sheet04
+  - topic: sheet04
 attachments:
-    -   link: "https://raw.githubusercontent.com/Compiler-CampusMinden/AnnotatedSlides/master/minipython-builder.ann.ba.pdf"
-        name: "Annotierte Folien: Minipython CBuilder"
+  - link: "https://raw.githubusercontent.com/Compiler-CampusMinden/AnnotatedSlides/master/minipython-builder.ann.ba.pdf"
+    name: "Annotierte Folien: Minipython CBuilder"
 ---
 
 
