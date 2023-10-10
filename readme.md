@@ -56,7 +56,7 @@ setzen diese bei der Erstellung eines kleinen Compiler-Frontends für [_Mini-Pyt
 Durchführung als **Flipped Classroom** (Carsten) bzw. **Vorlesung** (BC):
 alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
-[ILIAS]: https://www.hsbi.de/elearning/goto.php?target=crs_1091711&client_id=FH-Bielefeld
+[ILIAS]: https://www.hsbi.de/elearning/goto.php?target=crs_1254524&client_id=FH-Bielefeld
 
 ## Prüfungsform, Note und Credits
 
