@@ -106,7 +106,7 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 |  42   | Fr, 20.10. (**Praktikum**)      | [Lexer mit ANTLR]                                                                                                   | Carsten     |                                 |
 |  43   | Di, 24.10.                      | [CFG]                                                                                                               | BC          |                                 |
 |  43   | Fr, 27.10. (**Praktikum**)      | [LL-Parser]                                                                                                         | BC          |                                 |
-|  44   | **Mo, 30.10., 17:00-18:00 Uhr** | **Edmonton I**: ANTLR + Live-Coding (CA)                                                                            |             |                                 |
+|  44   | **Mo, 30.10., 17:00-18:00 Uhr** | **Edmonton I**: ANTLR + Live-Coding (CA)                                                                            |             | online bzw. H10                 |
 |  44   | Di, 31.10.                      | [Parser mit ANTLR] \| [Grenze Lexer und Parser]                                                                     | Carsten     |                                 |
 |  45   | Di, 07.11.                      | [Überblick Symboltabellen] \| [Symboltabellen: Scopes] \| [Symboltabellen: Funktionen] \| [Symboltabellen: Klassen] | Carsten     | [B01]                           |
 |  46   | Di, 14.11.                      | [Attributierte Grammatiken]                                                                                         | BC          |                                 |
