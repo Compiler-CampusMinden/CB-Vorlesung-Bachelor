@@ -136,7 +136,7 @@ Vorname Name: +49.571.8385-268
 
     ``` {.antlr size="scriptsize"}
     addrbk  : row+;
-    row     : SURNAME NAME ':' TELNR;
+    row     : GIVENNAME SURNAME ':' TELNR;
     ```
 
 \pause
@@ -151,11 +151,11 @@ Vorname Name: +49.571.8385-268
 
     ``` {.antlr size="scriptsize"}
     addrbk  : row+;
-    row     : SURNAME NAME ':' telnr;
+    row     : GIVENNAME SURNAME ':' telnr;
     ```
 
 ::: notes
-Die weiterführenden Lexer- und Parser-Regeln (`telnr`, `TELNR`, `SURNAME`, `NAME`)
+Die weiterführenden Lexer- und Parser-Regeln (`telnr`, `TELNR`, `GIVENNAME`, `SURNAME`)
 sind hier nicht dargestellt.
 :::
 
