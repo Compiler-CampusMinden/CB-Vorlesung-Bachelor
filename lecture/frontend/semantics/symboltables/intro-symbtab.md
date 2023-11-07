@@ -74,8 +74,8 @@ werden. Dies geschieht über Symboltabellen. Im Folgenden werden wir verschieden
 Aspekte von Symboltabellen betrachten und eine mögliche Implementierung erarbeiten,
 bevor wir uns (in [Syntaxgesteuerte Interpreter](../../../backend/interpretation/syntaxdriven.md))
 um die Auswertung (Interpretation) des AST kümmern können.
-### Logische Compilierung
-sphasen
+
+### Logische Compilierungsphasen
 
 *   Die lexikalische Analyse generiert eine Folge von Token.
 *   Die Syntaxanalyse generiert einen Parse Tree.
