@@ -115,7 +115,7 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 |   48   | Di, 28.11.                           | [Überblick Zwischencode] \| [Mini-Python (Builder)]                                                                 | BC          |                                 |
 |   48   | **Di, 28.11., 18:00-19:00 Uhr**      | **Edmonton II**: Vortrag Mindener Projekte (DE)                                                                     |             |                                 |
 |   49   | **Mi, 06.12., 18:00-19:00 Uhr**      | **Edmonton III**: Vortrag Edmontoner Projekte (CA)                                                                  |             | [B03]                           |
-|   50   | Di, 12.12.                           | Freies Arbeiten                                                                                                     | Carsten     |                                 |
+|   50   | Di, 12.12.                           | Freies Arbeiten / [B03] (Nachfrist)                                                                                 | Carsten     |                                 |
 |   51   | Di, 19.12.                           | [B04]                                                                                                               | Carsten, BC |                                 |
 |   02   | Di, 09.01.                           | Freies Arbeiten                                                                                                     | Carsten     |                                 |
 |   03   | Di, 16.01.                           | Vortrag: Termine siehe Etherpad                                                                                     | Carsten, BC | Vortrag: Termine siehe Etherpad |
@@ -150,12 +150,12 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
 ### Praktikum
 
-| Woche | Blatt                                          | Abgabe ILIAS                                                                                                         | Vorstellung Praktikum           |
-|:-----:|:-----------------------------------------------|:---------------------------------------------------------------------------------------------------------------------|:--------------------------------|
-|  45   | [B01]: Grammatik, ANTLR, AST (Mini-Python)     | Fr, 10.11., 16:00 Uhr ([Link](https://www.hsbi.de/elearning/goto.php?target=exc_1258623&client_id=FH-Bielefeld))     | Fr, 10.11.                      |
-|  47   | [B02]: AST und Symboltabellen (Mini-Python)    | Fr, 24.11., 16:00 Uhr ([Link](https://www.hsbi.de/elearning/goto.php?target=exc_1258623&client_id=FH-Bielefeld))     | Fr, 24.11.                      |
-|  49   | [B03]: Interpreter (Mini-Python)               | Fr, 08.12., 16:00 Uhr ([Link](https://www.hsbi.de/elearning/goto.php?target=exc_1258623&client_id=FH-Bielefeld))     | Fr, 08.12.                      |
-|  51   | [B04]: Builder und freie Aufgabe (Mini-Python) | **Di, 19.12., 08:00 Uhr** ([Link](https://www.hsbi.de/elearning/goto.php?target=exc_1258623&client_id=FH-Bielefeld)) | Di, 19.12. (**Vorlesungsslot**) |
+| Woche | Blatt                                          | Abgabe ILIAS                                                                                                                                        | Vorstellung Praktikum                                  |
+|:-----:|:-----------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------|
+|  45   | [B01]: Grammatik, ANTLR, AST (Mini-Python)     | Fr, 10.11., 16:00 Uhr ([Link](https://www.hsbi.de/elearning/goto.php?target=exc_1258623&client_id=FH-Bielefeld))                                    | Fr, 10.11.                                             |
+|  47   | [B02]: AST und Symboltabellen (Mini-Python)    | Fr, 24.11., 16:00 Uhr ([Link](https://www.hsbi.de/elearning/goto.php?target=exc_1258623&client_id=FH-Bielefeld))                                    | Fr, 24.11.                                             |
+|  49   | [B03]: Interpreter (Mini-Python)               | Fr, 08.12., 16:00 Uhr ([Link](https://www.hsbi.de/elearning/goto.php?target=exc_1258623&client_id=FH-Bielefeld)) (Nachfrist: Di, 12.12., 08:00 Uhr) | Fr, 08.12. (Nachfrist: Di, 12.12., **Vorlesungsslot**) |
+|  51   | [B04]: Builder und freie Aufgabe (Mini-Python) | **Di, 19.12., 08:00 Uhr** ([Link](https://www.hsbi.de/elearning/goto.php?target=exc_1258623&client_id=FH-Bielefeld))                                | Di, 19.12. (**Vorlesungsslot**)                        |
 
 [B01]: homework/sheet01.md
 [B02]: homework/sheet02.md
