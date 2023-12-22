@@ -99,28 +99,31 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
 ### Vorlesung
 
-| Woche  | Datum                                | Themen                                                                                                              | Lead        | Bemerkung                       |
-|:------:|:-------------------------------------|:--------------------------------------------------------------------------------------------------------------------|:------------|:--------------------------------|
-|   41   | Di, 10.10.                           | Orga (**Zoom**) \|\| [Überblick] \| [Sprachen] \| [Anwendungen]                                                     | Carsten, BC |                                 |
-|   42   | Di, 17.10.                           | [Reguläre Sprachen]                                                                                                 | BC          |                                 |
-|   42   | Fr, 20.10. (**Praktikum**)           | [Lexer mit ANTLR]                                                                                                   | Carsten     |                                 |
-|   43   | Di, 24.10.                           | [CFG]                                                                                                               | BC          |                                 |
-|   43   | Fr, 27.10. (**Praktikum**)           | [LL-Parser]                                                                                                         | BC          |                                 |
-|   44   | **Mo, 30.10., 17:00-18:00 Uhr**      | **Edmonton I**: ANTLR + Live-Coding (CA)                                                                            |             | online bzw. H10                 |
-|   44   | Di, 31.10.                           | [Parser mit ANTLR] \| [Grenze Lexer und Parser]                                                                     | Carsten     |                                 |
-|   45   | Di, 07.11.                           | [Überblick Symboltabellen] \| [Symboltabellen: Scopes] \| [Symboltabellen: Funktionen] \| [Symboltabellen: Klassen] | Carsten     | [B01]                           |
-| ~~46~~ | ~~Di, 14.11.~~                       | ~~[Attributierte Grammatiken]~~                                                                                     | ~~BC~~      |                                 |
-|   46   | Fr, 17.11. (**Praktikum**)           | [Syntaxgesteuerte Interpreter] \| [AST-basierte Interpreter 1] \| [AST-basierte Interpreter 2]                      | Carsten     |                                 |
-|   47   | Di, 21.11.                           | [Attributierte Grammatiken]                                                                                         | BC          | [B02]                           |
-|   48   | Di, 28.11.                           | [Überblick Zwischencode] \| [Mini-Python (Builder)]                                                                 | BC          |                                 |
-|   48   | **Di, 28.11., 18:00-19:00 Uhr**      | **Edmonton II**: Vortrag Mindener Projekte (DE)                                                                     |             |                                 |
-|   49   | **Mi, 06.12., 18:00-19:00 Uhr**      | **Edmonton III**: Vortrag Edmontoner Projekte (CA)                                                                  |             | [B03]                           |
-|   50   | Di, 12.12.                           | Freies Arbeiten / [B03] (Nachfrist)                                                                                 | Carsten     |                                 |
-|   51   | Di, 19.12.                           | [B04]                                                                                                               | Carsten, BC |                                 |
-|   02   | Di, 09.01.                           | Freies Arbeiten                                                                                                     | Carsten     |                                 |
-|   03   | Di, 16.01.                           | Vortrag: Termine siehe Etherpad                                                                                     | Carsten, BC | Vortrag: Termine siehe Etherpad |
-|   04   | **Mo, 22.01., 11:45-13:15 Uhr, B70** | **Besuch von Prof. Nelson Amaral in Minden (Vortrag und Gespräch mit Studierenden), B70**                           | BC          |                                 |
-|   04   | Di, 23.01.                           | Vortrag: Termine siehe Etherpad                                                                                     | Carsten, BC | Vortrag: Termine siehe Etherpad |
+| Woche  | Datum                                | Themen                                                                                                              | Lead        | Bemerkung       |
+|:------:|:-------------------------------------|:--------------------------------------------------------------------------------------------------------------------|:------------|:----------------|
+|   41   | Di, 10.10.                           | Orga (**Zoom**) \|\| [Überblick] \| [Sprachen] \| [Anwendungen]                                                     | Carsten, BC |                 |
+|   42   | Di, 17.10.                           | [Reguläre Sprachen]                                                                                                 | BC          |                 |
+|   42   | Fr, 20.10. (**Praktikum**)           | [Lexer mit ANTLR]                                                                                                   | Carsten     |                 |
+|   43   | Di, 24.10.                           | [CFG]                                                                                                               | BC          |                 |
+|   43   | Fr, 27.10. (**Praktikum**)           | [LL-Parser]                                                                                                         | BC          |                 |
+|   44   | **Mo, 30.10., 17:00-18:00 Uhr**      | **Edmonton I**: ANTLR + Live-Coding (CA)                                                                            |             | online bzw. H10 |
+|   44   | Di, 31.10.                           | [Parser mit ANTLR] \| [Grenze Lexer und Parser]                                                                     | Carsten     |                 |
+|   45   | Di, 07.11.                           | [Überblick Symboltabellen] \| [Symboltabellen: Scopes] \| [Symboltabellen: Funktionen] \| [Symboltabellen: Klassen] | Carsten     | [B01]           |
+| ~~46~~ | ~~Di, 14.11.~~                       | ~~[Attributierte Grammatiken]~~                                                                                     | ~~BC~~      |                 |
+|   46   | Fr, 17.11. (**Praktikum**)           | [Syntaxgesteuerte Interpreter] \| [AST-basierte Interpreter 1] \| [AST-basierte Interpreter 2]                      | Carsten     |                 |
+|   47   | Di, 21.11.                           | [Attributierte Grammatiken]                                                                                         | BC          | [B02]           |
+|   48   | Di, 28.11.                           | [Überblick Zwischencode] \| [Mini-Python (Builder)]                                                                 | BC          |                 |
+|   48   | **Di, 28.11., 18:00-19:00 Uhr**      | **Edmonton II**: Vortrag Mindener Projekte (DE)                                                                     |             |                 |
+|   49   | **Mi, 06.12., 18:00-19:00 Uhr**      | **Edmonton III**: Vortrag Edmontoner Projekte (CA)                                                                  |             | [B03]           |
+|   50   | Di, 12.12.                           | Freies Arbeiten / [B03] (Nachfrist)                                                                                 | Carsten     |                 |
+|   51   | Di, 19.12.                           | [B04]                                                                                                               | Carsten, BC |                 |
+|   02   | Di, 09.01.                           | Freies Arbeiten                                                                                                     | Carsten     |                 |
+|   03   | Di, 16.01.                           | Freies Arbeiten                                                                                                     | Carsten     |                 |
+|   04   | **Mo, 22.01., 11:45-13:15 Uhr, B70** | **Besuch von Prof. Nelson Amaral in Minden (Vortrag und Gespräch mit Studierenden), B70**                           | BC          |                 |
+|   04   | Di, 23.01.                           | Vortrag: [Termine siehe Etherpad]                                                                                   | Carsten, BC |                 |
+|   04   | Fr, 26.01. (**Praktikum**)           | Vortrag: [Termine siehe Etherpad]                                                                                   | Carsten, BC |                 |
+
+[Termine siehe Etherpad]: https://www.hsbi.de/elearning/goto.php?target=xpdl_1331973&client_id=FH-Bielefeld
 
 [Überblick]: lecture/intro/overview.md
 [Sprachen]: lecture/intro/languages.md
