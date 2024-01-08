@@ -122,8 +122,10 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 |   04   | **Mo, 22.01., 11:45-13:15 Uhr, B70** | **Besuch von Prof. Nelson Amaral in Minden (Vortrag und Gespräch mit Studierenden), B70**                           | BC          |                 |
 |   04   | Di, 23.01.                           | Vortrag: [Termine siehe Etherpad]                                                                                   | Carsten, BC |                 |
 |   04   | Fr, 26.01. (**Praktikum**)           | Vortrag: [Termine siehe Etherpad]                                                                                   | Carsten, BC |                 |
+|  _06_  | _Do, 08.02._                         | Mündliche Prüfung: [Termine siehe Buchungsliste]                                                                    | Carsten, BC |                 |
 
 [Termine siehe Etherpad]: https://www.hsbi.de/elearning/goto.php?target=xpdl_1331973&client_id=FH-Bielefeld
+[Termine siehe Buchungsliste]: https://www.hsbi.de/elearning/goto.php?target=book_1334197&client_id=FH-Bielefeld
 
 [Überblick]: lecture/intro/overview.md
 [Sprachen]: lecture/intro/languages.md
