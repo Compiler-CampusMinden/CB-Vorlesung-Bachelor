@@ -124,7 +124,7 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 |   04   | Fr, 26.01. (**Praktikum**)           | Vortrag: [Termine siehe Etherpad]                                                                                   | Carsten, BC |                 |
 |  _06_  | _Do, 08.02._                         | Mündliche Prüfung: [Termine siehe Buchungsliste]                                                                    | Carsten, BC |                 |
 
-[**Bitte geben Sie mir Feedback: Nehmen Sie bitte an der anonymen [Umfrage] zu Compilerbau (Bachelor) teil.**]{.alert}
+[**Bitte geben Sie uns Feedback: Nehmen Sie bitte an der anonymen [Umfrage] zu Compilerbau (Bachelor) teil.**]{.alert}
 
 [Termine siehe Etherpad]: https://www.hsbi.de/elearning/goto.php?target=xpdl_1331973&client_id=FH-Bielefeld
 [Termine siehe Buchungsliste]: https://www.hsbi.de/elearning/goto.php?target=book_1334197&client_id=FH-Bielefeld
