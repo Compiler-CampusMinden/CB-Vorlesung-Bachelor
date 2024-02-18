@@ -1,7 +1,7 @@
 ---
 archetype: lecture-bc
 title: "Einstieg Builder für Mini-Python"
-menuTitle: "Mini-Python (Builder)"
+linkTitle: "Mini-Python (Builder)"
 author: "BC George (HSBI)"
 readings:
   - key: "Torczon2012"
