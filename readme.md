@@ -1,6 +1,6 @@
 ---
 archetype: "home"
-title: "IFM 5.21: Compilerbau (Winter 2023/24)"
+title: "IFM 3.1: Compilerbau (PO23, Winter 2024/25)"
 ---
 
 
@@ -15,9 +15,7 @@ Datenstrukturen und Programmiersprachenkonzepte zur Anwendung.
 
 In diesem Modul geht es um ein grundlegendes Verständnis für die wichtigsten Konzepte
 im Compilerbau. Wir schauen uns dazu relevante aktuelle Tools und Frameworks an und
-setzen diese bei der Erstellung eines kleinen Compiler-Frontends für [_Mini-Python_] ein.
-
-[_Mini-Python_]: https://github.com/Compiler-CampusMinden/Mini-Python-Builder
+setzen diese bei der Erstellung eines kleinen Compiler-Frontends für C++ ein.
 
 
 ## Überblick Modulinhalte
@@ -25,49 +23,83 @@ setzen diese bei der Erstellung eines kleinen Compiler-Frontends für [_Mini-Pyt
 1.  Lexikalische Analyse: Scanner/Lexer
     *   Reguläre Sprachen
     *   Generierung mit ANTLR
-
 2.  Syntaxanalyse: Parser
     *   Kontextfreie Grammatiken (CFG)
     *   LL-Parser (Top-Down-Parser)
     *   Generierung mit ANTLR
-
 3.  Semantische Analyse: Attributierte Grammatiken und Symboltabellen
     *   Namen und Scopes
     *   Typen, Klassen, Polymorphie
-
 4.  Zwischencode: Intermediate Representation (IR), Builder
-
 5.  Interpreter: AST-Traversierung
 
 
 ## Team
 
 *   [BC George](https://www.hsbi.de/minden/ueber-uns/personenverzeichnis/birgit-christina-george)
-*   [Carsten Gips](https://www.hsbi.de/minden/ueber-uns/personenverzeichnis/carsten-gips)
+*   [Carsten Gips](https://www.hsbi.de/minden/ueber-uns/personenverzeichnis/carsten-gips) (Sprechstunde nach Vereinbarung)
 
 
 ## Kursformat
 
-| Vorlesung (2 SWS)     | Praktikum (2 SWS)     |
-|:----------------------|:----------------------|
-| Di, 08:00 - 09:30 Uhr | Fr, 16:15 - 17:45 Uhr |
-| online/C1             | online/D328           |
+:::::: {.tabs groupid="vl-pr"}
+::: {.tab title="Vorlesung"}
 
-Durchführung als **Flipped Classroom** (Carsten) bzw. **Vorlesung** (BC):
-alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
+**Vorlesung (2 SWS)**
+
+Mi, 08:00 - 09:30 Uhr (online)
+
+Durchführung als **Flipped Classroom**.
+
+:::
+::: {.tab title="Praktikum"}
+
+**Praktikum (2 SWS)**
+
+| Praktikumsgruppe | Zeit                  | Raum   |
+|:-----------------|:----------------------|:-------|
+| Gruppe 1         | Mi, 11:30 - 13:00 Uhr | online |
+| Gruppe 2         | Mi, 09:45 - 11:15 Uhr | D320   |
+| Gruppe 3         | Mi, 09:45 - 11:15 Uhr | online |
+| Gruppe 4         | Mi, 11:30 - 13:00 Uhr | D320   |
+
+Praktika Gruppen 2 und 4 in **Präsenz**.
+
+:::
+::::::
+
+Online-Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**).
+Sie _können_ hierzu den Raum J104 nutzen.
 
 [ILIAS]: https://www.hsbi.de/elearning/goto.php?target=crs_1254524&client_id=FH-Bielefeld
 
+
 ## Prüfungsform, Note und Credits
 
-**Parcoursprüfung**, 5 ECTS
+**Parcoursprüfung**, 5 ECTS (PO23)
 
-*   **unbenotet**: Alle vier Übungsblätter ausreichend bearbeitet und Ergebnisse vorgestellt/diskutiert
-*   **unbenotet**: Aktive Teilnahme an den drei gemeinsamen Terminen mit der University of Alberta (Edmonton)
-*   **benotet (30%)**: Vortrag: Vorstellung der Ergebnisse der freien Aufgabe, 30 Minuten Dauer
-*   **benotet (70%)**: Mündliche Prüfung
+:::::: {.tabs groupid="exams"}
+::: {.tab title="Prüfung im ersten Zeitraum"}
 
-**Gesamtnote: 30% Vortrag plus 70% mdl. Prüfung**
+*   **Stationen**:
+    *   Praktikum: 10x Übungsblätter mit jeweils 1P
+        (Einzelbearbeitung, mindestens 60% bearbeitet,
+        fristgerechte Abgabe der Lösungen im ILIAS,
+        Vorstellung der Lösungen im Praktikum => Punkte)
+    *   Schriftliche Prüfung (digitale Klausur) mit 100P;
+        [Prüfungsvorbereitung]
+*   **Gesamtnote**: 4.0: ab 50P, alle 5P nächste Teilnote, 1.0: ab 95P
+
+:::
+::: {.tab title="Prüfung im zweiten Zeitraum"}
+
+*   **Stationen**:
+    *   Schriftliche Prüfung (digitale Klausur) mit 100P;
+        [Prüfungsvorbereitung]
+*   **Gesamtnote**: 4.0: ab 50P, alle 5P nächste Teilnote, 1.0: ab 95P
+
+:::
+::::::
 
 
 ## Materialien
@@ -92,43 +124,51 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 
 ### Tools
 
-*   [github.com/antlr](https://github.com/antlr/antlr4)
+*   JDK: Java SE 21 (LTS) ([Oracle](https://www.oracle.com/java/technologies/downloads/) oder
+    [Alternativen](https://code.visualstudio.com/docs/languages/java#_install-a-java-development-kit-jdk),
+    bitte 64-bit Version nutzen)
+*   [ANTLR v4](https://github.com/antlr/antlr4)
+*   IDE: [Eclipse IDE for Java Developers](https://www.eclipse.org/downloads/) oder
+    [IntelliJ IDEA (Community Edition)](https://www.jetbrains.com/idea/) oder
+    [Visual Studio Code](https://code.visualstudio.com/) oder [Vim](https://www.vim.org/) oder ...
+*   [Git](https://git-scm.com/)
 
 
 ## Fahrplan
 
 ### Vorlesung
 
-| Woche  | Datum                                | Themen                                                                                                              | Lead        | Bemerkung       |
-|:------:|:-------------------------------------|:--------------------------------------------------------------------------------------------------------------------|:------------|:----------------|
-|   41   | Di, 10.10.                           | Orga (**Zoom**) \|\| [Überblick] \| [Sprachen] \| [Anwendungen]                                                     | Carsten, BC |                 |
-|   42   | Di, 17.10.                           | [Reguläre Sprachen]                                                                                                 | BC          |                 |
-|   42   | Fr, 20.10. (**Praktikum**)           | [Lexer mit ANTLR]                                                                                                   | Carsten     |                 |
-|   43   | Di, 24.10.                           | [CFG]                                                                                                               | BC          |                 |
-|   43   | Fr, 27.10. (**Praktikum**)           | [LL-Parser]                                                                                                         | BC          |                 |
-|   44   | **Mo, 30.10., 17:00-18:00 Uhr**      | **Edmonton I**: ANTLR + Live-Coding (CA)                                                                            |             | online bzw. H10 |
-|   44   | Di, 31.10.                           | [Parser mit ANTLR] \| [Grenze Lexer und Parser]                                                                     | Carsten     |                 |
-|   45   | Di, 07.11.                           | [Überblick Symboltabellen] \| [Symboltabellen: Scopes] \| [Symboltabellen: Funktionen] \| [Symboltabellen: Klassen] | Carsten     | [B01]           |
-| ~~46~~ | ~~Di, 14.11.~~                       | ~~[Attributierte Grammatiken]~~                                                                                     | ~~BC~~      |                 |
-|   46   | Fr, 17.11. (**Praktikum**)           | [Syntaxgesteuerte Interpreter] \| [AST-basierte Interpreter 1] \| [AST-basierte Interpreter 2]                      | Carsten     |                 |
-|   47   | Di, 21.11.                           | [Attributierte Grammatiken]                                                                                         | BC          | [B02]           |
-|   48   | Di, 28.11.                           | [Überblick Zwischencode] \| [Mini-Python (Builder)]                                                                 | BC          |                 |
-|   48   | **Di, 28.11., 18:00-19:00 Uhr**      | **Edmonton II**: Vortrag Mindener Projekte (DE)                                                                     |             |                 |
-|   49   | **Mi, 06.12., 18:00-19:00 Uhr**      | **Edmonton III**: Vortrag Edmontoner Projekte (CA)                                                                  |             | [B03]           |
-|   50   | Di, 12.12.                           | Freies Arbeiten / [B03] (Nachfrist)                                                                                 | Carsten     |                 |
-|   51   | Di, 19.12.                           | [B04]                                                                                                               | Carsten, BC |                 |
-|   02   | Di, 09.01.                           | Freies Arbeiten                                                                                                     | Carsten     |                 |
-|   03   | Di, 16.01.                           | Freies Arbeiten                                                                                                     | Carsten     |                 |
-|   04   | **Mo, 22.01., 11:45-13:15 Uhr, B70** | **Besuch von Prof. Nelson Amaral in Minden (Vortrag und Gespräch mit Studierenden), B70**                           | BC          |                 |
-|   04   | Di, 23.01.                           | Vortrag: [Termine siehe Etherpad]                                                                                   | Carsten, BC |                 |
-|   04   | Fr, 26.01. (**Praktikum**)           | Vortrag: [Termine siehe Etherpad]                                                                                   | Carsten, BC |                 |
-|  _06_  | _Do, 08.02._                         | Mündliche Prüfung: [Termine siehe Buchungsliste]                                                                    | Carsten, BC |                 |
+Hier finden Sie einen abonnierbaren [Google Kalender] mit allen Terminen der Veranstaltung zum Einbinden in Ihre Kalender-App.
 
-[**Bitte geben Sie uns Feedback: Nehmen Sie bitte an der anonymen [Umfrage] zu Compilerbau (Bachelor) teil.**]{.alert}
+| Monat    | Tag   | Vorlesung                                                                                                     | Praktikum               | Lead        | Bemerkung                                                                       |
+|:---------|:------|:--------------------------------------------------------------------------------------------------------------|:------------------------|:------------|:--------------------------------------------------------------------------------|
+| Oktober  | 09.   | [Orga] (**Zoom**); [Überblick], [Sprachen], [Anwendungen]                                                     |                         | Carsten, BC |                                                                                 |
+|          | 16.   | C++ I: Datentypen, Arrays, Funktionen, Pointer, Referenzen                                                    |                         | Carsten     |                                                                                 |
+|          | 23.   | C++ II: Klassen, Operatoren, Vererbung, Polymorphie                                                           | [B01] C++ I             | Carsten     |                                                                                 |
+|          | 30.   | [Reguläre Sprachen]                                                                                           | [B02] C++ II            | BC          | **Mo, 30.10., 17:00-18:00 Uhr, Edmonton I**: ANTLR + Live-Coding (CA)           |
+| November | 06.   | **Parcoursprüfung: Station 1 (C++)**                                                                          |                         |             |                                                                                 |
+|          | 13.   | [CFG]                                                                                                         | [B03] Reguläre Sprachen | BC          |                                                                                 |
+|          | 20.   | [Lexer mit ANTLR], [Parser mit ANTLR]                                                                         | [B04] CFG               | Carsten     |                                                                                 |
+|          | 27.   | AST                                                                                                           | [B05] ANTLR             | Carsten     | **Di, 28.11., 18:00-19:00 Uhr, Edmonton II**: Vortrag Mindener Projekte (DE)    |
+| Dezember | 04.   | [Attributierte Grammatiken]                                                                                   | [B06] AST               | BC          | **Mi, 06.12., 18:00-19:00 Uhr, Edmonton III**: Vortrag Edmontoner Projekte (CA) |
+|          | 11.   | **Parcoursprüfung: Station 2 (Grammars, Lexing, Parsing)**                                                    |                         |             |                                                                                 |
+|          | 18.   | [Überblick Symboltabellen], [Symboltabellen: Scopes], [Symboltabellen: Funktionen], [Symboltabellen: Klassen] |                         | Carsten     |                                                                                 |
+|          | 25.   | _Weihnachtspause_                                                                                             |                         |             |                                                                                 |
+| Januar   | 01.   | _Weihnachtspause_                                                                                             |                         |             |                                                                                 |
+|          | 08.   | [AST-basierte Interpreter 1], [AST-basierte Interpreter 2]                                                    | [B07] Symboltabellen    | Carsten     |                                                                                 |
+|          | 15.   | [Überblick Zwischencode], Überblick Backend                                                                   | [B08] Interpreter       |             |                                                                                 |
+|          | 22.   | Rückblick (**Zoom**)                                                                                          |                         | Carsten, BC |                                                                                 |
+|          | _tbd_ | **Parcoursprüfung: Station 3 (Semant. Analyse, Interpreter)** (Termin 1, Campus Minden, B40)                  |                         |             |                                                                                 |
 
-[Termine siehe Etherpad]: https://www.hsbi.de/elearning/goto.php?target=xpdl_1331973&client_id=FH-Bielefeld
-[Termine siehe Buchungsliste]: https://www.hsbi.de/elearning/goto.php?target=book_1334197&client_id=FH-Bielefeld
-[Umfrage]: https://www.hsbi.de/elearning/goto.php?target=svy_1339631&client_id=FH-Bielefeld
+
+Abgabe der Übungsblätter jeweils **bis 08:00 Uhr** [im ILIAS](https://www.hsbi.de/elearning/goto.php?target=exc_1356670&client_id=FH-Bielefeld).
+
+
+[Google Kalender]: https://calendar.google.com/calendar/ical/5121604486803dcdb5cfaa8602b8b09ce76743d8b9216795606617cac807e595%40group.calendar.google.com/public/basic.ics
+
+[Prüfungsvorbereitung]: admin/exams.md
+[Orga]: https://github.com/Programmiermethoden-CampusMinden/Prog2-Lecture/discussions/categories/q-a
+
 
 [Überblick]: lecture/intro/overview.md
 [Sprachen]: lecture/intro/languages.md
@@ -156,20 +196,16 @@ alle Sitzungen online/per Zoom (**Zugangsdaten siehe [ILIAS]**)
 [AST-basierte Interpreter 1]: lecture/backend/interpretation/astdriven-part1.md
 [AST-basierte Interpreter 2]: lecture/backend/interpretation/astdriven-part2.md
 
-### Praktikum
-
-| Woche | Blatt                                          | Abgabe ILIAS                                                                                                                                        | Vorstellung Praktikum                                    |
-|:-----:|:-----------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------|
-|  45   | [B01]: Grammatik, ANTLR, AST (Mini-Python)     | Fr, 10.11., 16:00 Uhr ([Link](https://www.hsbi.de/elearning/goto.php?target=exc_1258623&client_id=FH-Bielefeld))                                    | Fr, 10.11.                                               |
-|  47   | [B02]: AST und Symboltabellen (Mini-Python)    | Fr, 24.11., 16:00 Uhr ([Link](https://www.hsbi.de/elearning/goto.php?target=exc_1258623&client_id=FH-Bielefeld))                                    | Fr, 24.11.                                               |
-|  49   | [B03]: Interpreter (Mini-Python)               | Fr, 08.12., 16:00 Uhr ([Link](https://www.hsbi.de/elearning/goto.php?target=exc_1258623&client_id=FH-Bielefeld)) (Nachfrist: Di, 12.12., 08:00 Uhr) | Fr, 08.12. (Nachfrist: Di, 12.12., **Vorlesungsslot**)   |
-|  51   | [B04]: Builder und freie Aufgabe (Mini-Python) | **Di, 19.12., 08:00 Uhr** ([Link](https://www.hsbi.de/elearning/goto.php?target=exc_1258623&client_id=FH-Bielefeld))                                | Di, 19.12. (**Vorlesungsslot**)                          |
-|  04   | Freie Aufgabe (Mini-Python)                    | **Di, 23.01., 08:00 Uhr** ([Link](https://www.hsbi.de/elearning/goto.php?target=exc_1258623&client_id=FH-Bielefeld))                                | Di, 23.01. (**Vorlesungsslot**) / Fr, 26.01. (Praktikum) |
-
 [B01]: homework/sheet01.md
 [B02]: homework/sheet02.md
 [B03]: homework/sheet03.md
 [B04]: homework/sheet04.md
+[B05]: homework/sheet05.md
+[B06]: homework/sheet06.md
+[B07]: homework/sheet07.md
+[B08]: homework/sheet08.md
+[B09]: homework/sheet09.md
+[B10]: homework/sheet10.md
 
 
 ## Förderungen und Kooperationen
