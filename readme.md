@@ -166,9 +166,7 @@ Abgabe der Übungsblätter jeweils **bis 08:00 Uhr** [im ILIAS](https://www.hsbi
 
 [Google Kalender]: https://calendar.google.com/calendar/ical/5121604486803dcdb5cfaa8602b8b09ce76743d8b9216795606617cac807e595%40group.calendar.google.com/public/basic.ics
 
-[Prüfungsvorbereitung]: admin/exams.md
 [Orga]: https://github.com/Programmiermethoden-CampusMinden/Prog2-Lecture/discussions/categories/q-a
-
 
 [Überblick]: lecture/intro/overview.md
 [Sprachen]: lecture/intro/languages.md
@@ -200,12 +198,14 @@ Abgabe der Übungsblätter jeweils **bis 08:00 Uhr** [im ILIAS](https://www.hsbi
 [B02]: homework/sheet02.md
 [B03]: homework/sheet03.md
 [B04]: homework/sheet04.md
+<!--
 [B05]: homework/sheet05.md
 [B06]: homework/sheet06.md
 [B07]: homework/sheet07.md
 [B08]: homework/sheet08.md
 [B09]: homework/sheet09.md
 [B10]: homework/sheet10.md
+-->
 
 
 ## Förderungen und Kooperationen
