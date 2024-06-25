@@ -79,6 +79,7 @@ Sie _können_ hierzu den Raum J104 nutzen.
 **Parcoursprüfung mit Testat**, 5 ECTS (PO23/PO18)
 
 *   **Testat**: Mindestens 5 der 6 Übungsblätter erfolgreich bearbeitet
+
     (Bearbeitung 2er Team, je mindestens 80% bearbeitet,
     fristgerechte Abgabe der Lösungen im ILIAS,
     Vorstellung der Lösungen im Praktikum)
