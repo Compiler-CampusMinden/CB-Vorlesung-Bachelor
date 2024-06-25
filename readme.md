@@ -1,6 +1,6 @@
 ---
 archetype: "home"
-title: "IFM 3.1: Compilerbau (PO23, Winter 2024/25)"
+title: "IFM 3.1/IFM 5.21: Compilerbau (PO23/PO18, Winter 2024/25)"
 ---
 
 
@@ -49,7 +49,7 @@ setzen diese bei der Erstellung eines kleinen Compiler-Frontends für C++ ein.
 
 Mi, 08:00 - 09:30 Uhr (online)
 
-Durchführung als **Flipped Classroom**.
+Durchführung als **Flipped Classroom** (Carsten) bzw. **Vorlesung** (BC).
 
 :::
 ::: {.tab title="Praktikum"}
@@ -76,28 +76,30 @@ Sie _können_ hierzu den Raum J104 nutzen.
 
 ## Prüfungsform, Note und Credits
 
-**Parcoursprüfung**, 5 ECTS (PO23)
+**Parcoursprüfung mit Testat**, 5 ECTS (PO23/PO18)
+
+*   **Testat**: Mindestens 5 der 6 Übungsblätter erfolgreich bearbeitet
+    (Bearbeitung 2er Team, je mindestens 80% bearbeitet,
+    fristgerechte Abgabe der Lösungen im ILIAS,
+    Vorstellung der Lösungen im Praktikum)
 
 :::::: {.tabs groupid="exams"}
 ::: {.tab title="Prüfung im ersten Zeitraum"}
 
 *   **Stationen**:
-    *   Praktikum: 10x Übungsblätter mit jeweils 1P
-        (Einzelbearbeitung, mindestens 60% bearbeitet,
-        fristgerechte Abgabe der Lösungen im ILIAS,
-        Vorstellung der Lösungen im Praktikum => Punkte)
-    *   Schriftliche Prüfung (digitale Klausur) mit 100P;
-        [Prüfungsvorbereitung]
-*   **Gesamtnote**: 4.0: ab 50P, alle 5P nächste Teilnote, 1.0: ab 95P
+    1.  13.11. (Vorlesungsslot, ILIAS-Test, einzeln): Grammar, Lexing, Parsing
+    2.  18.12. (Vorlesungsslot, ILIAS-Test, einzeln): Semantische Analyse, Interpreter, C++ I
+    3.  22.01. (Praktikumsslot, Live-Programming, 2er Teams): Interpreter für Mini-C++
 
+    In jeder Station kann die gleiche Punkteanzahl erreicht werden. Die besten beiden
+    Ergebnisse werden für die Gesamtnote herangezogen.
 :::
 ::: {.tab title="Prüfung im zweiten Zeitraum"}
 
 *   **Stationen**:
-    *   Schriftliche Prüfung (digitale Klausur) mit 100P;
-        [Prüfungsvorbereitung]
-*   **Gesamtnote**: 4.0: ab 50P, alle 5P nächste Teilnote, 1.0: ab 95P
+    1.  Mündliche Prüfung (_ALL\*_) (individuell, ca. 45 Minuten)
 
+    Die Note der mündlichen Prüfung ergibt die Gesamtnote.
 :::
 ::::::
 
@@ -140,26 +142,27 @@ Sie _können_ hierzu den Raum J104 nutzen.
 
 Hier finden Sie einen abonnierbaren [Google Kalender] mit allen Terminen der Veranstaltung zum Einbinden in Ihre Kalender-App.
 
-| Monat    | Tag   | Vorlesung                                                                                                     | Praktikum               | Lead        | Bemerkung                                                                       |
-|:---------|:------|:--------------------------------------------------------------------------------------------------------------|:------------------------|:------------|:--------------------------------------------------------------------------------|
-| Oktober  | 09.   | [Orga] (**Zoom**); [Überblick], [Sprachen], [Anwendungen]                                                     |                         | Carsten, BC |                                                                                 |
-|          | 16.   | C++ I: Datentypen, Arrays, Funktionen, Pointer, Referenzen                                                    |                         | Carsten     |                                                                                 |
-|          | 23.   | C++ II: Klassen, Operatoren, Vererbung, Polymorphie                                                           | [B01] C++ I             | Carsten     |                                                                                 |
-|          | 30.   | [Reguläre Sprachen]                                                                                           | [B02] C++ II            | BC          | **Mo, 30.10., 17:00-18:00 Uhr, Edmonton I**: ANTLR + Live-Coding (CA)           |
-| November | 06.   | **Parcoursprüfung: Station 1 (C++)**                                                                          |                         |             |                                                                                 |
-|          | 13.   | [CFG]                                                                                                         | [B03] Reguläre Sprachen | BC          |                                                                                 |
-|          | 20.   | [Lexer mit ANTLR], [Parser mit ANTLR]                                                                         | [B04] CFG               | Carsten     |                                                                                 |
-|          | 27.   | AST                                                                                                           | [B05] ANTLR             | Carsten     | **Di, 28.11., 18:00-19:00 Uhr, Edmonton II**: Vortrag Mindener Projekte (DE)    |
-| Dezember | 04.   | [Attributierte Grammatiken]                                                                                   | [B06] AST               | BC          | **Mi, 06.12., 18:00-19:00 Uhr, Edmonton III**: Vortrag Edmontoner Projekte (CA) |
-|          | 11.   | **Parcoursprüfung: Station 2 (Grammars, Lexing, Parsing)**                                                    |                         |             |                                                                                 |
-|          | 18.   | [Überblick Symboltabellen], [Symboltabellen: Scopes], [Symboltabellen: Funktionen], [Symboltabellen: Klassen] |                         | Carsten     |                                                                                 |
-|          | 25.   | _Weihnachtspause_                                                                                             |                         |             |                                                                                 |
-| Januar   | 01.   | _Weihnachtspause_                                                                                             |                         |             |                                                                                 |
-|          | 08.   | [AST-basierte Interpreter 1], [AST-basierte Interpreter 2]                                                    | [B07] Symboltabellen    | Carsten     |                                                                                 |
-|          | 15.   | [Überblick Zwischencode], Überblick Backend                                                                   | [B08] Interpreter       |             |                                                                                 |
-|          | 22.   | Rückblick (**Zoom**)                                                                                          |                         | Carsten, BC |                                                                                 |
-|          | _tbd_ | **Parcoursprüfung: Station 3 (Semant. Analyse, Interpreter)** (Termin 1, Campus Minden, B40)                  |                         |             |                                                                                 |
-
+| Monat    | Tag                         | Vorlesung                                                                                                     | Praktikum (PO23)                                         | Praktikum (PO18 abweichend)                                                               | Lead        | Bemerkung                                          |
+|:---------|:----------------------------|:--------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------|:------------------------------------------------------------------------------------------|:------------|:---------------------------------------------------|
+| Oktober  | 09.                         | [Orga] (**Zoom**); [Überblick], [Sprachen], [Anwendungen]                                                     |                                                          |                                                                                           | Carsten, BC |                                                    |
+|          | 16.                         | [Reguläre Sprachen]                                                                                           |                                                          |                                                                                           | BC          |                                                    |
+|          | 23.                         | [CFG]                                                                                                         | [B01] Reguläre Sprachen                                  |                                                                                           | BC          |                                                    |
+|          | 30.                         | [Lexer mit ANTLR], [Parser mit ANTLR]                                                                         | **Edmonton I: ANTLR + Live-Coding (CA)**                 |                                                                                           | Carsten     |                                                    |
+| November | 06.                         | [Überblick Symboltabellen], [Symboltabellen: Scopes], [Symboltabellen: Funktionen], [Symboltabellen: Klassen] | [B02] CFG, ANTLR                                         |                                                                                           | Carsten     |                                                    |
+|          | 13.                         | **Parcoursprüfung: Station 1 (Grammar, Lexing, Parsing)**                                                     |                                                          |                                                                                           |             |                                                    |
+|          | 20.                         | [Überblick Zwischencode], Überblick Backend (LLVM), Überblick Laufzeitsysteme                                 | [B03] Symboltabellen                                     |                                                                                           | BC          |                                                    |
+|          | 27.                         | [AST-basierte Interpreter 1], [AST-basierte Interpreter 2]                                                    | **Edmonton II: Vortrag Mindener Projekte (Master, DE)**  |                                                                                           | Carsten     |                                                    |
+| Dezember | 04.                         | C++ I: Datentypen, Arrays, Funktionen, (Pointer), Referenzen                                                  | [B04] Interpreter                                        |                                                                                           | Carsten     | **Edmonton III: Vortrag Edmontoner Projekte (CA)** |
+|          | 11.                         | C++ II: Klassen, (Operatoren), Vererbung, Polymorphie                                                         | [B05] C++ I                                              | [B05]: Testsuiten (Eingabe/Ausgabe)                                                       | Carsten     |                                                    |
+|          | 18.                         | **Parcoursprüfung: Station 2 (Semant. Analyse, Interpreter, C++ I)**                                          |                                                          |                                                                                           |             |                                                    |
+|          | 25.                         | _Weihnachtspause_                                                                                             |                                                          |                                                                                           |             |                                                    |
+| Januar   | 01.                         | _Weihnachtspause_                                                                                             |                                                          |                                                                                           |             |                                                    |
+|          | 08.                         | _Freies Arbeiten_                                                                                             | [B06] C++ II                                             | [B06]: Pointer+Speicherverwaltung                                                         |             |                                                    |
+|          | 15.                         | _Freies Arbeiten_                                                                                             |                                                          |                                                                                           |             |                                                    |
+|          | 22.                         | _Freies Arbeiten_                                                                                             | **Parcoursprüfung: Station 3: Interpreter für Mini-C++** | **Parcoursprüfung: Station 3: Interpreter für Mini-C++ inkl. Pointer/Speicherverwaltung** |             |                                                    |
+|          |                             |                                                                                                               |                                                          |                                                                                           |             |                                                    |
+|          | _(Prüfungsphase 1. Termin)_ | Keine Prüfung                                                                                                 |                                                          |                                                                                           |             |                                                    |
+|          | _(Prüfungsphase 2. Termin)_ | **Parcoursprüfung: mdl. Prüfung (ALL*)**                                                                      |                                                          |                                                                                           |             |                                                    |
 
 Abgabe der Übungsblätter jeweils **bis 08:00 Uhr** [im ILIAS](https://www.hsbi.de/elearning/goto.php?target=exc_1356670&client_id=FH-Bielefeld).
 
@@ -176,11 +179,7 @@ Abgabe der Übungsblätter jeweils **bis 08:00 Uhr** [im ILIAS](https://www.hsbi
 [Lexer mit ANTLR]: lecture/frontend/lexing/antlr-lexing.md
 
 [CFG]: lecture/frontend/parsing/cfg.md
-[LL-Parser]: lecture/frontend/parsing/ll-parser.md
 [Parser mit ANTLR]: lecture/frontend/parsing/antlr-parsing.md
-[Grenze Lexer und Parser]: lecture/frontend/parsing/finalwords.md
-
-[Attributierte Grammatiken]: lecture/frontend/semantics/attribgrammars.md
 
 [Überblick Symboltabellen]: lecture/frontend/semantics/symboltables/intro-symbtab.md
 [Symboltabellen: Scopes]: lecture/frontend/semantics/symboltables/scopes.md
@@ -188,9 +187,7 @@ Abgabe der Übungsblätter jeweils **bis 08:00 Uhr** [im ILIAS](https://www.hsbi
 [Symboltabellen: Klassen]: lecture/frontend/semantics/symboltables/classes.md
 
 [Überblick Zwischencode]: lecture/intermediate/intro-ir.md
-[Mini-Python (Builder)]: lecture/backend/minipython-builder.md
 
-[Syntaxgesteuerte Interpreter]: lecture/backend/interpretation/syntaxdriven.md
 [AST-basierte Interpreter 1]: lecture/backend/interpretation/astdriven-part1.md
 [AST-basierte Interpreter 2]: lecture/backend/interpretation/astdriven-part2.md
 
@@ -201,10 +198,6 @@ Abgabe der Übungsblätter jeweils **bis 08:00 Uhr** [im ILIAS](https://www.hsbi
 <!--
 [B05]: homework/sheet05.md
 [B06]: homework/sheet06.md
-[B07]: homework/sheet07.md
-[B08]: homework/sheet08.md
-[B09]: homework/sheet09.md
-[B10]: homework/sheet10.md
 -->
 
 
