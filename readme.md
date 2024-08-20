@@ -83,8 +83,8 @@ Sie _können_ hierzu den Raum J101 nutzen.
 
 *   **Testat**:
     1.  Mindestens 5 der Übungsblätter B01 - B06 erfolgreich bearbeitet, **und**
-    2.  Mindestens 1 der Übungsblätter B07 - B08 erfolgreich bearbeitet, **und**
-    3.  Aktive Teilnahme an mindestens 2 der 3 Edmonton-Termine.
+    2.  mindestens 1 der Übungsblätter B07 - B08 erfolgreich bearbeitet, **und**
+    3.  aktive Teilnahme an mindestens 2 der 3 Edmonton-Termine.
 
     ("erfolgreich bearbeitet": Bearbeitung 3er Team, je mindestens 80% bearbeitet,
     fristgerechte Abgabe der Lösungen im ILIAS, Vorstellung der Lösungen im Praktikum)
@@ -102,7 +102,7 @@ Sie _können_ hierzu den Raum J101 nutzen.
 ::: {.tab title="Prüfung im zweiten Zeitraum"}
 
 *   **Stationen**:
-    1.  Mündliche Prüfung (_ALL\*_) (individuell, ca. 45 Minuten)
+    1.  Mündliche Prüfung (individuell, ca. 45 Minuten)
 
     Die Note der mündlichen Prüfung ergibt die Gesamtnote.
 
@@ -133,9 +133,6 @@ Sie _können_ hierzu den Raum J101 nutzen.
 *   JDK: Java SE 21 (LTS) ([Oracle](https://www.oracle.com/java/technologies/downloads/) oder
     [Alternativen](https://code.visualstudio.com/docs/languages/java#_install-a-java-development-kit-jdk),
     bitte 64-bit Version nutzen)
-*   IDE: [Eclipse IDE for Java Developers](https://www.eclipse.org/downloads/) oder
-    [IntelliJ IDEA (Community Edition)](https://www.jetbrains.com/idea/) oder
-    [Visual Studio Code](https://code.visualstudio.com/) oder [Vim](https://www.vim.org/) oder ...
 *   [Git](https://git-scm.com/)
 
 
@@ -145,30 +142,30 @@ Sie _können_ hierzu den Raum J101 nutzen.
 
 Hier finden Sie einen abonnierbaren [Google Kalender] mit allen Terminen der Veranstaltung zum Einbinden in Ihre Kalender-App.
 
-| Monat    | Tag                         | Vorlesung                                                                                                     | Lead Vorlesung |
-|:---------|:----------------------------|:--------------------------------------------------------------------------------------------------------------|:---------------|
-| Oktober  | 09.                         | [Orga] (**Zoom**); [Überblick], [Sprachen], [Anwendungen]                                                     | Carsten, BC    |
-|          | 16.                         | [Reguläre Sprachen]                                                                                           | BC             |
-|          | 23.                         | [CFG]                                                                                                         | BC             |
-|          | 30.                         | [Lexer mit ANTLR], [Parser mit ANTLR]                                                                         | Carsten        |
-| November | 06.                         | **Dienstbesprechung**                                                                                         |                |
-|          | 13.                         | [Überblick Symboltabellen], [Symboltabellen: Scopes], [Symboltabellen: Funktionen], [Symboltabellen: Klassen] | Carsten        |
-|          | 20.                         | [Überblick Zwischencode], Überblick Backend (LLVM)                                                            | BC, Carsten    |
-|          | 27.                         | **Parcoursprüfung: Station 1 ILIAS (Grammar, Lexing, Parsing, Symboltabellen)**                               |                |
-| Dezember | 04.                         | [AST-basierte Interpreter 1], [AST-basierte Interpreter 2]                                                    | Carsten        |
-|          | 11.                         | C++ I: Datentypen, Arrays, Funktionen, Pointer, Referenzen                                                    | Carsten        |
-|          | 18.                         | **Projektwoche Semester 1+3**                                                                                 |                |
-|          | 25.                         | _Weihnachtspause_                                                                                             |                |
-| Januar   | 01.                         | _Weihnachtspause_                                                                                             |                |
-|          | 08.                         | C++ II: Klassen, Operatoren, Vererbung, Polymorphie                                                           | Carsten        |
-|          | 15.                         | _Freies Arbeiten/Puffer_                                                                                      |                |
-|          | 22.                         | Rückblick (**Zoom**), Prüfungsvorbereitung                                                                    | Carsten, BC    |
-|          | _(Prüfungsphase 1. Termin)_ | **Parcoursprüfung: Station 2 mdl. (semant. Analyse, Interpreter, C++)**                                       |                |
-|          | _(Prüfungsphase 2. Termin)_ | **Parcoursprüfung: mdl. Prüfung (ALL\*)**                                                                     |                |
+| Monat    | Tag                         | Vorlesung                                                                                                     | Lead        |
+|:---------|:----------------------------|:--------------------------------------------------------------------------------------------------------------|:------------|
+| Oktober  | 09.                         | [Orga] (**Zoom**); [Überblick], [Sprachen], [Anwendungen]                                                     | Carsten, BC |
+|          | 16.                         | [Reguläre Sprachen]                                                                                           | BC          |
+|          | 23.                         | [CFG]                                                                                                         | BC          |
+|          | 30.                         | [Lexer mit ANTLR], [Parser mit ANTLR]                                                                         | Carsten     |
+| November | 06.                         | **Dienstbesprechung**                                                                                         |             |
+|          | 13.                         | [Überblick Symboltabellen], [Symboltabellen: Scopes], [Symboltabellen: Funktionen], [Symboltabellen: Klassen] | Carsten     |
+|          | 20.                         | [Überblick Zwischencode], Überblick Backend (LLVM)                                                            | BC, Carsten |
+|          | 27.                         | **Parcoursprüfung: Station 1 ILIAS (Grammar, Lexing, Parsing, Symboltabellen)**                               |             |
+| Dezember | 04.                         | [AST-basierte Interpreter 1], [AST-basierte Interpreter 2]                                                    | Carsten     |
+|          | 11.                         | C++ I: Datentypen, Arrays, Funktionen, Pointer, Referenzen                                                    | Carsten     |
+|          | 18.                         | **Projektwoche Semester 1+3**                                                                                 |             |
+|          | 25.                         | _Weihnachtspause_                                                                                             |             |
+| Januar   | 01.                         | _Weihnachtspause_                                                                                             |             |
+|          | 08.                         | C++ II: Klassen, Operatoren, Vererbung, Polymorphie                                                           | Carsten     |
+|          | 15.                         | _Freies Arbeiten/Puffer_                                                                                      |             |
+|          | 22.                         | Rückblick (**Zoom**), Prüfungsvorbereitung                                                                    | Carsten, BC |
+|          | _(Prüfungsphase 1. Termin)_ | **Parcoursprüfung: Station 2 mdl. (semant. Analyse, Interpreter, C++)**                                       |             |
+|          | _(Prüfungsphase 2. Termin)_ | **Parcoursprüfung: mdl. Prüfung (alle Themen)**                                                               |             |
 
 ### Praktikum
 
-| Monat    | S3, G1 | S3, G2 | S3, G3 | S5  | Praktikum (PO23)                                                   | Praktikum (PO18 abweichend)                                                    | Lead Praktikum   |
+| Monat    | S3, G1 | S3, G2 | S3, G3 | S5  | Praktikum (PO23)                                                   | Praktikum (PO18 abweichend)                                                    | Lead/Modus       |
 |:---------|:-------|:-------|:-------|:----|:-------------------------------------------------------------------|:-------------------------------------------------------------------------------|:-----------------|
 | Oktober  | 22.    | 25.    | 21.    | 23. | [B01] Reguläre Sprachen                                            |                                                                                | BC (Präsenz)     |
 | November | 05.    | 08.    | 04.    | 06. | [B02] CFG                                                          |                                                                                | BC  (Präsenz)    |
@@ -180,6 +177,14 @@ Hier finden Sie einen abonnierbaren [Google Kalender] mit allen Terminen der Ver
 |          | 21.    | 24.    | 20.    | 22. | [B08] C++: Interpreter, Code-Gen. C++2Java                         | [B08] C++: Interpreter, Code-Gen. C++2Java und Speicherverwaltung              | Carsten (online) |
 
 Abgabe der Übungsblätter jeweils **bis Montag, 09:00 Uhr** [im ILIAS](https://www.hsbi.de/elearning/goto.php?target=exc_1356670&client_id=FH-Bielefeld).
+
+### Termine mit Edmonton
+
+| Monat    | Tag | Zeit | Inhalt                                               |
+|:---------|:----|:-----|:-----------------------------------------------------|
+| Oktober  | 30. | tbd  | Edmonton I: ANTLR + Live-Coding (CA)                 |
+| November | 27. | tbd  | Edmonton II: Vorträge Mindener Projekte (Master, DE) |
+| Dezember | 04. | tbd  | Edmonton III: Vorträge Edmontoner Projekte (CA)      |
 
 
 [Google Kalender]: https://calendar.google.com/calendar/ical/5121604486803dcdb5cfaa8602b8b09ce76743d8b9216795606617cac807e595%40group.calendar.google.com/public/basic.ics
