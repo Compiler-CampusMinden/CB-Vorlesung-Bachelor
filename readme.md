@@ -30,7 +30,7 @@ setzen diese bei der Erstellung eines kleinen Compiler-Frontends für C++ ein.
 3.  Semantische Analyse: Attributierte Grammatiken und Symboltabellen
     *   Namen und Scopes
     *   Typen, Klassen, Polymorphie
-4.  Zwischencode: Intermediate Representation (IR)
+4.  Zwischencode: Intermediate Representation (IR), LLVM-IR
 5.  Backend:
     *   LLVM
     *   Interpreter: AST-Traversierung
