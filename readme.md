@@ -31,9 +31,10 @@ setzen diese bei der Erstellung eines kleinen Compiler-Frontends für C++ ein.
     *   Namen und Scopes
     *   Typen, Klassen, Polymorphie
 4.  Zwischencode: Intermediate Representation (IR)
-5.  Backend: LLVM
-6.  Interpreter: AST-Traversierung
-7.  C++ als zu verarbeitende Programmiersprache
+5.  Backend:
+    *   LLVM
+    *   Interpreter: AST-Traversierung
+6.  C++ als zu verarbeitende Programmiersprache
 
 
 ## Team
