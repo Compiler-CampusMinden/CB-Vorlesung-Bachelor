@@ -45,31 +45,13 @@ setzen diese bei der Erstellung eines kleinen Compiler-Frontends für C++ ein.
 
 ## Kursformat
 
-:::::: {.tabs groupid="vl-pr"}
-::: {.tab title="Vorlesung"}
-
-**Vorlesung (2 SWS)**
-
-Mi, 08:00 - 09:30 Uhr (online)
-
-Durchführung als **Flipped Classroom** (Carsten) bzw. **Vorlesung** (BC).
-
-:::
-::: {.tab title="Praktikum"}
-
-**Praktikum (2 SWS)**
-
-| Praktikumsgruppe | Zeit                  | Raum                  |
-|:-----------------|:----------------------|:----------------------|
-| S3, Gruppe 1     | Di, 11:30 - 13:00 Uhr | online/Präsenz (J101) |
-| S3, Gruppe 2     | Fr, 14:00 - 15:30 Uhr | online/Präsenz (J101) |
-| S3, Gruppe 3     | Mo, 09:15 - 10:45 Uhr | online/Präsenz (J101) |
-| S5               | Mi, 09:45 - 11:15 Uhr | online/Präsenz (J101) |
-
-Durchführung **online** (Carsten) bzw. **Präsenz** (BC).
-
-:::
-::::::
+| Vorlesung (2 SWS)                               | Praktikum (2 SWS)                                   |
+|:------------------------------------------------|:----------------------------------------------------|
+| Mi, 08:00 - 09:30 Uhr (online)                  | S3, G1: Di, 11:30 - 13:00 Uhr (online/Präsenz J101) |
+| (Carsten: *Flipped Classroom*, BC: *Vorlesung*) | S3, G2: Fr, 14:00 - 15:30 Uhr (online/Präsenz J101) |
+|                                                 | S3, G3: Mo, 09:15 - 10:45 Uhr (online/Präsenz J101) |
+|                                                 | S5: Mi, 09:45 - 11:15 Uhr (online/Präsenz J101)     |
+|                                                 | (Carsten: *online*, BC: *Präsenz*)                  |
 
 Online-Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**).
 Sie _können_ hierzu den Raum J101 nutzen.
@@ -102,7 +84,7 @@ Sie _können_ hierzu den Raum J101 nutzen.
 ::: {.tab title="Prüfung im zweiten Zeitraum"}
 
 *   **Stationen**:
-    1.  Mündliche Prüfung (individuell, ca. 45 Minuten)
+    1.  Prüfungszeitraum II: Mündliche Prüfung (individuell, ca. 45 Minuten)
 
     Die Note der mündlichen Prüfung ergibt die Gesamtnote.
 
@@ -111,8 +93,6 @@ Sie _können_ hierzu den Raum J101 nutzen.
 
 
 ## Materialien
-
-### Literatur
 
 1.  ["**Compilers: Principles, Techniques, and Tools**"](https://learning.oreilly.com/library/view/compilers-principles-techniques/9789357054881/).
     Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D. and Bansal, S., Pearson India, 2023.
@@ -129,20 +109,12 @@ Sie _können_ hierzu den Raum J101 nutzen.
     Sandler, N., No Starch Press, 2024. ISBN [978-1-0981-8222-9](https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-0981-8222-9).
     [Online](https://learning.oreilly.com/library/view/writing-a-c/9781098182229/) über die [O'Reilly-Lernplattform](https://www.oreilly.com/library-access/).
 
-### Tools
-
-*   [ANTLR v4](https://github.com/antlr/antlr4)
-*   JDK: Java SE 21 (LTS) ([Oracle](https://www.oracle.com/java/technologies/downloads/) oder
-    [Alternativen](https://code.visualstudio.com/docs/languages/java#_install-a-java-development-kit-jdk),
-    bitte 64-bit Version nutzen)
-*   [Git](https://git-scm.com/)
-
 
 ## Fahrplan
 
-### Vorlesung
-
 Hier finden Sie einen abonnierbaren [Google Kalender] mit allen Terminen der Veranstaltung zum Einbinden in Ihre Kalender-App.
+
+### Vorlesung
 
 | Monat    | Tag                         | Vorlesung                                                                                                     | Lead        |
 |:---------|:----------------------------|:--------------------------------------------------------------------------------------------------------------|:------------|
