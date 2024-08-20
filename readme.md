@@ -78,22 +78,23 @@ Sie _können_ hierzu den Raum J104 nutzen.
 
 **Parcoursprüfung mit Testat**, 5 ECTS (PO23/PO18)
 
-*   **Testat**: Mindestens 5 der 6 Übungsblätter erfolgreich bearbeitet
+*   **Testat**:
+    1.  Mindestens 5 der Übungsblätter B01 - B06 erfolgreich bearbeitet, **und**
+    2.  Mindestens 1 der Übungsblätter B07 - B08 erfolgreich bearbeitet, **und**
+    3.  Aktive Teilnahme an mindestens 2 der 3 Edmonton-Termine.
 
-    (Bearbeitung 2er Team, je mindestens 80% bearbeitet,
-    fristgerechte Abgabe der Lösungen im ILIAS,
-    Vorstellung der Lösungen im Praktikum)
+    ("erfolgreich bearbeitet": Bearbeitung 3er Team, je mindestens 80% bearbeitet,
+    fristgerechte Abgabe der Lösungen im ILIAS, Vorstellung der Lösungen im Praktikum)
 
 :::::: {.tabs groupid="exams"}
 ::: {.tab title="Prüfung im ersten Zeitraum"}
 
 *   **Stationen**:
-    1.  13.11. (Vorlesungsslot, ILIAS-Test, einzeln): Grammar, Lexing, Parsing
-    2.  18.12. (Vorlesungsslot, ILIAS-Test, einzeln): Semantische Analyse, Interpreter, C++ I
-    3.  22.01. (Praktikumsslot, Live-Programming, 2er Teams): Interpreter für Mini-C++
+    1.  27.11. (ILIAS-Test, einzeln): Grammar, Lexing, Parsing, Symboltabellen
+    2.  Prüfungszeitraum I (Mündliche Prüfung, 3er Teams): semantische Analyse, Interpreter, C++
 
-    In jeder Station kann die gleiche Punkteanzahl erreicht werden. Die besten beiden
-    Ergebnisse werden für die Gesamtnote herangezogen.
+    Beide Stationen ergeben zu je 50% die Gesamtnote.
+
 :::
 ::: {.tab title="Prüfung im zweiten Zeitraum"}
 
@@ -101,6 +102,7 @@ Sie _können_ hierzu den Raum J104 nutzen.
     1.  Mündliche Prüfung (_ALL\*_) (individuell, ca. 45 Minuten)
 
     Die Note der mündlichen Prüfung ergibt die Gesamtnote.
+    
 :::
 ::::::
 
