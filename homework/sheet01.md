@@ -1,6 +1,6 @@
 ---
 archetype: assignment
-title: "Meilenstein 01: Grammatik, ANTLR, AST (Mini-Python)"
+title: "Blatt 01: Grammatik, ANTLR, AST (Mini-Python)"
 author: "BC George, Carsten Gips (HSBI)"
 
 hidden: true
