@@ -1,6 +1,6 @@
 ---
 archetype: assignment
-title: "Meilenstein 02: AST und Symboltabellen (Mini-Python)"
+title: "Blatt 02: AST und Symboltabellen (Mini-Python)"
 author: "BC George, Carsten Gips (HSBI)"
 
 hidden: true

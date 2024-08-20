@@ -1,6 +1,6 @@
 ---
 archetype: assignment
-title: "Meilenstein 03: Interpreter (Mini-Python)"
+title: "Blatt 03: Interpreter (Mini-Python)"
 author: "BC George, Carsten Gips (HSBI)"
 
 hidden: true

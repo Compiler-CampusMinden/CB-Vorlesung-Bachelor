@@ -161,7 +161,7 @@ Hier finden Sie einen abonnierbaren [Google Kalender] mit allen Terminen der Ver
 | Januar   | 01.                         | _Weihnachtspause_                                                                                             |                |
 |          | 08.                         | C++ II: Klassen, Operatoren, Vererbung, Polymorphie                                                           | Carsten        |
 |          | 15.                         | _Freies Arbeiten/Puffer_                                                                                      |                |
-|          | 22.                         | Rückblick (**Zoom**), [Prüfungsvorbereitung]                                                                  | Carsten, BC    |
+|          | 22.                         | Rückblick (**Zoom**), Prüfungsvorbereitung                                                                    | Carsten, BC    |
 |          | _(Prüfungsphase 1. Termin)_ | **Parcoursprüfung: Station 2 mdl. (semant. Analyse, Interpreter, C++)**                                       |                |
 |          | _(Prüfungsphase 2. Termin)_ | **Parcoursprüfung: mdl. Prüfung (ALL\*)**                                                                     |                |
 
@@ -184,7 +184,6 @@ Abgabe der Übungsblätter jeweils **bis Montag, 09:00 Uhr** [im ILIAS](https://
 [Google Kalender]: https://calendar.google.com/calendar/ical/5121604486803dcdb5cfaa8602b8b09ce76743d8b9216795606617cac807e595%40group.calendar.google.com/public/basic.ics
 
 [Orga]: https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/discussions/categories/q-a?discussions_q=category%3AQ%26A+is%3Aopen
-[Prüfungsvorbereitung]: admin/exams.md
 
 [Überblick]: lecture/intro/overview.md
 [Sprachen]: lecture/intro/languages.md
