@@ -121,6 +121,7 @@ Sie _können_ hierzu den Raum J101 nutzen.
 2.  ["**Crafting Interpreters**"](https://github.com/munificent/craftinginterpreters).
     Nystrom, R., Genever Benning, 2021.
     ISBN [978-0-9905829-3-9](https://fhb-bielefeld.digibib.net/openurl?isbn=978-0-9905829-3-9).
+    [Online](https://www.craftinginterpreters.com/).
 3.  ["**The Definitive ANTLR 4 Reference**"](https://learning.oreilly.com/library/view/the-definitive-antlr/9781941222621/).
     Parr, T., Pragmatic Bookshelf, 2014. ISBN [978-1-9343-5699-9](https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-9343-5699-9).
     [Online](https://learning.oreilly.com/library/view/the-definitive-antlr/9781941222621/) über die [O'Reilly-Lernplattform](https://www.oreilly.com/library-access/).
