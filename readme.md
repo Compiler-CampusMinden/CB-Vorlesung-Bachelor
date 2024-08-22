@@ -175,10 +175,10 @@ Abgabe der Übungsblätter jeweils **bis Montag, 09:00 Uhr** [im ILIAS](https://
 [CFG]: lecture/02-parsing/cfg.md
 [Parser mit ANTLR]: lecture/02-parsing/antlr-parsing.md
 
-[Überblick Symboltabellen]: lecture/03-semantics/symboltables/intro-symbtab.md
-[Symboltabellen: Scopes]: lecture/03-semantics/symboltables/scopes.md
-[Symboltabellen: Funktionen]: lecture/03-semantics/symboltables/functions.md
-[Symboltabellen: Klassen]: lecture/03-semantics/symboltables/classes.md
+[Überblick Symboltabellen]: lecture/03-semantics/symbtab0-intro.md
+[Symboltabellen: Scopes]: lecture/03-semantics/symbtab1-scopes.md
+[Symboltabellen: Funktionen]: lecture/03-semantics/symbtab2-functions.md
+[Symboltabellen: Klassen]: lecture/03-semantics/symbtab3-classes.md
 
 [Überblick Zwischencode]: lecture/04-intermediate/intro-ir.md
 
