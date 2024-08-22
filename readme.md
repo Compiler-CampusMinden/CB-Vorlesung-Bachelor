@@ -173,8 +173,11 @@ Abgabe der Übungsblätter jeweils **bis Montag, 09:00 Uhr** [im ILIAS](https://
 [Lexer mit ANTLR]: lecture/01-lexing/antlr-lexing.md
 
 [CFG]: lecture/02-parsing/cfg.md
+<!-- [LL-Parser]: lecture/02-parsing/ll-parser.md -->
 [Parser mit ANTLR]: lecture/02-parsing/antlr-parsing.md
+<!-- [Grenze Lexer und Parser]: lecture/02-parsing/finalwords.md -->
 
+<!-- [Attributierte Grammatiken]: lecture/03-semantics/attribgrammars.md -->
 [Überblick Symboltabellen]: lecture/03-semantics/symbtab0-intro.md
 [Symboltabellen: Scopes]: lecture/03-semantics/symbtab1-scopes.md
 [Symboltabellen: Funktionen]: lecture/03-semantics/symbtab2-functions.md
@@ -182,8 +185,11 @@ Abgabe der Übungsblätter jeweils **bis Montag, 09:00 Uhr** [im ILIAS](https://
 
 [Überblick Zwischencode]: lecture/04-intermediate/intro-ir.md
 
+<!-- [Syntaxgesteuerte Interpreter]: lecture/06-interpretation/syntaxdriven.md -->
 [AST-basierte Interpreter 1]: lecture/06-interpretation/astdriven-part1.md
 [AST-basierte Interpreter 2]: lecture/06-interpretation/astdriven-part2.md
+
+<!-- [Builder für Mini-Python]: lecture/07-codegen/minipython-builder.md -->
 
 [B01]: homework/sheet01.md
 [B02]: homework/sheet02.md
