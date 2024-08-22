@@ -1,12 +1,11 @@
 ---
 archetype: "default"
-title: "Lexer"
+title: "Überblick"
 ---
 
 
-Der Lexer (auch "Scanner") soll den Zeichenstrom in eine Folge von Token
-zerlegen. Zur Spezifikation der Token werden in der Regel reguläre Ausdrücke
-verwendet.
+Was ist ein Compiler? Welche Bausteine lassen sich identifizieren, welche Aufgaben haben
+diese?
 
 
 `{{< children showhidden="true" >}}`{=markdown}
