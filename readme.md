@@ -165,25 +165,31 @@ Abgabe der Übungsblätter jeweils **bis Montag, 09:00 Uhr** [im ILIAS](https://
 
 [Orga]: https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/discussions/categories/q-a?discussions_q=category%3AQ%26A+is%3Aopen
 
-[Überblick]: lecture/intro/overview.md
-[Sprachen]: lecture/intro/languages.md
-[Anwendungen]: lecture/intro/applications.md
+[Überblick]: lecture/00-intro/overview.md
+[Sprachen]: lecture/00-intro/languages.md
+[Anwendungen]: lecture/00-intro/applications.md
 
-[Reguläre Sprachen]: lecture/frontend/lexing/regular.md
-[Lexer mit ANTLR]: lecture/frontend/lexing/antlr-lexing.md
+[Reguläre Sprachen]: lecture/01-lexing/regular.md
+[Lexer mit ANTLR]: lecture/01-lexing/antlr-lexing.md
 
-[CFG]: lecture/frontend/parsing/cfg.md
-[Parser mit ANTLR]: lecture/frontend/parsing/antlr-parsing.md
+[CFG]: lecture/02-parsing/cfg.md
+<!-- [LL-Parser]: lecture/02-parsing/ll-parser.md -->
+[Parser mit ANTLR]: lecture/02-parsing/antlr-parsing.md
+<!-- [Grenze Lexer und Parser]: lecture/02-parsing/finalwords.md -->
 
-[Überblick Symboltabellen]: lecture/frontend/semantics/symboltables/intro-symbtab.md
-[Symboltabellen: Scopes]: lecture/frontend/semantics/symboltables/scopes.md
-[Symboltabellen: Funktionen]: lecture/frontend/semantics/symboltables/functions.md
-[Symboltabellen: Klassen]: lecture/frontend/semantics/symboltables/classes.md
+<!-- [Attributierte Grammatiken]: lecture/03-semantics/attribgrammars.md -->
+[Überblick Symboltabellen]: lecture/03-semantics/symbtab0-intro.md
+[Symboltabellen: Scopes]: lecture/03-semantics/symbtab1-scopes.md
+[Symboltabellen: Funktionen]: lecture/03-semantics/symbtab2-functions.md
+[Symboltabellen: Klassen]: lecture/03-semantics/symbtab3-classes.md
 
-[Überblick Zwischencode]: lecture/intermediate/intro-ir.md
+[Überblick Zwischencode]: lecture/04-intermediate/intro-ir.md
 
-[AST-basierte Interpreter 1]: lecture/backend/interpretation/astdriven-part1.md
-[AST-basierte Interpreter 2]: lecture/backend/interpretation/astdriven-part2.md
+<!-- [Syntaxgesteuerte Interpreter]: lecture/06-interpretation/syntaxdriven.md -->
+[AST-basierte Interpreter 1]: lecture/06-interpretation/astdriven-part1.md
+[AST-basierte Interpreter 2]: lecture/06-interpretation/astdriven-part2.md
+
+<!-- [Builder für Mini-Python]: lecture/07-codegen/minipython-builder.md -->
 
 [B01]: homework/sheet01.md
 [B02]: homework/sheet02.md
