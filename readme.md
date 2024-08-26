@@ -45,18 +45,37 @@ setzen diese bei der Erstellung eines kleinen Compiler-Frontends für C++ ein.
 
 ## Kursformat
 
+:::::: {.tabs groupid="modul-po"}
+::: {.tab title="IFM 3.1 CB (PO23, 3. Semester)"}
+
 | Vorlesung (2 SWS)                               | Praktikum (2 SWS)                                   |
 |:------------------------------------------------|:----------------------------------------------------|
 | Mi, 08:00 - 09:30 Uhr (online)                  | S3, G1: Di, 11:30 - 13:00 Uhr (online/Präsenz J101) |
 | (Carsten: *Flipped Classroom*, BC: *Vorlesung*) | S3, G2: Fr, 14:00 - 15:30 Uhr (online/Präsenz J101) |
 |                                                 | S3, G3: Mo, 09:15 - 10:45 Uhr (online/Präsenz J101) |
-|                                                 | S5: Mi, 09:45 - 11:15 Uhr (online/Präsenz J101)     |
 |                                                 | (Carsten: *online*, BC: *Präsenz*)                  |
 
-Online-Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS]**).
-Sie _können_ hierzu den Raum J101 nutzen.
+Online-Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS IFM 3.1 CB (PO23, 3. Semester)]**).
+Sie _können_ hierzu den Raum J101 (siehe Stundenplan) nutzen.
 
-[ILIAS]: https://www.hsbi.de/elearning/goto.php?target=crs_1254524&client_id=FH-Bielefeld
+:::
+::: {.tab title="IFM 5.21 CB (PO18, 5. Semester)"}
+
+| Vorlesung (2 SWS)                               | Praktikum (2 SWS)                      |
+|:------------------------------------------------|:---------------------------------------|
+| Mi, 08:00 - 09:30 Uhr (online)                  | S5, G1: Mi, 09:30 - 11:00 Uhr (online) |
+| (Carsten: *Flipped Classroom*, BC: *Vorlesung*) | S5, G2: Mi, 09:30 - 11:00 Uhr (online) |
+|                                                 | S5, G3: Mi, 09:30 - 11:00 Uhr (online) |
+|                                                 | (Carsten: *online*, BC: *online*)      |
+
+Online-Sitzungen per Zoom (**Zugangsdaten siehe [IFM 5.21 CB (PO18, 5. Semester)]**).
+Sie _können_ hierzu den Raum J101 (siehe Stundenplan) nutzen.
+
+:::
+::::::
+
+[ILIAS IFM 3.1 CB (PO23, 3. Semester)]: https://www.hsbi.de/elearning/goto.php?target=crs_1400596&client_id=FH-Bielefeld
+[IFM 5.21 CB (PO18, 5. Semester)]: https://www.hsbi.de/elearning/goto.php?target=crs_1400603&client_id=FH-Bielefeld
 
 
 ## Prüfungsform, Note und Credits
