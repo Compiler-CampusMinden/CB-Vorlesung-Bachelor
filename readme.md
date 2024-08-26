@@ -80,21 +80,24 @@ Sie _können_ hierzu den Raum J101 (siehe Stundenplan) nutzen.
 
 ## Prüfungsform, Note und Credits
 
-**Parcoursprüfung mit Testat**, 5 ECTS (PO23/PO18)
+:::::::::::: {.tabs groupid="modul-po"}
+::::::::: {.tab title="IFM 3.1 CB (PO23, 3. Semester)"}
 
-*   **Testat**:
-    1.  Mindestens 5 der Übungsblätter B01 - B06 erfolgreich bearbeitet, **und**
-    2.  mindestens 1 der Übungsblätter B07 - B08 erfolgreich bearbeitet, **und**
-    3.  aktive Teilnahme an mindestens 2 der 3 Edmonton-Termine.
+**Parcoursprüfung mit Testat**, 5 ECTS (PO23)
 
-    ("erfolgreich bearbeitet": Bearbeitung 3er Team, je mindestens 80% bearbeitet,
+*   **Testat**: Vergabe der Credit-Points
+    1.  Mindestens 5 der Übungsblätter [B01], [B02], [B03], [B04], [B05] und [B06] erfolgreich bearbeitet, **und**
+    2.  mindestens 1 der Übungsblätter [B07] und [B08] erfolgreich bearbeitet, **und**
+    3.  **aktive** Teilnahme an allen 3 Edmonton-Terminen.
+
+    ("erfolgreich bearbeitet": Bearbeitung in 3er Teams, je mindestens 80% bearbeitet,
     fristgerechte Abgabe der Lösungen im ILIAS, Vorstellung der Lösungen im Praktikum)
 
 :::::: {.tabs groupid="exams"}
 ::: {.tab title="Prüfung im ersten Zeitraum"}
 
 *   **Stationen**:
-    1.  27.11. (ILIAS-Test, einzeln): Grammar, Lexing, Parsing, Symboltabellen
+    1.  20.11. (ILIAS-Test, einzeln): Grammar, Lexing, Parsing
     2.  Prüfungszeitraum I (Mündliche Prüfung, 3er Teams): semantische Analyse, Interpreter, C++
 
     Beide Stationen ergeben zu je 50% die Gesamtnote.
@@ -109,6 +112,43 @@ Sie _können_ hierzu den Raum J101 (siehe Stundenplan) nutzen.
 
 :::
 ::::::
+
+:::::::::
+::::::::: {.tab title="IFM 5.21 CB (PO18, 5. Semester)"}
+
+**Parcoursprüfung mit Testat**, 5 ECTS (PO18)
+
+*   **Testat**: Vergabe der Credit-Points
+    1.  Mindestens 5 der Übungsblätter [B01], [B02], [B03], [B04x], [B05x] und [B06x] erfolgreich bearbeitet, **und**
+    2.  mindestens 1 der Übungsblätter [B07x] und [B08x] erfolgreich bearbeitet, **und**
+    3.  Vorstellung der Lösung von [B04x] auf dem zweiten Edmonton-Treffen, **und**
+    4.  **aktive** Teilnahme an allen 3 Edmonton-Terminen.
+
+    ("erfolgreich bearbeitet": Bearbeitung in 3er Teams, je mindestens 80% bearbeitet,
+    fristgerechte Abgabe der Lösungen im ILIAS, Vorstellung der Lösungen im Praktikum)
+
+:::::: {.tabs groupid="exams"}
+::: {.tab title="Prüfung im ersten Zeitraum"}
+
+*   **Stationen**:
+    1.  20.11. (Vortrag, 3er Team): Vorstellung der Lösung von [B04x]
+    2.  Prüfungszeitraum I (Mündliche Prüfung, 3er Teams): semantische Analyse, Interpreter, C++
+
+    Beide Stationen ergeben zu je 50% die Gesamtnote.
+
+:::
+::: {.tab title="Prüfung im zweiten Zeitraum"}
+
+*   **Stationen**:
+    1.  Prüfungszeitraum II: Mündliche Prüfung (individuell, ca. 45 Minuten)
+
+    Die Note der mündlichen Prüfung ergibt die Gesamtnote.
+
+:::
+::::::
+
+:::::::::
+::::::::::::
 
 
 ## Materialien
@@ -169,29 +209,29 @@ Hier finden Sie einen abonnierbaren [Google Kalender IFM 5.21 CB (PO18, 5. Semes
 
 Abgabe der Übungsblätter jeweils **Mittwoch bis 09:00 Uhr** im [ILIAS](https://www.hsbi.de/elearning/goto.php?target=exc_1420725&client_id=FH-Bielefeld). Vorstellung der Lösung im jeweiligen Praktikum in der Abgabewoche.
 
-| Monat                | Tag | Vorlesung                                                                                                     | Lead        | Abgabe Aufgabenblatt & Vorstellung Praktikum                                                                |
-|:---------------------|:----|:--------------------------------------------------------------------------------------------------------------|:------------|:------------------------------------------------------------------------------------------------------------|
-| Oktober              | 09. | [Orga] (*Zoom*); [Überblick], [Sprachen], [Anwendungen]                                                       | Carsten, BC |                                                                                                             |
-|                      | 16. | [Reguläre Sprachen]                                                                                           | BC          |                                                                                                             |
-|                      | 23. | [CFG]                                                                                                         | BC          | [B01] Reguläre Sprachen (BC, *Präsenz*)                                                                     |
-|                      | 29. | **18:00 - 19:30 Uhr (online): Edmonton I: ANTLR + Live-Coding (CA)**                                          |             |                                                                                                             |
-|                      | 30. | [Lexer mit ANTLR], [Parser mit ANTLR]                                                                         | Carsten     |                                                                                                             |
-| November             | 06. | **Dienstbesprechung**                                                                                         |             | [B02] CFG (BC, *Präsenz*)                                                                                   |
-|                      | 13. | [Überblick Symboltabellen], [Symboltabellen: Scopes], [Symboltabellen: Funktionen], [Symboltabellen: Klassen] | Carsten     | [B03] ANTLR (Carsten, *online*)                                                                             |
-|                      | 20. | **08:00 - 09:30 Uhr (online): Parcoursprüfung: Station 1 Vortrag Projekt**                                    |             |                                                                                                             |
-|                      | 26. | **18:00 - 19:30 Uhr (online): Edmonton II: Vorträge Mindener Projekte (DE)**                                  |             |                                                                                                             |
-|                      | 27. | [Überblick Zwischencode], Überblick Backend (LLVM)                                                            | BC, Carsten |                                                                                                             |
-| Dezember             | 03. | **18:00 - 19:30 Uhr (online): Edmonton III: Vorträge Edmontoner Projekte (CA)**                               |             |                                                                                                             |
-|                      | 04. | [AST-basierte Interpreter 1], [AST-basierte Interpreter 2]                                                    | Carsten     |                                                                                                             |
-|                      | 11. | C++ I: Datentypen, Arrays, Funktionen, Pointer, Referenzen                                                    | Carsten     | [B04] Symboltabellen, [B05] Interpreter (Carsten, *online*)                                                 |
-|                      | 18. | **Projektwoche Semester 1+3**                                                                                 |             |                                                                                                             |
-|                      | 25. | _Weihnachtspause_                                                                                             |             |                                                                                                             |
-| Januar               | 01. | _Weihnachtspause_                                                                                             |             |                                                                                                             |
-|                      | 08. | C++ II: Klassen, Operatoren, Vererbung, Polymorphie                                                           | Carsten     | [B06] C++ und Pointer/Speicherverwaltung (Runtime in Java) (Carsten, *online*)                              |
-|                      | 15. | _Freies Arbeiten/Puffer_                                                                                      |             | [B07] Mini-Projekt: Grammar, ANTLR, Symboltabelle, Pretty Printer/Formatter und Pointer (Carsten, *online*) |
-|                      | 22. | Rückblick (*Zoom*), Prüfungsvorbereitung                                                                      | Carsten, BC | [B08] Mini-Projekt: Interpreter, Code-Gen. C++2Java und Speicherverwaltung (Carsten, *online*)              |
-| _(Prüfungsphase I)_  |     | **Parcoursprüfung: Station 2 mdl. (semant. Analyse, Interpreter, C++)**                                       |             |                                                                                                             |
-| _(Prüfungsphase II)_ |     | **Parcoursprüfung: mdl. Prüfung (alle Themen)**                                                               |             |                                                                                                             |
+| Monat                | Tag | Vorlesung                                                                                                     | Lead        | Abgabe Aufgabenblatt & Vorstellung Praktikum                                                                 |
+|:---------------------|:----|:--------------------------------------------------------------------------------------------------------------|:------------|:-------------------------------------------------------------------------------------------------------------|
+| Oktober              | 09. | [Orga] (*Zoom*); [Überblick], [Sprachen], [Anwendungen]                                                       | Carsten, BC |                                                                                                              |
+|                      | 16. | [Reguläre Sprachen]                                                                                           | BC          |                                                                                                              |
+|                      | 23. | [CFG]                                                                                                         | BC          | [B01] Reguläre Sprachen (BC, *Präsenz*)                                                                      |
+|                      | 29. | **18:00 - 19:30 Uhr (online): Edmonton I: ANTLR + Live-Coding (CA)**                                          |             |                                                                                                              |
+|                      | 30. | [Lexer mit ANTLR], [Parser mit ANTLR]                                                                         | Carsten     |                                                                                                              |
+| November             | 06. | **Dienstbesprechung**                                                                                         |             | [B02] CFG (BC, *Präsenz*)                                                                                    |
+|                      | 13. | [Überblick Symboltabellen], [Symboltabellen: Scopes], [Symboltabellen: Funktionen], [Symboltabellen: Klassen] | Carsten     | [B03] ANTLR (Carsten, *online*)                                                                              |
+|                      | 20. | **08:00 - 09:30 Uhr (online): Vortrag: Vorstellung der Lösung von [B04x]**                                    |             |                                                                                                              |
+|                      | 26. | **18:00 - 19:30 Uhr (online): Edmonton II: Vorträge Mindener Projekte (DE)**                                  |             |                                                                                                              |
+|                      | 27. | [Überblick Zwischencode], Überblick Backend (LLVM)                                                            | BC, Carsten |                                                                                                              |
+| Dezember             | 03. | **18:00 - 19:30 Uhr (online): Edmonton III: Vorträge Edmontoner Projekte (CA)**                               |             |                                                                                                              |
+|                      | 04. | [AST-basierte Interpreter 1], [AST-basierte Interpreter 2]                                                    | Carsten     |                                                                                                              |
+|                      | 11. | C++ I: Datentypen, Arrays, Funktionen, Pointer, Referenzen                                                    | Carsten     | [B05x] Interpreter (Carsten, *online*)                                                                       |
+|                      | 18. | **Projektwoche Semester 1+3**                                                                                 |             |                                                                                                              |
+|                      | 25. | _Weihnachtspause_                                                                                             |             |                                                                                                              |
+| Januar               | 01. | _Weihnachtspause_                                                                                             |             |                                                                                                              |
+|                      | 08. | C++ II: Klassen, Operatoren, Vererbung, Polymorphie                                                           | Carsten     | [B06x] C++ und Pointer/Speicherverwaltung (Runtime in Java) (Carsten, *online*)                              |
+|                      | 15. | _Freies Arbeiten/Puffer_                                                                                      |             | [B07x] Mini-Projekt: Grammar, ANTLR, Symboltabelle, Pretty Printer/Formatter und Pointer (Carsten, *online*) |
+|                      | 22. | Rückblick (*Zoom*), Prüfungsvorbereitung                                                                      | Carsten, BC | [B08x] Mini-Projekt: Interpreter, Code-Gen. C++2Java und Speicherverwaltung (Carsten, *online*)              |
+| _(Prüfungsphase I)_  |     | **Parcoursprüfung: Station 2 mdl. (semant. Analyse, Interpreter, C++)**                                       |             |                                                                                                              |
+| _(Prüfungsphase II)_ |     | **Parcoursprüfung: mdl. Prüfung (alle Themen)**                                                               |             |                                                                                                              |
 
 :::
 ::::::
@@ -236,6 +276,11 @@ Abgabe der Übungsblätter jeweils **Mittwoch bis 09:00 Uhr** im [ILIAS](https:/
 [B06]: homework/sheet06.md
 [B07]: homework/sheet07.md
 [B08]: homework/sheet08.md
+[B04x]: homework/sheet04.md
+[B05x]: homework/sheet05.md
+[B06x]: homework/sheet06.md
+[B07x]: homework/sheet07.md
+[B08x]: homework/sheet08.md
 
 
 ## Förderungen und Kooperationen
