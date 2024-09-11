@@ -1,6 +1,6 @@
 ---
 archetype: lecture-cg
-title: "C++, Teil 1: TODO"
+title: "Einführung in C++"
 author: "Carsten Gips (HSBI)"
 readings:
   - key: "Aho2023"
@@ -13,13 +13,39 @@ outcomes:
   - k2: "TODO"
 youtube:
   - link: "TODO"
-    name: "VL C++, Teil 1: TODO"
+    name: "VL Einführung in C++"
 ---
 
 
-## C++, Teil 1: TODO
+## Thema 1: Einführung
 
-TODO
+- Warum C++ lernen?
+- Kurzer Überblick über die Geschichte und Verwendung von C++
+
+
+## Thema 2: Grundlegende Konzepte
+
+- Variablen und Datentypen in C++: `float`, `double`, `char`, `boolean`, `int`
+- Einführung in Operatoren und Ausdrücke
+- Ein- und Ausgabe von Daten mit `cin` und `cout`
+- Kommentare und Formatierung von Code
+- Eingebaute Funktionen/Operatoren: `printf`, `sizeof`, `<<`, `typedef`
+- Namespaces, Scopes
+
+
+## Thema 3: Kontrollstrukturen
+
+- Verzweigungen mit `if`, `else if` und `else`
+- Schleifen mit `for`, `while` und `do while`
+- Verwendung von logischen Operatoren
+
+
+## Thema 4: Funktionen
+
+- Definition und Verwendung von Funktionen
+- Parameterübergabe an Funktionen
+- Rückgabewerte von Funktionen
+- Lokale und globale Variablen
 
 
 ## Wrap-Up
