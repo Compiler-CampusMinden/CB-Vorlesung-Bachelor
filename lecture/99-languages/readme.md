@@ -1,6 +1,7 @@
 ---
 archetype: "default"
 title: "Programmiersprachen und -konzepte"
+linkTitle: "Programmiersprachen"
 ---
 
 

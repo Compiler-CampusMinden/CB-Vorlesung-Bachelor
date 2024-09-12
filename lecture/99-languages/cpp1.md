@@ -17,15 +17,7 @@ youtube:
 ---
 
 
-## Thema 1: Arrays
-
-- Einführung in Arrays
-- Arbeiten mit Arrays und Schleifen: `vec3 foo[10]`
-- Mehrdimensionale Arrays
-- Verwendung von Standardbibliothekscontainern (z.B. `vector`)
-
-
-## Thema 2: Referenzen und Pointer
+## Thema 1: Referenzen und Pointer
 
 - Einführung in Speicherverwaltung
 - Konzept eines Pointers
@@ -38,17 +30,30 @@ youtube:
 - Arbeiten mit Pointern und Referenzen
 
 
-## Thema 3: Klassen und Objekte
+## Thema 2: Klassen und Objekte
 
 - Definition von Klassen und Objekten in C++ und Structs
-- Konstruktoren und Destruktoren
+
+
+## Thema 3: Big3
+
+- Konstruktoren und Destruktoren: Big3
+
+
+## Thema 4: Operatoren
+
 - Zuweisung (nur Verwendung, nicht Definition)
 - Einsatz von (Mathe-) Operatoren für Klassen/Objekte => `a * b` ist wie `a.mult(b)`
 
 
-## Thema 4: Vererbung und Polymorphismus
+## Thema 4: Vererbung
 
-- Vererbung in C++: Einfache und Mehrfachvererbung
+- Vererbung in C++
+
+
+## Thema 5: Mehrfachvererbung und Polymorphismus
+
+- Mehrfachvererbung
 - Polymorphismus und virtuelle Funktionen
 - Abstrakte Klassen und reine virtuelle Funktionen
 
