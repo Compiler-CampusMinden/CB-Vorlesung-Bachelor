@@ -283,6 +283,11 @@ Regel des Targets `tollesProgramm` ausgeführt, um die Datei `tollesProgramm` zu
 
 
 
+https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/06_OOPII.md
+https://github.com/LiaBooks/C-Programmierung/tree/master
+https://github.com/LiaBooks/C-Programming/tree/master
+
+
 ## Thema 2: Grundlegende Konzepte
 
 - Variablen und Datentypen in C++: `float`, `double`, `char`, `boolean`, `int`
