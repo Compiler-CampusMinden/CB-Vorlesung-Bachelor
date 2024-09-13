@@ -60,6 +60,10 @@ youtube:
 
 ## Wrap-Up
 
+https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/06_OOPII.md
+https://github.com/LiaBooks/C-Programmierung/tree/master
+https://github.com/LiaBooks/C-Programming/tree/master
+
 TODO
 
 

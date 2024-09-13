@@ -67,9 +67,6 @@ tldr: |
     dem Operator `sizeof` heraus.
 
     Mit `typedef` kann man einen neuen Namen für bereits existierende Typen vergeben.
-
-
-    TODO
 outcomes:
   - k1: "Wie hängen C und C++ zusammen?"
   - k1: "Wichtigste Unterschiede und Gemeinsamkeiten zu Java"
@@ -84,8 +81,6 @@ outcomes:
   - k3: "Einfache Ausgaben mit `printf()`"
   - k3: "Benutzung von `sizeof` zur Bestimmung des Speicherbedarfs"
   - k3: "Benutzung von `typedef` zur Definition neuer Typen (Aliase bestehender Typen)"
-
-  - k2: "TODO"
 youtube:
   - link: "TODO"
     name: "VL Einführung in C++ (Erinnerungen an C)"
@@ -570,39 +565,6 @@ Zusätzlich gibt es noch benannte Scopes und einen Scope-Operator.
 [Beispiel: cppScope.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/cppScope.cpp"}
 
 
-
-
-
-
-
-
-
-
-
-https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/06_OOPII.md
-https://github.com/LiaBooks/C-Programmierung/tree/master
-https://github.com/LiaBooks/C-Programming/tree/master
-
-
-## Thema 4: Funktionen
-
-- Definition und Verwendung von Funktionen
-- Parameterübergabe an Funktionen
-- Rückgabewerte von Funktionen
-- Lokale und globale Variablen
-
-
-## Thema 5: Arrays
-
-- Einführung in Arrays
-- Arbeiten mit Arrays und Schleifen: `vec3 foo[10]`
-- Mehrdimensionale Arrays
-- Verwendung von Standardbibliothekscontainern (z.B. `vector`)
-
-
-
-
-
 ## Wrap-Up
 
 -   C/C++ sind enge Verwandte: kompilierte Sprachen, C++ fügt OO hinzu
@@ -614,9 +576,6 @@ https://github.com/LiaBooks/C-Programming/tree/master
     -   Integer können im booleschen Kontext ausgewertet werden
     -   Operator `sizeof` zur Bestimmung des Speicherbedarfs
     -   Alias-Namen für existierende Typen mit `typedef` definierbar
-
-
-TODO
 
 
 
