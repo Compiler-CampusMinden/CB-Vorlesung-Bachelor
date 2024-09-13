@@ -26,11 +26,11 @@ tldr: |
     von C übernommen hat. C++ hat die C-Syntax übernommen und fügt neue objektorientierte Konzepte
     hinzu. Mit gewissen Einschränkungen funktioniert also C-Code auch in C++.
 
-    In C++ gibt es Klassen (mit Methoden und Attributen), und zusätzlich gibt es Funktionen. Der Einsprungpunkt in ein
-    Programm ist (analog zu Java) die Funktion `main()`, die ein `int` als Ergebnis zurückliefert.
-    Dieser Integer kann vom Aufrufer ausgewertet werden, wobei der Wert 0 typischerweise als Erfolg
-    interpretiert wird. Achtung: Das ist eine Konvention, d.h. es kann Programme geben, die andere
-    Werte zurückliefern. Die Werte müssen dokumentiert werden.
+    In C++ gibt es Klassen (mit Methoden und Attributen), und zusätzlich gibt es Funktionen. Der
+    Einsprungpunkt in ein Programm ist (analog zu Java) die Funktion `main()`, die ein `int` als
+    Ergebnis zurückliefert. Dieser Integer kann vom Aufrufer ausgewertet werden, wobei der Wert 0
+    typischerweise als Erfolg interpretiert wird. Achtung: Das ist eine Konvention, d.h. es kann
+    Programme geben, die andere Werte zurückliefern. Die Werte müssen dokumentiert werden.
 
     Bevor der Compiler den Quelltext "sieht", wird dieser von einem Präprozessor bearbeitet. Dieser
     hat verschiedene Aufgaben, unter anderem das Einbinden anderer Dateien. Dabei wird ein
@@ -48,13 +48,42 @@ tldr: |
     Konsole eingeben könnte. Make berücksichtigt den Zeitstempel der Dateien: Ziele, die bereits
     existieren und deren Abhängigkeiten nicht neuer sind, werden nicht erneut gebaut.
 
+    Die gute Nachricht: In Bezug auf Variablen, Operatoren und Kontrollfluss verhalten sich C und C++
+    im Wesentlichen wie Java.
+
+    Es gibt in C++ den Typ `bool` mit den Werten `true` und `false`.  Zusätzlich werden Integerwerte
+    im boolschen Kontext (etwa in einer `if`-Abfrage) ausgewertet, wobei der Wert 0 einem `false`
+    entspricht und alle anderen Integer-Werte einem `true`. (Dies steht etwas im Widerspruch zu den
+    Werten, die in der `main`-Funktion per `return` zurückgeliefert werden: Hier bedeutet 0 in der
+    Regel, dass alles OK war.)
+
+    Die Basisdatentypen sind (bis auf `char` und `bool`) in ihrer Größe maschinenabhängig. Es kann
+    also sein, dass Code, der auf einem 64bit-Laptop ohne Probleme läuft, auf einem Raspberry PI
+    Überläufe verursacht! Um besonders ressourcenschonend zu arbeiten, kann man die Speichergröße
+    für einige Basisdatentypen durch die Typmodifikatoren `short` und `long` beeinflussen sowie
+    die Interpretation von Zahlenwerten mit oder ohne Vorzeichen (`signed`, `unsigned`) einstellen.
+
+    Die Anzahl der für einen Typ oder eine Variable/Struktur benötigten Bytes bekommt man mit
+    dem Operator `sizeof` heraus.
+
+    Mit `typedef` kann man einen neuen Namen für bereits existierende Typen vergeben.
+
+
     TODO
 outcomes:
   - k1: "Wie hängen C und C++ zusammen?"
+  - k1: "Wichtigste Unterschiede und Gemeinsamkeiten zu Java"
   - k1: "Wichtigste Aufgaben des Präprozessors"
   - k3: "Aufbau, Übersetzen und Starten von einfachen C++-Programmen"
   - k3: "Ausgabe mit `printf()` und `std::cout`"
   - k3: "Erinnerung: Automatisiertes Übersetzen mit Hilfe von GNU Make und einfachsten Makefiles"
+  - k3: "Nutzung der Basisdatentypen einschließlich der Modifikatoren"
+  - k3: "Deklaration von Variablen, Nutzung von Kontrollstrukturen und Operatoren"
+  - k3: "Interpretation von Integers im booleschen Kontext"
+  - k3: "Nutzung von bitweise wirkenden Operatoren"
+  - k3: "Einfache Ausgaben mit `printf()`"
+  - k3: "Benutzung von `sizeof` zur Bestimmung des Speicherbedarfs"
+  - k3: "Benutzung von `typedef` zur Definition neuer Typen (Aliase bestehender Typen)"
 
   - k2: "TODO"
 youtube:
@@ -101,7 +130,7 @@ youtube:
 
 ## Hello World!
 
-```c
+``` c++
 /*
  * HelloWorld.cpp (g++ -Wall HelloWorld.cpp)
  */
@@ -183,7 +212,7 @@ ausgeführt werden soll.
 -   Java: `ant`, C/C++: `make`
 -   Achtung: Verschiedene Make-Dialekte! Wir nutzen _GNU Make_!
 
-```makefile
+``` makefile
  # Kommentar
  Ziel1: AbhaengigkeitenListe1
      Aktionen1
@@ -213,7 +242,7 @@ Die Ziele und Abhängigkeiten sind i.d.R. Dateien (müssen es aber nicht sein).
     "tollesProgramm" erzeugt werden
 -   Passendes Makefile:
 
-    ```makefile
+    ``` makefile
     CXXFLAGS = -Wall
 
     .PHONY: all
@@ -279,6 +308,273 @@ Regel des Targets `tollesProgramm` ausgeführt, um die Datei `tollesProgramm` zu
 [Konsole: HelloWorld.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/HelloWorld.cpp"}
 
 
+## Variablen, Operatoren, Kontrollfluss
+
+::: center
+[**Im Wesentlichen wie von Java gewohnt ... :-)**]{.alert}
+:::
+
+\bigskip
+\bigskip
+
+-   Wichtig(st)e Abweichung:
+
+    Im booleschen Kontext wird `int` als Wahrheitswert interpretiert: \newline
+    Alle Werte ungleich 0 entsprechen `true` (!)
+
+    ::: notes
+    **Anmerkung**: Dies steht im Widerspruch zu den Werten, die in der `main`-Funktion per
+    `return` zurückgeliefert werden: Hier bedeutet 0 in der Regel, dass alles OK war.
+    :::
+
+\bigskip
+
+=> Vorsicht mit
+
+``` c
+int c;
+if (c=4) { ... }
+```
+
+::: notes
+**Beispiele für Schleifen und Kontrollstrukturen in C/C++**
+
+``` c
+int x=5, y=1;
+
+
+if (x>5) {
+    x++;
+} else if(y<=1) {
+    y = y-x;
+} else {
+    y = 2*x;
+}
+
+
+while (y>0) {
+    y--;
+}
+
+
+for (x=0; x<10; x++) {
+    y = y*y;
+}
+```
+:::
+
+
+## Basisdatentypen
+
+|          |                                             |
+|:---------|:--------------------------------------------|
+| `char`   | Zeichen (ASCII, 8 Bit bzw. 1 Byte)          |
+| `int`    | Ganze Zahl (16, 32 oder 64 Bit)             |
+| `float`  | Gleitkommazahl (typ. 32 Bit)                |
+| `double` | Doppelt genaue Gleitkommazahl (typ. 64 Bit) |
+| `void`   | Ohne/kein Wert                              |
+| `bool`   | `true`, `false`                             |
+
+Außerdem Arrays und Pointer mit diesen Typen möglich.
+
+
+::: notes
+## Typmodifikatoren ändern Bedeutung
+
+Vorangestellte Modifikatoren ändern Bedeutung:
+
+1.  Länge im Speicher
+
+    |         |                                        |
+    | :------ | :------------------------------------- |
+    | `short` | Speicher: halbe Wortlänge              |
+    | `long`  | Speicher: doppelte/dreifache Wortlänge |
+
+2.  Vorzeichen
+
+    |            |                                     |
+    | :--------- | :---------------------------------- |
+    | `signed`   | mit Vorzeichen (Default bei Zahlen) |
+    | `unsigned` | ohne Vorzeichen                     |
+
+Anwendung auf ganze Zahlen:
+
+-   `short` und `long` sind Synonyme für `short int` und `long int`
+-   `long long` ist typischerweise eine ganze Zahl mit 8 Byte
+-   `unsigned char` sind Zahlen von 0, ..., 255 (1 Byte)
+-   zusätzlich: `long double` (nur diese Form)
+
+Sie können `short`, `long` und `long long` nur für ganze Zahlen (`int`) nutzen, mit der Ausnahme `long double`.
+Dagegen können `signed` und `unsigned` sowohl für `char` als auch für `int` benutzt werden.
+
+vgl. [en.wikipedia.org/wiki/C_data_types](https://en.wikipedia.org/wiki/C_data_types)
+:::
+
+
+## Größe eines Datentyps ist maschinenabhängig
+
+::: center
+[**Der reservierte Speicherbereich und damit auch der Zahlenbereich für einen einfachen Typ in C/C++ ist maschinenabhängig!**]{.alert}
+:::
+
+::: notes
+-   Zahlenbereiche für konkrete Implementierung in Header-Files definiert
+
+    `limits.h` und `float.h`: Konstanten `INT_MAX`, `INT_MIN`, ...
+
+-   Alternativ Herausfinden der Größe in Bytes: Operator `sizeof`
+
+    Syntax: `sizeof(Typ)`
+:::
+
+\bigskip
+\bigskip
+\bigskip
+
+Es gilt in C/C++:
+
+-   `sizeof(unsigned char)` $=$ 1
+-   `sizeof(short int)` $=$ 2
+-   `sizeof(short int)` $\le$ `sizeof(int)` $\le$ `sizeof(long int)`
+-   `sizeof(float)` $\le$ `sizeof(double)` $\le$ `sizeof(long double)`
+
+::: notes
+**Hinweis Arrays**: `sizeof` gibt immer die Anzahl der Bytes für einen Typ oder eine
+Variable zurück. Bei Array ist das nicht unbedingt die Anzahl der Elemente im Array!
+
+Beispiel:
+
+``` c
+char a[10];
+double b[10];
+```
+
+`sizeof(a)` würde den Wert 10 als Ergebnis liefern, da ein `char` in C/C++ immer exakt ein
+Byte benötigt und entsprechend 10 `char` 10 Byte. `sizeof(b)` ist maschinenabhängig und
+liefert die Anzahl der Bytes, die man für die Darstellung von 10 Double-Werten benötigt.
+
+Wenn man die Anzahl der Elemente im Array mit `sizeof` herausfinden will, muss man den
+Gesamtwert für das Array noch durch den Speicherbedarf eines Elements teilen, also
+beispielsweise `sizeof(b)/sizeof(b[0])`.
+:::
+
+
+## Alias-Namen für Typen mit typedef
+
+Syntax: `typedef existTyp neuerName;`
+
+``` c
+typedef unsigned long uint32;
+uint32 x, y, z;
+```
+
+::: notes
+Im Beispiel ist `unint32` ein neuer Name für den existierenden Typ `unsigned long`, d.h.
+die Variablen `x`, `y` und `z` sind `unsigned long`.
+:::
+
+## Ein- und Ausgabe mit printf() und cin/cout
+
+-   `printf(formatstring, ...)`
+
+    ::: notes
+    -   Einbinden über `#include <cstdio>`
+    -   Format-String: Text und Formatierung der restlichen Parameter: `%[flags][width][.precision]conversion`
+
+        -   `flags`: hängt von der konkreten Ausgabe ab
+        -   `width`: Feldbreite
+        -   `precision`: Anzahl der Dezimalstellen
+        -   `conversion`: (Beispiele)
+
+            |     |                   |
+            | :-- | :---------------- |
+            | c   | Zeichen (Char)    |
+            | d   | Integer (dezimal) |
+            | f   | Gleitkommazahl    |
+    :::
+
+-   Standardkanäle: `cin` (Standardeingabe), `cout` (Standardausgabe), `cerr` (Standardfehlerausgabe)
+
+    ::: notes
+    -   Genauer: `cout` ist ein Ausgabestrom, auf dem der Operator `<<` schreibt
+    -   Einbinden über `#include <iostream>`
+    -   Implementierung der Ein- und Ausgabeoperatoren (`>>`, `<<`) für Basistypen und Standardklassen vorhanden
+    -   Automatische Konvertierungen für Basistypen und Standardklassen
+    :::
+
+    ``` cpp
+    // Ausgabe, auch verkettet
+    string foo = "fluppie";
+    cout << "hello world :" << foo << endl;
+
+    // liest alle Ziffern bis zum ersten Nicht-Ziffernzeichen
+    // (fuehrende Whitespaces werden ignoriert!)
+    int zahl; cin >> zahl;
+    ```
+
+    ::: notes
+    ``` cpp
+    // Einzelne Zeichen (auch Whitespaces) lesen
+    char c; cin.get(c);
+    ```
+    :::
+
+[Beispiel: cin.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/cin.cpp"}
+
+
+## Sichtbarkeit und Gültigkeit und Namespaces
+
+::: notes
+Wie in Java:
+
+-   Namen sind nur nach Deklaration und innerhalb des Blockes, in dem sie deklariert wurden, gültig
+-   Namen sind auch gültig für innerhalb des Blockes neu angelegte innere Blöcke
+-   Namen in inneren Blöcken können Namen aus äußeren Scopes überdecken
+
+Zusätzlich gibt es noch benannte Scopes und einen Scope-Operator.
+:::
+
+-   C++ enthält den Scope-Operator `::` => Zugriff auf global sichtbare Variablen
+
+    ``` cpp
+    int a=1;
+    int main() {
+        int a = 10;
+        cout << "lokal: " << a << "global: " << ::a << endl;
+    }
+    ```
+
+-   Alle Namen aus `XYZ` zugänglich machen: `using namespace XYZ;`
+
+    ``` cpp
+    using namespace std;
+    cout << "Hello World" << endl;
+    ```
+
+-   Alternativ gezielter Zugriff auf einzelne Namen: `XYZ::name`
+
+    ```cpp
+    std::cout << "Hello World" << std::endl;
+    ```
+
+::: notes
+-   Namensraum `XYZ` deklarieren
+
+    ```cpp
+    namespace XYZ {
+        ...
+    }
+    ```
+:::
+
+[Beispiel: cppScope.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/cppScope.cpp"}
+
+
+
+
+
+
+
 
 
 
@@ -286,24 +582,6 @@ Regel des Targets `tollesProgramm` ausgeführt, um die Datei `tollesProgramm` zu
 https://github.com/TUBAF-IfI-LiaScript/VL_EAVD/blob/master/06_OOPII.md
 https://github.com/LiaBooks/C-Programmierung/tree/master
 https://github.com/LiaBooks/C-Programming/tree/master
-
-
-## Thema 2: Grundlegende Konzepte
-
-- Variablen und Datentypen in C++: `float`, `double`, `char`, `boolean`, `int`
-- Einführung in Operatoren und Ausdrücke
-- Ein- und Ausgabe von Daten mit `cin` und `cout`
-- Kommentare und Formatierung von Code
-- Eingebaute Funktionen/Operatoren: `printf`, `sizeof`, `<<`, `typedef`
-- Namespaces, Scopes
-- Präprozessor und Header
-
-
-## Thema 3: Kontrollstrukturen
-
-- Verzweigungen mit `if`, `else if` und `else`
-- Schleifen mit `for`, `while` und `do while`
-- Verwendung von logischen Operatoren
 
 
 ## Thema 4: Funktionen
@@ -329,6 +607,14 @@ https://github.com/LiaBooks/C-Programming/tree/master
 
 -   C/C++ sind enge Verwandte: kompilierte Sprachen, C++ fügt OO hinzu
 -   Funktionsweise einfachster Make-Files
+-   Wichtigste Unterschiede zu Java
+    -   Kontrollfluss wie in Java
+    -   Basisdatentypen vorhanden
+    -   Typmodifikatoren zur Steuerung des Speicherbedarfs/Wertebereich
+    -   Integer können im booleschen Kontext ausgewertet werden
+    -   Operator `sizeof` zur Bestimmung des Speicherbedarfs
+    -   Alias-Namen für existierende Typen mit `typedef` definierbar
+
 
 TODO
 
