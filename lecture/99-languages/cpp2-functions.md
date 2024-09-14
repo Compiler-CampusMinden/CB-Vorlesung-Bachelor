@@ -255,7 +255,7 @@ Operationen für unterschiedliche Datentypen bereitstellen!
 :::
 
 
-## Parameterübergabe in C: Call-by-Value
+## Parameterübergabe in C/C++: Call-by-Value
 
 :::::: columns
 ::: {.column}
@@ -322,13 +322,9 @@ int main() {
 
 ::: notes
 -   Außerhalb **jeder** Funktion definierte Variablen
-
-\smallskip
-
 -   Existieren die **gesamte** Programmlebensdauer über
 -   Müssen bei _Nutzung_ in Funktionen als `extern` deklariert werden
 
-\bigskip
 => Werden auch als [**externe Variablen**]{.alert} bezeichnet
 :::
 
@@ -346,7 +342,6 @@ Varianten für Nutzung globaler Variablen in Funktionen:
 -   Deklaration der globalen Variable nach Funktionsdefinition: In Funktion als `extern` deklarieren
 :::
 
-[Konsole: extern.c]{.bsp}
 
 ## Lokale Variablen (automatische Variablen)
 
@@ -368,12 +363,8 @@ int main() {
 
 ::: notes
 -   Innerhalb einer Funktion (oder Blockes) definierte Variablen
-    -   Gilt auch für Variablen aus Parameterliste
-
-\smallskip
-
+-   Gilt auch für Variablen aus Parameterliste
 -   Überdecken **globale Variablen** gleichen Namens
-
 -   Sichtbarkeit:
     -   Außerhalb der Funktion/Blockes nicht zugreifbar
     -   Beim Betreten der Funktion Reservierung von Speicherplatz für lokale
@@ -388,13 +379,11 @@ int main() {
     Software Engineering: Vermeiden Sie lokale Namen, die Namen aus einem
     äußeren Scope überdecken!
 
-\bigskip
 => Werden auch als [**automatische Variablen**]{.alert} bezeichnet
 :::
 
-[Konsole: sichtbarkeit.c]{.bsp}
 
-## Schlüsselwort static
+## Schlüsselwort static (lokale Variablen)
 
 ```c
 void foo() {
@@ -415,8 +404,6 @@ int main() {
     static int callCount;
     ```
 
-\smallskip
-
 -   Eigenschaften:
     -   Wert bleibt für die folgenden Funktionsaufrufe erhalten
     -   Wert kann in der Funktion verändert werden
@@ -428,32 +415,22 @@ int main() {
 
 _Hinweis_: `static` für globale Variablen bedeutet etwas anderes
 
-[[Beispiel: static.c]{.bsp}]{.notes}
 
-## Initialisierung
+::: notes
+## Initialisierung von Variablen
 
 (Automatische) Initialisierung von Variablen hängt von ihrer Speicherklasse ab!
-
-\bigskip
 
 -   Extern
     -   Mit dem Wert 0 oder vorgegebenem Wert
     -   Bereits vor Programmstart (im Code enthalten)
-
-\smallskip
-
 -   Automatisch
     -   Werden [nicht]{.alert} automatisch initialisiert (!)
     -   Bei vorgegebenem Wert ab Aufruf der Funktion
-
-\smallskip
-
 -   Statisch
     -   Mit dem Wert 0 oder vorgegebenem Wert
     -   Ab erstem Aufruf der Funktion
-
-[Konsole: initVar.c]{.bsp}
-
+:::
 
 
 ## Wrap-Up
