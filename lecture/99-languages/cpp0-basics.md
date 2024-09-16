@@ -5,6 +5,8 @@ linkTitle: "Einführung in C++"
 author: "Carsten Gips (HSBI)"
 readings:
   - key: "Breymann2011"
+  - key: "cppreference.com"
+  - key: "cprogramming.com"
 tldr: |
     Für C wurde ein paar Jahre nach der Entstehung ein objektorientierter Aufsatz entwickelt: C++.
     Beide Sprachversionen werden aktiv weiterentwickelt, vor allem in C++ gibt es ca. alle 2 Jahre
@@ -29,7 +31,7 @@ tldr: |
     In C++ gibt es Klassen (mit Methoden und Attributen), und zusätzlich gibt es Funktionen. Der
     Einsprungpunkt in ein Programm ist (analog zu Java) die Funktion `main()`, die ein `int` als
     Ergebnis zurückliefert. Dieser Integer kann vom Aufrufer ausgewertet werden, wobei der Wert 0
-    typischerweise als Erfolg interpretiert wird. Achtung: Das ist eine Konvention, d.h. es kann
+    typischerweise als Erfolg interpretiert wird. Achtung: Das ist eine _Konvention_, d.h. es kann
     Programme geben, die andere Werte zurückliefern. Die Werte müssen dokumentiert werden.
 
     Bevor der Compiler den Quelltext "sieht", wird dieser von einem Präprozessor bearbeitet. Dieser
@@ -72,18 +74,64 @@ outcomes:
   - k1: "Wichtigste Unterschiede und Gemeinsamkeiten zu Java"
   - k1: "Wichtigste Aufgaben des Präprozessors"
   - k3: "Aufbau, Übersetzen und Starten von einfachen C++-Programmen"
-  - k3: "Ausgabe mit `printf()` und `std::cout`"
-  - k3: "Erinnerung: Automatisiertes Übersetzen mit Hilfe von GNU Make und einfachsten Makefiles"
+  - k3: "Standard-Ein-/Ausgabe-Kanäle in C++ sowie die Operatoren `>>` und `<<`"
   - k3: "Nutzung der Basisdatentypen einschließlich der Modifikatoren"
   - k3: "Deklaration von Variablen, Nutzung von Kontrollstrukturen und Operatoren"
   - k3: "Interpretation von Integers im booleschen Kontext"
-  - k3: "Nutzung von bitweise wirkenden Operatoren"
-  - k3: "Einfache Ausgaben mit `printf()`"
+  - k3: "Nutzung des Scope-Operators `::`, Namensräume"
   - k3: "Benutzung von `sizeof` zur Bestimmung des Speicherbedarfs"
   - k3: "Benutzung von `typedef` zur Definition neuer Typen (Aliase bestehender Typen)"
+  - k3: "Erinnerung: Automatisiertes Übersetzen mit Hilfe von GNU Make und einfachsten Makefiles"
 youtube:
   - link: "TODO"
     name: "VL Einführung in C++ (Erinnerungen an C)"
+challenges: |
+    *   Wie groß ist der Bereich der Basisdatentypen (Speicherbedarf, Zahlenbereich)?
+        Wie können Sie das feststellen?
+
+        ```c
+        unsigned char a;
+        int b;
+
+        long long x[10];
+        long long y[] = {1, 2, 3};
+        long long z[7] = {3};
+        ```
+
+        <!--
+        ```
+        a: 1 Byte
+        x: 10 Elemente, nicht initialisiert
+        y: 3 Elemente, initialisiert wie angegeben
+        z: 7 Elemente, erstes mit Wert 3, Rest mit 0 initialisiert
+        ```
+        -->
+
+    *   Erklären Sie den Unterschied `sizeof(x)` vs. `sizeof(x)/sizeof(x[0])`!
+
+    *   Warum ist der folgende Code-Schnipsel gefährlich?
+
+        ```c
+        if (i=3)
+            printf("Vorsicht");
+        else
+            printf("Vorsicht (auch hier)");
+        ```
+
+    *   Limits kennen: Datentypen, Wertebereiche
+
+        Schreiben Sie ein C-Programm, welches die größtmögliche `unsigned int` Zahl
+        auf Ihrem System berechnet.
+
+        Verwenden Sie hierzu **nicht** die Kenntnis der systemintern verwendeten Bytes
+        (`sizeof`, ...). Nutzen Sie auch nicht die Konstanten/Makros/Funktionen aus
+        `limits.h` oder `float.h` oder anderen Headerdateien!
+
+        <!-- XXX
+        ```c
+        unsigned int x = 0; x--;
+        ```
+        -->
 ---
 
 
@@ -644,10 +692,13 @@ Zusätzlich gibt es noch benannte Scopes und einen Scope-Operator.
 
 -   C/C++ sind enge Verwandte: kompilierte Sprachen, C++ fügt OO hinzu
 -   Funktionsweise einfachster Make-Files
+
+\smallskip
+
 -   Wichtigste Unterschiede zu Java
     -   Kontrollfluss wie in Java
     -   Basisdatentypen vorhanden
-    -   Typmodifikatoren zur Steuerung des Speicherbedarfs/Wertebereich
+    -   Typ-Modifikatoren zur Steuerung des Speicherbedarfs/Wertebereich
     -   Integer können im booleschen Kontext ausgewertet werden
     -   Operator `sizeof` zur Bestimmung des Speicherbedarfs
     -   Alias-Namen für existierende Typen mit `typedef` definierbar

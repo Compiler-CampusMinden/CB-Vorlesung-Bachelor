@@ -4,6 +4,8 @@ title: "C++: Funktionen"
 author: "Carsten Gips (HSBI)"
 readings:
   - key: "Breymann2011"
+  - key: "cppreference.com"
+  - key: "cprogramming.com"
 tldr: |
     In C++ gibt es Funktionen (analog zu Methoden in Java), diese existieren unabhängig von Klassen.
 
@@ -20,8 +22,8 @@ tldr: |
     (dito bei der Rückgabe von Werten). Wenn Referenzen oder Pointer eingesetzt werden, wird dagegen
     auch ein _call-by-reference_ möglich. (Dazu später mehr.)
 
-    Unterscheidung in globale, lokale und lokale statische Variablen mit unterschiedlicher Lebensdauer und
-    unterschiedlicher Initialisierung durch den Compiler.
+    Unterscheidung in globale, lokale und lokale statische Variablen mit unterschiedlicher Lebensdauer
+    und unterschiedlicher Initialisierung durch den Compiler.
 outcomes:
     - k2: "Unterschied zwischen Deklaration und Definition, One Definition Rule"
     - k2: "Problematik bei der Deklaration parameterloser Funktionen"
@@ -32,6 +34,46 @@ outcomes:
 youtube:
   - link: "TODO"
     name: "VL C++: Funktionen"
+challenges: |
+    *   Erklären Sie die Probleme bei folgendem Code-Schnipsel:
+
+        ```cpp
+        int maximum(int, int);
+        double maximum(int, int);
+        char maximum(int, int, int=10);
+        ```
+
+    *   Erklären Sie die Probleme bei folgendem Code-Schnipsel:
+
+        ```cpp
+        int maximum(int, int);
+        double maximum(double, double);
+
+        int main() {
+            cout << maximum(1, 2.2) << endl;
+        }
+        ```
+
+    *   Erklären Sie den Unterschied zwischen
+
+        ```c
+        int a=1;
+        int main() {
+            extern int a;
+            return 0;
+        }
+        ```
+
+        und
+
+        ```c
+        int a=1;
+        int main() {
+            int a = 4;
+            return 0;
+        }
+        ```
+
 ---
 
 
@@ -548,9 +590,15 @@ void fkt_a1() {
     -   Funktionen in C analog zu Methoden in Java
     -   Existieren unabhängig von Klassen (gibt in C auch keine)
     -   Überladen von Funktionen [(analog zu Java)]{.notes}
-    -   Defaultparameter bei Funktionen
+    -   Default-Parameter bei Funktionen
+
+\smallskip
+
 -   Deklaration vs. Definition, Funktionsprototypen, **One-Definition-Rule**
 -   Parameterübergabe: **call-by-value** (Standard in C)
+
+\smallskip
+
 -   Unterscheidung globale, lokale und lokale statische Variablen
 
 
