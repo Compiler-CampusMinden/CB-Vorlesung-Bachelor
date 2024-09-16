@@ -258,7 +258,7 @@ Operationen für unterschiedliche Datentypen bereitstellen!
 ## Parameterübergabe in C/C++: Call-by-Value
 
 :::::: columns
-::: {.column}
+::: {.column width="40%"}
 
 ``` cpp
 int add_5(int x) {
@@ -273,22 +273,22 @@ int main() {
 ```
 
 :::
-::: {.column}
+::: {.column width="60%"}
 
 ```
  Aufrufer-Sicht
-              i                  erg
-           +-----+             +-----+
-           |     |             |     |
-           +--+--+             +--^--+
-              |                   |
-              |                   |
---------------+-------------------+-----
-  Kopie bei   |            Kopie  |
-  Aufruf      |            bei    |
-              |            return |
-           +--v--+                |
-           |     +----------------+
+              i                      erg
+           +-----+                 +-----+
+           |     |                 |     |
+           +--+--+                 +--^--+
+              |                       |
+              |                       |
+--------------+-----------------------+-----
+  Kopie bei   |                Kopie  |
+  Aufruf      |                bei    |
+              |                return |
+           +--v--+                    |
+           |     +--------------------+
            +-----+
               x
  Funktionssicht
@@ -310,42 +310,9 @@ Ausnahme: Übergabe von C++-Referenzen oder Pointern
 :::
 
 
-## Globale Variablen (externe Variablen)
+## Lokale Variablen ("automatische Variablen")
 
-```c
-int a = 1;
-
-int main() {
-    extern int a;
-}
-```
-
-::: notes
--   Außerhalb **jeder** Funktion definierte Variablen
--   Existieren die **gesamte** Programmlebensdauer über
--   Müssen bei _Nutzung_ in Funktionen als `extern` deklariert werden
-
-=> Werden auch als [**externe Variablen**]{.alert} bezeichnet
-:::
-
-\bigskip
-\bigskip
-
-_Hinweis_: `extern` für globale Konstanten bedeutet etwas **leicht** anderes
-
-::: notes
-Varianten für Nutzung globaler Variablen in Funktionen:
-
--   Deklaration der globalen Variable vor Funktionsdefinition:
-    -   In Funktion als `extern` deklarieren, oder
-    -   In Funktion direkt (ohne Deklaration) nutzen ...
--   Deklaration der globalen Variable nach Funktionsdefinition: In Funktion als `extern` deklarieren
-:::
-
-
-## Lokale Variablen (automatische Variablen)
-
-```c
+```cpp
 int b = 1;
 
 void f() {
@@ -383,13 +350,59 @@ int main() {
 :::
 
 
-## Schlüsselwort static (lokale Variablen)
+## Globale Variablen ("externe Variablen")
 
 ```c
+/* ======== Datei main.cpp (einzeln kompilierbar) ======== */
+int main() {
+    extern int global;  // Deklaration
+}
+
+int global;             // Definition
+```
+
+```c
+/* ======== Datei foo.cpp (einzeln kompilierbar) ======== */
+extern int global;      // Deklaration
+
+void foo() {
+    global = 45;
+}
+```
+
+::: notes
+-   Globale Variablen: Außerhalb **jeder** Funktion definierte Variablen
+-   Globale Variablen gelten in [allen]{.alert} Teilen des Programms
+-   Auch in anderen Dateien! => müssen bei _Nutzung_ in Funktionen als `extern` deklariert werden
+-   Existieren die **gesamte** Programmlebensdauer über
+
+=> Werden auch als [**externe Variablen**]{.alert} bezeichnet
+
+Die Dateien sind einzeln kompilierbar (`extern` sagt dem Compiler, dass
+die Variable woanders definiert ist) => erst der Linker löst das auf.
+:::
+
+\bigskip
+\bigskip
+
+_Hinweis_: `extern` für globale Konstanten bedeutet etwas **leicht** anderes!
+
+::: notes
+Varianten für Nutzung globaler Variablen in Funktionen:
+
+-   Deklaration der globalen Variable vor Funktionsdefinition:
+    -   In Funktion als `extern` deklarieren, oder
+    -   In Funktion direkt (ohne Deklaration) nutzen ...
+-   Deklaration der globalen Variable nach Funktionsdefinition: In Funktion als `extern` deklarieren
+:::
+
+
+## Statische lokale Variablen
+
+```cpp
 void foo() {
     static int x = 42;
     x++;
-    printf("x=%d\n", x);
 }
 
 int main() {
@@ -413,7 +426,7 @@ int main() {
 \bigskip
 \bigskip
 
-_Hinweis_: `static` für globale Variablen bedeutet etwas anderes
+_Hinweis_: `static` für globale Variablen bedeutet etwas anderes!
 
 
 ::: notes
@@ -421,15 +434,137 @@ _Hinweis_: `static` für globale Variablen bedeutet etwas anderes
 
 (Automatische) Initialisierung von Variablen hängt von ihrer Speicherklasse ab!
 
--   Extern
-    -   Mit dem Wert 0 oder vorgegebenem Wert
-    -   Bereits vor Programmstart (im Code enthalten)
--   Automatisch
+-   **Automatisch**
     -   Werden [nicht]{.alert} automatisch initialisiert (!)
     -   Bei vorgegebenem Wert ab Aufruf der Funktion
--   Statisch
+-   **Extern**
+    -   Mit dem Wert 0 oder vorgegebenem Wert
+    -   Bereits vor Programmstart (im Code enthalten)
+-   **Statisch**
     -   Mit dem Wert 0 oder vorgegebenem Wert
     -   Ab erstem Aufruf der Funktion
+:::
+
+
+::: notes
+## Sichtbarkeit globaler Variablen (und Funktionen) beschränken
+
+-   Beschränkung der Gültigkeit von **globalen Variablen** auf die Datei, wo
+    sie definiert sind: **Schlüsselwort `static`**
+    -   werden automatisch mit 0 initialisiert
+    -   sind nur in der Datei sichtbar/gültig, wo sie definiert sind
+    -   dient zur Vermeidung von Namenskonflikten bei globalen Variablen
+
+-   Sichtbarkeitsbeschränkung gilt auch für **Funktionen**
+
+`static` für globale Variablen beschränkt deren Sichtbarkeit auf die Datei,
+wo sie definiert sind. D.h. man kann diese dann nicht in einer anderen Datei
+nutzen, nicht mal mit `extern` ...
+
+`static` für Funktionen beschränkt deren Sichtbarkeit ebenfalls auf die Datei,
+wo sie definiert sind. Man kann sie dann nur in anderen Funktionen, die
+ebenfalls in der selben Datei definiert werden, nutzen. In anderen Dateien sind
+die `static` Funktionen _nicht_ sichtbar. D.h. es macht auch keinen Sinn, sie
+in einer Header-Datei zu deklarieren! (In der Praxis liefert der gcc dann sogar
+einen Fehler!). Das ist mit `private` Methoden vergleichbar.
+
+**Hinweise**
+
+-   Nicht verwechseln: [globale]{.alert} `static` Variablen vs. [lokale]{.alert}
+    `static` Variablen!
+-   Vermeidung von Namenskonflikten besser mit Namespaces (C++)!
+-   Vermeiden Sie globale Variablen!
+    -   Fehler im Zusammenhang mit globalen Variablen sind extrem schwer
+        zu finden!
+    -   "Zwang" zu globalen Variablen deutet auf schlechtes
+        Software-Design hin!
+:::
+
+::: notes
+## Globale Konstanten
+
+### In C funktionieren globale Konstanten wie globale Variablen
+
+-   **Definition** in einer Übersetzungseinheit ohne "`extern`"
+
+    => Definition als "`extern`" wird in C mit einer Warnung quittiert!
+
+-   Nutzung in anderen Übersetzungseinheiten durch (erneute)
+    **Deklaration** als "`extern`"
+
+-   Beispiel:
+
+    ```c
+    /* ======== Datei main.c ======== */
+    const int PI=123;       // Definition OHNE "extern" (C)
+
+    int main() {
+        fkt_a1();
+        int x = PI;
+        ...
+    }
+    ```
+
+    ```c
+    /* ======== Datei a.c ======== */
+    extern const int PI;    // (erneute) Deklaration mit "extern"
+    void fkt_a1() {
+        int x = PI;
+        ...
+    }
+    ```
+
+### In C++ sind globale Konstanten per Default nur in ihrer Definitionsdatei sichtbar!
+
+-   Abhilfe: Definieren _und_ Deklarieren mit `extern`
+
+-   Beispiel:
+
+    ```cpp
+    /* ======== Datei main.cpp ======== */
+    extern const int PI=123;    // Definition MIT "extern" (C++)
+
+    int main() {
+        fkt_a1();
+        int x = PI;
+        ...
+    }
+    ```
+
+    ```cpp
+    /* ======== Datei a.cpp ======== */
+    extern const int PI;        // (erneute) Deklaration mit "extern"
+    void fkt_a1() {
+        int x = PI;
+        ...
+    }
+    ```
+
+### Alternativ: In beiden Sprachen Konstanten vorwärts deklarieren
+
+Folgende Definition und (Vorwärts-) Deklaration der Konstanten `PI`
+funktioniert sowohl in C als auch in C++:
+
+```c
+/* ======== Datei main.c ======== */
+extern const int PI;    // (Vorwärts-) Deklaration mit "extern"
+const int PI=123;       // Definition OHNE "extern"
+
+int main() {
+    fkt_a1();
+    int x = PI;
+    ...
+}
+```
+
+```c
+/* ======== Datei a.c ======== */
+extern const int PI;    // (erneute) Deklaration mit "extern"
+void fkt_a1() {
+    int x = PI;
+    ...
+}
+```
 :::
 
 

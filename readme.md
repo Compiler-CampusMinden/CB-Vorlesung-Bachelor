@@ -266,8 +266,7 @@ Abgabe der Übungsblätter jeweils **Mittwoch bis 09:00 Uhr** im [ILIAS](https:/
 <!-- [Builder für Mini-Python]: lecture/07-codegen/minipython-builder.md -->
 
 [Basics]: lecture/99-languages/cpp0-basics.md
-[Arrays]: lecture/99-languages/cpp1-arrays.md
-[Funktionen]: lecture/99-languages/cpp2-functions.md
+[Funktionen]: lecture/99-languages/cpp1-functions.md
 [Pointer & Referenzen]: lecture/99-languages/cpp3.md
 
 
