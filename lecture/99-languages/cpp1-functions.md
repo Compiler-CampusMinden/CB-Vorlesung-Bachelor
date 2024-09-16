@@ -66,12 +66,6 @@ Unterschied "Parameter" und "Argument":
 -   Beim Aufruf werden "Argumente" übergeben, auch "aktuelle Parameter" genannt
 
     In der Praxis verwendet man beide Begriffe i.d.R. synonym.
-
-Anmerkungen zum Beispiel:
-
--   Compiler "liest" Quellcode von oben nach unten
--   Funktionen müssen [vor]{.alert} ihrer Verwendung [deklariert]{.alert} sein,
-    d.h. es muss zumindest ihre Signatur bekannt sein (siehe nächste Folie)
 :::
 
 
@@ -97,16 +91,17 @@ Anmerkungen zum Beispiel:
 \bigskip
 
 -   Compiler "liest" Quellcode von oben nach unten
--   Funktionen müssen [vor]{.alert} ihrer Verwendung [mindestens]{.notes} [deklariert]{.alert} sein
+-   Funktionen müssen [(wie alle anderen Symbole auch)]{.notes} [vor]{.alert} ihrer Verwendung zumindest
+    [deklariert]{.alert} sein, d.h. es muss zumindest ihre Signatur bekannt sein (siehe nächste Folie)
 -   Deklaration: Variablennamen können weggelassen werden
 
 ::: notes
-Allgemein:
-
--   Deklaration: Macht einen Namen bekannt und legt den Typ der Variablen bzw.
+`{{% notice style="info" title="Deklaration vs. Definition" %}}`{=markdown}
+-   **Deklaration**: Macht einen Namen bekannt und legt den Typ der Variablen bzw.
     die Schnittstelle der Funktionen fest.
--   Definition: Deklaration plus Reservierung von Speicherplatz für die
+-   **Definition**: Deklaration plus Reservierung von Speicherplatz für die
     Variable oder Implementierung einer Funktion/Struktur/...
+`{{% /notice %}}`{=markdown}
 :::
 
 [Konsole: simplefunction.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/simplefunction.cpp"}
@@ -382,18 +377,9 @@ Die Dateien sind einzeln kompilierbar (`extern` sagt dem Compiler, dass
 die Variable woanders definiert ist) => erst der Linker löst das auf.
 :::
 
-\bigskip
-\bigskip
-
-_Hinweis_: `extern` für globale Konstanten bedeutet etwas **leicht** anderes!
-
 ::: notes
-Varianten für Nutzung globaler Variablen in Funktionen:
-
--   Deklaration der globalen Variable vor Funktionsdefinition:
-    -   In Funktion als `extern` deklarieren, oder
-    -   In Funktion direkt (ohne Deklaration) nutzen ...
--   Deklaration der globalen Variable nach Funktionsdefinition: In Funktion als `extern` deklarieren
+_Hinweis_: Bei globalen Konstanten in C++ brauchen Sie zusätzlich auch bei der Definition ein "`extern`",
+da die Konstante sonst nur in ihrer Datei sichtbar ist.
 :::
 
 
@@ -426,7 +412,7 @@ int main() {
 \bigskip
 \bigskip
 
-_Hinweis_: `static` für globale Variablen bedeutet etwas anderes!
+_Hinweis_: `static` für globale Variablen bedeutet etwas anderes! [(s.u. "Sichtbarkeit")]{.notes}
 
 
 ::: notes
@@ -467,17 +453,6 @@ ebenfalls in der selben Datei definiert werden, nutzen. In anderen Dateien sind
 die `static` Funktionen _nicht_ sichtbar. D.h. es macht auch keinen Sinn, sie
 in einer Header-Datei zu deklarieren! (In der Praxis liefert der gcc dann sogar
 einen Fehler!). Das ist mit `private` Methoden vergleichbar.
-
-**Hinweise**
-
--   Nicht verwechseln: [globale]{.alert} `static` Variablen vs. [lokale]{.alert}
-    `static` Variablen!
--   Vermeidung von Namenskonflikten besser mit Namespaces (C++)!
--   Vermeiden Sie globale Variablen!
-    -   Fehler im Zusammenhang mit globalen Variablen sind extrem schwer
-        zu finden!
-    -   "Zwang" zu globalen Variablen deutet auf schlechtes
-        Software-Design hin!
 :::
 
 ::: notes
