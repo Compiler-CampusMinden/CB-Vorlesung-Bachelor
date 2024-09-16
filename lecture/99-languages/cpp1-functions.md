@@ -440,7 +440,6 @@ _Hinweis_: `static` für globale Variablen bedeutet etwas anderes! [(s.u. "Sicht
     -   werden automatisch mit 0 initialisiert
     -   sind nur in der Datei sichtbar/gültig, wo sie definiert sind
     -   dient zur Vermeidung von Namenskonflikten bei globalen Variablen
-
 -   Sichtbarkeitsbeschränkung gilt auch für **Funktionen**
 
 `static` für globale Variablen beschränkt deren Sichtbarkeit auf die Datei,
