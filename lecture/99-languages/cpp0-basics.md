@@ -406,6 +406,80 @@ vgl. [en.wikipedia.org/wiki/C_data_types](https://en.wikipedia.org/wiki/C_data_t
 :::
 
 
+## Arrays und Vektoren in C++
+
+-   Syntax: `Typ Name[AnzahlElemente];`
+
+    ```c
+    int myArray[100];
+    int myArray2[] = {1, 2, 3, 4};
+    ```
+
+    ::: notes
+    **Guter Stil**: Anzahl der Elemente als Konstante deklarieren
+
+    -   [Compiler]{.alert} reserviert sofort Speicher auf dem [Stack]{.alert} \newline
+        => **statisch**: im Programmlauf nicht änderbar
+    -   Zugriff über den Indexoperator []
+    -   Achtung: "roher" Speicher, d.h. **keinerlei Methoden**
+    -   Größe nachträglich bestimmen mit `sizeof`:
+
+        ```c
+        int myArray[100], i;
+        int cnt = sizeof(myArray)/sizeof(myArryay[0]);
+        ```
+    :::
+
+-   Vordefinierter Vektor-Datentyp `vector`
+
+    ::: notes
+    -   Einbinden über `#include <vector>`
+    -   Anlegen eines neuen Arrays mit 10 Elementen für Integer:
+    :::
+
+    ```cpp
+    vector<int> v(10);
+    vector<double> meinVektor = {1.1, 2.2, 3.3, 4.4};
+    meinVektor.push_back(5.5);
+    cout << meinVektor.size() << endl;
+    ```
+
+    ::: notes
+    -   Zugriff auf Elemente:
+    :::
+
+    ```cpp
+    cout << v[0] << endl;       // ohne Bereichspruefung!
+    cout << v.at(1000) << endl; // mit interner Bereichspruefung
+    ```
+
+    ::: notes
+    -   Zuweisung (mit Kopieren):
+    :::
+
+    ```cpp
+    vector<double> andererVektor;
+    andererVektor = meinVektor;
+    ```
+
+    ::: notes
+    -   Dynamische Datenstruktur:
+
+    ```cpp
+    vector<int> meineDaten;      // initiale Groesse: 0
+    meineDaten.push_back(123);   // Wert anhaengen
+
+    meineDaten.pop_back(); // Wert loeschen
+    meineDaten.empty();    // leer?
+    ```
+    :::
+
+::: notes
+[**Vorsicht!**]{.alert} `vector<int> arr();` ist **kein** Vektor der Länge 0,
+sondern deklariert eine **neue Funktion**!
+:::
+
+
 ## Größe eines Datentyps ist maschinenabhängig
 
 ::: center
