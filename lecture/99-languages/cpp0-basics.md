@@ -542,6 +542,7 @@ Im Beispiel ist `unint32` ein neuer Name für den existierenden Typ `unsigned lo
 die Variablen `x`, `y` und `z` sind `unsigned long`.
 :::
 
+
 ## Ein- und Ausgabe mit printf() und cin/cout
 
 -   `printf(formatstring, ...)`

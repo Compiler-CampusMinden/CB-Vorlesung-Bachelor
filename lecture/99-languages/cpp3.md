@@ -17,18 +17,6 @@ youtube:
 ---
 
 
-## Thema 1: Referenzen und Pointer
-
-- Einführung in Speicherverwaltung
-- Konzept eines Pointers
-    - Pointer und Arrays, Pointer-Arithmetik
-    - Speicherverwaltung (`new`, `delete`)
-- Konzept einer Referenz
-- Copy-Semantik: Call-by-Value vs. Call-by-Reference
-    - `bar  foo(wuppie&,  bar)` (ja)
-    - `bar& foo(fluppie*, bar)` (eher nicht)
-- Arbeiten mit Pointern und Referenzen
-
 
 ## Thema 2: Klassen und Objekte
 

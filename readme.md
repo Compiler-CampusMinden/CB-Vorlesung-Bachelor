@@ -267,7 +267,8 @@ Abgabe der Übungsblätter jeweils **Mittwoch bis 09:00 Uhr** im [ILIAS](https:/
 
 [Basics]: lecture/99-languages/cpp0-basics.md
 [Funktionen]: lecture/99-languages/cpp1-functions.md
-[Pointer & Referenzen]: lecture/99-languages/cpp3.md
+[Pointer & Referenzen]: lecture/99-languages/cpp2-pointer.md
+[XXX]: lecture/99-languages/cpp3.md
 
 
 
