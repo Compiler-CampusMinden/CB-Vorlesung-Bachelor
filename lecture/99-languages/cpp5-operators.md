@@ -1,6 +1,6 @@
 ---
 archetype: lecture-cg
-title: "C++: Big3 und Operatoren"
+title: "C++: Operatoren"
 author: "Carsten Gips (HSBI)"
 readings:
   - key: "Breymann2011"
@@ -28,7 +28,7 @@ outcomes:
     - k3: "Implementierung von Post- und Präfix-Operatoren"
 youtube:
   - link: "TODO"
-    name: "VL C++: Big3 und Operatoren"
+    name: "VL C++: Operatoren"
 challenges: |
     **Operator "++"**
 
@@ -145,7 +145,6 @@ class MyString {
 Analog weitere Operatoren, etwa `operator==`, `operator+`, ... überladen
 :::
 
-[Konsole: MyString.cpp (Zuweisung, Konkatenation)]{.bsp}
 
 ## Überladen von Operatoren _außerhalb_ von Klassen
 
@@ -180,6 +179,7 @@ class MyString {
 \smallskip
 => Lösung: Operator [**außerhalb**]{.alert} der Klasse überladen => 2 Parameter
 
+
 ## Überladen von Operatoren _außerhalb_ von Klassen (cnt.)
 
 ::: notes
@@ -198,12 +198,14 @@ ostream &operator<<(ostream &out, const MyString &s) {
     -   entweder umständlich über Getter-Funktionen
     -   oder als `friend` der Klasse `MyString` deklarieren
 
-\smallskip
+        [Alternativ Zugriffsmethoden (aka _Getter_) nutzen wie `toString()` ...]{.notes}
+
+\bigskip
+\bigskip
 
 **Anmerkung**: Rückgabe der Referenz auf den Stream erlaubt die typische
 Verkettung: `cout << s1 << s2 << endl;`
 
-[Alternativ Zugriffsmethoden nutzen wie `toString()` ...)]{.bsp}
 
 ## Meine Freunde dürfen in mein Wohnzimmer
 
@@ -224,6 +226,7 @@ class Dummy {
     friend void test();
 };
 ```
+
 
 ## (Fast) alle Operatoren lassen sich überladen
 
@@ -253,6 +256,7 @@ class Dummy {
 \bigskip
 Vgl. Tabelle 9.1 (S. 318) im @Breymann2011
 
+
 ## Implizite Typkonvertierungen bei Aufruf
 
 ```cpp
@@ -261,7 +265,6 @@ s != "123";     // ???
 "123" != s;     // ???
 ```
 
-\pause
 \bigskip
 
 -   Operatoren **in** Klasse überladen: [Typ der linken Seite muss]{.alert} [**exakt**]{.alert} [passen]{.alert}
@@ -296,8 +299,9 @@ s != "123";     // ???
     :::
 
 ::: notes
-[**NIEMALS**]{.alert} beide Formen [gleichzeitig]{.alert} für einen Operator implementieren
+[**NIEMALS**]{.alert} beide Formen [gleichzeitig]{.alert} für einen Operator implementieren!
 :::
+
 
 ## Anmerkung zu "++" und "-$\,$-" Operatoren: Präfix und Postfix
 
@@ -306,12 +310,13 @@ s != "123";     // ???
     -   Signatur: `Typ &operator++()`
 
 \bigskip
-\pause
+\smallskip
 
 -   Postfix: \quad `o1 = o2++;`
     -   Objekt soll erst **nach Auswertung** inkrementiert werden
     -   Signatur: `Typ operator++(int)`
         [(=> `int` dient nur zur Unterscheidung der Präfix-Variante, wird **nie** benutzt)]{.notes}
+
 
 ## Weitere Anmerkungen
 
@@ -345,6 +350,7 @@ s != "123";     // ???
     ::: notes
     Nutzen Sie im Zweifel lieber Methoden mit aussagekräftigen Namen!
     :::
+
 
 ## Wrap-Up
 
