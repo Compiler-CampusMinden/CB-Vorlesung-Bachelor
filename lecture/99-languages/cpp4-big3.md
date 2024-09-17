@@ -1,6 +1,6 @@
 ---
 archetype: lecture-cg
-title: "C++: Big3 und Operatoren"
+title: "C++: Big 3"
 author: "Carsten Gips (HSBI)"
 readings:
   - key: "Breymann2011"
@@ -18,7 +18,7 @@ tldr: |
     aufgerufen, wenn auf beiden Seiten ein fertiges Objekt vorliegt.
 
     Innerhalb einer Klasse kann man über den **Pointer `this`** auf das eigene Objekt zugreifen
-    (analog zu `self` in Python oder `this` in Java).
+    (analog zu `self` in Python oder `this` in Java, dort aber Referenzen).
 
     Bei statischen Methoden und Attributen wird die Deklaration als `static` **nicht** in der
     Implementierung wiederholt! Statische Attribute müssen außerhalb der Klassendefinition einmal
@@ -33,7 +33,7 @@ outcomes:
     - k3: "'Big Three': Destruktor, Copy-Konstruktor, Zuweisungsoperator"
 youtube:
   - link: "TODO"
-    name: "VL C++: Big3 und Operatoren"
+    name: "VL C++: Big 3"
 challenges: |
     **Konstruktor, Copy-Konstruktor, Zuweisungsoperator?**
 
@@ -144,15 +144,17 @@ challenges: |
 ---
 
 
-::: notes
+::::::::: notes
 ## Big Three
 
--   Neben eigentlichen Konstruktor existieren in C++ weitere wichtige Konstruktoren:
-    die sogenannten ["Big Three"]{.alert}:
-    -   Destruktor: Gegenstück zum Konstruktor
-    -   Copy-Konstruktor
-    -   Zuweisungsoperator (`operator=`)
-:::
+Neben dem eigentlichen Konstruktor existieren in C++ weitere wichtige Konstruktoren/Operatoren:
+die sogenannten ["Big Three"]{.alert}:
+
+-   Destruktor: Gegenstück zum Konstruktor
+-   Copy-Konstruktor
+-   Zuweisungsoperator (`operator=`)
+:::::::::
+
 
 ## Big Three: Destruktor
 
@@ -165,9 +167,12 @@ challenges: |
     -   wenn ein Objekt seinen Scope verlässt, oder
     -   wenn explizit `delete` [für einen Pointer auf ein Objekt (auf dem Heap!)]{.notes} aufgerufen wird
 
+\smallskip
+
 -   Default-Destruktor ruft Destruktoren der Objekt-Attribute auf
 
-[Konsole: destruktor.cpp]{.bsp}
+[Konsole: destruktor.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/destruktor.cpp"}
+
 
 ## delete this?
 
@@ -178,8 +183,6 @@ Erinnerung:
 -   `delete` darf nur für Pointer auf Objekte, die mit `new` angelegt wurden,
     aufgerufen werden => Freigabe von Objekten auf dem Heap!
 -   `delete` ruft den Destruktor eines Objekts auf ...
-
-\bigskip
 
 Frage: Ist das folgende Konstrukt sinnvoll? Ist es überhaupt erlaubt? Was
 passiert dabei?
@@ -195,18 +198,16 @@ public:
 ```
 
 ::: notes
-Analyse:
+Analyse: Wir haben hier gleich zwei Probleme:
 
--   `delete` ruft den Destruktor des verwiesenen Objekts auf. Da `this` ein
+1.  `delete` ruft den Destruktor des verwiesenen Objekts auf. Da `this` ein
     Pointer auf das eigene Objekt ist, ruft `delete this;` den eigenen
     Destruktor auf, der dann wiederum `delete this;` aufruft und so weiter.
     => Endlosschleife!
 
--   Außerdem wissen wir im Destruktor bzw. im Objekt gar nicht, ob das Objekt
+2.  Außerdem wissen wir im Destruktor bzw. im Objekt gar nicht, ob das Objekt
     wirklich mit `new` auf dem Heap angelegt wurde! D.h. wenn wir nicht in
     die Endlosschleife eintreten würden, würde das Programm abstürzen.
-
-\bigskip
 
 Der Destruktor wird aufgerufen, wenn ein Objekt zerstört wird, d.h. wenn ein
 Objekt seine Lebensdauer beendet (Verlassen des Scopes, in dem das Objekt
@@ -228,9 +229,14 @@ automatisch freigegeben (auf dem Stack wegen des Verlassen des Scopes (=>
 automatische Variable), auf dem Heap durch das vorherige Aufrufen von `delete`
 auf den Pointer auf das Objekt im Heap), d.h. Sie brauchen im Destruktor **kein**
 `delete` auf "sich selbst" (das ist wie oben demonstriert sogar schädlich)!
+
+`{{% notice style="caution" title="Warnung" %}}`{=markdown}
+Auch wenn es zunächst irgendwie sinnvoll aussieht - rufen Sie niemals nie `delete this` im Destruktor auf!
+`{{% /notice %}}`{=markdown}
+
+[Konsole: deletethis.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/deletethis.cpp"}
 :::
 
-[Konsole: foo.cpp]{.bsp}
 
 ## Big Three: Copy-Konstruktor
 
@@ -243,15 +249,17 @@ auf den Pointer auf das Objekt im Heap), d.h. Sie brauchen im Destruktor **kein*
     -   Objektübergabe und -rückgabe mit Call-by-Value
     -   [Nicht bei Zuweisung]{.alert}
 
+\smallskip
+
 -   Default-Copy-Konstruktor kopiert einfach elementweise \newline
     => bei Pointern also nur **flache Kopie**
 
 ::: notes
-"**Merkregel**": Linke Seite unfertiges Objekt (noch zu bauen), rechte Seite
-fertiges Objekt.
+"**Merkregel**": Linke Seite unfertiges Objekt (noch zu bauen), rechte Seite fertiges Objekt.
 :::
 
-[Konsole: copyKonstruktor.cpp]{.bsp}
+[Konsole: copyKonstruktor.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/copyKonstruktor.cpp"}
+
 
 ## Big Three: Zuweisungsoperator
 
@@ -262,6 +270,8 @@ fertiges Objekt.
 -   Wird aufgerufen:
     -   bei Zuweisung bereits initialisierter Objekte
 
+\smallskip
+
 -   Default-Zuweisungsoperator kopiert einfach elementweise \newline
     => bei Pointern also nur **flache Kopie**
 
@@ -269,30 +279,26 @@ fertiges Objekt.
 "**Merkregel**": Linke Seite fertiges Objekt, rechte Seite fertiges Objekt.
 :::
 
-[Konsole: zuweisungsOperator.cpp]{.bsp}
+[Konsole: zuweisungsOperator.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/zuweisungsOperator.cpp"}
 
-::: notes
-## Big Three: Defaults
-
-Kein eigener Konstruktor (Copy-Konstruktor, Destruktor, Zuweisungsoperator)
-definiert? => Default-Konstruktor (-Copy-Konstruktor, -Destruktor,
--Zuweisungsoperator) vom Compiler generiert!
-
--   Defaults passen normalerweise, wenn die Data-Member
-    -   `int`, `double`, `vector<int>`, `string`, `vector<string>` o.ä. sind
-
-\smallskip
-
--   Problematisch, wenn Pointer dabei sind:
-    -   Flache Kopien
-    -   Speicherplatz auf Heap nicht freigegeben
-:::
 
 ::::::::: notes
-### Big Three: Vorsicht Defaults
+## Big Three: Defaults
 
-:::::: columns
-::: {.column width="50%"}
+Analog zum Default-Konstruktor kann der Compiler auch Defaults für die Big Three
+(Copy-Konstruktor, Destruktor, Zuweisungsoperator) generieren. Das funktioniert
+nur, so lange Sie nicht selbst einen Copy-Konstruktor, Destruktor oder Zuweisungsoperator
+definiert haben.
+
+Diese Defaults passen normalerweise, wenn die Data-Member vom Typ `int`, `double`,
+`vector<int>`, `string`, `vector<string>` o.ä. sind.
+
+Problematisch wird es, wenn Pointer dabei sind: Dann werden flache Kopien erzeugt bzw.
+Speicher auf dem Heap nicht oder mehrfach freigegeben! Sobald Sie für die Attribute
+Pointer verwenden, sollten Sie eigene Konstruktoren, Copy-Konstruktoren, Destruktoren
+und Zuweisungsoperatoren definieren!
+
+Hier ein Beispiel für die Wirkung:
 
 ```cpp
 class Dummy {
@@ -312,32 +318,44 @@ private:
 };
 
 void main() {
+    // oberer Teil der Abbildung
     Dummy a(2);
     Dummy b = a;
     Dummy c;
 
+    // unterer Teil der Abbildung
     c=b;
     a.setValue(4);
 }
 ```
 
-:::
-::: {.column width="50%"}
-
 ![](images/bigthreeDefaults.png)
 
-:::
-::::::
+Analyse:
+
+1.  Es sind Pointer im Spiel. Es wurde ein eigener Konstruktor definiert, aber kein
+    Copy-Konstruktor, d.h. diesen "spendiert" der Compiler.
+2.  Beim Anlegen von `a` wird auf dem Heap Speicher für einen `int` reserviert und
+    dort der Wert `2` hineingeschrieben.
+3.  Beim Anlegen von `b` wird der Default-Copy-Konstruktor verwendet, der einfach
+    elementweise kopiert. Damit zeigt der Pointer `value` in `b` auf den selben
+    Speicher wie der Pointer `value` in `a`.
+4.  Der Ausdruck `c=b` ist eine Zuweisung (warum?). Auch hier wird der vom Compiler
+    bereitgestellte Default genutzt (elementweise Zuweisung). Damit zeigt nun auch
+    der Pointer `value` in `c` auf den selben Speicher wie die `value`-Pointer in
+    `a` und `b`.
 :::::::::
 
-::: notes
+
+::::::::: notes
 ## Hinweis Abarbeitungsreihenfolge
 
 ```cpp
 Dummy a(0); Dummy b(1); Dummy c(2); Dummy d(3);
 a = b = c = d; // entspricht: a.operator=(b.operator=(c.operator=(d)));
 ```
-:::
+:::::::::
+
 
 ## C++11: default und delete
 
@@ -376,31 +394,6 @@ private:
     Schlüsselwort `default`
 :::
 
-[[Beispiel: defaultKonstruktor.cpp]{.bsp}]{.notes}
-
-<!-- XXX
-Beispiel 7.12 aus Grimm "C++11 für Programmierer", O'Reilly Verlag:
-
-```cpp
-class MyData{
-public:
-    explicit MyData(const MyData&);             // 3
-    MyData& operator= (MyData&);                // 5
-    virtual ~MyData() throw();                  // 2, 4
-private:
-    MyData();                                    // 1
-};
-
-MyData::MyData() = default;                    // 1
-MyData::~MyData() throw() = default;           // 2, 4
-MyData::MyData(const MyData&) = default;       // 3
-MyData& MyData::operator=(MyData&) = default;  // 5
-```
-
-> Der Default-Konstruktor (1) ist privat, der Destruktor ist virtuell (2), und
-> er besitzt eine Ausnahmespezifikation (4), der Copy-Konstruktor ist explizit
-> (3), und zuletzt nimmt der Zuweisungsoperator (5) sein Argument nicht const an.
--->
 
 ## Statische Methoden und Attribute
 
@@ -424,9 +417,10 @@ int Studi::getCount() {
 ::: notes
 -   Deklaration als `static` **nicht** in Implementierung wiederholen
 -   Statische Attribute: Initialisierung außerhalb der Klasse!
+
+[Konsole: Studi.cpp (static)]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/Studi.cpp"}
 :::
 
-[Konsole: Studi.cpp (static)]{.bsp}
 
 ## Konstante Methoden und Kontexte
 
@@ -450,24 +444,24 @@ int Studi::getCredits() {
 ```
 
 ::: notes
--   `const` gehört zur Signatur der Methode!
--   Konstante Methoden dürfen auf konstanten Objekten/Referenzen aufgerufen werden
-:::
+Das `const` gehört zur Signatur der Methode!
 
-[Konsole: Studi.cpp (const)]{.bsp}
+So wie im Beispiel gezeigt, gibt es jetzt zwei Methoden `getCredits()` - eine davon
+ist konstant. Konstante Methoden dürfen auf konstanten Objekten/Referenzen aufgerufen
+werden.
 
-::: notes
+Was passiert, wenn das `const` auf der linken Seite steht? Dann bezieht es sich
+auf den Rückgabewert:
+
 ```cpp
 const foo wuppie(foo&, foo&);
 ```
 
--   `const`: Rückgabewert darf nicht als L-Wert benutzt werden: \newline
-    `wuppie(a,b) = c;` ist verboten
-
-\bigskip
-
-=> Verweis auf [Move-Semantik](../move-semantics/move1.md) (L-Werte, R-Werte, ...)
+Hier darf der Rückgabewert nicht als L-Wert benutzt werden: `wuppie(a,b) = c;` ist verboten.
 :::
+
+[Konsole: Studi.cpp (const)]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/Studi.cpp"}
+
 
 ## Wrap-Up
 

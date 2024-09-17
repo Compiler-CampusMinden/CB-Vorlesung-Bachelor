@@ -193,7 +193,7 @@ Abgabe der Übungsblätter jeweils **Montag bis 09:00 Uhr** im [ILIAS](https://w
 |                      | 51    | 18.: **Projektwoche Semester 1+3**                                                                                 |             |                              |                                        |
 |                      | 52    | 25.: _Weihnachtspause_                                                                                             |             |                              |                                        |
 | Januar               | 01    | 01.: _Weihnachtspause_                                                                                             |             |                              |                                        |
-|                      | 02    | 08.: C++ II: [Klassen], Operatoren, Vererbung, Polymorphie                                                         | Carsten     | 06.: [B06] C++               | 07. / 10. / 06. (Carsten, *online*)    |
+|                      | 02    | 08.: C++ II: [Klassen], [Big3], [Operatoren], Vererbung, Polymorphie                                               | Carsten     | 06.: [B06] C++               | 07. / 10. / 06. (Carsten, *online*)    |
 |                      | 03    | 15.: _Freies Arbeiten/Puffer_                                                                                      |             |                              |                                        |
 |                      | 04    | 22.: [**Parcoursprüfung: Station 2 [B07]+[B08] (VL- und Praktika-Slots, siehe Ankündigung)**]{.alert}              | Carsten, BC |                              | 21. / 24. / 20. (Carsten/BC, *online*) |
 | _(Prüfungsphase I)_  |       | _Keine separate Prüfung_                                                                                           |             |                              |                                        |
@@ -224,7 +224,7 @@ Abgabe der Übungsblätter jeweils **Mittwoch bis 09:00 Uhr** im [ILIAS](https:/
 |                      | 18. | **Projektwoche Semester 1+3**                                                                                          |               |                                                                                 |
 |                      | 25. | _Weihnachtspause_                                                                                                      |               |                                                                                 |
 | Januar               | 01. | _Weihnachtspause_                                                                                                      |               |                                                                                 |
-|                      | 08. | C++ II: [Klassen], Operatoren, Vererbung, Polymorphie                                                                  | Carsten       | [B06x] C++ und Pointer/Speicherverwaltung (Runtime in Java) (Carsten, *online*) |
+|                      | 08. | C++ II: [Klassen], [Big3], [Operatoren], Vererbung, Polymorphie                                                        | Carsten       | [B06x] C++ und Pointer/Speicherverwaltung (Runtime in Java) (Carsten, *online*) |
 |                      | 15. | _Freies Arbeiten/Puffer_                                                                                               |               |                                                                                 |
 |                      | 22. | [**Parcoursprüfung: Station 2 [B07x]+[B08x] (VL- und Praktika-Slots, siehe Ankündigung)**]{.alert}                     | Carsten, BC   | (Carsten/BC, *online*)                                                          |
 | _(Prüfungsphase I)_  |     | _Keine separate Prüfung_                                                                                               |               |                                                                                 |
@@ -269,6 +269,8 @@ Abgabe der Übungsblätter jeweils **Mittwoch bis 09:00 Uhr** im [ILIAS](https:/
 [Funktionen]: lecture/99-languages/cpp1-functions.md
 [Pointer & Referenzen]: lecture/99-languages/cpp2-pointer.md
 [Klassen]: lecture/99-languages/cpp3-classes.md
+[Big3]: lecture/99-languages/cpp4-big3.md
+[Operatoren]: lecture/99-languages/cpp4-big3.md
 [XXX]: lecture/99-languages/cpp3.md
 
 
