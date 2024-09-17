@@ -1,8 +1,7 @@
 /*
  * HelloWorld.cpp
  *
- * `g++ -Wall HelloWorld.cpp`
- *
+ * g++ -Wall HelloWorld.cpp
  */
 
 #include <cstdio>

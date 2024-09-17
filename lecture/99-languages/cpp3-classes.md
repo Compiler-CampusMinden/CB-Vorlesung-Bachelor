@@ -111,24 +111,17 @@ private:
 :::
 ::::::
 
-::: notes
+::::::::: notes
 ### OOP in C++: Unterschiede zu Java
 
--   Klassendefinition hat selbst keine Angaben bzgl. Sichtbarkeit
 -   Klassendefinition muss mit Semikolon beendet werden
--   Sichtbarkeit wird immer blockweise eingestellt
-    (per Default immer `private`)
--   Konstruktoren dürfen sich nicht gegenseitig aufrufen
-    (ab C++11 ist das erlaubt)
--   Wie bei Funktionen: Deklaration muss vor Verwendung bekannt sein
-:::
+-   Sichtbarkeit wird immer blockweise eingestellt (per Default immer `private`)
+-   Wie bei Funktionen: Deklaration muss vor Verwendung (= Aufruf) bekannt sein
+-   `this` ist keine Referenz, sondern ein **Pointer** auf das eigene Objekt
 
-## Objektlayout: Java vs. C++
+### Objektlayout: Java vs. C++
 
-\bigskip
-
-:::::: columns
-::: {.column width="50%"}
+#### Java: Referenzen auf Objekte
 
 ```java
 class Student {
@@ -138,12 +131,15 @@ class Student {
 }
 ```
 
-\bigskip
-
 ![](images/objektLayoutJava.png)
 
-:::
-::: {.column width="40%"}
+In Java werden im Objektlayout lediglich die primitiven Attribute direkt gespeichert.
+
+Für Objekte wird nur eine Referenz auf die Objekte gehalten. Die Attribute selbst
+liegen aber außerhalb der Klasse, dadurch benötigt das Objekt selbst nur relativ wenig
+Platz im Speicher.
+
+#### C++: Alles direkt im Objekt
 
 ```cpp
 class Student {
@@ -153,37 +149,28 @@ class Student {
 };
 ```
 
-\bigskip
-
 ![](images/objektLayoutCpp.png)
 
-:::
-::::::
+In C++ werden alle Attribute innerhalb des Objektlayouts gespeichert. Ein Objekt mit
+vielen oder großen Feldern braucht also auch entsprechend viel Platz im Speicher.
 
-::: notes
--   Java: Objekte per Referenz
-    (gilt auch für Komposition)
--   C++: Objekte werden direkt gespeichert
+Wollte man eine Java-ähnliche Lösung aufbauen, müsste man in C++ entsprechend Pointer
+einsetzen:
 
-\smallskip
+```cpp
+class Student {
+private:
+    string *name;
+    Date *birthday;
+    double credits;
+}
+```
 
--   Java-ähnliche Lösung: [Pointer]{.alert}
+[**Warum nicht Referenzen?**]{.alert}
+:::::::::
 
-    ```cpp
-    class Student {
-    private:
-        string *name;
-        Date *birthday;
-        double credits;
-    }
-    ```
 
-    [**Warum nicht Referenzen?**]{.alert}
-:::
-
-[Hinweis: `this` ist keine Referenz, sondern ein **Pointer** auf das eigene Objekt]{.notes}
-
-## C++: Eigene Konstruktoren
+## Objekte erzeugen mit Konstruktoren
 
 ```cpp
 class Dummy {
@@ -206,24 +193,29 @@ Dummy c=99;
 
 \bigskip
 \bigskip
-=> Kein Aufruf von `new`!
-[(`new` würde zwar auch ein neues Objekt anlegen, aber auf dem Heap!)]{.notes}
 
-::: notes
-## C++: Default-Konstruktoren
+[**=> Kein Aufruf von `new`!**]{.alert}
 
--   _Kein_ eigener Konstruktor implementiert? \newline
-    => **parameterloser Default-Konstruktor** _automatisch_ erzeugt
-    -   Wendet für jedes Attribut dessen parameterlosen Konstruktor an
-    -   Für primitive Typen keine garantierte Initialisierung!
+[(`new` würde zwar auch ein neues Objekt anlegen, aber **auf dem Heap**!)]{.notes}
 
--   [**Achtung**]{.alert}: Default-Konstruktor wird ohne Klammern aufgerufen!
 
-    ```cpp
-    Dummy a;    // Korrekt
-    Dummy a();  // FALSCH!!! (Deklaration einer Funktion `a()`, die ein `Dummy` zurueckliefert)
-    ```
-:::
+::::::::: notes
+## Default-Konstruktoren
+
+Der C++-Compiler generiert einen **parameterlosen Defaultkonstruktor** - sofern man
+nicht selbst mindestens einen Konstruktor definiert.
+
+Dieser parameterlose Defaultkonstruktor wendet für jedes Attribut dessen parameterlosen
+Konstruktor an, für primitive Typen erfolgt keine garantierte Initialisierung!
+
+[**Achtung**]{.alert}: Default-Konstruktor wird ohne Klammern aufgerufen!
+
+```cpp
+Dummy a;    // Korrekt
+Dummy a();  // FALSCH!!! (Deklaration einer Funktion `a()`, die ein `Dummy` zurueckliefert)
+```
+:::::::::
+
 
 ## C++: Trennung .h und .cpp
 
@@ -248,6 +240,7 @@ Dummy::Dummy(int c) {
 
 [Klassenname ist der Scope für die Methoden]{.notes}
 
+
 ## Konstruktoren: Normale (Java-like) Initialisierung
 
 ```cpp
@@ -266,18 +259,18 @@ private:
 ```
 
 ::: notes
-1.  Attribut wird angelegt, mit [Defaultwert/-konstruktor]{.alert} des Datentyps
-    initialisiert
+Hier erfolgt die Initialisierung in **zwei** Schritten:
 
-2.  [Anschließend]{.alert} wird die [Zuweisung]{.alert} im Body des Konstruktors
-    ausgeführt
+1.  Attribut wird angelegt, mit [Defaultwert/-konstruktor]{.alert} des Datentyps initialisiert
+2.  [Anschließend]{.alert} wird die [Zuweisung]{.alert} im Body des Konstruktors ausgeführt
 
-    Beispiel oben:
-    Beim Anlegen von `birthday` im Speicher wird der **Defaultkonstruktor** für
-    `Date` aufgerufen. Danach wird im Body der übergebene Datumswert **zugewiesen**
+Beispiel oben:
+Beim Anlegen von `birthday` im Speicher wird der **Defaultkonstruktor** für
+`Date` aufgerufen. Danach wird im Body der übergebene Datumswert **zugewiesen**.
 :::
 
-[Konsole: studiInitBody.cpp]{.bsp}
+[Konsole: studiInitBody.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/studiInitBody.cpp"}
+
 
 ## Konstruktoren: Initialisierungslisten
 
@@ -295,83 +288,48 @@ private:
 ```
 
 ::: notes
+In diesem Fall erfolgt die Initialisierung in nur einem Schritt:
+
 1.  Attribut wird angelegt und [direkt]{.alert} mit übergebenen Wert
     ([Kopie]{.alert}) initialisiert
 
-2.  Reihenfolge der Auswertung der Initialisierungslisten wird durch die
-    Reihenfolge der Attribut-Deklarationen in der Klasse bestimmt!!!
+Achtung: Die Reihenfolge der Auswertung der Initialisierungslisten wird durch die
+Reihenfolge der Attribut-Deklarationen in der Klasse bestimmt!!!
 
-    Beispiel oben:
-    Beim Anlegen von `birthday` im Speicher wird direkt der übergebene Wert **kopiert**
+Beispiel oben:
+Beim Anlegen von `birthday` im Speicher wird direkt der übergebene Wert **kopiert**.
 :::
 
-[Konsole: studiInitListe.cpp (ohne/mit `-Wall`)]{.bsp}
+[Konsole: studiInitListe.cpp (ohne/mit `-Wall`)]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/studiInitListe.cpp"}
 
+
+::::::::: notes
 ## Zwang zu Initialisierungslisten
 
-\pause
-
-::: notes
 In manchen Fällen **muss** man die Initialisierung der Attribute per
 Initialisierungsliste durchführen.
 
 Hier einige Beispiele:
-:::
 
 -   Attribute **ohne parameterfreien Konstruktor**
 
-    [Bei "normaler" Initialisierung würde zunächst der parameterfreie Konstruktor für das Attribut aufgerufen, bevor die Werte gesetzt werden. Dieser existiert aber in diesem Fall nicht ...]{.notes}
-
-\smallskip
+    Bei "normaler" Initialisierung würde zunächst der parameterfreie Konstruktor für das
+    Attribut aufgerufen, bevor die Werte gesetzt werden. Dieser existiert aber in diesem
+    Fall nicht ...
 
 -   **Konstante** Attribute
 
-    [Bei "normaler" Initialisierung würde das Attribut zunächst per parameterfreiem Konstruktor angelegt (s.o.), danach ist es konstant und darf nicht mehr geändert werden (müsste es aber, um die eigentlich gewünschten Werte im Body zu setzen) ...]{.notes}
-
-\smallskip
+    Bei "normaler" Initialisierung würde das Attribut zunächst per parameterfreiem Konstruktor
+    angelegt (s.o.), danach ist es konstant und darf nicht mehr geändert werden (müsste es aber,
+    um die eigentlich gewünschten Werte im Body zu setzen) ...
 
 -   Attribute, die **Referenzen** sind
 
-    [Referenzen müssen direkt beim Anlegen initialisiert werden.]{.notes}
+    Referenzen müssen direkt beim Anlegen initialisiert werden.
+:::::::::
 
-<!-- XXX Grund???
-*   Geerbte Komponenten einer Superklasse ohne Default-Konstruktor
 
-    Analoge Überlegung zu Attributen ohne parameterfreien Konstruktor ...
--->
-
-## C++11 und Initialisiererlisten ("Uniforme Initialisierung")
-
-[Ab C++11 "uniforme Initialisierung" von Objekten mit Initialisiererlisten:]{.notes}
-
-```cpp
-int f[] = { 1, 2 };
-
-int x = 0;
-int y(0);
-int z{ 0 };
-
-vector<int> myVec1(10);    // Vektor mit 10 Elementen
-vector<int> myVec2{10};    // Vektor mit 1 Element (Wert 10)
-```
-
-::: notes
--   Zusätzlich Template für Initialisiererlisten: `std::initializer_list`
--   Damit können ab C++11 sogenannte "Sequenzkonstruktoren" erzeugt werden
--   Regeln beim Aufruf (vgl. @Grimm2014):
-    -   Im Konstruktoraufruf wird eine Initialisiererliste verwendet:
-    -   Falls sowohl der Sequenzkonstruktor als auch der klassische
-        Konstruktor angewandt werden kann, wird der Sequenzkonstruktor
-        vorgezogen
-    -   Falls der Sequenzkonstruktor nicht angewandt werden kann (z.B.
-        Typinkompatibilität), werden die klassischen Konstruktoren angewendet
-    -   Im Konstruktoraufruf wird keine Initialisiererliste genutzt:
-        Nutzung der herkömmlichen Konstruktoren
-:::
-
-[Konsole: uniformInitialisation.cpp]{.bsp}
-
-::: notes
+::::::::: notes
 ## C++11 und delegierende Konstruktoren
 
 ```cpp
@@ -395,7 +353,8 @@ class C {
 -   Ab C++11: Ein Objekt ist fertig konstruiert, wenn der **erste** Konstruktor fertig ausgeführt ist
     => Jeder weitere aufgerufene Konstruktor agiert auf einem "fertigen" Objekt.
 -   Vorsicht mit rekursiven Aufrufen: Compiler _kann_ warnen, muss aber nicht.
-:::
+:::::::::
+
 
 ## C++ und explizite Konstruktoren
 
@@ -430,16 +389,14 @@ class C {
     explicit Dummy(int c=0);
     ```
 
+
 ## Wrap-Up
 
--   Klassen in C++:
-    -   Klassendefinition mit Semikolon abschließen (!)
-    -   Sichtbarkeiten blockweise, keine für Klasse
-    -   Daten liegen direkt im Objekt (anderenfalls Pointer nutzen)
-    -   Attribute sind echte Objekte: Initialisieren mit `NULL` nicht möglich
-    -   Rückgabe mit Call-by-Value: zwei Kopien (Rückgabe, dann Zuweisung)
-    -   Vorsicht mit Default-\*struktoren/-operatoren
-    -   Konstruktoren: Kein `new` nötig (würde Objekt auf Heap anlegen und Pointer liefern)
+-   Klassendefinition mit Semikolon abschließen (!)
+-   Sichtbarkeiten blockweise, keine für Klasse
+-   Daten liegen direkt im Objekt (anderenfalls Pointer nutzen)
+-   Attribute sind echte Objekte: Initialisieren mit `NULL` nicht möglich
+-   Konstruktoren: Kein `new` nötig (würde Objekt auf Heap anlegen und Pointer liefern)
 
 
 

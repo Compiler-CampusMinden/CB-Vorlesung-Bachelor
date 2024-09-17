@@ -1,8 +1,7 @@
 /*
  * HelloWorld.c
  *
- * `gcc -Wall HelloWorld.c`
- *
+ * gcc -Wall HelloWorld.c
  */
 
 #include <stdio.h>
