@@ -155,63 +155,62 @@ challenges: |
 class Student : public Person { ... }
 ```
 
+\pause
+\bigskip
+
+```cpp
+Student(const string &name = "", double c = 0.0)
+: Person(name), credits(c) { }
+
+Student(const Student &s)
+: Person(s), credits(s.credits) { }
+```
+
 ::: notes
+Analog zu Java:
+
 -   `Student`: abgeleitete Klasse
 -   `Person`: Basisklasse
 -   `: public`: Vererbungsbeziehung (analog zu `extends` in Java)
--   Erinnerung: `#define  extends  : public`
 -   `public`-Vererbung: Verhalten wie in Java
 -   Hinweis: Es gibt weitere Spielarten (`protected`, `private`), vgl. Semesterliteratur
+-   Ab C++11:
+    -   Schlüsselwort `override`:
+        Die Methode muss eine virtuelle Methode der Klassenhierarchie überschreiben.
+    -   Schlüsselwort `final`:
+        Die virtuelle Methode darf nicht in abgeleiteten Klassen überschrieben werden.
 :::
 
-[Konsole: vererbungEinfach.cpp]{.bsp}
-
-::: notes
-## Vererbung und Konstruktoren
+::::::::: notes
+### Vererbung und Konstruktoren
 
 -   Defaultkonstruktoren werden automatisch richtig verkettet
     -   zuerst Aufruf des Basisklassen-Konstruktors
     -   anschließend Behandlung der zusätzlichen Attribute
 
-\smallskip
-
 -   Eigene Konstruktoren verketten:
     -   [Zuerst]{.alert} Basisklassen-Konstruktor aufrufen (in
         Initialisierungsliste!) \newline
         => Konkreten Konstruktor nehmen, nicht `super` wie in Java
+:::::::::
 
-    ```cpp
-    Student(const string &name = "", double c = 0.0)
-    : Person(name), credits(c) { }
-
-    Student(const Student &s)
-    : Person(s), credits(s.credits) { }
-    ```
-
-[Beispiel: vererbungVerkettung.cpp]{.bsp}
-:::
-
-::: notes
-## Vererbung und Destruktoren
+::::::::: notes
+### Vererbung und Destruktoren
 
 -   Defaultdestruktoren werden automatisch richtig verkettet
     -   zuerst werden die Destruktoren der zusätzlichen Attribute aufgerufen
     -   dann der Destruktor der Basisklasse
 
-\smallskip
-
 -   Eigene Destruktoren werden automatisch verkettet
 -   Destruktor abgeleiteter Klasse muss sich nur um zusätzliche Attribute kümmern
-:::
+:::::::::
 
-::: notes
-## Vererbung und Operatoren
+::::::::: notes
+### Vererbung und Operatoren
 
 -   Defaultoperatoren werden automatisch richtig verkettet
     -   zuerst Aufruf des Basisklassen-Operators
     -   anschließend Behandlung der zusätzlichen Attribute
-
-\smallskip
 
 -   Eigene Operatoren am Beispiel Zuweisungsoperator:
     -   Zuerst den Zuweisungsoperator der Basisklasse aufrufen
@@ -226,49 +225,19 @@ class Student : public Person { ... }
             return *this;
         }
         ```
-:::
+:::::::::
 
-## Überladen vs. Überschreiben
-
-::: notes
--   **Überladen**:
-    -   Methoden gleichen Namens mit unterschiedlicher Signatur
-    -   Überladen von aus Oberklasse geerbten Methoden verdeckt diese \newline
-        => Zugriff nur über Scope-Operator `::`
-
-\smallskip
-
--   **Überschreiben**:
-    -   Neuimplementierung einer Methode aus der Oberklasse (identische Signatur)
-:::
-
-```cpp
-class A {
-public:
-    void f();
-    void f(int); // Ueberladen
-    void g();
-};
-
-
-class B : public A {
-public:
-    void f(double); // Ueberladen, verdeckt Methoden aus A!
-    void g();       // Ueberschrieben
-};
-```
-
-[[Beispiel: ueberladen-ueberschreiben.cpp]{.bsp}]{.notes}
-
-::: notes
-## Vererbung von Freundschaften
+::::::::: notes
+### Vererbung von Freundschaften
 
 -   Freundschaften werden nicht vererbt!
 -   `friends` der Basisklasse haben keinen Zugriff auf zusätzliche
     private Attribute/Methoden der Unterklassen
 -   Aber: weiterhin Zugriff auf die geerbten privaten Elemente!
-:::
+:::::::::
 
+
+::::::::: notes
 ## Abstrakte Klassen
 
 -   Eine **Klasse** ist [abstrakt]{.alert}, wenn sie mindestens eine abstrakte Methode hat
@@ -276,11 +245,7 @@ public:
     1.  als [virtuell]{.alert} deklariert ist, **und**
     2.  der Deklaration ein "`=0`" folgt
 
-::: notes
 [Abstrakte Methoden]{.alert} können [Implementierung]{.alert} haben! => Implementierung [außerhalb]{.alert} der Klassendeklaration
-:::
-
-\bigskip
 
 ```cpp
 class Person {
@@ -291,10 +256,10 @@ public:
 
 string Person::toString() const { ... }  // Implementierung :-)
 ```
+:::::::::
 
-[[Beispiel: vererbungAbstrakt.cpp]{.bsp}]{.notes}
 
-## Was passiert im folgenden Beispiel?
+## Polymorphie: Was passiert im folgenden Beispiel?
 
 ::: notes
 IS-A Beziehung: Objekte können als Objekte ihrer Oberklasse behandelt werden
@@ -311,7 +276,7 @@ cout << s.toString() << endl;
 cout << p.toString() << endl;
 ```
 
-[Konsole: polyStat.cpp]{.bsp}
+[Konsole: polyStat.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/polyStat.cpp"}
 
 ::: notes
 Antwort: Es wird die falsche Methode aufgerufen!
@@ -319,6 +284,7 @@ Antwort: Es wird die falsche Methode aufgerufen!
 -   `s.toString()` => `Student::toString()` => wie erwartet
 -   `p.toString()` => `Person::toString()` => [**unerwartet**]{.alert}!
 :::
+
 
 ## Polymorphie: statisch und dynamisch
 
@@ -331,6 +297,7 @@ Antwort: Es wird die falsche Methode aufgerufen!
 
 -   Von Java her bekannt: **dynamisches Binden**
     -   Typ eines Objektes wird zur **Laufzeit** ausgewertet
+
 
 ## Dynamisches Binden geht auch in C++ ...
 
@@ -357,7 +324,8 @@ class Person {
 };
 ```
 
-[Konsole: polyDyn.cpp]{.bsp}
+[Konsole: polyDyn.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/polyDyn.cpp"}
+
 
 ## Vorsicht Slicing
 
@@ -370,7 +338,7 @@ cout << "Objekt s (Student): " << s.toString() << endl;
 cout << "Objekt p (Person):  " << p.toString() << endl;
 ```
 
-[Konsole polySlicing.cpp]{.bsp}
+[Konsole polySlicing.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/polySlicing.cpp"}
 
 \pause
 
@@ -388,135 +356,21 @@ cout << "Objekt p (Person):  " << p.toString() << endl;
 => **Dyn. Polymorphie** in C++ immer über [**Referenzen**]{.alert}
 (bzw. Pointer) **und** [**virtuelle Methoden**]{.alert}
 
+
 ::: notes
 ## Anmerkungen zu Polymorphie in C++
 
 -   **Gestaltung der API**:
     -   Zum Überschreiben gedachte Methoden als virtuell deklarieren
     -   Nicht virtuelle Methoden aus der Basisklasse nicht überschreiben
-
-\smallskip
-
 -   Trennung von Deklaration und Implementierung:
     -   Deklaration als virtuelle Funktion nur im Deklarationsteil
     -   Keine Wiederholung im Implementierungsteil (analog zu Defaultwerten)
-
-\smallskip
-
 -   "Virtualität vererbt sich":
     -   Virtuelle Funktionen sind virtuell in der Vererbungshierarchie hinab ab
         der ersten Deklaration als virtuell
-
-\smallskip
-
 -   Virtualität ist "teuer": Es muss eine Tabelle aller virtuellen Funktionen aufgebaut werden und zur
     Laufzeit geprüft werden, welche Funktion genommen werden soll
-:::
-
-## Vererbung in C++ und Casting
-
-```cpp
-Person *p  = new Student("Heinz", 0.3);   // erlaubt
-Student *s = (Student *) p;               // nur mit Cast!
-
-p          = new Person("Harald");
-Student *s = (Student *) p;               // leider moeglich!
-
-Student *s = dynamic_cast<Student *>(p);  // zur Laufzeit
-```
-
-::: notes
--   Pointer haben Typ, Zuweisung immer nur an allgemeineren Pointer
--   Normaler C-Cast wird nicht geprüft!
--   Für dynamisches Binden: `dynamic_cast<Typ>(elem)`
-:::
-
-\bigskip
-
--   `dynamic_cast<Typ>(elem)` prüft zur Laufzeit die Typverträglichkeit:
-    -   Liefert ggf. `NULL` (Pointer) oder `bad_cast`-Exception (Referenz)
-    -   Voraussetzung: dynamisches Binden
-
-        ::: notes
-        -   Geht nur bei Klassen, die mindestens eine virtuelle Methode haben!
-        -   Geht nur für Pointer/Referenzen auf Klassen!
-        :::
-
-::: notes
-### Typumwandlung zur Compile-Zeit
-
-Notwendigkeit zum Casten: oft schlechtes Design!
-
--   C: `(TYP) Ausdruck;`
-    -   Syntaktisch leicht zu übersehen
-    -   Schwer für Tools auffindbar (search & replace, ...)
-    -   Umgeht Typkontrolle des Compilers
-
-\smallskip
-
--   C++-Alternative: `static_cast<TYP>(Ausdruck)`
-
-    ```cpp
-    class A { ... };
-    class B: public A { ... };
-    B b, *pb;
-    A *pa = &b;
-
-    pb = (B*) pa;
-    pb = static_cast<B*>(pa);
-    ```
-
-=> `static_cast` ist nur geeignet, wenn bereits zur **Compile-Zeit**
-feststeht, dass ein Basisklassenzeiger auf ein Objekt einer abgeleiteten Klasse
-zeigt. Eine Prüfung erfolgt nicht.
-:::
-
-::: notes
-### Typumwandlung zur Laufzeit
-
-`dynamic_cast<TYP>(Ausdruck)`
-
--   Typprüfung zur Laufzeit \newline
-    (außer bereits zur Compile-Zeit möglich, dann wie `static_cast<TYP>`)
--   `TYP` muss Pointer oder Referenz auf Klasse sein
--   Ergebnis:
-    -   `Ausdruck` ist Pointer, der nicht auf Objekt von `TYP` oder
-        davon abgeleiteter Klasse zeigt => Nullpointer `(TYP*)0`
-    -   `Ausdruck` ist Referenz, die nicht auf Objekt von `TYP` oder
-        davon abgeleiteter Klasse verweist => Exception `bad_cast`
-
-[Beispiel: typumwandlung.cpp]{.bsp}
-:::
-
-::: notes
-## Private Vererbung: Implementierungsvererbung
-
--   Nur Implementierung wird geerbt:
-    -   `public`-Methoden der Oberklasse dürfen in Unterklasse genutzt werden
-    -   Geerbte Methoden gehören aber nicht zur Schnittstelle \newline
-        => Objekte der Unterklasse dürfen die geerbten Methoden nicht aufrufen
-
-```cpp
-class UltimativeAntwort : public Antwort, private DeepThought { }
-```
-
-_Anmerkung_: Delegation ist ähnlich, aber eleganter!
-
-[Beispiel: privateVererbung.cpp]{.bsp}
-:::
-
-::: notes
-## Neues in C++11 zur Vererbung
-
--   Schlüsselwort `override`:
-    Die Methode muss eine virtuelle Methode der Klassenhierarchie überschreiben.
-
-\smallskip
-
--   Schlüsselwort `final`:
-    Die virtuelle Methode darf nicht in abgeleiteten Klassen überschrieben werden.
-
-[Beispiel: override.cpp]{.bsp}
 :::
 
 
@@ -536,12 +390,12 @@ class HiWi: public Student, public Angestellter {...};
 
 [Hinweis Speicherlayout ...]{.bsp}
 
-## Gleichnamige Methoden aus Basisklassen geerbt
+::::::::: notes
+### Problem 1: Gleichnamige Methoden aus Basisklassen geerbt
 
 ![](images/mehrfachvererbung-namenskollision_new.png){width="50%"}
 
-::: notes
-## Namenskollision bei Mehrfachvererbung auflösen
+Namenskollision bei Mehrfachvererbung auflösen:
 
 -   Scope-Operator `::` nutzen:
 
@@ -554,8 +408,6 @@ class HiWi: public Student, public Angestellter {...};
     cout << h.Angestellter::getName() << endl;
     ```
 
-\smallskip
-
 -   Methode in abgeleiteter Klasse überschreiben
 
     ```cpp
@@ -565,15 +417,16 @@ class HiWi: public Student, public Angestellter {...};
     cout << h.Student::toString() << endl;
     cout << h.Angestellter::toString() << endl;
     ```
-:::
 
-[Konsole vererbungMultiMethoden.cpp]{.bsp}
+[Konsole vererbungMultiMethoden.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/vererbungMultiMethoden.cpp"}
 
-## Gemeinsam geerbte Attribute sind mehrfach vorhanden
+### Problem 2: Gemeinsam geerbte Attribute sind mehrfach vorhanden
 
 ![](images/mehrfachvererbung-attributkollision_new.png){width="50%"}
 
-[Konsole vererbungMultiAttribute.cpp]{.bsp}
+[Konsole vererbungMultiAttribute.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/vererbungMultiAttribute.cpp"}
+:::::::::
+
 
 ## Mehrfachvererbung in C++: Virtuelle Basisklassen
 
@@ -599,48 +452,52 @@ HiWi h("Anne", 23.0, 40.0);         // jetzt auch nur EIN name-Feld
 ```
 :::
 
-[Konsole vererbungMultiVirtual.cpp]{.bsp}
+[Konsole vererbungMultiVirtual.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/vererbungMultiVirtual.cpp"}
 
+
+::::::::: notes
 ## Sonderregeln bei virtueller Ableitung
 
-::: notes
--   Virtuelle Ableitung: Potentiell Konflikte zwischen Konstruktoren!
-    -   Gemeinsam geerbtes Attribut nur noch [einmal]{.alert} vorhanden
-    -   Konstruktoren werden [nacheinander]{.alert} aufgerufen, alle wollen das
-        gemeinsame Attribut initialisieren (durch Aufruf des Konstruktors der
-        jeweiligen Basisklasse)
-    -   Zuletzt aufgerufener Konstruktor würde "gewinnen"
+Virtuelle Ableitung: Potentiell Konflikte zwischen Konstruktoren!
+
+-   Gemeinsam geerbtes Attribut nur noch [einmal]{.alert} vorhanden
+-   Konstruktoren werden [nacheinander]{.alert} aufgerufen, alle wollen das
+    gemeinsame Attribut initialisieren (durch Aufruf des Konstruktors der
+    jeweiligen Basisklasse)
+-   Zuletzt aufgerufener Konstruktor würde "gewinnen"
 
 Deshalb gibt es bei virtueller Ableitung folgende Sonderregeln:
-:::
 
 1.  Für virtuelle Basisklassen ist **Mechanismus des Weiterreichens** von
     Initialisierungswerten [**deaktiviert**]{.alert}
-
-\smallskip
 
 2.  Konstruktor einer virtuellen Basisklasse kann in Initialisierungsliste von
     indirekten Unterklassen aufgerufen werden
 
     Sonst wird der Defaultkonstruktor der virtuellen Basisklasse genutzt!
 
-[Konsole vererbungMultiVirtual.cpp (Basiskonstruktor)]{.bsp}
+[Konsole vererbungMultiVirtual.cpp (Basiskonstruktor)]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/vererbungMultiVirtual.cpp"}
+:::::::::
 
-::: notes
-### Mehrfachvererbung in C++ ist ein recht kompliziertes Thema
+
+::::::::: notes
+## Mehrfachvererbung in C++ ist ein recht kompliziertes Thema
 
 Warum ist die Möglichkeit dennoch nützlich?
 
 -   In Java kann man nur von einer Klasse erben, aber viele [Interfaces]{.alert}
-    implementieren. In C++ gibt es keine Interfaces
+    implementieren. In C++ gibt es keine Interfaces ...
+
     => Interfaces mit abstrakten Klassen Interfaces simulieren
+
     => Mehrfachvererbung!
 
--   Modellierung komplexer Zusammenhänge:
-
-    ![](images/mehrfachvererbung-bsp.png)
-:::
-
+Tatsächlich dürfen Java-Interfaces mittlerweile auch Verhalten implementieren
+und vererben, wodurch eine ähnliche Situation wie hier in C++ entsteht und es
+ausgefeilte Regeln für die Konfliktauflösung braucht. Allerdings ist das in
+Java auf Verhalten beschränkt, d.h. Attribute (Zustand) ist in Java-Interfaces
+(noch) nicht erlaubt.
+:::::::::
 
 
 ## Wrap-Up
@@ -659,15 +516,9 @@ Warum ist die Möglichkeit dennoch nützlich?
 
 \smallskip
 
-
 -   Konzept der Mehrfachvererbung
-    -   Problem bei rautenförmiger Vererbungsbeziehung: Attribute und Methoden mehrfach vorhanden
-
-\smallskip
-
--   Virtuelle Basisklassen
-    -   Gemeinsam genutzte Attribute und Methoden nur noch einfach vorhanden
-    -   Sonderregeln bei virtueller Ableitung
+-   Problem bei rautenförmiger Vererbungsbeziehung: Attribute und Methoden mehrfach vorhanden
+-   Virtuelle Basisklassen: Gemeinsam genutzte Attribute nur noch einfach vorhanden
 
 
 
