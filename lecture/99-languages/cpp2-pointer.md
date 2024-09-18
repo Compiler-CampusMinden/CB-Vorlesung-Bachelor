@@ -297,7 +297,6 @@ challenges: |
 ---
 
 
-
 ## Virtueller Speicher
 
 ```
