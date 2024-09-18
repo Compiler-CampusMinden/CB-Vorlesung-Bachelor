@@ -144,34 +144,161 @@ challenges: |
 ---
 
 
-::::::::: notes
 ## Big Three
 
+::: notes
 Neben dem eigentlichen Konstruktor existieren in C++ weitere wichtige Konstruktoren/Operatoren:
 die sogenannten ["Big Three"]{.alert}:
 
--   Destruktor: Gegenstück zum Konstruktor
 -   Copy-Konstruktor
+-   Destruktor: Gegenstück zum Konstruktor
 -   Zuweisungsoperator (`operator=`)
-:::::::::
 
+*Anmerkung*: Für Fortgeschrittenere sei hier auf die in C++11 eingeführte und den Folgeversionen verbesserte
+und verfeinerte [Move-Semantik](https://en.wikipedia.org/wiki/C%2B%2B11#Rvalue_references_and_move_constructors)
+und die entsprechenden Varianten der Ctoren und Operatoren verwiesen. Man spricht deshalb mittlerweile auch gern
+von den "Big Five" bzw. der ["rule of five"](https://en.wikipedia.org/wiki/Rule_of_three_(C%2B%2B_programming)) ...
+:::
 
-## Big Three: Destruktor
-
--   Syntax: `Dummy::~Dummy();` \newline
-    (Konstruktor mit vorgesetzter Tilde)
+```cpp
+class Dummy {
+public:
+    Dummy(int a=0);
+    Dummy(const Dummy &d);
+    ~Dummy();
+    Dummy &operator=(const Dummy &d);
+private:
+    int value;
+};
+```
 
 \bigskip
 
+```cpp
+Dummy::Dummy(int a): value(a) {}
+Dummy::Dummy(const Dummy &d): value(d.value) {}
+Dummy::~Dummy() {}
+Dummy::Dummy &operator=(const Dummy &d) {
+    if (this != &d) { value = d.value; }
+    return *this;
+}
+```
+
+::::::::: notes
+### Big Three: Destruktor
+
+-   Syntax: `Dummy::~Dummy();` \newline
+    (Konstruktor mit vorgesetzter Tilde)
 -   Wird aufgerufen:
     -   wenn ein Objekt seinen Scope verlässt, oder
     -   wenn explizit `delete` [für einen Pointer auf ein Objekt (auf dem Heap!)]{.notes} aufgerufen wird
-
-\smallskip
-
 -   Default-Destruktor ruft Destruktoren der Objekt-Attribute auf
 
 [Konsole: destruktor.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/destruktor.cpp"}
+:::::::::
+
+::::::::: notes
+### Big Three: Copy-Konstruktor
+
+-   Syntax: `Dummy::Dummy(const Dummy &);`
+-   Wird aufgerufen bei:
+    -   Deklaration mit Initialisierung mit Objekt
+    -   Objektübergabe und -rückgabe mit Call-by-Value
+    -   [Nicht bei Zuweisung]{.alert}
+-   Default-Copy-Konstruktor kopiert einfach elementweise \newline
+    => bei Pointern also nur **flache Kopie**
+
+"**Merkregel**": Linke Seite unfertiges Objekt (noch zu bauen), rechte Seite fertiges Objekt.
+
+[Konsole: copyKonstruktor.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/copyKonstruktor.cpp"}
+:::::::::
+
+::::::::: notes
+### Big Three: Zuweisungsoperator
+
+-   Syntax: `Dummy &Dummy::operator=(const Dummy &)`
+-   Wird aufgerufen:
+    -   bei Zuweisung bereits initialisierter Objekte
+-   Default-Zuweisungsoperator kopiert einfach elementweise \newline
+    => bei Pointern also nur **flache Kopie**
+
+"**Merkregel**": Linke Seite fertiges Objekt, rechte Seite fertiges Objekt.
+
+[Konsole: zuweisungsOperator.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/zuweisungsOperator.cpp"}
+:::::::::
+
+::::::::: notes
+### Big Three: Defaults
+
+Analog zum Default-Konstruktor kann der Compiler auch Defaults für die Big Three
+(Copy-Konstruktor, Destruktor, Zuweisungsoperator) generieren. Das funktioniert
+nur, so lange Sie nicht selbst einen Copy-Konstruktor, Destruktor oder Zuweisungsoperator
+definiert haben.
+
+Diese Defaults passen normalerweise, wenn die Data-Member vom Typ `int`, `double`,
+`vector<int>`, `string`, `vector<string>` o.ä. sind.
+
+Problematisch wird es, wenn Pointer dabei sind: Dann werden flache Kopien erzeugt bzw.
+Speicher auf dem Heap nicht oder mehrfach freigegeben! Sobald Sie für die Attribute
+Pointer verwenden, sollten Sie eigene Konstruktoren, Copy-Konstruktoren, Destruktoren
+und Zuweisungsoperatoren definieren!
+
+Hier ein Beispiel für die Wirkung:
+
+```cpp
+class Dummy {
+public:
+    Dummy(int initValue = 0) {
+        value = new int(initValue);
+    }
+
+    int getValue() {
+        return *value;
+    }
+    void setValue(int a) {
+        *value = a;
+    }
+private:
+    int *value;
+};
+
+void main() {
+    // oberer Teil der Abbildung
+    Dummy a(2);
+    Dummy b = a;
+    Dummy c;
+
+    // unterer Teil der Abbildung
+    c=b;
+    a.setValue(4);
+}
+```
+
+![](images/bigthreeDefaults.png)
+
+Analyse:
+
+1.  Es sind Pointer im Spiel. Es wurde ein eigener Konstruktor definiert, aber kein
+    Copy-Konstruktor, d.h. diesen "spendiert" der Compiler.
+2.  Beim Anlegen von `a` wird auf dem Heap Speicher für einen `int` reserviert und
+    dort der Wert `2` hineingeschrieben.
+3.  Beim Anlegen von `b` wird der Default-Copy-Konstruktor verwendet, der einfach
+    elementweise kopiert. Damit zeigt der Pointer `value` in `b` auf den selben
+    Speicher wie der Pointer `value` in `a`.
+4.  Der Ausdruck `c=b` ist eine Zuweisung (warum?). Auch hier wird der vom Compiler
+    bereitgestellte Default genutzt (elementweise Zuweisung). Damit zeigt nun auch
+    der Pointer `value` in `c` auf den selben Speicher wie die `value`-Pointer in
+    `a` und `b`.
+:::::::::
+
+::::::::: notes
+### Hinweis Abarbeitungsreihenfolge
+
+```cpp
+Dummy a(0); Dummy b(1); Dummy c(2); Dummy d(3);
+a = b = c = d; // entspricht: a.operator=(b.operator=(c.operator=(d)));
+```
+:::::::::
 
 
 ## delete this?
@@ -236,125 +363,6 @@ Auch wenn es zunächst irgendwie sinnvoll aussieht - rufen Sie niemals nie `dele
 
 [Konsole: deletethis.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/deletethis.cpp"}
 :::
-
-
-## Big Three: Copy-Konstruktor
-
--   Syntax: `Dummy::Dummy(const Dummy &);`
-
-\bigskip
-
--   Wird aufgerufen bei:
-    -   Deklaration mit Initialisierung mit Objekt
-    -   Objektübergabe und -rückgabe mit Call-by-Value
-    -   [Nicht bei Zuweisung]{.alert}
-
-\smallskip
-
--   Default-Copy-Konstruktor kopiert einfach elementweise \newline
-    => bei Pointern also nur **flache Kopie**
-
-::: notes
-"**Merkregel**": Linke Seite unfertiges Objekt (noch zu bauen), rechte Seite fertiges Objekt.
-:::
-
-[Konsole: copyKonstruktor.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/copyKonstruktor.cpp"}
-
-
-## Big Three: Zuweisungsoperator
-
--   Syntax: `Dummy &Dummy::operator=(const Dummy &)`
-
-\bigskip
-
--   Wird aufgerufen:
-    -   bei Zuweisung bereits initialisierter Objekte
-
-\smallskip
-
--   Default-Zuweisungsoperator kopiert einfach elementweise \newline
-    => bei Pointern also nur **flache Kopie**
-
-::: notes
-"**Merkregel**": Linke Seite fertiges Objekt, rechte Seite fertiges Objekt.
-:::
-
-[Konsole: zuweisungsOperator.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/zuweisungsOperator.cpp"}
-
-
-::::::::: notes
-## Big Three: Defaults
-
-Analog zum Default-Konstruktor kann der Compiler auch Defaults für die Big Three
-(Copy-Konstruktor, Destruktor, Zuweisungsoperator) generieren. Das funktioniert
-nur, so lange Sie nicht selbst einen Copy-Konstruktor, Destruktor oder Zuweisungsoperator
-definiert haben.
-
-Diese Defaults passen normalerweise, wenn die Data-Member vom Typ `int`, `double`,
-`vector<int>`, `string`, `vector<string>` o.ä. sind.
-
-Problematisch wird es, wenn Pointer dabei sind: Dann werden flache Kopien erzeugt bzw.
-Speicher auf dem Heap nicht oder mehrfach freigegeben! Sobald Sie für die Attribute
-Pointer verwenden, sollten Sie eigene Konstruktoren, Copy-Konstruktoren, Destruktoren
-und Zuweisungsoperatoren definieren!
-
-Hier ein Beispiel für die Wirkung:
-
-```cpp
-class Dummy {
-public:
-    Dummy(int initValue = 0) {
-        value = new int(initValue);
-    }
-
-    int getValue() {
-        return *value;
-    }
-    void setValue(int a) {
-        *value = a;
-    }
-private:
-    int *value;
-};
-
-void main() {
-    // oberer Teil der Abbildung
-    Dummy a(2);
-    Dummy b = a;
-    Dummy c;
-
-    // unterer Teil der Abbildung
-    c=b;
-    a.setValue(4);
-}
-```
-
-![](images/bigthreeDefaults.png)
-
-Analyse:
-
-1.  Es sind Pointer im Spiel. Es wurde ein eigener Konstruktor definiert, aber kein
-    Copy-Konstruktor, d.h. diesen "spendiert" der Compiler.
-2.  Beim Anlegen von `a` wird auf dem Heap Speicher für einen `int` reserviert und
-    dort der Wert `2` hineingeschrieben.
-3.  Beim Anlegen von `b` wird der Default-Copy-Konstruktor verwendet, der einfach
-    elementweise kopiert. Damit zeigt der Pointer `value` in `b` auf den selben
-    Speicher wie der Pointer `value` in `a`.
-4.  Der Ausdruck `c=b` ist eine Zuweisung (warum?). Auch hier wird der vom Compiler
-    bereitgestellte Default genutzt (elementweise Zuweisung). Damit zeigt nun auch
-    der Pointer `value` in `c` auf den selben Speicher wie die `value`-Pointer in
-    `a` und `b`.
-:::::::::
-
-
-::::::::: notes
-## Hinweis Abarbeitungsreihenfolge
-
-```cpp
-Dummy a(0); Dummy b(1); Dummy c(2); Dummy d(3);
-a = b = c = d; // entspricht: a.operator=(b.operator=(c.operator=(d)));
-```
-:::::::::
 
 
 ## C++11: default und delete
