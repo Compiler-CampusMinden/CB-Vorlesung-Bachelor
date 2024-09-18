@@ -9,6 +9,7 @@ namespace WUPPIE {
     int a = 42;
 }
 
+
 int main() {
     cout << "a: " << a << endl;
 
@@ -42,6 +43,7 @@ int main() {
 
     cout << endl;
     cout << "WUPPIE::a => " << WUPPIE::a << endl;
+
 
     return EXIT_SUCCESS;
 }

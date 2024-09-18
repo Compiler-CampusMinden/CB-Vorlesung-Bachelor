@@ -38,5 +38,6 @@ int main() {
     cout << "Objekt s (Student):  " << s.toString() << endl;
     cout << "Referenz p (Person): " << p.toString() << endl;
 
+
     return EXIT_SUCCESS;
 }

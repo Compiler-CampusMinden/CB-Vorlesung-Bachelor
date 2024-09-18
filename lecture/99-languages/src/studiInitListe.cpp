@@ -25,6 +25,7 @@ public:
 
 };
 
+
 class Student {
 public:
     Student(const string &n, const Date &d, double c) : credits(c), name(n), birthday(d) {
@@ -36,12 +37,14 @@ public:
     double credits = 0.9;   // geht seit C++11
 };
 
+
 int main() {
     Date d("01.01.1980");
 
     cout << endl << "Anlegen eines Studenten" << endl;
     Student a("Heiner", d, 9);
     cout << "Heiners Credits: " << a.credits << endl;
+
 
     return EXIT_SUCCESS;
 }

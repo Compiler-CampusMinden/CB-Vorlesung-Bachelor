@@ -45,5 +45,6 @@ int main() {
     Dummy c;
     c = 2;
 
+
     return EXIT_SUCCESS;
 }

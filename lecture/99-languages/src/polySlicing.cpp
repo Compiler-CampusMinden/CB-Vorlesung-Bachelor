@@ -43,5 +43,6 @@ int main() {
     cout << "Referenz p (Person): " << p.toString() << endl << endl;
     */
 
+
     return EXIT_SUCCESS;
 }
