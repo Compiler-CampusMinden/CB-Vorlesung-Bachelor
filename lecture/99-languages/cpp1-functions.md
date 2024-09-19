@@ -31,9 +31,9 @@ outcomes:
     - k2: "Sichtbarkeit und Initialisierung von Variablen"
     - k3: "Definition und Deklaration von Funktionen"
     - k3: "Nutzung lokaler und globaler und lokaler statischer Variablen"
-youtube:
-  - link: "TODO"
-    name: "VL C++: Funktionen"
+#youtube:
+#  - link: "TODO"
+#    name: "VL C++: Funktionen"
 challenges: |
     *   Erklären Sie die Probleme bei folgendem Code-Schnipsel:
 

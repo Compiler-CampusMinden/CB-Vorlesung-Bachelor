@@ -41,9 +41,9 @@ outcomes:
     - k2: "Problematik mit Defaultkonstruktoren/-operatoren (Pointer)"
     - k3: "Konstruktoren (eigene, Default)"
     - k3: "Unterschied Initialisierungslisten vs. Initialisierung im Body"
-youtube:
-  - link: "TODO"
-    name: "VL C++: Klassen"
+#youtube:
+#  - link: "TODO"
+#    name: "VL C++: Klassen"
 challenges: |
     **C++: Klassen**
 

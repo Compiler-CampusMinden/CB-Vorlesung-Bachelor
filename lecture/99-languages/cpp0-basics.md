@@ -82,9 +82,9 @@ outcomes:
   - k3: "Benutzung von `sizeof` zur Bestimmung des Speicherbedarfs"
   - k3: "Benutzung von `typedef` zur Definition neuer Typen (Aliase bestehender Typen)"
   - k3: "Erinnerung: Automatisiertes Übersetzen mit Hilfe von GNU Make und einfachsten Makefiles"
-youtube:
-  - link: "TODO"
-    name: "VL Einführung in C++ (Erinnerungen an C)"
+#youtube:
+#  - link: "TODO"
+#    name: "VL Einführung in C++ (Erinnerungen an C)"
 challenges: |
     *   Wie groß ist der Bereich der Basisdatentypen (Speicherbedarf, Zahlenbereich)?
         Wie können Sie das feststellen?

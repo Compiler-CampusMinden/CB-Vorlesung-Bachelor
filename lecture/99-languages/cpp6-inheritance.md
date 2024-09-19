@@ -54,9 +54,9 @@ outcomes:
     - k3: "Abstrakte Klassen in C++"
     - k2: "Probleme bei Mehrfachvererbung und Einsatz virtueller Basisklassen"
     - k3: "Praktischer Umgang mit Mehrfachvererbung"
-youtube:
-  - link: "TODO"
-    name: "VL C++: Vererbung und Polymorphie"
+#youtube:
+#  - link: "TODO"
+#    name: "VL C++: Vererbung und Polymorphie"
 challenges: |
     **Destruktoren und Vererbung**
 

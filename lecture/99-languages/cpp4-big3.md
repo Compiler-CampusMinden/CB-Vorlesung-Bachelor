@@ -31,9 +31,9 @@ outcomes:
     - k2: "Problematik mit Defaultkonstruktoren/-operatoren (Pointer)"
     - k2: "Problematik konstanter Funktionen, wann werden diese aufgerufen"
     - k3: "'Big Three': Destruktor, Copy-Konstruktor, Zuweisungsoperator"
-youtube:
-  - link: "TODO"
-    name: "VL C++: Big 3"
+#youtube:
+#  - link: "TODO"
+#    name: "VL C++: Big 3"
 challenges: |
     **Konstruktor, Copy-Konstruktor, Zuweisungsoperator?**
 

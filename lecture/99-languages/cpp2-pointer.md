@@ -75,9 +75,9 @@ outcomes:
   - k3: "Referenzen in C++ (Deklaration, Initialisierung, Nutzung)"
   - k3: "Zusammenhang und Unterschied Pointer und Arrays"
   - k3: "Rechnen mit Pointern, Berücksichtigung des Typs"
-youtube:
-  - link: "TODO"
-    name: "C++: Pointer und Referenzen"
+#youtube:
+#  - link: "TODO"
+#    name: "C++: Pointer und Referenzen"
 challenges: |
     **Pointer**
 
