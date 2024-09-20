@@ -97,7 +97,7 @@ Sie _können_ hierzu den Raum J101 (siehe Stundenplan) nutzen.
 
 *   **Stationen**:
     1.  ILIAS-Test (einzeln, 20.11.)
-    2.  Projektvorstellung (3er Teams, letzte VL-Woche): Vorstellung der Lösung von [B07] und [B08]
+    2.  Vorstellung Mini-Projekt [B07] (3er Teams, letzte VL-Woche)
 
     Beide Stationen ergeben zu je 50% die Gesamtnote.
 
@@ -129,7 +129,7 @@ Sie _können_ hierzu den Raum J101 (siehe Stundenplan) nutzen.
 
 *   **Stationen**:
     1.  Vortrag (3er Team, 20.11. zur Probe und 26.11. auf Edmonton II-Treffen in englischer Sprache): Vorstellung der Lösung von [B04x]
-    2.  Projektvorstellung (3er Teams, letzte VL-Woche): Vorstellung der Lösung von [B07x] und [B08x]
+    2.  Vorstellung Mini-Projekt [B07x] (3er Teams, letzte VL-Woche)
 
     Beide Stationen ergeben zu je 50% die Gesamtnote.
 
@@ -195,7 +195,7 @@ Abgabe der Übungsblätter jeweils **Montag bis 09:00 Uhr** im [ILIAS](https://w
 | Januar               | 01    | 01.: _Weihnachtspause_                                                                                             |             |                              |                                        |
 |                      | 02    | 08.: C++ II: [Klassen], [Big 3], [Operatoren], [Vererbung & Polymorphie]                                           | Carsten     | 06.: [B06] C++               | 07. / 10. / 06. (Carsten, *online*)    |
 |                      | 03    | 15.: _Freies Arbeiten/Puffer_                                                                                      |             |                              |                                        |
-|                      | 04    | 22.: [**Parcoursprüfung: Station 2 [B07]+[B08] (VL- und Praktika-Slots, siehe Ankündigung)**]{.alert}              | Carsten, BC |                              | 21. / 24. / 20. (Carsten/BC, *online*) |
+|                      | 04    | 22.: [**Parcoursprüfung: Station 2 [B07] (VL- und Praktika-Slots, siehe Ankündigung)**]{.alert}                    | Carsten, BC |                              | 21. / 24. / 20. (Carsten/BC, *online*) |
 | _(Prüfungsphase I)_  |       | _Keine separate Prüfung_                                                                                           |             |                              |                                        |
 | _(Prüfungsphase II)_ |       | [**Parcoursprüfung: mdl. Prüfung (alle Themen)**]{.alert}                                                          |             |                              |                                        |
 
@@ -226,7 +226,7 @@ Abgabe der Übungsblätter jeweils **Mittwoch bis 09:00 Uhr** im [ILIAS](https:/
 | Januar               | 01. | _Weihnachtspause_                                                                                                      |               |                                                                                 |
 |                      | 08. | C++ II: [Klassen], [Big 3], [Operatoren], [Vererbung & Polymorphie]                                                    | Carsten       | [B06x] C++ und Pointer/Speicherverwaltung (Runtime in Java) (Carsten, *online*) |
 |                      | 15. | _Freies Arbeiten/Puffer_                                                                                               |               |                                                                                 |
-|                      | 22. | [**Parcoursprüfung: Station 2 [B07x]+[B08x] (VL- und Praktika-Slots, siehe Ankündigung)**]{.alert}                     | Carsten, BC   | (Carsten/BC, *online*)                                                          |
+|                      | 22. | [**Parcoursprüfung: Station 2 [B07x] (VL- und Praktika-Slots, siehe Ankündigung)**]{.alert}                            | Carsten, BC   | (Carsten/BC, *online*)                                                          |
 | _(Prüfungsphase I)_  |     | _Keine separate Prüfung_                                                                                               |               |                                                                                 |
 | _(Prüfungsphase II)_ |     | [**Parcoursprüfung: mdl. Prüfung (alle Themen)**]{.alert}                                                              |               |                                                                                 |
 
@@ -280,12 +280,10 @@ Abgabe der Übungsblätter jeweils **Mittwoch bis 09:00 Uhr** im [ILIAS](https:/
 [B05]: homework/sheet05.md
 [B06]: homework/sheet06.md
 [B07]: homework/sheet07.md
-[B08]: homework/sheet08.md
 [B04x]: homework/sheet04.md
 [B05x]: homework/sheet05.md
 [B06x]: homework/sheet06.md
 [B07x]: homework/sheet07.md
-[B08x]: homework/sheet08.md
 
 
 ## Förderungen und Kooperationen
