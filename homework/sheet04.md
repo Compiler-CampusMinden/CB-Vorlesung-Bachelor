@@ -36,3 +36,7 @@ bis maximal 6 Minuten Zeit. Das Poster teilen Sie im Zoom, Sie brauchen es nicht
 
 Die PDF-Version des Posters geben Sie zusammen mit der Lösung der obigen Aufgabe im ILIAS
 ab.
+
+
+
+Idee: Mini-C abwandeln => Grammatik erstellen, Parser mit ANTLR, AST (?), Symboltabelle, Type-Checking
