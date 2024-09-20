@@ -64,6 +64,17 @@ Sitzungen vor.
 
 
 
+### Aufgabe C++
+
+Hashing in C++ mit den einfachen Sprachmöglichkeiten ... => Prinzip erklären, Ein- und Ausgaben fordern
+
+### Aufgabe CB
+
+Grammatik, Parser, Symboltabelle, Typchecking, Übersetzung nach Java
+
+Zusatzaufgabe für S5: Speicherverwaltung (Pointer, Heap)
+
+
 
 ### Aufgabe 1: Implementierung eines einfachen Tokenizers (25 Punkte)
 
