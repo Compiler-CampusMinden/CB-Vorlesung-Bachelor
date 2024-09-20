@@ -1,7 +1,7 @@
 ---
 archetype: assignment
-title: "Blatt 06: TODO"
-author: "BC George, Carsten Gips (HSBI)"
+title: "Blatt 06: C++"
+author: "Carsten Gips, BC George (HSBI)"
 
 hidden: true
 ---
