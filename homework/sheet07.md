@@ -61,3 +61,35 @@ Arbeit gewidmet._)
 Bereiten Sie Ihren Vortrag zur Vorstellung der Ergebnisse Ihrer freien Aufgabe
 (Konzeption und Umsetzung der zusätzlichen Features) in den letzten beiden
 Sitzungen vor.
+
+
+
+
+### Aufgabe 1: Implementierung eines einfachen Tokenizers (25 Punkte)
+
+Erstellen Sie eine Funktion `void tokenize(const std::string& input, std::vector<std::string>& tokens)`, die einen gegebenen String als Eingabe erhält und diesen in Tokens (Wörter) splittet. Nutzen Sie Referenzen, um die Token-Liste zu aktualisieren. Testen Sie die Funktion mit verschiedenen Eingabestrings und geben Sie die Tokens aus.
+
+
+### Aufgabe 2: Syntaxanalyse mit Referenzen (30 Punkte)
+
+Implementieren Sie eine einfache Funktion `bool parseExpression(const std::string& expr, int& result)`, die überprüft, ob eine als String dargestellte mathematische Ausdrucksform (z.B. "3 + 4") syntaktisch korrekt ist. Die Funktion soll das Ergebnis der Berechnung zurückgeben. Nutzen Sie Referenzen für den Rückgabewert und testen Sie die Funktion mit verschiedenen mathematischen Ausdrücken.
+
+
+### Aufgabe 3: Symboltabelle verwalten (35 Punkte)
+
+Definieren Sie eine Struktur `Symbol`, die Informationen wie `name`, `type` und `value` eines Symbols speichert. Implementieren Sie eine Klasse `SymbolTable` mit Methoden zum Hinzufügen und Suchen von Symbolen. Schreiben Sie eine Methode `void updateSymbol(const std::string& name, const int& value)`, die den Wert eines vorhanden Symbols aktualisiert. Testen Sie die Klasse in der `main`-Funktion, indem Sie eine Symboltabelle erstellen und mehrere Symbole hinzufügen und aktualisieren.
+
+
+### Aufgabe 4: Generierung von Zwischencode (40 Punkte)
+
+Entwickeln Sie eine Funktion `std::string generateIntermediateCode(const std::string& ast)`, die einen gegebenen abstrakten Syntaxbaum (AST) als String erhält und aus diesem einen einfachen Zwischencode erzeugt. Der Zwischencode sollte einfache Anweisungen zur arithmetischen Auswertung bieten. Nutzen Sie Referenzen, um den Zwischencode zurückzugeben, und demonstrieren Sie die Verwendung in der `main`-Funktion.
+
+### Aufgabe 5: |Typüberprüfung und -konvertierung (45 Punkte)
+
+Implementieren Sie eine Funktion `bool typeCheckAndConvert(const std::string& input, int& intValue, double& doubleValue)`, die überprüft, ob ein gegebenes Input-String in einen Integer oder Double konvertiert werden kann. Nutzen Sie Referenzen für die Rückgabe der konvertierten Werte und den Rückgabewert für den Erfolg der Konvertierung. Testen Sie die Funktion in der `main`-Funktion mit verschiedenen Dateneingaben und dokumentieren Sie die Ergebnisse.
+
+
+**Bonusaufgabe (25 Punkte):**
+Entwickeln Sie eine Funktion zur Auswertung von Variablenwerten `void evaluateVariables(const std::map<std::string, int>& variables, const std::string& expression, int& result)`, die eine Map von Variablen und ihren Werten sowie einen Ausdruck erhält. Die Funktion soll den Wert des Ausdrucks mit den gegebenen Variablen auswerten. Nutzen Sie Referenzen für die Rückgabe des Ergebnisses und testen Sie die Funktion in der `main`-Funktion.
+
+
