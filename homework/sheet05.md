@@ -16,3 +16,6 @@ Bauen Sie einen Tree-Walking-Interpreter in Ihr Projekt ein:
 *   Lesen Sie den zu interpretierenden Mini-Python-Code aus einer Datei ein.
 *   Realisieren Sie die Funktionen `input()` und `print()` als _native_ Funktionen
     in Ihrem Interpreter.
+
+
+Idee: Mini-Python => Grammatik vorgeben(!), Parser mit ANTLR, Symboltabelle, Interpretation (Tree-Walking)
