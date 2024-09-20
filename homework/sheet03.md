@@ -18,3 +18,6 @@ die folgenden Aufgaben nutzen.
 ## A3.2: TODO
 
 TODO
+
+
+Idee: BrainFuck abwandeln => Grammatik erstellen, Parser mit ANTLR, AST (?), Pretty-Printing für AST
