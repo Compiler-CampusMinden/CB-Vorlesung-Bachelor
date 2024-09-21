@@ -18,4 +18,4 @@ Bauen Sie einen Tree-Walking-Interpreter in Ihr Projekt ein:
     in Ihrem Interpreter.
 
 
-Idee: Mini-Python => Grammatik vorgeben(!), Parser mit ANTLR, Symboltabelle, Interpretation (Tree-Walking)
+Idee: Clojure => Grammatik (ist einfach), Parser mit ANTLR, Symboltabelle, Interpretation (Tree-Walking)
