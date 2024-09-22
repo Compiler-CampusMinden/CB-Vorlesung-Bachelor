@@ -186,7 +186,7 @@ Abgabe der Übungsblätter jeweils **Montag bis 09:00 Uhr** im [ILIAS](https://w
 |                      | 46    | 13.: [Überblick Symboltabellen], [Symboltabellen: Scopes], [Symboltabellen: Funktionen], [Symboltabellen: Klassen] | Carsten     | 11.: [B03] ANTLR             | 12. / 15. / 11. (Carsten, *online*)    |
 |                      | 47    | 20.: [**09:45 - 10:45 Uhr (B40): Parcoursprüfung: Station 1 ILIAS (Grammar, Lexing, Parsing)**]{.alert}            |             | 18.: [B04] Symboltabellen    | 19. / 22. / 18. (Carsten, *online*)    |
 |                      | 48    | 26.: **18:00 - 19:30 Uhr (online): Edmonton II: Vorträge Mindener Projekte**                                       | _Minden_    |                              |                                        |
-|                      | 48    | 27.: [Überblick Zwischencode], Überblick Backend (LLVM)                                                            | BC, Carsten |                              |                                        |
+|                      | 48    | 27.: [Überblick Zwischencode], [Überblick Backend (LLVM)]                                                          | BC, Carsten |                              |                                        |
 | Dezember             | 49    | 03.: **18:00 - 19:30 Uhr (online): Edmonton III: Vorträge Edmontoner Projekte**                                    | _Edmonton_  |                              |                                        |
 |                      | 49    | 04.: [AST-basierte Interpreter 1], [AST-basierte Interpreter 2]                                                    | Carsten     |                              |                                        |
 |                      | 50    | 11.: C++ I: [Basics], [Funktionen], [Pointer & Referenzen]                                                         | Carsten     | 09.: [B05] Interpreter       | 10. / 13. / 09. (Carsten, *online*)    |
@@ -217,7 +217,7 @@ Abgabe der Übungsblätter jeweils **Mittwoch bis 09:00 Uhr** im [ILIAS](https:/
 |                      | 13. | [Überblick Symboltabellen], [Symboltabellen: Scopes], [Symboltabellen: Funktionen], [Symboltabellen: Klassen]          | Carsten       | [B03] ANTLR (Carsten, *online*)                                                 |
 |                      | 20. | [**08:00 - 09:30 Uhr (online): Vortrag: Vorstellung der Lösung von [B04x] ("Generalprobe")**]{.alert}                  |               |                                                                                 |
 |                      | 26. | [**18:00 - 19:30 Uhr (online): Parcoursprüfung: Station 1 / Edmonton II: Vorträge Mindener Projekte: [B04x]**]{.alert} | _Minden (S5)_ |                                                                                 |
-|                      | 27. | [Überblick Zwischencode], Überblick Backend (LLVM)                                                                     | BC, Carsten   |                                                                                 |
+|                      | 27. | [Überblick Zwischencode], [Überblick Backend (LLVM)]                                                                   | BC, Carsten   |                                                                                 |
 | Dezember             | 03. | **18:00 - 19:30 Uhr (online): Edmonton III: Vorträge Edmontoner Projekte**                                             | _Edmonton_    |                                                                                 |
 |                      | 04. | [AST-basierte Interpreter 1], [AST-basierte Interpreter 2]                                                             | Carsten       |                                                                                 |
 |                      | 11. | C++ I: [Basics], [Funktionen], [Pointer & Referenzen]                                                                  | Carsten       | [B05x] Interpreter (Carsten, *online*)                                          |
@@ -258,6 +258,7 @@ Abgabe der Übungsblätter jeweils **Mittwoch bis 09:00 Uhr** im [ILIAS](https:/
 [Symboltabellen: Klassen]: lecture/03-semantics/symbtab3-classes.md
 
 [Überblick Zwischencode]: lecture/04-intermediate/intro-ir.md
+[Überblick Backend (LLVM)]: lecture/04-intermediate/llvm-ir.md
 
 <!-- [Syntaxgesteuerte Interpreter]: lecture/06-interpretation/syntaxdriven.md -->
 [AST-basierte Interpreter 1]: lecture/06-interpretation/astdriven-part1.md
