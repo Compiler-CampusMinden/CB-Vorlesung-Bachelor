@@ -171,6 +171,12 @@ Sie _können_ hierzu den Raum J101 (siehe Stundenplan) nutzen.
 :::::: {.tabs groupid="modul-po"}
 ::: {.tab title="IFM 3.1 CB (PO23, 3. Semester)"}
 
+<!--
+`{{% notice style="note" title="News" %}}`{=markdown}
+Here be dragons ...
+`{{% /notice %}}`{=markdown}
+-->
+
 Hier finden Sie einen abonnierbaren [Google Kalender IFM 3.1 CB (PO23, 3. Semester)] mit allen Terminen der Veranstaltung zum Einbinden in Ihre Kalender-App.
 
 Abgabe der Übungsblätter jeweils **Montag bis 09:00 Uhr** im [ILIAS](https://www.hsbi.de/elearning/goto.php?target=exc_1420724&client_id=FH-Bielefeld). Vorstellung der Lösung im jeweiligen Praktikum in der Abgabewoche.
@@ -201,6 +207,12 @@ Abgabe der Übungsblätter jeweils **Montag bis 09:00 Uhr** im [ILIAS](https://w
 
 :::
 ::: {.tab title="IFM 5.21 CB (PO18, 5. Semester)"}
+
+<!--
+`{{% notice style="note" title="News" %}}`{=markdown}
+Here be dragons ...
+`{{% /notice %}}`{=markdown}
+-->
 
 Hier finden Sie einen abonnierbaren [Google Kalender IFM 5.21 CB (PO18, 5. Semester)] mit allen Terminen der Veranstaltung zum Einbinden in Ihre Kalender-App.
 
