@@ -20,4 +20,4 @@ die folgenden Aufgaben nutzen.
 TODO
 
 
-Idee: Mini-Python oder Bril oder Lox abwandeln => Grammatik erstellen, Parser mit ANTLR, AST (?), Pretty-Printing für AST
+Idee: **Mini-Python** (modifiziert) oder Bril oder ~~Lox~~ abwandeln => Grammatik erstellen, Parser mit ANTLR, AST (?), Pretty-Printing für AST
