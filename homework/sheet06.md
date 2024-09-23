@@ -19,6 +19,9 @@ TODO
 TODO
 
 
+**S5**: noch irgendwas Richtung Speicherverwaltung/Heap extra
+
+
 ### Aufgabe 1: Implementierung eines einfachen Tokenizers (25 Punkte)
 
 Erstellen Sie eine Funktion `void tokenize(const std::string& input, std::vector<std::string>& tokens)`, die einen gegebenen String als Eingabe erhält und diesen in Tokens (Wörter) splittet. Nutzen Sie Referenzen, um die Token-Liste zu aktualisieren. Testen Sie die Funktion mit verschiedenen Eingabestrings und geben Sie die Tokens aus.
