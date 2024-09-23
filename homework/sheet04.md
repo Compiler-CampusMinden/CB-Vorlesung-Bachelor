@@ -39,4 +39,5 @@ ab.
 
 
 
-Idee: Mini-C abwandeln => Grammatik erstellen, Parser mit ANTLR, AST (?), Symboltabelle, Type-Checking
+Idee: **Mini-C abwandeln** => Grammatik erstellen, Parser mit ANTLR, AST (?), Symboltabelle, Type-Checking
+keine Pointer, keine Referenzen. Expressions, Functions, Scopes ...
