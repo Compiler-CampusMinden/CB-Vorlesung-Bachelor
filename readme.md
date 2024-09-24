@@ -246,8 +246,8 @@ Abgabe der Übungsblätter jeweils **Mittwoch bis 09:00 Uhr** im [ILIAS](https:/
 ::::::
 
 
-[Google Kalender IFM 3.1 CB (PO23, 3. Semester)]: https://calendar.google.com/calendar/ical/5121604486803dcdb5cfaa8602b8b09ce76743d8b9216795606617cac807e595%40group.calendar.google.com/public/basic.ics
-[Google Kalender IFM 5.21 CB (PO18, 5. Semester)]: https://calendar.google.com/calendar/ical/5121604486803dcdb5cfaa8602b8b09ce76743d8b9216795606617cac807e595%40group.calendar.google.com/public/basic.ics
+[Google Kalender IFM 3.1 CB (PO23, 3. Semester)]: https://calendar.google.com/calendar/ical/07021c87022fe3f132fa2e2e799b230b5ab9c7088c85d152f2beab8f1b5218af%40group.calendar.google.com/public/basic.ics
+[Google Kalender IFM 5.21 CB (PO18, 5. Semester)]: https://calendar.google.com/calendar/ical/643ebb4721e215c2b2f2ac0330d5642f6cf9efe18cd16548e2e08f8bfa199336%40group.calendar.google.com/public/basic.ics
 
 [Orga]: https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/discussions/categories/q-a?discussions_q=category%3AQ%26A+is%3Aopen
 
