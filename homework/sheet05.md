@@ -4,8 +4,6 @@ title: "Blatt 05: Interpreter"
 author: "Carsten Gips, BC George (HSBI)"
 
 hidden: true
-
-sketch: true
 ---
 
 
