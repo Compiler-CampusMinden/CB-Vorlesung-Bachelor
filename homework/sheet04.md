@@ -4,8 +4,6 @@ title: "Blatt 04: Symboltabellen"
 author: "Carsten Gips, BC George (HSBI)"
 
 hidden: true
-
-sketch: true
 ---
 
 
