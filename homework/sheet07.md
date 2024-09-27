@@ -4,8 +4,6 @@ title: "Blatt 07: Mini-Projekt C++"
 author: "BC George, Carsten Gips (HSBI)"
 
 hidden: true
-
-sketch: true
 ---
 
 
