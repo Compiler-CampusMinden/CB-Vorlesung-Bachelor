@@ -4,6 +4,8 @@ title: "Blatt 03: ANTLR"
 author: "Carsten Gips, BC George (HSBI)"
 
 hidden: true
+
+sketch: true
 ---
 
 

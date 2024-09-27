@@ -4,6 +4,8 @@ title: "Blatt 06: C++"
 author: "Carsten Gips, BC George (HSBI)"
 
 hidden: true
+
+sketch: true
 ---
 
 

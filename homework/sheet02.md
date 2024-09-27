@@ -4,6 +4,8 @@ title: "Blatt 02: CFG"
 author: "BC George, Carsten Gips (HSBI)"
 
 hidden: true
+
+sketch: true
 ---
 
 
