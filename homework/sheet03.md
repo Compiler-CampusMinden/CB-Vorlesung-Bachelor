@@ -226,11 +226,11 @@ entgegen, wertet diesen aus und gibt das Ergebnis auf der Standardausgabe aus.
 
 Unsere Sprache hat drei eingebaute Datentypen:
 
-| Datentyp  | Definition                                                                                                                                            |
-|:----------|:------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `Integer` | Integer-Literale bestehen aus einer beliebigen Folge der Ziffern `0-9`.                                                                               |
-| `String`  | String-Literale bestehen aus einer beliebigen Folge an ASCII-Zeichen, die von `"` eingeschlossen sind. Sie müssen keine Unicode-Zeichen unterstützen. |
-| `Boolean` | Bestehen aus einem der beiden Schlüsselwörter `True` oder `False`                                                                                     |
+| Datentyp | Definition |
+|:-------|:-------------------------------------------------------------------------------------|
+| `Integer` | Integer-Literale bestehen aus einer beliebigen Folge der Ziffern `0-9`. |
+| `String` | String-Literale bestehen aus einer beliebigen Folge an ASCII-Zeichen, die von `"` eingeschlossen sind. Sie müssen keine Unicode-Zeichen unterstützen. |
+| `Boolean` | Bestehen aus einem der beiden Schlüsselwörter `True` oder `False` |
 
 Die Sprache ist dynamisch typisiert, d.h. beim Parsen werden Ihnen keine Typ-Angaben begegnen.
 Aber Sie müssen die entsprechenden Werte parsen können.
@@ -269,7 +269,41 @@ eingerückt ausgegeben wird.
 
 ## Beispiele
 
-**TODO**
+``` python
+print("Hello World")
+```
+
+``` python
+a := "wuppie fluppie"
+```
+
+``` python
+a := 0
+if 10<1 do
+    print("10<1")
+    a := 42
+else do
+    print("kaputt")
+#end
+```
+
+``` python
+fun f95(n) do
+    if n == 0 do
+        return 1
+    else do
+        if n == 1 do
+            return 1
+        else do
+            return f95(n - 1) + f95(n - 2) + f95(n - 3) + f95(n - 4) + f95(n - 5)
+        #end
+    #end
+#end
+
+n := 10
+r := f95(n)
+print(r)
+```
 
 [^1]: Um den Text lesbar zu halten, wird hier oft nur von "Parser" gesprochen - gemeint ist
     aber die gesamte auf diesem Blatt zu erstellende Toolchain: Lexer - Parser - AST -
