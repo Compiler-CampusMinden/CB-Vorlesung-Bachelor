@@ -42,6 +42,8 @@ b := "foo"   # Zuweisung des Ausdrucks "foo" (String) an die Variable b
 func1(a, b)  # Funktionsaufruf mit Variablen a und b
 ```
 
+Kontrollstrukturen zählen ebenfalls als Anweisung.
+
 ### Ausdrücke (*Expression*)
 
 Die einfachsten Ausdrücke sind Integer- oder String-Literale oder die Wahrheitswerte.
