@@ -267,6 +267,37 @@ Ihnen hier formulierten AST-Strukturen.
 Programmieren Sie eine Traversierung Ihres AST, so dass das geparste Programm korrekt
 eingerückt ausgegeben wird.
 
+Jede Anweisung soll auf einer eigenen Zeile stehen. Die Einrückung soll mit Leerzeichen
+erfolgen und konsistent sein. Sie brauchen keine Begrenzung der Zeilenlänge implementieren.
+
+Beispiel:
+
+Aus
+
+``` python
+a := 0
+    if 10<1 do
+print("10<1")
+a := 42
+else do
+        print("kaputt")
+  #end
+```
+
+soll
+
+``` python
+a := 0
+if 10<1 do
+    print("10<1")
+    a := 42
+else do
+    print("kaputt")
+#end
+```
+
+werden.
+
 ## Beispiele
 
 ``` python
