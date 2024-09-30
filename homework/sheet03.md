@@ -37,7 +37,7 @@ Funktionsaufruf oder eine Operation. Sie muss immer mit einem Newline abgeschlos
 Eine Anweisung hat keinen Wert.
 
 ``` python
-a := 10 - 5  # Zuweisung des Ausdruckes 10-5 (Integer) an die Variable a
+a := 10 - 5  # Zuweisung des Ausdruckes 10-5 (Integer-Wert 5) an die Variable a
 b := "foo"   # Zuweisung des Ausdrucks "foo" (String) an die Variable b
 func1(a, b)  # Funktionsaufruf mit Variablen a und b
 ```
@@ -76,11 +76,11 @@ Es gibt in unserer Sprache folgende Operationen mit der üblichen Semantik:
 #### Beispiele für Ausdrücke
 
 ``` python
-10 - 5
-"foo"
-a
-a + b
-func1(a, b)
+10 - 5       # Der Integer-Wert 5
+"foo"        # Der String "foo"
+a            # Wert der Variablen a
+a + b        # Ergebnis der Addition der Variablen a und b
+func1(a, b)  # Ergebnis des Funktionsaufrufs
 ```
 
 ### Bezeichner
@@ -97,9 +97,9 @@ mithilfe des `:=`-Operators. Auf der rechten Seite der Zuweisung können auch ei
 Ausdrücke stehen.
 
 ``` python
-a := 5
-a := 2 + 3
-print(a)
+a := 5      # Zuweisung des Wertes 5 an die Variable a
+a := 2 + 3  # Zuweisung des Wertes 5 an die Variable a
+print(a)    # Ausgabe des Wertes 5 auf der Standardausgabe
 ```
 
 ### Kommentare
@@ -267,7 +267,7 @@ eingerückt ausgegeben wird.
 
 ## Beispiele
 
-TODO
+**TODO**
 
 [^1]: Um den Text lesbar zu halten, wird hier oft nur von "Parser" gesprochen - gemeint ist
     aber die gesamte auf diesem Blatt zu erstellende Toolchain: Lexer - Parser - AST -
