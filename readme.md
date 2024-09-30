@@ -78,94 +78,6 @@ Sie _können_ hierzu den Raum J101 (siehe Stundenplan) nutzen.
 [IFM 5.21 CB (PO18, 5. Semester)]: https://www.hsbi.de/elearning/goto.php?target=crs_1400603&client_id=FH-Bielefeld
 
 
-## Prüfungsform, Note und Credits
-
-:::::::::::: {.tabs groupid="modul-po"}
-::::::::: {.tab title="IFM 3.1 CB (PO23, 3. Semester)"}
-
-**Parcoursprüfung plus Testat**, 5 ECTS (PO23)
-
-*   **Testat**: Vergabe der Credit-Points
-    1.  Mindestens 4 der Übungsblätter [B01], [B02], [B03], [B04], [B05] und [B06] erfolgreich bearbeitet, **und**
-    2.  **aktive** Teilnahme an allen 3 Edmonton-Terminen.
-
-    ("erfolgreich bearbeitet": Bearbeitung in 3er Teams, je mindestens 60% bearbeitet,
-    fristgerechte Abgabe der Lösungen im ILIAS, Vorstellung der Lösungen im Praktikum)
-
-:::::: {.tabs groupid="exams"}
-::: {.tab title="Prüfung im ersten Zeitraum"}
-
-*   **Stationen**:
-    1.  ILIAS-Test (einzeln, 20.11.)
-    2.  Vorstellung Mini-Projekt [B07] (3er Teams, letzte VL-Woche)
-
-    Beide Stationen ergeben zu je 50% die Gesamtnote.
-
-:::
-::: {.tab title="Prüfung im zweiten Zeitraum"}
-
-*   **Stationen**:
-    1.  Mündliche Prüfung (individuell, ca. 45 Minuten, zweiter Prüfungszeitraum)
-
-    Die Note der mündlichen Prüfung ergibt die Gesamtnote.
-
-:::
-::::::
-
-:::::::::
-::::::::: {.tab title="IFM 5.21 CB (PO18, 5. Semester)"}
-
-**Parcoursprüfung plus Testat**, 5 ECTS (PO18)
-
-*   **Testat**: Vergabe der Credit-Points
-    1.  Mindestens 4 der Übungsblätter [B01], [B02], [B03], [B04x], [B05x] und [B06x] erfolgreich bearbeitet, **und**
-    2.  **aktive** Teilnahme an allen 3 Edmonton-Terminen.
-
-    ("erfolgreich bearbeitet": Bearbeitung in 3er Teams, je mindestens 60% bearbeitet,
-    fristgerechte Abgabe der Lösungen im ILIAS, Vorstellung der Lösungen im Praktikum)
-
-:::::: {.tabs groupid="exams"}
-::: {.tab title="Prüfung im ersten Zeitraum"}
-
-*   **Stationen**:
-    1.  Vortrag (3er Team, 20.11. zur Probe und 26.11. auf Edmonton II-Treffen in englischer Sprache): Vorstellung der Lösung von [B04x]
-    2.  Vorstellung Mini-Projekt [B07x] (3er Teams, letzte VL-Woche)
-
-    Beide Stationen ergeben zu je 50% die Gesamtnote.
-
-:::
-::: {.tab title="Prüfung im zweiten Zeitraum"}
-
-*   **Stationen**:
-    1.  Mündliche Prüfung (individuell, ca. 45 Minuten, zweiter Prüfungszeitraum)
-
-    Die Note der mündlichen Prüfung ergibt die Gesamtnote.
-
-:::
-::::::
-
-:::::::::
-::::::::::::
-
-
-## Materialien
-
-1.  ["**Compilers: Principles, Techniques, and Tools**"](https://learning.oreilly.com/library/view/compilers-principles-techniques/9789357054881/).
-    Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D. and Bansal, S., Pearson India, 2023.
-    ISBN [978-9-3570-5488-1](https://fhb-bielefeld.digibib.net/openurl?isbn=978-9-3570-5488-1).
-    [Online](https://learning.oreilly.com/library/view/compilers-principles-techniques/9789357054881/) über die [O'Reilly-Lernplattform](https://www.oreilly.com/library-access/).
-2.  ["**Crafting Interpreters**"](https://github.com/munificent/craftinginterpreters).
-    Nystrom, R., Genever Benning, 2021.
-    ISBN [978-0-9905829-3-9](https://fhb-bielefeld.digibib.net/openurl?isbn=978-0-9905829-3-9).
-    [Online](https://www.craftinginterpreters.com/).
-3.  ["**The Definitive ANTLR 4 Reference**"](https://learning.oreilly.com/library/view/the-definitive-antlr/9781941222621/).
-    Parr, T., Pragmatic Bookshelf, 2014. ISBN [978-1-9343-5699-9](https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-9343-5699-9).
-    [Online](https://learning.oreilly.com/library/view/the-definitive-antlr/9781941222621/) über die [O'Reilly-Lernplattform](https://www.oreilly.com/library-access/).
-4.  ["Writing a C Compiler"](https://learning.oreilly.com/library/view/writing-a-c/9781098182229/).
-    Sandler, N., No Starch Press, 2024. ISBN [978-1-0981-8222-9](https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-0981-8222-9).
-    [Online](https://learning.oreilly.com/library/view/writing-a-c/9781098182229/) über die [O'Reilly-Lernplattform](https://www.oreilly.com/library-access/).
-
-
 ## Fahrplan
 
 :::::: {.tabs groupid="modul-po"}
@@ -296,6 +208,94 @@ Abgabe der Übungsblätter jeweils **Mittwoch bis 09:00 Uhr** im [ILIAS](https:/
 [B05x]: homework/sheet05.md
 [B06x]: homework/sheet06.md
 [B07x]: homework/sheet07.md
+
+
+## Prüfungsform, Note und Credits
+
+:::::::::::: {.tabs groupid="modul-po"}
+::::::::: {.tab title="IFM 3.1 CB (PO23, 3. Semester)"}
+
+**Parcoursprüfung plus Testat**, 5 ECTS (PO23)
+
+*   **Testat**: Vergabe der Credit-Points
+    1.  Mindestens 4 der Übungsblätter [B01], [B02], [B03], [B04], [B05] und [B06] erfolgreich bearbeitet, **und**
+    2.  **aktive** Teilnahme an allen 3 Edmonton-Terminen.
+
+    ("erfolgreich bearbeitet": Bearbeitung in 3er Teams, je mindestens 60% bearbeitet,
+    fristgerechte Abgabe der Lösungen im ILIAS, Vorstellung der Lösungen im Praktikum)
+
+:::::: {.tabs groupid="exams"}
+::: {.tab title="Prüfung im ersten Zeitraum"}
+
+*   **Stationen**:
+    1.  ILIAS-Test (einzeln, 20.11.)
+    2.  Vorstellung Mini-Projekt [B07] (3er Teams, letzte VL-Woche)
+
+    Beide Stationen ergeben zu je 50% die Gesamtnote.
+
+:::
+::: {.tab title="Prüfung im zweiten Zeitraum"}
+
+*   **Stationen**:
+    1.  Mündliche Prüfung (individuell, ca. 45 Minuten, zweiter Prüfungszeitraum)
+
+    Die Note der mündlichen Prüfung ergibt die Gesamtnote.
+
+:::
+::::::
+
+:::::::::
+::::::::: {.tab title="IFM 5.21 CB (PO18, 5. Semester)"}
+
+**Parcoursprüfung plus Testat**, 5 ECTS (PO18)
+
+*   **Testat**: Vergabe der Credit-Points
+    1.  Mindestens 4 der Übungsblätter [B01], [B02], [B03], [B04x], [B05x] und [B06x] erfolgreich bearbeitet, **und**
+    2.  **aktive** Teilnahme an allen 3 Edmonton-Terminen.
+
+    ("erfolgreich bearbeitet": Bearbeitung in 3er Teams, je mindestens 60% bearbeitet,
+    fristgerechte Abgabe der Lösungen im ILIAS, Vorstellung der Lösungen im Praktikum)
+
+:::::: {.tabs groupid="exams"}
+::: {.tab title="Prüfung im ersten Zeitraum"}
+
+*   **Stationen**:
+    1.  Vortrag (3er Team, 20.11. zur Probe und 26.11. auf Edmonton II-Treffen in englischer Sprache): Vorstellung der Lösung von [B04x]
+    2.  Vorstellung Mini-Projekt [B07x] (3er Teams, letzte VL-Woche)
+
+    Beide Stationen ergeben zu je 50% die Gesamtnote.
+
+:::
+::: {.tab title="Prüfung im zweiten Zeitraum"}
+
+*   **Stationen**:
+    1.  Mündliche Prüfung (individuell, ca. 45 Minuten, zweiter Prüfungszeitraum)
+
+    Die Note der mündlichen Prüfung ergibt die Gesamtnote.
+
+:::
+::::::
+
+:::::::::
+::::::::::::
+
+
+## Materialien
+
+1.  ["**Compilers: Principles, Techniques, and Tools**"](https://learning.oreilly.com/library/view/compilers-principles-techniques/9789357054881/).
+    Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D. and Bansal, S., Pearson India, 2023.
+    ISBN [978-9-3570-5488-1](https://fhb-bielefeld.digibib.net/openurl?isbn=978-9-3570-5488-1).
+    [Online](https://learning.oreilly.com/library/view/compilers-principles-techniques/9789357054881/) über die [O'Reilly-Lernplattform](https://www.oreilly.com/library-access/).
+2.  ["**Crafting Interpreters**"](https://github.com/munificent/craftinginterpreters).
+    Nystrom, R., Genever Benning, 2021.
+    ISBN [978-0-9905829-3-9](https://fhb-bielefeld.digibib.net/openurl?isbn=978-0-9905829-3-9).
+    [Online](https://www.craftinginterpreters.com/).
+3.  ["**The Definitive ANTLR 4 Reference**"](https://learning.oreilly.com/library/view/the-definitive-antlr/9781941222621/).
+    Parr, T., Pragmatic Bookshelf, 2014. ISBN [978-1-9343-5699-9](https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-9343-5699-9).
+    [Online](https://learning.oreilly.com/library/view/the-definitive-antlr/9781941222621/) über die [O'Reilly-Lernplattform](https://www.oreilly.com/library-access/).
+4.  ["Writing a C Compiler"](https://learning.oreilly.com/library/view/writing-a-c/9781098182229/).
+    Sandler, N., No Starch Press, 2024. ISBN [978-1-0981-8222-9](https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-0981-8222-9).
+    [Online](https://learning.oreilly.com/library/view/writing-a-c/9781098182229/) über die [O'Reilly-Lernplattform](https://www.oreilly.com/library-access/).
 
 
 ## Förderungen und Kooperationen
