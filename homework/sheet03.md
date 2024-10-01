@@ -225,13 +225,12 @@ entgegen, wertet diesen aus und gibt das Ergebnis auf der Standardausgabe aus.
 
 ### Datentypen
 
-Unsere Sprache hat drei eingebaute Datentypen:
+Unsere Sprache hat zwei eingebaute Datentypen, für die entsprechende Literale erkannt werden müssen:
 
-| Datentyp | Definition |
-|:-------|:-------------------------------------------------------------------------------------|
-| `Integer` | Integer-Literale bestehen aus einer beliebigen Folge der Ziffern `0-9`. |
-| `String` | String-Literale bestehen aus einer beliebigen Folge an ASCII-Zeichen, die von `"` eingeschlossen sind. Sie müssen keine Unicode-Zeichen unterstützen. |
-| `Boolean` | Bestehen aus einem der beiden Schlüsselwörter `True` oder `False` |
+| Datentyp | Definition                                                                                                                                            |
+|:---------|:------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `int`    | Integer-Literale bestehen aus einer beliebigen Folge der Ziffern `0-9`.                                                                               |
+| `string` | String-Literale bestehen aus einer beliebigen Folge an ASCII-Zeichen, die von `"` eingeschlossen sind. Sie müssen keine Unicode-Zeichen unterstützen. |
 
 Die Sprache ist dynamisch typisiert, d.h. beim Parsen werden Ihnen keine Typ-Angaben begegnen.
 Aber Sie müssen die entsprechenden Werte parsen können.
