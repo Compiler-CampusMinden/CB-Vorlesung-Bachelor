@@ -92,9 +92,8 @@ a + b   # Ergebnis der Addition der Variablen a und b
 
 ### Bezeichner
 
-Werden zur Bezeichnung von Variablen und Funktionsnamen verwendet. Sie bestehen aus einer
-Zeichenkette der Zeichen `a-z`,`A-Z`, `0-9`, `_`. Bezeichner dürfen nicht mit einer Ziffer
-`0-9` beginnen.
+Werden zur Bezeichnung von Variablen verwendet. Sie bestehen aus einer Zeichenkette der
+Zeichen `a-z`,`A-Z`, `0-9`, `_`. Bezeichner dürfen nicht mit einer Ziffer `0-9` beginnen.
 
 ### Variablen
 
