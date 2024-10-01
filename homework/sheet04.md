@@ -20,7 +20,7 @@ Definieren Sie zunächst eine passende kontextfreie Grammatik und erstellen Sie 
 wieder einen Lexer und Parser. Definieren Sie einen AST und konvertieren Sie Ihren Parse-Tree
 in einen AST.
 
-Es ist empfehlenswert, den Type-Checker zwei-stufig zu realisieren:
+Es ist empfehlenswert, den Type-Checker zweistufig zu realisieren:
 
 1.  Aufbauen der Symboltabelle und Prüfung von Deklaration vs. Definition vs. Benutzung
 2.  Prüfen der verwendeten Typen
@@ -29,7 +29,7 @@ Es ist empfehlenswert, den Type-Checker zwei-stufig zu realisieren:
 
 Ein Programm besteht aus einer oder mehreren Anweisungen (*Statements*).
 
-### Anweisungen
+### Anweisungen (*Statements*)
 
 Eine Anweisung ist eine Befehlsfolge, beispielsweise eine Deklaration (Funktionen), Definition
 (Variablen, Funktionen), Zuweisung, ein Funktionsaufruf oder eine Operation. Sie muss immer
@@ -58,7 +58,7 @@ verdecken.
 int a = 7;
 int d;
 {   # erster innerer Scope
-    int b = 7;      # b ist nur in diesem Scope sichtbar
+    int b = 7;      # b ist nur in diesem und im zweiten inneren Scope sichtbar
     foo(a);         # Funktionsaufruf mit der Variable a aus dem äußeren Scope (Wert 7)
     int a = 42;     # Variable verdeckt das a aus dem äußeren Scope
     foo(a);         # Funktionsaufruf mit der Variable a aus dem aktuellen Scope (Wert 42)
@@ -73,12 +73,13 @@ int d;
 }
 ```
 
-### Ausdrücke (*Expression*)
+### Ausdrücke (*Expressions*)
 
 Die einfachsten Ausdrücke sind Integer- oder String-Literale oder die Wahrheitswerte.
 Variablen und Funktionsaufrufe sind ebenfalls Ausdrücke. Komplexere Ausdrücke werden mit Hilfe
-von Operationen gebildet, dabei sind die Operanden jeweils auch wieder Ausdrücke. Ein Ausdruck
-hat/ergibt immer einen Wert.
+von Operationen gebildet, dabei sind die Operanden jeweils auch wieder Ausdrücke.
+
+Ein Ausdruck hat immer einen Wert und einen Typ.
 
 Die Operatoren besitzen eine Rangfolge, um verschachtelte Operationen aufzulösen. Sie dürfen
 daher nicht einfach von links nach rechts aufgelöst werden. Die Rangfolge der Operatoren
@@ -126,8 +127,7 @@ Zeichenkette der Zeichen `a-z`,`A-Z`, `0-9`, `_`. Bezeichner dürfen nicht mit e
 
 Variablen bestehen aus einem eindeutigen Bezeichner (Variablennamen). Den Variablen können
 Werte zugewiesen werden und Variablen können als Werte verwendet werden. Die Zuweisung erfolgt
-mithilfe des `=`-Operators. Auf der rechten Seite der Zuweisung können auch einfache Ausdrücke
-stehen.
+mithilfe des `=`-Operators. Auf der rechten Seite der Zuweisung können auch Ausdrücke stehen.
 
 ``` python
 int a;         # Definition der Variablen a (Typ: Integer)
@@ -137,8 +137,8 @@ a = 2 + 3;     # Zuweisung des Wertes 5 an die Variable a
 print_int(a);  # Ausgabe des Wertes 5 auf der Standardausgabe
 ```
 
-Variablen müssen vor ihrer Benutzung deklariert sein. Die Initialisierung kann zusammen mit
-der Definition erfolgen.
+Variablen müssen vor ihrer Benutzung definiert sein. Die Initialisierung kann zusammen mit der
+Definition erfolgen.
 
 ### Kommentare
 
@@ -254,15 +254,15 @@ bool func1(int a, string b) {
 #### Funktionsaufrufe
 
 Funktionsaufrufe bestehen aus einem Bezeichner (Funktionsname) gefolgt von einer in Klammern
-angegebenen Parameterliste, die auch leer sein kann. Als Parameter können Variablen, Werte der
-Datentypen, weitere Funktionsaufrufe und Ausdrücke wie z.B. `1 + 1` dienen.
+angegebenen Parameterliste, die auch leer sein kann. Als Parameter können alle passend
+typisierten Ausdrücke dienen.
 
 ``` python
 func1(var1, 5)
 func1(func2(), 1 + 1)
 ```
 
-Funktionen müssen vor dem ersten Aufruf mindestens deklariert sein.
+Funktionen müssen vor dem Aufruf mindestens deklariert sein.
 
 #### Eingebaute Funktionen
 
@@ -274,11 +274,11 @@ werten diesen aus und geben das Ergebnis auf der Standardausgabe aus.
 
 Unsere Sprache hat drei eingebaute Datentypen:
 
-| Datentyp | Definition |
-|:-------|:-------------------------------------------------------------------------------------|
-| `int` | Integer-Literale bestehen aus einer beliebigen Folge der Ziffern `0-9`. |
+| Datentyp | Definition                                                                                                                                            |
+|:---------|:------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `int`    | Integer-Literale bestehen aus einer beliebigen Folge der Ziffern `0-9`.                                                                               |
 | `string` | String-Literale bestehen aus einer beliebigen Folge an ASCII-Zeichen, die von `"` eingeschlossen sind. Sie müssen keine Unicode-Zeichen unterstützen. |
-| `bool` | Bestehen aus einem der beiden Schlüsselwörter `True` oder `False` |
+| `bool`   | Bestehen aus einem der beiden Schlüsselwörter `True` oder `False`                                                                                     |
 
 ## Aufgaben
 
@@ -306,7 +306,7 @@ widerspiegelt. Die einzelnen Zweige sind damit aber auch viel zu tief verschacht
 benötigen (das ist Ihr AST). Programmieren Sie eine Transformation des Parse-Tree in die von
 Ihnen hier formulierten AST-Strukturen.
 
-### A4.3: Aufbau der Symboltabelle (6P)
+### A4.3: Aufbau der Symboltabelle und Typprüfung (6P)
 
 Bauen Sie für den AST eine Symboltabelle auf. Führen Sie die Typprüfung durch. Geben Sie
 erkannte Fehler auf der Konsole aus.
@@ -351,6 +351,5 @@ int f95(int n) {
 }
 
 int n = 10;
-int r = f95(n);
-print_int(r);
+print_int(f95(n));
 ```

@@ -12,13 +12,14 @@ hidden: true
 ## Aufgaben
 
 Betrachten Sie die auf [Blatt 04](sheet04.md) definierte Sprache. Ergänzen Sie diese Sprache
-um Arrays und Pointer. Benutzen Sie dabei die aus C/C++ bekannte Syntax. (Hier sind nur die
-syntaktischen Elemente und ihre semantischen Auswirkungen interessant, d.h.
-(Funktionen/Operatoren für die) dynamische Speicherverwaltung brauchen Sie nicht
-implementieren!)
+um Arrays und Pointer. Benutzen Sie dabei die aus C/C++ bekannte Syntax.
 
 Lösen Sie mit dieser erweiterten Sprachdefinition die auf [Blatt 04](sheet04.md) gestellten
 Aufgaben.
+
+*Anmerkung*: Hier sind nur die syntaktischen Elemente und ihre semantischen Auswirkungen
+interessant, d.h. (Funktionen/Operatoren für die) dynamische Speicherverwaltung brauchen Sie
+nicht implementieren!
 
 ## Vorstellung (Station I der Parcoursprüfung)
 
