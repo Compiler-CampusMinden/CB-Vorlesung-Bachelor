@@ -2,6 +2,7 @@
 archetype: assignment
 title: "Blatt 04: Symboltabellen"
 author: "Carsten Gips, BC George (HSBI)"
+points: "10 Punkte"
 
 hidden: true
 ---
@@ -281,7 +282,7 @@ Unsere Sprache hat drei eingebaute Datentypen:
 
 ## Aufgaben
 
-### A4.1: Beispielprogramme
+### A4.1: Beispielprogramme (1P)
 
 Sie finden unten einige Beispielprogramme.
 
@@ -291,7 +292,7 @@ Ausdrücken bis hin zu komplexeren Programmen reichen.
 Definieren Sie neben gültigen Programmen auch solche, die in der semantischen Analyse
 zurückgewiesen werden sollten. Welche Fehlerkategorien könnte es hier geben?
 
-### A4.2: Grammatik und ANTLR
+### A4.2: Grammatik und ANTLR (3P)
 
 Definieren Sie für die obige Sprache eine geeignete ANTLR-Grammatik.
 
@@ -305,7 +306,7 @@ widerspiegelt. Die einzelnen Zweige sind damit aber auch viel zu tief verschacht
 benötigen (das ist Ihr AST). Programmieren Sie eine Transformation des Parse-Tree in die von
 Ihnen hier formulierten AST-Strukturen.
 
-### A4.3: Aufbau der Symboltabelle
+### A4.3: Aufbau der Symboltabelle (6P)
 
 Bauen Sie für den AST eine Symboltabelle auf. Führen Sie die Typprüfung durch. Geben Sie
 erkannte Fehler auf der Konsole aus.
