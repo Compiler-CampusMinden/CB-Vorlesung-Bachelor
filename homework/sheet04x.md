@@ -24,7 +24,7 @@ Aufgaben.
 
 Stellen Sie Ihre Konzepte und Lösungen im Rahmen eines Vortrags vor. Fokussieren Sie sich
 dabei auf die Auswirkungen der oben beschriebenen Erweiterung der Sprache auf die Grammatik
-und die semantische Analyse.
+und die semantische Analyse. Der Vortrag soll 20 Minuten dauern.
 
 Am 20. November halten Sie den Vortrag zur Probe im Kreis der Kursgruppe. Hier bekommen Sie
 von der Gruppe Feedback, welches Sie zur Verbesserung Ihres Vortrags nutzen können. Dieser
@@ -51,16 +51,16 @@ Edmonton-Treffen (englische Sprache). Dieser Vortrag wird benotet.
 
 3.  **Präsentationsform (20 Punkte)**
 
-    -   **Visuelle Hilfsmittel (10 Punkte)**: Wurden geeignete und ansprechende visuelle
-        Hilfsmittel eingesetzt (z.B. PowerPoint, Plakate)? Unterstützen diese die Inhalte oder
-        lenken sie eher ab?
+    -   **Gestaltung (10 Punkte)**: Wurden geeignete und ansprechende visuelle Hilfsmittel
+        eingesetzt (Diagramme, Abbildungen)? Unterstützen diese die Inhalte oder lenken sie
+        eher ab?
     -   **Gestik, Mimik und Sprache (10 Punkte)**: Ist die Sprache klar, verständlich und
-        angemessen? Ist die Stimmlage dynamisch und ansprechend?
+        angemessen? Ist die Stimmlage dynamisch und ansprechend? Ist das Tempo angemessen?
 
-4.  **Interaktion (10 Punkte)**
+4.  **Verschiedenes (10 Punkte)**
 
-    -   **Einbindung des Publikums (5 Punkte)**: Wurde das Publikum aktiv einbezogen? Gab es
-        Möglichkeiten für Fragen oder Diskussionen?
+    -   **Zeitmanagement (5 Punkte)**: Wurde das der Zeitrahmen (20 Minuten pro Vortrag)
+        eingehalten?
     -   **Reaktionen auf Fragen (5 Punkte)**: Wurden Fragen des Publikums souverän und
         kompetent beantwortet?
 
