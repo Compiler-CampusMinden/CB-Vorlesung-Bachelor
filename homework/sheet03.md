@@ -14,11 +14,15 @@ hidden: true
 Ziel dieses Aufgabenblattes ist die Erstellung eines einfachen *Pretty Printers* für eine
 fiktive Sprache.
 
-Dazu muss eine passende kontextfreie Grammatik definiert werden mit Lexer-Regeln und
-Parser-Regeln und unter Beachtung üblicher Vorrangregeln. Für diese Grammatik erstellen Sie
-mit Hilfe von ANTLR einen Lexer und einen Parser, die zu einem Eingabeprogramm einen
-Parse-Tree erzeugen. Aus dem Parse-Tree sollen Sie ein AST erstellen, und schließlich sollen
-Sie den AST mit einer Traversierung wohlformatiert wieder ausgeben.
+Dazu werden Sie eine passende kontextfreie Grammatik definieren mit Lexer- und Parser-Regeln
+und dabei auch übliche Vorrangregeln beachten.
+
+Für diese Grammatik erstellen Sie mit Hilfe von ANTLR einen Lexer und einen Parser, die zu
+einem Eingabeprogramm einen Parse-Tree erzeugen.
+
+Aus dem Parse-Tree erstellen Sie in einer Baumtraversion einen vereinfachten
+Abstract-Syntex-Tree (*AST*), und schließlich geben Sie den AST mit einer weiteren
+Traversierung konsistent eingerückt wieder auf der Standardausgabe aus.
 
 ## Methodik
 
