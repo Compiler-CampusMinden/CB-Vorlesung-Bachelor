@@ -38,7 +38,7 @@ einlesen (bzw. die Ihr Parser zurückweist).[^1]
 
 Ein Programm besteht aus einer oder mehreren Anweisungen (*Statements*).
 
-### Anweisungen
+### Anweisungen (*Statements*)
 
 Eine Anweisung ist eine einzeilige Befehlsfolge, beispielsweise eine Zuweisung oder eine
 Operation. Sie muss immer mit einem Newline abgeschlossen werden. Eine Anweisung hat keinen
@@ -51,7 +51,7 @@ b := "foo"   # Zuweisung des Ausdrucks "foo" (String) an die Variable b
 
 Kontrollstrukturen (s.u.) zählen ebenfalls als Anweisungen.
 
-### Ausdrücke (*Expression*)
+### Ausdrücke (*Expressions*)
 
 Die einfachsten Ausdrücke sind Integer- oder String-Literale. Variablen sind ebenfalls
 Ausdrücke. Komplexere Ausdrücke werden mit Hilfe von Operationen gebildet, dabei sind die
