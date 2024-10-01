@@ -26,40 +26,13 @@ Es ist empfehlenswert, den Type-Checker zwei-stufig zu realisieren:
 
 ## Sprachdefinition
 
-<!--
-```ebnf
-smallc_program ::= type_specifier id ‘(‘ param_decl_list ‘)’ compound_stmt
-Type_specifier ::= int | char
-Param_decl_list ::= parameter_decl (‘,’ parameter_decl )*
-Param_decl ::= type_specifier id
-Compound_stmt ::= ‘{‘ (var_decl* stmt*)? ‘}’
-Var_decl ::= type_specifier var_decl_list ‘;’
-Var_decl_list ::= variable_id ( ‘,’ variable_id)*
-Variable_id ::= id ( ‘=’ expr )?
-Stmt ::= compound_stmt | cond_stmt | while_stmt | break ‘;’ | continue ‘;’ | return expr ‘;’ | readint ‘(‘ id ‘)’ ‘;’ |
- writeint ‘(‘ expr ‘)’ ‘;’
-Cond_stmt ::= if ‘(‘ expr ‘)’ stmt (else stmt)?
-While_stmt ::= while ‘(‘ expr ‘)’ stmt
-Expr ::= id ‘=’ expr | condition
-Condition ::= disjunction | disjunction ‘?’ expr ‘:’ condition
-Disjunction ::= conjunction | disjunction ‘||’ conjunction
-Conjunction ::= comparison | conjunction ‘&&’ comparison
-Comparison ::= relation | relation ‘==’ relation
-Relation ::= sum | sum (‘<’ | ‘>’) sum
-Sum ::= sum ‘+’ term | sum ‘-’ term | term
-Term ::= term ‘*’ factor | term ‘/’ factor | term ‘%’ factor | factor
-Factor ::= ‘!’ factor | ‘-’ factor | primary
-Primary ::= num | charconst | id | ‘(‘ expr ‘)’
-```
--->
-
 Ein Programm besteht aus einer oder mehreren Anweisungen (*Statements*).
 
 ### Anweisungen
 
-Eine Anweisung ist eine Befehlsfolge, beispielsweise eine Deklaration, Definition, Zuweisung,
-ein Funktionsaufruf oder eine Operation. Sie muss immer mit einem Semikolon abgeschlossen
-werden. Eine Anweisung hat keinen Wert.
+Eine Anweisung ist eine Befehlsfolge, beispielsweise eine Deklaration (Funktionen), Definition
+(Variablen, Funktionen), Zuweisung, ein Funktionsaufruf oder eine Operation. Sie muss immer
+mit einem Semikolon abgeschlossen werden. Eine Anweisung hat keinen Wert.
 
 ``` python
 int a;           # Definition der Integer-Variablen a
@@ -237,9 +210,9 @@ if (a < "adc") {
 #### Funktionsdeklaration
 
 Jede Funktion muss vor ihrer Benutzung mindestens deklariert sein. Dabei wird die Signatur
-bekannt gegeben: Rückgabetyp, Funktionsname, Parameterliste. Die Parameterliste umfasst die
-Parameter mit Komma separariert, jeweils Typ und Variablenname. Die Parameterliste kann auch
-leer sein.
+bekannt gegeben: Rückgabetyp, Funktionsname, Parameterliste. Die Parameterliste ist eine
+Komma-separierte Liste mit der Deklaration der Parameter (jeweils Typ und Variablenname). Die
+Parameterliste kann auch leer sein.
 
 ``` c
 type bezeichner(type param1, type param2);
@@ -252,10 +225,13 @@ bool func1(int a, string b);
 Eine Funktionsdeklaration kann beliebig oft im Programm vorkommen, so lange sie sich nicht
 ändert.
 
+Funktionen können nicht überladen werden.
+
 #### Funktionsdefinition
 
 Eine Funktionsdefinition macht dem Compiler die Implementierung der Funktion bekannt. Sie ist
-gleichzeitig auch eine Funktionsdeklaration.
+gleichzeitig auch eine Funktionsdeklaration und fügt nach der Deklaration den Funktionskörper
+als Code-Block an.
 
 Eine Funktionsdefinition darf es jeweils nur einmal im Programm geben.
 
@@ -298,7 +274,7 @@ werten diesen aus und geben das Ergebnis auf der Standardausgabe aus.
 Unsere Sprache hat drei eingebaute Datentypen:
 
 | Datentyp | Definition |
-|:------|:--------------------------------------------------------------------------------------|
+|:-------|:-------------------------------------------------------------------------------------|
 | `int` | Integer-Literale bestehen aus einer beliebigen Folge der Ziffern `0-9`. |
 | `string` | String-Literale bestehen aus einer beliebigen Folge an ASCII-Zeichen, die von `"` eingeschlossen sind. Sie müssen keine Unicode-Zeichen unterstützen. |
 | `bool` | Bestehen aus einem der beiden Schlüsselwörter `True` oder `False` |
