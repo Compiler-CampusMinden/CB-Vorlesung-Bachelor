@@ -99,8 +99,7 @@ Zeichen `a-z`,`A-Z`, `0-9`, `_`. Bezeichner dürfen nicht mit einer Ziffer `0-9`
 
 Variablen bestehen aus einem eindeutigen Bezeichner (Variablennamen). Den Variablen können
 Werte zugewiesen werden und Variablen können als Werte verwendet werden. Die Zuweisung erfolgt
-mithilfe des `:=`-Operators. Auf der rechten Seite der Zuweisung können auch einfache
-Ausdrücke stehen.
+mithilfe des `:=`-Operators. Auf der rechten Seite der Zuweisung können auch Ausdrücke stehen.
 
 ``` python
 a := 5      # Zuweisung des Wertes 5 an die Variable a
@@ -208,14 +207,14 @@ Ausdrücken bis hin zu komplexeren Programmen reichen.
 Definieren Sie neben gültigen Programmen auch solche, die in der syntaktischen Analyse
 zurückgewiesen werden sollten. Welche Fehlerkategorien könnte es hier geben?
 
-### A3.2: Grammatik (3P)
+### A3.2: Grammatik (4P)
 
 Definieren Sie für die obige Sprache eine geeignete ANTLR-Grammatik.
 
 Sie werden Lexer- und (rekursive) Parser-Regeln benötigen. Beachten Sie die üblichen
 Vorrangregeln für die Operatoren.
 
-### A3.3: ANTLR (2P)
+### A3.3: ANTLR (1P)
 
 Erzeugen Sie mithilfe der Grammatik und ANTLR einen Lexer und Parser, den Sie für die
 folgenden Aufgaben nutzen.
@@ -227,12 +226,13 @@ Grammatik widerspiegelt. Die einzelnen Zweige sind damit aber auch viel zu tief 
 
 Überlegen Sie sich, welche Informationen/Knoten Sie für die formatierte Ausgabe wirklich
 benötigen (das ist Ihr AST). Programmieren Sie eine Transformation des Parse-Tree in die von
-Ihnen hier formulierten AST-Strukturen.
+Ihnen hier formulierten AST-Strukturen. Dies können Sie beispielsweise mit einer passenden
+Traversierung (Visitor-Pattern) erreichen.
 
 ### A3.5: Pretty Printer (2P)
 
-Programmieren Sie eine Traversierung Ihres AST, so dass das syntaktisch korrektes Programm
-konsistent eingerückt ausgegeben wird.
+Programmieren Sie eine weitere Traversierung Ihres AST, in der Sie syntaktisch korrekte
+Programme konsistent eingerückt ausgeben können.
 
 Jede Anweisung soll auf einer eigenen Zeile stehen. Die Einrückung soll mit Leerzeichen
 erfolgen und konsistent sein. Sie brauchen keine Begrenzung der Zeilenlänge implementieren.
