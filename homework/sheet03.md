@@ -2,6 +2,7 @@
 archetype: assignment
 title: "Blatt 03: ANTLR"
 author: "Carsten Gips, BC George (HSBI)"
+points: "10 Punkte"
 
 hidden: true
 ---
@@ -237,23 +238,23 @@ Aber Sie müssen die entsprechenden Werte parsen können.
 
 ## Aufgaben
 
-### A3.1: Beispielprogramme
+### A3.1: Beispielprogramme (1P)
 
 Sie finden unten einige Beispielprogramme.
 
 Erstellen Sie selbst weitere Programme in der Zielsprache. Diese sollten von einfachsten
 Ausdrücken bis hin zu komplexeren Programmen reichen.
 
-### A3.2: Grammatik
+### A3.2: Grammatik (3P)
 
 Definieren Sie für die obige Sprache eine geeignete ANTLR-Grammatik.
 
-### A3.3: ANTLR
+### A3.3: ANTLR (2P)
 
 Erzeugen Sie mithilfe der Grammatik und ANTLR einen Lexer und Parser, den Sie für die
 folgenden Aufgaben nutzen.
 
-### A3.4: AST
+### A3.4: AST (2P)
 
 Beim Parsen bekommen Sie von ANTLR einen Parse-Tree zurück, der die Struktur Ihrer Grammatik
 widerspiegelt. Die einzelnen Zweige sind damit aber auch viel zu tief verschachtelt.
@@ -262,7 +263,7 @@ widerspiegelt. Die einzelnen Zweige sind damit aber auch viel zu tief verschacht
 benötigen (das ist Ihr AST). Programmieren Sie eine Transformation des Parse-Tree in die von
 Ihnen hier formulierten AST-Strukturen.
 
-### A3.5: Pretty Printer
+### A3.5: Pretty Printer (2P)
 
 Programmieren Sie eine Traversierung Ihres AST, so dass das geparste Programm korrekt
 eingerückt ausgegeben wird.
