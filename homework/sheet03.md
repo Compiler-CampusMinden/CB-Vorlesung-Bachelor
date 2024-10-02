@@ -111,23 +111,13 @@ a := 2 + 3  # Zuweisung des Wertes 5 an die Variable a
 Kommentare werden durch das Zeichen `#` eingeleitet und umfassen sämtliche Zeichen bis zum
 nächsten Newline.
 
-Es existiert ein spezielles Schlüsselwort `#end`, welches **keinen** Kommentar darstellt.
-
-### *#end*
-
-Das Schlüsselwort `#end` stellt eine Besonderheit dar und dient zum Schließen von
-Kontrollstrukturen. Es steht wie eine Anweisung in einer eigenen Zeile.
-
-Durch die Verwendung dieses Schlüsselworts kann auf die Auswertung der Einrückung verzichtet
-werden.
-
 ### Kontrollstrukturen
 
 #### While-Schleife
 
 While-Schleifen werden mit dem Schlüsselwort `while` eingeleitet. Sie bestehen im Weiteren aus
 einer Bedingung, die durch ein `do` abgeschlossen wird, einer Folge von Anweisungen und werden
-mit dem Schlüsselwort `#end` abgeschlossen.
+mit dem Schlüsselwort `end` abgeschlossen.
 
 Die Bedingung kann aus einem Vergleichsausdruck bestehen.
 
@@ -135,7 +125,7 @@ Die Bedingung kann aus einem Vergleichsausdruck bestehen.
 while <Bedingung> do
     <Anweisung_1>
     <Anweisung_2>
-#end
+end
 ```
 
 ``` python
@@ -144,7 +134,7 @@ b := 0
 while a >= 0 do
     a := a - 1
     b := b + 9
-#end
+end
 ```
 
 #### Bedingte Anweisung (If-Else)
@@ -152,17 +142,17 @@ while a >= 0 do
 Eine bedingte Anweisung besteht immer aus genau einer `if`-Anweisung, gefolgt von einer
 Bedingung, die mit einem `do` abgeschlossen wird und einer Folge von Anweisungen.
 
-Danach wird die bedingte Anweisung entweder mit dem Schlüsselwort `#end` abgeschlossen oder es
+Danach wird die bedingte Anweisung entweder mit dem Schlüsselwort `end` abgeschlossen oder es
 folgt genau ein `else`-Teil.
 
 Ein `else`-Teil wird mit dem Schlüsselwort `else` eingeleitet. Darauf folgt ein `do` und eine
-Folge von Anweisungen. Der `else`-Teil wird mit dem Schlüsselwort `#end` abgeschlossen.
+Folge von Anweisungen. Der `else`-Teil wird mit dem Schlüsselwort `end` abgeschlossen.
 
 ``` python
 if <Bedingung> do
     <Anweisung_1>
     <Anweisung_2>
-#end
+end
 ```
 
 ``` python
@@ -170,7 +160,7 @@ if <Bedingung> do
     <Anweisung>
 else do
     <Anweisung>
-#end
+end
 ```
 
 ``` python
@@ -179,7 +169,7 @@ if a < "abc" do
     a := "wuppie"
 else do
     a := "nope"
-#end
+end
 ```
 
 ### Datentypen
@@ -247,7 +237,7 @@ a := 0
 a := 42
 else do
         a := 7
-  #end
+  end
 ```
 
 soll
@@ -258,7 +248,7 @@ if 10<1 do
     a := 42
 else do
     a := 7
-#end
+end
 ```
 
 werden.
@@ -280,7 +270,7 @@ if 10<1 do
     a := 42
 else do
     a := 7
-#end
+end
 ```
 
 [^1]: Um den Text lesbar zu halten, wird hier oft nur von "Parser" gesprochen - gemeint ist
