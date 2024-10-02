@@ -190,8 +190,8 @@ Da es kein `while` oder `for` gibt, müssen Schleifen über rekursive Aufrufe ab
 In unserer Sprache gibt es Listen:
 
 ``` clojure
-(1 2 3)
-(def v (1 2 3))
+(1 2 3)          ;; Fehler!
+(def v (1 2 3))  ;; Fehler!
 ```
 
 Das Problem daran ist, dass unsere S-Expressions zwar bereits listenartige Strukturen sind,
