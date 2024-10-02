@@ -8,6 +8,7 @@ package my.pkg;
 // Parser
 start : stmt* ;
 
+
 stmt  : ID '=' expr ';' | expr ';' ;
 
 expr  : term ('+' term)* ;

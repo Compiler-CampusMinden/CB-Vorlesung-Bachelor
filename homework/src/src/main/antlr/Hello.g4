@@ -4,6 +4,7 @@ grammar Hello;
 // Parser
 start : stmt* ;
 
+
 stmt  : ID '=' expr ';' | expr ';' ;
 
 expr  : term ('+' term)* ;

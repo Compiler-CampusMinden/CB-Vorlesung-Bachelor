@@ -10,10 +10,8 @@ repositories {
 }
 
 dependencies {
-    // ANTLR
     antlr 'org.antlr:antlr4:4.13.2'
 
-    // JUnit and Mockito for testing
     testImplementation 'org.junit.jupiter:junit-jupiter:5.11.1'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.11.1'
     testImplementation 'org.mockito:mockito-core:5.14.1'
@@ -35,14 +33,14 @@ generateGrammarSource {
 
 
 application {
-    // Define the main class for the application
+    // TODO: Define your main class
     mainClass = 'Main'
 }
+
 
 tasks.named('test') {
     useJUnitPlatform()
 }
-
 
 spotless {
     java {
