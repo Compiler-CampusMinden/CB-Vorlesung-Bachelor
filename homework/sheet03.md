@@ -12,7 +12,7 @@ hidden: true
 ## Zusammenfassung
 
 Ziel dieses Aufgabenblattes ist die Erstellung eines einfachen *Pretty Printers* für eine
-fiktive Sprache.
+einfache fiktive Sprache mit Expressions und Kontrollstrukturen.
 
 Dazu werden Sie eine passende kontextfreie Grammatik definieren mit Lexer- und Parser-Regeln
 und dabei auch übliche Vorrangregeln beachten.
@@ -185,11 +185,26 @@ müssen:
 Die Sprache ist dynamisch typisiert, d.h. beim Parsen werden Ihnen keine Typ-Angaben im Code
 begegnen. Aber Sie müssen die entsprechenden Werte (Literale) parsen können.
 
+### Beispiele
+
+``` python
+a := "wuppie fluppie"
+```
+
+``` python
+a := 0
+if 10<1 do
+    a := 42
+else do
+    a := 7
+end
+```
+
 ## Aufgaben
 
 ### A3.1: Beispielprogramme (1P)
 
-Sie finden unten einige Beispielprogramme.
+Sie finden oben einige Beispielprogramme.
 
 Erstellen Sie selbst weitere Programme in der Zielsprache. Diese sollten von einfachsten
 Ausdrücken bis hin zu komplexeren Programmen reichen.
@@ -209,13 +224,17 @@ Vorrangregeln für die Operatoren.
 Erzeugen Sie mithilfe der Grammatik und ANTLR einen Lexer und Parser, den Sie für die
 folgenden Aufgaben nutzen.
 
+*Hinweis*: Es ist vorteilhaft, mit einem Build-Skript (beispielsweise Gradle) zu arbeiten. Sie
+können natürlich auch die Grammatik durch einen manuellen Aufruf von ANTLR übersetzen.
+
 ### A3.4: AST (2P)
 
 Beim Parsen bekommen Sie von ANTLR einen Parse-Tree zurück, der direkt die Struktur Ihrer
-Grammatik widerspiegelt. Die einzelnen Zweige sind damit aber auch viel zu tief verschachtelt.
+Grammatik widerspiegelt. Die einzelnen Zweige sind damit in der Regel aber auch viel zu tief
+verschachtelt.
 
 Überlegen Sie sich, welche Informationen/Knoten Sie für die formatierte Ausgabe wirklich
-benötigen (das ist Ihr AST). Programmieren Sie eine Transformation des Parse-Tree in die von
+benötigen - das ist Ihr AST. Programmieren Sie eine Transformation des Parse-Tree in die von
 Ihnen hier formulierten AST-Strukturen. Dies können Sie beispielsweise mit einer passenden
 Traversierung (Visitor-Pattern) erreichen.
 
@@ -258,20 +277,8 @@ die Semantik (passende Typen o.ä.) noch keine Gedanken machen! Achten Sie auf d
 Einrücktiefen. Die Zeilenlänge spielt hier keine Rolle, es wird einfach direkt nach jedem
 Statement umgebrochen (bzw. wie bei den Kontrollstrukturen gezeigt).
 
-## Beispiele
-
-``` python
-a := "wuppie fluppie"
-```
-
-``` python
-a := 0
-if 10<1 do
-    a := 42
-else do
-    a := 7
-end
-```
+*Hinweis*: Sie können diese Aufgabe auch dann bearbeiten, wenn Sie die AST-Aufgabe nicht
+bearbeitet haben sollten: Dann traversieren Sie einfach über den Parse-Tree.
 
 [^1]: Um den Text lesbar zu halten, wird hier oft nur von "Parser" gesprochen - gemeint ist
     aber die gesamte auf diesem Blatt zu erstellende Toolchain: Lexer - Parser - AST -
