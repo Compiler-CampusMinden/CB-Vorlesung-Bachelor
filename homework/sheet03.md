@@ -7,7 +7,7 @@ points: "10 Punkte"
 hidden: true
 ---
 
-<!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94 sheet03.md -o xxx.md  -->
+<!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94 --reference-links=true  sheet03.md  -o xxx.md  -->
 
 ## Zusammenfassung
 
@@ -20,19 +20,32 @@ und dabei auch übliche Vorrangregeln beachten.
 Für diese Grammatik erstellen Sie mit Hilfe von ANTLR einen Lexer und einen Parser, die zu
 einem Eingabeprogramm einen Parse-Tree erzeugen.
 
-Aus dem Parse-Tree erstellen Sie in einer Baumtraversion einen vereinfachten
-Abstract-Syntex-Tree (*AST*), und schließlich geben Sie den AST mit einer weiteren
-Traversierung konsistent eingerückt wieder auf der Standardausgabe aus.
+Den im Parse-Tree repräsentierten Code des Eingabeprogramms können Sie mit Hilfe einer
+Traversierung konsistent eingerückt wieder auf der Standardausgabe ausgeben - das ist der
+*Pretty Printer*.
+
+Sie werden merken, dass viele Strukturen im Parse-Tree für diese Aufgabe nicht relevant sind
+und den Baum mit einer weiteren Traversierung in einen vereinfachten Baum, den sogenannten
+Abstract-Syntex-Tree (*AST*), transformieren und diesen erneut als formatierten Code auf der
+Konsole ausgeben.
 
 ## Methodik
 
-Erstellen Sie sich ein Java-Projekt mit einem Makefile oder Gradle-Skript und binden Sie ANTLR
-ein. Testen Sie, ob Sie mit Hilfe einer minimalen ANTLR-Grammatik einen Lexer und Parser
-automatisiert erzeugen können.
+Nutzen Sie das [Starter-Projekt] in der Vorgabe.
 
-Bauen Sie die Grammatik für die Aufgabe schrittweise auf. Testen Sie mit Hilfe des
-Beispielcodes und überlegen Sie sich selbst weitere Code-Schnipsel, die Sie mit Ihrem Parser
-einlesen (bzw. die Ihr Parser zurückweist).[^1]
+Laden Sie sich das Projekt herunter, binden Sie es in Ihre IDE ein und vergewissern Sie sich,
+dass alles funktioniert: Führen Sie das enthaltene Programm aus, ändern Sie die mitgelieferten
+Beispielgrammatik.
+
+Bauen Sie dann Ihre Grammatik für die Aufgabe schrittweise auf. Testen Sie diese mit Hilfe der
+Beispielprogramme der Zielsprache (s.u.) und überlegen Sie sich selbst weitere Code-Schnipsel,
+die Sie mit Ihrem Parser einlesen bzw. die Ihr Parser zurückweisen sollte.[^1] Es empfiehlt
+sich, in dieser Phase mit dem [ANTLR-Plugin für IntelliJ] zu arbeiten.
+
+Erkunden Sie dann die Strukturen Ihres Parse-Trees. Diese sind an die Regeln Ihrer Grammatik
+gekoppelt und sind deshalb so individuell wie Ihre Grammatik. Mit einer Traversierung des
+Baumes können Sie die gewünschte Ausgabe programmieren und auch die Erstellung des
+vereinfachten Baumes (AST).
 
 ## Sprachdefinition
 
@@ -202,49 +215,26 @@ end
 
 ## Aufgaben
 
-### A3.1: Beispielprogramme (1P)
-
-Sie finden oben einige Beispielprogramme.
-
-Erstellen Sie selbst weitere Programme in der Zielsprache. Diese sollten von einfachsten
-Ausdrücken bis hin zu komplexeren Programmen reichen.
-
-Definieren Sie neben gültigen Programmen auch solche, die in der syntaktischen Analyse
-zurückgewiesen werden sollten. Welche Fehlerkategorien könnte es hier geben?
-
-### A3.2: Grammatik (4P)
+### A3.1: Grammatik (4P)
 
 Definieren Sie für die obige Sprache eine geeignete ANTLR-Grammatik.
 
-Sie werden Lexer- und (rekursive) Parser-Regeln benötigen. Beachten Sie die üblichen
-Vorrangregeln für die Operatoren.
+Sie werden sowohl Lexer- als auch (rekursive) Parser-Regeln benötigen. Beachten Sie die
+üblichen Vorrangregeln für die Operatoren, orientieren Sie sich hier an Sprachen wie Java oder
+Python oder C.
 
-### A3.3: ANTLR (1P)
+### A3.2: Pretty Printer (3P)
 
-Erzeugen Sie mithilfe der Grammatik und ANTLR einen Lexer und Parser, den Sie für die
-folgenden Aufgaben nutzen.
+Erzeugen Sie mithilfe der Grammatik und ANTLR einen Lexer und Parser. Damit können Sie
+syntaktisch korrekte Eingabe-Programme in einen Parse-Tree überführen.
 
-*Hinweis*: Es ist vorteilhaft, mit einem Build-Skript (beispielsweise Gradle) zu arbeiten. Sie
-können natürlich auch die Grammatik durch einen manuellen Aufruf von ANTLR übersetzen.
-
-### A3.4: AST (2P)
-
-Beim Parsen bekommen Sie von ANTLR einen Parse-Tree zurück, der direkt die Struktur Ihrer
-Grammatik widerspiegelt. Die einzelnen Zweige sind damit in der Regel aber auch viel zu tief
-verschachtelt.
-
-Überlegen Sie sich, welche Informationen/Knoten Sie für die formatierte Ausgabe wirklich
-benötigen - das ist Ihr AST. Programmieren Sie eine Transformation des Parse-Tree in die von
-Ihnen hier formulierten AST-Strukturen. Dies können Sie beispielsweise mit einer passenden
-Traversierung (Visitor-Pattern) erreichen.
-
-### A3.5: Pretty Printer (2P)
-
-Programmieren Sie eine weitere Traversierung Ihres AST, in der Sie syntaktisch korrekte
+Programmieren Sie eine Traversierung Ihres Parse-Trees, in der Sie syntaktisch korrekte
 Programme konsistent eingerückt ausgeben können.
 
 Jede Anweisung soll auf einer eigenen Zeile stehen. Die Einrückung soll mit Leerzeichen
 erfolgen und konsistent sein. Sie brauchen keine Begrenzung der Zeilenlänge implementieren.
+
+Demonstrieren Sie die Fähigkeiten an mehreren Beispielen mit unterschiedlicher Komplexität.
 
 Beispiel:
 
@@ -277,9 +267,24 @@ die Semantik (passende Typen o.ä.) noch keine Gedanken machen! Achten Sie auf d
 Einrücktiefen. Die Zeilenlänge spielt hier keine Rolle, es wird einfach direkt nach jedem
 Statement umgebrochen (bzw. wie bei den Kontrollstrukturen gezeigt).
 
-*Hinweis*: Sie können diese Aufgabe auch dann bearbeiten, wenn Sie die AST-Aufgabe nicht
-bearbeitet haben sollten: Dann traversieren Sie einfach über den Parse-Tree.
+### A3.3: AST (3P)
+
+Beim Parsen bekommen Sie von ANTLR einen Parse-Tree zurück, der direkt die Struktur Ihrer
+Grammatik widerspiegelt. Die einzelnen Zweige sind damit in der Regel aber auch viel zu tief
+verschachtelt.
+
+Überlegen Sie sich, welche Informationen/Knoten Sie für die formatierte Ausgabe wirklich
+benötigen - das ist Ihr Abstract-Syntex-Tree (*AST*).
+
+Programmieren Sie eine Transformation des Parse-Tree in die von Ihnen hier formulierten
+AST-Strukturen. Dies können Sie beispielsweise mit einer passenden Traversierung
+(Visitor-Pattern) erreichen.
+
+Passen Sie den Pretty-Printer so an, dass er auch den AST ausgeben kann.
 
 [^1]: Um den Text lesbar zu halten, wird hier oft nur von "Parser" gesprochen - gemeint ist
     aber die gesamte auf diesem Blatt zu erstellende Toolchain: Lexer - Parser - AST -
     Ausgabe.
+
+  [Starter-Projekt]: https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/tree/master/homework/src/sample_project
+  [ANTLR-Plugin für IntelliJ]: https://plugins.jetbrains.com/plugin/7358-antlr-v4
