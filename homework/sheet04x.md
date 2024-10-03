@@ -7,15 +7,14 @@ points: "10 Punkte"
 hidden: true
 ---
 
-<!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94 --reference-links=true  sheet04.md  -o xxx.md  -->
+<!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94 --reference-links=true  sheet04x.md  -o xxx.md  -->
 
 ## Aufgaben
 
-Betrachten Sie die auf [Blatt 04](sheet04.md) definierte Sprache. Ergänzen Sie diese Sprache
-um Arrays und Pointer. Benutzen Sie dabei die aus C/C++ bekannte Syntax.
+Betrachten Sie die auf [Blatt 04] definierte Sprache. Ergänzen Sie diese Sprache um Arrays und
+Pointer. Benutzen Sie dabei die aus C/C++ bekannte Syntax.
 
-Lösen Sie mit dieser erweiterten Sprachdefinition die auf [Blatt 04](sheet04.md) gestellten
-Aufgaben.
+Lösen Sie mit dieser erweiterten Sprachdefinition die auf [Blatt 04] gestellten Aufgaben.
 
 *Anmerkung*: Hier sind nur die syntaktischen Elemente und ihre semantischen Auswirkungen
 interessant, d.h. (Funktionen/Operatoren für die) dynamische Speicherverwaltung brauchen Sie
@@ -66,3 +65,5 @@ Edmonton-Treffen (englische Sprache). Dieser Vortrag wird benotet.
         kompetent beantwortet?
 
 Gesamtbewertung: 100 Punkte
+
+  [Blatt 04]: sheet04.md
