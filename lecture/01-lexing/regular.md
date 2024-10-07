@@ -122,7 +122,7 @@ Hier entsteht ein Tafelbild.
 
  **Def.:** Sei A ein DFA oder ein NFA. Dann ist **L(A)** die von A akzeptierte Sprache, d. h.
 
-$L(A) = \{Wörter\ w\ |\ \delta^*(q_0, w) \in F\}$
+$L(A) = \{\text{Wörter}\ w\ |\ \delta^*(q_0, w) \in F\}$
 
 
 ## Wozu NFAs im Compilerbau?
@@ -131,7 +131,7 @@ Pattern Matching (Erkennung von Schlüsselwörtern, Bezeichnern, ...) geht mit N
 
 NFAs sind so nicht zu programmieren, aber:
 
-\ \
+\medskip
 
  **Satz:** Eine Sprache $L$ wird von einem NFA akzeptiert  $\Leftrightarrow L$ wird von einem DFA akzeptiert.
 
@@ -197,7 +197,7 @@ Hier entsteht ein Tafelbild.
 
 *    *P*: endliche Menge von **Produktionen** der Form
 
-\ \
+\medskip
 
 $\qquad X \rightarrow Y$ mit $X \in (N \cup T)^{\ast} N  (N \cup T)^{\ast}, Y \in (N \cup T)^{\ast}$
 
@@ -210,7 +210,7 @@ $(N \cup T)^{\ast}$ und sei $A$ $\rightarrow \gamma$ eine Produktion von $G$.
 Wir schreiben:
 $\alpha A \beta \Rightarrow \alpha \gamma \beta$ ($\alpha A \beta$ leitet $\alpha \gamma \beta$ ab).
 
-\ \
+\medskip
 
 **Def.:** Wir definieren die Relation $\overset{\ast}{\Rightarrow}$ induktiv wie folgt:
 
@@ -219,10 +219,10 @@ $\alpha A \beta \Rightarrow \alpha \gamma \beta$ ($\alpha A \beta$ leitet $\alph
 *    Induktion: Wenn $\alpha \overset{\ast}{\Rightarrow} \beta$ und
         $\beta\Rightarrow \gamma$ dann $\alpha \overset{\ast}{\Rightarrow} \gamma$
 
-        \ \
+\medskip
 
  **Def.:** Sei $G = (N, T ,P, S)$ eine formale Grammatik.
-    Dann ist $L(G) = \lbrace$Wörter\ $w$\ über\ $T \mid S \overset{\ast}{\Rightarrow} w\rbrace$ die von $G$ erzeugte Sprache.
+    Dann ist $L(G) = \{\text{Wörter}\ w\ \text{über}\ T \mid S \overset{\ast}{\Rightarrow} w\}$ die von $G$ erzeugte Sprache.
 
 
 ## Beispiel
@@ -255,7 +255,7 @@ Hier entsteht ein Tafelbild.
 
 **Satz:** Die von endlichen Automaten akzeptiert Sprachklasse, die von regulären Ausdrücken beschriebene Sprachklasse und die von regulären Grammatiken erzeugte Sprachklasse sind identisch und heißen **reguläre Sprachen**.
 
-  \ \
+\medskip
 
 **Reguläre Sprachen**
 *   einfache Struktur
