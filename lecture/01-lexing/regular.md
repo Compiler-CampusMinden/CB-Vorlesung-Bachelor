@@ -222,7 +222,7 @@ $\alpha A \beta \Rightarrow \alpha \gamma \beta$ ($\alpha A \beta$ leitet $\alph
 \medskip
 
  **Def.:** Sei $G = (N, T ,P, S)$ eine formale Grammatik.
-    Dann ist $L(G) = \{\text{Wörter}\ w\ \text{über}\ T \mid S \overset{\ast}{\Rightarrow} w\}$ die von $G$ erzeugte Sprache.
+    Dann ist $L(G) = \lbrace \text{Wörter}\ w\ \text{über}\ T \mid S \overset{\ast}{\Rightarrow} w\rbrace$ die von $G$ erzeugte Sprache.
 
 
 ## Beispiel
