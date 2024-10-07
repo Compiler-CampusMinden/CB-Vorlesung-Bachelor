@@ -46,7 +46,7 @@ Für z. B. alle Sprachen, in deren Wörtern Zeichen über eine Konstante hinaus 
 *   PDAs: mächtiger als DFAs, NFAs
 *   kontextfreie Grammatiken und Sprachen: mächtiger als reguläre Grammatiken und Sprachen
 *   DPDAs und deterministisch kontextfreie Grammatiken: die Grundlage der Syntaxanalyse im Compilerbau
-*   Der Einsatz kontextfreier Grammatik zur Syntaxanalyse mittels Top-Down-Techniken
+*   Der Einsatz kontextfreier Grammatiken zur Syntaxanalyse mittels Top-Down-Techniken
 
 
 ## Einordnung: Erweiterung der Automatenklasse DFA, um komplexere Sprachen als die regulären akzeptieren zu können
@@ -83,46 +83,6 @@ Ein PDA für $L=\lbrace ww^{R}\mid w\in \lbrace a,b\rbrace^{\ast}\rbrace$:
 
 ![](images/pda2.png){width="45%"}
 
-
-## Konfigurationen von PDAs
-
-**Def.:** Eine Konfiguration (ID) eines PDAs 3-Tupel $(q, w, \gamma)$
-mit
-
-* $q$ ist ein Zustand
-* $w$ ist der verbleibende Input, $w\in\Sigma^{\ast}$
-* $\gamma$ ist der Kellerinhalt $\gamma\in \Gamma^{\ast}$
-
-eines PDAs zu einem gegebenen Zeitpunkt.
-
-
-## Die Übergangsrelation eines PDAs
-
-**Def.:** Die Relation $\vdash$ definiert Übergänge von einer Konfiguration zu einer anderen:
-
-Sei $(p, \alpha) \in \delta(q, a, X)$, dann gilt $\forall w\ \epsilon \ \Sigma^{\ast}$ und
-$\beta \in \Gamma^{\ast}$:
-
-$(q, aw, X\beta)\vdash(p, w, \alpha\beta)$.
-
-\bigskip
-
-**Def.:** Wir definieren mit $\overset{\ast}{\vdash}$ 0 oder endlich viele Schritte des PDAs
-induktiv wie folgt:
-
-*   Basis: $I\overset{\ast}{\vdash} I$ für eine ID $I$.
-*   Induktion: $I\overset{\ast}{\vdash}J$, wenn $\exists$ ID $K$ mit $I\vdash K$ und $K \overset{\ast}{\vdash}J$.
-
-
-## Akzeptierte Sprachen
-
-**Def.:** Sei $P=(Q, \Sigma, \Gamma, \delta, q_0, \perp, F)$ ein PDA. Dann ist die *über einen Endzustand*
-akzeptierte Sprache $L(P) = \lbrace w \mid (q_0, w, \perp) \overset{\ast}{\vdash} (q, \epsilon, \alpha)\rbrace$
-für einen Zustand $q \in F, \alpha \in \Gamma^{\ast}$.
-
-**Def.:** Für einen PDA $P=(Q, \Sigma, \Gamma, \delta, q_{0}, \perp, F)$
-definieren wir die über den *leeren Keller* akzeptierte Sprache
-$N(P) = \lbrace (w \mid (q_0, w, \perp) \overset{\ast}{\vdash} (q, \epsilon, \epsilon)\rbrace$.
 
 
 ## Deterministische PDAs
@@ -171,13 +131,16 @@ Hier entsteht ein Tafelbild.
 :::
 
 
-## Mehrdeutige Grammatiken
+## Nicht jede kontextfreie Grammatik ist eindeutig
 
 **Def.:** Gibt es in einer von einer kontextfreien Grammatik erzeugten Sprache ein
 Wort, für das mehr als ein Ableitungsbaum existiert, so heißt diese Grammatik
 *mehrdeutig*. Anderenfalls heißt sie *eindeutig*.
 
+**Satz:** Es ist nicht entscheidbar, ob eine gegebene kontextfreie Grammatik eindeutig ist.
+
 **Satz:** Es gibt kontextfreie Sprachen, für die keine eindeutige Grammatik existiert.
+
 
 
 ## Kontextfreie Grammatiken und PDAs
@@ -185,45 +148,15 @@ Wort, für das mehr als ein Ableitungsbaum existiert, so heißt diese Grammatik
 **Satz:** Die kontextfreien Sprachen und die Sprachen, die von PDAs akzeptiert werden, sind dieselbe
 Sprachklasse.
 
-**Satz:** Sei $L = N(P)$ für einen DPDA *P*, dann hat *L* eine eindeutige Grammatik.
-
-**Def.:** Die Klasse der Sprachen, die von einem DPDA akzeptiert werden, heißt
-Klasse der *deterministisch kontextfreien (oder LR(k)-) Sprachen*.
+**Satz:** Eine von einem DPDA akzeptierteSprache hat eine eindeutige Grammatik.
 
 
+Vorgehensweise im Compilerbau: Eine Grammatik für die gewünschte Sprache definieren und schauen, ob sich daraus ein DPDA generieren lässt (automatisch).
 
 
 
-## Entscheidbarkeit von kontextfreien Grammatiken und Sprachen
-
-**Satz:** Es ist entscheidbar für eine kontextfreie Grammatik *G*,
-
-*   ob $L(G) = \emptyset$
-*   welche Symbole nach $\epsilon$ abgeleitet werden können
-*   welche Symbole erreichbar sind
-*   ob $w  \in L(G)$ für ein gegebenes $w \in {\Sigma}^{\ast}$
 
 
-**Satz:** Es ist nicht entscheidbar,
-
-*   ob eine gegebene kontextfreie Grammatik eindeutig ist
-*   ob der Durchschnitt zweier kontextfreier Sprachen leer ist
-*   ob zwei kontextfreie Sprachen identisch sind
-*   ob eine gegebene kontextfreie Sprache gleich $\Sigma^{\ast}$ ist
-
-
-## Abschlusseigenschaften deterministisch kontextfreier Sprachen
-
-**Satz:** Deterministisch kontextfreie Sprachen sind abgeschlossen unter
-
-*   Durchschnitt mit regulären Sprachen
-*   Komplement
-
-Sie sind nicht abgeschlossen unter
-
-*   Umkehrung
-*   Vereinigung
-*   Konkatenation
 
 # Wrap-Up
 
