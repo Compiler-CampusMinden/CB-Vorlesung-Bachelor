@@ -623,9 +623,6 @@ hinzu, welches man im jeweiligen Kontext abfragen bzw. setzen kann (agiert
 als Rückgabewert der generierten Methode). Auf diesen Wert kann in den
 Aktionen mit `$v` zugegriffen werden.
 
-In [Attributierte Grammatiken](../03-semantics/attribgrammars.md)
-werfen wir einen genaueren Blick auf die attributierten Grammatiken.
-
 _Anmerkung_: Durch den Einsatz von eingebetteten Aktionen und Attributen wird
 die Grammatik abhängig von der Zielsprache des generierten Lexers/Parsers!
 :::

@@ -170,9 +170,6 @@ von Parametern, ...) überprüft, und  implizite Typumwandlungen werden vorgenom
 müssen Typen automatisch bestimmt werden (z.B. bei Polymorphie, Typinferenz). Damit
 Typen bestimmt oder angepasst werden können, müssen Bezeichner zunächst identifiziert
 werden, d.h. bei namensgleichen Bezeichnern der richtige Bezug bestimmt werden.
-
-Zu Annotationen/Attributen, Typen und Type-Checks siehe VL
-[Typprüfungen, Attributgrammatiken](attribgrammars.md)!
 :::
 
 \bigskip
@@ -204,8 +201,6 @@ Konvertierungen vorgenommen werden, etwa bei `3+4.1` ...
 *   Zugriff auf Funktionen: Vorwärtsreferenzen sind OK
 *   Variablen werden nicht als Funktionen genutzt
 *   Funktionen werden nicht als Variablen genutzt
-
-=> Verweis auf VL [Typprüfungen, Attributgrammatiken](attribgrammars.md)
 
 Da Funktionen bereits vor dem Bekanntmachen der Definition aufgerufen werden dürfen, bietet
 sich ein **zweimaliger Durchlauf** (*pass*) an: Beim ersten Traversieren des AST werden alle
