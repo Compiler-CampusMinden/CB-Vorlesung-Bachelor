@@ -121,7 +121,7 @@ Hier entsteht ein Tafelbild.
 
  **Def.:** Sei A ein DFA oder ein NFA. Dann ist **L(A)** die von A akzeptierte Sprache, d. h.
 
-$L(A) = \{\text{Wörter}\ w\ |\ \delta^*(q_0, w) \in F\}$
+$L(A) = \lbrace\text{Wörter}\ w\ |\ \delta^*(q_0, w) \in F\rbrace$
 
 
 ## Wozu NFAs im Compilerbau?
