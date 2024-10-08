@@ -10,18 +10,16 @@ sketch: true
 
 ## A 1.1 Sprachen von regulären Ausdrücken
 
-Welche Sprachen werden von den folgenden regulären Ausdrücken beschrieben?
+Welche Sprache wird von dem folgenden regulären Ausdruck beschrieben?
 
-$a\ |\ a\ (a\ +\ b)^*\ a$
-
-$((1\ +\ 2)^*\ 3)^*\ +\ 123$
+$a\ +\ a\ (a\ +\ b)^*\ a$
 
 
 ## A1.2: Bezeicher in Programmiersprachen
 
 Betrachen Sie eine Programmiersprache, in der die Bezeichner (= Namen für Variablen, Funktionen, Klassen, Methoden, ...) folgenden Aufbau haben:
 
-*   Alle Variablennamen beginnen mit *V* oder **v**
+*   Alle Variablennamen beginnen mit **V** oder **v**
 
 *   Handelt es sich um globale Variablen, beginnen Sie mit **V**, lokale beginnen mit **v**
 
