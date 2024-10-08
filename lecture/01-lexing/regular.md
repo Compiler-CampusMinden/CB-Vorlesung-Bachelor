@@ -22,7 +22,6 @@ attachments:
 ---
 
 
-
 # Motivation
 
 ## Was muss ein Compiler wohl als erstes tun?
