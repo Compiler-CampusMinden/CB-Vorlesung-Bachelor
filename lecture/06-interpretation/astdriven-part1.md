@@ -18,11 +18,9 @@ tldr: |
   bei Anweisungen (*Statements*) keinen Rückgabewert hat.
 
   Der Wert von Literalen ergibt sich direkt durch die Übersetzung des jeweiligen Werts in den
-  passenden Typ der Implementierungssprache. Bei einfachen Ausdrücken kann man auf das in
-  [Syntaxgesteuerte Interpreter](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/06-interpretation/syntaxdriven.md)
-  demonstrierte Vorgehen zurückgreifen: Man interpretiert zunächst die Teilausdrücke durch den
-  Aufruf von `eval()` für die jeweiligen AST-Kindknoten und berechnet daraus das gewünschte
-  Ergebnis.
+  passenden Typ der Implementierungssprache. Bei Ausdrücken interpretiert zunächst die Teilausdrücke
+  durch den Aufruf von `eval()` für die jeweiligen AST-Kindknoten und berechnet daraus das
+  gewünschte Ergebnis.
 
   Für Blöcke und Variablen muss man analog zum Aufbau von Symboltabellen wieder Scopes
   berücksichtigen, d.h. man benötigt Strukturen ähnlich zu den Symboltabellen (hier "Umgebung"
