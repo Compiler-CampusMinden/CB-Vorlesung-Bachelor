@@ -9,6 +9,8 @@ hidden: true
 sketch: true
 ---
 
+<!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94 --reference-links=true  sheet01.md  -o xxx.md  -->
+
 ## A1.1 Sprachen von regulären Ausdrücken
 
 Welche Sprache wird von dem folgenden regulären Ausdruck beschrieben?
