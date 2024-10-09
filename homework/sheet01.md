@@ -81,8 +81,8 @@ deren zweitletztes Zeichen dasselbe ist wie das zweite.
 Welche Sprache generiert die folgende Grammatik?
 
 $$\begin{eqnarray}
-S &\rightarrow& a A     \nonumber \\
-A &\rightarrow& d B \ | \ b A \ | \ c A \nonumber \\
-B &\rightarrow& a c \ | \ b C \ | \ c A \nonumber \\
-C &\rightarrow& \epsilon    \nonumber
+S &\rightarrow& a A                      \nonumber \\
+A &\rightarrow& d B \ | \ b A \ | \ c A  \nonumber \\
+B &\rightarrow& a c \ | \ b C \ | \ c A  \nonumber \\
+C &\rightarrow& \epsilon                 \nonumber
 \end{eqnarray}$$
