@@ -32,7 +32,7 @@ Funktionen, Klassen, Methoden, ...) folgenden Aufbau haben:
 -   Alle Bezeichner müssen aus mindestens zwei Zeichen bestehen
 
 Entwickeln Sie einen regulären Ausdruck, der den Aufbau der Bezeichner beschreibt. Beachten
-Sie, dass Ihr regex alle zulässigen Bezeichner bechreiben muss, aber keinen einzigen
+Sie, dass Ihr regex alle zulässigen Bezeichner beschreiben muss, aber keinen einzigen
 unzulässigen beschreiben darf. Wählen Sie zwei Bezeichner aus der Sprache und zeigen Sie, wie
 sie vom regex gematcht werden.
 
