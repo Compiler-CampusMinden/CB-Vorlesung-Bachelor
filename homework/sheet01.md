@@ -2,6 +2,7 @@
 archetype: assignment
 title: "Blatt 01: Reguläre Sprachen"
 author: "BC George, Carsten Gips (HSBI)"
+points: "10 Punkte"
 
 hidden: true
 
