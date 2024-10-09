@@ -72,7 +72,7 @@ Entwickeln Sie einen DFA, der nur Wörter über $\Sigma = \lbrace 1,2,3 \rbrace$
 
 ## A1.6 Der zweitletzte Buchstabe
 
-Entwickeln Sie einen DFA, der nur Wörter über $\Sigma = \{1,2,3\}$ akzeptiert, deren zweitletztes Zeichen dasselbe ist wie das zweite.
+Entwickeln Sie einen DFA, der nur Wörter über $\Sigma = \lbrace 1,2,3 \rbrace$ akzeptiert, deren zweitletztes Zeichen dasselbe ist wie das zweite.
 
 ## A 1.7 Sprache einer regulären Grammatik
 
