@@ -74,7 +74,7 @@ Entwickeln Sie einen DFA, der nur Wörter über $\Sigma = \lbrace 1,2,3 \rbrace$
 
 Entwickeln Sie einen DFA, der nur Wörter über $\Sigma = \lbrace 1,2,3 \rbrace$ akzeptiert, deren zweitletztes Zeichen dasselbe ist wie das zweite.
 
-## A 1.7 Sprache einer regulären Grammatik
+## A1.7 Sprache einer regulären Grammatik
 
 Welche Sprache generiert die folgende Grammatik?
 
