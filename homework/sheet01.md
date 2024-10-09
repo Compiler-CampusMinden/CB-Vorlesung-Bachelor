@@ -45,7 +45,7 @@ Beachten Sie, dass Ihre Grammatik alle zulässigen Bezeichner generieren können
 
 
 ## A1.3: Gleitkomamzahlen in Programmiersprachen
-Recherchieren Sie zunächst den Aufbau von Gleitkomamzahlen in Python und Java.
+Recherchieren Sie zunächst den Aufbau von Gleitkommazahlen in Python und Java.
 
 Erstellen Sie für jede der beiden Programmiersprachen reguläre Ausdrücke, DFAs und reguläre Grammatiken wie in Aufgabe 1. Verifizieren Sie Ihre Lösungen wie in Aufgabe 1.
 
