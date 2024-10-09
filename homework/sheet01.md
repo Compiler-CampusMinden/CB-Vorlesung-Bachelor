@@ -82,10 +82,7 @@ deren zweitletztes Zeichen dasselbe ist wie das zweite.
 
 Welche Sprache generiert die folgende Grammatik?
 
-$S \rightarrow a A$
-
-$A \rightarrow d B \ | \ b A \ | \ c A$
-
-$B \rightarrow a c \ | \ b C \ | \ c A$
-
-$C \rightarrow \epsilon$
+-   $S \rightarrow a A$
+-   $A \rightarrow d B \ | \ b A \ | \ c A$
+-   $B \rightarrow a c \ | \ b C \ | \ c A$
+-   $C \rightarrow \epsilon$
