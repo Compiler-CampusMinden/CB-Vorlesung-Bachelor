@@ -57,7 +57,6 @@ Warum ist der folgende regex ungeeignet für die Verarbeitung von Mailadressen?
 
 $(a-z)^+@(a-z).(a-z)$
 
-\medskip
 
 Bitte beachten Sie, dass die Schreibweise a-z nicht unserer Definition genügt. Eigentlich müsste jedes Zeichen aufgeführt werden:
 
