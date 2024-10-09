@@ -11,14 +11,14 @@ sketch: true
 
 <!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94 --reference-links=true  sheet01.md  -o xxx.md  -->
 
-## A1.1 Sprachen von regulären Ausdrücken
+## A1.1: Sprachen von regulären Ausdrücken (1P)
 
 Welche Sprache wird von dem folgenden regulären Ausdruck beschrieben?
 
 $a\ +\ a\ (a\ +\ b)^*\ a$
 
 
-## A1.2: Bezeichner in Programmiersprachen
+## A1.2: Bezeichner in Programmiersprachen (2P)
 
 Betrachen Sie eine Programmiersprache, in der die Bezeichner (= Namen für Variablen, Funktionen, Klassen, Methoden, ...) folgenden Aufbau haben:
 
@@ -47,13 +47,13 @@ Entwickeln Sie eine reguläre Grammatik, die diese Bezeichner generiert.
 Beachten Sie, dass Ihre Grammatik alle zulässigen Bezeichner generieren können muss, aber keinen einzigen unzulässigen generieren darf. Wählen Sie zwei Bezeichner aus der Spache und zeigen Sie die Ableitungsbäume dazu.
 
 
-## A1.3: Gleitkomamzahlen in Programmiersprachen
+## A1.3: Gleitkomamzahlen in Programmiersprachen (2P)
 Recherchieren Sie zunächst den Aufbau von Gleitkommazahlen in Python und Java.
 
 Erstellen Sie für jede der beiden Programmiersprachen reguläre Ausdrücke, DFAs und reguläre Grammatiken wie in Aufgabe 1. Verifizieren Sie Ihre Lösungen wie in Aufgabe 1.
 
 
-## A1.4: Mailadressen?
+## A1.4: Mailadressen? (1P)
 
 Warum ist der folgende regex ungeeignet für die Verarbeitung von Mailadressen?
 
@@ -69,15 +69,15 @@ Anmerkung: Diese Darstellung wird ab jetzt akzeptiert.
 
 Verbessern Sie den gegebenen regulären Ausdruck.
 
-## A1.5: Sprache eines DFAs
+## A1.5: Sprache eines DFAs (1P)
 
 Entwickeln Sie einen DFA, der nur Wörter über $\Sigma = \lbrace 1,2,3 \rbrace$ akzeptiert, deren zweitletztes Zeichen dasselbe ist wie das zweite.
 
-## A1.6 Der zweitletzte Buchstabe
+## A1.6: Der zweitletzte Buchstabe (1P)
 
 Entwickeln Sie einen DFA, der nur Wörter über $\Sigma = \lbrace 1,2,3 \rbrace$ akzeptiert, deren zweitletztes Zeichen dasselbe ist wie das zweite.
 
-## A1.7 Sprache einer regulären Grammatik
+## A1.7: Sprache einer regulären Grammatik (2P)
 
 Welche Sprache generiert die folgende Grammatik?
 
@@ -88,8 +88,3 @@ $A \rightarrow d B \ | \ b A \ | \ c A$
 $B \rightarrow a c \ | \ b C \ | \ c A$
 
 $C \rightarrow \epsilon$
-
-
-
-
-
