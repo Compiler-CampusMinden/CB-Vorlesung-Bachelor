@@ -315,7 +315,7 @@ string a = "wuppie fluppie";
 
 ``` c
 int a = 0;
-if (10<1) {
+if (10 < 1) {
     a = 42;
 } else {
     foo();
