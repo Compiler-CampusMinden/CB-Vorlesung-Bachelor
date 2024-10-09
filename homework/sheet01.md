@@ -43,7 +43,7 @@ gelesen und akzeptiert werden.
 
 Entwickeln Sie eine reguläre Grammatik, die diese Bezeichner generiert. Beachten Sie, dass
 Ihre Grammatik alle zulässigen Bezeichner generieren können muss, aber keinen einzigen
-unzulässigen generieren darf. Wählen Sie zwei Bezeichner aus der Spache und zeigen Sie die
+unzulässigen generieren darf. Wählen Sie zwei Bezeichner aus der Sprache und zeigen Sie die
 Ableitungsbäume dazu.
 
 ## A1.3: Gleitkomamzahlen in Programmiersprachen (2P)
