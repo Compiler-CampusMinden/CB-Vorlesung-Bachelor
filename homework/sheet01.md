@@ -68,7 +68,7 @@ Verbessern Sie den gegebenen regulären Ausdruck.
 
 ## A1.5: Sprache eines DFAs
 
-Entwickeln Sie einen DFA, der nur Wörter über $\Sigma = \{1,2,3\}$ akzeptiert, deren zweitletztes Zeichen dasselbe ist wie das zweite.
+Entwickeln Sie einen DFA, der nur Wörter über $\Sigma = \lbrace 1,2,3 \rbrace$ akzeptiert, deren zweitletztes Zeichen dasselbe ist wie das zweite.
 
 ## A1.6 Der zweitletzte Buchstabe
 
