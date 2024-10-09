@@ -83,11 +83,48 @@ Sie _können_ hierzu den Raum J101 (siehe Stundenplan) nutzen.
 :::::: {.tabs groupid="modul-po"}
 ::: {.tab title="IFM 3.1 CB (PO23, 3. Semester)"}
 
-<!--
 `{{% notice style="note" title="News" %}}`{=markdown}
-Here be dragons ...
+`{{% expand title="09.10.24" %}}`{=markdown}
+
+### Teams
+
+Bitte bearbeiten Sie die Aufgaben in 3er Teams.
+
+Es ist empfehlenswert, wenn alle Personen im Team in der selben Stundenplangruppe
+(Praktikumsgruppe) sind. Sie können aber auch Teams über verschiedene Gruppen
+hinweg bilden. Geben Sie individuell im ILIAS ab und stellen Sie die Lösung dann
+individuell in Ihrer jeweiligen Praktikumsgruppe vor.
+
+Sie können Ihre Teams jederzeit selbstständig im Semester ändern/wechseln.
+
+**Achtung**: Den Vortrag zu [B07] müssen Sie aber **gemeinsam als Team** halten.
+Wenn Ihre Teammitglieder aus verschiedenen Stundenplangruppen kommen sollten,
+findet der Vortrag in der Gruppe statt, aus der die meisten der Teammitglieder
+kommen. Bitte beachten Sie das bei der Teamwahl!
+
+### Abgabe ILIAS
+
+Das Abgabeverfahren im ILIAS wurde deutlich vereinfacht: Jede Person gibt für
+jedes Blatt individuell direkt im ILIAS an, welche Aufgaben das Team bearbeitet
+hat (also keine Teambildung und keine Textdatei mehr im ILIAS).
+
+Bitte darauf achten, dass Sie das die angegebenen Aufgaben auch vorstellen können
+müssen! Achten Sie bitte auch auf die mind. 60% für das Testat.
+
+### Praktikum
+
+Sie gehen einfach in das Praktikum, welches Ihrer Stundenplangruppe zugeordnet ist
+und stellen dort individuell die Lösungen Ihres Teams vor.
+
+Den Vortrag zu [B07] (letzte VL-Woche) halten Sie dann in die Praktikumsgruppe, in
+der die meisten Teammitglieder sind. Bitte prüfen Sie, ob das für Sie passt (vom
+Stundenplan her möglich ist) und wählen Sie ggf. ein anderes Team. Wir werden
+rechtzeitig eine entsprechende Planung organisieren. Einige Vorträge werden wir
+aber auch im Vorlesungsslot machen müssen, d.h. hier besteht bei Bedarf eine
+Ausweichmöglichkeit.
+
+`{{% /expand %}}`{=markdown}
 `{{% /notice %}}`{=markdown}
--->
 
 Hier finden Sie einen abonnierbaren [Google Kalender IFM 3.1 CB (PO23, 3. Semester)] mit allen Terminen der Veranstaltung zum Einbinden in Ihre Kalender-App.
 
@@ -120,11 +157,48 @@ Abgabe der Übungsblätter jeweils **Montag bis 09:00 Uhr** im [ILIAS](https://w
 :::
 ::: {.tab title="IFM 5.21 CB (PO18, 5. Semester)"}
 
-<!--
 `{{% notice style="note" title="News" %}}`{=markdown}
-Here be dragons ...
+`{{% expand title="09.10.24" %}}`{=markdown}
+
+### Teams
+
+Bitte bearbeiten Sie die Aufgaben in 3er Teams.
+
+Es ist empfehlenswert, wenn alle Personen im Team in der selben Stundenplangruppe
+(Praktikumsgruppe) sind. Sie können aber auch Teams über verschiedene Gruppen
+hinweg bilden. Geben Sie individuell im ILIAS ab und stellen Sie die Lösung dann
+individuell in Ihrer jeweiligen Praktikumsgruppe vor.
+
+Sie können Ihre Teams jederzeit selbstständig im Semester ändern/wechseln.
+
+**Achtung**: Den Vortrag zu [B07x] müssen Sie (wie auch den Vortrag zu [B04x]) aber
+**gemeinsam als Team** halten. Wenn Ihre Teammitglieder aus verschiedenen
+Stundenplangruppen kommen sollten, findet der Vortrag in der Gruppe statt, aus der
+die meisten der Teammitglieder kommen. Bitte beachten Sie das bei der Teamwahl!
+
+### Abgabe ILIAS
+
+Das Abgabeverfahren im ILIAS wurde deutlich vereinfacht: Jede Person gibt für
+jedes Blatt individuell direkt im ILIAS an, welche Aufgaben das Team bearbeitet
+hat (also keine Teambildung und keine Textdatei mehr im ILIAS).
+
+Bitte darauf achten, dass Sie das die angegebenen Aufgaben auch vorstellen können
+müssen! Achten Sie bitte auch auf die mind. 60% für das Testat.
+
+### Praktikum
+
+Sie gehen einfach in das Praktikum, welches Ihrer Stundenplangruppe zugeordnet ist
+und stellen dort individuell die Lösungen Ihres Teams vor.
+
+Den Vortrag zu [B07x] (letzte VL-Woche) halten Sie dann in die Praktikumsgruppe, in
+der die meisten Teammitglieder sind. Bitte prüfen Sie, ob das für Sie passt (vom
+Stundenplan her möglich ist) und wählen Sie ggf. ein anderes Team. Wir werden
+rechtzeitig eine entsprechende Planung organisieren. Einige Vorträge werden wir
+aber auch im Vorlesungsslot machen müssen, d.h. hier besteht bei Bedarf eine
+Ausweichmöglichkeit.
+
+`{{% /expand %}}`{=markdown}
 `{{% /notice %}}`{=markdown}
--->
 
 Hier finden Sie einen abonnierbaren [Google Kalender IFM 5.21 CB (PO18, 5. Semester)] mit allen Terminen der Veranstaltung zum Einbinden in Ihre Kalender-App.
 
