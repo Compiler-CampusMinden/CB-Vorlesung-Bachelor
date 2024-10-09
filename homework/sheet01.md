@@ -17,7 +17,7 @@ $a\ +\ a\ (a\ +\ b)^*\ a$
 
 ## A1.2: Bezeichner in Programmiersprachen (2P)
 
-Betrachen Sie eine Programmiersprache, in der die Bezeichner (= Namen für Variablen,
+Betrachten Sie eine Programmiersprache, in der die Bezeichner (= Namen für Variablen,
 Funktionen, Klassen, Methoden, ...) folgenden Aufbau haben:
 
 -   Alle Variablennamen beginnen mit **V** oder **v**
