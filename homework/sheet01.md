@@ -38,7 +38,7 @@ Entwickeln Sie einen regulären Ausdruck, der den Aufbau der Bezeichner beschrei
 Beachten Sie, dass Ihr regex alle zulässigen Bezeichner bechreiben muss, aber keinen einzigen unzulässigen beschreiben darf. Wählen Sie zwei Bezeichner aus der Sprache und zeigen Sie, wie sie vom regex gematcht werden.
 
 Entwickeln Sie einen DFA, der diese Bezeichner akzeptiert.
-Beachten Sie, dass Ihr DFA alle zulässigen Bezeichner akzeptiren muss, aber keinen einzigen unzulässigen akzeptieren darf. Wählen Sie zwei Bezeichner aus der Spache und zeigen Sie, wie sie vom Automaten zeichenweise gelesen und akzeptiert werden.
+Beachten Sie, dass Ihr DFA alle zulässigen Bezeichner akzeptieren muss, aber keinen einzigen unzulässigen akzeptieren darf. Wählen Sie zwei Bezeichner aus der Spache und zeigen Sie, wie sie vom Automaten zeichenweise gelesen und akzeptiert werden.
 
 Entwickeln Sie eine reguläre Grammatik, die diese Bezeichner generiert.
 Beachten Sie, dass Ihre Grammatik alle zulässigen Bezeichner generieren können muss, aber keinen einzigen unzulässigen generieren darf. Wählen Sie zwei Bezeichner aus der Spache und zeigen Sie die Ableitungsbäume dazu.
