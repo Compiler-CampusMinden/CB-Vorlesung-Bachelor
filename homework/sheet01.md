@@ -44,7 +44,7 @@ Ihre Grammatik alle zulässigen Bezeichner generieren können muss, aber keinen 
 unzulässigen generieren darf. Wählen Sie zwei Bezeichner aus der Sprache und zeigen Sie die
 Ableitungsbäume dazu.
 
-## A1.3: Gleitkomamzahlen in Programmiersprachen (2P)
+## A1.3: Gleitkommazahlen in Programmiersprachen (2P)
 
 Recherchieren Sie zunächst den Aufbau von Gleitkommazahlen in Python und Java.
 
