@@ -35,7 +35,7 @@ Betrachen Sie eine Programmiersprache, in der die Bezeichner (= Namen für Varia
 
 
 Entwickeln Sie einen regulären Ausdruck, der den Aufbau der Bezeichner beschreibt.
-Beachten Sie, dass Ihr regex alle zulässigen Bezeichner bechreiben muss, aber keinen einzigen unzulässigen bechreiben darf. Wählen Sie zwei Bezeichner aus der Spache und zeigen Sie, wie sie vom regex gematcht werden.
+Beachten Sie, dass Ihr regex alle zulässigen Bezeichner bechreiben muss, aber keinen einzigen unzulässigen beschreiben darf. Wählen Sie zwei Bezeichner aus der Sprache und zeigen Sie, wie sie vom regex gematcht werden.
 
 Entwickeln Sie einen DFA, der diese Bezeichner akzeptiert.
 Beachten Sie, dass Ihr DFA alle zulässigen Bezeichner akzeptiren muss, aber keinen einzigen unzulässigen akzeptieren darf. Wählen Sie zwei Bezeichner aus der Spache und zeigen Sie, wie sie vom Automaten zeichenweise gelesen und akzeptiert werden.
