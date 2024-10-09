@@ -8,7 +8,7 @@ hidden: true
 sketch: true
 ---
 
-## A 1.1 Sprachen von regulären Ausdrücken
+## A1.1 Sprachen von regulären Ausdrücken
 
 Welche Sprache wird von dem folgenden regulären Ausdruck beschrieben?
 
