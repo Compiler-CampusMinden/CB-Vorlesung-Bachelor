@@ -15,7 +15,7 @@ Welche Sprache wird von dem folgenden regulären Ausdruck beschrieben?
 $a\ +\ a\ (a\ +\ b)^*\ a$
 
 
-## A1.2: Bezeicher in Programmiersprachen
+## A1.2: Bezeichner in Programmiersprachen
 
 Betrachen Sie eine Programmiersprache, in der die Bezeichner (= Namen für Variablen, Funktionen, Klassen, Methoden, ...) folgenden Aufbau haben:
 
