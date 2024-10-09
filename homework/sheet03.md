@@ -206,7 +206,7 @@ a := "wuppie fluppie"
 
 ``` python
 a := 0
-if 10<1 do
+if 10 < 1 do
     a := 42
 else do
     a := 7
@@ -242,7 +242,7 @@ Aus
 
 ``` python
 a := 0
-    if 10<1 do
+    if 10 < 1 do
 a := 42
 else do
         a := 7
@@ -253,7 +253,7 @@ soll
 
 ``` python
 a := 0
-if 10<1 do
+if 10 < 1 do
     a := 42
 else do
     a := 7
