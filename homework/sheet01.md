@@ -54,7 +54,6 @@ Erstellen Sie für jede der beiden Programmiersprachen reguläre Ausdrücke, DFA
 
 Warum ist der folgende regex ungeeignet für die Verarbeitung von Mailadressen?
 
-\medskip
 
 $(a-z)^+@(a-z).(a-z)$
 
