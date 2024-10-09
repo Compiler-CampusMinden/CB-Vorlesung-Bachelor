@@ -38,7 +38,7 @@ sie vom regex gematcht werden.
 
 Entwickeln Sie einen DFA, der diese Bezeichner akzeptiert. Beachten Sie, dass Ihr DFA alle
 zulässigen Bezeichner akzeptieren muss, aber keinen einzigen unzulässigen akzeptieren darf.
-Wählen Sie zwei Bezeichner aus der Spache und zeigen Sie, wie sie vom Automaten zeichenweise
+Wählen Sie zwei Bezeichner aus der Sprache und zeigen Sie, wie sie vom Automaten zeichenweise
 gelesen und akzeptiert werden.
 
 Entwickeln Sie eine reguläre Grammatik, die diese Bezeichner generiert. Beachten Sie, dass
