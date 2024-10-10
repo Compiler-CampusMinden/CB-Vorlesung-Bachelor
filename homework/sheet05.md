@@ -23,14 +23,14 @@ Erstellen Sie mit dieser Grammatik und ANTLR wieder einen Lexer und Parser.
 
 Es ist empfehlenswert, den Interpreter dreistufig zu realisieren:
 
-1.  Einlesen aus einer Datei und Parsen der Inhalte
+1.  Einlesen aus einer Datei mit Lisp-Code und Parsen der Inhalte
 2.  Aufbauen der Symboltabelle und Durchführung der semantischen Analyse
-3.  Ablaufen des Parse-Tree/AST und Auswerten der Ausdrücke
+3.  Ablaufen des Parse-Tree/AST und Auswerten der Ausdrücke (Interpretation)
 
 ## Sprachdefinition
 
 Ein Programm besteht aus einem oder mehreren Ausdrücken (*Expressions*). Die Ausdrücke haben
-eine spezielle Form: Sie sind sogenannte S-Expressions. Dies sind entweder Literale der Form
+eine spezielle Form: Sie sind sogenannte [S-Expressions]. Dies sind entweder Literale der Form
 `x` oder einfache listenartige Gebilde der Form `(. x y)`, wobei der `.` eine Operation (oder
 Funktion) darstellt und `x` und `y` selbst wieder S-Expressions sind.
 
@@ -42,6 +42,12 @@ Die einfachste Form sind dabei Literale mit konkreten Werten der drei Datentypen
 "hello"     ;; String
 true        ;; Boolean
 false       ;; Boolean
+```
+
+Für eine Variable `foo` wäre das Folgende ebenfalls eine S-Expression:
+
+``` clojure
+foo         ;; Variable foo
 ```
 
 (Über `;;` wird ein Kommentar eingeleitet, der bis zum Ende der Zeile geht.)
@@ -61,7 +67,7 @@ Funktionsname), danach kommen je nach Operation/Funktion (die Arität muss passe
 entsprechende Einträge, die als Parameter für die Operation oder Funktion zu verstehen sind.
 
 Die Ausdrücke sind implizit von links nach rechts geklammert, d.h. der Ausdruck `(+ 1 2 3 4)`
-ist äquivalent zu `(+ (+ (+ 1 2) 3) 4)` und löst sich nach $1+2+3+4$ auf.
+ist [*syntactic sugar*] für `(+ (+ (+ 1 2) 3) 4)`.
 
 ### Eingebaute Funktionen
 
@@ -121,11 +127,21 @@ Die `if-then-else`-Abfrage gibt es mit und ohne den `else`-Zweig:
     optional-else-form)
 ```
 
+``` clojure
+(if (< 1 2)
+    (print "true")    ;; then
+    (print "false"))  ;; else
+```
+
 Dabei kann jeweils nur genau eine S-Expression genutzt werden. Wenn man mehrere Dinge
 berechnen möchte, nutzt man `do`:
 
 ``` clojure
-(do (print "wuppie") (print "fluppie") (print "foo") (print "bar"))
+(do
+    (print "wuppie")
+    (print "fluppie")
+    (print "foo")
+    (print "bar"))
 ```
 
 Beispiel:
@@ -258,6 +274,10 @@ Realisieren Sie die eingebauten Funktionen `print` und `str` dabei als *native* 
 Realisieren Sie `list`, `nth`, `head` und `tail` sowie `def`, `let`, `defn`, `do` und die
 Operatoren und die Kontrollstrukturen geeignet.
 
+Lösen Sie die als "*syntactic sugar*" bezeichneten Ausdrücke auf und transformieren Sie den
+AST entsprechend: `(+ 1 2 3 4)` soll zu `(+ (+ (+ 1 2) 3) 4)` umgeformt werden. Analog für die
+anderen Operatoren der Sprache (Vergleiche, Arithmetik).
+
 Achten Sie auf die Datentypen. Die Typen von Variablen etc. sind erst zur Laufzeit bekannt und
 müssen dann passen.
 
@@ -272,3 +292,5 @@ verarbeiten Sie die Eingaben interaktiv. Wie müssen Sie hier mit der Symboltabe
 
   [Sample Project]: https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/tree/master/homework/src/sample_project
   [Grammatik]: https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/homework/src/sample_project/src/main/antlr/MiniLisp.g4
+  [S-Expressions]: https://en.wikipedia.org/wiki/S-expression
+  [*syntactic sugar*]: https://en.wikipedia.org/wiki/Syntactic_sugar
