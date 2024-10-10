@@ -42,27 +42,22 @@ Edmonton-Treffen (englische Sprache). Dieser Vortrag wird benotet.
     -   **Argumentation und Nachvollziehbarkeit (20 Punkte)**: Sind die Konzepte logisch und
         schlüssig aufgebaut? Werden die Aussagen durch relevante Beispiele gestützt?
 
-2.  **Struktur (20 Punkte)**
+2.  **Struktur (30 Punkte)**
 
     -   **Aufbau (10 Punkte)**: Gibt es eine klare Einleitung, einen strukturierten Hauptteil
         und einen prägnanten Schluss?
-    -   **Roter Faden (10 Punkte)**: Wird der rote Faden während des gesamten Vortrags
-        beibehalten? Ist der Zusammenhang zwischen den einzelnen Punkten nachvollziehbar?
-
-3.  **Präsentationsform (20 Punkte)**
-
     -   **Gestaltung (10 Punkte)**: Wurden geeignete und ansprechende visuelle Hilfsmittel
         eingesetzt (Diagramme, Abbildungen)? Unterstützen diese die Inhalte oder lenken sie
         eher ab?
+    -   **Roter Faden (10 Punkte)**: Wird der rote Faden während des gesamten Vortrags
+        beibehalten? Ist der Zusammenhang zwischen den einzelnen Punkten nachvollziehbar?
+
+3.  **Präsentation (20 Punkte)**
+
     -   **Gestik, Mimik und Sprache (10 Punkte)**: Ist die Sprache klar, verständlich und
         angemessen? Ist die Stimmlage dynamisch und ansprechend? Ist das Tempo angemessen?
-
-4.  **Verschiedenes (10 Punkte)**
-
-    -   **Zeitmanagement (5 Punkte)**: Wurde das der Zeitrahmen (20 Minuten pro Vortrag)
+    -   **Zeitmanagement (10 Punkte)**: Wurde das der Zeitrahmen (20 Minuten pro Vortrag)
         eingehalten?
-    -   **Reaktionen auf Fragen (5 Punkte)**: Wurden Fragen des Publikums souverän und
-        kompetent beantwortet?
 
 Gesamtbewertung: 100 Punkte
 
