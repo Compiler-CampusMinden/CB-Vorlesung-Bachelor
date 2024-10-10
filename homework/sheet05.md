@@ -2,6 +2,7 @@
 archetype: assignment
 title: "Blatt 05: Interpreter"
 author: "Carsten Gips, BC George (HSBI)"
+points: "10 Punkte"
 
 hidden: true
 ---
