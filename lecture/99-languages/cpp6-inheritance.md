@@ -357,7 +357,7 @@ cout << "Objekt p (Person):  " << p.toString() << endl;
 (bzw. Pointer) **und** [**virtuelle Methoden**]{.alert}
 
 
-::: notes
+::::::::: notes
 ## Anmerkungen zu Polymorphie in C++
 
 -   **Gestaltung der API**:
@@ -371,7 +371,7 @@ cout << "Objekt p (Person):  " << p.toString() << endl;
         der ersten Deklaration als virtuell
 -   Virtualität ist "teuer": Es muss eine Tabelle aller virtuellen Funktionen aufgebaut werden und zur
     Laufzeit geprüft werden, welche Funktion genommen werden soll
-:::
+:::::::::
 
 
 ## Mehrfachvererbung in C++

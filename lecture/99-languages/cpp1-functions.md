@@ -182,7 +182,7 @@ Jede Funktion darf im **gesamten** Programm nur [**einmal definiert**]{.alert} s
     void fkt(int a, char b) { ... }
     ```
 
-::: notes
+::::::::: notes
 ### Leere Parameterliste in C
 
 Wenn eine Funktion keine Parameter hat, können Sie wie in C die Parameterliste
@@ -217,10 +217,10 @@ Keine Parameter: Leere Liste und Schlüsselwort `void` **gleichwertig**
 void fkt();
 void fkt(void);
 ```
-:::
+:::::::::
 
 
-::: notes
+::::::::: notes
 ## Defaultparameter in C++
 
 -   Parameter mit Defaultwerten am [**Ende**]{.alert} der Parameterliste
@@ -234,10 +234,10 @@ void f(int i, int j=1, int k=2);
 // Definition
 void f(int i, int j, int k) { ... }
 ```
-:::
+:::::::::
 
 
-::: notes
+::::::::: notes
 ## Überladen von Funktionen
 
 -   Funktionen im **gleichen Gültigkeitsbereich** können überladen werden
@@ -248,10 +248,10 @@ void f(int i, int j, int k) { ... }
 
 => [Warnung]{.alert}: Überladene Funktionen sollten gleichartige
 Operationen für unterschiedliche Datentypen bereitstellen!
-:::
+:::::::::
 
 
-::: notes
+::::::::: notes
 ## Probleme beim Überladen von Funktionen
 
 1.  Defaultparameter
@@ -289,7 +289,7 @@ Operationen für unterschiedliche Datentypen bereitstellen!
         return 0;
     }
     ```
-:::
+:::::::::
 
 
 ## Parameterübergabe in C/C++: Call-by-Value
@@ -457,7 +457,7 @@ int main() {
 _Hinweis_: `static` für globale Variablen bedeutet etwas anderes! [(s.u. "Sichtbarkeit")]{.notes}
 
 
-::: notes
+::::::::: notes
 ## Initialisierung von Variablen
 
 (Automatische) Initialisierung von Variablen hängt von ihrer Speicherklasse ab!
@@ -471,10 +471,10 @@ _Hinweis_: `static` für globale Variablen bedeutet etwas anderes! [(s.u. "Sicht
 -   **Statisch**
     -   Mit dem Wert 0 oder vorgegebenem Wert
     -   Ab erstem Aufruf der Funktion
-:::
+:::::::::
 
 
-::: notes
+::::::::: notes
 ## Sichtbarkeit globaler Variablen (und Funktionen) beschränken
 
 -   Beschränkung der Gültigkeit von **globalen Variablen** auf die Datei, wo
@@ -494,9 +494,9 @@ ebenfalls in der selben Datei definiert werden, nutzen. In anderen Dateien sind
 die `static` Funktionen _nicht_ sichtbar. D.h. es macht auch keinen Sinn, sie
 in einer Header-Datei zu deklarieren! (In der Praxis liefert der gcc dann sogar
 einen Fehler!). Das ist mit `private` Methoden vergleichbar.
-:::
+:::::::::
 
-::: notes
+::::::::: notes
 ## Globale Konstanten
 
 ### In C funktionieren globale Konstanten wie globale Variablen
@@ -581,7 +581,7 @@ void fkt_a1() {
     ...
 }
 ```
-:::
+:::::::::
 
 
 ## Wrap-Up

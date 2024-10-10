@@ -1051,7 +1051,7 @@ Funktion und nicht auf die Variable `y` im äußeren Scope.
 
 ## Call-by-Reference Semantik in C++
 
-::::::::: slides
+::: slides
 ```cpp
 void add_5_ptr(int *x) { *x += 5; }
 void add_5_ref(int &x) {  x += 5; }
@@ -1063,7 +1063,7 @@ int main() {
     add_5_ref( i);
 }
 ```
-:::::::::
+:::
 
 ::::::::: notes
 ### Variante A: Pointer (C und C++)

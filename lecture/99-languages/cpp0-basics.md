@@ -193,7 +193,7 @@ int main() {
 }
 ```
 
-::: notes
+::::::::: notes
 ### Beobachtungen
 
 Jedes (ausführbare) C++-Programm hat genau eine `main()`-Funktion. Die `main()`-Funktion ist
@@ -346,7 +346,7 @@ Regel des Targets `tollesProgramm` ausgeführt, um die Datei `tollesProgramm` zu
 -   `make <ziel>` \newline
     Sucht nach Datei mit dem Namen "GNUmakefile", "makefile" oder "Makefile" und erzeugt das
     Ziel `<ziel>`
-:::
+:::::::::
 
 [Konsole: HelloWorld.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/HelloWorld.cpp"}
 
@@ -421,7 +421,7 @@ for (x=0; x<10; x++) {
 Außerdem Arrays und Pointer mit diesen Typen möglich.
 
 
-::: notes
+::::::::: notes
 ## Typmodifikatoren ändern Bedeutung
 
 Vorangestellte Modifikatoren ändern Bedeutung:
@@ -451,7 +451,7 @@ Sie können `short`, `long` und `long long` nur für ganze Zahlen (`int`) nutzen
 Dagegen können `signed` und `unsigned` sowohl für `char` als auch für `int` benutzt werden.
 
 vgl. [en.wikipedia.org/wiki/C_data_types](https://en.wikipedia.org/wiki/C_data_types)
-:::
+:::::::::
 
 
 ## Arrays und Vektoren in C++
