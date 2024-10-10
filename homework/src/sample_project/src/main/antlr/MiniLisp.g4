@@ -2,67 +2,41 @@ grammar MiniLisp;
 
 
 // Parser
-program : expr+ EOF;
+program :  expr+ EOF ;
 
 
-expr
-    : literal
-    | symbol
-    | list
-    | defExpr
-    | fnExpr
-    | functionCall
-    | letExpr
-    ;
+expr    :  literal
+        |  symbol
+        |  list
+        |  def
+        |  fn
+        |  fcall
+        |  let
+        ;
 
-literal
-    : NUMBER
-    | STRING
-    | TRUE
-    | FALSE
-    ;
+literal :  NUMBER
+        |  STRING
+        |  TRUE
+        |  FALSE
+        ;
 
-symbol
-    : ID
-    ;
+symbol  :  ID ;
+list    :  '(' 'list' expr* ')' ;
+def     :  '(' 'def' symbol expr ')' ;
 
-list
-    : '(' 'list' expr* ')'
-    ;
+fn      :  '(' 'defn' symbol '(' symbol* ')' expr* ')' ;
+fcall   :  '(' op expr* ')' ;
+op      :  ID | '+' | '-' | '*' | '/' | '=' | '>' | '<' ;
 
-
-defExpr
-    : '(' 'def' symbol expr ')'
-    ;
-
-
-fnExpr
-    : '(' 'defn' '(' paramList ')' expr* ')'
-    ;
-
-paramList
-    : symbol (',' symbol)* // Eine oder mehrere Symbole, durch Kommas getrennt
-    ;
-
-functionCall
-    : '(' symbol expr* ')'
-    ;
-
-
-letExpr
-    : '(' 'let' '(' binding* ')' expr ')'
-    ;
-
-binding
-    : '(' symbol expr ')'
-    ;
+let     :  '(' 'let' '(' binding* ')' expr ')' ;
+binding :  symbol expr ;
 
 
 // Lexer
-NUMBER  : [0-9]+ ;
-STRING  : '"' (~[\n\r"])* '"';
-TRUE    : 'true' ;
-FALSE   : 'false' ;
-ID      : [a-z][a-zA-Z]* ;
-COMMENT : ';;' ~[\n\r]* -> skip ;
-WS      : [ ,\t\n\r]+ -> skip ;
+TRUE    :  'true' ;
+FALSE   :  'false' ;
+ID      :  [a-z][a-zA-Z0-9]* ;
+NUMBER  :  [0-9]+ ;
+STRING  :  '"' (~[\n\r"])* '"' ;
+COMMENT :  ';;' ~[\n\r]* -> skip ;
+WS      :  [ ,\t\n\r]+ -> skip ;
