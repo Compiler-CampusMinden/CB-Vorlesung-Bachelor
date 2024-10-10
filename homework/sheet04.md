@@ -293,7 +293,7 @@ if (a == 42) {
 }
 
 int foo(int a) {
-    return a+37;
+    return a + 37;
 }
 ```
 
