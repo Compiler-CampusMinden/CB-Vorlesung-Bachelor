@@ -26,7 +26,8 @@ einen AST und konvertieren Sie Ihren Parse-Tree in einen AST.
 
 Es ist empfehlenswert, den Type-Checker dreiphasig zu realisieren:
 
-1.  Aufbauen der Symboltabelle und Prüfen von Deklaration/Definition vs. Benutzung (Variablen)
+1.  Aufbauen der Symboltabelle und Prüfen von z.B. Deklaration/Definition vs. Benutzung
+    (Variablen) usw.
 2.  Prüfen bei Funktionsaufrufen auf vorhandene/sichtbare Funktionsdefinitionen
 3.  Prüfen der verwendeten Typen
 
@@ -47,12 +48,12 @@ c = "foo";       # Zuweisung des Ausdrucks "foo" (String) an die Variable c (die
 func1(a, c);     # Funktionsaufruf mit Variablen a und c
 ```
 
-Kontrollstrukturen und Code-Blöcke zählen ebenfalls als Anweisung.
+Kontrollstrukturen und Code-Blöcke sowie `return`-Statements zählen ebenfalls als Anweisung.
 
 ### Code-Blöcke und Scopes
 
-Code-Blöcke werden in geschweifte Klammern eingeschlossen und enthalten ein oder mehrere
-Anweisungen.
+Code-Blöcke werden in geschweifte Klammern eingeschlossen und enthalten eine beliebige Anzahl
+von Anweisungen.
 
 Jeder Code-Block bildet einen eigenen Scope - alle Deklarationen/Definition in diesem Scope
 sind im äußeren Scope nicht sichtbar. Im Scope kann auf die Symbole des/der umgebenden Scopes
@@ -81,9 +82,9 @@ int d;
 
 ### Ausdrücke (*Expressions*)
 
-Die einfachsten Ausdrücke sind Integer- oder String-Literale oder die Wahrheitswerte.
-Variablen und Funktionsaufrufe sind ebenfalls Ausdrücke. Komplexere Ausdrücke werden mit Hilfe
-von Operationen gebildet, dabei sind die Operanden jeweils auch wieder Ausdrücke.
+Die einfachsten Ausdrücke sind Integer- oder String-Literale. Variablen und Funktionsaufrufe
+sind ebenfalls Ausdrücke. Komplexere Ausdrücke werden mit Hilfe von Operationen gebildet,
+dabei sind die Operanden jeweils auch wieder Ausdrücke.
 
 Ein Ausdruck hat immer einen Wert und einen Typ.
 
@@ -133,8 +134,8 @@ Ausdrücke werden nicht mit einem Semikolon abgeschlossen. Sie sind also Teil ei
 ### Bezeichner
 
 Werden zur Bezeichnung von Variablen und Funktionsnamen verwendet. Sie bestehen aus einer
-Zeichenkette der Zeichen `a-z`,`A-Z`, `0-9`, `_`. Bezeichner dürfen nicht mit einer Ziffer
-`0-9` beginnen.
+Zeichenkette der Zeichen `a-z`,`A-Z`, `0-9`. Bezeichner dürfen nicht mit einer Ziffer `0-9`
+beginnen.
 
 ### Variablen
 
@@ -176,10 +177,9 @@ nächsten Newline.
 #### While-Schleife
 
 While-Schleifen werden mit dem Schlüsselwort `while` eingeleitet. Sie bestehen im Weiteren aus
-einer Bedingung in runden Klammern und einem in geschweiften Klammern formulierten Block mit
-ein oder mehreren Anweisungen.
+einer Bedingung in runden Klammern und einem in geschweiften Klammern formulierten Code-Block.
 
-Die Bedingung besteht aus einem Vergleichsausdruck oder einem Wahrheitswert.
+Die Bedingung besteht aus einem Vergleichsausdruck.
 
 ``` c
 while (<Bedingung>) {
@@ -202,13 +202,12 @@ Eine bedingte Anweisung besteht immer aus genau einer `if`-Anweisung, und einer 
 `else`-Anweisung.
 
 Eine `if`-Anweisung wird mit dem Schlüsselwort `if` eingeleitet und besteht aus einer
-Bedingung in runden Klammern und einem in geschweiften Klammern formulierten Block mit ein
-oder mehreren Anweisungen.
+Bedingung in runden Klammern und einem in geschweiften Klammern formulierten Code-Block.
 
-Die Bedingung besteht aus einem Vergleichsausdruck oder einem Wahrheitswert.
+Die Bedingung besteht aus einem Vergleichsausdruck.
 
 Eine `else`-Anweisung wird mit dem Schlüsselwort `else` eingeleitet. Auf das Schlüsselwort
-folgt in geschweiften Klammern formulierter Block mit ein oder mehreren Anweisungen.
+folgt in geschweiften Klammern formulierter Code-Block.
 
 ``` c
 if (<Bedingung>) {
@@ -272,7 +271,7 @@ bool func1(int a, string b) {
 #### Funktionsaufrufe
 
 Funktionsaufrufe bestehen aus einem Bezeichner (Funktionsname) gefolgt von einer in Klammern
-angegebenen Parameterliste, die auch leer sein kann. Als Parameter können alle passend
+angegebenen Liste der Argumente, die auch leer sein kann. Als Argumente können alle passend
 typisierten Ausdrücke dienen.
 
 ``` python
@@ -305,7 +304,7 @@ Unsere Sprache hat drei eingebaute Datentypen:
 |:---------|:--------------------------------------------------------------|
 | `int`    | eine beliebige Folge der Ziffern `0-9`                        |
 | `string` | eine beliebige Folge von ASCII-Zeichen, eingeschlossen in `"` |
-| `bool`   | eines der beiden Schlüsselwörter `True` oder `False`          |
+| `bool`   | eines der beiden Schlüsselwörter `T` oder `F`                 |
 
 ### Beispiele
 
@@ -350,26 +349,29 @@ Definieren Sie einen AST für die Zielsprache. Welche Informationen aus dem Eing
 müssen repräsentiert werden?
 
 Programmieren Sie eine Traversierung des Parse-Trees, die den AST erzeugt. Testen Sie dies mit
-den obigen Beispielprogrammen und definieren Sie sich selbst weitere Programme für diesen
-Zweck.
+den obigen Beispielprogrammen und definieren Sie sich selbst weitere Programme
+unterschiedlicher Komplexität für diesen Zweck.
 
 ### A4.2: Aufbau der Symboltabelle (2P)
 
 Bauen Sie für den AST eine Symboltabelle auf. Führen Sie dabei die im ersten Lauf möglichen
-Prüfungen durch, beispielsweise ob zugegriffene Variablen tatsächlich bereits definiert und
-sichtbar sind oder ob eine Funktion in einem Scope mehrfach definiert wird. Geben Sie erkannte
-Fehler auf der Konsole aus.
+Prüfungen durch, beispielsweise ob referenzierte Variablen tatsächlich bereits definiert und
+sichtbar sind oder ob eine Variable oder Funktion in einem Scope mehrfach definiert wird oder
+ob Variablen als Funktion genutzt werden. Geben Sie erkannte Fehler auf der Konsole aus.
 
 ### A4.3: Symboltabelle: Funktionsaufrufe (1P)
 
 Implementieren Sie einen zweiten Lauf. Dabei soll für Funktionsaufrufe geprüft werden, ob
-diese bereits definiert sind und im Scope sichtbar sind. Geben Sie erkannte Fehler auf der
-Konsole aus.
+diese Funktionen bereits definiert sind und im Scope sichtbar sind. Geben Sie erkannte Fehler
+auf der Konsole aus.
 
 ### A4.4: Symboltabelle: Typprüfungen (5P)
 
-Implementieren Sie einen dritten Lauf. Führen Sie die Typprüfung durch. Geben Sie erkannte
-Fehler auf der Konsole aus.
+Implementieren Sie einen dritten Lauf. Führen Sie die Typprüfung durch: Haben die Operanden in
+Ausdrücken die richtigen Typen, passen die Typen der Funktionsargumente, passen die Typen bei
+einer Zuweisung, ... Geben Sie erkannte Fehler auf der Konsole aus. *Hinweis*: Sie brauchen
+hier nur die Typprüfung durchführen. Eine Typinferenz oder Typerweiterung o.ä. ist nicht
+notwendig.
 
   [Sample Project]: https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/tree/master/homework/src/sample_project
   [Grammatik]: https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/homework/src/sample_project/src/main/antlr/MiniC.g4
