@@ -144,7 +144,7 @@ Abgabe der Übungsblätter jeweils **Montag bis 09:00 Uhr** im [ILIAS](https://w
 |                      | 48    | 27.: [Überblick Zwischencode], Überblick Backend (LLVM)                                                                                       | BC, Carsten |                                |                                        |
 | Dezember             | 49    | 03.: **18:00 - 19:30 Uhr (online): Edmonton III: Vorträge Edmontoner Projekte**                                                               | _Edmonton_  |                                |                                        |
 |                      | 49    | 04.: [AST-basierte Interpreter 1], [AST-basierte Interpreter 2]                                                                               | Carsten     |                                |                                        |
-|                      | 50    | 11.: C++ I: [Basics], [Funktionen], [Pointer & Referenzen]                                                                                    | Carsten     | 09.: [B05] Interpreter         | 09. / 10. / 13. (Carsten, *online*)    |
+|                      | 50    | 11.: C++ I: [Basics], [Pointer & Referenzen]                                                                                                  | Carsten     | 09.: [B05] Interpreter         | 09. / 10. / 13. (Carsten, *online*)    |
 |                      | 51    | 18.: **Projektwoche Semester 1+3**                                                                                                            |             |                                |                                        |
 |                      | 52    | 25.: _Weihnachtspause_                                                                                                                        |             |                                |                                        |
 | Januar               | 01    | 01.: _Weihnachtspause_                                                                                                                        |             |                                |                                        |
@@ -218,7 +218,7 @@ Abgabe der Übungsblätter jeweils **Mittwoch bis 09:00 Uhr** im [ILIAS](https:/
 |                      | 27. | [Überblick Zwischencode], Überblick Backend (LLVM)                                                                                       | BC, Carsten   |                                                                                 |
 | Dezember             | 03. | **18:00 - 19:30 Uhr (online): Edmonton III: Vorträge Edmontoner Projekte**                                                               | _Edmonton_    |                                                                                 |
 |                      | 04. | [AST-basierte Interpreter 1], [AST-basierte Interpreter 2]                                                                               | Carsten       |                                                                                 |
-|                      | 11. | C++ I: [Basics], [Funktionen], [Pointer & Referenzen]                                                                                    | Carsten       | [B05x] Interpreter (Carsten, *online*)                                          |
+|                      | 11. | C++ I: [Basics], [Pointer & Referenzen]                                                                                                  | Carsten       | [B05x] Interpreter (Carsten, *online*)                                          |
 |                      | 18. | **Projektwoche Semester 1+3**                                                                                                            |               |                                                                                 |
 |                      | 25. | _Weihnachtspause_                                                                                                                        |               |                                                                                 |
 | Januar               | 01. | _Weihnachtspause_                                                                                                                        |               |                                                                                 |
@@ -264,7 +264,6 @@ Abgabe der Übungsblätter jeweils **Mittwoch bis 09:00 Uhr** im [ILIAS](https:/
 <!-- [Builder für Mini-Python]: lecture/07-codegen/minipython-builder.md -->
 
 [Basics]: lecture/99-languages/cpp0-basics.md
-[Funktionen]: lecture/99-languages/cpp1-functions.md
 [Pointer & Referenzen]: lecture/99-languages/cpp2-pointer.md
 [Klassen]: lecture/99-languages/cpp3-classes.md
 [Big 3]: lecture/99-languages/cpp4-big3.md

@@ -317,7 +317,7 @@ ausgeführt werden soll.
 ## Variablen, Operatoren, Kontrollfluss
 
 ::: center
-[**Im Wesentlichen wie von Java gewohnt ... :-)**]{.alert}
+[**Im Wesentlichen wie von C und Java gewohnt ... :-)**]{.alert}
 :::
 
 \bigskip
@@ -450,8 +450,6 @@ Zusätzlich gibt es noch benannte Scopes und einen Scope-Operator.
     ```
 
     ::: notes
-    **Guter Stil**: Anzahl der Elemente als Konstante deklarieren
-
     -   [Compiler]{.alert} reserviert sofort Speicher auf dem [Stack]{.alert} \newline
         => **statisch**: im Programmlauf nicht änderbar
     -   Zugriff über den Indexoperator []
@@ -462,12 +460,21 @@ Zusätzlich gibt es noch benannte Scopes und einen Scope-Operator.
         int myArray[100], i;
         int cnt = sizeof(myArray)/sizeof(myArryay[0]);
         ```
+
+    **Guter Stil**: Anzahl der Elemente als Konstante deklarieren:
+    Statt `int myArray[100];` besser
+    ```c
+    #define LENGTH 100
+    int myArray[LENGTH];
+    ```
     :::
 
 -   Vordefinierter Vektor-Datentyp `vector`
 
     ::: notes
     -   Einbinden über `#include <vector>`
+    -   Parametrisierter Datentyp (C++: Templates) - Nutzung analog wie in Java
+        (Erstellung von Templateklassen und -methoden aber deutlich anders!)
     -   Anlegen eines neuen Arrays mit 10 Elementen für Integer:
     :::
 
@@ -483,8 +490,8 @@ Zusätzlich gibt es noch benannte Scopes und einen Scope-Operator.
     :::
 
     ```cpp
-    cout << v[0] << endl;       // ohne Bereichspruefung!
-    cout << v.at(1000) << endl; // mit interner Bereichspruefung
+    cout << v[0] << endl;        // ohne Bereichspruefung!
+    cout << v.at(1000) << endl;  // mit interner Bereichspruefung
     ```
 
     ::: notes
@@ -503,8 +510,8 @@ Zusätzlich gibt es noch benannte Scopes und einen Scope-Operator.
     vector<int> meineDaten;      // initiale Groesse: 0
     meineDaten.push_back(123);   // Wert anhaengen
 
-    meineDaten.pop_back(); // Wert loeschen
-    meineDaten.empty();    // leer?
+    meineDaten.pop_back();  // Wert loeschen
+    meineDaten.empty();     // leer?
     ```
     :::
 
@@ -516,17 +523,33 @@ sondern deklariert eine **neue Funktion**!
 
 ## Alias-Namen für Typen mit *typedef* und *using*
 
-Syntax: `typedef existTyp neuerName;`
+*   Syntax: `typedef existTyp neuerName;`
 
-``` c
-typedef unsigned long uint32;
-uint32 x, y, z;
-```
+    ``` c
+    typedef unsigned long uint32;
+    uint32 x, y, z;
+    ```
 
-::: notes
-Im Beispiel ist `unint32` ein neuer Name für den existierenden Typ `unsigned long`, d.h.
-die Variablen `x`, `y` und `z` sind `unsigned long`.
-:::
+    ::: notes
+    Im Beispiel ist `unint32` ein neuer Name für den existierenden Typ `unsigned long`, d.h.
+    die Variablen `x`, `y` und `z` sind `unsigned long`.
+    :::
+
+\bigskip
+
+*   Syntax: `typedef existTyp neuerName;`
+
+    ``` c
+    typedef unsigned long uint32;
+    uint32 x, y, z;
+    ```
+
+    ::: notes
+    Im Beispiel ist `unint32` ein neuer Name für den existierenden Typ `unsigned long`, d.h.
+    die Variablen `x`, `y` und `z` sind `unsigned long`.
+    :::
+
+
 
 
 ::::::::: notes
@@ -645,6 +668,465 @@ for (x=0; x<10; x++) {
 }
 ```
 
+
+### Funktionen in C und C++
+
+-   Funktionen sind mit Methoden in Java vergleichbar
+
+    => sind aber [unabhängig]{.alert} von Klassen bzw. Objekten
+
+-   Syntax:
+
+    ``` cpp
+    Rueckgabetyp Funktionsname(Parameterliste) {
+        Anweisungen (Implementierung)
+    }
+    ```
+
+-   Aufruf: Nennung des Namens (mit Argumenten) im Programmcode
+
+    ``` cpp
+    int x = foo(42);
+    ```
+
+Anmerkung: Unterschied "Parameter" und "Argument":
+
+-   Funktion hat "Parameter" in ihrer Parameterliste, auch "formale Parameter" genannt
+-   Beim Aufruf werden "Argumente" übergeben, auch "aktuelle Parameter" genannt
+
+In der Praxis verwendet man beide Begriffe i.d.R. synonym.
+
+#### Funktionen: Deklaration vs. Definition
+
+-   **Deklaration**: [(Funktions-) Prototyp]{.alert}: Festlegen von
+    [Signatur]{.alert} [(d.h. Funktionsname und Anzahl, Typ, Reihenfolge der Parameter)]{.notes} u. Rückgabetyp
+
+    ``` cpp
+    void machWas(int, int);
+    ```
+
+-   **Definition**: [Implementierung]{.alert} der Funktion
+
+    ``` cpp
+    void machWas(int a, int b) {
+        cout << "a: " << a << ", b: " << b << endl;
+    }
+    ```
+
+-   Compiler "liest" Quellcode von oben nach unten
+-   Funktionen müssen [(wie alle anderen Symbole auch)]{.notes} [vor]{.alert} ihrer Verwendung zumindest
+    [deklariert]{.alert} sein, d.h. es muss zumindest ihre Signatur bekannt sein (siehe nächste Folie)
+-   Deklaration: Variablennamen können weggelassen werden
+
+`{{% notice style="info" title="Deklaration vs. Definition" %}}`{=markdown}
+-   **Deklaration**: Macht einen Namen bekannt und legt den Typ der Variablen bzw.
+    die Schnittstelle der Funktionen fest.
+-   **Definition**: Deklaration plus Reservierung von Speicherplatz für die
+    Variable oder Implementierung einer Funktion/Struktur/...
+`{{% /notice %}}`{=markdown}
+
+[Konsole: simplefunction.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/simplefunction.cpp"}
+
+#### One Definition Rule (für Funktionen)
+
+::: center
+Jede Funktion darf im **gesamten** Programm nur [**einmal definiert**]{.alert} sein!
+:::
+
+#### Funktionen und Parameter
+
+-   Funktionen "ohne" Parameter:
+
+    Leere Parameter-Liste^[Achtung: C-Compiler akzeptiert [**alle**]{.alert}
+    Parameter!] oder Schlüsselwort `void`
+
+    ```c
+    void fkt();
+    void fkt(void);
+    ```
+
+-   Funktionen **mit** Parameter:
+
+    -   Deklaration: Variablennamen können weggelassen werden
+    -   Definition: Variablennamen müssen angegeben werden
+
+    ```c
+    void fkt(int, char);
+    void fkt(int a, char b);
+
+    void fkt(int a, char b) { ... }
+    ```
+
+##### Leere Parameterliste in C
+
+Wenn eine Funktion keine Parameter hat, können Sie wie in C die Parameterliste
+entweder einfach leer lassen (`int fkt();`) oder das Schlüsselwort `void`
+nutzen (`int fkt(void);`).
+
+Betrachten Sie folgendes Beispiel:
+
+``` c
+// Legal in C
+int wuppie();                   // Deklaration: "Ich verrate Dir nicht, wieviele Parameter wuppie() hat."
+int wuppie(int x) { return x; } // Aufruf mit Argumenten => ist okay
+
+// Fehler in C
+int fluppie(void);               // Deklaration: fluppie() hat KEINE Parameter!
+int fluppie(int x) { return x; } // Aufruf mit Argumenten => Compiler-Fehler
+```
+
+Wenn Sie eine mit leerer Parameterliste deklarierte Funktion definieren bzw.
+aufrufen, akzeptiert der C-Compiler dennoch **alle** übergebenen Parameter. Dies
+kann zu schwer verständlichen Fehlern führen! Sobald eine Funktion explizit
+mit dem Schlüsselwort `void` in der Parameterliste deklariert wird, **muss**
+diese dann auch ohne Parameter aufgerufen werden.
+
+[=> **Bevorzugen Sie in C die Variante mit dem Schlüsselwort `void`!**]{.alert}
+
+##### Leere Parameterliste in C++
+
+Keine Parameter: Leere Liste und Schlüsselwort `void` **gleichwertig**
+
+``` cpp
+void fkt();
+void fkt(void);
+```
+
+#### Defaultparameter in C++
+
+-   Parameter mit Defaultwerten am [**Ende**]{.alert} der Parameterliste
+-   Bei Trennung von Deklaration und Definition: Defaultparameter
+    [**nur**]{.alert} in Deklaration
+
+``` cpp
+// Deklaration
+void f(int i, int j=1, int k=2);
+
+// Definition
+void f(int i, int j, int k) { ... }
+```
+
+#### Überladen von Funktionen
+
+-   Funktionen im **gleichen Gültigkeitsbereich** können überladen werden
+-   Zu beachten:
+    1.  Funktionsname identisch
+    2.  Signatur (Anzahl, Typen der Parameter) muss [unterschiedlich]{.alert} sein
+    3.  Rückgabewert darf variieren
+
+=> [Warnung]{.alert}: Überladene Funktionen sollten gleichartige
+Operationen für unterschiedliche Datentypen bereitstellen!
+
+#### Probleme beim Überladen von Funktionen
+
+1.  Defaultparameter
+
+    ``` cpp
+    int maximum(int, int);
+    int maximum(int, int, int=10);
+    ```
+
+2.  Identische Signatur, Unterschied nur im Rückgabewert
+
+    ``` cpp
+    int maximum(int, int);
+    double maximum(int, int);
+    ```
+
+3.  Überladen nur für Funktionen des selben Gültigkeitsbereichs!
+
+    ``` cpp
+    #include <iostream>
+    using namespace std;
+
+    void f(char c) {
+        cout << "f(char): " << c << endl;
+    }
+    void f(int i) {
+        cout << "f(int): " << i << endl;
+    }
+
+
+    int main() {
+        void f(int i);  // f(char) nicht mehr sichtbar!
+        f('a');
+
+        return 0;
+    }
+    ```
+
+#### Parameterübergabe in C/C++: Call-by-Value
+
+:::::: columns
+::: {.column width="40%"}
+
+``` cpp
+int add_5(int x) {
+    x += 5;
+    return x;
+}
+
+int main() {
+    int erg, i=0;
+    erg = add_5(i);
+}
+```
+
+:::
+::: {.column width="60%"}
+
+```
+ Aufrufer-Sicht
+              i                      erg
+           +-----+                 +-----+
+           |     |                 |     |
+           +--+--+                 +--^--+
+              |                       |
+              |                       |
+--------------+-----------------------+-----
+  Kopie bei   |                Kopie  |
+  Aufruf      |                bei    |
+              |                return |
+           +--v--+                    |
+           |     +--------------------+
+           +-----+
+              x
+ Funktionssicht
+```
+
+:::
+::::::
+
+-   Default in C/C++ ist die [call-by-value]{.alert} Semantik:
+    -   Argumente werden bei Übergabe [kopiert]{.alert}
+    -   Ergebniswerte werden bei Rückgabe [kopiert]{.alert}
+-   Folgen:
+    -   Keine Seiteneffekte durch Verändern von übergebenen Strukturen
+    -   Negative Auswirkungen auf Laufzeit bei großen Daten
+
+Ausnahme: Übergabe von C++-Referenzen oder Pointern
+(wobei Pointer streng genommen auch kopiert werden, also per call-by-value übergeben werden ...)
+
+
+### Unterschiedliche Variablenarten
+
+#### Lokale Variablen ("automatische Variablen")
+
+```cpp
+int b = 1;
+
+void f() {
+    int b = 42;
+}
+
+int main() {
+    int b = 3;
+
+    {
+        int b = 7;
+    }
+}
+```
+
+-   Innerhalb einer Funktion (oder Blockes) definierte Variablen
+-   Gilt auch für Variablen aus Parameterliste
+-   Überdecken **globale Variablen** gleichen Namens
+-   Sichtbarkeit:
+    -   Außerhalb der Funktion/Blockes nicht zugreifbar
+    -   Beim Betreten der Funktion Reservierung von Speicherplatz für lokale
+        Variablen
+    -   Dieser wird beim Verlassen des Blockes/Funktion automatisch wieder
+        freigegeben
+    -   Namen sind nur nach Deklaration und innerhalb des Blockes, in dem sie
+        deklariert wurden, gültig
+    -   Namen sind auch gültig für innerhalb des Blockes neu angelegte innere
+        Blöcke
+
+    Software Engineering: Vermeiden Sie lokale Namen, die Namen aus einem
+    äußeren Scope überdecken!
+
+=> Werden auch als [**automatische Variablen**]{.alert} bezeichnet
+
+#### Globale Variablen ("externe Variablen")
+
+```c
+/* ======== Datei main.cpp (einzeln kompilierbar) ======== */
+int main() {
+    extern int global;  // Deklaration
+}
+
+int global;             // Definition
+```
+
+```c
+/* ======== Datei foo.cpp (einzeln kompilierbar) ======== */
+extern int global;      // Deklaration
+
+void foo() {
+    global = 45;
+}
+```
+
+-   Globale Variablen: Außerhalb **jeder** Funktion definierte Variablen
+-   Globale Variablen gelten in [allen]{.alert} Teilen des Programms
+-   Auch in anderen Dateien! => müssen bei _Nutzung_ in Funktionen als `extern` deklariert werden
+-   Existieren die **gesamte** Programmlebensdauer über
+
+=> Werden auch als [**externe Variablen**]{.alert} bezeichnet
+
+Die Dateien sind einzeln kompilierbar (`extern` sagt dem Compiler, dass
+die Variable woanders definiert ist) => erst der Linker löst das auf.
+
+_Hinweis_: Bei globalen Konstanten in C++ brauchen Sie zusätzlich auch bei der Definition ein "`extern`",
+da die Konstante sonst nur in ihrer Datei sichtbar ist.
+
+#### Statische lokale Variablen
+
+```cpp
+void foo() {
+    static int x = 42;
+    x++;
+}
+
+int main() {
+    foo();  foo();  foo();
+}
+```
+
+-   Lokale Variablen mit "Gedächtnis": Definition mit dem vorangestellten Schlüsselwort "static"
+
+    ```c
+    static int callCount;
+    ```
+
+-   Eigenschaften:
+    -   Wert bleibt für die folgenden Funktionsaufrufe erhalten
+    -   Wert kann in der Funktion verändert werden
+    -   Dennoch: lokale Variable, d.h. von außen nicht sichtbar/gültig
+
+_Hinweis_: `static` für globale Variablen bedeutet etwas anderes! [(s.u. "Sichtbarkeit")]{.notes}
+
+#### Initialisierung von Variablen
+
+(Automatische) Initialisierung von Variablen hängt von ihrer Speicherklasse ab!
+
+-   **Automatisch**
+    -   Werden [nicht]{.alert} automatisch initialisiert (!)
+    -   Bei vorgegebenem Wert ab Aufruf der Funktion
+-   **Extern**
+    -   Mit dem Wert 0 oder vorgegebenem Wert
+    -   Bereits vor Programmstart (im Code enthalten)
+-   **Statisch**
+    -   Mit dem Wert 0 oder vorgegebenem Wert
+    -   Ab erstem Aufruf der Funktion
+
+#### Sichtbarkeit globaler Variablen (und Funktionen) beschränken
+
+-   Beschränkung der Gültigkeit von **globalen Variablen** auf die Datei, wo
+    sie definiert sind: **Schlüsselwort `static`**
+    -   werden (weiterhin) automatisch mit 0 initialisiert
+    -   sind nun nur in der Datei sichtbar/gültig, wo sie definiert sind
+    -   dient zur Vermeidung von Namenskonflikten bei globalen Variablen
+-   Sichtbarkeitsbeschränkung gilt auch für **Funktionen**
+
+`static` für globale Variablen beschränkt deren Sichtbarkeit auf die Datei,
+wo sie definiert sind. D.h. man kann diese dann nicht in einer anderen Datei
+nutzen, nicht mal mit `extern` ...
+
+`static` für Funktionen beschränkt deren Sichtbarkeit ebenfalls auf die Datei,
+wo sie definiert sind. Man kann sie dann nur in anderen Funktionen, die
+ebenfalls in der selben Datei definiert werden, nutzen. In anderen Dateien sind
+die `static` Funktionen _nicht_ sichtbar. D.h. es macht auch keinen Sinn, sie
+in einer Header-Datei zu deklarieren! (In der Praxis liefert der gcc dann sogar
+einen Fehler!). Das ist mit `private` Methoden vergleichbar.
+
+
+### Globale Konstanten
+
+#### In C funktionieren globale Konstanten wie globale Variablen
+
+-   **Definition** in einer Übersetzungseinheit ohne "`extern`"
+
+    => Definition als "`extern`" wird in C mit einer Warnung quittiert!
+
+-   Nutzung in anderen Übersetzungseinheiten durch (erneute)
+    **Deklaration** als "`extern`"
+
+-   Beispiel:
+
+    ```c
+    /* ======== Datei main.c ======== */
+    const int PI=123;       // Definition OHNE "extern" (C)
+
+    int main() {
+        fkt_a1();
+        int x = PI;
+        ...
+    }
+    ```
+
+    ```c
+    /* ======== Datei a.c ======== */
+    extern const int PI;    // (erneute) Deklaration mit "extern"
+    void fkt_a1() {
+        int x = PI;
+        ...
+    }
+    ```
+
+#### In C++ sind globale Konstanten per Default nur in ihrer Definitionsdatei sichtbar!
+
+-   Abhilfe: Definieren _und_ Deklarieren mit `extern`
+
+-   Beispiel:
+
+    ```cpp
+    /* ======== Datei main.cpp ======== */
+    extern const int PI=123;    // Definition MIT "extern" (C++)
+
+    int main() {
+        fkt_a1();
+        int x = PI;
+        ...
+    }
+    ```
+
+    ```cpp
+    /* ======== Datei a.cpp ======== */
+    extern const int PI;        // (erneute) Deklaration mit "extern"
+    void fkt_a1() {
+        int x = PI;
+        ...
+    }
+    ```
+
+#### Alternativ: In beiden Sprachen Konstanten vorwärts deklarieren
+
+Folgende Definition und (Vorwärts-) Deklaration der Konstanten `PI`
+funktioniert sowohl in C als auch in C++:
+
+```c
+/* ======== Datei main.c ======== */
+extern const int PI;    // (Vorwärts-) Deklaration mit "extern"
+const int PI=123;       // Definition OHNE "extern"
+
+int main() {
+    fkt_a1();
+    int x = PI;
+    ...
+}
+```
+
+```c
+/* ======== Datei a.c ======== */
+extern const int PI;    // (erneute) Deklaration mit "extern"
+void fkt_a1() {
+    int x = PI;
+    ...
+}
+```
+
+
 ### Automatisieren der Buildvorgänge: GNU Make
 
 #### Makefile: Textdatei mit Regeln für das Programm `make`
@@ -745,15 +1227,10 @@ Regel des Targets `tollesProgramm` ausgeführt, um die Datei `tollesProgramm` zu
     Sucht nach Datei mit dem Namen "GNUmakefile", "makefile" oder "Makefile" und erzeugt das
     Ziel `<ziel>`
 
-
-
-
-
-
-
 `{{% /expand %}}`{=markdown}
 `{{% /notice %}}`{=markdown}
 :::::::::
+
 
 
 ## Wrap-Up
@@ -770,6 +1247,7 @@ Regel des Targets `tollesProgramm` ausgeführt, um die Datei `tollesProgramm` zu
     -   Integer können im booleschen Kontext ausgewertet werden
     -   Operator `sizeof` zur Bestimmung des Speicherbedarfs
     -   Alias-Namen für existierende Typen mit `typedef` definierbar
+    -   Funktionen mit Default-Parametern und Überladung
 
 
 
