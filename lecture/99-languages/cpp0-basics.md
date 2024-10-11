@@ -9,7 +9,7 @@ readings:
   - key: "cprogramming.com"
 tldr: |
     Für C wurde ein paar Jahre nach der Entstehung ein objektorientierter Aufsatz entwickelt: C++.
-    Beide Sprachversionen werden aktiv weiterentwickelt, vor allem in C++ gibt es ca. alle 2 Jahre
+    Beide Sprachversionen werden aktiv weiterentwickelt, vor allem in C++ gibt es ca. alle 3 Jahre
     einen neuen Standard mit teilweise recht umfangreichen Ergänzungen. Hier fließen analog zu Java
     immer mehr Programmierkonzepte mit ein, die aus anderen Sprachen stammen (etwa funktionale
     Programmierung). Das macht das Erlernen und Beherrschen der Sprache nicht unbedingt leichter.
@@ -24,9 +24,9 @@ tldr: |
     Indexberechnungen) nicht von der Laufzeitumgebung entdeckt und abgefangen werden können.
 
     C-Programme sehen auf den ersten Blick Java-Code relativ ähnlich. Das ist nicht verwunderlich,
-    da Java zeitlich nach C entwickelt wurde und die Syntax und große Teile der Schlüsselwörter
-    von C übernommen hat. C++ hat die C-Syntax übernommen und fügt neue objektorientierte Konzepte
-    hinzu. Mit gewissen Einschränkungen funktioniert also C-Code auch in C++.
+    da Java zeitlich nach C/C++ entwickelt wurde und die Syntax und große Teile der Schlüsselwörter
+    von C und C++ übernommen hat. C++ hat die C-Syntax übernommen und fügt neue objektorientierte
+    Konzepte hinzu. Mit gewissen Einschränkungen funktioniert also C-Code auch in C++.
 
     In C++ gibt es Klassen (mit Methoden und Attributen), und zusätzlich gibt es Funktionen. Der
     Einsprungpunkt in ein Programm ist (analog zu Java) die Funktion `main()`, die ein `int` als
@@ -347,6 +347,11 @@ if (c=4) { ... }
 
 -   `printf(formatstring, ...)`
 
+    ``` cpp
+    string foo = "fluppie";
+    printf("hello world : %s\n", foo.c_str());
+    ```
+
     ::: notes
     -   Einbinden über `#include <cstdio>`
     -   Format-String: Text und Formatierung der restlichen Parameter: `%[flags][width][.precision]conversion`
@@ -375,7 +380,7 @@ if (c=4) { ... }
     ``` cpp
     // Ausgabe, auch verkettet
     string foo = "fluppie";
-    cout << "hello world :" << foo << endl;
+    cout << "hello world : " << foo << endl;
 
     // liest alle Ziffern bis zum ersten Nicht-Ziffernzeichen
     // (fuehrende Whitespaces werden ignoriert!)
@@ -523,7 +528,7 @@ sondern deklariert eine **neue Funktion**!
 
 ## Alias-Namen für Typen mit *typedef* und *using*
 
-*   Syntax: `typedef existTyp neuerName;`
+*   Syntax: `typedef existTyp neuerName;` (C, C++)
 
     ``` c
     typedef unsigned long uint32;
@@ -531,32 +536,39 @@ sondern deklariert eine **neue Funktion**!
     ```
 
     ::: notes
-    Im Beispiel ist `unint32` ein neuer Name für den existierenden Typ `unsigned long`, d.h.
+    Im Beispiel ist `uint32` ein neuer Name für den existierenden Typ `unsigned long`, d.h.
     die Variablen `x`, `y` und `z` sind `unsigned long`.
     :::
 
 \bigskip
 
-*   Syntax: `typedef existTyp neuerName;`
+*   Syntax: `using neuerName = existTyp;` (C++)
 
-    ``` c
-    typedef unsigned long uint32;
-    uint32 x, y, z;
+    ```cpp
+    typedef unsigned long uint32;       // C, C++
+    using uint32 = unsigned long;       // C++11
+
+    typedef std::vector<int> foo;       // C, C++
+    using foo = std::vector<int>;       // C++11
+
+    typedef void (*fp)(int,double);     // C, C++
+    using fp = void (*)(int,double);    // C++11
     ```
 
     ::: notes
-    Im Beispiel ist `unint32` ein neuer Name für den existierenden Typ `unsigned long`, d.h.
-    die Variablen `x`, `y` und `z` sind `unsigned long`.
+    Seit C++11 gibt es das Schlüsselwort `using` für Alias-Deklarationen (analog zu `typedef`).
+    Dieses funktioniert im Gegensatz zu `typedef` auch für Templates mit (teilweise) gebundenen
+    Template-Parametern.
     :::
 
 
 
 
-::::::::: notes
-`{{% notice style="note" title="Erinnerungen an C - Vergleich mit C++" %}}`{=markdown}
-`{{% expand title="Expand me..." %}}`{=markdown}
-
 ## Erinnerungen an C - Vergleich mit C++
+
+::::::::: notes
+`{{% notice style="important" title="Erinnerungen an C - Vergleich mit C++" %}}`{=markdown}
+`{{% expand title="Expand me..." %}}`{=markdown}
 
 ### Basisdatentypen
 
@@ -1230,6 +1242,7 @@ Regel des Targets `tollesProgramm` ausgeführt, um die Datei `tollesProgramm` zu
 `{{% /expand %}}`{=markdown}
 `{{% /notice %}}`{=markdown}
 :::::::::
+
 
 
 
