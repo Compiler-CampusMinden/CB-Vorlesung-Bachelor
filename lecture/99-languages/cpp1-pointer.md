@@ -63,18 +63,18 @@ tldr: |
     springt man mit `ptr+1` automatisch zum nächsten Objekt und nicht notwendigerweise zum nächsten
     Byte.
 outcomes:
-  - k1: "Virtueller Speicher, Segmente: Text, Data, Stack"
-  - k2: "Pointer sind Variablen, Wert wird als Adresse interpretiert"
-  - k2: "Pointer als spezielle Variablen: Wert des Pointers als Adresse interpretieren"
-  - k2: "Initialisierung und Scopes bei Pointern"
-  - k3: "Zuweisen einer Adresse an einen Pointer"
-  - k3: "Dereferenzierung eines Pointers und Zugriff auf das referenzierte Element"
-  - k3: "Pointer als Funktionsparameter: Call-by-Reference mit Hilfe von Pointern"
-  - k2: "Memory Leaks und Stale Pointer und deren Vermeidung"
-  - k3: "C++-Operatoren `new` und `delete`, Unterschied zu `malloc()`, `free()`"
-  - k3: "Referenzen in C++ (Deklaration, Initialisierung, Nutzung)"
-  - k3: "Zusammenhang und Unterschied Pointer und Arrays"
-  - k3: "Rechnen mit Pointern, Berücksichtigung des Typs"
+    - k1: "Virtueller Speicher, Segmente: Text, Data, Stack"
+    - k2: "Pointer sind Variablen, Wert wird als Adresse interpretiert"
+    - k2: "Pointer als spezielle Variablen: Wert des Pointers als Adresse interpretieren"
+    - k2: "Initialisierung und Scopes bei Pointern"
+    - k3: "Zuweisen einer Adresse an einen Pointer"
+    - k3: "Dereferenzierung eines Pointers und Zugriff auf das referenzierte Element"
+    - k3: "Pointer als Funktionsparameter: Call-by-Reference mit Hilfe von Pointern"
+    - k2: "Memory Leaks und Stale Pointer und deren Vermeidung"
+    - k3: "C++-Operatoren `new` und `delete`, Unterschied zu `malloc()`, `free()`"
+    - k3: "Referenzen in C++ (Deklaration, Initialisierung, Nutzung)"
+    - k3: "Zusammenhang und Unterschied Pointer und Arrays"
+    - k3: "Rechnen mit Pointern, Berücksichtigung des Typs"
 #youtube:
 #  - link: "TODO"
 #    name: "C++: Pointer und Referenzen"
@@ -145,6 +145,7 @@ challenges: |
     delete p;
     ```
 
+
     **Referenzen vs. Pointer: Welche der Aufrufe sind zulässig?**
 
     ```cpp
@@ -163,6 +164,7 @@ challenges: |
         f2(ir);     f2(&ir);    f2(*ir);
     }
     ```
+
 
     **C++-Referenzen und Pointer**
 
@@ -183,6 +185,7 @@ challenges: |
     ptr1  == ptr2;
     *ptr1 == *ptr2;
     ```
+
 
     **Fallstricke mit C++-Referenzen**
 
@@ -205,6 +208,7 @@ challenges: |
         return 0;
     }
     ```
+
 
     **Referenzen in C++**
 
@@ -262,6 +266,7 @@ challenges: |
         }
         ```
 
+
     **Pointer und Arrays**
 
     *   Erklären Sie die Unterschiede folgender Anweisungen. Welche sind
@@ -284,6 +289,7 @@ challenges: |
         x = *(pb+1);
         x = *(pb++);
         ```
+
 
     **Typ eines Pointers bei Adressarithmetik**
 
@@ -923,7 +929,7 @@ pa++;
 a++;
 ```
 
-### Selbsttest: Was bedeutet was, was ist erlaubt/nicht erlaubt, was kommt raus?
+### Selbsttest: Was bedeutet was, was ist erlaubt/nicht erlaubt, was kommt raus? Warum?
 
 ```c
 int a[10], *pa, *pb, x;
@@ -993,6 +999,38 @@ r=10;        // aendert i: i==10
 r=j;         // aendert i: i==9
 
 int &s=r;    // aequivalent zu int &s = i;
+```
+
+
+::: slides
+## Referenzen bilden Alias-Namen
+:::
+
+::: notes
+### Referenzen bilden Alias-Namen
+:::
+
+```c
+int i = 99;
+int *iptr = &i;
+
+int &iref = i;   // Referenz: neuer Name fuer i
+```
+
+```
+        Variable    Speicheraddresse    Inhalt
+
+                                        |          |
+                                        +----------+
+        i, iref     10125               | 99       |  <--+
+                                        +----------+     |
+                                        |          |     |
+                    ....                 ....            |
+                                        |          |     |
+                                        +----------+     |
+        iptr        27890               | 10125    |  ---+
+                                        +----------+
+                                        |          |
 ```
 
 ::::::::: notes
@@ -1147,31 +1185,58 @@ int main() {
 
 -   Normalerweise per call-by-value (Kopie)
 -   Mit Referenzen oder Pointern auch als call-by-reference
+:::::::::
 
-    ```cpp
-    int &fkt1(const int &a, char b);
-    int *fkt2(const int &a, char b);
-    ```
+::: slides
+## Rückgabe von Werten per Referenz
+:::
+
+```cpp
+int &fkt1(const int &, const char *);
+int *fkt2(const int &, const char *);
+```
+
+\bigskip
+\pause
 
 -   Vorsicht mit lokalen Variablen (Gültigkeit)!
 
     ```cpp
-    int &fkt1(int i, int j) {
-        int erg = i+j;
-        return erg; // Referenz auf lokale Variable!
+    int &fkt1(const int &i, const char *j) {
+        int erg = i+1;
+        return erg;   // Referenz auf lokale Variable!
     }
-    int *fkt2(int i, int j) {
-        int erg = i+j;
-        return &erg; // Pointer auf lokale Variable!
+    int *fkt2(const int &i, const char *j) {
+        int erg = i+2;
+        return &erg;  // Pointer auf lokale Variable!
     }
-
     int main() {
-        int &x = fkt1(2, 10);  // AUTSCH!!!
-        int *y = fkt2(2, 10);  // AUTSCH!!!
-
-        int  z = fkt1(2, 10);  // OK => Kopieren der zurückgelieferten Referenz in die Variable z
+        int &x = fkt1(2, "a");  // AUTSCH!!!
+        int *y = fkt2(2, "b");  // AUTSCH!!!
+        int  z = fkt1(2, "c");  // OK
     }
     ```
+
+::::::::: notes
+Die Zuweisung `int &x = fkt1(2, "a");` ist syntaktisch erlaubt. Semantisch aber nicht: Die
+Referenz `x` bindet sich an das zurückgelieferte lokale `erg` - dieses existiert aber nicht
+mehr, da der Scope von erg beendet ist ...
+
+**=> Nur Pointer auf Speicher zurückliefern, der nach Beendigung des Funtionsaufrufes noch existiert!**
+(Dies könnte beispielsweise Speicher aus `malloc` oder `new` oder ein Pointer auf das eigene Objekt
+(`*this`) sein.)
+
+Die Zuweisung `int *y = fkt2(2, "b");` ist syntaktisch erlaubt. Semantisch aber nicht: Der
+Pointer `y` übernimmt die zurückgelieferte Adresse des lokalen `erg` - dieses existiert aber
+nicht mehr, da der Scope von erg beendet ist ...
+
+**=> Nur Referenzen zurückliefern, die nach Beendigung des Funtionsaufrufes noch gültig sind!**
+(Dies könnten beispielsweise Referenz-Inputparameter oder eine Referenz auf das eigene Objekt
+(`*this`) sein.)
+
+Die Zuweisung `int  z = fkt1(2, "c");` ist unbedenklich, da `z` eine normale Integervariable
+ist und hier das übliche Kopieren der Rückgabe von `ftk1` in die Variable stattfindet.
+
 
 ### Diskussion
 
