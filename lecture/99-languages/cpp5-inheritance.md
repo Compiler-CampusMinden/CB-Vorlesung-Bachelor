@@ -301,20 +301,25 @@ Antwort: Es wird die falsche Methode aufgerufen!
 
 ## Dynamisches Binden geht auch in C++ ...
 
+::: notes
+Für dynamische Polymorphie müssen in C++ drei Bedingungen erfüllt sein:
+:::
+
 1.  Methoden in **Basisklasse** als **virtuelle Funktion** deklarieren \newline
     => Schlüsselwort `virtual`
 
 \smallskip
 
 2.  Virtuelle Methoden in Subklasse normal überschreiben (gleiche Signatur)
-    -   Zusätzlich muss der Rückgabetyp exakt übereinstimmen \newline
-        (Ausnahme: Rückgabe Pointer/Referenz auf _abgeleitete_ Klasse)
+
+    ::: notes
+    Zusätzlich muss der Rückgabetyp exakt übereinstimmen \newline
+    (Ausnahme: Rückgabe Pointer/Referenz auf _abgeleitete_ Klasse)
+    :::
 
 \smallskip
 
-::: notes
 3.  Objekte mittels Basisklassen-Referenzen bzw. -Pointer zugreifen (siehe nächste Folie)
-:::
 
 \bigskip
 
@@ -355,6 +360,50 @@ cout << "Objekt p (Person):  " << p.toString() << endl;
 \bigskip
 => **Dyn. Polymorphie** in C++ immer über [**Referenzen**]{.alert}
 (bzw. Pointer) **und** [**virtuelle Methoden**]{.alert}
+
+::: notes
+Wir hatten die Methode `toString` in der Basisklasse `Person` zwar als `virtual` deklariert,
+und wir hatten diese Methode in der ableitenden Klasse `Studi` passend überschrieben.
+
+Damit haben wir aber nur zwei der drei Bedingungen für dynamische Polymorphie in C++
+erfüllt. Wenn wir Objekte vom Typ `Studi` über eine normale Variable vom Typ `Person`
+handhaben, haben wir immer noch statische Polymorphie - uns stehen also nur die Methoden
+aus und in `Person` zur Verfügung.
+
+Zusätzlich haben wir durch die Zuweisung `p = s;` das Objekt `s` in den Speicherbereich
+von `p` "gequetscht". Dieses ist vom Typ `Person` und hat auch nur (Speicher-) Platz für
+Elemente dieses Typs. Alles andere wird bei der Zuweisung "abgeschnitten", d.h. `p` ist
+immer noch ein Objekt vom Typ `Person`, der zusätzliche Rest aus `Studi` fehlt ...
+
+Wir könnten das durch Pointer oder Referenzen heilen:
+
+```cpp
+// Variante mit Basisklassen-Pointer
+Student s("Heinz", 10.0);
+Person *p;
+
+p = &s;
+cout << "Objekt s (Student): " << s.toString()  << endl;
+cout << "Objekt p (Person):  " << p->toString() << endl;
+```
+
+::: notes
+*Anmerkung*: Der Operator `->` ist die zusammengefasste Dereferenzierung des Pointers und
+der nachfolgende Zugriff auf Methoden oder Attribute. Man könnte also entsprechend auch
+`(*p).toString()` statt `p->toString()` schreiben.
+:::
+
+```cpp
+// Variante mit Basisklassen-Referenz
+Student s("Heinz", 10.0);
+Person &p = s;
+
+cout << "Objekt s (Student): " << s.toString() << endl;
+cout << "Objekt p (Person):  " << p.toString() << endl;
+```
+
+Erst damit erfüllen wir die dritte Bedingung und haben echte dynamische Polymorphie in C++.
+:::
 
 
 ::::::::: notes
