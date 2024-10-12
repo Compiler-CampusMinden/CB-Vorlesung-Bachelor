@@ -72,3 +72,10 @@ In der `main`-Funktion sollten Sie mindestens 5 Studenten anlegen, deren Werte i
 Implementieren Sie eine Funktion `void countVowels(const std::string& str, int& count)`, die die Anzahl der Vokale in einem gegebenen String zählt. Testen Sie die Funktion in der `main`-Funktion mit verschiedenen Eingaben. Verwenden Sie dabei Referenzen zur Rückgabe des Zählers.
 
 
+
+
+TODO: (S3) Smartpointer (ohne Templates - also für konkreten Typ, und ohne Operatoren) => Big3 noch in die erste Sitzung nehmen wg. Zuweisung und Destruktor? War B08 in SP
+
+TODO: (S5) Speicherverwaltung auf Java-Seite vorbereiten. War B04 in SP
+
+
