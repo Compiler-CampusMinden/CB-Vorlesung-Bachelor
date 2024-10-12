@@ -267,7 +267,7 @@ Abgabe der Übungsblätter jeweils **Mittwoch bis 09:00 Uhr** im [ILIAS](https:/
 [Pointer & Referenzen]: lecture/99-languages/cpp1-pointer.md
 [Klassen]: lecture/99-languages/cpp2-classes.md
 [Big 3]: lecture/99-languages/cpp3-big3.md
-[Operatoren]: lecture/99-languages/cpp5-operators.md
+[Operatoren]: lecture/99-languages/cpp4-operators.md
 [Vererbung & Polymorphie]: lecture/99-languages/cpp6-inheritance.md
 
 [B01]: homework/sheet01.md
