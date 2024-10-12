@@ -261,8 +261,11 @@ private:
 ::: notes
 Hier erfolgt die Initialisierung in **zwei** Schritten:
 
-1.  Attribut wird angelegt, mit [Defaultwert/-konstruktor]{.alert} des Datentyps initialisiert
+1.  Attribut wird angelegt und mit [Defaultwert/-konstruktor]{.alert} des Datentyps initialisiert
 2.  [Anschließend]{.alert} wird die [Zuweisung]{.alert} im Body des Konstruktors ausgeführt
+
+Das klappt natürlich nur, wenn es einen parameterlosen Konstruktor für das Attribut
+gibt.
 
 Beispiel oben:
 Beim Anlegen von `birthday` im Speicher wird der **Defaultkonstruktor** für
@@ -293,8 +296,11 @@ In diesem Fall erfolgt die Initialisierung in nur einem Schritt:
 1.  Attribut wird angelegt und [direkt]{.alert} mit übergebenen Wert
     ([Kopie]{.alert}) initialisiert
 
-Achtung: Die Reihenfolge der Auswertung der Initialisierungslisten wird durch die
-Reihenfolge der Attribut-Deklarationen in der Klasse bestimmt!!!
+Das klappt natürlich nur, wenn ein passender Konstruktor für das Attribut
+existiert.
+
+**Achtung**: Die Reihenfolge der Auswertung der Initialisierungslisten wird durch
+die Reihenfolge der Attribut-Deklarationen in der Klasse bestimmt!!!
 
 Beispiel oben:
 Beim Anlegen von `birthday` im Speicher wird direkt der übergebene Wert **kopiert**.
@@ -311,17 +317,17 @@ Initialisierungsliste durchführen.
 
 Hier einige Beispiele:
 
--   Attribute **ohne parameterfreien Konstruktor**
+-   Attribut **ohne parameterfreien Konstruktor**
 
     Bei "normaler" Initialisierung würde zunächst der parameterfreie Konstruktor für das
-    Attribut aufgerufen, bevor die Werte gesetzt werden. Dieser existiert aber in diesem
-    Fall nicht ...
+    Attribut aufgerufen, bevor der Wert zugewiesen wird. Wenn es keinen parameterfreien
+    Konstruktor für das Attribut gibt, bekommt man beim Kompilieren einen Fehler.
 
 -   **Konstante** Attribute
 
     Bei "normaler" Initialisierung würde das Attribut zunächst per parameterfreiem Konstruktor
-    angelegt (s.o.), danach ist es konstant und darf nicht mehr geändert werden (müsste es aber,
-    um die eigentlich gewünschten Werte im Body zu setzen) ...
+    angelegt (s.o.), danach existiert es und ist konstant und darf nicht mehr geändert werden
+    (müsste es aber, um die eigentlich gewünschten Werte im Body zu setzen) ...
 
 -   Attribute, die **Referenzen** sind
 
@@ -348,9 +354,11 @@ class C {
 };
 ```
 
--   Delegierende Konstruktoren gibt es ab C++11
+Delegierende Konstruktoren gibt es ab C++11:
+
 -   Vor C++11: Ein Objekt ist fertig konstruiert, wenn der Konstruktor durchgelaufen ist
--   Ab C++11: Ein Objekt ist fertig konstruiert, wenn der **erste** Konstruktor fertig ausgeführt ist
+-   Ab C++11: Ein Objekt ist fertig konstruiert, wenn der **erste** Konstruktor fertig
+    ausgeführt ist
     => Jeder weitere aufgerufene Konstruktor agiert auf einem "fertigen" Objekt.
 -   Vorsicht mit rekursiven Aufrufen: Compiler _kann_ warnen, muss aber nicht.
 :::::::::
