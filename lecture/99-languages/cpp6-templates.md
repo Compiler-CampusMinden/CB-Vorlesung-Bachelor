@@ -455,7 +455,7 @@ Damit könnte man die `cmp`-Funktion nicht mehr für `int` benutzen (Compiler-
 bzw. Linker-Fehler).
 :::::::::
 
-[Konsole: funktionsTemplates.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/funktionsTemplates.cpp}
+[Konsole: funktionsTemplates.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/funktionsTemplates.cpp"}
 
 
 ## Klassen-Templates in C++
@@ -499,12 +499,12 @@ Matrix<T>::Matrix(unsigned rows, unsigned cols) { ... }
 ```
 
 ::: notes
-[Beispiel: matrix.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/matrix.cpp}
+[Beispiel: matrix.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/matrix.cpp"}
 :::
 
 
 ::::::::: notes
-## Klassen-Templates in C++ (Variante mit Konstanten)
+### Klassen-Templates in C++ (Variante mit Konstanten)
 
 ```cpp
 template <typename T, unsigned rows, unsigned cols>
@@ -531,12 +531,12 @@ int main() {
 }
 ```
 
-[Beispiel: matrix2.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/matrix2.cpp}
+[Beispiel: matrix2.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/matrix2.cpp"}
 :::::::::
 
 
 ::::::::: notes
-## Beispiel: Konstanten als Template-Parameter
+### Beispiel: Konstanten als Template-Parameter
 
 ```cpp
 template <int I>
@@ -601,7 +601,7 @@ Die Variante mit dem `enum` werden Sie entsprechend sehr häufig in C++ finden!
 
 
 ::::::::: notes
-## Klassen-Templates mit Defaults
+### Klassen-Templates mit Defaults
 
 ```cpp
 template <typename T = int, unsigned rows = 1, unsigned cols = 1>
@@ -625,7 +625,7 @@ _Hinweis_: Defaults für Template-Parameter waren zunächst nur für Klassen-Tem
 erlaubt. Seit C++11 kann man solche Defaults auch bei Funktions-Templates
 einsetzen.
 
-[Beispiel: matrix3.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/matrix3.cpp}
+[Beispiel: matrix3.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/matrix3.cpp"}
 :::::::::
 
 
@@ -666,10 +666,11 @@ Matrix<T>::Matrix(unsigned rows, unsigned cols) { ... }
 // Implementierung fuer vollstaendig spezialisiertes Template
 Matrix<uint>::Matrix(unsigned rows, unsigned cols) { ... }
 ```
+:::
 
 
-:::::::::
-## Partielle Spezialisierung
+::::::::: notes
+### Partielle Spezialisierung
 
 ```cpp
 template <typename T1, typename T2>
@@ -705,7 +706,7 @@ Array<T, int>::Array() {}
 
 
 ::::::::: notes
-## Vergleich verschiedene Spezialisierungen
+### Vergleich verschiedene Spezialisierungen
 
 Allgemeine Templates vs. partiell spezialisierte Templates vs. vollständig spezialisierte Templates
 
@@ -836,7 +837,7 @@ void Array<T,n>::copy_from(const C &c) { ... }
     -   Bei Implementierung außerhalb der Deklaration: Template-Deklaration mitführen!
     -   Klassen-Templates lassen sich partiell spezialisieren
 
-\bigskipskip
+\bigskip
 
 -   Compiler stellt je instantiiertes Template eine konkrete Funktion/Klasse bereit
 
