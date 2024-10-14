@@ -74,7 +74,14 @@ Implementieren Sie eine Funktion `void countVowels(const std::string& str, int& 
 
 
 
+
+
+
+---
+
+
 TODO: (S3) Smartpointer (ohne Templates - also für konkreten Typ, und ohne Operatoren) => Big3 noch in die erste Sitzung nehmen wg. Zuweisung und Destruktor? War B08 in SP
+Problem: Wir brauchen Klassen, Big3 und *Operatoren*. Templates könnte man durch feste Nutzlast ersetzen - vielleicht sowas wie MyString und statt der Operatoren Getter/Setter/Methoden?
 
 TODO: (S5) Speicherverwaltung auf Java-Seite vorbereiten. War B04 in SP
 
