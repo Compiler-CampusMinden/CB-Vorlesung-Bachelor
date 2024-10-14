@@ -455,7 +455,7 @@ Damit könnte man die `cmp`-Funktion nicht mehr für `int` benutzen (Compiler-
 bzw. Linker-Fehler).
 :::::::::
 
-[Konsole: Funktions-Templates.cpp]{.bsp}
+[Konsole: funktionsTemplates.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/funktionsTemplates.cpp}
 
 
 ## Klassen-Templates in C++
@@ -498,6 +498,10 @@ template <typename T>
 Matrix<T>::Matrix(unsigned rows, unsigned cols) { ... }
 ```
 
+::: notes
+[Beispiel: matrix.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/matrix.cpp}
+:::
+
 
 ::::::::: notes
 ## Klassen-Templates in C++ (Variante mit Konstanten)
@@ -526,6 +530,8 @@ int main() {
     Matrix<string, 1, 1> m3;
 }
 ```
+
+[Beispiel: matrix2.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/matrix2.cpp}
 :::::::::
 
 
@@ -618,6 +624,8 @@ Leere spitze Klammern bei Klassen-Templates mit Default-Parameter Pflicht!
 _Hinweis_: Defaults für Template-Parameter waren zunächst nur für Klassen-Templates
 erlaubt. Seit C++11 kann man solche Defaults auch bei Funktions-Templates
 einsetzen.
+
+[Beispiel: matrix3.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/matrix3.cpp}
 :::::::::
 
 
