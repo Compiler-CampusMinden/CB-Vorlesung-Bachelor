@@ -110,7 +110,7 @@ Hier entsteht ein Tafelbild.
 
 * $\Sigma$ : Alphabet von **Eingabesymbolen**
 
-* $\delta$ : die (eventuell partielle)Übergangsfunktion $(Q \times \Sigma) \rightarrow Q$
+* $\delta$ : die (eventuell partielle) **Übergangsfunktion** $(Q \times \Sigma) \rightarrow Q$
 
 * $q_0 \in Q$ : der **Startzustand**
 
