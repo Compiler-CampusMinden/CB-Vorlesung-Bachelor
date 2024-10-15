@@ -73,8 +73,8 @@ $A = (Q, \Sigma, \delta, q_0, F)$ mit
 
 * $\Sigma$ : Alphabet von **Eingabesymbolen**
 
-* $\delta$ : die (eventuell partielle) **Übergangsfunktion** $(Q \times \Sigma) \rightarrow Q,
-  \delta$ kann partiell sein
+* $\delta$ : die (eventuell partielle) **Übergangsfunktion** $(Q \times \Sigma) \rightarrow Q$,
+  $\delta$ kann partiell sein
 
 * $q_0 \in Q$ : der **Startzustand**
 
@@ -110,7 +110,7 @@ Hier entsteht ein Tafelbild.
 
 * $\Sigma$ : Alphabet von **Eingabesymbolen**
 
-* $\delta$ : die (eventuell partielle)Übergangsfunktion $(Q \times \Sigma) \rightarrow Q$
+* $\delta$ : die (eventuell partielle) **Übergangsfunktion** $(Q \times \Sigma) \rightarrow Q$
 
 * $q_0 \in Q$ : der **Startzustand**
 
@@ -121,7 +121,7 @@ Hier entsteht ein Tafelbild.
 
  **Def.:** Sei A ein DFA oder ein NFA. Dann ist **L(A)** die von A akzeptierte Sprache, d. h.
 
-$L(A) = \lbrace\text{Wörter}\ w\ |\ \delta^*(q_0, w) \in F\rbrace$
+$L(A) = \lbrace \text{Wörter}\ w\ |\ \delta^*(q_0, w) \in F \rbrace$
 
 
 ## Wozu NFAs im Compilerbau?
@@ -190,11 +190,11 @@ Hier entsteht ein Tafelbild.
 
 *    $N$: endliche Menge von **Nichtterminalen**
 
-*    *T*: endliche Menge von **Terminalen**, $N \cap T = \emptyset$
+*    $T$: endliche Menge von **Terminalen**, $N \cap T = \emptyset$
 
 *    $S \in N$: **Startsymbol**
 
-*    *P*: endliche Menge von **Produktionen** der Form
+*    $P$: endliche Menge von **Produktionen** der Form
 
 \medskip
 
