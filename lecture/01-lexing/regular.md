@@ -190,11 +190,11 @@ Hier entsteht ein Tafelbild.
 
 *    $N$: endliche Menge von **Nichtterminalen**
 
-*    *T*: endliche Menge von **Terminalen**, $N \cap T = \emptyset$
+*    $T$: endliche Menge von **Terminalen**, $N \cap T = \emptyset$
 
 *    $S \in N$: **Startsymbol**
 
-*    *P*: endliche Menge von **Produktionen** der Form
+*    $P$: endliche Menge von **Produktionen** der Form
 
 \medskip
 
