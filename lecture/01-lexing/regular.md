@@ -73,8 +73,8 @@ $A = (Q, \Sigma, \delta, q_0, F)$ mit
 
 * $\Sigma$ : Alphabet von **Eingabesymbolen**
 
-* $\delta$ : die (eventuell partielle) **Übergangsfunktion** $(Q \times \Sigma) \rightarrow Q,
-  \delta$ kann partiell sein
+* $\delta$ : die (eventuell partielle) **Übergangsfunktion** $(Q \times \Sigma) \rightarrow Q$,
+  $\delta$ kann partiell sein
 
 * $q_0 \in Q$ : der **Startzustand**
 
