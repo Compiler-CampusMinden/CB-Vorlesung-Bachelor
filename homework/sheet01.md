@@ -15,7 +15,7 @@ Welche Sprache wird von dem folgenden regulären Ausdruck beschrieben?
 
 $a\ +\ a\ (a\ +\ b)^*\ a$
 
-## A1.2: Bezeichner in Programmiersprachen (2P)
+## A1.2: Bezeichner in Programmiersprachen (3P)
 
 Betrachten Sie eine Programmiersprache, in der die Bezeichner (= Namen für Variablen,
 Funktionen, Klassen, Methoden, ...) folgenden Aufbau haben:
@@ -66,17 +66,12 @@ Anmerkung: Diese Darstellung wird ab jetzt akzeptiert.
 
 Verbessern Sie den gegebenen regulären Ausdruck.
 
-## A1.5: Sprache eines DFAs (1P)
+## A1.5: Der zweitletzte Buchstabe (1P)
 
 Entwickeln Sie einen DFA, der nur Wörter über $\Sigma = \lbrace 1,2,3 \rbrace$ akzeptiert,
 deren zweitletztes Zeichen dasselbe ist wie das zweite.
 
-## A1.6: Der zweitletzte Buchstabe (1P)
-
-Entwickeln Sie einen DFA, der nur Wörter über $\Sigma = \lbrace 1,2,3 \rbrace$ akzeptiert,
-deren zweitletztes Zeichen dasselbe ist wie das zweite.
-
-## A1.7: Sprache einer regulären Grammatik (2P)
+## A1.6: Sprache einer regulären Grammatik (2P)
 
 Welche Sprache generiert die folgende Grammatik?
 
