@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="de-DE" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.135.0">
+    <meta name="generator" content="Relearn 6.4.1">
+    <meta name="description" content="Vererbung: &#34;IS-A&#34;-Beziehung zw. Klassen class Student : public Person { ... } Student(const string &amp;name = &#34;&#34;, double c = 0.0) : Person(name), credits(c) { } Student(const Student &amp;s) : Person(s), credits(s.credits) { } Analog zu Java:
+Student: abgeleitete Klasse Person: Basisklasse : public: Vererbungsbeziehung (analog zu extends in Java) public-Vererbung: Verhalten wie in Java Hinweis: Es gibt weitere Spielarten (protected, private), vgl. Semesterliteratur Ab C&#43;&#43;11: Schlüsselwort override: Die Methode muss eine virtuelle Methode der Klassenhierarchie überschreiben. Schlüsselwort final: Die virtuelle Methode darf nicht in abgeleiteten Klassen überschrieben werden. Vererbung und Konstruktoren Defaultkonstruktoren werden automatisch richtig verkettet zuerst Aufruf des Basisklassen-Konstruktors anschließend Behandlung der zusätzlichen Attribute Eigene Konstruktoren verketten: Zuerst Basisklassen-Konstruktor aufrufen (in Initialisierungsliste!) =&gt; Konkreten Konstruktor nehmen, nicht super wie in Java Vererbung und Destruktoren Defaultdestruktoren werden automatisch richtig verkettet zuerst werden die Destruktoren der zusätzlichen Attribute aufgerufen dann der Destruktor der Basisklasse Eigene Destruktoren werden automatisch verkettet Destruktor abgeleiteter Klasse muss sich nur um zusätzliche Attribute kümmern Vererbung und Operatoren Defaultoperatoren werden automatisch richtig verkettet zuerst Aufruf des Basisklassen-Operators anschließend Behandlung der zusätzlichen Attribute Eigene Operatoren am Beispiel Zuweisungsoperator: Zuerst den Zuweisungsoperator der Basisklasse aufrufen">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="C&#43;&#43;: Vererbung und Polymorphie">
+    <meta name="twitter:description" content="Vererbung: &#34;IS-A&#34;-Beziehung zw. Klassen class Student : public Person { ... } Student(const string &amp;name = &#34;&#34;, double c = 0.0) : Person(name), credits(c) { } Student(const Student &amp;s) : Person(s), credits(s.credits) { } Analog zu Java:
+Student: abgeleitete Klasse Person: Basisklasse : public: Vererbungsbeziehung (analog zu extends in Java) public-Vererbung: Verhalten wie in Java Hinweis: Es gibt weitere Spielarten (protected, private), vgl. Semesterliteratur Ab C&#43;&#43;11: Schlüsselwort override: Die Methode muss eine virtuelle Methode der Klassenhierarchie überschreiben. Schlüsselwort final: Die virtuelle Methode darf nicht in abgeleiteten Klassen überschrieben werden. Vererbung und Konstruktoren Defaultkonstruktoren werden automatisch richtig verkettet zuerst Aufruf des Basisklassen-Konstruktors anschließend Behandlung der zusätzlichen Attribute Eigene Konstruktoren verketten: Zuerst Basisklassen-Konstruktor aufrufen (in Initialisierungsliste!) =&gt; Konkreten Konstruktor nehmen, nicht super wie in Java Vererbung und Destruktoren Defaultdestruktoren werden automatisch richtig verkettet zuerst werden die Destruktoren der zusätzlichen Attribute aufgerufen dann der Destruktor der Basisklasse Eigene Destruktoren werden automatisch verkettet Destruktor abgeleiteter Klasse muss sich nur um zusätzliche Attribute kümmern Vererbung und Operatoren Defaultoperatoren werden automatisch richtig verkettet zuerst Aufruf des Basisklassen-Operators anschließend Behandlung der zusätzlichen Attribute Eigene Operatoren am Beispiel Zuweisungsoperator: Zuerst den Zuweisungsoperator der Basisklasse aufrufen">
+    <meta property="og:url" content="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp5-inheritance.html">
+    <meta property="og:title" content="C&#43;&#43;: Vererbung und Polymorphie">
+    <meta property="og:description" content="Vererbung: &#34;IS-A&#34;-Beziehung zw. Klassen class Student : public Person { ... } Student(const string &amp;name = &#34;&#34;, double c = 0.0) : Person(name), credits(c) { } Student(const Student &amp;s) : Person(s), credits(s.credits) { } Analog zu Java:
+Student: abgeleitete Klasse Person: Basisklasse : public: Vererbungsbeziehung (analog zu extends in Java) public-Vererbung: Verhalten wie in Java Hinweis: Es gibt weitere Spielarten (protected, private), vgl. Semesterliteratur Ab C&#43;&#43;11: Schlüsselwort override: Die Methode muss eine virtuelle Methode der Klassenhierarchie überschreiben. Schlüsselwort final: Die virtuelle Methode darf nicht in abgeleiteten Klassen überschrieben werden. Vererbung und Konstruktoren Defaultkonstruktoren werden automatisch richtig verkettet zuerst Aufruf des Basisklassen-Konstruktors anschließend Behandlung der zusätzlichen Attribute Eigene Konstruktoren verketten: Zuerst Basisklassen-Konstruktor aufrufen (in Initialisierungsliste!) =&gt; Konkreten Konstruktor nehmen, nicht super wie in Java Vererbung und Destruktoren Defaultdestruktoren werden automatisch richtig verkettet zuerst werden die Destruktoren der zusätzlichen Attribute aufgerufen dann der Destruktor der Basisklasse Eigene Destruktoren werden automatisch verkettet Destruktor abgeleiteter Klasse muss sich nur um zusätzliche Attribute kümmern Vererbung und Operatoren Defaultoperatoren werden automatisch richtig verkettet zuerst Aufruf des Basisklassen-Operators anschließend Behandlung der zusätzlichen Attribute Eigene Operatoren am Beispiel Zuweisungsoperator: Zuerst den Zuweisungsoperator der Basisklasse aufrufen">
+    <meta property="og:locale" content="de_DE">
+    <meta property="og:type" content="website">
+    <meta itemprop="name" content="C&#43;&#43;: Vererbung und Polymorphie">
+    <meta itemprop="description" content="Vererbung: &#34;IS-A&#34;-Beziehung zw. Klassen class Student : public Person { ... } Student(const string &amp;name = &#34;&#34;, double c = 0.0) : Person(name), credits(c) { } Student(const Student &amp;s) : Person(s), credits(s.credits) { } Analog zu Java:
+Student: abgeleitete Klasse Person: Basisklasse : public: Vererbungsbeziehung (analog zu extends in Java) public-Vererbung: Verhalten wie in Java Hinweis: Es gibt weitere Spielarten (protected, private), vgl. Semesterliteratur Ab C&#43;&#43;11: Schlüsselwort override: Die Methode muss eine virtuelle Methode der Klassenhierarchie überschreiben. Schlüsselwort final: Die virtuelle Methode darf nicht in abgeleiteten Klassen überschrieben werden. Vererbung und Konstruktoren Defaultkonstruktoren werden automatisch richtig verkettet zuerst Aufruf des Basisklassen-Konstruktors anschließend Behandlung der zusätzlichen Attribute Eigene Konstruktoren verketten: Zuerst Basisklassen-Konstruktor aufrufen (in Initialisierungsliste!) =&gt; Konkreten Konstruktor nehmen, nicht super wie in Java Vererbung und Destruktoren Defaultdestruktoren werden automatisch richtig verkettet zuerst werden die Destruktoren der zusätzlichen Attribute aufgerufen dann der Destruktor der Basisklasse Eigene Destruktoren werden automatisch verkettet Destruktor abgeleiteter Klasse muss sich nur um zusätzliche Attribute kümmern Vererbung und Operatoren Defaultoperatoren werden automatisch richtig verkettet zuerst Aufruf des Basisklassen-Operators anschließend Behandlung der zusätzlichen Attribute Eigene Operatoren am Beispiel Zuweisungsoperator: Zuerst den Zuweisungsoperator der Basisklasse aufrufen">
+    <meta itemprop="wordCount" content="1280">
+    <title>C&#43;&#43;: Vererbung und Polymorphie</title>
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp5-inheritance.html" rel="canonical" type="text/html" title="C++: Vererbung und Polymorphie">
+
+    
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/images/logo.png?1729064406" rel="icon" type="image/png">
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/fontawesome-all.min.css?1729064406" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/fontawesome-all.min.css?1729064406" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/nucleus.css?1729064406" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/auto-complete.css?1729064406" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/auto-complete.css?1729064406" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/perfect-scrollbar.min.css?1729064406" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/fonts.css?1729064406" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/fonts.css?1729064406" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/theme.css?1729064406" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/theme-auto.css?1729064406" rel="stylesheet" id="R-variant-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/chroma-auto.css?1729064406" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/variant.css?1729064406" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/print.css?1729064406" rel="stylesheet" media="print">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/format-print.css?1729064406" rel="stylesheet">
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/variant.js?1729064406"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..';
+      window.relearn.relBaseUri='..\/..\/..\/..\/..\/..';
+      window.relearn.absBaseUri='https:\/\/www.hsbi.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1360443';
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      window.index_js_url="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.search.js?1729064406";
+      // variant stuff
+      window.variants && variants.init( [ 'auto', 'zen-light', 'zen-dark', 'relearn-bright', 'relearn-light', 'relearn-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support print disableInlineCopyToClipboard" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp5-inheritance.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            C&#43;&#43;: Vererbung und Polymorphie
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable " tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+<h1>C&#43;&#43;: Vererbung und Polymorphie</h1>
+
+
+
+    
+
+
+
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-graduation-cap"></i> TL;DR
+  </div>
+  <div class="box-content">
+<p>Vererbung analog zu Java passiert in C++ über die &quot;<code>public</code>-Vererbung&quot;: <code>Subklasse : public Superklasse</code>.
+Dabei gibt es in C++ <strong>keine</strong> gemeinsame Oberklasse wie <code>Object</code> und entsprechend kein <code>super</code>. (Es
+kann auch private Vererbung geben.)</p>
+<p>Operatoren und *struktoren werden in den vom Compiler erzeugten Defaults richtig verkettet. Bei der
+eigenen Implementierung von Operatoren und Konstruktoren muss zunächst der Operator/Konstruktor der
+Basisklasse aufgerufen werden (Basisklassen-Konstruktoren dabei in der Initialisierungsliste!), danach
+erfolgt die Implementierung für die eigenen Attribute der abgeleiteten Klasse. Der Zugriff auf die
+Elemente der Elternklasse erfolgt dabei über den Namen der Elternklasse und den Scope-Operator (nicht
+mit <code>super</code>!). Destruktoren von abgeleiteten Klassen müssen sich dagegen nur um die zusätzlichen
+Attribute der abgeleiteten Klasse kümmern, der Basisklassendestruktor wird automatisch verkettet bzw.
+aufgerufen.</p>
+<p>Abstrakte Klassen in C++ haben mindestens eine abstrakte Methode. Eine Methode ist abstrakt, wenn sie
+als &quot;<code>virtual</code>&quot; deklariert ist <strong>und</strong> der Deklaration ein &quot;<code>=0</code>&quot; folgt.</p>
+<p>In C++ hat man aus Effizienzgründen per Default statische Polymorphie. Bei der Zuweisung eines Objekts
+einer abgeleiteten Klasse (rechte Seite) an ein Objekt vom Typ der Oberklasse (linke Seite) erfolgt
+dabei &quot;Slicing&quot;, d.h. alle zusätzlichen Eigenschaften der abgeleiteten Klasse gehen dabei verloren.
+Dynamische Polymorphie kann man in C++ nutzen, indem man (a) die gewünschten Methoden in der Basisklasse
+als <code>virtual</code> deklariert und (b) für den Zugriff auf die Objekte der abgeleiteten Klasse Pointer oder
+Referenzen vom Basisklassen-Typ benutzt.</p>
+<p>In C++ ist Mehrfachvererbung möglich, d.h. eine Klasse kann von mehreren anderen Klassen erben. Damit
+erbt sie auch das Objekt-Layout aller Elternklassen.</p>
+<p>Bei rautenförmigen Vererbungsbeziehung führt dies zu Problemen, da Attribute und Methoden der gemeinsamen
+Basisklasse mehrfach vorhanden (über jeden Zweig der Raute).</p>
+<p>Zur Umgehung des Problems kann man die gemeinsam genutzten Basisklassen &quot;<code>virtual</code>&quot; deklarieren. Dadurch
+sind gemeinsam genutzte Attribute und Methoden nur noch einfach vorhanden. Da die Klassen &quot;in der Raute&quot;
+ihrerseits den Konstruktor der Basisklasse aufrufen (könnten) und es dadurch zu Konflikten beim Setzen
+der Attribute der Basisklasse kommen kann, gelten bei virtueller Ableitung Sonderregeln: Für die virtuelle
+Basisklasse wird die Weiterleitung der Werte aufgehoben (es muss also ein parameterloser Konstruktor existieren,
+der durch die direkten Unterklassen aufgerufen wird) und die Klasse am &quot;unteren Ende der Raute&quot; kann direkt
+den Konstruktor der virtuellen Basisklasse am &quot;oberen Ende der Raute&quot; aufrufen.</p>
+  </div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+
+    
+    
+
+
+
+
+
+    
+
+    
+
+    
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+    
+
+    <div class="box notices cstyle tip">
+  <div class="box-label">
+    <i class="fas fa-lightbulb"></i> Lernziele
+  </div>
+  <div class="box-content">
+<ul> <li>(K2) Unterschied zwischen <code>public</code>- und <code>private</code>-Vererbung</li> <li>(K2) Unterschied Überladen und Überschreiben</li> <li>(K2) Slicing in C++</li> <li>(K2) Probleme bei Mehrfachvererbung und Einsatz virtueller Basisklassen</li> <li>(K3) <code>public</code>-Vererbung in C++</li> <li>(K3) Verkettung von Operatoren und *struktoren</li> <li>(K3) Statische und dynamische Polymorphie in C++</li> <li>(K3) Abstrakte Klassen in C++</li> <li>(K2) Probleme bei Mehrfachvererbung und Einsatz virtueller Basisklassen</li> <li>(K3) Praktischer Umgang mit Mehrfachvererbung</li></ul>
+  </div>
+</div>
+
+
+
+
+    <h2 id="vererbung-is-a-beziehung-zw-klassen">Vererbung: &quot;IS-A&quot;-Beziehung zw. Klassen</h2>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Student</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Person { ... }</span></span></code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Student(<span style="color:#66d9ef">const</span> string <span style="color:#f92672">&amp;</span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#66d9ef">double</span> c <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">:</span> Person(name), credits(c) { }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Student(<span style="color:#66d9ef">const</span> Student <span style="color:#f92672">&amp;</span>s)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">:</span> Person(s), credits(s.credits) { }</span></span></code></pre></div>
+<p>Analog zu Java:</p>
+<ul>
+<li><code>Student</code>: abgeleitete Klasse</li>
+<li><code>Person</code>: Basisklasse</li>
+<li><code>: public</code>: Vererbungsbeziehung (analog zu <code>extends</code> in Java)</li>
+<li><code>public</code>-Vererbung: Verhalten wie in Java</li>
+<li>Hinweis: Es gibt weitere Spielarten (<code>protected</code>, <code>private</code>), vgl. Semesterliteratur</li>
+<li>Ab C++11:
+<ul>
+<li>Schlüsselwort <code>override</code>:
+Die Methode muss eine virtuelle Methode der Klassenhierarchie überschreiben.</li>
+<li>Schlüsselwort <code>final</code>:
+Die virtuelle Methode darf nicht in abgeleiteten Klassen überschrieben werden.</li>
+</ul>
+</li>
+</ul>
+<h3 id="vererbung-und-konstruktoren">Vererbung und Konstruktoren</h3>
+<ul>
+<li>Defaultkonstruktoren werden automatisch richtig verkettet
+<ul>
+<li>zuerst Aufruf des Basisklassen-Konstruktors</li>
+<li>anschließend Behandlung der zusätzlichen Attribute</li>
+</ul>
+</li>
+<li>Eigene Konstruktoren verketten:
+<ul>
+<li><span class='alert'>Zuerst</span> Basisklassen-Konstruktor aufrufen (in
+Initialisierungsliste!)
+=&gt; Konkreten Konstruktor nehmen, nicht <code>super</code> wie in Java</li>
+</ul>
+</li>
+</ul>
+<h3 id="vererbung-und-destruktoren">Vererbung und Destruktoren</h3>
+<ul>
+<li>Defaultdestruktoren werden automatisch richtig verkettet
+<ul>
+<li>zuerst werden die Destruktoren der zusätzlichen Attribute aufgerufen</li>
+<li>dann der Destruktor der Basisklasse</li>
+</ul>
+</li>
+<li>Eigene Destruktoren werden automatisch verkettet</li>
+<li>Destruktor abgeleiteter Klasse muss sich nur um zusätzliche Attribute kümmern</li>
+</ul>
+<h3 id="vererbung-und-operatoren">Vererbung und Operatoren</h3>
+<ul>
+<li>Defaultoperatoren werden automatisch richtig verkettet
+<ul>
+<li>zuerst Aufruf des Basisklassen-Operators</li>
+<li>anschließend Behandlung der zusätzlichen Attribute</li>
+</ul>
+</li>
+<li>Eigene Operatoren am Beispiel Zuweisungsoperator:
+<ul>
+<li>
+<p>Zuerst den Zuweisungsoperator der Basisklasse aufrufen</p>
+</li>
+<li>
+<p>Zugriff über Superklassennamen und Scope-Operator (nicht mit <code>super</code>!)</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> Student <span style="color:#f92672">&amp;</span><span style="color:#66d9ef">operator</span><span style="color:#f92672">=</span>(<span style="color:#66d9ef">const</span> Student <span style="color:#f92672">&amp;</span>s) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span> <span style="color:#f92672">!=</span> <span style="color:#f92672">&amp;</span>s) {
+</span></span><span style="display:flex;"><span>        Person<span style="color:#f92672">::</span><span style="color:#66d9ef">operator</span><span style="color:#f92672">=</span>(s);
+</span></span><span style="display:flex;"><span>        credits <span style="color:#f92672">=</span> s.credits;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="vererbung-von-freundschaften">Vererbung von Freundschaften</h3>
+<ul>
+<li>Freundschaften werden nicht vererbt!</li>
+<li><code>friends</code> der Basisklasse haben keinen Zugriff auf zusätzliche
+private Attribute/Methoden der Unterklassen</li>
+<li>Aber: weiterhin Zugriff auf die geerbten privaten Elemente!</li>
+</ul>
+<h2 id="abstrakte-klassen">Abstrakte Klassen</h2>
+<ul>
+<li>Eine <strong>Klasse</strong> ist <span class='alert'>abstrakt</span>, wenn sie mindestens eine abstrakte Methode hat</li>
+<li>Eine <strong>Methode</strong> ist in C++ <span class='alert'>abstrakt</span>, wenn sie
+<ol>
+<li>als <span class='alert'>virtuell</span> deklariert ist, <strong>und</strong></li>
+<li>der Deklaration ein &quot;<code>=0</code>&quot; folgt</li>
+</ol>
+</li>
+</ul>
+<p><span class='alert'>Abstrakte Methoden</span> können <span class='alert'>Implementierung</span> haben! =&gt; Implementierung <span class='alert'>außerhalb</span> der Klassendeklaration</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">virtual</span> string toString() <span style="color:#66d9ef">const</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>string Person<span style="color:#f92672">::</span>toString() <span style="color:#66d9ef">const</span> { ... }  <span style="color:#75715e">// Implementierung :-)
+</span></span></span></code></pre></div>
+<h2 id="polymorphie-was-passiert-im-folgenden-beispiel">Polymorphie: Was passiert im folgenden Beispiel?</h2>
+<p>IS-A Beziehung: Objekte können als Objekte ihrer Oberklasse behandelt werden</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span> { ... }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Student</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Person { ... }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Student <span style="color:#a6e22e">s</span>(<span style="color:#e6db74">&#34;Heinz&#34;</span>, <span style="color:#e6db74">&#34;heizer&#34;</span>);
+</span></span><span style="display:flex;"><span>Person <span style="color:#f92672">&amp;</span>p <span style="color:#f92672">=</span> s;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cout <span style="color:#f92672">&lt;&lt;</span> s.toString() <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>cout <span style="color:#f92672">&lt;&lt;</span> p.toString() <span style="color:#f92672">&lt;&lt;</span> endl;</span></span></code></pre></div>
+<div style="text-align: right;"><span class="btn cstyle interactive default"><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/polyStat.cpp" target="_blank"><span class="title">Konsole: polyStat.cpp</span></a></span></div>
+<p>Antwort: Es wird die falsche Methode aufgerufen!</p>
+<ul>
+<li><code>s.toString()</code> =&gt; <code>Student::toString()</code> =&gt; wie erwartet</li>
+<li><code>p.toString()</code> =&gt; <code>Person::toString()</code> =&gt; <span class='alert'><strong>unerwartet</strong></span>!</li>
+</ul>
+<h2 id="polymorphie-statisch-und-dynamisch">Polymorphie: statisch und dynamisch</h2>
+<ul>
+<li>
+<p>C++ entscheidet zur <span class='alert'><strong>Kompilierzeit</strong></span>, welche Methode aufgerufen wird</p>
+<ul>
+<li><code>p</code> ist vom Typ <code>Person</code> =&gt; <code>p.toString()</code>
+=&gt; <code>Person::toString()</code></li>
+<li>Dieses Verhalten wird <strong>statisches Binden</strong> genannt.</li>
+</ul>
+</li>
+<li>
+<p>Von Java her bekannt: <strong>dynamisches Binden</strong></p>
+<ul>
+<li>Typ eines Objektes wird zur <strong>Laufzeit</strong> ausgewertet</li>
+</ul>
+</li>
+</ul>
+<h2 id="dynamisches-binden-geht-auch-in-c-">Dynamisches Binden geht auch in C++ ...</h2>
+<p>Für dynamische Polymorphie müssen in C++ drei Bedingungen erfüllt sein:</p>
+<ol>
+<li>
+<p>Methoden in <strong>Basisklasse</strong> als <strong>virtuelle Funktion</strong> deklarieren
+=&gt; Schlüsselwort <code>virtual</code></p>
+</li>
+<li>
+<p>Virtuelle Methoden in Subklasse normal überschreiben (gleiche Signatur)</p>
+<p>Zusätzlich muss der Rückgabetyp exakt übereinstimmen
+(Ausnahme: Rückgabe Pointer/Referenz auf <em>abgeleitete</em> Klasse)</p>
+</li>
+<li>
+<p>Objekte mittels Basisklassen-Referenzen bzw. -Pointer zugreifen (siehe nächste Folie)</p>
+</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">virtual</span> string <span style="color:#a6e22e">toString</span>() <span style="color:#66d9ef">const</span> { ... }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
+<div style="text-align: right;"><span class="btn cstyle interactive default"><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/polyDyn.cpp" target="_blank"><span class="title">Konsole: polyDyn.cpp</span></a></span></div>
+<h2 id="vorsicht-slicing">Vorsicht Slicing</h2>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Student <span style="color:#a6e22e">s</span>(<span style="color:#e6db74">&#34;Heinz&#34;</span>, <span style="color:#ae81ff">10.0</span>);
+</span></span><span style="display:flex;"><span>Person <span style="color:#a6e22e">p</span>(<span style="color:#e6db74">&#34;Holger&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">=</span> s;
+</span></span><span style="display:flex;"><span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Objekt s (Student): &#34;</span> <span style="color:#f92672">&lt;&lt;</span> s.toString() <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Objekt p (Person):  &#34;</span> <span style="color:#f92672">&lt;&lt;</span> p.toString() <span style="color:#f92672">&lt;&lt;</span> endl;</span></span></code></pre></div>
+<div style="text-align: right;"><span class="btn cstyle interactive default"><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/polySlicing.cpp" target="_blank"><span class="title">Konsole polySlicing.cpp</span></a></span></div>
+<p>=&gt; <code>p</code> ist vom Typ <code>Person</code></p>
+<ul>
+<li>Zuweisung von Objekten vom Typ <code>Student</code> ist erlaubt (Polymorphie)</li>
+<li><code>p</code> hat aber nur Speicherplatz für genau eine <code>Person</code>
+=&gt; &quot;Abschneiden&quot; aller Elemente, die nicht Bestandteil von
+<code>Person</code> sind!</li>
+<li>Slicing passiert immer beim <span class='alert'>Kopieren/Zuweisen</span> von Objekten</li>
+</ul>
+<p>=&gt; <strong>Dyn. Polymorphie</strong> in C++ immer über <span class='alert'><strong>Referenzen</strong></span>
+(bzw. Pointer) <strong>und</strong> <span class='alert'><strong>virtuelle Methoden</strong></span></p>
+<p>Wir hatten die Methode <code>toString</code> in der Basisklasse <code>Person</code> zwar als <code>virtual</code> deklariert,
+und wir hatten diese Methode in der ableitenden Klasse <code>Studi</code> passend überschrieben.</p>
+<p>Damit haben wir aber nur zwei der drei Bedingungen für dynamische Polymorphie in C++
+erfüllt. Wenn wir Objekte vom Typ <code>Studi</code> über eine normale Variable vom Typ <code>Person</code>
+handhaben, haben wir immer noch statische Polymorphie - uns stehen also nur die Methoden
+aus und in <code>Person</code> zur Verfügung.</p>
+<p>Zusätzlich haben wir durch die Zuweisung <code>p = s;</code> das Objekt <code>s</code> in den Speicherbereich
+von <code>p</code> &quot;gequetscht&quot;. Dieses ist vom Typ <code>Person</code> und hat auch nur (Speicher-) Platz für
+Elemente dieses Typs. Alles andere wird bei der Zuweisung &quot;abgeschnitten&quot;, d.h. <code>p</code> ist
+immer noch ein Objekt vom Typ <code>Person</code>, der zusätzliche Rest aus <code>Studi</code> fehlt ...</p>
+<p>Wir könnten das durch Pointer oder Referenzen heilen:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// Variante mit Basisklassen-Pointer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>Student <span style="color:#a6e22e">s</span>(<span style="color:#e6db74">&#34;Heinz&#34;</span>, <span style="color:#ae81ff">10.0</span>);
+</span></span><span style="display:flex;"><span>Person <span style="color:#f92672">*</span>p;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>s;
+</span></span><span style="display:flex;"><span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Objekt s (Student): &#34;</span> <span style="color:#f92672">&lt;&lt;</span> s.toString()  <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Objekt p (Person):  &#34;</span> <span style="color:#f92672">&lt;&lt;</span> p<span style="color:#f92672">-&gt;</span>toString() <span style="color:#f92672">&lt;&lt;</span> endl;</span></span></code></pre></div>
+<p><em>Anmerkung</em>: Der Operator <code>-&gt;</code> ist die zusammengefasste Dereferenzierung des Pointers und
+der nachfolgende Zugriff auf Methoden oder Attribute. Man könnte also entsprechend auch
+<code>(*p).toString()</code> statt <code>p-&gt;toString()</code> schreiben.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// Variante mit Basisklassen-Referenz
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>Student <span style="color:#a6e22e">s</span>(<span style="color:#e6db74">&#34;Heinz&#34;</span>, <span style="color:#ae81ff">10.0</span>);
+</span></span><span style="display:flex;"><span>Person <span style="color:#f92672">&amp;</span>p <span style="color:#f92672">=</span> s;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Objekt s (Student): &#34;</span> <span style="color:#f92672">&lt;&lt;</span> s.toString() <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Objekt p (Person):  &#34;</span> <span style="color:#f92672">&lt;&lt;</span> p.toString() <span style="color:#f92672">&lt;&lt;</span> endl;</span></span></code></pre></div>
+<p>Erst damit erfüllen wir die dritte Bedingung und haben echte dynamische Polymorphie in C++.</p>
+<h2 id="anmerkungen-zu-polymorphie-in-c">Anmerkungen zu Polymorphie in C++</h2>
+<ul>
+<li><strong>Gestaltung der API</strong>:
+<ul>
+<li>Zum Überschreiben gedachte Methoden als virtuell deklarieren</li>
+<li>Nicht virtuelle Methoden aus der Basisklasse nicht überschreiben</li>
+</ul>
+</li>
+<li>Trennung von Deklaration und Implementierung:
+<ul>
+<li>Deklaration als virtuelle Funktion nur im Deklarationsteil</li>
+<li>Keine Wiederholung im Implementierungsteil (analog zu Defaultwerten)</li>
+</ul>
+</li>
+<li>&quot;Virtualität vererbt sich&quot;:
+<ul>
+<li>Virtuelle Funktionen sind virtuell in der Vererbungshierarchie hinab ab
+der ersten Deklaration als virtuell</li>
+</ul>
+</li>
+<li>Virtualität ist &quot;teuer&quot;: Es muss eine Tabelle aller virtuellen Funktionen aufgebaut werden und zur
+Laufzeit geprüft werden, welche Funktion genommen werden soll</li>
+</ul>
+<h2 id="mehrfachvererbung-in-c">Mehrfachvererbung in C++</h2>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">HiWi</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Student, <span style="color:#66d9ef">public</span> Angestellter {...};</span></span></code></pre></div>
+<p><a href="#R-image-e649b4d29392921d03e6bafb83efddb1" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp5-inheritance/mehrfachvererbung-studi_new.png?width=50%25&height=auto" style=" height: auto; width: 50%;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e649b4d29392921d03e6bafb83efddb1"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp5-inheritance/mehrfachvererbung-studi_new.png?width=50%25&height=auto"></a></p>
+<div style="text-align: right;"><span class="badge cstyle default"><span class="badge-content">Hinweis Speicherlayout ...</span></span></div>
+<h3 id="problem-1-gleichnamige-methoden-aus-basisklassen-geerbt">Problem 1: Gleichnamige Methoden aus Basisklassen geerbt</h3>
+<p><a href="#R-image-e9ab80c19797ec9a4edd3b34138f63f5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp5-inheritance/mehrfachvererbung-namenskollision_new.png?width=50%25&height=auto" style=" height: auto; width: 50%;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e9ab80c19797ec9a4edd3b34138f63f5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp5-inheritance/mehrfachvererbung-namenskollision_new.png?width=50%25&height=auto"></a></p>
+<p>Namenskollision bei Mehrfachvererbung auflösen:</p>
+<ul>
+<li>
+<p>Scope-Operator <code>::</code> nutzen:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>HiWi <span style="color:#a6e22e">h</span>(<span style="color:#e6db74">&#34;Anne&#34;</span>, <span style="color:#ae81ff">23.0</span>, <span style="color:#ae81ff">40.0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cout <span style="color:#f92672">&lt;&lt;</span> h.Student<span style="color:#f92672">::</span>toString() <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>cout <span style="color:#f92672">&lt;&lt;</span> h.Angestellter<span style="color:#f92672">::</span>toString() <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>cout <span style="color:#f92672">&lt;&lt;</span> h.Student<span style="color:#f92672">::</span>getName() <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>cout <span style="color:#f92672">&lt;&lt;</span> h.Angestellter<span style="color:#f92672">::</span>getName() <span style="color:#f92672">&lt;&lt;</span> endl;</span></span></code></pre></div>
+</li>
+<li>
+<p>Methode in abgeleiteter Klasse überschreiben</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>HiWi <span style="color:#a6e22e">h</span>(<span style="color:#e6db74">&#34;Anne&#34;</span>, <span style="color:#ae81ff">23.0</span>, <span style="color:#ae81ff">40.0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cout <span style="color:#f92672">&lt;&lt;</span> h.toString() <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>cout <span style="color:#f92672">&lt;&lt;</span> h.Student<span style="color:#f92672">::</span>toString() <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>cout <span style="color:#f92672">&lt;&lt;</span> h.Angestellter<span style="color:#f92672">::</span>toString() <span style="color:#f92672">&lt;&lt;</span> endl;</span></span></code></pre></div>
+</li>
+</ul>
+<div style="text-align: right;"><span class="btn cstyle interactive default"><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/vererbungMultiMethoden.cpp" target="_blank"><span class="title">Konsole vererbungMultiMethoden.cpp</span></a></span></div>
+<h3 id="problem-2-gemeinsam-geerbte-attribute-sind-mehrfach-vorhanden">Problem 2: Gemeinsam geerbte Attribute sind mehrfach vorhanden</h3>
+<p><a href="#R-image-e8d14fab65aac6c5a2661d114a21d1ec" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp5-inheritance/mehrfachvererbung-attributkollision_new.png?width=50%25&height=auto" style=" height: auto; width: 50%;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e8d14fab65aac6c5a2661d114a21d1ec"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp5-inheritance/mehrfachvererbung-attributkollision_new.png?width=50%25&height=auto"></a></p>
+<div style="text-align: right;"><span class="btn cstyle interactive default"><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/vererbungMultiAttribute.cpp" target="_blank"><span class="title">Konsole vererbungMultiAttribute.cpp</span></a></span></div>
+<h2 id="mehrfachvererbung-in-c-virtuelle-basisklassen">Mehrfachvererbung in C++: Virtuelle Basisklassen</h2>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Angestellter</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">public</span> Person {...};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Student</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">public</span> Person {...};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">HiWi</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Student, <span style="color:#66d9ef">public</span> Angestellter {...};</span></span></code></pre></div>
+<ul>
+<li><code>Person</code> ist jetzt eine <span class='alert'>virtuelle Basisklasse</span></li>
+<li>Auswirkungen erst in Klasse <code>HiWi</code></li>
+<li>Dadurch sind gemeinsam genutzte Anteile nur einfach vorhanden</li>
+</ul>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Student <span style="color:#a6e22e">s</span>(<span style="color:#e6db74">&#34;Heinz&#34;</span>, <span style="color:#ae81ff">10.0</span>);           <span style="color:#75715e">// wie vorher: nur EIN name-Feld
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>Angestellter <span style="color:#a6e22e">a</span>(<span style="color:#e6db74">&#34;Holger&#34;</span>, <span style="color:#ae81ff">80.5</span>);     <span style="color:#75715e">// wie vorher: nur EIN name-Feld
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>HiWi <span style="color:#a6e22e">h</span>(<span style="color:#e6db74">&#34;Anne&#34;</span>, <span style="color:#ae81ff">23.0</span>, <span style="color:#ae81ff">40.0</span>);         <span style="color:#75715e">// jetzt auch nur EIN name-Feld
+</span></span></span></code></pre></div>
+<div style="text-align: right;"><span class="btn cstyle interactive default"><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/vererbungMultiVirtual.cpp" target="_blank"><span class="title">Konsole vererbungMultiVirtual.cpp</span></a></span></div>
+<h2 id="sonderregeln-bei-virtueller-ableitung">Sonderregeln bei virtueller Ableitung</h2>
+<p>Virtuelle Ableitung: Potentiell Konflikte zwischen Konstruktoren!</p>
+<ul>
+<li>Gemeinsam geerbtes Attribut nur noch <span class='alert'>einmal</span> vorhanden</li>
+<li>Konstruktoren werden <span class='alert'>nacheinander</span> aufgerufen, alle wollen das
+gemeinsame Attribut initialisieren (durch Aufruf des Konstruktors der
+jeweiligen Basisklasse)</li>
+<li>Zuletzt aufgerufener Konstruktor würde &quot;gewinnen&quot;</li>
+</ul>
+<p>Deshalb gibt es bei virtueller Ableitung folgende Sonderregeln:</p>
+<ol>
+<li>
+<p>Für virtuelle Basisklassen ist <strong>Mechanismus des Weiterreichens</strong> von
+Initialisierungswerten <span class='alert'><strong>deaktiviert</strong></span></p>
+</li>
+<li>
+<p>Konstruktor einer virtuellen Basisklasse kann in Initialisierungsliste von
+indirekten Unterklassen aufgerufen werden</p>
+<p>Sonst wird der Defaultkonstruktor der virtuellen Basisklasse genutzt!</p>
+</li>
+</ol>
+<div style="text-align: right;"><span class="btn cstyle interactive default"><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/vererbungMultiVirtual.cpp" target="_blank"><span class="title">Konsole vererbungMultiVirtual.cpp (Basiskonstruktor)</span></a></span></div>
+<h2 id="mehrfachvererbung-in-c-ist-ein-recht-kompliziertes-thema">Mehrfachvererbung in C++ ist ein recht kompliziertes Thema</h2>
+<p>Warum ist die Möglichkeit dennoch nützlich?</p>
+<ul>
+<li>
+<p>In Java kann man nur von einer Klasse erben, aber viele <span class='alert'>Interfaces</span>
+implementieren. In C++ gibt es keine Interfaces ...</p>
+<p>=&gt; Interfaces mit abstrakten Klassen Interfaces simulieren</p>
+<p>=&gt; Mehrfachvererbung!</p>
+</li>
+</ul>
+<p>Tatsächlich dürfen Java-Interfaces mittlerweile auch Verhalten implementieren
+und vererben, wodurch eine ähnliche Situation wie hier in C++ entsteht und es
+ausgefeilte Regeln für die Konfliktauflösung braucht. Allerdings ist das in
+Java auf Verhalten beschränkt, d.h. Attribute (Zustand) ist in Java-Interfaces
+(noch) nicht erlaubt.</p>
+<h2 id="wrap-up">Wrap-Up</h2>
+<ul>
+<li>
+<p><code>public</code>-Vererbung in C++: <code>Subklasse : public Superklasse</code></p>
+</li>
+<li>
+<p>Keine gemeinsame Oberklasse wie <code>Object</code>, kein <code>super</code></p>
+</li>
+<li>
+<p>Verkettung von Operatoren und *struktoren</p>
+</li>
+<li>
+<p>Abstrakte Klassen in C++</p>
+</li>
+<li>
+<p>Statische und dynamische Polymorphie in C++</p>
+<ul>
+<li>Methoden in Basisklasse als <code>virtual</code> deklarieren</li>
+<li>Dyn. Polymorphie nur mittels Pointer/Referenzen</li>
+<li>Slicing in C++ (bei Call-by-Value)</li>
+</ul>
+</li>
+<li>
+<p>Konzept der Mehrfachvererbung</p>
+</li>
+<li>
+<p>Problem bei rautenförmiger Vererbungsbeziehung: Attribute und Methoden mehrfach vorhanden</p>
+</li>
+<li>
+<p>Virtuelle Basisklassen: Gemeinsam genutzte Attribute nur noch einfach vorhanden</p>
+</li>
+</ul>
+
+
+    
+
+
+
+    
+
+
+
+    
+
+    <div class="box notices cstyle note">
+  <div class="box-label">
+    <i class="fas fa-puzzle-piece"></i> Challenges
+  </div>
+  <div class="box-content">
+<p><strong>Destruktoren und Vererbung</strong></p>
+<p>Welcher Destruktor würde im folgenden Beispiel aufgerufen?!</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Student <span style="color:#f92672">*</span>s3 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Student(<span style="color:#e6db74">&#34;Holger&#34;</span>, <span style="color:#ae81ff">1.0</span>);
+</span></span><span style="display:flex;"><span>Person  <span style="color:#f92672">*</span>p  <span style="color:#f92672">=</span> s3;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">delete</span> p;</span></span></code></pre></div>
+<p><strong>Vererbung</strong></p>
+<ul>
+<li>Welche Formen der (einfachen) Vererbung gibt es in C++ neben der
+<code>public</code>-Form noch? Was bewirken diese Formen?</li>
+<li>Warum wird in C++ die <code>public</code>-Form der Vererbung vorgezogen
+(zumindest, wenn man dynamische Polymorphie nutzen will)?</li>
+<li>Wie müssen Konstruktoren/Destruktoren richtig verkettet werden?</li>
+<li>Arbeiten Sie das Beispiel auf S. 274 im <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.html#id_Breymann2011">[Breymann2011]</a>:
+&quot;Der C++ Programmierer&quot; durch.</li>
+</ul>
+<p><strong>Virtuelle Methoden, Dynamische Polymorphie in C++</strong></p>
+<ol>
+<li>Was sind virtuelle Methoden und wie setze ich diese ein?</li>
+<li>Wozu brauche ich in C++ virtuelle Klassen? Was muss beachtet werden?</li>
+<li>Was passiert in C++, wenn eine virtuelle Methode innerhalb von Konstruktoren
+verwendet wird? Schreiben Sie ein kurzes Programm zur Verdeutlichung.</li>
+<li>Wie verhält es sich mit der Problematik aus (a) in Java?</li>
+<li>Wie unterscheiden sich in C++ virtuelle und nicht virtuelle Destruktoren?
+Schreiben Sie ein kurzes Programm zur Verdeutlichung.</li>
+<li>Was passiert, wenn in C++ aus einem Destruktor heraus eine virtuelle
+Methode aufgerufen wird?</li>
+</ol>
+<p><em>Hinweis:</em>
+Möglicherweise müssen jeweils mehrere Fälle betrachtet werden!</p>
+  </div>
+</div>
+
+
+
+    
+
+
+
+
+    
+
+
+
+
+    
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                
+            
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                
+            
+            
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-book-reader"></i> Quellen
+  </div>
+  <div class="box-content">
+<ul> <li id='id_Breymann2011'>[Breymann2011] <strong>Der C++ Programmierer</strong><br>Breymann, U., Hanser, 2011. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-3-446-42691-7' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-3-446-42691-7</a>.</li> <li id='id_cppreference.com'>[cppreference.com] <a href='https://en.cppreference.com/w/' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'><strong>C and C++ Reference</strong></a><br>, cppreference.com.</li> <li id='id_cprogramming.com'>[cprogramming.com] <a href='https://www.cprogramming.com/' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'><strong>C Programming and C++ Programming</strong></a><br>Allain, A. und Hoffer, A..</li></ul>
+  </div>
+</div>
+
+
+
+
+
+
+<footer class="footline"><div style="color: darkgray; font-size: small;">
+<p style="margin-left: 4rem; margin-right: 4rem; margin-top: 6rem;">
+<!-- https://creativecommons.org/choose/ -->
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+Unless otherwise noted, <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor">this work</a> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/graphs/contributors">contributors</a> is licensed under <a rel="license" href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/LICENSE.md">CC BY-SA 4.0</a>.
+See the <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/CREDITS.md">credits</a> for a detailed list of contributing projects.
+
+</p>
+</div>
+
+</footer>
+</article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/clipboard.min.js?1729064406" defer></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/perfect-scrollbar.min.js?1729064406" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/mathjax/tex-mml-chtml.js?1729064406"></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/theme.js?1729064406" defer></script>
+  </body>
+</html>
