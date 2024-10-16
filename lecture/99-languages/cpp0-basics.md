@@ -9,7 +9,7 @@ readings:
   - key: "cprogramming.com"
 tldr: |
     Für C wurde ein paar Jahre nach der Entstehung ein objektorientierter Aufsatz entwickelt: C++.
-    Beide Sprachversionen werden aktiv weiterentwickelt, vor allem in C++ gibt es ca. alle 2 Jahre
+    Beide Sprachversionen werden aktiv weiterentwickelt, vor allem in C++ gibt es ca. alle 3 Jahre
     einen neuen Standard mit teilweise recht umfangreichen Ergänzungen. Hier fließen analog zu Java
     immer mehr Programmierkonzepte mit ein, die aus anderen Sprachen stammen (etwa funktionale
     Programmierung). Das macht das Erlernen und Beherrschen der Sprache nicht unbedingt leichter.
@@ -24,9 +24,9 @@ tldr: |
     Indexberechnungen) nicht von der Laufzeitumgebung entdeckt und abgefangen werden können.
 
     C-Programme sehen auf den ersten Blick Java-Code relativ ähnlich. Das ist nicht verwunderlich,
-    da Java zeitlich nach C entwickelt wurde und die Syntax und große Teile der Schlüsselwörter
-    von C übernommen hat. C++ hat die C-Syntax übernommen und fügt neue objektorientierte Konzepte
-    hinzu. Mit gewissen Einschränkungen funktioniert also C-Code auch in C++.
+    da Java zeitlich nach C/C++ entwickelt wurde und die Syntax und große Teile der Schlüsselwörter
+    von C und C++ übernommen hat. C++ hat die C-Syntax übernommen und fügt neue objektorientierte
+    Konzepte hinzu. Mit gewissen Einschränkungen funktioniert also C-Code auch in C++.
 
     In C++ gibt es Klassen (mit Methoden und Attributen), und zusätzlich gibt es Funktionen. Der
     Einsprungpunkt in ein Programm ist (analog zu Java) die Funktion `main()`, die ein `int` als
@@ -69,19 +69,43 @@ tldr: |
     dem Operator `sizeof` heraus.
 
     Mit `typedef` kann man einen neuen Namen für bereits existierende Typen vergeben.
+
+    In C++ gibt es Funktionen (analog zu Methoden in Java), diese existieren unabhängig von Klassen.
+
+    Wenn eine Funktion aufgerufen wird, muss dem Compiler die Signatur zur Prüfung bekannt sein. Das
+    bedeutet, dass die Funktion entweder zuvor komplett definiert werden muss oder zumindest zuvor
+    deklariert werden muss (die Definition kann auch später in der Datei kommen oder in einer anderen
+    Datei). Das Vorab-Deklarieren einer Funktion nennt man auch "Funktionsprototypen".
+
+    Eine Deklaration darf (so lange sie konsistent ist) mehrfach vorkommen, eine Definition immer nur
+    exakt einmal. Dabei werden alle Code-Teile, die zu einem Programm zusammencompiliert werden,
+    gemeinsam betrachtet. => Das ist auch als **One-Definition-Rule** bekannt.
+
+    In C++ gilt beim Funktionsaufruf immer zunächst immer die Parameterübergabe per **call-by-value**
+    (dito bei der Rückgabe von Werten). Wenn Referenzen oder Pointer eingesetzt werden, wird dagegen
+    auch ein _call-by-reference_ möglich. (Dazu später mehr.)
+
+    Unterscheidung in globale, lokale und lokale statische Variablen mit unterschiedlicher Lebensdauer
+    und unterschiedlicher Initialisierung durch den Compiler.
 outcomes:
-  - k1: "Wie hängen C und C++ zusammen?"
-  - k1: "Wichtigste Unterschiede und Gemeinsamkeiten zu Java"
-  - k1: "Wichtigste Aufgaben des Präprozessors"
-  - k3: "Aufbau, Übersetzen und Starten von einfachen C++-Programmen"
-  - k3: "Standard-Ein-/Ausgabe-Kanäle in C++ sowie die Operatoren `>>` und `<<`"
-  - k3: "Nutzung der Basisdatentypen einschließlich der Modifikatoren"
-  - k3: "Deklaration von Variablen, Nutzung von Kontrollstrukturen und Operatoren"
-  - k3: "Interpretation von Integers im booleschen Kontext"
-  - k3: "Nutzung des Scope-Operators `::`, Namensräume"
-  - k3: "Benutzung von `sizeof` zur Bestimmung des Speicherbedarfs"
-  - k3: "Benutzung von `typedef` zur Definition neuer Typen (Aliase bestehender Typen)"
-  - k3: "Erinnerung: Automatisiertes Übersetzen mit Hilfe von GNU Make und einfachsten Makefiles"
+    - k1: "Wie hängen C und C++ zusammen?"
+    - k1: "Wichtigste Unterschiede und Gemeinsamkeiten zu Java"
+    - k1: "Wichtigste Aufgaben des Präprozessors"
+    - k3: "Aufbau, Übersetzen und Starten von einfachen C++-Programmen"
+    - k3: "Standard-Ein-/Ausgabe-Kanäle in C++ sowie die Operatoren `>>` und `<<`"
+    - k3: "Nutzung der Basisdatentypen einschließlich der Modifikatoren"
+    - k3: "Deklaration von Variablen, Nutzung von Kontrollstrukturen und Operatoren"
+    - k3: "Interpretation von Integers im booleschen Kontext"
+    - k3: "Nutzung des Scope-Operators `::`, Namensräume"
+    - k3: "Benutzung von `sizeof` zur Bestimmung des Speicherbedarfs"
+    - k3: "Benutzung von `typedef` zur Definition neuer Typen (Aliase bestehender Typen)"
+    - k3: "Erinnerung: Automatisiertes Übersetzen mit Hilfe von GNU Make und einfachsten Makefiles"
+    - k2: "Unterschied zwischen Deklaration und Definition, One Definition Rule"
+    - k2: "Problematik bei der Deklaration parameterloser Funktionen"
+    - k2: "Call-by-Value-Semantik bei der Parameterübergabe"
+    - k2: "Sichtbarkeit und Initialisierung von Variablen"
+    - k3: "Definition und Deklaration von Funktionen"
+    - k3: "Nutzung lokaler und globaler und lokaler statischer Variablen"
 #youtube:
 #  - link: "TODO"
 #    name: "VL Einführung in C++ (Erinnerungen an C)"
@@ -132,6 +156,45 @@ challenges: |
         unsigned int x = 0; x--;
         ```
         -->
+
+    *   Erklären Sie die Probleme bei folgendem Code-Schnipsel:
+
+        ```cpp
+        int maximum(int, int);
+        double maximum(int, int);
+        char maximum(int, int, int=10);
+        ```
+
+    *   Erklären Sie die Probleme bei folgendem Code-Schnipsel:
+
+        ```cpp
+        int maximum(int, int);
+        double maximum(double, double);
+
+        int main() {
+            cout << maximum(1, 2.2) << endl;
+        }
+        ```
+
+    *   Erklären Sie den Unterschied zwischen
+
+        ```c
+        int a=1;
+        int main() {
+            extern int a;
+            return 0;
+        }
+        ```
+
+        und
+
+        ```c
+        int a=1;
+        int main() {
+            int a = 4;
+            return 0;
+        }
+        ```
 ---
 
 
@@ -193,7 +256,7 @@ int main() {
 }
 ```
 
-::: notes
+::::::::: notes
 ### Beobachtungen
 
 Jedes (ausführbare) C++-Programm hat genau eine `main()`-Funktion. Die `main()`-Funktion ist
@@ -246,6 +309,835 @@ Ausführen können Sie das erzeugte Programm in der Konsole mit: `./helloworld`.
 Ordner ist üblicherweise (aus Sicherheitsgründen) nicht im Suchpfad für ausführbare Dateien
 enthalten. Deshalb muss man explizit angeben, dass ein Programm im aktuellen Ordner (`.`)
 ausgeführt werden soll.
+:::::::::
+
+[Konsole: HelloWorld.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/HelloWorld.cpp"}
+
+
+## Variablen, Operatoren, Kontrollfluss
+
+::: center
+[**Im Wesentlichen wie von C und Java gewohnt ... :-)**]{.alert}
+:::
+
+\bigskip
+\bigskip
+
+-   Wichtig(st)e Abweichung:
+
+    Im booleschen Kontext wird `int` als Wahrheitswert interpretiert: \newline
+    Alle Werte ungleich 0 entsprechen `true` (!)
+
+    ::: notes
+    **Anmerkung**: Dies steht im Widerspruch zu den Werten, die in der `main`-Funktion per
+    `return` zurückgeliefert werden: Hier bedeutet 0 in der Regel, dass alles OK war.
+    :::
+
+\bigskip
+
+=> Vorsicht mit
+
+``` c
+int c;
+if (c=4) { ... }
+```
+
+
+## Ein- und Ausgabe mit *printf* und *cin/cout*
+
+-   `printf(formatstring, ...)`
+
+    ``` cpp
+    string foo = "fluppie";
+    printf("hello world : %s\n", foo.c_str());
+    ```
+
+    ::: notes
+    -   Einbinden über `#include <cstdio>`
+    -   Format-String: Text und Formatierung der restlichen Parameter: `%[flags][width][.precision]conversion`
+
+        -   `flags`: hängt von der konkreten Ausgabe ab
+        -   `width`: Feldbreite
+        -   `precision`: Anzahl der Dezimalstellen
+        -   `conversion`: (Beispiele)
+
+            |     |                   |
+            | :-- | :---------------- |
+            | c   | Zeichen (Char)    |
+            | d   | Integer (dezimal) |
+            | f   | Gleitkommazahl    |
+    :::
+
+-   Standardkanäle: `cin` (Standardeingabe), `cout` (Standardausgabe), `cerr` (Standardfehlerausgabe)
+
+    ::: notes
+    -   Genauer: `cout` ist ein Ausgabestrom, auf dem der Operator `<<` schreibt
+    -   Einbinden über `#include <iostream>`
+    -   Implementierung der Ein- und Ausgabeoperatoren (`>>`, `<<`) für Basistypen und Standardklassen vorhanden
+    -   Automatische Konvertierungen für Basistypen und Standardklassen
+    :::
+
+    ``` cpp
+    // Ausgabe, auch verkettet
+    string foo = "fluppie";
+    cout << "hello world : " << foo << endl;
+
+    // liest alle Ziffern bis zum ersten Nicht-Ziffernzeichen
+    // (fuehrende Whitespaces werden ignoriert!)
+    int zahl; cin >> zahl;
+    ```
+
+    ::: notes
+    ``` cpp
+    // Einzelne Zeichen (auch Whitespaces) lesen
+    char c; cin.get(c);
+    ```
+    :::
+
+[Beispiel: cin.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/cin.cpp"}
+
+
+## Sichtbarkeit und Gültigkeit und Namespaces
+
+::: notes
+Wie in Java:
+
+-   Namen sind nur nach Deklaration und innerhalb des Blockes, in dem sie deklariert wurden, gültig
+-   Namen sind auch gültig für innerhalb des Blockes neu angelegte innere Blöcke
+-   Namen in inneren Blöcken können Namen aus äußeren Scopes überdecken
+
+Zusätzlich gibt es noch benannte Scopes und einen Scope-Operator.
+:::
+
+-   C++ enthält den Scope-Operator `::` => Zugriff auf global sichtbare Variablen
+
+    ``` cpp
+    int a=1;
+    int main() {
+        int a = 10;
+        cout << "lokal: " << a << "global: " << ::a << endl;
+    }
+    ```
+
+-   Alle Namen aus `XYZ` zugänglich machen: `using namespace XYZ;`
+
+    ``` cpp
+    using namespace std;
+    cout << "Hello World" << endl;
+    ```
+
+-   Alternativ gezielter Zugriff auf einzelne Namen: `XYZ::name`
+
+    ```cpp
+    std::cout << "Hello World" << std::endl;
+    ```
+
+::: notes
+-   Namensraum `XYZ` deklarieren
+
+    ```cpp
+    namespace XYZ {
+        ...
+    }
+    ```
+:::
+
+[Beispiel: cppScope.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/cppScope.cpp"}
+
+
+## Arrays und Vektoren in C++
+
+-   Syntax: `Typ Name[AnzahlElemente];`
+
+    ```c
+    int myArray[100];
+    int myArray2[] = {1, 2, 3, 4};
+    ```
+
+    ::: notes
+    -   [Compiler]{.alert} reserviert sofort Speicher auf dem [Stack]{.alert} \newline
+        => **statisch**: im Programmlauf nicht änderbar
+    -   Zugriff über den Indexoperator []
+    -   Achtung: "roher" Speicher, d.h. **keinerlei Methoden**
+    -   Größe nachträglich bestimmen mit `sizeof`:
+
+        ```c
+        int myArray[100], i;
+        int cnt = sizeof(myArray)/sizeof(myArryay[0]);
+        ```
+
+    **Guter Stil**: Anzahl der Elemente als Konstante deklarieren:
+    Statt `int myArray[100];` besser
+    ```c
+    #define LENGTH 100
+    int myArray[LENGTH];
+    ```
+    :::
+
+-   Vordefinierter Vektor-Datentyp `vector`
+
+    ::: notes
+    -   Einbinden über `#include <vector>`
+    -   Parametrisierter Datentyp (C++: Templates) - Nutzung analog wie in Java
+        (Erstellung von Templateklassen und -methoden aber deutlich anders!)
+    -   Anlegen eines neuen Arrays mit 10 Elementen für Integer:
+    :::
+
+    ```cpp
+    vector<int> v(10);
+    vector<double> meinVektor = {1.1, 2.2, 3.3, 4.4};
+    meinVektor.push_back(5.5);
+    cout << meinVektor.size() << endl;
+    ```
+
+    ::: notes
+    -   Zugriff auf Elemente:
+    :::
+
+    ```cpp
+    cout << v[0] << endl;        // ohne Bereichspruefung!
+    cout << v.at(1000) << endl;  // mit interner Bereichspruefung
+    ```
+
+    ::: notes
+    -   Zuweisung (mit Kopieren):
+    :::
+
+    ```cpp
+    vector<double> andererVektor;
+    andererVektor = meinVektor;
+    ```
+
+    ::: notes
+    -   Dynamische Datenstruktur:
+
+    ```cpp
+    vector<int> meineDaten;      // initiale Groesse: 0
+    meineDaten.push_back(123);   // Wert anhaengen
+
+    meineDaten.pop_back();  // Wert loeschen
+    meineDaten.empty();     // leer?
+    ```
+    :::
+
+::: notes
+[**Vorsicht!**]{.alert} `vector<int> arr();` ist **kein** Vektor der Länge 0,
+sondern deklariert eine **neue Funktion**!
+:::
+
+
+## Alias-Namen für Typen mit *typedef* und *using*
+
+*   Syntax: `typedef existTyp neuerName;` (C, C++)
+
+    ``` c
+    typedef unsigned long uint32;
+    uint32 x, y, z;
+    ```
+
+    ::: notes
+    Im Beispiel ist `uint32` ein neuer Name für den existierenden Typ `unsigned long`, d.h.
+    die Variablen `x`, `y` und `z` sind `unsigned long`.
+    :::
+
+\bigskip
+
+*   Syntax: `using neuerName = existTyp;` (C++)
+
+    ```cpp
+    typedef unsigned long uint32;       // C, C++
+    using uint32 = unsigned long;       // C++11
+
+    typedef std::vector<int> foo;       // C, C++
+    using foo = std::vector<int>;       // C++11
+
+    typedef void (*fp)(int,double);     // C, C++
+    using fp = void (*)(int,double);    // C++11
+    ```
+
+    ::: notes
+    Seit C++11 gibt es das Schlüsselwort `using` für Alias-Deklarationen (analog zu `typedef`).
+    Dieses funktioniert im Gegensatz zu `typedef` auch für Templates mit (teilweise) gebundenen
+    Template-Parametern.
+    :::
+
+
+
+
+## Erinnerungen an C - Vergleich mit C++
+
+::::::::: notes
+`{{% notice style="important" title="Erinnerungen an C - Vergleich mit C++" %}}`{=markdown}
+`{{% expand title="Expand me..." %}}`{=markdown}
+
+### Basisdatentypen
+
+|          |                                             |
+|:---------|:--------------------------------------------|
+| `char`   | Zeichen (ASCII, 8 Bit bzw. 1 Byte)          |
+| `int`    | Ganze Zahl (16, 32 oder 64 Bit)             |
+| `float`  | Gleitkommazahl (typ. 32 Bit)                |
+| `double` | Doppelt genaue Gleitkommazahl (typ. 64 Bit) |
+| `void`   | Ohne/kein Wert                              |
+| `bool`   | `true`, `false`                             |
+
+Außerdem sind Arrays und Pointer mit diesen Typen möglich.
+
+
+### Typmodifikatoren ändern Bedeutung
+
+Vorangestellte Modifikatoren ändern Bedeutung:
+
+1.  Länge im Speicher
+
+    |         |                                        |
+    | :------ | :------------------------------------- |
+    | `short` | Speicher: halbe Wortlänge              |
+    | `long`  | Speicher: doppelte/dreifache Wortlänge |
+
+2.  Vorzeichen
+
+    |            |                                     |
+    | :--------- | :---------------------------------- |
+    | `signed`   | mit Vorzeichen (Default bei Zahlen) |
+    | `unsigned` | ohne Vorzeichen                     |
+
+Anwendung auf ganze Zahlen:
+
+-   `short` und `long` sind Synonyme für `short int` und `long int`
+-   `long long` ist typischerweise eine ganze Zahl mit 8 Byte
+-   `unsigned char` sind Zahlen von 0, ..., 255 (1 Byte)
+-   zusätzlich: `long double` (nur diese Form)
+
+Sie können `short`, `long` und `long long` nur für ganze Zahlen (`int`) nutzen, mit der Ausnahme `long double`.
+Dagegen können `signed` und `unsigned` sowohl für `char` als auch für `int` benutzt werden.
+
+vgl. [en.wikipedia.org/wiki/C_data_types](https://en.wikipedia.org/wiki/C_data_types)
+
+
+### Größe eines Datentyps ist maschinenabhängig
+
+::: center
+[**Der reservierte Speicherbereich und damit auch der Zahlenbereich für einen einfachen Typ in C/C++ ist maschinenabhängig!**]{.alert}
+:::
+
+-   Zahlenbereiche für konkrete Implementierung in Header-Files definiert
+
+    `limits.h` und `float.h`: Konstanten `INT_MAX`, `INT_MIN`, ...
+
+-   Alternativ Herausfinden der Größe in Bytes: Operator `sizeof`
+
+    Syntax: `sizeof(Typ)`
+
+Es gilt in C/C++:
+
+-   `sizeof(unsigned char)` $=$ 1
+-   `sizeof(short int)` $=$ 2
+-   `sizeof(short int)` $\le$ `sizeof(int)` $\le$ `sizeof(long int)`
+-   `sizeof(float)` $\le$ `sizeof(double)` $\le$ `sizeof(long double)`
+
+**Hinweis Arrays**: `sizeof` gibt immer die Anzahl der Bytes für einen Typ oder eine
+Variable zurück. Bei Array ist das nicht unbedingt die Anzahl der Elemente im Array!
+
+Beispiel:
+
+``` c
+char a[10];
+double b[10];
+```
+
+`sizeof(a)` würde den Wert 10 als Ergebnis liefern, da ein `char` in C/C++ immer exakt ein
+Byte benötigt und entsprechend 10 `char` 10 Byte. `sizeof(b)` ist maschinenabhängig und
+liefert die Anzahl der Bytes, die man für die Darstellung von 10 Double-Werten benötigt.
+
+Wenn man die Anzahl der Elemente im Array mit `sizeof` herausfinden will, muss man den
+Gesamtwert für das Array noch durch den Speicherbedarf eines Elements teilen, also
+beispielsweise `sizeof(b)/sizeof(b[0])`.
+
+
+### (Beispiele für) Schleifen und Kontrollstrukturen in C/C++
+
+``` c
+int x=5, y=1;
+
+
+if (x>5) {
+    x++;
+} else if(y<=1) {
+    y = y-x;
+} else {
+    y = 2*x;
+}
+
+
+while (y>0) {
+    y--;
+}
+
+
+for (x=0; x<10; x++) {
+    y = y*y;
+}
+```
+
+
+### Funktionen in C und C++
+
+-   Funktionen sind mit Methoden in Java vergleichbar
+
+    => sind aber [unabhängig]{.alert} von Klassen bzw. Objekten
+
+-   Syntax:
+
+    ``` cpp
+    Rueckgabetyp Funktionsname(Parameterliste) {
+        Anweisungen (Implementierung)
+    }
+    ```
+
+-   Aufruf: Nennung des Namens (mit Argumenten) im Programmcode
+
+    ``` cpp
+    int x = foo(42);
+    ```
+
+Anmerkung: Unterschied "Parameter" und "Argument":
+
+-   Funktion hat "Parameter" in ihrer Parameterliste, auch "formale Parameter" genannt
+-   Beim Aufruf werden "Argumente" übergeben, auch "aktuelle Parameter" genannt
+
+In der Praxis verwendet man beide Begriffe i.d.R. synonym.
+
+#### Funktionen: Deklaration vs. Definition
+
+-   **Deklaration**: [(Funktions-) Prototyp]{.alert}: Festlegen von
+    [Signatur]{.alert} [(d.h. Funktionsname und Anzahl, Typ, Reihenfolge der Parameter)]{.notes} u. Rückgabetyp
+
+    ``` cpp
+    void machWas(int, int);
+    ```
+
+-   **Definition**: [Implementierung]{.alert} der Funktion
+
+    ``` cpp
+    void machWas(int a, int b) {
+        cout << "a: " << a << ", b: " << b << endl;
+    }
+    ```
+
+-   Compiler "liest" Quellcode von oben nach unten
+-   Funktionen müssen [(wie alle anderen Symbole auch)]{.notes} [vor]{.alert} ihrer Verwendung zumindest
+    [deklariert]{.alert} sein, d.h. es muss zumindest ihre Signatur bekannt sein (siehe nächste Folie)
+-   Deklaration: Variablennamen können weggelassen werden
+
+`{{% notice style="info" title="Deklaration vs. Definition" %}}`{=markdown}
+-   **Deklaration**: Macht einen Namen bekannt und legt den Typ der Variablen bzw.
+    die Schnittstelle der Funktionen fest.
+-   **Definition**: Deklaration plus Reservierung von Speicherplatz für die
+    Variable oder Implementierung einer Funktion/Struktur/...
+`{{% /notice %}}`{=markdown}
+
+[Konsole: simplefunction.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/simplefunction.cpp"}
+
+#### One Definition Rule (für Funktionen)
+
+::: center
+Jede Funktion darf im **gesamten** Programm nur [**einmal definiert**]{.alert} sein!
+:::
+
+#### Funktionen und Parameter
+
+-   Funktionen "ohne" Parameter:
+
+    Leere Parameter-Liste^[Achtung: C-Compiler akzeptiert [**alle**]{.alert}
+    Parameter!] oder Schlüsselwort `void`
+
+    ```c
+    void fkt();
+    void fkt(void);
+    ```
+
+-   Funktionen **mit** Parameter:
+
+    -   Deklaration: Variablennamen können weggelassen werden
+    -   Definition: Variablennamen müssen angegeben werden
+
+    ```c
+    void fkt(int, char);
+    void fkt(int a, char b);
+
+    void fkt(int a, char b) { ... }
+    ```
+
+##### Leere Parameterliste in C
+
+Wenn eine Funktion keine Parameter hat, können Sie wie in C die Parameterliste
+entweder einfach leer lassen (`int fkt();`) oder das Schlüsselwort `void`
+nutzen (`int fkt(void);`).
+
+Betrachten Sie folgendes Beispiel:
+
+``` c
+// Legal in C
+int wuppie();                   // Deklaration: "Ich verrate Dir nicht, wieviele Parameter wuppie() hat."
+int wuppie(int x) { return x; } // Aufruf mit Argumenten => ist okay
+
+// Fehler in C
+int fluppie(void);               // Deklaration: fluppie() hat KEINE Parameter!
+int fluppie(int x) { return x; } // Aufruf mit Argumenten => Compiler-Fehler
+```
+
+Wenn Sie eine mit leerer Parameterliste deklarierte Funktion definieren bzw.
+aufrufen, akzeptiert der C-Compiler dennoch **alle** übergebenen Parameter. Dies
+kann zu schwer verständlichen Fehlern führen! Sobald eine Funktion explizit
+mit dem Schlüsselwort `void` in der Parameterliste deklariert wird, **muss**
+diese dann auch ohne Parameter aufgerufen werden.
+
+[=> **Bevorzugen Sie in C die Variante mit dem Schlüsselwort `void`!**]{.alert}
+
+##### Leere Parameterliste in C++
+
+Keine Parameter: Leere Liste und Schlüsselwort `void` **gleichwertig**
+
+``` cpp
+void fkt();
+void fkt(void);
+```
+
+#### Defaultparameter in C++
+
+-   Parameter mit Defaultwerten am [**Ende**]{.alert} der Parameterliste
+-   Bei Trennung von Deklaration und Definition: Defaultparameter
+    [**nur**]{.alert} in Deklaration
+
+``` cpp
+// Deklaration
+void f(int i, int j=1, int k=2);
+
+// Definition
+void f(int i, int j, int k) { ... }
+```
+
+#### Überladen von Funktionen
+
+-   Funktionen im **gleichen Gültigkeitsbereich** können überladen werden
+-   Zu beachten:
+    1.  Funktionsname identisch
+    2.  Signatur (Anzahl, Typen der Parameter) muss [unterschiedlich]{.alert} sein
+    3.  Rückgabewert darf variieren
+
+=> [Warnung]{.alert}: Überladene Funktionen sollten gleichartige
+Operationen für unterschiedliche Datentypen bereitstellen!
+
+#### Probleme beim Überladen von Funktionen
+
+1.  Defaultparameter
+
+    ``` cpp
+    int maximum(int, int);
+    int maximum(int, int, int=10);
+    ```
+
+2.  Identische Signatur, Unterschied nur im Rückgabewert
+
+    ``` cpp
+    int maximum(int, int);
+    double maximum(int, int);
+    ```
+
+3.  Überladen nur für Funktionen des selben Gültigkeitsbereichs!
+
+    ``` cpp
+    #include <iostream>
+    using namespace std;
+
+    void f(char c) {
+        cout << "f(char): " << c << endl;
+    }
+    void f(int i) {
+        cout << "f(int): " << i << endl;
+    }
+
+
+    int main() {
+        void f(int i);  // f(char) nicht mehr sichtbar!
+        f('a');
+
+        return 0;
+    }
+    ```
+
+#### Parameterübergabe in C/C++: Call-by-Value
+
+:::::: columns
+::: {.column width="40%"}
+
+``` cpp
+int add_5(int x) {
+    x += 5;
+    return x;
+}
+
+int main() {
+    int erg, i=0;
+    erg = add_5(i);
+}
+```
+
+:::
+::: {.column width="60%"}
+
+```
+ Aufrufer-Sicht
+              i                      erg
+           +-----+                 +-----+
+           |     |                 |     |
+           +--+--+                 +--^--+
+              |                       |
+              |                       |
+--------------+-----------------------+-----
+  Kopie bei   |                Kopie  |
+  Aufruf      |                bei    |
+              |                return |
+           +--v--+                    |
+           |     +--------------------+
+           +-----+
+              x
+ Funktionssicht
+```
+
+:::
+::::::
+
+-   Default in C/C++ ist die [call-by-value]{.alert} Semantik:
+    -   Argumente werden bei Übergabe [kopiert]{.alert}
+    -   Ergebniswerte werden bei Rückgabe [kopiert]{.alert}
+-   Folgen:
+    -   Keine Seiteneffekte durch Verändern von übergebenen Strukturen
+    -   Negative Auswirkungen auf Laufzeit bei großen Daten
+
+Ausnahme: Übergabe von C++-Referenzen oder Pointern
+(wobei Pointer streng genommen auch kopiert werden, also per call-by-value übergeben werden ...)
+
+
+### Unterschiedliche Variablenarten
+
+#### Lokale Variablen ("automatische Variablen")
+
+```cpp
+int b = 1;
+
+void f() {
+    int b = 42;
+}
+
+int main() {
+    int b = 3;
+
+    {
+        int b = 7;
+    }
+}
+```
+
+-   Innerhalb einer Funktion (oder Blockes) definierte Variablen
+-   Gilt auch für Variablen aus Parameterliste
+-   Überdecken **globale Variablen** gleichen Namens
+-   Sichtbarkeit:
+    -   Außerhalb der Funktion/Blockes nicht zugreifbar
+    -   Beim Betreten der Funktion Reservierung von Speicherplatz für lokale
+        Variablen
+    -   Dieser wird beim Verlassen des Blockes/Funktion automatisch wieder
+        freigegeben
+    -   Namen sind nur nach Deklaration und innerhalb des Blockes, in dem sie
+        deklariert wurden, gültig
+    -   Namen sind auch gültig für innerhalb des Blockes neu angelegte innere
+        Blöcke
+
+    Software Engineering: Vermeiden Sie lokale Namen, die Namen aus einem
+    äußeren Scope überdecken!
+
+=> Werden auch als [**automatische Variablen**]{.alert} bezeichnet
+
+#### Globale Variablen ("externe Variablen")
+
+```c
+/* ======== Datei main.cpp (einzeln kompilierbar) ======== */
+int main() {
+    extern int global;  // Deklaration
+}
+
+int global;             // Definition
+```
+
+```c
+/* ======== Datei foo.cpp (einzeln kompilierbar) ======== */
+extern int global;      // Deklaration
+
+void foo() {
+    global = 45;
+}
+```
+
+-   Globale Variablen: Außerhalb **jeder** Funktion definierte Variablen
+-   Globale Variablen gelten in [allen]{.alert} Teilen des Programms
+-   Auch in anderen Dateien! => müssen bei _Nutzung_ in Funktionen als `extern` deklariert werden
+-   Existieren die **gesamte** Programmlebensdauer über
+
+=> Werden auch als [**externe Variablen**]{.alert} bezeichnet
+
+Die Dateien sind einzeln kompilierbar (`extern` sagt dem Compiler, dass
+die Variable woanders definiert ist) => erst der Linker löst das auf.
+
+_Hinweis_: Bei globalen Konstanten in C++ brauchen Sie zusätzlich auch bei der Definition ein "`extern`",
+da die Konstante sonst nur in ihrer Datei sichtbar ist.
+
+#### Statische lokale Variablen
+
+```cpp
+void foo() {
+    static int x = 42;
+    x++;
+}
+
+int main() {
+    foo();  foo();  foo();
+}
+```
+
+-   Lokale Variablen mit "Gedächtnis": Definition mit dem vorangestellten Schlüsselwort "static"
+
+    ```c
+    static int callCount;
+    ```
+
+-   Eigenschaften:
+    -   Wert bleibt für die folgenden Funktionsaufrufe erhalten
+    -   Wert kann in der Funktion verändert werden
+    -   Dennoch: lokale Variable, d.h. von außen nicht sichtbar/gültig
+
+_Hinweis_: `static` für globale Variablen bedeutet etwas anderes! [(s.u. "Sichtbarkeit")]{.notes}
+
+#### Initialisierung von Variablen
+
+(Automatische) Initialisierung von Variablen hängt von ihrer Speicherklasse ab!
+
+-   **Automatisch**
+    -   Werden [nicht]{.alert} automatisch initialisiert (!)
+    -   Bei vorgegebenem Wert ab Aufruf der Funktion
+-   **Extern**
+    -   Mit dem Wert 0 oder vorgegebenem Wert
+    -   Bereits vor Programmstart (im Code enthalten)
+-   **Statisch**
+    -   Mit dem Wert 0 oder vorgegebenem Wert
+    -   Ab erstem Aufruf der Funktion
+
+#### Sichtbarkeit globaler Variablen (und Funktionen) beschränken
+
+-   Beschränkung der Gültigkeit von **globalen Variablen** auf die Datei, wo
+    sie definiert sind: **Schlüsselwort `static`**
+    -   werden (weiterhin) automatisch mit 0 initialisiert
+    -   sind nun nur in der Datei sichtbar/gültig, wo sie definiert sind
+    -   dient zur Vermeidung von Namenskonflikten bei globalen Variablen
+-   Sichtbarkeitsbeschränkung gilt auch für **Funktionen**
+
+`static` für globale Variablen beschränkt deren Sichtbarkeit auf die Datei,
+wo sie definiert sind. D.h. man kann diese dann nicht in einer anderen Datei
+nutzen, nicht mal mit `extern` ...
+
+`static` für Funktionen beschränkt deren Sichtbarkeit ebenfalls auf die Datei,
+wo sie definiert sind. Man kann sie dann nur in anderen Funktionen, die
+ebenfalls in der selben Datei definiert werden, nutzen. In anderen Dateien sind
+die `static` Funktionen _nicht_ sichtbar. D.h. es macht auch keinen Sinn, sie
+in einer Header-Datei zu deklarieren! (In der Praxis liefert der gcc dann sogar
+einen Fehler!). Das ist mit `private` Methoden vergleichbar.
+
+
+### Globale Konstanten
+
+#### In C funktionieren globale Konstanten wie globale Variablen
+
+-   **Definition** in einer Übersetzungseinheit ohne "`extern`"
+
+    => Definition als "`extern`" wird in C mit einer Warnung quittiert!
+
+-   Nutzung in anderen Übersetzungseinheiten durch (erneute)
+    **Deklaration** als "`extern`"
+
+-   Beispiel:
+
+    ```c
+    /* ======== Datei main.c ======== */
+    const int PI=123;       // Definition OHNE "extern" (C)
+
+    int main() {
+        fkt_a1();
+        int x = PI;
+        ...
+    }
+    ```
+
+    ```c
+    /* ======== Datei a.c ======== */
+    extern const int PI;    // (erneute) Deklaration mit "extern"
+    void fkt_a1() {
+        int x = PI;
+        ...
+    }
+    ```
+
+#### In C++ sind globale Konstanten per Default nur in ihrer Definitionsdatei sichtbar!
+
+-   Abhilfe: Definieren _und_ Deklarieren mit `extern`
+
+-   Beispiel:
+
+    ```cpp
+    /* ======== Datei main.cpp ======== */
+    extern const int PI=123;    // Definition MIT "extern" (C++)
+
+    int main() {
+        fkt_a1();
+        int x = PI;
+        ...
+    }
+    ```
+
+    ```cpp
+    /* ======== Datei a.cpp ======== */
+    extern const int PI;        // (erneute) Deklaration mit "extern"
+    void fkt_a1() {
+        int x = PI;
+        ...
+    }
+    ```
+
+#### Alternativ: In beiden Sprachen Konstanten vorwärts deklarieren
+
+Folgende Definition und (Vorwärts-) Deklaration der Konstanten `PI`
+funktioniert sowohl in C als auch in C++:
+
+```c
+/* ======== Datei main.c ======== */
+extern const int PI;    // (Vorwärts-) Deklaration mit "extern"
+const int PI=123;       // Definition OHNE "extern"
+
+int main() {
+    fkt_a1();
+    int x = PI;
+    ...
+}
+```
+
+```c
+/* ======== Datei a.c ======== */
+extern const int PI;    // (erneute) Deklaration mit "extern"
+void fkt_a1() {
+    int x = PI;
+    ...
+}
+```
+
 
 ### Automatisieren der Buildvorgänge: GNU Make
 
@@ -346,346 +1238,12 @@ Regel des Targets `tollesProgramm` ausgeführt, um die Datei `tollesProgramm` zu
 -   `make <ziel>` \newline
     Sucht nach Datei mit dem Namen "GNUmakefile", "makefile" oder "Makefile" und erzeugt das
     Ziel `<ziel>`
-:::
 
-[Konsole: HelloWorld.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/HelloWorld.cpp"}
+`{{% /expand %}}`{=markdown}
+`{{% /notice %}}`{=markdown}
+:::::::::
 
 
-## Variablen, Operatoren, Kontrollfluss
-
-::: center
-[**Im Wesentlichen wie von Java gewohnt ... :-)**]{.alert}
-:::
-
-\bigskip
-\bigskip
-
--   Wichtig(st)e Abweichung:
-
-    Im booleschen Kontext wird `int` als Wahrheitswert interpretiert: \newline
-    Alle Werte ungleich 0 entsprechen `true` (!)
-
-    ::: notes
-    **Anmerkung**: Dies steht im Widerspruch zu den Werten, die in der `main`-Funktion per
-    `return` zurückgeliefert werden: Hier bedeutet 0 in der Regel, dass alles OK war.
-    :::
-
-\bigskip
-
-=> Vorsicht mit
-
-``` c
-int c;
-if (c=4) { ... }
-```
-
-::: notes
-**Beispiele für Schleifen und Kontrollstrukturen in C/C++**
-
-``` c
-int x=5, y=1;
-
-
-if (x>5) {
-    x++;
-} else if(y<=1) {
-    y = y-x;
-} else {
-    y = 2*x;
-}
-
-
-while (y>0) {
-    y--;
-}
-
-
-for (x=0; x<10; x++) {
-    y = y*y;
-}
-```
-:::
-
-
-## Basisdatentypen
-
-|          |                                             |
-|:---------|:--------------------------------------------|
-| `char`   | Zeichen (ASCII, 8 Bit bzw. 1 Byte)          |
-| `int`    | Ganze Zahl (16, 32 oder 64 Bit)             |
-| `float`  | Gleitkommazahl (typ. 32 Bit)                |
-| `double` | Doppelt genaue Gleitkommazahl (typ. 64 Bit) |
-| `void`   | Ohne/kein Wert                              |
-| `bool`   | `true`, `false`                             |
-
-Außerdem Arrays und Pointer mit diesen Typen möglich.
-
-
-::: notes
-## Typmodifikatoren ändern Bedeutung
-
-Vorangestellte Modifikatoren ändern Bedeutung:
-
-1.  Länge im Speicher
-
-    |         |                                        |
-    | :------ | :------------------------------------- |
-    | `short` | Speicher: halbe Wortlänge              |
-    | `long`  | Speicher: doppelte/dreifache Wortlänge |
-
-2.  Vorzeichen
-
-    |            |                                     |
-    | :--------- | :---------------------------------- |
-    | `signed`   | mit Vorzeichen (Default bei Zahlen) |
-    | `unsigned` | ohne Vorzeichen                     |
-
-Anwendung auf ganze Zahlen:
-
--   `short` und `long` sind Synonyme für `short int` und `long int`
--   `long long` ist typischerweise eine ganze Zahl mit 8 Byte
--   `unsigned char` sind Zahlen von 0, ..., 255 (1 Byte)
--   zusätzlich: `long double` (nur diese Form)
-
-Sie können `short`, `long` und `long long` nur für ganze Zahlen (`int`) nutzen, mit der Ausnahme `long double`.
-Dagegen können `signed` und `unsigned` sowohl für `char` als auch für `int` benutzt werden.
-
-vgl. [en.wikipedia.org/wiki/C_data_types](https://en.wikipedia.org/wiki/C_data_types)
-:::
-
-
-## Arrays und Vektoren in C++
-
--   Syntax: `Typ Name[AnzahlElemente];`
-
-    ```c
-    int myArray[100];
-    int myArray2[] = {1, 2, 3, 4};
-    ```
-
-    ::: notes
-    **Guter Stil**: Anzahl der Elemente als Konstante deklarieren
-
-    -   [Compiler]{.alert} reserviert sofort Speicher auf dem [Stack]{.alert} \newline
-        => **statisch**: im Programmlauf nicht änderbar
-    -   Zugriff über den Indexoperator []
-    -   Achtung: "roher" Speicher, d.h. **keinerlei Methoden**
-    -   Größe nachträglich bestimmen mit `sizeof`:
-
-        ```c
-        int myArray[100], i;
-        int cnt = sizeof(myArray)/sizeof(myArryay[0]);
-        ```
-    :::
-
--   Vordefinierter Vektor-Datentyp `vector`
-
-    ::: notes
-    -   Einbinden über `#include <vector>`
-    -   Anlegen eines neuen Arrays mit 10 Elementen für Integer:
-    :::
-
-    ```cpp
-    vector<int> v(10);
-    vector<double> meinVektor = {1.1, 2.2, 3.3, 4.4};
-    meinVektor.push_back(5.5);
-    cout << meinVektor.size() << endl;
-    ```
-
-    ::: notes
-    -   Zugriff auf Elemente:
-    :::
-
-    ```cpp
-    cout << v[0] << endl;       // ohne Bereichspruefung!
-    cout << v.at(1000) << endl; // mit interner Bereichspruefung
-    ```
-
-    ::: notes
-    -   Zuweisung (mit Kopieren):
-    :::
-
-    ```cpp
-    vector<double> andererVektor;
-    andererVektor = meinVektor;
-    ```
-
-    ::: notes
-    -   Dynamische Datenstruktur:
-
-    ```cpp
-    vector<int> meineDaten;      // initiale Groesse: 0
-    meineDaten.push_back(123);   // Wert anhaengen
-
-    meineDaten.pop_back(); // Wert loeschen
-    meineDaten.empty();    // leer?
-    ```
-    :::
-
-::: notes
-[**Vorsicht!**]{.alert} `vector<int> arr();` ist **kein** Vektor der Länge 0,
-sondern deklariert eine **neue Funktion**!
-:::
-
-
-## Größe eines Datentyps ist maschinenabhängig
-
-::: center
-[**Der reservierte Speicherbereich und damit auch der Zahlenbereich für einen einfachen Typ in C/C++ ist maschinenabhängig!**]{.alert}
-:::
-
-::: notes
--   Zahlenbereiche für konkrete Implementierung in Header-Files definiert
-
-    `limits.h` und `float.h`: Konstanten `INT_MAX`, `INT_MIN`, ...
-
--   Alternativ Herausfinden der Größe in Bytes: Operator `sizeof`
-
-    Syntax: `sizeof(Typ)`
-:::
-
-\bigskip
-\bigskip
-\bigskip
-
-Es gilt in C/C++:
-
--   `sizeof(unsigned char)` $=$ 1
--   `sizeof(short int)` $=$ 2
--   `sizeof(short int)` $\le$ `sizeof(int)` $\le$ `sizeof(long int)`
--   `sizeof(float)` $\le$ `sizeof(double)` $\le$ `sizeof(long double)`
-
-::: notes
-**Hinweis Arrays**: `sizeof` gibt immer die Anzahl der Bytes für einen Typ oder eine
-Variable zurück. Bei Array ist das nicht unbedingt die Anzahl der Elemente im Array!
-
-Beispiel:
-
-``` c
-char a[10];
-double b[10];
-```
-
-`sizeof(a)` würde den Wert 10 als Ergebnis liefern, da ein `char` in C/C++ immer exakt ein
-Byte benötigt und entsprechend 10 `char` 10 Byte. `sizeof(b)` ist maschinenabhängig und
-liefert die Anzahl der Bytes, die man für die Darstellung von 10 Double-Werten benötigt.
-
-Wenn man die Anzahl der Elemente im Array mit `sizeof` herausfinden will, muss man den
-Gesamtwert für das Array noch durch den Speicherbedarf eines Elements teilen, also
-beispielsweise `sizeof(b)/sizeof(b[0])`.
-:::
-
-
-## Alias-Namen für Typen mit typedef
-
-Syntax: `typedef existTyp neuerName;`
-
-``` c
-typedef unsigned long uint32;
-uint32 x, y, z;
-```
-
-::: notes
-Im Beispiel ist `unint32` ein neuer Name für den existierenden Typ `unsigned long`, d.h.
-die Variablen `x`, `y` und `z` sind `unsigned long`.
-:::
-
-
-## Ein- und Ausgabe mit printf() und cin/cout
-
--   `printf(formatstring, ...)`
-
-    ::: notes
-    -   Einbinden über `#include <cstdio>`
-    -   Format-String: Text und Formatierung der restlichen Parameter: `%[flags][width][.precision]conversion`
-
-        -   `flags`: hängt von der konkreten Ausgabe ab
-        -   `width`: Feldbreite
-        -   `precision`: Anzahl der Dezimalstellen
-        -   `conversion`: (Beispiele)
-
-            |     |                   |
-            | :-- | :---------------- |
-            | c   | Zeichen (Char)    |
-            | d   | Integer (dezimal) |
-            | f   | Gleitkommazahl    |
-    :::
-
--   Standardkanäle: `cin` (Standardeingabe), `cout` (Standardausgabe), `cerr` (Standardfehlerausgabe)
-
-    ::: notes
-    -   Genauer: `cout` ist ein Ausgabestrom, auf dem der Operator `<<` schreibt
-    -   Einbinden über `#include <iostream>`
-    -   Implementierung der Ein- und Ausgabeoperatoren (`>>`, `<<`) für Basistypen und Standardklassen vorhanden
-    -   Automatische Konvertierungen für Basistypen und Standardklassen
-    :::
-
-    ``` cpp
-    // Ausgabe, auch verkettet
-    string foo = "fluppie";
-    cout << "hello world :" << foo << endl;
-
-    // liest alle Ziffern bis zum ersten Nicht-Ziffernzeichen
-    // (fuehrende Whitespaces werden ignoriert!)
-    int zahl; cin >> zahl;
-    ```
-
-    ::: notes
-    ``` cpp
-    // Einzelne Zeichen (auch Whitespaces) lesen
-    char c; cin.get(c);
-    ```
-    :::
-
-[Beispiel: cin.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/cin.cpp"}
-
-
-## Sichtbarkeit und Gültigkeit und Namespaces
-
-::: notes
-Wie in Java:
-
--   Namen sind nur nach Deklaration und innerhalb des Blockes, in dem sie deklariert wurden, gültig
--   Namen sind auch gültig für innerhalb des Blockes neu angelegte innere Blöcke
--   Namen in inneren Blöcken können Namen aus äußeren Scopes überdecken
-
-Zusätzlich gibt es noch benannte Scopes und einen Scope-Operator.
-:::
-
--   C++ enthält den Scope-Operator `::` => Zugriff auf global sichtbare Variablen
-
-    ``` cpp
-    int a=1;
-    int main() {
-        int a = 10;
-        cout << "lokal: " << a << "global: " << ::a << endl;
-    }
-    ```
-
--   Alle Namen aus `XYZ` zugänglich machen: `using namespace XYZ;`
-
-    ``` cpp
-    using namespace std;
-    cout << "Hello World" << endl;
-    ```
-
--   Alternativ gezielter Zugriff auf einzelne Namen: `XYZ::name`
-
-    ```cpp
-    std::cout << "Hello World" << std::endl;
-    ```
-
-::: notes
--   Namensraum `XYZ` deklarieren
-
-    ```cpp
-    namespace XYZ {
-        ...
-    }
-    ```
-:::
-
-[Beispiel: cppScope.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/cppScope.cpp"}
 
 
 ## Wrap-Up
@@ -702,6 +1260,7 @@ Zusätzlich gibt es noch benannte Scopes und einen Scope-Operator.
     -   Integer können im booleschen Kontext ausgewertet werden
     -   Operator `sizeof` zur Bestimmung des Speicherbedarfs
     -   Alias-Namen für existierende Typen mit `typedef` definierbar
+    -   Funktionen mit Default-Parametern und Überladung
 
 
 

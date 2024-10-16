@@ -250,7 +250,7 @@ class Dummy {
 
 -   Anmerkungen:
     -   Beim Überladen muss die Arität erhalten bleiben
-    -   Nur existierende Operatoren lassen sich überladen \newline
+    -   Nur *existierende* Operatoren lassen sich überladen \newline
         => Es lassen sich keine neuen Operatoren erschaffen
 
 \bigskip

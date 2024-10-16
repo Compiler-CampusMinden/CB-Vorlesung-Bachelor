@@ -154,10 +154,10 @@ die sogenannten ["Big Three"]{.alert}:
 -   Destruktor: Gegenstück zum Konstruktor
 -   Zuweisungsoperator (`operator=`)
 
-*Anmerkung*: Für Fortgeschrittenere sei hier auf die in C++11 eingeführte und den Folgeversionen verbesserte
-und verfeinerte [Move-Semantik](https://en.wikipedia.org/wiki/C%2B%2B11#Rvalue_references_and_move_constructors)
-und die entsprechenden Varianten der Ctoren und Operatoren verwiesen. Man spricht deshalb mittlerweile auch gern
-von den "Big Five" bzw. der ["rule of five"](https://en.wikipedia.org/wiki/Rule_of_three_(C%2B%2B_programming)) ...
+*Anmerkung*: Für Fortgeschrittenere sei hier auf die in C++11 eingeführte und den Folgeversionen verbesserte und
+verfeinerte [Move-Semantik](https://en.wikipedia.org/wiki/C%2B%2B11#Rvalue_references_and_move_constructors) und
+die entsprechenden Varianten der Konstruktoren und Operatoren verwiesen. Man spricht deshalb mittlerweile auch gern
+von den "Big Five" bzw. der ["rule of five"](https://en.wikipedia.org/wiki/Rule_of_three_(C%2B%2B_programming)).
 :::
 
 ```cpp
@@ -191,7 +191,7 @@ Dummy::Dummy &operator=(const Dummy &d) {
     (Konstruktor mit vorgesetzter Tilde)
 -   Wird aufgerufen:
     -   wenn ein Objekt seinen Scope verlässt, oder
-    -   wenn explizit `delete` [für einen Pointer auf ein Objekt (auf dem Heap!)]{.notes} aufgerufen wird
+    -   wenn explizit `delete` für einen Pointer auf ein Objekt (auf dem Heap!) aufgerufen wird
 -   Default-Destruktor ruft Destruktoren der Objekt-Attribute auf
 
 [Konsole: destruktor.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/destruktor.cpp"}
@@ -358,14 +358,14 @@ auf den Pointer auf das Objekt im Heap), d.h. Sie brauchen im Destruktor **kein*
 `delete` auf "sich selbst" (das ist wie oben demonstriert sogar schädlich)!
 
 `{{% notice style="caution" title="Warnung" %}}`{=markdown}
-Auch wenn es zunächst irgendwie sinnvoll aussieht - rufen Sie niemals nie `delete this` im Destruktor auf!
+Auch wenn es zunächst irgendwie sinnvoll aussieht - rufen Sie **niemals nie** `delete this` im Destruktor auf!
 `{{% /notice %}}`{=markdown}
 
 [Konsole: deletethis.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/deletethis.cpp"}
 :::
 
 
-## C++11: default und delete
+## C++11: *default* und *delete*
 
 ```cpp
 class Dummy {
@@ -424,7 +424,7 @@ int Studi::getCount() {
 
 ::: notes
 -   Deklaration als `static` **nicht** in Implementierung wiederholen
--   Statische Attribute: Initialisierung außerhalb der Klasse!
+-   Statische Attribute: Initialisierung **immer** außerhalb der Klasse!
 
 [Konsole: Studi.cpp (static)]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/Studi.cpp"}
 :::
