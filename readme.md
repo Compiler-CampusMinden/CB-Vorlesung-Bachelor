@@ -84,6 +84,18 @@ Sie _können_ hierzu den Raum J101 (siehe Stundenplan) nutzen.
 ::: {.tab title="IFM 3.1 CB (PO23, 3. Semester)"}
 
 `{{% notice style="note" title="News" %}}`{=markdown}
+`{{% expand title="16.10.24" %}}`{=markdown}
+
+### Update B01
+
+Bitte beachten Sie die Aktualisierung von B01.
+
+Die bisherigen Aufgaben 5 und 6 kamen versehentlich doppelt vor. Dies wurde
+korrigiert, d.h. es gibt jetzt eine Aufgabe weniger und Aufgabe 2 hat einen
+dritten Punkt neu dazu bekommen.
+
+`{{% /expand %}}`{=markdown}
+
 `{{% expand title="09.10.24" %}}`{=markdown}
 
 ### Teams
@@ -158,6 +170,18 @@ Abgabe der Übungsblätter jeweils **Montag bis 09:00 Uhr** im [ILIAS](https://w
 ::: {.tab title="IFM 5.21 CB (PO18, 5. Semester)"}
 
 `{{% notice style="note" title="News" %}}`{=markdown}
+`{{% expand title="16.10.24" %}}`{=markdown}
+
+### Update B01
+
+Bitte beachten Sie die Aktualisierung von B01.
+
+Die bisherigen Aufgaben 5 und 6 kamen versehentlich doppelt vor. Dies wurde
+korrigiert, d.h. es gibt jetzt eine Aufgabe weniger und Aufgabe 2 hat einen
+dritten Punkt neu dazu bekommen.
+
+`{{% /expand %}}`{=markdown}
+
 `{{% expand title="09.10.24" %}}`{=markdown}
 
 ### Teams
