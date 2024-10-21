@@ -10,6 +10,8 @@ outcomes:
   - k1: "Deterministische PDAs"
   - k1: "Kontextfreie Grammatiken"
   - k1: "Deterministisch kontextfreie Grammatiken"
+  - k1: "Top-Down-Analyse"
+  - k1: "LL-Parser"
   - k2: "Zusammenhang zwischen PDAs und kontextfreien Grammatiken"
 attachments:
   - link: "https://raw.githubusercontent.com/Compiler-CampusMinden/AnnotatedSlides/master/frontend_parsing_cfg.ann.ba.pdf"
