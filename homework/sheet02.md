@@ -19,7 +19,7 @@ $L = \{w \in {a, b, c}^* | w\ \text{hat doppelt so viele a's wie c's}\}$ akzepti
 Beschreiben Sie Schritt für Schritt, wie der PDA die Eingaben *bcaba* und *bccac* abarbeitet.
 
 
-## A2.2: Akzeptierte Sprache (2P)
+## A2.2: Akzeptierte Sprache (1P)
 
 Ist der folgenden PDA deterministisch? Warum (nicht)?
 
@@ -29,12 +29,12 @@ Bild folgt
 Welche Sprache akzeptiert er?
 
 
-## A2.3: Epsilon-Übergänge
+## A2.3: Epsilon-Übergänge (2P)
 
 Entwickeln Sie einen Algorithmus, der einen PDA mit $\epsilon$ - Übergängen in einen ohne diese umwandelt.
 
 
-## A2.4 Kontextfreie Sprache
+## A2.4 Kontextfreie Sprache (1P)
 
 Welche Sprache generiert die folgende kontextfreie (Teil-) Grammatik?
 
@@ -49,7 +49,7 @@ $Condition \rightarrow \ldots\}$
 Ist die Grammatik mehrdeutig? Warum (nicht)?
 
 
-## A2.5 Kontextfreie Grammatik
+## A2.5 Kontextfreie Grammatik (2P)
 
 Enwickeln Sie eine kontextfreie Grammatik für die Sprache
 
@@ -58,7 +58,7 @@ $L = \{a^ib^jc^k\ | \ i = j \lor j = k\}$
 Zeigen Sie, dass die Grammatik mehrdeutig ist. Entwickeln Sie einen PDA für diese Sprache.
 
 
-## A2.6 Kontextfreie Grammatik
+## A2.6 Kontextfreie Grammatik (2P)
 
 Die folgende kontextfreie Grammatik ist mehrdeutig. Warum? Welche Sprache erzeugt sie? Wandeln Sie sie in eine eindeutige Grammatik um.
 
