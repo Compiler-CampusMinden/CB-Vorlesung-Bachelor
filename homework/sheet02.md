@@ -60,7 +60,7 @@ Zeigen Sie, dass die Grammatik mehrdeutig ist. Entwickeln Sie einen PDA für die
 
 Die folgende kontextfreie Grammatik ist mehrdeutig. Warum? Welche Sprache erzeugt sie? Wandeln Sie sie in eine eindeutige Grammatik um.
 
-$G = (\{S\}, \{a, b\}, P, S)$ mit $P =$
+$G = (\lbrace S \rbrace, \lbrace a, b \rbrace, P, S)$ mit $P =$
 
 $\{S \rightarrow SS\ | \ aS\ |\ Sb\ |\ \epsilon\}$
 
