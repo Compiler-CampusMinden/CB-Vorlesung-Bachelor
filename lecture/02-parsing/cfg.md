@@ -39,6 +39,8 @@ Für z. B. alle Sprachen, in deren Wörtern Zeichen über eine Konstante hinaus 
 *    $a^ib^{2*i}$ ist nicht regulär
 *    $a^ib^{2*i}$ für $0 \leq i \leq 3$ ist regulär
 
+\smallskip
+
 *    Wo finden sich die oben genannten Variablen bei einem DFA wieder?
 *    Warum ist die erste Sprache oben nicht regulär, die zweite aber?
 
