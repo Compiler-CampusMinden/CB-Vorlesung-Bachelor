@@ -42,7 +42,7 @@ mit $P =$
 
 $\lbrace Statement \rightarrow "if"\ Condition\ Statement\ | \ "if"\ Condition\ Statement\ "else"\ Statement$
 
-$Condition \rightarrow \ldots\}$
+$Condition \rightarrow \ldots \rbrace$
 
 Ist die Grammatik mehrdeutig? Warum (nicht)?
 
