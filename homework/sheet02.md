@@ -62,7 +62,7 @@ Die folgende kontextfreie Grammatik ist mehrdeutig. Warum? Welche Sprache erzeug
 
 $G = (\lbrace S \rbrace, \lbrace a, b \rbrace, P, S)$ mit $P =$
 
-$\{S \rightarrow SS\ | \ aS\ |\ Sb\ |\ \epsilon\}$
+$\lbrace S \rightarrow SS\ | \ aS\ |\ Sb\ |\ \epsilon \rbrace$
 
 
 
