@@ -51,7 +51,7 @@ Ist die Grammatik mehrdeutig? Warum (nicht)?
 
 Enwickeln Sie eine kontextfreie Grammatik für die Sprache
 
-$L = \{a^ib^jc^k\ | \ i = j \lor j = k\}$
+$L = \lbrace a^ib^jc^k\ | \ i = j \lor j = k \rbrace$
 
 Zeigen Sie, dass die Grammatik mehrdeutig ist. Entwickeln Sie einen PDA für diese Sprache.
 
