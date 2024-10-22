@@ -116,8 +116,8 @@ Die regulären Sprachen sind eine echte Teilmenge der von DPDAs akzeptierten Spr
 
 ## Kontextfreie Grammatiken
 
-**Def.**   Eine *kontextfreie (cf-)* Grammatik ist ein 4-Tupel $G = (N, T, P, S)$ mit *N, T, S* wie in
-(formalen) Grammatiken und *P* ist eine endliche Menge von Produktionen der Form:
+**Def.**   Eine *kontextfreie (cf-)* Grammatik ist ein 4-Tupel $G = (N, T, P, S)$ mit $N, T, S$ wie in
+(formalen) Grammatiken und $P$ ist eine endliche Menge von Produktionen der Form:
 
 $X \rightarrow Y$ mit $X \in N, Y \in {(N \cup T)}^{\ast}$.
 
@@ -203,8 +203,8 @@ Wir brauchen die "terminalen k-Anfänge" von Ableitungen von Nichtterminalen, um
 
 **Def.:** Wir definieren $First$ - Mengen einer Grammatik wie folgt:
 
-*   $a \in T^\ast, |a| \leq k: {First}_k (a) = \lbrace a\rbrace$
-*   $a \in T^\ast, |a| > k: {First}_k (a) = \lbrace v \in T^\ast \mid a = vw, |v| = k\rbrace$
+*   $a \in T^\ast, |a| \leq k: {First}_k (a) = \lbrace a \rbrace$
+*   $a \in T^\ast, |a| > k: {First}_k (a) = \lbrace v \in T^\ast \mid a = vw, |v| = k \rbrace$
 *   $\alpha \in (N \cup T)^\ast \backslash T^\ast: {First}_k (\alpha) = \lbrace v \in T^\ast \mid  \alpha \overset{\ast}{\Rightarrow} w,\text{mit}\ w \in T^\ast, First_k(w) = \lbrace v \rbrace \rbrace$
 
 
@@ -217,7 +217,7 @@ Man schreibt $\alpha \overset{\ast}{\Rightarrow}_l \beta.$
 
 ## LL(k)-Grammatiken
 
-**Def.:** Eine kontextfreie Grammatik *G = (N, T, P, S)* ist genau dann eine *LL(k)*-Grammatik, wenn für alle Linksableitungen der Form:
+**Def.:** Eine kontextfreie Grammatik $G = (N, T, P, S)$ ist genau dann eine *LL(k)*-Grammatik, wenn für alle Linksableitungen der Form:
 
 $S \overset{\ast}{\Rightarrow}_l\ wA \gamma\ {\Rightarrow}_l\ w\alpha\gamma \overset{\ast}{\Rightarrow}_l wx$
 
@@ -246,16 +246,16 @@ Die von *LL(k)*-Grammatiken erzeugten Sprachen sind eine echte Teilmenge der det
 
 Die von *LL(k)*-Grammatiken erzeugten Sprachen sind eine echte Teilmenge der von *LL(k+1)*-Grammatiken erzeugten Sprachen.
 
-Für eine kontextfreie Grammatik *G* ist nicht entscheidbar, ob es eine *LL(1)* - Grammatik *G'* gibt mit $L(G) = L(G')$.
+Für eine kontextfreie Grammatik $G$ ist nicht entscheidbar, ob es eine *LL(1)* - Grammatik $G'$ gibt mit $L(G) = L(G')$.
 
-In der Praxis reichen $LL(1)$ - Grammatiken oft. Hier gibt es effiziente Parsergeneratoren (hier: ANTLR), deren Eingabe eine LL-Grammatik ist, und die als Ausgabe den Quellcode eines (effizienten) tabellengesteuerten Parsers generieren.
+In der Praxis reichen *LL(1)* - Grammatiken oft. Hier gibt es effiziente Parsergeneratoren (hier: ANTLR), deren Eingabe eine LL-Grammatik ist, und die als Ausgabe den Quellcode eines (effizienten) tabellengesteuerten Parsers generieren.
 
 
 ##  Algorithmus: Konstruktion einer LL-Parsertabelle {.fragile}
 
-**Eingabe:** Eine  Grammatik G = (N, T, P, S)
+**Eingabe:** Eine  Grammatik $G = (N, T, P, S)$
 
-**Ausgabe:** Eine Parsertabelle *P*
+**Ausgabe:** Eine Parsertabelle $P$
 
 ![Algorithmus zur Generierung einer LL-Parsertabelle](images/LL-Parsertabelle.png){width="60%"}
 
@@ -274,7 +274,7 @@ Rekursive Programmierung bedeutet, dass das Laufzeitsystem einen Stack benutzt. 
 
 ## Algorithmus: Tabellengesteuertes LL-Parsen mit einem PDA {.fragile}
 
-**Eingabe:** Eine  Grammatik G = (N, T, P, S), eine Parsertabelle *P* mit "$w\perp$" als initialem Kellerinhalt
+**Eingabe:** Eine  Grammatik $G = (N, T, P, S)$, eine Parsertabelle $P$ mit "$w\perp$" als initialem Kellerinhalt
 
 **Ausgabe:** Wenn $w \in L(G)$,  eine Linksableitung von $w$, Fehler sonst
 
