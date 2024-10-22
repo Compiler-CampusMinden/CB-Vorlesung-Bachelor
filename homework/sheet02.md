@@ -19,20 +19,38 @@ Beschreiben Sie Schritt für Schritt, wie der PDA die Eingaben *bcaba* und *bcca
 
 ## A2.2: Akzeptierte Sprache (1P)
 
+
 Ist der folgenden PDA deterministisch? Warum (nicht)?
 
-
-Bild folgt
-
-Welche Sprache akzeptiert er?
+$q_4$ sei der akzeptierende Zustand.
 
 
-## A2.3: Epsilon-Übergänge (2P)
+$\delta(q_0,a, \perp) = (q_0, A\perp)$
 
-Entwickeln Sie einen Algorithmus, der einen PDA mit $\epsilon$ - Übergängen in einen ohne diese umwandelt.
+$\delta(q_0,a, A) = (q_0, AA)$
+
+$\delta(q_0,b, A) = (q_1, BA)$
+
+$\delta(q_1,b, B) = (q_1, BB)$
+
+$\delta(q_1,c, B) = (q_2, \epsilon)$
+
+$\delta(q_2,c, B) = (q_2, \epsilon)$
+
+$\delta(q_2,d, A) = (q_3, \epsilon)$
+
+$\delta(q_3,d, A) = (q_3, \epsilon)$
+
+$\delta(q_3,d, A) = (q_3, AA)$
+
+$\delta(q_3,\epsilon, \perp) = (q_4, \epsilon)$
 
 
-## A2.4 Kontextfreie Sprache (1P)
+
+Zeichnen Sie den Automaten. Geben Sie das 7-Tupel des PDa an. Welche Sprache akzeptiert er?
+
+
+## A2.3 Kontextfreie Sprache (1P)
 
 Welche Sprache generiert die folgende kontextfreie (Teil-) Grammatik?
 
@@ -47,7 +65,7 @@ $Condition \rightarrow \ldots \rbrace$
 Ist die Grammatik mehrdeutig? Warum (nicht)?
 
 
-## A2.5 Kontextfreie Grammatik (2P)
+## A2.4 Kontextfreie Grammatik (2P)
 
 Enwickeln Sie eine kontextfreie Grammatik für die Sprache
 
@@ -56,13 +74,25 @@ $L = \lbrace a^ib^jc^k\ | \ i = j \lor j = k \rbrace$
 Zeigen Sie, dass die Grammatik mehrdeutig ist. Entwickeln Sie einen PDA für diese Sprache.
 
 
-## A2.6 Kontextfreie Grammatik (2P)
+## A2.5 Kontextfreie Grammatik (4P)
 
-Die folgende kontextfreie Grammatik ist mehrdeutig. Warum? Welche Sprache erzeugt sie? Wandeln Sie sie in eine eindeutige Grammatik um.
+Betrachten sie die folgende Grammatik:
 
-$G = (\lbrace S \rbrace, \lbrace a, b \rbrace, P, S)$ mit $P =$
+$G = (\lbrace S, A \rbrace, \lbrace 1, 2, 3 \rbrace, P, S)$
 
-$\lbrace S \rightarrow SS\ | \ aS\ |\ Sb\ |\ \epsilon \rbrace$
+mit $P =$
+
+$\lbrace S \rightarrow 1AS\ |\ 3$
+
+$A \rightarrow 2AS\ \ | \ \epsilon \rbrace$
+
+Berechnen die die *First-* und *Followmengen* der Grammatik.
+
+Zeigen Sie, dass die Grammatik LL(1) ist.
+
+Konstruieren Sie die LL-Parsertabelle für die Grammatik und simulieren Sie das Parsen des Wortes *1233*.
+
+
 
 
 
