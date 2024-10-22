@@ -40,7 +40,7 @@ $G = (\lbrace Statement, Condition, \ldots \rbrace, \lbrace "if", "else", \ldots
 
 mit $P =$
 
-$\{Statement \rightarrow "if"\ Condition\ Statement\ | \ "if"\ Condition\ Statement\ "else"\ Statement$
+$\lbrace Statement \rightarrow "if"\ Condition\ Statement\ | \ "if"\ Condition\ Statement\ "else"\ Statement$
 
 $Condition \rightarrow \ldots\}$
 
