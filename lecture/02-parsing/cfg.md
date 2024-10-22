@@ -10,6 +10,8 @@ outcomes:
   - k1: "Deterministische PDAs"
   - k1: "Kontextfreie Grammatiken"
   - k1: "Deterministisch kontextfreie Grammatiken"
+  - k1: "Top-Down-Analyse"
+  - k1: "LL-Parser"
   - k2: "Zusammenhang zwischen PDAs und kontextfreien Grammatiken"
 attachments:
   - link: "https://raw.githubusercontent.com/Compiler-CampusMinden/AnnotatedSlides/master/frontend_parsing_cfg.ann.ba.pdf"
@@ -37,6 +39,8 @@ Für z. B. alle Sprachen, in deren Wörtern Zeichen über eine Konstante hinaus 
 *    $a^ib^{2*i}$ ist nicht regulär
 *    $a^ib^{2*i}$ für $0 \leq i \leq 3$ ist regulär
 
+\smallskip
+
 *    Wo finden sich die oben genannten Variablen bei einem DFA wieder?
 *    Warum ist die erste Sprache oben nicht regulär, die zweite aber?
 
@@ -55,7 +59,9 @@ Für z. B. alle Sprachen, in deren Wörtern Zeichen über eine Konstante hinaus 
 Wir spendieren den DFAs einen möglichst einfachen, aber beliebig großen, Speicher, um zählen  und matchen zu können. Wir suchen dabei konzeptionell die "kleinstmögliche" Erweiterung, die die akzeptierte Sprachklasse gegenüber DFAs vergrößert.
 
 *   Der konzeptionell einfachste Speicher ist ein Stack. Wir haben keinen wahlfreien Zugriff auf die gespeicherten Werte.
+
 *   Es soll eine deterministische und eine indeterministische Variante der neuen Automatenklasse geben.
+
 *   In diesem Zusammenhang wird der Stack auch Keller genannt.
 
 
@@ -75,7 +81,7 @@ Ein PDA ist per Definition nichtdeterministisch und kann spontane Zustandsüberg
 
 Strukturen mit paarweise zu matchenden Symbolen.
 
-Bei jedem Zustandsübergang wird ein Zeichen (oder $\epsilon$) aus der Eingabe gelesen, ein Symbol von Keller genommen. Diese und das Eingabezeichen bestimmen den Folgezustand und eine Zeichenfolge, die auf den Stack gepackt wird. Dabei wird ein Symbol, das später mit einem Eingabesymbol zu matchen ist, auf den Stack gepackt. Soll das automatisch vom Stack genommene Symbol auf dem Stack bleiben, muss es wieder gepusht werden.
+Bei jedem Zustandsübergang wird ein Zeichen (oder $\epsilon$) aus der Eingabe gelesen, ein Symbol von Keller genommen. Diese und das Eingabezeichen bestimmen den Folgezustand und eine Zeichenfolge, die auf den Stack gepackt wird. Dabei wird ein Symbol, (z. B. eines, das später mit einem Eingabesymbol zu matchen ist,) auf den Stack gepackt. Soll das automatisch vom Stack genommene Symbol auf dem Stack bleiben, muss es wieder gepusht werden.
 
 
 ## Beispiel
@@ -92,6 +98,7 @@ Ein PDA für $L=\lbrace ww^{R}\mid w\in \lbrace a,b\rbrace^{\ast}\rbrace$:
 $: \Leftrightarrow$
 
 *   $\delta(q, a, X)$ hat höchstens ein Element für jedes $q \in Q, a \in\Sigma$ oder $(a = \epsilon$ und $X \in \Gamma)$.
+
 *   Wenn $\delta (q, a, x)$ nicht leer ist für ein $a \in \Sigma$, dann muss $\delta (q, \epsilon, x)$ leer sein.
 
 Deterministische PDAs werden auch *DPDAs* genannt.
@@ -102,16 +109,15 @@ Deterministische PDAs werden auch *DPDAs* genannt.
 **Satz:** Die von DPDAs akzeptierten Sprachen sind eine echte Teilmenge der von
 PDAs akzeptierten Sprachen.
 
-Die Sprachen, die von *regex* beschrieben werden, sind eine echte Teilmenge der von
-DPDAs akzeptierten Sprachen.
+Die regulären Sprachen sind eine echte Teilmenge der von DPDAs akzeptierten Sprachen.
 
 
 # Kontextfreie Grammatiken und Sprachen
 
 ## Kontextfreie Grammatiken
 
-**Def.**   Eine *kontextfreie (cf-)* Grammatik ist ein 4-Tupel $G = (N, T, P, S)$ mit *N, T, S* wie in
-(formalen) Grammatiken und *P* ist eine endliche Menge von Produktionen der Form:
+**Def.**   Eine *kontextfreie (cf-)* Grammatik ist ein 4-Tupel $G = (N, T, P, S)$ mit $N, T, S$ wie in
+(formalen) Grammatiken und $P$ ist eine endliche Menge von Produktionen der Form:
 
 $X \rightarrow Y$ mit $X \in N, Y \in {(N \cup T)}^{\ast}$.
 
@@ -146,8 +152,7 @@ Wort, für das mehr als ein Ableitungsbaum existiert, so heißt diese Grammatik
 
 ## Kontextfreie Grammatiken und PDAs
 
-**Satz:** Die kontextfreien Sprachen und die Sprachen, die von PDAs akzeptiert werden, sind dieselbe
-Sprachklasse.
+**Satz:** Die kontextfreien Sprachen und die Sprachen, die von PDAs akzeptiert werden, sind dieselbe Sprachklasse.
 
 **Satz:** Eine von einem DPDA akzeptierteSprache hat eine eindeutige Grammatik.
 
@@ -161,27 +166,28 @@ Vorgehensweise im Compilerbau: Eine Grammatik für die gewünschte Sprache defin
 ## Was brauchen wir für die Syntaxanalyse von Programmen?
 
 *   einen Grammatiktypen, aus dem sich manuell oder automatisiert ein Programm zur deterministischen Syntaxanalyse (=Parser) erstellen lässt
+
 *   einen Algorithmus zum Parsen von Programmen mit Hilfe einer solchen Grammatik
 
 ## Syntax
 
 Wir verstehen unter Syntax eine Menge von Regeln, die die Struktur von Daten (z. B. Programmen) bestimmen.
 
-Syntaxanalyse ist die Bestimmung, ob Eingabedaten einer vorgegebenen Syntax entsprechen.
-
 Diese vorgegebene Syntax wird im Compilerbau mit einer kontextfreien Grammatik beschrieben und mit einem sogenannten **Parser** analysiert.
 
-Wir beshäftigen uns heute mit LL-Parsing, mit dem man eine Teilmenge der eindeutigen kontextfreien Grammatiken syntaktich analysieren kann.
+Heute: LL-Parsing, mit dem man eine Teilmenge der eindeutigen kontextfreien Grammatiken syntaktich analysieren kann.
 
-Der Ableitungsbaum wird von oben nach unten aufgebaut.
+Dabei wird der Ableitungsbaum von oben nach unten aufgebaut.
 
 
 ## Ziele der Syntaxanalyse
 
-*   aussagekräftige Fehlermeldungen, wenn ein Eingabeprogramm syntaktisch nicht korrekt ist
-*   evtl. Fehlerkorrektur
 *   Bestimmung der syntaktischen Struktur eines Programms
+
+*   aussagekräftige Fehlermeldungen, wenn ein Eingabeprogramm syntaktisch nicht korrekt ist
+
 *   Erstellung des AST (abstrakter Syntaxbaum): Der Parse Tree ohne Symbole, die nach der Syntaxanalyse inhaltlich irrelevant sind (z. B. Semikolons, manche Schlüsselwörter)
+
 *   die Symboltablelle(n) mit Informationen bzgl. Bezeichner (Variable, Funktionen und Methoden, Klassen, benutzerdefinierte Typen, Parameter, ...), aber auch die Gültigkeitsbereiche.
 
 
@@ -197,8 +203,8 @@ Wir brauchen die "terminalen k-Anfänge" von Ableitungen von Nichtterminalen, um
 
 **Def.:** Wir definieren $First$ - Mengen einer Grammatik wie folgt:
 
-*   $a \in T^\ast, |a| \leq k: {First}_k (a) = \lbrace a\rbrace$
-*   $a \in T^\ast, |a| > k: {First}_k (a) = \lbrace v \in T^\ast \mid a = vw, |v| = k\rbrace$
+*   $a \in T^\ast, |a| \leq k: {First}_k (a) = \lbrace a \rbrace$
+*   $a \in T^\ast, |a| > k: {First}_k (a) = \lbrace v \in T^\ast \mid a = vw, |v| = k \rbrace$
 *   $\alpha \in (N \cup T)^\ast \backslash T^\ast: {First}_k (\alpha) = \lbrace v \in T^\ast \mid  \alpha \overset{\ast}{\Rightarrow} w,\text{mit}\ w \in T^\ast, First_k(w) = \lbrace v \rbrace \rbrace$
 
 
@@ -211,7 +217,7 @@ Man schreibt $\alpha \overset{\ast}{\Rightarrow}_l \beta.$
 
 ## LL(k)-Grammatiken
 
-**Def.:** Eine kontextfreie Grammatik *G = (N, T, P, S)* ist genau dann eine *LL(k)*-Grammatik, wenn für alle Linksableitungen der Form:
+**Def.:** Eine kontextfreie Grammatik $G = (N, T, P, S)$ ist genau dann eine *LL(k)*-Grammatik, wenn für alle Linksableitungen der Form:
 
 $S \overset{\ast}{\Rightarrow}_l\ wA \gamma\ {\Rightarrow}_l\ w\alpha\gamma \overset{\ast}{\Rightarrow}_l wx$
 
@@ -240,16 +246,16 @@ Die von *LL(k)*-Grammatiken erzeugten Sprachen sind eine echte Teilmenge der det
 
 Die von *LL(k)*-Grammatiken erzeugten Sprachen sind eine echte Teilmenge der von *LL(k+1)*-Grammatiken erzeugten Sprachen.
 
-Für eine kontextfreie Grammatik *G* ist nicht entscheidbar, ob es eine *LL(1)* - Grammatik *G'* gibt mit $L(G) = L(G')$.
+Für eine kontextfreie Grammatik $G$ ist nicht entscheidbar, ob es eine *LL(1)* - Grammatik $G'$ gibt mit $L(G) = L(G')$.
 
-In der Praxis reichen $LL(1)$ - Grammatiken oft. Hier gibt es effiziente Parsergeneratoren (hier: ANTLR), deren Eingabe eine LL(k)- (meist LL(1)-) Grammatik ist, und die als Ausgabe den Quellcode eines (effizienten) tabellengesteuerten Parsers generieren.
+In der Praxis reichen *LL(1)* - Grammatiken oft. Hier gibt es effiziente Parsergeneratoren (hier: ANTLR), deren Eingabe eine LL-Grammatik ist, und die als Ausgabe den Quellcode eines (effizienten) tabellengesteuerten Parsers generieren.
 
 
 ##  Algorithmus: Konstruktion einer LL-Parsertabelle {.fragile}
 
-**Eingabe:** Eine  Grammatik G = (N, T, P, S)
+**Eingabe:** Eine  Grammatik $G = (N, T, P, S)$
 
-**Ausgabe:** Eine Parsertabelle *P*
+**Ausgabe:** Eine Parsertabelle $P$
 
 ![Algorithmus zur Generierung einer LL-Parsertabelle](images/LL-Parsertabelle.png){width="60%"}
 
@@ -268,7 +274,7 @@ Rekursive Programmierung bedeutet, dass das Laufzeitsystem einen Stack benutzt. 
 
 ## Algorithmus: Tabellengesteuertes LL-Parsen mit einem PDA {.fragile}
 
-**Eingabe:** Eine  Grammatik G = (N, T, P, S), eine Parsertabelle *P* mit "$w\perp$" als initialem Kellerinhalt
+**Eingabe:** Eine  Grammatik $G = (N, T, P, S)$, eine Parsertabelle $P$ mit "$w\perp$" als initialem Kellerinhalt
 
 **Ausgabe:** Wenn $w \in L(G)$,  eine Linksableitung von $w$, Fehler sonst
 
@@ -279,11 +285,10 @@ Rekursive Programmierung bedeutet, dass das Laufzeitsystem einen Stack benutzt. 
 ## Ergebnisse der Syntaxanalyse
 
 *   eventuelle  Syntaxfehler mit Angabe der Fehlerart und des -Ortes
-*   Fehlerkorrektur
+
 *   Format für die Weiterverarbeitung:
     *   Ableitungsbaum oder Syntaxbaum oder Parse Tree
     *   abstrakter Syntaxbaum (AST): Der Parse Tree ohne Symbole, die nach der Syntaxanalyse inhaltlich irrelevant sind (z. B. ;, Klammern, manche Schlüsselwörter, $\ldots$)
-*   Symboltabelle
 
 
 # Wrap-Up
