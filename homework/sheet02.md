@@ -36,7 +36,7 @@ Entwickeln Sie einen Algorithmus, der einen PDA mit $\epsilon$ - Übergängen in
 
 Welche Sprache generiert die folgende kontextfreie (Teil-) Grammatik?
 
-$G = (\{Statement, Condition, \ldots\}, \{"if", "else", \ldots\}, P, Statement)$
+$G = (\lbrace Statement, Condition, \ldots \rbrace, \lbrace "if", "else", \ldots \rbrace, P, Statement)$
 
 mit $P =$
 
