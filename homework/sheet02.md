@@ -83,11 +83,17 @@ Betrachten sie die folgende Grammatik:
 
 $G = (\lbrace S, A \rbrace, \lbrace 1, 2, 3 \rbrace, P, S)$
 
-mit $P =$
+mit
 
-$\lbrace S \rightarrow 1AS\ |\ 3$
 
-$A \rightarrow 2AS\ \ | \ \epsilon \rbrace$
+$$\begin{eqnarray}
+P = \lbrace &&                       \nonumber \\
+&S& \rightarrow 1AS\ |\ 3            \nonumber \\
+&A& \rightarrow 2AS\ \ | \ \epsilon  \nonumber \\
+\rbrace                              \nonumber
+\end{eqnarray}$$
+
+
 
 Berechnen die die *First-* und *Follow-Mengen* der Grammatik.
 
