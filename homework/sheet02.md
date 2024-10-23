@@ -12,7 +12,7 @@ hidden: true
 ## A2.1: PDA (2P)
 
 Erstellen Sie einen deterministischen PDA, der die Sprache
-$L = \lbrace w \in \lbrace a, b, c \rbrace^* | w\ \text{hat doppelt so viele a's wie c's} \rbrace$ akzeptiert.
+$L = \lbrace w \in \lbrace a, b, c \rbrace^* \,|\, w \, \text{hat doppelt so viele a's wie c's} \rbrace$ akzeptiert.
 
 Beschreiben Sie Schritt für Schritt, wie der PDA die Eingaben *bcaba* und *bccac* abarbeitet.
 
@@ -51,10 +51,10 @@ $G = (\lbrace \text{Statement}, \text{Condition}, \ldots \rbrace, \lbrace \text{
 mit
 
 $$\begin{eqnarray}
-P = \lbrace &&                                                                                                        \nonumber \\
-&\text{Statement}& \rightarrow \text{"if" Condition Statement}\ | \ \text{"if" Condition Statement "else" Statement}  \nonumber \\
-&\text{Condition}& \rightarrow \ldots                                                                                 \nonumber \\
-\rbrace                                                                                                               \nonumber
+P = \lbrace &&                                                                                                         \nonumber \\
+&\text{Statement}& \rightarrow \text{"if" Condition Statement} \,|\, \text{"if" Condition Statement "else" Statement}  \nonumber \\
+&\text{Condition}& \rightarrow \ldots                                                                                  \nonumber \\
+\rbrace                                                                                                                \nonumber
 \end{eqnarray}$$
 
 Ist die Grammatik mehrdeutig? Warum (nicht)?
@@ -64,7 +64,7 @@ Ist die Grammatik mehrdeutig? Warum (nicht)?
 
 Entwickeln Sie eine kontextfreie Grammatik für die Sprache
 
-$L = \lbrace a^ib^jc^k\ | \ i = j \lor j = k \rbrace$
+$L = \lbrace a^ib^jc^k \,|\, i = j \lor j = k \rbrace$
 
 Zeigen Sie, dass die Grammatik mehrdeutig ist. Entwickeln Sie einen PDA für diese Sprache.
 
@@ -79,10 +79,10 @@ mit
 
 
 $$\begin{eqnarray}
-P = \lbrace &&                       \nonumber \\
-&S& \rightarrow 1AS\ |\ 3            \nonumber \\
-&A& \rightarrow 2AS\ \ | \ \epsilon  \nonumber \\
-\rbrace                              \nonumber
+P = \lbrace &&                      \nonumber \\
+&S& \rightarrow 1AS \,|\, 3         \nonumber \\
+&A& \rightarrow 2AS \,|\, \epsilon  \nonumber \\
+\rbrace                             \nonumber
 \end{eqnarray}$$
 
 
