@@ -54,11 +54,11 @@ Zeichnen Sie den Automaten. Geben Sie das 7-Tupel des PDa an. Welche Sprache akz
 
 Welche Sprache generiert die folgende kontextfreie (Teil-) Grammatik?
 
-$G = (\lbrace Statement, Condition, \ldots \rbrace, \lbrace "if", "else", \ldots \rbrace, P, Statement)$
+$G = (\lbrace \text{Statement}, \text{Condition}, \ldots \rbrace, \lbrace \text{"if"}, \text{"else"}, \ldots \rbrace, P, \text{Statement})$
 
 mit $P =$
 
-$\lbrace Statement \rightarrow "if"\ Condition\ Statement\ | \ "if"\ Condition\ Statement\ "else"\ Statement$
+$\lbrace \text{Statement} \rightarrow \text{"if" Condition Statement}\ | \ \text{"if" Condition Statement "else" Statement}$
 
 $Condition \rightarrow \ldots \rbrace$
 
