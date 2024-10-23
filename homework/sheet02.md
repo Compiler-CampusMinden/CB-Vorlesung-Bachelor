@@ -38,7 +38,7 @@ $$\begin{eqnarray}
 
 Zeichnen Sie den Automaten. Geben Sie das 7-Tupel des PDa an. Welche Sprache akzeptiert er?
 
-## A2.3 Kontextfreie Sprache (1P)
+## A2.3: Kontextfreie Sprache (1P)
 
 Welche Sprache generiert die folgende kontextfreie (Teil-) Grammatik?
 
@@ -55,7 +55,7 @@ P = \lbrace &&                                                                  
 
 Ist die Grammatik mehrdeutig? Warum (nicht)?
 
-## A2.4 Kontextfreie Grammatik (2P)
+## A2.4: Kontextfreie Grammatik (2P)
 
 Entwickeln Sie eine kontextfreie Grammatik für die Sprache
 
@@ -63,7 +63,7 @@ $L = \lbrace a^ib^jc^k \,|\, i = j \lor j = k \rbrace$
 
 Zeigen Sie, dass die Grammatik mehrdeutig ist. Entwickeln Sie einen PDA für diese Sprache.
 
-## A2.5 Kontextfreie Grammatik (4P)
+## A2.5: Kontextfreie Grammatik (4P)
 
 Betrachten sie die folgende Grammatik:
 
