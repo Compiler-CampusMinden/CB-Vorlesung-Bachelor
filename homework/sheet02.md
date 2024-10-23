@@ -24,26 +24,18 @@ Ist der folgenden PDA deterministisch? Warum (nicht)?
 
 $q_4$ sei der akzeptierende Zustand.
 
-
-$\delta(q_0,a, \perp) = (q_0, A\perp)$
-
-$\delta(q_0,a, A) = (q_0, AA)$
-
-$\delta(q_0,b, A) = (q_1, BA)$
-
-$\delta(q_1,b, B) = (q_1, BB)$
-
-$\delta(q_1,c, B) = (q_2, \epsilon)$
-
-$\delta(q_2,c, B) = (q_2, \epsilon)$
-
-$\delta(q_2,d, A) = (q_3, \epsilon)$
-
-$\delta(q_3,d, A) = (q_3, \epsilon)$
-
-$\delta(q_3,d, A) = (q_3, AA)$
-
-$\delta(q_3,\epsilon, \perp) = (q_4, \epsilon)$
+$$\begin{eqnarray}
+\delta(q_0,a, \perp) &=& (q_0, A\perp)           \nonumber \\
+\delta(q_0,a, A) &=& (q_0, AA)                   \nonumber \\
+\delta(q_0,b, A) &=& (q_1, BA)                   \nonumber \\
+\delta(q_1,b, B) &=& (q_1, BB)                   \nonumber \\
+\delta(q_1,c, B) &=& (q_2, \epsilon)             \nonumber \\
+\delta(q_2,c, B) &=& (q_2, \epsilon)             \nonumber \\
+\delta(q_2,d, A) &=& (q_3, \epsilon)             \nonumber \\
+\delta(q_3,d, A) &=& (q_3, \epsilon)             \nonumber \\
+\delta(q_3,d, A) &=& (q_3, AA)                   \nonumber \\
+\delta(q_3,\epsilon, \perp) &=& (q_4, \epsilon)  \nonumber
+\end{eqnarray}$$
 
 
 
@@ -60,8 +52,8 @@ mit
 
 $$\begin{eqnarray}
 P = \lbrace &&                                                                                                        \nonumber \\
-&\text{Statement} \rightarrow& \text{"if" Condition Statement}\ | \ \text{"if" Condition Statement "else" Statement}  \nonumber \\
-&\text{Condition} \rightarrow& \ldots                                                                                 \nonumber \\
+&\text{Statement}& \rightarrow \text{"if" Condition Statement}\ | \ \text{"if" Condition Statement "else" Statement}  \nonumber \\
+&\text{Condition}& \rightarrow \ldots                                                                                 \nonumber \\
 \rbrace                                                                                                               \nonumber
 \end{eqnarray}$$
 
