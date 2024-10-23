@@ -12,7 +12,9 @@ hidden: true
 ## A2.1: PDA (2P)
 
 Erstellen Sie einen deterministischen PDA, der die Sprache
-$L = \lbrace w \in \lbrace a, b, c \rbrace^* \; | \; w \; \text{hat doppelt so viele a's wie c's} \rbrace$
+
+$$L = \lbrace w \in \lbrace a, b, c \rbrace^* \; | \; w \; \text{hat doppelt so viele a's wie c's} \rbrace$$
+
 akzeptiert.
 
 Beschreiben Sie Schritt für Schritt, wie der PDA die Eingaben *bcaba* und *bccac* abarbeitet.
@@ -42,7 +44,7 @@ Zeichnen Sie den Automaten. Geben Sie das 7-Tupel des PDa an. Welche Sprache akz
 
 Welche Sprache generiert die folgende kontextfreie (Teil-) Grammatik?
 
-$G = (\lbrace \text{Statement}, \text{Condition}, \ldots \rbrace, \lbrace \text{"if"}, \text{"else"}, \ldots \rbrace, P, \text{Statement})$
+$$G = (\lbrace \text{Statement}, \text{Condition}, \ldots \rbrace, \lbrace \text{"if"}, \text{"else"}, \ldots \rbrace, P, \text{Statement})$$
 
 mit
 
@@ -59,7 +61,7 @@ Ist die Grammatik mehrdeutig? Warum (nicht)?
 
 Entwickeln Sie eine kontextfreie Grammatik für die Sprache
 
-$L = \lbrace a^ib^jc^k \; | \; i = j \lor j = k \rbrace$
+$$L = \lbrace a^ib^jc^k \; | \; i = j \lor j = k \rbrace$$
 
 Zeigen Sie, dass die Grammatik mehrdeutig ist. Entwickeln Sie einen PDA für diese Sprache.
 
@@ -67,7 +69,7 @@ Zeigen Sie, dass die Grammatik mehrdeutig ist. Entwickeln Sie einen PDA für die
 
 Betrachten sie die folgende Grammatik:
 
-$G = (\lbrace S, A \rbrace, \lbrace 1, 2, 3 \rbrace, P, S)$
+$$G = (\lbrace S, A \rbrace, \lbrace 1, 2, 3 \rbrace, P, S)$$
 
 mit
 
