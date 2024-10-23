@@ -56,11 +56,7 @@ Welche Sprache generiert die folgende kontextfreie (Teil-) Grammatik?
 
 $G = (\lbrace \text{Statement}, \text{Condition}, \ldots \rbrace, \lbrace \text{"if"}, \text{"else"}, \ldots \rbrace, P, \text{Statement})$
 
-mit $P =$
-
-$\lbrace \text{Statement} \rightarrow \text{"if" Condition Statement}\ | \ \text{"if" Condition Statement "else" Statement}$
-
-$Condition \rightarrow \ldots \rbrace$
+mit $P = \lbrace \text{Statement} \rightarrow \text{"if" Condition Statement}\ | \ \text{"if" Condition Statement "else" Statement Condition} \rightarrow \ldots \rbrace$
 
 Ist die Grammatik mehrdeutig? Warum (nicht)?
 
