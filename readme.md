@@ -179,6 +179,15 @@ Abgabe der Übungsblätter jeweils **Montag bis 09:00 Uhr** im [ILIAS](https://w
 ::: {.tab title="IFM 5.21 CB (PO18, 5. Semester)"}
 
 `{{% notice style="note" title="News" %}}`{=markdown}
+`{{% expand title="23.10.24" %}}`{=markdown}
+
+### Verschiebung des Praktikums zu Blatt 01 auf 30.10.
+
+Das Praktikum zur Vorstellung von Blatt 01 musste aus gesundheitlichen Gründen
+um eine Woche auf den 30.10. verschoben werden.
+
+`{{% /expand %}}`{=markdown}
+
 `{{% expand title="16.10.24" %}}`{=markdown}
 
 ### Update B01
@@ -241,9 +250,9 @@ Abgabe der Übungsblätter jeweils **Mittwoch bis 09:00 Uhr** im [ILIAS](https:/
 |:---------------------|:----|:-----------------------------------------------------------------------------------------------------------------------------------------|:--------------|:--------------------------------------------------------------------------------|
 | Oktober              | 09. | [Orga] (*Zoom*); [Überblick], [Sprachen], [Anwendungen]                                                                                  | Carsten, BC   |                                                                                 |
 |                      | 16. | [Reguläre Sprachen]                                                                                                                      | BC            |                                                                                 |
-|                      | 23. | [CFG]                                                                                                                                    | BC            | [B01] Reguläre Sprachen (BC, *online*)                                          |
+|                      | 23. | [CFG]                                                                                                                                    | BC            | ~~[B01] Reguläre Sprachen (BC, *online*)~~                                      |
 |                      | 29. | **18:00 - 19:30 Uhr (online): Edmonton I: ANTLR + Live-Coding**                                                                          | _Edmonton_    |                                                                                 |
-|                      | 30. | [Lexer mit ANTLR], [Parser mit ANTLR]                                                                                                    | Carsten       |                                                                                 |
+|                      | 30. | [Lexer mit ANTLR], [Parser mit ANTLR]                                                                                                    | Carsten       | **[B01] Reguläre Sprachen (BC, *online*)**                                      |
 | November             | 06. | *Dienstbesprechung*                                                                                                                      |               | [B02] CFG (BC, *online*)                                                        |
 |                      | 13. | [Überblick Symboltabellen], [Symboltabellen: Scopes], [Symboltabellen: Funktionen], [Symboltabellen: Klassen]                            | Carsten       | [B03] ANTLR (Carsten, *online*)                                                 |
 |                      | 20. | [**08:00 - 09:30 Uhr (online): Vortrag: Vorstellung der Lösung von [B04x] ("Generalprobe")**]{.alert}                                    |               | [B04x] Semantische Analyse (Abgabe)                                             |
