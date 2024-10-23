@@ -12,7 +12,7 @@ hidden: true
 ## A2.1: PDA (2P)
 
 Erstellen Sie eine deterministischen PDA, der die Sprache
-$L = \lbrace w \in {a, b, c}^* | w\ \text{hat doppelt so viele a's wie c's} \rbrace$ akzeptiert.
+$L = \lbrace w \in \lbrace a, b, c \rbrace^* | w\ \text{hat doppelt so viele a's wie c's} \rbrace$ akzeptiert.
 
 Beschreiben Sie Schritt für Schritt, wie der PDA die Eingaben *bcaba* und *bccac* abarbeitet.
 
