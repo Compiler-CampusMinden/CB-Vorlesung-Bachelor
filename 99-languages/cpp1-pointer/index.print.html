@@ -1,0 +1,1688 @@
+<!DOCTYPE html>
+<html lang="de-DE" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.135.0">
+    <meta name="generator" content="Relearn 6.4.1">
+    <meta name="description" content="Virtueller Speicher &#43;-----------------------------------------&#43; | Text | 0x0000 | | | |-----------------------------------------| | | Heap (Data) | | | | | |--------------------&#43;--------------------| | | | | | | v | | | | | | | v | ^ | | | | |--------------------&#43;--------------------| | | | Stack | &#43;-----------------------------------------&#43; Kernel weist jedem Prozess seinen eigenen virtuellen Speicher zu Linearer Adressbereich, beginnend mit Adresse 0 bis zu einer maximalen Adresse Verwaltung durch MMU (Memory Management Unit) MMU bildet logische Adressen aus virtuellem Speicher auf den physikalischen Speicher ab Transparent für den Prozess Segmente des virtuellen Speichers: Text (read-only) Programm Code Konstanten, String Literale zusätzlich (nicht in Abbildung dargestellt):">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="C&#43;&#43;: Pointer und Referenzen">
+    <meta name="twitter:description" content="Virtueller Speicher &#43;-----------------------------------------&#43; | Text | 0x0000 | | | |-----------------------------------------| | | Heap (Data) | | | | | |--------------------&#43;--------------------| | | | | | | v | | | | | | | v | ^ | | | | |--------------------&#43;--------------------| | | | Stack | &#43;-----------------------------------------&#43; Kernel weist jedem Prozess seinen eigenen virtuellen Speicher zu Linearer Adressbereich, beginnend mit Adresse 0 bis zu einer maximalen Adresse Verwaltung durch MMU (Memory Management Unit) MMU bildet logische Adressen aus virtuellem Speicher auf den physikalischen Speicher ab Transparent für den Prozess Segmente des virtuellen Speichers: Text (read-only) Programm Code Konstanten, String Literale zusätzlich (nicht in Abbildung dargestellt):">
+    <meta property="og:url" content="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp1-pointer.html">
+    <meta property="og:title" content="C&#43;&#43;: Pointer und Referenzen">
+    <meta property="og:description" content="Virtueller Speicher &#43;-----------------------------------------&#43; | Text | 0x0000 | | | |-----------------------------------------| | | Heap (Data) | | | | | |--------------------&#43;--------------------| | | | | | | v | | | | | | | v | ^ | | | | |--------------------&#43;--------------------| | | | Stack | &#43;-----------------------------------------&#43; Kernel weist jedem Prozess seinen eigenen virtuellen Speicher zu Linearer Adressbereich, beginnend mit Adresse 0 bis zu einer maximalen Adresse Verwaltung durch MMU (Memory Management Unit) MMU bildet logische Adressen aus virtuellem Speicher auf den physikalischen Speicher ab Transparent für den Prozess Segmente des virtuellen Speichers: Text (read-only) Programm Code Konstanten, String Literale zusätzlich (nicht in Abbildung dargestellt):">
+    <meta property="og:locale" content="de_DE">
+    <meta property="og:type" content="website">
+    <meta itemprop="name" content="C&#43;&#43;: Pointer und Referenzen">
+    <meta itemprop="description" content="Virtueller Speicher &#43;-----------------------------------------&#43; | Text | 0x0000 | | | |-----------------------------------------| | | Heap (Data) | | | | | |--------------------&#43;--------------------| | | | | | | v | | | | | | | v | ^ | | | | |--------------------&#43;--------------------| | | | Stack | &#43;-----------------------------------------&#43; Kernel weist jedem Prozess seinen eigenen virtuellen Speicher zu Linearer Adressbereich, beginnend mit Adresse 0 bis zu einer maximalen Adresse Verwaltung durch MMU (Memory Management Unit) MMU bildet logische Adressen aus virtuellem Speicher auf den physikalischen Speicher ab Transparent für den Prozess Segmente des virtuellen Speichers: Text (read-only) Programm Code Konstanten, String Literale zusätzlich (nicht in Abbildung dargestellt):">
+    <meta itemprop="wordCount" content="3254">
+    <title>C&#43;&#43;: Pointer und Referenzen</title>
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp1-pointer.html" rel="canonical" type="text/html" title="C++: Pointer und Referenzen">
+
+    
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/images/logo.png?1729688305" rel="icon" type="image/png">
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/fontawesome-all.min.css?1729688305" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/fontawesome-all.min.css?1729688305" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/nucleus.css?1729688305" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/auto-complete.css?1729688305" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/auto-complete.css?1729688305" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/perfect-scrollbar.min.css?1729688305" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/fonts.css?1729688305" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/fonts.css?1729688305" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/theme.css?1729688305" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/theme-auto.css?1729688305" rel="stylesheet" id="R-variant-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/chroma-auto.css?1729688305" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/variant.css?1729688305" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/print.css?1729688305" rel="stylesheet" media="print">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/format-print.css?1729688305" rel="stylesheet">
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/variant.js?1729688305"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..';
+      window.relearn.relBaseUri='..\/..\/..\/..\/..\/..';
+      window.relearn.absBaseUri='https:\/\/www.hsbi.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1360443';
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      window.index_js_url="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.search.js?1729688305";
+      // variant stuff
+      window.variants && variants.init( [ 'auto', 'zen-light', 'zen-dark', 'relearn-bright', 'relearn-light', 'relearn-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support print disableInlineCopyToClipboard" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp1-pointer.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            C&#43;&#43;: Pointer und Referenzen
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable " tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+<h1>C&#43;&#43;: Pointer und Referenzen</h1>
+
+
+
+    
+
+
+
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-graduation-cap"></i> TL;DR
+  </div>
+  <div class="box-content">
+<p>Es gibt viele Arten Speicher, die sich vor allem in der Größe und Geschwindigkeit unterscheiden
+(Cache, RAM, SSD, Festplatte, ...). Der Kernel stellt jedem Prozess einen linearen Adressraum
+bereit und abstrahiert dabei von den darunter liegenden physikalischen Speichermedien (es gibt
+eine Abbildung auf die jeweiligen Speichermedien durch die MMU, dies ist aber nicht Bestandteil
+dieses Kurses).</p>
+<p>Den virtuellen Speicher kann man grob in drei Segmente aufteilen: Text (hier befindet sich der
+Programmcode des Prozesses), Stack (automatische Verwaltung, für Funktionsaufrufe und lokale
+Variablen) und Heap (Verwaltung durch den Programmierer, dynamische Bereitstellung von Speicher
+während der Laufzeit des Programms).</p>
+<p>Pointer sind Variablen, deren <strong>Wert als Adresse</strong> (im virtuellen Speicher) interpretiert wird.
+Pointer können auf andere Objekte bzw. Variablen zeigen: Der Adressoperator &quot;<code>&amp;</code>&quot; liefert die
+Adresse eines Objekts im virtuellen Speicher, diese kann einem Pointer zugewiesen werden (der
+Wert des Pointers ist dann die zugewiesene Adresse). Pointer können mit &quot;<code>*</code>&quot; dereferenziert
+werden, d.h. es wird an der Speicherstelle im virtuellen Speicher nachgeschaut, deren Adresse
+im Pointer gespeichert ist. Dadurch erfolgt der Zugriff auf das verwiesene Objekt. (Dies hat
+noch nichts mit <em>dynamischer Speicherverwaltung</em> zu tun!) Die Deklaration eines Pointers erfolgt
+mit einem <code>*</code> zwischen Typ und Pointername: <code>int *p;</code>. Da Pointer normale Variablen sind, unterliegen
+Pointer-Variablen den üblichen Gültigkeitsbedingungen (Scopes).</p>
+<p>In C++ gibt es zusätzlich <strong>Referenzen</strong>. Diese stellen Alias-Namen für ein Objekt (oder eine Variable)
+dar, d.h. ein Zugriff auf eine Referenz bewirkt den direkten Zugriff auf das verbundene Objekt.
+Referenzen müssen bei der Deklaration initialisiert werden (<code>Typ &amp;ref = obj;</code>) und sind dann
+fest mit diesem Objekt verbunden.</p>
+<p>In C und C++ werden Funktionsparameter immer per Call-by-Value übergeben: Der Wert des Arguments wird
+in die lokale Variable des Funktionsparameters kopiert. Wenn ein Pointer übergeben wird, wird entsprechend
+der Wert des Pointers kopiert, also die gespeicherte Adresse. Mit der Adresse eines Objekts kann man
+aber auch in der Funktion direkt auf dieses Objekt zugreifen und dieses auslesen und verändern, d.h.
+durch die Übergabe eines Pointers hat man zwar immer noch Call-by-Value (die Adresse wird kopiert), die
+Wirkung ist aber wie bei Call-by-Reference (also als ob eine Referenz auf das Objekt übergeben wurde).
+Bei der Verwendung von C++-Referenzen hat man dagegen echtes Call-by-Reference.</p>
+<p>Zur Laufzeit kann man Speicher auf dem Heap reservieren (<em>allozieren</em>). Im Gegensatz zu Speicher auf dem
+Stack ist man selbst auch für die Freigabe des reservierten Speichers zuständig - wenn man dies nicht beachtet,
+läuft irgendwann der Heap voll. Allokation und Freigabe kann entweder mit den C-Funktionen <code>malloc</code> und <code>free</code>
+erfolgen oder mit den C++-Operatoren <code>new</code> und <code>delete</code>. Mischen Sie niemals nie <code>malloc()</code>/<code>free()</code> mit
+<code>new</code>/<code>delete</code>!</p>
+<p>Zwischen Pointern und Arrays gibt es eine enge Verwandschaft. Die einzelnen Elemente eines Arrays
+werden vom Compiler direkt aufeinanderfolgend im Speicher angeordnet, der Array-Name ist wie
+ein (konstanter) Pointer auf das erste Element. Tatsächlich übersetzt der Compiler Indexzugriffe
+für ein Array in die passende Pointerdereferenzierung: <code>a[i]</code> wird zu <code>*(a+i)</code>. Ein Pointer kann
+wiederum auch auf das erste Element eines zusammenhängenden Speicherbereichs zeigen, etwa wenn man
+über <code>malloc</code> Speicherplatz für mehrere Elemente anfordert. Da der Compiler aus einem Indexzugriff
+ohnehin die Pointerdereferenzierung macht, könnte man so einen Pointer auch per Indexzugriff
+abfragen. Dies ist aber gefährlich: Es funktioniert auch, wenn der Pointer nur auf <em>ein</em> anderes
+Objekt zeigt und nicht auf einen Speicherbereich ... Ein Arrayname wird vom Compiler fest der
+ersten Speicheradresse des Arrays zugeordnet und kann nicht verändert werden, der Inhalt eines
+(nicht-konstanten) Pointer dagegen schon (der Pointer selbst wird auch fest im Speicher angelegt).</p>
+<p>Pointer haben einen Typ: Die Pointerarithmetik berücksichtigt die Speicherbreite des Typs! Damit
+springt man mit <code>ptr+1</code> automatisch zum nächsten Objekt und nicht notwendigerweise zum nächsten
+Byte.</p>
+  </div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+
+    
+    
+
+
+
+
+
+    
+
+    
+
+    
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+    
+
+    <div class="box notices cstyle tip">
+  <div class="box-label">
+    <i class="fas fa-lightbulb"></i> Lernziele
+  </div>
+  <div class="box-content">
+<ul> <li>(K1) Virtueller Speicher, Segmente: Text, Data, Stack</li> <li>(K2) Pointer sind Variablen, Wert wird als Adresse interpretiert</li> <li>(K2) Pointer als spezielle Variablen: Wert des Pointers als Adresse interpretieren</li> <li>(K2) Initialisierung und Scopes bei Pointern</li> <li>(K3) Zuweisen einer Adresse an einen Pointer</li> <li>(K3) Dereferenzierung eines Pointers und Zugriff auf das referenzierte Element</li> <li>(K3) Pointer als Funktionsparameter: Call-by-Reference mit Hilfe von Pointern</li> <li>(K2) Memory Leaks und Stale Pointer und deren Vermeidung</li> <li>(K3) C++-Operatoren <code>new</code> und <code>delete</code>, Unterschied zu <code>malloc()</code>, <code>free()</code></li> <li>(K3) Referenzen in C++ (Deklaration, Initialisierung, Nutzung)</li> <li>(K3) Zusammenhang und Unterschied Pointer und Arrays</li> <li>(K3) Rechnen mit Pointern, Berücksichtigung des Typs</li></ul>
+  </div>
+</div>
+
+
+
+
+    <h2 id="virtueller-speicher">Virtueller Speicher</h2>
+<pre><code>            +-----------------------------------------+
+            |          Text                           | 0x0000
+            |                                         |    |
+            |-----------------------------------------|    |
+            |          Heap (Data)                    |    |
+            |                                         |    |
+            |--------------------+--------------------|    |
+            |                    |                    |    |
+            |                    v                    |    |
+            |                                         |    |
+            |                                         |    v
+            |                    ^                    |
+            |                    |                    |
+            |--------------------+--------------------|
+            |                                         |
+            |          Stack                          |
+            +-----------------------------------------+
+</code></pre>
+<ul>
+<li>Kernel weist jedem Prozess seinen eigenen virtuellen Speicher zu</li>
+<li>Linearer Adressbereich, beginnend mit Adresse 0 bis zu einer maximalen Adresse</li>
+<li>Verwaltung durch MMU (<em>Memory Management Unit</em>)
+<ul>
+<li>MMU bildet logische Adressen aus virtuellem Speicher auf den physikalischen Speicher ab</li>
+<li>Transparent für den Prozess</li>
+</ul>
+</li>
+</ul>
+<h3 id="segmente-des-virtuellen-speichers-text-read-only">Segmente des virtuellen Speichers: Text (read-only)</h3>
+<ul>
+<li>Programm Code</li>
+<li>Konstanten, String Literale</li>
+</ul>
+<p>zusätzlich (nicht in Abbildung dargestellt):</p>
+<ul>
+<li>Bereich initialisierter Daten (globale und static Variablen (explizit initialisiert))</li>
+<li>Bereich uninitialisierter Daten (globale und static Variablen (uninitialisiert) =&gt; Wert 0)</li>
+</ul>
+<h3 id="segmente-des-virtuellen-speichers-stack">Segmente des virtuellen Speichers: Stack</h3>
+<ul>
+<li>Dynamisch wachsend und schrumpfend</li>
+<li>Stackframe je Funktionsaufruf:
+<ul>
+<li>Lokale Variablen (&quot;automatische&quot; Variablen)</li>
+<li>Argumente und Return-Werte</li>
+</ul>
+</li>
+<li><strong>Automatische Pflege</strong>
+<ul>
+<li>Nach Funktionsrückkehr wird der Stackpointer (&quot;Top of Stack&quot;) weiter gesetzt</li>
+<li>Dadurch &quot;Bereinigung&quot;: Speicher der lokalen Variablen wird freigegeben</li>
+</ul>
+</li>
+</ul>
+<h3 id="segmente-des-virtuellen-speichers-data-heap">Segmente des virtuellen Speichers: Data (Heap)</h3>
+<ul>
+<li>Dynamisch wachsend und schrumpfend</li>
+<li>Bereich für dynamischen Speicher (Allokation während der Laufzeit)</li>
+<li>Zugriff und Verwaltung aus <span class='alert'>laufendem</span> Programm =&gt; <strong>Pointer</strong>
+<ul>
+<li><code>malloc()</code>/<code>calloc()</code>/<code>free()</code> (C)</li>
+<li><code>new</code>/<code>delete</code> (C++)</li>
+<li>typischerweise <span class='alert'><strong>Pointer</strong></span></li>
+</ul>
+</li>
+<li><strong>KEINE automatische Pflege - Programmierer ist selbst verantwortlich!</strong></li>
+</ul>
+<h2 id="konzept-eines-pointers">Konzept eines Pointers</h2>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">99</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>iptr;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>iptr <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>i;  <span style="color:#75715e">/* Wert von iptr ist gleich Adresse von i */</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">*</span>iptr <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;  <span style="color:#75715e">/* Deferenzierung von iptr =&gt; Veränderung von i */</span></span></span></code></pre></div>
+<pre><code>        Variable    Speicheraddresse    Inhalt
+
+                                        |          |
+                                        +----------+
+        i           10125               | 99       |  &lt;--+
+                                        +----------+     |
+                                        |          |     |
+                    ....                 ....            |
+                                        |          |     |
+                                        +----------+     |
+        iptr        27890               | 10125    |  ---+
+                                        +----------+
+                                        |          |
+</code></pre>
+<h3 id="pointer-sind-variablen">Pointer sind Variablen</h3>
+<ul>
+<li>haben Namen und Wert</li>
+<li>können mit Operatoren verändert werden</li>
+<li>sind einer Speicheradresse im virtuellen Speicher zugeordnet</li>
+</ul>
+<p>Im Beispiel:</p>
+<ul>
+<li>Variable <code>i</code>:
+<ul>
+<li>Name: &quot;i&quot;</li>
+<li>Wert: 99</li>
+<li>Speicherzelle (Adresse): 10125</li>
+</ul>
+</li>
+<li>Variable <code>iptr</code>:
+<ul>
+<li>Name: &quot;iptr&quot;</li>
+<li>Wert: 10125</li>
+<li>Speicherzelle (Adresse): 27890</li>
+</ul>
+</li>
+</ul>
+<h3 id="pointer-sind-besondere-variablen">Pointer sind besondere Variablen</h3>
+<div class='center'>
+<p>Der <span class='alert'>Wert</span> eines Pointers wird als <span class='alert'><strong>Adresse</strong></span> im Speicher behandelt</p>
+</div>
+<p>Der Wert von <code>iptr</code> ist nicht ein beliebiger Integer, sondern eine Adresse. In
+diesem Fall handelt es sich um die Adresse im virtuellen Speicher, wo die
+Variable <code>i</code> abgelegt ist.</p>
+<p>Wirkung/Interpretation: Variable <code>iptr</code> &quot;zeigt&quot; auf die Adresse von Variable <code>i</code>.</p>
+<h3 id="pointer-und-adressen-syntax">Pointer und Adressen (Syntax)</h3>
+<ul>
+<li>
+<p>Deklaration</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>Typ <span style="color:#f92672">*</span> Name;</span></span></code></pre></div>
+</li>
+<li>
+<p>Zuweisung einer Adresse über den <code>&amp;</code>-Operator:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">99</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>iptr;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>iptr <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>i;  <span style="color:#75715e">/* Wert von iptr ist gleich Adresse von i */</span></span></span></code></pre></div>
+</li>
+<li>
+<p><code>iptr</code> ist ein Pointer auf eine (beliebige) Speicherzelle mit Inhalt vom Typ <code>int</code></p>
+</li>
+<li>
+<p>Nach Zuweisung: <code>iptr</code> ist ein Pointer auf die Speicherzelle der Variablen <code>i</code></p>
+</li>
+</ul>
+<h3 id="dereferenzierung-zugriff-auf-ziel">Dereferenzierung: Zugriff auf Ziel</h3>
+<ul>
+<li>
+<p>Dereferenzierung mit <code>*</code>:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">99</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>iptr;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>iptr <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>i;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">*</span>iptr <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;  <span style="color:#75715e">// Zugriff auf verwiesene Speicherzelle i
+</span></span></span></code></pre></div>
+</li>
+</ul>
+<h3 id="pointer-schreibweisen">Pointer: Schreibweisen</h3>
+<ul>
+<li>
+<p>Position des <code>*</code> zwischen Typ und Name beliebig</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/* aequivalente Schreibweisen */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> iptr;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span> iptr;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>iptr;</span></span></code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/* Vorsicht Mehrfachdeklaration */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> iptr, ptr2;      <span style="color:#75715e">/* ptr2 ist nur ein int! */</span></span></span></code></pre></div>
+</li>
+<li>
+<p>Dereferenzierung von Pointern auf Klassen/Structs: Operator <code>-&gt;</code></p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/* aequivalente Schreibweisen */</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#f92672">*</span>iptr).attribut;
+</span></span><span style="display:flex;"><span>iptr<span style="color:#f92672">-&gt;</span>attribut;</span></span></code></pre></div>
+</li>
+</ul>
+<h3 id="pointer-zuweisungen-an-andere-pointer">Pointer: Zuweisungen an andere Pointer</h3>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">99</span>, <span style="color:#f92672">*</span>iptr, <span style="color:#f92672">*</span>ptr2;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>iptr <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>i;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ptr2 <span style="color:#f92672">=</span> iptr;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">*</span>ptr2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;</span></span></code></pre></div>
+<p>Jetzt zeigen zwei Pointer auf die Speicherzelle von Variable <code>i</code>: <code>iptr</code> (wegen <code>iptr = &amp;i</code>), und
+weil der Wert von <code>iptr</code> in <code>ptr2</code> kopiert wurde (<code>ptr2 = iptr</code>), zeigt nun auch <code>ptr2</code> auf <code>i</code>.</p>
+<p>Der Wert von <code>iptr</code> ist die Adresse von <code>i</code>. Wenn dieser Wert kopiert oder zugewiesen wird, ändert
+sich an dieser Adresse nichts. <code>ptr2</code> bekommt diesen Wert zugewiesen, d.h. bei einer Dereferenzierung
+von <code>ptr2</code> würde auf die Adresse von <code>i</code> zugriffen werden und dort gelesen/geschrieben werden.</p>
+<h3 id="pointer-und-scopes">Pointer und Scopes</h3>
+<div class='center'>
+<p><span class='alert'><strong>Nicht auf Variablen außerhalb ihres Scopes zugreifen!</strong></span></p>
+</div>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">9</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>ip <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>i;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">*</span>ip <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>;
+</span></span><span style="display:flex;"><span>{  <span style="color:#75715e">/* neuer Block */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> j<span style="color:#f92672">=</span><span style="color:#ae81ff">7</span>;
+</span></span><span style="display:flex;"><span>    ip <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>j;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#f92672">*</span>ip <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;  <span style="color:#75715e">/* AUTSCH!!! */</span></span></span></code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> <span style="color:#a6e22e">murks</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">99</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span>i;  <span style="color:#75715e">/* AUTSCH!!! */</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="hotelzimmer-analogie">Hotelzimmer-Analogie</h3>
+<ul>
+<li>Wenn Sie in ein Hotel einchecken, bekommen Sie den Schlüssel zu <strong>Ihrem</strong> Zimmer
+<ul>
+<li><em>Pointer</em> == Schlüssel</li>
+<li><em>Variable auf die Pointer zeigt</em> == Zimmer</li>
+</ul>
+</li>
+<li>Wenn Sie auschecken, geben Sie normalerweise Ihr Zimmer auf und den Schlüssel ab
+<ul>
+<li>Pointer wird ungültig</li>
+<li>Variable wird ungültig</li>
+</ul>
+</li>
+<li>Wenn Sie beim Auschecken den Schlüssel nicht abgeben, gehört das Zimmer
+dennoch nicht mehr Ihnen
+<ul>
+<li>Sie haben noch den Pointer</li>
+<li>Die Variable, auf die der Pointer zeigt, ist ungültig</li>
+</ul>
+</li>
+<li>Wenn Sie jetzt auf das Zimmer gehen, kommen Sie (evtl.) noch rein
+<ul>
+<li>Evtl. ist das Zimmer noch nicht wieder belegt, und Sie finden Ihr vergessenes Handy</li>
+<li>Bei Dereferenzierung erhalten Sie noch den alten Wert der Variablen
+<ul>
+<li>Evtl. wurde das Zimmer bereits wieder vergeben =&gt; Sie &quot;brechen&quot; bei
+einem Fremden ein!</li>
+<li>Bei Dereferenzierung greifen Sie auf &quot;fremde&quot; Variablen (Speicherbereiche) zu!</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="pointer-und-initialisierung">Pointer und Initialisierung</h3>
+<div class='center'>
+<p>Pointer werden vom Compiler <span class='alert'><strong>nicht</strong></span> initialisiert!</p>
+</div>
+<ul>
+<li>Zeigen ohne explizite Initialisierung auf <span class='alert'><strong>zufällige</strong></span> Adresse</li>
+<li>Dereferenzierung uninitialisierter Pointer problematisch</li>
+</ul>
+<p><strong>Explizite Null-Pointer</strong>:</p>
+<ul>
+<li>Wert 0 zuweisen</li>
+<li>Besser: Symbolische Konstante <code>NULL</code> aus <code>stdio.h</code> bzw. <code>cstdio</code> bzw. in C++ <code>nullptr</code></li>
+</ul>
+<h2 id="speicherverwaltung">Speicherverwaltung</h2>
+<ul>
+<li>
+<p>C: <span class='alert'><strong>Funktionen</strong></span> zur Verwaltung dynamischen Speichers: <code>malloc()</code>,
+<code>free()</code>, ... (in <code>&lt;stdlib.h&gt;</code>)</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> <span style="color:#a6e22e">malloc</span>(<span style="color:#66d9ef">size_t</span> size)</span></span></code></pre></div>
+<ul>
+<li>Alloziert <code>size</code> Bytes auf dem Heap und liefert Adresse zurück</li>
+<li>Pointer auf <code>void</code>, da Typ unbekannt - vor Nutzung auf korrekten Typ umcasten</li>
+<li>Im Fehlerfall wird ein Null-Pointer zurückgeliefert: <code>NULL</code></li>
+<li>Achtung: Speicher ist nicht initialisiert!</li>
+</ul>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span><span style="color:#f92672">*</span>) <span style="color:#a6e22e">malloc</span>(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">int</span>));
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>pa <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span><span style="color:#f92672">*</span>) <span style="color:#a6e22e">malloc</span>(<span style="color:#ae81ff">4</span><span style="color:#f92672">*</span><span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">int</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">free</span>(p);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">free</span>(pa);</span></span></code></pre></div>
+</li>
+<li>
+<p>C++: <span class='alert'><strong>Operatoren</strong></span>: <code>new</code> und <code>delete</code></p>
+<ul>
+<li>Direkte Angabe des Zieltyps</li>
+<li>Rückgabe eines Pointers auf diesen Typ</li>
+<li>Exception, wenn kein Speicher verfügbar</li>
+<li>Form mit <code>[]</code>-Operator für Arrays</li>
+<li>Mit <code>new</code> allozierter Speicher muss mit <code>delete</code> freigegeben werden</li>
+<li>Mit <code>new []</code> allozierter Speicher muss mit <code>delete []</code> freigegeben werden</li>
+</ul>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>pa <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>[<span style="color:#ae81ff">4</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">delete</span> p;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">delete</span> [] pa;</span></span></code></pre></div>
+</li>
+</ul>
+<h3 id="speicher-allozieren-standardidiom">Speicher allozieren: Standardidiom</h3>
+<p>In C müssen Sie die Rückgabe von <code>malloc</code> prüfen:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>i, <span style="color:#f92672">*</span>x;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>i <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>) <span style="color:#a6e22e">malloc</span>(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">int</span>));
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>) <span style="color:#a6e22e">malloc</span>(<span style="color:#66d9ef">sizeof</span>(<span style="color:#f92672">*</span>x));   <span style="color:#75715e">/* Stern wichtig */</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>i) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* Fehlerbehandlung */</span>
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* mach was */</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p>In C++ bekommen Sie eine Exception, falls <code>new</code> nicht erfolgreich war:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>i;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    i <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* mach was */</span>
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (...) { <span style="color:#75715e">/* Fehlerbehandlung */</span> }</span></span></code></pre></div>
+<p><em>Hinweis</em>: Pointer-Variablen <code>i</code> und <code>x</code> liegen auf Stack, angeforderter Speicher im Heap!</p>
+<h3 id="pointer-und-typen">Pointer und Typen</h3>
+<ul>
+<li>Typ eines Zeigers relevant, wird vom Compiler geprüft</li>
+<li>Zuweisung ohne expliziten Cast nur an allgemeinere Typen/Oberklassen
+<ul>
+<li>
+<p>Jeder Zeiger auf Typ <code>T</code> kann automatisch zum <code>void</code>-Pointer
+konvertiert werden</p>
+</li>
+<li>
+<p>Für Zuweisung von <code>void</code>-Pointern an Pointer auf Typ <code>T</code> expliziter
+Cast nach <code>T*</code> nötig (siehe auch nachfolgenden Hinweis zu C11)</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>cp;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>vp;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>vp <span style="color:#f92672">=</span> cp;          <span style="color:#75715e">/* OK */</span>
+</span></span><span style="display:flex;"><span>cp <span style="color:#f92672">=</span> vp;          <span style="color:#75715e">/* problematisch */</span>
+</span></span><span style="display:flex;"><span>cp <span style="color:#f92672">=</span> (<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>) vp; <span style="color:#75715e">/* OK */</span></span></span></code></pre></div>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="fallstricke-dynamischer-speicherverwaltung">Fallstricke dynamischer Speicherverwaltung</h3>
+<h4 id="nur-new-und-delete-kombinieren-bzw-malloc-und-free">Nur new und delete kombinieren bzw. malloc und free</h4>
+<ul>
+<li>
+<p><code>delete</code> darf nur auf mit <code>new</code> erzeugte Objekte angewendet werden</p>
+<ul>
+<li>Vorsicht bei Pointern auf Stack-Variablen!</li>
+<li><span class='alert'><strong>NIE</strong></span> mischen mit <code>malloc()</code>/<code>calloc()</code>/<code>free()</code>!</li>
+</ul>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>) malloc(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">int</span>));
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">delete</span> p;  <span style="color:#75715e">// FEHLER! Absturzgefahr
+</span></span></span></code></pre></div>
+</li>
+</ul>
+<h4 id="delete-genau-nur-bei-new">delete[] genau nur bei new[]</h4>
+<ul>
+<li>
+<p><code>delete[]</code> darf nur auf mit <code>new[]</code> erzeugte Objekte angewendet werden
+(und <span class='alert'><strong>muss</strong></span> dort auch angewendet werden)</p>
+<p><code>delete</code> auf mit <code>new[]</code> erzeugtes Array würde nur
+erstes Element freigeben!</p>
+</li>
+</ul>
+<h4 id="vorsicht-mit-pointern-auf-lokale-variablen">Vorsicht mit Pointern auf lokale Variablen</h4>
+<ul>
+<li>
+<p>Funktioniert technisch, ist aber gefährlich:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> <span style="color:#a6e22e">murks</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">99</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span>i;  <span style="color:#75715e">/* SO NICHT: Pointer auf lokale Variable! */</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</li>
+<li>
+<p>Etwas besser:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> <span style="color:#a6e22e">wenigerMurks</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>) <span style="color:#a6e22e">malloc</span>(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">int</span>)); <span style="color:#75715e">/* neuer Speicher */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">*</span>p<span style="color:#f92672">=</span><span style="color:#ae81ff">99</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> p; <span style="color:#75715e">/* das geht */</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</li>
+</ul>
+<div style="text-align: right;"><span class="badge cstyle default"><span class="badge-content">Warum nur &quot;etwas besser&quot;?</span></span></div>
+<p>Jetzt haben Sie aber ein neues Problem: Der Aufrufer der Funktion muss wissen,
+dass diese Speicher alloziert und muss sich selbst um die Freigabe kümmern.
+Dies ist unschön, da die Allokation und Freigabe in unterschiedlicher
+Verantwortung liegen! Dadurch können sehr schnell Fehler passieren.</p>
+<p>Besser wäre, wenn der Aufrufer einen Pointer übergibt, mit dem dann in der
+Funktion gearbeitet wird. Dann liegt die Verantwortung für die Erstellung und
+Freigabe des Pointers komplett in der Hand des Aufrufers.</p>
+<h4 id="memory-leaks">Memory Leaks</h4>
+<ul>
+<li>
+<p>Pointer-Variablen unterliegen den Gültigkeitsregeln für Variablen</p>
+</li>
+<li>
+<p>Mit <code>malloc()</code> reservierter Speicher existiert bis Programmende</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>i;
+</span></span><span style="display:flex;"><span>    i <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>) <span style="color:#a6e22e">malloc</span>(<span style="color:#66d9ef">sizeof</span>(<span style="color:#f92672">*</span>i));
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">*</span>i <span style="color:#f92672">=</span> <span style="color:#ae81ff">99</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/* hier existiert die Variable i nicht mehr */</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/* aber der Speicher auf dem Heap bleibt belegt */</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/* ist aber nicht mehr zugreifbar -&gt; SPEICHERLOCH! */</span></span></span></code></pre></div>
+</li>
+</ul>
+<h4 id="double-free-und-stale-pointer">Double Free und Stale Pointer</h4>
+<ul>
+<li><code>free()</code> darf nur <span class='alert'>einmal pro Objekt</span> aufgerufen werden
+<ul>
+<li>Hintergrund: Intern wird eine Freispeicherliste verwaltet</li>
+</ul>
+</li>
+<li>Nach <code>free()</code> ist der Zeiger undefiniert:
+<ul>
+<li>Zeigt immer noch in den Heap (alte Adresse!)</li>
+<li>Ist nicht gleich <code>NULL</code> oder 0</li>
+<li>Zugriff ist möglich, aber gefährlich: Speicher kann wieder vergeben und
+überschrieben werden (<em>Hotelzimmer-Analogie</em>)</li>
+</ul>
+</li>
+<li>Mehrere Pointer auf ein Objekt: Einmal <code>free()</code> reicht!
+<ul>
+<li>Die anderen Pointer dürfen anschließend aber auch nicht mehr
+dereferenziert werden (<span class='alert'>stale/dangling pointer</span>)</li>
+</ul>
+</li>
+</ul>
+<h4 id="beispiel-stale-pointer">Beispiel Stale Pointer</h4>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>i, <span style="color:#f92672">*</span>k; i <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>) <span style="color:#a6e22e">malloc</span>(<span style="color:#66d9ef">sizeof</span>(<span style="color:#f92672">*</span>i)); k <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">free</span>(i);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">free</span>(i); <span style="color:#75715e">/* EINMAL reicht! */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">*</span>k <span style="color:#f92672">=</span> <span style="color:#ae81ff">42</span>; <span style="color:#75715e">/* Speicher ist bereits frei - stale pointer */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">free</span>(k); <span style="color:#75715e">/* Speicher ist bereits frei - double free */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">*</span>i <span style="color:#f92672">=</span> <span style="color:#ae81ff">99</span>; <span style="color:#75715e">/* Speicher ist bereits frei */</span></span></span></code></pre></div>
+<p><em>Anmerkung</em>: Anwendung auf <code>NULL</code>-Pointer bewirkt nichts und ist unschädlich</p>
+<h4 id="dereferenzieren-von-bad-pointern">Dereferenzieren von &quot;Bad Pointern&quot;</h4>
+<p>Der klassische Scanf-Bug :)</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i;
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">scanf</span>(<span style="color:#e6db74">&#34;%d&#34;</span>, i);</span></span></code></pre></div>
+<div class="expand">
+  <input type="checkbox" id="R-expand-c4b8e1c1b344373c316a34cd56d5205a" aria-controls="R-expandcontent-c4b8e1c1b344373c316a34cd56d5205a">
+  <label class="expand-label" for="R-expand-c4b8e1c1b344373c316a34cd56d5205a">
+    <i class="expander-icon fa-fw fas fa-chevron-down"></i>
+    <i class="expander-icon fa-fw fas fa-chevron-right"></i> Show Me
+  </label>
+  <div id="R-expandcontent-c4b8e1c1b344373c316a34cd56d5205a" class="expand-content">
+<p>Tipp: <code>i</code> ist <strong>kein</strong> Pointer :)</p>
+  </div>
+</div>
+<h4 id="auslesen-von-nicht-initialisiertem-speicher">Auslesen von nicht-initialisiertem Speicher</h4>
+<p>Wenn Programmierer denken, dass irgendwer den Heap zwischendurch immer mal
+wieder auf 0 setzt ...</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/* return y = Ax */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">matvec</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">**</span>A, <span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>x, <span style="color:#66d9ef">int</span> N) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>y <span style="color:#f92672">=</span> <span style="color:#a6e22e">malloc</span>(N<span style="color:#f92672">*</span><span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">int</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span>N; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; j<span style="color:#f92672">&lt;</span>N; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            y[i] <span style="color:#f92672">+=</span> A[i][j] <span style="color:#f92672">*</span> x[j];
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> y;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<div class="expand">
+  <input type="checkbox" id="R-expand-6f0835c82f15229421c91ccc59b2281f" aria-controls="R-expandcontent-6f0835c82f15229421c91ccc59b2281f">
+  <label class="expand-label" for="R-expand-6f0835c82f15229421c91ccc59b2281f">
+    <i class="expander-icon fa-fw fas fa-chevron-down"></i>
+    <i class="expander-icon fa-fw fas fa-chevron-right"></i> Show Me
+  </label>
+  <div id="R-expandcontent-6f0835c82f15229421c91ccc59b2281f" class="expand-content">
+<p>Tipp: <code>y[i] += ...</code> setzt sinnvolle Werte in <code>y[i]</code> voraus ...</p>
+  </div>
+</div>
+<h4 id="überschreiben-von-speicher-i">Überschreiben von Speicher I</h4>
+<p>Allokation von falschen Größen</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>p;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">=</span> <span style="color:#a6e22e">malloc</span>(N<span style="color:#f92672">*</span><span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">int</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span>N; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    p[i] <span style="color:#f92672">=</span> <span style="color:#a6e22e">malloc</span>(M<span style="color:#f92672">*</span><span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">int</span>));
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<div class="expand">
+  <input type="checkbox" id="R-expand-a6e0a69eac18b40ffd705d496827a251" aria-controls="R-expandcontent-a6e0a69eac18b40ffd705d496827a251">
+  <label class="expand-label" for="R-expand-a6e0a69eac18b40ffd705d496827a251">
+    <i class="expander-icon fa-fw fas fa-chevron-down"></i>
+    <i class="expander-icon fa-fw fas fa-chevron-right"></i> Show Me
+  </label>
+  <div id="R-expandcontent-a6e0a69eac18b40ffd705d496827a251" class="expand-content">
+<p>Tipp: Jedes <code>p[i]</code> kann einen <code>int</code> speichern, bekommt aber einen Pointer
+zugewiesen (könnte deutlich breiter im Speicher sein als ein <code>int</code>) ...</p>
+  </div>
+</div>
+<h4 id="überschreiben-von-speicher-ii">Überschreiben von Speicher II</h4>
+<p>Indexberechnung kaputt, sogenannte &quot;<em>off-by-one-errors</em>&quot;</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">**</span>p;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">=</span> <span style="color:#a6e22e">malloc</span>(N<span style="color:#f92672">*</span><span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">int</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;=</span>N; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    p[i] <span style="color:#f92672">=</span> <span style="color:#a6e22e">malloc</span>(M<span style="color:#f92672">*</span><span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">int</span>));
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<div class="expand">
+  <input type="checkbox" id="R-expand-35bd16a9eafed90268e4fbd7a7d2f4ed" aria-controls="R-expandcontent-35bd16a9eafed90268e4fbd7a7d2f4ed">
+  <label class="expand-label" for="R-expand-35bd16a9eafed90268e4fbd7a7d2f4ed">
+    <i class="expander-icon fa-fw fas fa-chevron-down"></i>
+    <i class="expander-icon fa-fw fas fa-chevron-right"></i> Show Me
+  </label>
+  <div id="R-expandcontent-35bd16a9eafed90268e4fbd7a7d2f4ed" class="expand-content">
+<p>Tipp: Hier läuft <code>i</code> um einen Platz zu weit ...</p>
+  </div>
+</div>
+<h4 id="überschreiben-von-speicher-iii">Überschreiben von Speicher III</h4>
+<p>Einlesen von Strings, zu kleine Buffer</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">char</span> s[<span style="color:#ae81ff">8</span>];
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">gets</span>(s);</span></span></code></pre></div>
+<div class="expand">
+  <input type="checkbox" id="R-expand-46117e7b6559d3ab74799998a0c4a2bf" aria-controls="R-expandcontent-46117e7b6559d3ab74799998a0c4a2bf">
+  <label class="expand-label" for="R-expand-46117e7b6559d3ab74799998a0c4a2bf">
+    <i class="expander-icon fa-fw fas fa-chevron-down"></i>
+    <i class="expander-icon fa-fw fas fa-chevron-right"></i> Show Me
+  </label>
+  <div id="R-expandcontent-46117e7b6559d3ab74799998a0c4a2bf" class="expand-content">
+<p>Tipp: Wenn hier mehr als 7 Zeichen eingegeben werden, gibt es Probleme :)</p>
+  </div>
+</div>
+<h4 id="überschreiben-von-speicher-iv">Überschreiben von Speicher IV</h4>
+<p>Pointerarithmetik falsch verstanden</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">search</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>p, <span style="color:#66d9ef">int</span> val) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (<span style="color:#f92672">*</span>p <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">*</span>p <span style="color:#f92672">!=</span> val)
+</span></span><span style="display:flex;"><span>        p <span style="color:#f92672">+=</span> <span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">int</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> p;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<div class="expand">
+  <input type="checkbox" id="R-expand-7ecc878e9b5513fb9b13e605a10076b7" aria-controls="R-expandcontent-7ecc878e9b5513fb9b13e605a10076b7">
+  <label class="expand-label" for="R-expand-7ecc878e9b5513fb9b13e605a10076b7">
+    <i class="expander-icon fa-fw fas fa-chevron-down"></i>
+    <i class="expander-icon fa-fw fas fa-chevron-right"></i> Show Me
+  </label>
+  <div id="R-expandcontent-7ecc878e9b5513fb9b13e605a10076b7" class="expand-content">
+<p>Tipp: Jeder Pointer hat einen Typ, und der Ausdruck &quot;Pointer + 1&quot; rutscht um
+so viele Bytes im Speicher weiter, wie der Typ breit ist. D.h. mit einem
+&quot;Pointer + 1&quot; gelangt man zum nächsten Element, während der obige Ausdruck
+<code>p += sizeof(int);</code> um <code>sizeof(int)</code> Elemente weiterspringt!</p>
+  </div>
+</div>
+<h2 id="pointer-und-arrays">Pointer und Arrays</h2>
+<p>Ein Array-Name ist wie ein <em>konstanter</em> Pointer auf Array-Anfang: <code>a[i] == *(a+i)</code></p>
+<p>Ein <strong>Array-Name</strong> ist nur ein Label, welches der <strong>Adresse des ersten Array-Elements</strong> entspricht.
+Die Wirkung ist entsprechend die eines konstanten Pointers auf den Array-Anfang.</p>
+<p>=&gt; Der Compiler übersetzt Array-Zugriffe per Indexoperator in Pointerarithmetik: <code>a[i]</code> wird zu <code>*(a+i)</code> ...</p>
+<p>Vgl. auch die Diskussion in
+<a href="https://eli.thegreenplace.net/2009/10/21/are-pointers-and-arrays-equivalent-in-c" rel="external" target="_blank">eli.thegreenplace.net/2009/10/21/are-pointers-and-arrays-equivalent-in-c</a></p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">char</span> a[<span style="color:#ae81ff">6</span>], c, <span style="color:#f92672">*</span>cp;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&amp;</span>a[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> a;
+</span></span><span style="display:flex;"><span>cp <span style="color:#f92672">=</span> a;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>c <span style="color:#f92672">=</span> a[<span style="color:#ae81ff">5</span>];
+</span></span><span style="display:flex;"><span>c <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(a<span style="color:#f92672">+</span><span style="color:#ae81ff">5</span>);
+</span></span><span style="display:flex;"><span>c <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(cp<span style="color:#f92672">+</span><span style="color:#ae81ff">5</span>);
+</span></span><span style="display:flex;"><span>c <span style="color:#f92672">=</span> cp[<span style="color:#ae81ff">5</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> cp;  <span style="color:#75715e">/* FEHLER */</span>
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>c;  <span style="color:#75715e">/* FEHLER */</span></span></span></code></pre></div>
+<h3 id="iteration-durch-arrays-varianten">Iteration durch Arrays (Varianten)</h3>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> a[<span style="color:#ae81ff">10</span>], <span style="color:#f92672">*</span>pa<span style="color:#f92672">=</span>a;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> k<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; k<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">10</span>; k<span style="color:#f92672">++</span>)    <span style="color:#75715e">/* Iteration, Variante 1 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;%d &#34;</span>, a[k]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> k<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; k<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">10</span>; k<span style="color:#f92672">++</span>)    <span style="color:#75715e">/* Iteration, Variante 2 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;%d &#34;</span>, <span style="color:#f92672">*</span>(a<span style="color:#f92672">+</span>k));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>pa <span style="color:#f92672">=</span> a;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> k<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; k<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">10</span>; k<span style="color:#f92672">++</span>)    <span style="color:#75715e">/* Iteration, Variante 3 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;%d &#34;</span>, <span style="color:#f92672">*</span>pa<span style="color:#f92672">++</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/* Iteration, KEINE Variante */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> k<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; k<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">10</span>; k<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;%d &#34;</span>, <span style="color:#f92672">*</span>a<span style="color:#f92672">++</span>);    <span style="color:#75715e">/* DAS GEHT NICHT */</span></span></span></code></pre></div>
+<p><code>*pa++</code>: Operator <code>++</code> hat Vorrang vor <code>*</code>, ist aber die Postfix-Variante. D.h.
+<code>++</code> wirkt auf <code>pa</code> (und nicht auf <code>*pa</code>), aber zunächst wird für die Ausgabe
+<code>*pa</code> ausgewertet ...</p>
+<p><code>*a++</code> ist nicht erlaubt, weil dadurch der Name des Arrays (== Adresse des ersten
+Array-Elements == konstanter Zeiger auf den Anfang des Arrays) verändert würde.</p>
+<h3 id="array-namen-sind-wie-konstante-pointer">Array-Namen sind wie konstante Pointer</h3>
+<div class='center'>
+<p><span class='alert'><strong>Array-Namen können NICHT umgebogen werden!</strong></span></p>
+</div>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> a[], <span style="color:#f92672">*</span>pa<span style="color:#f92672">=</span>a, k;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/* erlaubt */</span>
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">+</span> k;
+</span></span><span style="display:flex;"><span>pa<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/* VERBOTEN */</span>
+</span></span><span style="display:flex;"><span>a<span style="color:#f92672">++</span>;</span></span></code></pre></div>
+<h3 id="selbsttest-was-bedeutet-was-was-ist-erlaubtnicht-erlaubt-was-kommt-raus-warum">Selbsttest: Was bedeutet was, was ist erlaubt/nicht erlaubt, was kommt raus? Warum?</h3>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> a[<span style="color:#ae81ff">10</span>], <span style="color:#f92672">*</span>pa, <span style="color:#f92672">*</span>pb, x;
+</span></span><span style="display:flex;"><span>pa <span style="color:#f92672">=</span> a;    pb <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span><span style="color:#f92672">*</span>) <span style="color:#a6e22e">malloc</span>(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">int</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> a[<span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(a<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(a<span style="color:#f92672">++</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> pa[<span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(pa<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(pa<span style="color:#f92672">++</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> pb[<span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(pb<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(pb<span style="color:#f92672">++</span>);</span></span></code></pre></div>
+<p>=&gt; Arrays können wie konstante Pointer behandelt werden.</p>
+<p>=&gt; Pointer dürfen <span class='alert'><strong>nicht immer wie Arrays</strong></span> behandelt werden!
+(Syntaktisch zulässig, semantisch normalerweise nicht!)</p>
+<h3 id="pointerarithmetik-typen-beachten">Pointerarithmetik: Typen beachten</h3>
+<ul>
+<li>Pointer zeigen auf Objekte mit einem bestimmten Typ</li>
+<li>Typen haben unterschiedliche Speicherbreite</li>
+<li>Inkrementierung/Dekrementierung: Pointer zeigt nicht auf nächste
+Speicheradresse, sondern auf die <span class='alert'>Adresse des nächsten Werts</span>!</li>
+</ul>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">double</span> d[<span style="color:#ae81ff">10</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">double</span> <span style="color:#f92672">*</span>d1 <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>d[<span style="color:#ae81ff">2</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">double</span> <span style="color:#f92672">*</span>d2 <span style="color:#f92672">=</span> d1;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>d2<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;%ld</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, d2<span style="color:#f92672">-</span>d1);               <span style="color:#75715e">// ergibt 1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;%ld</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, (<span style="color:#66d9ef">long</span>)d2 <span style="color:#f92672">-</span> (<span style="color:#66d9ef">long</span>)d1); <span style="color:#75715e">// double -&gt; zB. 8 Bytes
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;%ld</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, <span style="color:#66d9ef">sizeof</span>(d1));  <span style="color:#75715e">// Breite Pointervariable
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;%ld</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, <span style="color:#66d9ef">sizeof</span>(<span style="color:#f92672">*</span>d1)); <span style="color:#75715e">// Breite Pointerdatentyp
+</span></span></span></code></pre></div>
+<h2 id="referenzen-in-c">Referenzen in C++</h2>
+<div class='center'>
+<p><code>Typ &amp; Name = Objekt;</code></p>
+</div>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> j<span style="color:#f92672">=</span><span style="color:#ae81ff">9</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>r<span style="color:#f92672">=</span>i;    <span style="color:#75715e">// Referenz: neuer Name fuer i
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>r<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>;        <span style="color:#75715e">// aendert i: i==10
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>r<span style="color:#f92672">=</span>j;         <span style="color:#75715e">// aendert i: i==9
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>s<span style="color:#f92672">=</span>r;    <span style="color:#75715e">// aequivalent zu int &amp;s = i;
+</span></span></span></code></pre></div>
+<h3 id="referenzen-bilden-alias-namen-1">Referenzen bilden Alias-Namen</h3>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">99</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>iptr <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>i;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>iref <span style="color:#f92672">=</span> i;   <span style="color:#75715e">// Referenz: neuer Name fuer i
+</span></span></span></code></pre></div>
+<pre><code>        Variable    Speicheraddresse    Inhalt
+
+                                        |          |
+                                        +----------+
+        i, iref     10125               | 99       |  &lt;--+
+                                        +----------+     |
+                                        |          |     |
+                    ....                 ....            |
+                                        |          |     |
+                                        +----------+     |
+        iptr        27890               | 10125    |  ---+
+                                        +----------+
+                                        |          |
+</code></pre>
+<ul>
+<li>Referenz bildet <span class='alert'>Alias-Namen</span> für ein Objekt</li>
+<li>Objekt hat damit mehrere Namen, über die es ansprechbar ist</li>
+<li>Referenzen in C++ mit Hilfe des <code>&amp;</code>-Operators deklarieren</li>
+</ul>
+<h3 id="eigenschaften-von-referenzen-in-c">Eigenschaften von Referenzen in C++</h3>
+<ul>
+<li>
+<p>Referenzen müssen bei Deklaration initialisiert werden</p>
+</li>
+<li>
+<p>Referenzen können nicht um-assigned werden</p>
+</li>
+<li>
+<p>Referenzen brauchen keinen eigenen Speicherplatz</p>
+</li>
+<li>
+<p>Vorsicht bei gleichzeitiger Deklaration mehrerer Referenzen:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> j<span style="color:#f92672">=</span><span style="color:#ae81ff">9</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span> r<span style="color:#f92672">=</span>i, s<span style="color:#f92672">=</span>j;    <span style="color:#75715e">// SO NICHT!!!
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>r<span style="color:#f92672">=</span>i, <span style="color:#f92672">&amp;</span>s<span style="color:#f92672">=</span>j;   <span style="color:#75715e">// korrekt
+</span></span></span></code></pre></div>
+</li>
+</ul>
+<h3 id="referenzen-als-funktionsparameter">Referenzen als Funktionsparameter</h3>
+<ul>
+<li>
+<p>Signatur:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fkt</span>(<span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span>, <span style="color:#66d9ef">char</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fkt</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>a, <span style="color:#66d9ef">char</span> b);  <span style="color:#75715e">// a per Referenz
+</span></span></span></code></pre></div>
+</li>
+<li>
+<p>Aufruf: ganz normal (ohne extra <code>&amp;</code>) ...</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> x<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">char</span> y<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;a&#39;</span>;
+</span></span><span style="display:flex;"><span>fkt(x, y);  <span style="color:#75715e">// x per Referenz
+</span></span></span></code></pre></div>
+</li>
+</ul>
+<p>Im Beispiel werden die Variablen <code>x</code> und <code>y</code> an die Funktion <code>fkt</code> übergeben. Der
+erste Parameter wird per Referenz (call-by-reference), der zweite per Kopie
+(call-by-value) übergeben.</p>
+<p>Der Funktionsparameter <code>a</code> bindet sich an <code>x</code>, ist eine Referenz auf/für <code>x</code> - jeder
+Zugriff auf <code>a</code> ist wie ein Zugriff auf <code>x</code>. Änderungen von <code>a</code> sind also Änderungen
+von <code>x</code>.</p>
+<p>Der zweite Parameter bindet sich an den <em>Wert</em> von <code>y</code>, d.h. <code>b</code> hat den Wert <code>'a'</code>.
+Zwar kann auch <code>b</code> verändert werden, das hat dann aber nur Auswirkungen innerhalb der
+Funktion und nicht auf die Variable <code>y</code> im äußeren Scope.</p>
+<h2 id="call-by-reference-semantik-in-c">Call-by-Reference Semantik in C++</h2>
+<h3 id="variante-a-pointer-c-und-c">Variante A: Pointer (C und C++)</h3>
+<p>Mit Hilfe von Pointern lässt sich die Call-by-Reference Semantik in C und in C++ simulieren.</p>
+<p>Bei der Übergabe eines Pointers wird der Wert des Pointers <em>kopiert</em> (call-by-value!). Im Inneren
+der Funktion kann diese Adresse dereferenziert werden und so auf das außerhalb der Funktion &quot;lebende&quot;
+Objekt zugegriffen werden. Damit bekommt man in der Wirkung call-by-reference.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">add_5</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>x) {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">*</span>x <span style="color:#f92672">+=</span> <span style="color:#ae81ff">5</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, <span style="color:#f92672">*</span>ip<span style="color:#f92672">=&amp;</span>i;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">add_5</span>(ip);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">add_5</span>(<span style="color:#f92672">&amp;</span>i);
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<ul>
+<li>Pointer wird nach wie vor per <span class='alert'>call-by-value</span> übergeben:
+<ul>
+<li>Wert wird bei Übergabe <span class='alert'>kopiert</span> (hier Adresse von <code>i</code>)</li>
+<li>Kopierter Wert ist immer noch ein Pointer (hier Pointer auf <code>i</code>, da
+Adresse von <code>i</code>)</li>
+<li>Dereferenzierung des kopierten Pointers: Zugriff auf das
+Original-Objekt (hier <code>i</code>)</li>
+</ul>
+</li>
+</ul>
+<h3 id="variante-b-referenzen-nur-c">Variante B: Referenzen (nur C++)</h3>
+<p>Referenzen müssen bei der Deklaration initialisiert werden und binden sich an das dabei genutzte
+Objekt. Sie stellen letztlich lediglich einen neuen Namen für das Objekt dar.</p>
+<p>Bei der Übergabe von Variablen an Referenz-Parameter einer Funktion binden sich diese Parameter an
+die übergebenen Objekte. Jeder Zugriff innerhalb der Funktion auf einen Referenz-Parameter bewirken
+einen Zugriff auf das ursprüngliche Objekt.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">add_5</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>x) {
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">+=</span> <span style="color:#ae81ff">5</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> x;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, erg;
+</span></span><span style="display:flex;"><span>    erg <span style="color:#f92672">=</span> add_5(i);
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<ul>
+<li>Funktionsparameter <code>x</code> ist eine Referenz</li>
+<li>Bei Aufruf der Funktion wird dieser Parameter initialisiert - die Referenz <code>x</code> bindet sich
+im Beispiel an die Variable <code>i</code></li>
+<li>Zugriffe auf <code>x</code> in der Funktion sind also Zugriffe auf das Original-Objekt <code>i</code> - <code>x += 5</code>
+ist nichts anderes als <code>i += 5</code></li>
+<li>Bei weiteren Aufrufen wird <code>x</code> dann neu gebunden</li>
+</ul>
+<h3 id="call-by-reference-const">Call-by-Reference: const</h3>
+<ul>
+<li>
+<p>Nachteil bei Call-by-Reference:</p>
+<p>Übergebenes Objekt könnte durch die Funktion (unbeabsichtigt) verändert werden</p>
+</li>
+<li>
+<p>Abhilfe: Deklaration der Parameter als konstant (Schlüsselwort <code>const</code>):</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fkt</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span>, <span style="color:#66d9ef">char</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fkt</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>a, <span style="color:#66d9ef">char</span> b);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// a wird per Referenz uebergeben, darf aber in der Funktion nicht veraendert werden
+</span></span></span></code></pre></div>
+</li>
+</ul>
+<p>=&gt; <code>const</code>-heit ist Bestandteil der Signatur!</p>
+<div class='center'>
+<p><span class='alert'><strong>Arbeiten Sie (wo möglich/sinnvoll) mit (konstanten) Referenzen!</strong></span></p>
+</div>
+<h3 id="rückgabe-von-werten-per-referenz">Rückgabe von Werten per Referenz</h3>
+<ul>
+<li>Normalerweise per call-by-value (Kopie)</li>
+<li>Mit Referenzen oder Pointern auch als call-by-reference</li>
+</ul>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>fkt1(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">fkt2</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>);</span></span></code></pre></div>
+<ul>
+<li>
+<p>Vorsicht mit lokalen Variablen (Gültigkeit)!</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>fkt1(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>i, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>j) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> erg <span style="color:#f92672">=</span> i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> erg;   <span style="color:#75715e">// Referenz auf lokale Variable!
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">fkt2</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>i, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>j) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> erg <span style="color:#f92672">=</span> i<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span>erg;  <span style="color:#75715e">// Pointer auf lokale Variable!
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>x <span style="color:#f92672">=</span> fkt1(<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;a&#34;</span>);  <span style="color:#75715e">// AUTSCH!!!
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>y <span style="color:#f92672">=</span> fkt2(<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;b&#34;</span>);  <span style="color:#75715e">// AUTSCH!!!
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span>  z <span style="color:#f92672">=</span> fkt1(<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;c&#34;</span>);  <span style="color:#75715e">// OK
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}</span></span></code></pre></div>
+</li>
+</ul>
+<p>Die Zuweisung <code>int &amp;x = fkt1(2, &quot;a&quot;);</code> ist syntaktisch erlaubt. Semantisch aber nicht: Die
+Referenz <code>x</code> bindet sich an das zurückgelieferte lokale <code>erg</code> - dieses existiert aber nicht
+mehr, da der Scope von erg beendet ist ...</p>
+<p><strong>=&gt; Nur Pointer auf Speicher zurückliefern, der nach Beendigung des Funtionsaufrufes noch existiert!</strong>
+(Dies könnte beispielsweise Speicher aus <code>malloc</code> oder <code>new</code> oder ein Pointer auf das eigene Objekt
+(<code>*this</code>) sein.)</p>
+<p>Die Zuweisung <code>int *y = fkt2(2, &quot;b&quot;);</code> ist syntaktisch erlaubt. Semantisch aber nicht: Der
+Pointer <code>y</code> übernimmt die zurückgelieferte Adresse des lokalen <code>erg</code> - dieses existiert aber
+nicht mehr, da der Scope von erg beendet ist ...</p>
+<p><strong>=&gt; Nur Referenzen zurückliefern, die nach Beendigung des Funtionsaufrufes noch gültig sind!</strong>
+(Dies könnten beispielsweise Referenz-Inputparameter oder eine Referenz auf das eigene Objekt
+(<code>*this</code>) sein.)</p>
+<p>Die Zuweisung <code>int  z = fkt1(2, &quot;c&quot;);</code> ist unbedenklich, da <code>z</code> eine normale Integervariable
+ist und hier das übliche Kopieren der Rückgabe von <code>ftk1</code> in die Variable stattfindet.</p>
+<h3 id="diskussion">Diskussion</h3>
+<p>In C++ können Sie Call-by-Reference über Pointer und/oder über Referenzen erreichen.</p>
+<p>In den obigen Beispielen wurde dies für die Parameter einer Funktion gezeigt - es sind
+aber auch Pointer und/oder Referenzen als Rückgabetypen möglich. Beachten Sie dabei,
+ob das jeweils wirklich Sinn ergibt! Eine Referenz oder ein Pointer auf eine lokale
+Variable ist eine große Fehlerquelle.</p>
+<p>In C++ werden Referenzen über Pointer bevorzugt. Wenn Sie die Wahl zwischen den beiden
+Signaturen <code>bar foo(wuppie&amp;,  bar)</code> und <code>bar foo(wuppie*,  bar)</code> haben, sollten Sie sich
+für <code>bar foo(wuppie&amp;,  bar)</code> entscheiden.</p>
+<h2 id="vergleich-pointer-mit-referenzen">Vergleich Pointer mit Referenzen</h2>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">Referenzen</th>
+          <th style="text-align: left">Pointer</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">Alias-Name für Objekte/Variablen, kein eigener Speicherplatz</td>
+          <td style="text-align: left">&quot;Echte&quot; Variablen mit eigenem Speicherplatz (für den Wert des Pointers)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Können nicht auf andere Objekte &quot;umgebogen&quot; werden</td>
+          <td style="text-align: left">Können auf andere Objekte zeigen (falls nicht const)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Operationen agieren direkt auf dem referenzierten Objekt</td>
+          <td style="text-align: left">Operationen auf referenzierten Objekt als auch auf dem Pointer selbst</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Nur in C++</td>
+          <td style="text-align: left">In C und in C++</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">Mit Pointern ist dynamische Speicherverwaltung möglich: Manipulation von Speicherbereichen im Heap</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="wrap-up">Wrap-Up</h2>
+<ul>
+<li>
+<p>Virtueller Speicher: Kernel stellt Prozessen linearen Adressraum bereit,
+Segmente: Text, Stack, Heap</p>
+</li>
+<li>
+<p>Pointer sind Variablen, deren <strong>Wert als Adresse</strong> interpretiert wird</p>
+<ul>
+<li>Deklaration mit <code>*</code> zwischen Typ und Name</li>
+<li>Adressoperator <code>&amp;</code> liefert die Adresse eines Objekts</li>
+<li>Dereferenzierung eines Pointers mit <code>*</code> vor dem Namen</li>
+</ul>
+</li>
+<li>
+<p>Verwandtschaft zw. Arrays und Pointern: Array-Name ist konstanter Pointer auf Array-Anfang</p>
+</li>
+<li>
+<p>Pointer haben Typ: Pointerarithmetik berücksichtigt Speicherbreite des Typs</p>
+</li>
+<li>
+<p>C++-Referenzen als Alias-Namen für ein Objekt</p>
+<ul>
+<li>Deklaration: <code>Typ &amp;ref = obj;</code></li>
+<li>Fest mit Objekt verbunden</li>
+<li>Zugriff auf Referenz: Direkter Zugriff auf das Objekt</li>
+</ul>
+</li>
+</ul>
+
+
+    
+
+
+
+    
+
+
+
+    
+
+    <div class="box notices cstyle note">
+  <div class="box-label">
+    <i class="fas fa-puzzle-piece"></i> Challenges
+  </div>
+  <div class="box-content">
+<p><strong>Pointer</strong></p>
+<ul>
+<li>
+<p>Erklären Sie das Problem bei folgender Deklaration: <code>int* xptr, yptr;</code></p>
+</li>
+<li>
+<p>Seien <code>p1</code> und <code>p2</code> Pointer auf <code>int</code>. Was ist der Unterschied zwischen den
+beiden Code-Zeilen?</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>p2  <span style="color:#f92672">=</span> p1;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">*</span>p2 <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>p1;</span></span></code></pre></div>
+</li>
+<li>
+<p>Ist <code>*&amp;x</code> immer identisch mit <code>x</code>?</p>
+</li>
+<li>
+<p>Ist <code>&amp;*x</code> immer identisch mit <code>x</code>?</p>
+</li>
+<li>
+<p>Wann kann die Funktion <code>void f(int*)</code> so aufgerufen werden: <code>f(&amp;x);</code>?</p>
+</li>
+</ul>
+<p><strong>Swap ...</strong></p>
+<ul>
+<li>
+<p>Warum funktioniert die folgende <code>swap()</code>-Funktion nicht?
+Wie müsste sie korrigiert werden?</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">swap</span>(<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> tmp; tmp<span style="color:#f92672">=</span>x; x<span style="color:#f92672">=</span>y; y<span style="color:#f92672">=</span>tmp;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</li>
+<li>
+<p>Was ist mit dieser Version dieser <code>swap()</code>-Funktion?</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">swap</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>x, <span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>y) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>tmp;
+</span></span><span style="display:flex;"><span>    tmp<span style="color:#f92672">=</span>x; x<span style="color:#f92672">=</span>y; y<span style="color:#f92672">=</span>tmp;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</li>
+</ul>
+<p><strong>C++: new und delete</strong></p>
+<p>Betrachten Sie folgende Code-Schnipsel.
+Erklären Sie die Wirkung der jeweiligen Anweisungen.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fkt</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>cp <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">char</span>[<span style="color:#ae81ff">100</span>];
+</span></span><span style="display:flex;"><span>    cp[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;a&#39;</span>;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>i;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">delete</span> p;</span></span></code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>p;
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>cp <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">char</span>[<span style="color:#ae81ff">100</span>];
+</span></span><span style="display:flex;"><span>    p <span style="color:#f92672">=</span> cp;
+</span></span><span style="display:flex;"><span>    free(cp);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">delete</span> p;</span></span></code></pre></div>
+<p><strong>Referenzen vs. Pointer: Welche der Aufrufe sind zulässig?</strong></p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">f1</span>(<span style="color:#66d9ef">int</span><span style="color:#f92672">*</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">f2</span>(<span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, <span style="color:#f92672">*</span>ip<span style="color:#f92672">=&amp;</span>i, <span style="color:#f92672">&amp;</span>ir<span style="color:#f92672">=</span>i;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    f1(i);      f1(<span style="color:#f92672">&amp;</span>i);     f1(<span style="color:#f92672">*</span>i);
+</span></span><span style="display:flex;"><span>    f1(ip);     f1(<span style="color:#f92672">&amp;</span>ip);    f1(<span style="color:#f92672">*</span>ip);
+</span></span><span style="display:flex;"><span>    f1(ir);     f1(<span style="color:#f92672">&amp;</span>ir);    f1(<span style="color:#f92672">*</span>ir);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    f2(i);      f2(<span style="color:#f92672">&amp;</span>i);     f2(<span style="color:#f92672">*</span>i);
+</span></span><span style="display:flex;"><span>    f2(ip);     f2(<span style="color:#f92672">&amp;</span>ip);    f2(<span style="color:#f92672">*</span>ip);
+</span></span><span style="display:flex;"><span>    f2(ir);     f2(<span style="color:#f92672">&amp;</span>ir);    f2(<span style="color:#f92672">*</span>ir);
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p><strong>C++-Referenzen und Pointer</strong></p>
+<p>Betrachten Sie folgende Code-Schnipsel.
+Erklären Sie die Wirkung der jeweiligen Anweisungen.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> x<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, <span style="color:#f92672">&amp;</span>y<span style="color:#f92672">=</span>x;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>ptr1 <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>x;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>ptr2 <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>y;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">*</span>ptr1 <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">*</span>ptr1<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ptr2  <span style="color:#f92672">=</span> ptr1;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">*</span>ptr2 <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>ptr1;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ptr1  <span style="color:#f92672">==</span> ptr2;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">*</span>ptr1 <span style="color:#f92672">==</span> <span style="color:#f92672">*</span>ptr2;</span></span></code></pre></div>
+<p><strong>Fallstricke mit C++-Referenzen</strong></p>
+<p>Betrachten Sie folgende Code-Ausschnitte. Welchen Wert haben die Variablen nach
+der Ausführung? Begründen Sie Ihre Antwort.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, j<span style="color:#f92672">=</span><span style="color:#ae81ff">9</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>r<span style="color:#f92672">=</span>i, <span style="color:#f92672">&amp;</span>s<span style="color:#f92672">=</span>r;
+</span></span><span style="display:flex;"><span>s<span style="color:#f92672">=</span><span style="color:#ae81ff">200</span>;</span></span></code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>versuch(<span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> erg <span style="color:#f92672">=</span> i<span style="color:#f92672">+</span>j;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> erg;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>z <span style="color:#f92672">=</span> versuch(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p><strong>Referenzen in C++</strong></p>
+<p>Betrachten Sie folgende Code-Ausschnitte (C++). Erklären Sie, ob sich dort
+Fehler verstecken und falls ja, wie diese zu beheben wären.</p>
+<ol>
+<li>
+<p>Versuch</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>versuch(<span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> a<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, b<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>z <span style="color:#f92672">=</span> versuch(a, b);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>versuch(<span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>i, <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>j) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>erg <span style="color:#f92672">=</span> i<span style="color:#f92672">+</span>j;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> erg;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</li>
+<li>
+<p>Versuch</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>versuch(<span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> a<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, b<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>z <span style="color:#f92672">=</span> versuch(a, b);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>versuch(<span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>i, <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>j) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> erg <span style="color:#f92672">=</span> i<span style="color:#f92672">+</span>j;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> erg;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</li>
+<li>
+<p>Versuch</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>versuch(<span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> a<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, b<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>z <span style="color:#f92672">=</span> versuch(a, <span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>versuch(<span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>i, <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>j) {
+</span></span><span style="display:flex;"><span>    j <span style="color:#f92672">+=</span> i;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> j;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</li>
+</ol>
+<p><strong>Pointer und Arrays</strong></p>
+<ul>
+<li>
+<p>Erklären Sie die Unterschiede folgender Anweisungen. Welche sind
+erlaubt, welche nicht? Welche führen möglicherweise zu Fehlern?</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> a[<span style="color:#ae81ff">10</span>], <span style="color:#f92672">*</span>pa, <span style="color:#f92672">*</span>pb, x;
+</span></span><span style="display:flex;"><span>pa <span style="color:#f92672">=</span> a;
+</span></span><span style="display:flex;"><span>pb <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> a[<span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(a<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(a<span style="color:#f92672">++</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> pa[<span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(pa<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(pa<span style="color:#f92672">++</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> pb[<span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(pb<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(pb<span style="color:#f92672">++</span>);</span></span></code></pre></div>
+</li>
+</ul>
+<p><strong>Typ eines Pointers bei Adressarithmetik</strong></p>
+<ul>
+<li>
+<p>Was ist der Unterschied zwischen den beiden folgenden Statements?</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>((<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>)ptr)<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>((<span style="color:#66d9ef">double</span> <span style="color:#f92672">*</span>)ptr)<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span></span></span></code></pre></div>
+</li>
+</ul>
+  </div>
+</div>
+
+
+
+    
+
+
+
+
+    
+
+
+
+
+    
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                
+            
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                
+            
+            
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-book-reader"></i> Quellen
+  </div>
+  <div class="box-content">
+<ul> <li id='id_Breymann2011'>[Breymann2011] <strong>Der C++ Programmierer</strong><br>Breymann, U., Hanser, 2011. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-3-446-42691-7' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-3-446-42691-7</a>.</li> <li id='id_cppreference.com'>[cppreference.com] <a href='https://en.cppreference.com/w/' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'><strong>C and C++ Reference</strong></a><br>, cppreference.com.</li> <li id='id_cprogramming.com'>[cprogramming.com] <a href='https://www.cprogramming.com/' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'><strong>C Programming and C++ Programming</strong></a><br>Allain, A. und Hoffer, A..</li></ul>
+  </div>
+</div>
+
+
+
+
+
+
+<footer class="footline"><div style="color: darkgray; font-size: small;">
+<p style="margin-left: 4rem; margin-right: 4rem; margin-top: 6rem;">
+<!-- https://creativecommons.org/choose/ -->
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+Unless otherwise noted, <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor">this work</a> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/graphs/contributors">contributors</a> is licensed under <a rel="license" href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/LICENSE.md">CC BY-SA 4.0</a>.
+See the <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/CREDITS.md">credits</a> for a detailed list of contributing projects.
+
+</p>
+</div>
+
+</footer>
+</article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/clipboard.min.js?1729688305" defer></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/perfect-scrollbar.min.js?1729688305" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/mathjax/tex-mml-chtml.js?1729688305"></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/theme.js?1729688305" defer></script>
+  </body>
+</html>
