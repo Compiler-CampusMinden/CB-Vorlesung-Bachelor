@@ -89,7 +89,7 @@ $\lbrace S \rightarrow 1AS\ |\ 3$
 
 $A \rightarrow 2AS\ \ | \ \epsilon \rbrace$
 
-Berechnen die die *First-* und *Followmengen* der Grammatik.
+Berechnen die die *First-* und *Follow-Mengen* der Grammatik.
 
 Zeigen Sie, dass die Grammatik LL(1) ist.
 
