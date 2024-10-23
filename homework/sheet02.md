@@ -70,7 +70,7 @@ Ist die Grammatik mehrdeutig? Warum (nicht)?
 
 ## A2.4 Kontextfreie Grammatik (2P)
 
-Enwickeln Sie eine kontextfreie Grammatik für die Sprache
+Entwickeln Sie eine kontextfreie Grammatik für die Sprache
 
 $L = \lbrace a^ib^jc^k\ | \ i = j \lor j = k \rbrace$
 
