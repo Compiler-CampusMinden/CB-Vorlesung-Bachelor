@@ -1,20 +1,5 @@
 
-/*
- * SmartPointer.h
- *
- */
-
-#ifndef SMARTPOINTER_H
-#define SMARTPOINTER_H
-
-#include "smartpointer/RefCounter.h"
-
-
-/**
- * Template class to represent smart pointers (like std::shared_ptr)
- */
-template<class T>
-class SmartPointer {
+class Token {
 public:
     /**
      * Constructor
@@ -24,7 +9,7 @@ public:
      *
      * @param p is a raw pointer to the object to be shared
      */
-    SmartPointer(T * const p = nullptr);
+    Token(Token * const p = nullptr);
 
     /**
      * Copy constructor
@@ -34,7 +19,7 @@ public:
      *
      * @param p is another smart pointer
      */
-    SmartPointer(const SmartPointer& p);
+    Token(const Token& p);
 
     /**
      * Destructor
@@ -42,21 +27,65 @@ public:
      * Decrements the reference counter. If it reaches zero, the shared object will
      * be free'd.
      */
-    virtual ~SmartPointer();
+    ~Token();
 
     /**
      * Dereferences the smart pointer
      *
      * @return a pointer to the shared object
      */
-    T *operator->() const;
+    char* lexem() const;
 
     /**
      * Dereferences the smart pointer
      *
-     * @return a reference to the shared object
+     * @return a pointer to the shared object
      */
-    T &operator*() const;
+    int row() const;
+
+    /**
+     * Dereferences the smart pointer
+     *
+     * @return a pointer to the shared object
+     */
+    int col() const;
+
+private:
+    char* lexem;    ///< Pointer to the text of the token
+    int row;        ///< Row in input where this token was found
+    int col;        ///< Column in input where this token starts
+};
+
+
+class SmartToken {
+public:
+    /**
+     * Constructor
+     *
+     * Constructs a new smart pointer from a raw pointer, sets the reference
+     * counter to 1.
+     *
+     * @param p is a raw pointer to the object to be shared
+     */
+    SmartToken(Token * const p = nullptr);
+
+    /**
+     * Copy constructor
+     *
+     * Constructs a new smart pointer from another smart pointer, increments the
+     * reference counter.
+     *
+     * @param p is another smart pointer
+     */
+    SmartToken(const SmartToken& p);
+
+    /**
+     * Destructor
+     *
+     * Decrements the reference counter. If it reaches zero, the shared object will
+     * be free'd.
+     */
+    ~SmartToken();
 
     /**
      * Assignment
@@ -66,7 +95,7 @@ public:
      *
      * @param p raw pointer to the new object
      */
-    const SmartPointer &operator=(T * const p);
+    const SmartToken &operator=(Token * const p);
 
     /**
      * Assignment
@@ -76,52 +105,35 @@ public:
      *
      * @param p is another smart pointer
      */
-    const SmartPointer &operator=(const SmartPointer& p);
+    const SmartToken &operator=(const SmartToken& p);
+
+    /**
+     * Dereferences the smart pointer
+     *
+     * @return a reference to the shared object
+     */
+    Token &operator*() const;
+
+    /**
+     * Dereferences the smart pointer
+     *
+     * @return a pointer to the shared object
+     */
+    Token *operator->() const;
 
     /**
      * Comparison
      *
      * @return true, if `p` shares the same object
      */
-    bool operator==(const SmartPointer& p) const;
-
-    /**
-     * Comparison
-     *
-     * @return true, if `p` does not shares the same object
-     */
-    bool operator!=(const SmartPointer& p) const;
-
-    /**
-     * Boolean context
-     *
-     * @return true, if we have a shared object; false otherwise
-     */
-    operator bool() const;
+    bool operator==(const SmartToken& p) const;
 
 private:
-    T* pObj;            ///< Pointer to the current shared object
+    Token* pObj;            ///< Pointer to the current shared object
     RefCounter *rc;     ///< Pointer to the reference counter (used for the current object)
 };
 
 
-#endif  // SMARTPOINTER_H
-
-
-
-
-/*
- * RefCounter.h
- *
- */
-
-#ifndef REFCOUNTER_H
-#define REFCOUNTER_H
-
-
-/**
- * Auxiliary class for counting the references (interface)
- */
 class RefCounter {
 public:
 
@@ -159,31 +171,10 @@ public:
     RefCounter &operator=(const RefCounter&) = delete;
 
 private:
-    unsigned int n;     ///< How many SmartPointer share ownership of "our" object?
+    unsigned int n;     ///< How many SmartToken share ownership of "our" object?
 };
 
 
-#endif /* REFCOUNTER_H */
-
-
-
-
-/*
- * RingBuffer.h
- *
- */
-
-#ifndef RINGBUFFER_H
-#define RINGBUFFER_H
-
-
-/**
- * Template class to represent a ring buffer
- *
- * @param T is the type of elements to be stored (via pointer of type `T*`)
- * @param size is the max. number of elements that can be stored
- * @param alloc_t is the type of the allocator used to allocate the pointers to the elements (optional)
- */
 template <typename T, size_t size, typename alloc_t = std::allocator<T>>
 class RingBuffer {
 public:
@@ -192,8 +183,10 @@ public:
      *
      * Initialises the attributes and allocates memory for `size` elements of type `T*` and let the
      * pointer `elems` point to this new array
+     *
+     * @param size is the max. number of elements that can be stored
      */
-    RingBuffer();
+    RingBuffer(size_t size);
 
     /**
      * Destructor
@@ -231,15 +224,10 @@ public:
     void displayStatus() const;
 
 private:
-    alloc_t m_allocator;    ///< allocator to free element pointers
-
     size_t count;           ///< number of elements currently stored in the buffer
     size_t head;            ///< points to the beginning of the buffer (oldest element)
     T **elems;              ///< array with `size` places of type `T*`, dynamically allocated
 };
-
-
-#endif  // RINGBUFFER_H
 
 
 
@@ -266,7 +254,7 @@ private:
 #include <cassert>
 
 #include "smartpointer/NullPointerException.h"
-#include "smartpointer/SmartPointer.h"
+#include "smartpointer/SmartToken.h"
 
 
 /*
@@ -278,7 +266,7 @@ private:
  */
 
 template<typename T>
-SmartPointer<T>::SmartPointer(T * const ptr) :
+SmartToken<T>::SmartToken(T * const ptr) :
         pObj(ptr), rc((ptr != nullptr) ? new RefCounter() : nullptr) {
     if (rc) {
         rc->inc();
@@ -286,7 +274,7 @@ SmartPointer<T>::SmartPointer(T * const ptr) :
 }
 
 template<typename T>
-SmartPointer<T>::SmartPointer(const SmartPointer<T> &sp) :
+SmartToken<T>::SmartToken(const SmartToken<T> &sp) :
         pObj(sp.pObj), rc(sp.rc) {
     if (rc) {
         rc->inc();
@@ -294,12 +282,12 @@ SmartPointer<T>::SmartPointer(const SmartPointer<T> &sp) :
 }
 
 template<typename T>
-SmartPointer<T>::~SmartPointer() {
+SmartToken<T>::~SmartToken() {
     deleteObject();
 }
 
 template<typename T>
-T *SmartPointer<T>::operator->() const {
+T *SmartToken<T>::operator->() const {
     if (pObj == nullptr) {
         throw NullPointerException();
     }
@@ -307,7 +295,7 @@ T *SmartPointer<T>::operator->() const {
 }
 
 template<typename T>
-T &SmartPointer<T>::operator*() const {
+T &SmartToken<T>::operator*() const {
     if (pObj == nullptr) {
         throw NullPointerException();
     }
@@ -315,17 +303,17 @@ T &SmartPointer<T>::operator*() const {
 }
 
 template<class T>
-const T *SmartPointer<T>::getObject() const {
+const T *SmartToken<T>::getObject() const {
     return pObj;
 }
 
 template<class T>
-const RefCounter *SmartPointer<T>::getRefCounter() const {
+const RefCounter *SmartToken<T>::getRefCounter() const {
     return rc;
 }
 
 template<typename T>
-const SmartPointer<T> &SmartPointer<T>::operator=(T * const p) {
+const SmartToken<T> &SmartToken<T>::operator=(T * const p) {
     if (p == pObj) {
         return *this;
     }
@@ -344,7 +332,7 @@ const SmartPointer<T> &SmartPointer<T>::operator=(T * const p) {
 }
 
 template<typename T>
-const SmartPointer<T> &SmartPointer<T>::operator=(const SmartPointer<T> &sp) {
+const SmartToken<T> &SmartToken<T>::operator=(const SmartToken<T> &sp) {
     if (pObj == sp.pObj) {
         return *this;
     }
@@ -361,22 +349,22 @@ const SmartPointer<T> &SmartPointer<T>::operator=(const SmartPointer<T> &sp) {
 }
 
 template<typename T>
-bool SmartPointer<T>::operator==(const SmartPointer<T> &sp) const {
+bool SmartToken<T>::operator==(const SmartToken<T> &sp) const {
     return pObj == sp.pObj;
 }
 
 template<typename T>
-bool SmartPointer<T>::operator!=(const SmartPointer<T> &sp) const {
+bool SmartToken<T>::operator!=(const SmartToken<T> &sp) const {
     return !(*this == sp);
 }
 
 template<class T>
-SmartPointer<T>::operator bool() const {
+SmartToken<T>::operator bool() const {
     return bool(pObj);
 }
 
 template<class T>
-void SmartPointer<T>::deleteObject() {
+void SmartToken<T>::deleteObject() {
     if (pObj) {
         assert(rc != nullptr);
         rc->dec();
@@ -562,7 +550,7 @@ private:
 #include <cstdlib>
 #include <iostream>
 
-#include "smartpointer/SmartPointer.h"
+#include "smartpointer/SmartToken.h"
 
 using namespace std;
 
@@ -572,13 +560,13 @@ public:
     ~Foo() {
         cout << "Destruktor Foo" << endl;
     }
-    SmartPointer<Foo> ptr;
+    SmartToken<Foo> ptr;
 };
 
 
 void f1() {
     Foo *c = new Foo;
-    SmartPointer<Foo> p3 = c;
+    SmartToken<Foo> p3 = c;
 
     cout << "ab hier wirds spannend ;) \n\n" << endl;
 }
@@ -587,8 +575,8 @@ void f2() {
     Foo *a = new Foo;
     Foo *b = new Foo;
 
-    SmartPointer<Foo> p1 = a;
-    SmartPointer<Foo> p2 = b;
+    SmartToken<Foo> p1 = a;
+    SmartToken<Foo> p2 = b;
     a->ptr = p2;
     b->ptr = p1;
 
