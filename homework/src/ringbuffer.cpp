@@ -186,6 +186,8 @@ private:
     size_t head;            ///< points to the beginning of the buffer (oldest element)
     size_t size;            ///< length of array `elems`
     SmartToken* elems;      ///< array with `size` places of type `SmartToken`, dynamically allocated
+
+friend ostream &operator<<(ostream &out, const RingBuffer &rb);
 };
 
 
@@ -239,12 +241,9 @@ SmartToken::SmartToken(Token* ptr) : pObj(nullptr), rc(nullptr) {
     cout << "SmartToken::SmartToken(Token*): " << *this << endl;
 }
 SmartToken::SmartToken(const SmartToken& sp) : pObj(nullptr), rc(nullptr) {
-    cout << "SmartToken::SmartToken(SmartToken&): sp " << sp << endl;
-    cout << "SmartToken::SmartToken(SmartToken&): before " << *this << endl;
-
     acquireObject(sp.pObj, sp.rc);
 
-    cout << "SmartToken::SmartToken(SmartToken&): after " << *this << endl;
+    cout << "SmartToken::SmartToken(SmartToken&): " << *this << endl;
 }
 SmartToken::~SmartToken() {
     cout << "SmartToken::~SmartToken(): " << *this << endl;
@@ -252,7 +251,7 @@ SmartToken::~SmartToken() {
     releaseObject();
 }
 SmartToken& SmartToken::operator=(const SmartToken& sp) {
-    cout << "SmartToken::operator=" << endl;
+    cout << "SmartToken::operator=: lhs=" << *this << ", rhs: " << sp << endl;
 
     if (pObj == sp.pObj) {
         return *this;
@@ -264,19 +263,19 @@ SmartToken& SmartToken::operator=(const SmartToken& sp) {
     return *this;
 }
 Token& SmartToken::operator*() {
-    cout << "SmartToken::operator*" << endl;
+    cout << "SmartToken::operator*: " << *this << endl;
 
     assert(pObj != nullptr);
     return *pObj;
 }
 Token* SmartToken::operator->() {
-    cout << "SmartToken::operator->" << endl;
+    cout << "SmartToken::operator->: " << *this << endl;
 
     assert(pObj != nullptr);
     return pObj;
 }
 bool SmartToken::operator==(const SmartToken& sp) const {
-    cout << "SmartToken::operator==" << endl;
+    cout << "SmartToken::operator==: lhs=" << *this << ", rhs: " << sp << endl;
 
     return pObj == sp.pObj;
 }
@@ -294,35 +293,32 @@ void SmartToken::releaseObject() {
     }
 }
 void SmartToken::acquireObject(Token* p, RefCounter* r) {
-    cout << "SmartToken::acquireObject(): {p: " << p << ", r: " << r << "}" << endl;
-    cout << "SmartToken::acquireObject(): before " << *this << endl;
+    cout << "SmartToken::acquireObject(): *this=" << *this << ", Token=" << p << ", RC: " << r << endl;
 
     pObj = p;
     rc = r;
     if (rc) rc->inc();
-
-    cout << "SmartToken::acquireObject(): after " << *this << endl;
 }
 ostream &operator<<(ostream &out, const SmartToken &st) {
     if (st.pObj && st.rc)
-        return out << "{pObj: " << st.pObj << ", rc: " << st.rc << " >> " << *(st.pObj) << " >> " << *(st.rc);
+        return out << "{pObj: " << st.pObj << ", rc: " << st.rc << " >> " << *(st.pObj) << " >> " << *(st.rc) << "}";
     else
         return out << "{pObj: " << st.pObj << ", rc: " << st.rc << "}";
 }
 
 
 RingBuffer::RingBuffer(size_t size) : elems(nullptr), count(0), head(0), size(size) {
-    cout << "RingBuffer::RingBuffer(): {size: " << size << "}" << endl;
-
     elems = new SmartToken[size];
+
+    cout << "RingBuffer::RingBuffer(): " << *this << endl;
 }
 RingBuffer::~RingBuffer() {
-    cout << "RingBuffer::~RingBuffer(): {size: " << size << ", count: " << count << ", head: " << head << "}" << endl;
+    cout << "RingBuffer::~RingBuffer(): " << *this << endl;
 
     delete [] elems;
 }
 SmartToken RingBuffer::readBuffer() {
-    cout << "RingBuffer::readBuffer(): {size: " << size << ", count: " << count << ", head: " << head << "}" << endl;
+    cout << "RingBuffer::readBuffer(): " << *this << endl;
 
     if (count) {
         SmartToken& elem = elems[head];
@@ -333,7 +329,7 @@ SmartToken RingBuffer::readBuffer() {
     return SmartToken();
 }
 void RingBuffer::writeBuffer(const SmartToken& data) {
-    cout << "RingBuffer::writeBuffer(): {size: " << size << ", count: " << count << ", head: " << head << "}" << endl;
+    cout << "RingBuffer::writeBuffer(): *this=" << *this << ", data=" << data << endl;
 
     size_t tail;
 
@@ -347,6 +343,9 @@ void RingBuffer::writeBuffer(const SmartToken& data) {
     tail = (head + count) % size;
     elems[tail] = data;
     ++count;
+}
+ostream &operator<<(ostream &out, const RingBuffer &rb) {
+    return out << "{size: " << (unsigned int) rb.size << ", count: " << rb.count << ", head: " << rb.head << "}";
 }
 
 
@@ -409,6 +408,54 @@ int main(int argc, char **argv) {
     // RingBuffer
     {
         cout << endl << endl << ">> RingBuffer" << endl;
+        SmartToken wuppie = SmartToken(new Token("wuppie", 1, 4));
+        SmartToken fluppie = SmartToken(wuppie);
+        SmartToken fluppie2(wuppie);
+        SmartToken foo = SmartToken(new Token("foo", 9, 35));
+
+        cout << endl << ">> RingBuffer: create" << endl;
+        RingBuffer rb(3);
+        cout << "rb: " << rb << endl;
+        cout << "rb.readBuffer(): " << rb.readBuffer() << endl;     // {pObj: 0x0, rc: 0x0}
+
+        cout << endl << ">> RingBuffer: write" << endl;
+        rb.writeBuffer(wuppie);
+        rb.writeBuffer(fluppie);
+        rb.writeBuffer(fluppie2);
+        cout << "rb: " << rb << endl;
+        cout << "wuppie: " << wuppie << endl;       // {pObj: 0xN, rc: 0xM, lexem: wuppie, row: 1, col: 4, rc: 6}
+
+        cout << endl << ">> RingBuffer: read (wuppie)" << endl;
+        cout << "rb.readBuffer(): " << rb.readBuffer() << endl;     // {pObj: 0xN, rc: 0xM, lexem: wuppie, row: 1, col: 4, rc: 3}
+        cout << "rb: " << rb << endl;
+
+        cout << endl << ">> RingBuffer: read (fluppie)" << endl;
+        cout << "rb.readBuffer(): " << rb.readBuffer() << endl;     // {pObj: 0xN, rc: 0xM, lexem: wuppie, row: 1, col: 4, rc: 3}
+        cout << "rb: " << rb << endl;
+
+        cout << endl << ">> RingBuffer: read (fluppie2)" << endl;
+        cout << "rb.readBuffer(): " << rb.readBuffer() << endl;     // {pObj: 0xO, rc: 0xP, lexem: foo, row: 9, col: 35, rc: 1}
+        cout << "rb: " << rb << endl;
+
+        cout << endl << ">> RingBuffer: read (empty)" << endl;
+        cout << "rb.readBuffer(): " << rb.readBuffer() << endl;     // {pObj: 0x0, rc: 0x0}
+        cout << "rb: " << rb << endl;
+
+        cout << endl;
+        cout << "wuppie: " << wuppie << endl;       // {pObj: 0xN, rc: 0xM, lexem: wuppie, row: 1, col: 4, rc: 6} => 3x explizit, 3x Kopie
+
+        cout << endl << ">> RingBuffer: write (n+1)" << endl;
+        rb.writeBuffer(foo);
+        rb.writeBuffer(wuppie);
+        rb.writeBuffer(fluppie);
+        rb.writeBuffer(fluppie2);                   // overwrites foo
+        cout << "rb: " << rb << endl;
+        cout << "foo: " << foo << endl;             // {pObj: 0xO, rc: 0xP, lexem: foo, row: 9, col: 35, rc: 1}
+        cout << "wuppie: " << wuppie << endl;       // {pObj: 0xN, rc: 0xM, lexem: wuppie, row: 1, col: 4, rc: 6}
+        cout << "rb.readBuffer(): " << rb.readBuffer() << endl;     // {pObj: 0xN, rc: 0xM, lexem: wuppie, row: 1, col: 4, rc: 7}
+        cout << "rb: " << rb << endl;
+
+        cout << endl;
     }
 
 
