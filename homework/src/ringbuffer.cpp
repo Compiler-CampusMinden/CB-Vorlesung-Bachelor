@@ -1,8 +1,12 @@
 #include <cstdlib>      // size_t
 //#include <cstddef>
 #include <iostream>
+#include <stdexcept>
 
 using namespace std;
+
+
+// g++ --std=c++17 ringbuffer.cpp
 
 
 class Token {
@@ -10,42 +14,58 @@ public:
     /**
      * Constructs a new token object.
      *
-     * @param lexem is a pointer to the text of the token (to be copied)
-     * @param row is the row in input where this token was found
-     * @param col is the column in input where this token starts
+     * @param l is a pointer to the text of the token (to be copied)
+     * @param r is the row in input where this token was found
+     * @param c is the column in input where this token starts
      */
-    Token(const char* lexem, int row, int col);
+    Token(const char* l, int r, int c);
 
     /**
      * Destructs the token object and free's the stored lexem.
      */
     ~Token();
 
-    /**
-     * Access to the token's lexem
-     *
-     * @return a pointer to the stored lexem
-     */
-    char* lexem();
-
-    /**
-     * Access to the token's row
-     *
-     * @return the row where this token was found
-     */
-    int row();
-
-    /**
-     * Access to the token's column
-     *
-     * @return the column where this token starts
-     */
-    int col();
-
-private:
     char* lexem;    ///< Pointer to the text of the token
     int row;        ///< Row in input where this token was found
     int col;        ///< Column in input where this token starts
+};
+
+
+class RefCounter {
+public:
+    /**
+     * Default constructor
+     */
+    RefCounter();
+
+    /**
+     * Increment count
+     */
+    void inc();
+
+    /**
+     * Decrement count
+     */
+    void dec();
+
+    /**
+     * Compare the counter with zero
+     *
+     * @return true if n==0, false otherwise
+     */
+    bool isZero() const;
+
+    // Hide copy constructor and assignment operator
+    RefCounter(const RefCounter&) = delete;
+    RefCounter& operator=(const RefCounter&) = delete;
+
+    unsigned int n;     ///< How many SmartToken share ownership of "our" object?
+};
+
+
+class NullPointerException: public std::runtime_error {
+public:
+    NullPointerException() : runtime_error("NullPointerException!") {}
 };
 
 
@@ -59,7 +79,7 @@ public:
      *
      * @param p is a raw pointer to the token to be shared
      */
-    SmartToken(const Token* p = nullptr);
+    SmartToken(Token* p = nullptr);
 
     /**
      * Copy constructor
@@ -114,41 +134,8 @@ private:
     Token* pObj;        ///< Pointer to the current shared token
     RefCounter* rc;     ///< Pointer to the reference counter (used for the current token)
 
-    releaseObject();                         ///< Decrement reference counter and free object if necessary
-    acquireObject(Token* p, RefCounter* r);  ///< Copy pointer to token and reference counter and increment reference counter
-};
-
-
-class RefCounter {
-public:
-    /**
-     * Default constructor
-     */
-    RefCounter();
-
-    /**
-     * Increment count
-     */
-    void inc();
-
-    /**
-     * Decrement count
-     */
-    void dec();
-
-    /**
-     * Compare the counter with zero
-     *
-     * @return true if n==0, false otherwise
-     */
-    bool isZero() const;
-
-    // Hide copy constructor and assignment operator
-    RefCounter(const RefCounter&) = delete;
-    RefCounter& operator=(const RefCounter&) = delete;
-
-private:
-    unsigned int n;     ///< How many SmartToken share ownership of "our" object?
+    void releaseObject();                         ///< Decrement reference counter and free object if necessary
+    void acquireObject(Token* p, RefCounter* r);  ///< Copy pointer to token and reference counter and increment reference counter
 };
 
 
@@ -223,50 +210,75 @@ private:
  */
 
 Token::Token(const char* l, int r, int c) : row(r), col(c) {
+    cout << "Token::Token(): {lexem: " << l << ", row: " << r << ", column: " << c << "}" << endl;
+
     lexem = new char[strlen(l)];
     strcpy(lexem, l);
 }
-Token::~Token() { delete lexem; }
-char* Token::lexem() { return lexem; }
-int Token::row() { return row; }
-int Token::col() { return col; }
+Token::~Token() {
+    cout << "Token::~Token(): {lexem: " << lexem << ", row: " << row << ", column: " << col << "}" << endl;
+
+    delete lexem;
+}
 
 
-SmartToken::SmartToken(const Token* ptr) {
+RefCounter::RefCounter() : n(0) { cout << "RefCounter::RefCounter()" << endl; }
+void RefCounter::inc() { ++n; }
+void RefCounter::dec() { --n; }
+bool RefCounter::isZero() const { return n == 0; }
+
+
+SmartToken::SmartToken(Token* ptr) {
     acquireObject(ptr, (ptr != nullptr) ? new RefCounter() : nullptr);
+
+    cout << "SmartToken::SmartToken(Token*): {ptr: " << ((pObj)?pObj->lexem:"null") << ", refcount: " << ((rc)?rc->n:0) << "}" << endl;
 }
 SmartToken::SmartToken(const SmartToken& sp) {
     acquireObject(sp.pObj, sp.rc);
+
+    cout << "SmartToken::SmartToken(SmartToken&): {ptr: " << ((pObj)?pObj->lexem:"null") << ", refcount: " << ((rc)?rc->n:0) << "}" << endl;
 }
 SmartToken::~SmartToken() {
     releaseObject();
+
+    cout << "SmartToken::~SmartToken(): {ptr: " << ((pObj)?pObj->lexem:"null") << ", refcount: " << ((rc)?rc->n:0) << "}" << endl;
 }
-SmartToken& SmartToken::operator=(const SmartToken& p) {
+SmartToken& SmartToken::operator=(const SmartToken& sp) {
+    cout << "SmartToken::operator=" << endl;
+
     if (pObj == sp.pObj) {
         return *this;
     }
 
     releaseObject();
-    acquireObject(p.pObj, p.rc)
+    acquireObject(sp.pObj, sp.rc);
 
     return *this;
 }
 Token& SmartToken::operator*() {
+    cout << "SmartToken::operator*" << endl;
+
     if (pObj == nullptr) {
         throw NullPointerException();
     }
     return *pObj;
 }
 Token* SmartToken::operator->() {
+    cout << "SmartToken::operator->" << endl;
+
     if (pObj == nullptr) {
         throw NullPointerException();
     }
     return pObj;
 }
 bool SmartToken::operator==(const SmartToken& sp) const {
+    cout << "SmartToken::operator==" << endl;
+
     return pObj == sp.pObj;
 }
 void SmartToken::releaseObject() {
+    cout << "SmartToken::releaseObject(): {ptr: " << ((pObj)?pObj->lexem:"null") << ", refcount: " << ((rc)?rc->n:0) << "}" << endl;
+
     if (pObj) {
         rc->dec();
         if (rc->isZero()) {
@@ -278,25 +290,29 @@ void SmartToken::releaseObject() {
     }
 }
 void SmartToken::acquireObject(Token* p, RefCounter* r) {
+    cout << "SmartToken::acquireObject(): before {ptr: " << ((pObj)?pObj->lexem:"null") << ", refcount: " << ((rc)?rc->n:0) << "}" << endl;
+
     pObj = p;
     rc = r;
     if (rc) rc->inc();
+
+    cout << "SmartToken::acquireObject(): after {ptr: " << ((pObj)?pObj->lexem:"null") << ", refcount: " << ((rc)?rc->n:0) << "}" << endl;
 }
-
-
-RefCounter::RefCounter() : n(0) {}
-void RefCounter::inc() { ++n; }
-void RefCounter::dec() { --n; }
-bool RefCounter::isZero() const { return n == 0; }
 
 
 RingBuffer::RingBuffer(size_t size) : count(0), head(0), size(size) {
     elems = new SmartToken[size];
+
+    cout << "RingBuffer::RingBuffer(): {size: " << size << ", count: " << count << ", head: " << head << "}" << endl;
 }
 RingBuffer::~RingBuffer() {
+    cout << "RingBuffer::~RingBuffer(): {size: " << size << ", count: " << count << ", head: " << head << "}" << endl;
+
     delete [] elems;
 }
 SmartToken RingBuffer::readBuffer() {
+    cout << "RingBuffer::readBuffer(): {size: " << size << ", count: " << count << ", head: " << head << "}" << endl;
+
     if (count) {
         SmartToken& elem = elems[head];
         head = (head + 1) % size;
@@ -306,6 +322,8 @@ SmartToken RingBuffer::readBuffer() {
     return SmartToken();
 }
 void RingBuffer::writeBuffer(const SmartToken& data) {
+    cout << "RingBuffer::writeBuffer(): {size: " << size << ", count: " << count << ", head: " << head << "}" << endl;
+
     size_t tail;
 
     /* Puffer voll? Head freigeben */
@@ -321,141 +339,26 @@ void RingBuffer::writeBuffer(const SmartToken& data) {
 }
 
 
-class Foo {
-public:
-    ~Foo() {
-        cout << "Destruktor Foo" << endl;
-    }
-    SmartToken<Foo> ptr;
-};
-
-
-void f1() {
-    Foo *c = new Foo;
-    SmartToken<Foo> p3 = c;
-
-    cout << "ab hier wirds spannend ;) \n\n" << endl;
-}
-
-void f2() {
-    Foo *a = new Foo;
-    Foo *b = new Foo;
-
-    SmartToken<Foo> p1 = a;
-    SmartToken<Foo> p2 = b;
-    a->ptr = p2;
-    b->ptr = p1;
-
-    cout << "ab hier wirds spannend ;) \n\n" << endl;
-//    delete b;
-//    cout << "\n\n hinter delete b ... \n\n" << endl;
-}
-
-void f3() {
-    Foo *d = new Foo;
-    Foo *e = new Foo;
-
-    d->ptr = e;
-    e->ptr = d;
-
-    cout << "ab hier wirds spannend ;) \n\n" << endl;
-//    delete e;
-//    cout << "\n\n hinter delete b ... \n\n" << endl;
-}
-
-
-/*
- * ===========================================================================
- * main()
- * ===========================================================================
- *
- */
-int main(void) {
-    f1();
-    f2();
-    f3();
-
-    return EXIT_SUCCESS;
-}
-
-
-#include <iostream>
-#include <vector>
-
-#include "ringbuffer/RingBuffer.hpp"
-#include "ringbuffer/NoOpAllocator.h"
-#include "ringbuffer/MyAllocator.h"
-#include "ringbuffer/SPAllocator.h"
-
-
-/*
- *
- *                      MUSTERLOESUNG
- *
- * g++ -std=c++17 -I../../include demoRingBuffer.cpp
- */
-
-
 int main(int argc, char **argv) {
-    // MyAllocator
+    // Token
     {
-        cout << endl << "MyAllocator" << endl;
-        vector<int, MyAllocator<int>> bar(8);
-        bar.push_back(42);
-        for (auto x: bar) cout << x << " ";
-        cout << endl;
+        cout << endl << endl << ">> Token" << endl;
+        Token t = Token("wuppie", 1, 4);        // should be deleted automatically
+        Token* tp = new Token("foo", 9, 35);    // leaves a memory hole
     }
 
 
-    // RingBuffer I
+    // SmartToken
     {
-        cout << endl << "RingBuffer I" << endl;
-        MyAllocator<int> ma;
-        RingBuffer<int, 10, MyAllocator<int>> rb;
-
-        rb.displayStatus();
-        cout << "sizeof(int): " << sizeof(int) << endl;
-
-        int *x = ma.allocate(1);
-        *x = 42;
-        cout << "x: " << *x << " at " << (long) x << endl;
-
-        rb.writeBuffer(x);
-        rb.displayStatus();
-
-        int *y = rb.readBuffer();
-        cout << "x: " << *x << " at " << (long) x << endl;
-        cout << "y: " << *y << " at " << (long) y << endl;
-
-        *y = 7;
-        cout << "x: " << *x << "; x-y: " << (long) x - long (y) << endl;
+        cout << endl << endl << ">> SmartToken" << endl;
     }
 
 
-    // RingBuffer II
+    // RingBuffer
     {
-        cout << endl << "RingBuffer II" << endl;
-        RingBuffer<int, 10, NoOpAllocator<int>> rb;
-
-        rb.displayStatus();
-        cout << "sizeof(int): " << sizeof(int) << endl;
-
-        int xyz = 42;
-        cout << "xyz: " << xyz << " at " << (long) &xyz << endl;
-
-        int *x = &xyz;
-        cout << "x: " << *x << " at " << (long) x << endl;
-
-        rb.writeBuffer(x);
-        rb.displayStatus();
-
-        int *y = rb.readBuffer();
-        cout << "x: " << *x << " at " << (long) x << endl;
-        cout << "y: " << *y << " at " << (long) y << endl;
-
-        *y = 7;
-        cout << "x: " << *x << "; x-y: " << (long) x - long (y) << endl;
+        cout << endl << endl << ">> RingBuffer" << endl;
     }
+
 
     return EXIT_SUCCESS;
 }
