@@ -396,6 +396,11 @@ int main(int argc, char **argv) {
         cout << "st: " << st << endl;               // {pObj: 0x0, rc: 0x0}
         cout << "wuppie: " << wuppie << endl;       // {pObj: 0xN, rc: 0xM, lexem: wuppie, row: 1, col: 4, rc: 1}
 
+        cout << endl;
+//        cout << "*st: " << *st << endl;                             // ERROR (runtime)
+        cout << "*wuppie: " << *wuppie << endl;                     // {lexem: wuppie, row: 1, col: 4}
+        cout << "(*wuppie).lexem: " << (*wuppie).lexem << endl;     // wuppie
+        cout << "wuppie->lexem: " << wuppie->lexem << endl;         // wuppie
 
         cout << endl;
     }
