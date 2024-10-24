@@ -1,7 +1,6 @@
 #include <cstdlib>      // size_t
-//#include <cstddef>
 #include <iostream>
-#include <stdexcept>
+#include <cassert>
 
 using namespace std;
 
@@ -60,12 +59,6 @@ public:
     RefCounter& operator=(const RefCounter&) = delete;
 
     unsigned int n;     ///< How many SmartToken share ownership of "our" object?
-};
-
-
-class NullPointerException: public std::runtime_error {
-public:
-    NullPointerException() : runtime_error("NullPointerException!") {}
 };
 
 
@@ -134,8 +127,8 @@ private:
     Token* pObj;        ///< Pointer to the current shared token
     RefCounter* rc;     ///< Pointer to the reference counter (used for the current token)
 
-    void releaseObject();                         ///< Decrement reference counter and free object if necessary
-    void acquireObject(Token* p, RefCounter* r);  ///< Copy pointer to token and reference counter and increment reference counter
+    void releaseObject();                           ///< Decrement reference counter and free object if necessary
+    void acquireObject(Token* p, RefCounter* r);    ///< Copy pointer to token and reference counter and increment reference counter
 };
 
 
@@ -212,7 +205,7 @@ private:
 Token::Token(const char* l, int r, int c) : row(r), col(c) {
     cout << "Token::Token(): {lexem: " << l << ", row: " << r << ", column: " << c << "}" << endl;
 
-    lexem = new char[strlen(l)];
+    lexem = new char[strlen(l)+1];  // +1 for terminating '\0'
     strcpy(lexem, l);
 }
 Token::~Token() {
@@ -228,20 +221,20 @@ void RefCounter::dec() { --n; }
 bool RefCounter::isZero() const { return n == 0; }
 
 
-SmartToken::SmartToken(Token* ptr) {
-    acquireObject(ptr, (ptr != nullptr) ? new RefCounter() : nullptr);
+SmartToken::SmartToken(Token* ptr) : pObj(nullptr), rc(nullptr) {
+    cout << "SmartToken::SmartToken(Token*): {ptr: " << ptr << "}" << endl;
 
-    cout << "SmartToken::SmartToken(Token*): {ptr: " << ((pObj)?pObj->lexem:"null") << ", refcount: " << ((rc)?rc->n:0) << "}" << endl;
+    if (ptr) acquireObject(ptr, new RefCounter());
 }
 SmartToken::SmartToken(const SmartToken& sp) {
-    acquireObject(sp.pObj, sp.rc);
+    cout << "SmartToken::SmartToken(SmartToken&): {sp.pObj: " << sp.pObj << ", sp.rc: " << sp.rc << "}" << endl;
 
-    cout << "SmartToken::SmartToken(SmartToken&): {ptr: " << ((pObj)?pObj->lexem:"null") << ", refcount: " << ((rc)?rc->n:0) << "}" << endl;
+    acquireObject(sp.pObj, sp.rc);
 }
 SmartToken::~SmartToken() {
-    releaseObject();
+    cout << "SmartToken::~SmartToken(): {pObj: " << pObj << ", rc: " << rc << "}" << endl;
 
-    cout << "SmartToken::~SmartToken(): {ptr: " << ((pObj)?pObj->lexem:"null") << ", refcount: " << ((rc)?rc->n:0) << "}" << endl;
+    releaseObject();
 }
 SmartToken& SmartToken::operator=(const SmartToken& sp) {
     cout << "SmartToken::operator=" << endl;
@@ -258,17 +251,13 @@ SmartToken& SmartToken::operator=(const SmartToken& sp) {
 Token& SmartToken::operator*() {
     cout << "SmartToken::operator*" << endl;
 
-    if (pObj == nullptr) {
-        throw NullPointerException();
-    }
+    assert(pObj != nullptr);
     return *pObj;
 }
 Token* SmartToken::operator->() {
     cout << "SmartToken::operator->" << endl;
 
-    if (pObj == nullptr) {
-        throw NullPointerException();
-    }
+    assert(pObj != nullptr);
     return pObj;
 }
 bool SmartToken::operator==(const SmartToken& sp) const {
@@ -277,7 +266,7 @@ bool SmartToken::operator==(const SmartToken& sp) const {
     return pObj == sp.pObj;
 }
 void SmartToken::releaseObject() {
-    cout << "SmartToken::releaseObject(): {ptr: " << ((pObj)?pObj->lexem:"null") << ", refcount: " << ((rc)?rc->n:0) << "}" << endl;
+    cout << "SmartToken::releaseObject(): {pObj: " << pObj << ", rc: " << rc << "}" << endl;
 
     if (pObj) {
         rc->dec();
@@ -290,20 +279,21 @@ void SmartToken::releaseObject() {
     }
 }
 void SmartToken::acquireObject(Token* p, RefCounter* r) {
-    cout << "SmartToken::acquireObject(): before {ptr: " << ((pObj)?pObj->lexem:"null") << ", refcount: " << ((rc)?rc->n:0) << "}" << endl;
+    cout << "SmartToken::acquireObject(): {p: " << p << ", r: " << r << "}" << endl;
+    cout << "SmartToken::acquireObject(): before {pObj: " << pObj << ", rc: " << rc << "}" << endl;
 
     pObj = p;
     rc = r;
     if (rc) rc->inc();
 
-    cout << "SmartToken::acquireObject(): after {ptr: " << ((pObj)?pObj->lexem:"null") << ", refcount: " << ((rc)?rc->n:0) << "}" << endl;
+    cout << "SmartToken::acquireObject(): after {pObj: " << pObj << ", rc: " << rc << "}" << endl;
 }
 
 
 RingBuffer::RingBuffer(size_t size) : count(0), head(0), size(size) {
-    elems = new SmartToken[size];
+    cout << "RingBuffer::RingBuffer(): {size: " << size << "}" << endl;
 
-    cout << "RingBuffer::RingBuffer(): {size: " << size << ", count: " << count << ", head: " << head << "}" << endl;
+    elems = new SmartToken[size];
 }
 RingBuffer::~RingBuffer() {
     cout << "RingBuffer::~RingBuffer(): {size: " << size << ", count: " << count << ", head: " << head << "}" << endl;
@@ -343,14 +333,26 @@ int main(int argc, char **argv) {
     // Token
     {
         cout << endl << endl << ">> Token" << endl;
-        Token t = Token("wuppie", 1, 4);        // should be deleted automatically
-        Token* tp = new Token("foo", 9, 35);    // leaves a memory hole
+
+        Token wuppie = Token("wuppie", 1, 4);   // should be deleted automatically after this block
+        Token* foo = new Token("foo", 9, 35);   // will be free'd manually
+        Token* bar = new Token("bar", 7, 10);   // leaves a memory hole
+
+        cout << endl;
+        delete foo;
     }
 
 
     // SmartToken
     {
         cout << endl << endl << ">> SmartToken" << endl;
+
+        SmartToken st;                                                  // uses default c'tor (all empty)
+        SmartToken wuppie = SmartToken(new Token("wuppie", 1, 4));      // default c'tor w/ pointer
+        SmartToken fluppie = SmartToken(wuppie);                        // copy c'tor
+
+        cout << endl;
+
     }
 
 
