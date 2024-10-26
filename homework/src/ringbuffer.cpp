@@ -1,10 +1,11 @@
 #include <iostream>
 #include <cassert>
+#include <cstddef>
 
 using namespace std;
 
 
-// g++ --std=c++17 ringbuffer.cpp
+// g++ -Wall --std=c++17 ringbuffer.cpp
 
 
 class Token {
@@ -307,7 +308,7 @@ ostream &operator<<(ostream &out, const SmartToken &st) {
 }
 
 
-RingBuffer::RingBuffer(unsigned int size) : elems(nullptr), count(0), head(0), size(size) {
+RingBuffer::RingBuffer(unsigned int size) : count(0), head(0), size(size), elems(nullptr) {
     elems = new SmartToken[size];
 
     cout << "RingBuffer::RingBuffer(): " << *this << endl;
