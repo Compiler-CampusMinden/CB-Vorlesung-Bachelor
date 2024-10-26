@@ -1,4 +1,3 @@
-#include <cstdlib>      // size_t
 #include <iostream>
 #include <cassert>
 
@@ -84,9 +83,9 @@ public:
      * Constructs a new smart pointer from another smart pointer, increments
      * the reference counter.
      *
-     * @param p is another smart pointer
+     * @param sp is another smart pointer
      */
-    SmartToken(const SmartToken& p);
+    SmartToken(const SmartToken& sp);
 
     /**
      * Destructor
@@ -99,12 +98,12 @@ public:
     /**
      * Assignment
      *
-     * Changes the shared token, thus we need first to do the same like the
-     * destructor, followed by something like the constructor.
+     * Changes the shared token, thus we need first to perform something like
+     * the destructor, followed by something like the constructor.
      *
-     * @param p is another smart pointer
+     * @param sp is another smart pointer
      */
-    SmartToken& operator=(const SmartToken& p);
+    SmartToken& operator=(const SmartToken& sp);
 
     /**
      * Dereferences the smart pointer
@@ -123,9 +122,10 @@ public:
     /**
      * Comparison
      *
-     * @return true, if `p` shares the same token
+     * @param sp is another smart pointer
+     * @return true, if `sp` shares the same token
      */
-    bool operator==(const SmartToken& p) const;
+    bool operator==(const SmartToken& sp) const;
 
 private:
     Token* pObj;        ///< Pointer to the current shared token
@@ -149,7 +149,7 @@ public:
      *
      * @param size is the max. number of elements that can be stored
      */
-    RingBuffer(size_t size);
+    RingBuffer(unsigned int size);
 
     /**
      * Destructor
@@ -182,9 +182,9 @@ public:
     void writeBuffer(const SmartToken& data);
 
 private:
-    size_t count;           ///< number of elements currently stored in the buffer
-    size_t head;            ///< points to the beginning of the buffer (oldest element)
-    size_t size;            ///< length of array `elems`
+    unsigned int count;     ///< number of elements currently stored in the buffer
+    unsigned int head;      ///< points to the beginning of the buffer (oldest element)
+    unsigned int size;      ///< length of array `elems`
     SmartToken* elems;      ///< array with `size` places of type `SmartToken`, dynamically allocated
 
 friend ostream &operator<<(ostream &out, const RingBuffer &rb);
@@ -307,7 +307,7 @@ ostream &operator<<(ostream &out, const SmartToken &st) {
 }
 
 
-RingBuffer::RingBuffer(size_t size) : elems(nullptr), count(0), head(0), size(size) {
+RingBuffer::RingBuffer(unsigned int size) : elems(nullptr), count(0), head(0), size(size) {
     elems = new SmartToken[size];
 
     cout << "RingBuffer::RingBuffer(): " << *this << endl;
@@ -331,7 +331,7 @@ SmartToken RingBuffer::readBuffer() {
 void RingBuffer::writeBuffer(const SmartToken& data) {
     cout << "RingBuffer::writeBuffer(): *this=" << *this << ", data=" << data << endl;
 
-    size_t tail;
+    unsigned int tail;
 
     /* Puffer voll? Head freigeben */
     if (count == size) {
@@ -345,7 +345,7 @@ void RingBuffer::writeBuffer(const SmartToken& data) {
     ++count;
 }
 ostream &operator<<(ostream &out, const RingBuffer &rb) {
-    return out << "{size: " << (unsigned int) rb.size << ", count: " << rb.count << ", head: " << rb.head << "}";
+    return out << "{size: " << rb.size << ", count: " << rb.count << ", head: " << rb.head << "}";
 }
 
 
