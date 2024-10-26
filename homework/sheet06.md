@@ -170,7 +170,10 @@ Es hat sich gezeigt, dass der Umgang mit den Heap-Ressourcen sehr fehleranfälli
 
 ### Smartpointer als Lösung
 
-Während man in Sprachen wie Java die Speicherverwaltung komplett dem Compiler überlässt oder wie in Rust mit strikten Ownership-Modellen arbeitet, hat man in C++ die sogenannten [Smartpointer](https://en.cppreference.com/book/intro/smart_pointers) erdacht. Diese ersetzen den direkten Umgang mit den einfachen Pointern (auch als *raw pointer* bezeichnet) und lösen das Problem der Freigabe der verwalteten Ressourcen. Es gibt verschiedene Modelle, insbesondere gibt es die Variante *unique pointer*, bei der immer nur genau ein Smartpointer gleichzeitig die selbe Ressource besitzen darf, und die *shared pointer*, bei der mehrere Smartpointer gleichzeitig die selbe Ressource verwalten können. Sobald die Lebensdauer des *unique pointer* oder des letzten *shared pointer* endet, wird die verwaltete Ressource automatisch vom Smartpointer freigegeben.
+Während man in Sprachen wie Java die Speicherverwaltung komplett dem Compiler überlässt oder wie in Rust mit strikten Ownership-Modellen arbeitet, hat man in C++ die sogenannten [Smartpointer](https://en.cppreference.com/book/intro/smart_pointers) erdacht. Diese ersetzen den direkten Umgang mit den einfachen Pointern (auch als *raw pointer* bezeichnet) und lösen das Problem der Freigabe der verwalteten Ressourcen.^[Dereferenzierung von Null-Pointern
+oder nicht initialisierten Pointern, Nutzung von `delete` für Pointer, die nicht mit `new`
+erstellt wurden, mehrfaches `delete`, Speicherlöcher durch Vergessen von `delete`, Dangling
+Pointer, verwitwete Objekte, ...] Es gibt verschiedene Modelle, insbesondere gibt es die Variante *unique pointer*, bei der immer nur genau ein Smartpointer gleichzeitig die selbe Ressource besitzen darf, und die *shared pointer*, bei der mehrere Smartpointer gleichzeitig die selbe Ressource verwalten können. Sobald die Lebensdauer des *unique pointer* oder des letzten *shared pointer* endet, wird die verwaltete Ressource automatisch vom Smartpointer freigegeben.
 
 Das folgende Beispiel arbeitet mit einer selbst implementierten Variante der *shared pointers*. Dabei ist die Klasse `SmartToken` ein Smartpointer für Objekte vom Typ `Token`:
 
@@ -197,6 +200,27 @@ In der Kontrollstruktur werden weitere Smartpointer angelegt. Die ersten beiden 
 Mit der Kontrollstruktur endet auch die Lebensdauer der lokalen Variablen `fluppie`, `fluppie2` und `foo`, sie werden automatisch vom Stack entfernt. Da `foo` der letzte Smartpointer ist, der das Token "foo" verwaltet, wird hier die Ressource freigegeben. Bei `fluppie` und `fluppie2` werden nur die Smartpointer auf dem Stack entfernt, die verwaltete Ressource (Token "wuppie") bleibt erhalten, da die noch von einem anderen Smartpointer verwaltet wird.
 
 Mit dem Ende der Funktion endet auch die Lebensdauer des Smartpointers `wuppie`. Er wird automatisch vom Stack entfernt, und da er im Beispiel der letzte Smartpointer ist, der das Token "wuppie" verwaltet, wird dabei automatisch der Pointer zu "wuppie" wieder freigegeben.
+
+Ein Smartpointer soll entsprechend folgende Eigenschaften haben:
+
+-   Verwendung soll analog zu normalen Pointern sein (Operatoren `*` und `->` überladen)
+-   Smartpointer haben niemals einen undefinierten Wert: entweder sie zeigen auf ein Objekt oder
+    auf `nullptr`^[Sie müssen für `nullptr` den g++ auf C++11 oder höher umstellen (`--std=c++11`)
+    und den Header `<cstddef>` includen.]
+-   Kopieren von Smartpointern führt dazu, dass sich mehrere Smartpointer das verwiesene Objekt
+    _teilen_
+-   Smartpointer löschen sich selbst (und das verwiesene Objekt, falls kein anderer Smartpointer
+    mehr darauf zeigt), wenn die Smartpointer ungültig werden (bei Verlassen des Scopes bzw. bei
+    explizitem Aufruf von `delete`)
+-   Es gibt keine verwitweten Objekte mehr: Wenn mehrere Smartpointer auf das selbe Objekt zeigen,
+    darf erst der letzte Smartpointer das Objekt aus dem Heap löschen
+-   Smartpointer funktionieren nur für mit `new` erzeugte Objekte
+
+Weitere übliche Eigenschaften, die wir auf diesem Blatt außen vor lassen (Templates haben wir hier noch nicht behandelt, Exceptions werden wir gar nicht betrachten):
+
+-   Smartpointer sollen für beliebige Klassen nutzbar sein (Template-Klasse)
+-   Dereferenzierung von nicht existierenden Objekten (d.h. der Smartpointer zeigt intern auf
+    `nullptr`) führt nicht zum Programmabsturz, sondern zu einer Exception
 
 ### Reference Counting
 
@@ -460,6 +484,24 @@ Testen Sie Ihre `SmartToken`-Klasse an selbst gewählten Beispielen sowie an den
 
 ### A6.4: Ringpuffer (4P)
 
+Ein Ringpuffer ist eine Form der abstrakten Datenstruktur "Warteschlange" (_Queue_), die nur
+eine beschränkte Anzahl $n$ von Elementen (Datensätzen) aufnehmen kann. Die Daten werden nach
+dem FIFO-Prinzip über die Funktion `write()` am Ende der Schlange eingefügt und mit der Funktion
+`read()` vom Anfang der Schlange entnommen.
+
+Aus Effizienzgründen wird bei `read()` nur der Pointer auf das erste Element zurückgeliefert,
+das gelesene Element wird aber (noch) nicht aus dem Ringpuffer entfernt. Über ein Attribut
+`head` merkt man sich stattdessen, wo das nächste zu lesende Element liegt (auf dem Platz hinter
+dem aktuell gelesenen). Ist der Puffer voll, wird bei `write()` das älteste Element entfernt und
+das neue Element auf dem frei gewordenen Platz im internen Array `elems` eingefügt.
+
+Der Ringpuffer soll Elemente vom Typ `T` (Template-Parameter) speichern. Es wird davon ausgegangen,
+dass die Pointer mit einem Allocator vom Typ `alloc_t` angelegt wurden; entsprechend werden die
+Elemente (Pointer) im Ringpuffer bei der Freigabe darüber auch wieder freigegeben.
+
+Der Puffer kann effizient durch ein zur Laufzeit angelegtes **Array** mit `size` (Template-Parameter)
+Plätzen zur Speicherung der Pointer auf die Elemente realisiert werden. Die Ringstruktur wird durch
+Modulo-Operationen auf den Array-Indizes realisiert.
 
 
 
