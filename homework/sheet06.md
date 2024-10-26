@@ -8,76 +8,10 @@ hidden: true
 
 <!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94 --reference-links=true  sheet06.md  -o xxx.md  -->
 
-## A6.1: TODO
-
-TODO
-
-
-## A6.2: TODO
-
-TODO
-
-
-**S5**: noch irgendwas Richtung Speicherverwaltung/Heap extra
-
-
-### Aufgabe 1: Implementierung eines einfachen Tokenizers (25 Punkte)
-
-Erstellen Sie eine Funktion `void tokenize(const std::string& input, std::vector<std::string>& tokens)`, die einen gegebenen String als Eingabe erhält und diesen in Tokens (Wörter) splittet. Nutzen Sie Referenzen, um die Token-Liste zu aktualisieren. Testen Sie die Funktion mit verschiedenen Eingabestrings und geben Sie die Tokens aus.
-
-
-### Aufgabe 2: Syntaxanalyse mit Referenzen (30 Punkte)
-
-Implementieren Sie eine einfache Funktion `bool parseExpression(const std::string& expr, int& result)`, die überprüft, ob eine als String dargestellte mathematische Ausdrucksform (z.B. "3 + 4") syntaktisch korrekt ist. Die Funktion soll das Ergebnis der Berechnung zurückgeben. Nutzen Sie Referenzen für den Rückgabewert und testen Sie die Funktion mit verschiedenen mathematischen Ausdrücken.
 
 
 
 
-### Aufgabe 1: Überladene Funktionen (15 Punkte)
-
-Erstellen Sie eine C++-Bibliothek mit überladenen Funktionen, um den Flächeninhalt verschiedener Formen zu berechnen. Implementieren Sie folgende Funktionen:
-
-- `double area(double radius)`: Berechnet die Fläche eines Kreises.
-- `double area(double width, double height)`: Berechnet die Fläche eines Rechtecks.
-- `double area(double side1, double side2, double side3)`: Berechnet die Fläche eines Dreiecks mithilfe der Heronschen Formel.
-
-Testen Sie Ihre Implementierung in der `main`-Funktion mit unterschiedlichen Parametern.
-
-
-### Aufgabe 2: Pointer und Arrays (20 Punkte)
-
-Schreiben Sie eine Funktion `void initializeArray(int* arr, int size)`, die ein Array von Ganzzahlen mit aufsteigenden Werten initialisiert (beginnend bei 1). Erstellen Sie in der `main`-Funktion ein dynamisches Array, initialisieren Sie es mit Ihrer Funktion und geben Sie die Werte aus. Stellen Sie sicher, dass der Speicher ordnungsgemäß freigegeben wird.
-
-
-### Aufgabe 3: Mehrdimensionale Arrays mit Pointer-Arithmetik (25 Punkte)
-
-Erstellen Sie eine Funktion `void transposeMatrix(int* matrix, int rows, int cols)`, die eine Matrix (2D-Array) transponiert. Nutzen Sie Pointer-Arithmetik und zeigen Sie die ursprüngliche und die transponierte Matrix in der `main`-Funktion an. Achten Sie darauf, den Speicher für die Matrix dynamisch zu allozieren und zu deallozieren.
-
-
-### Aufgabe 4: Memory Management und Fehlerbehandlung (25 Punkte)
-
-Implementieren Sie eine Funktion `int* allocateAndFillArray(int size)`, die ein Array alloziert, es mit zufälligen Werten befüllt (zwischen 1 und 100) und zurückgibt. Fügen Sie einfache Fehlerbehandlungen für die Speicherzuweisung hinzu. In der `main`-Funktion sollten die Werte des Arrays ausgegeben und danach der Speicher freigegeben werden.
-
-
-### Aufgabe 5: Komplexe Datenverwaltung mit Referenzen (30 Punkte)
-
-Erstellen Sie eine Struktur `Student`, die `name`, `matrikelnummer` und `note` enthält. Implementieren Sie folgende Funktionen:
-
-- `void setStudentDetails(Student& s, const std::string& name, int matrikelnummer, double note)`: Setzt die Werte eines Studenten.
-- `double calculateAverage(const Student* students, int count)`: Berechnet den Durchschnitt der Noten eines gegebenen Studenten-Arrays.
-
-In der `main`-Funktion sollten Sie mindestens 5 Studenten anlegen, deren Werte initialisieren und den Durchschnitt der Noten ausgeben.
-
-**Bonusaufgabe (15 Punkte):**
-Implementieren Sie eine Funktion `void countVowels(const std::string& str, int& count)`, die die Anzahl der Vokale in einem gegebenen String zählt. Testen Sie die Funktion in der `main`-Funktion mit verschiedenen Eingaben. Verwenden Sie dabei Referenzen zur Rückgabe des Zählers.
-
-
-
-
-
-
-
----
 
 
 ## Zusammenfassung
@@ -207,7 +141,7 @@ Ein Smartpointer soll entsprechend folgende Eigenschaften haben:
 -   Smartpointer haben niemals einen undefinierten Wert: entweder sie zeigen auf ein Objekt oder
     auf `nullptr`^[Sie müssen für `nullptr` den g++ auf C++11 oder höher umstellen (`--std=c++11`)
     und den Header `<cstddef>` includen.]
--   Kopieren von Smartpointern führt dazu, dass sich mehrere Smartpointer das verwiesene Objekt
+-   Kopieren von (*shared*) Smartpointern führt dazu, dass sich mehrere Smartpointer das verwiesene Objekt
     _teilen_
 -   Smartpointer löschen sich selbst (und das verwiesene Objekt, falls kein anderer Smartpointer
     mehr darauf zeigt), wenn die Smartpointer ungültig werden (bei Verlassen des Scopes bzw. bei
@@ -216,7 +150,7 @@ Ein Smartpointer soll entsprechend folgende Eigenschaften haben:
     darf erst der letzte Smartpointer das Objekt aus dem Heap löschen
 -   Smartpointer funktionieren nur für mit `new` erzeugte Objekte
 
-Weitere übliche Eigenschaften, die wir auf diesem Blatt außen vor lassen (Templates haben wir hier noch nicht behandelt, Exceptions werden wir gar nicht betrachten):
+Weitere übliche Eigenschaften, die wir auf diesem Blatt außen vor lassen^[Templates haben wir hier noch nicht behandelt, Exceptions werden wir gar nicht betrachten]:
 
 -   Smartpointer sollen für beliebige Klassen nutzbar sein (Template-Klasse)
 -   Dereferenzierung von nicht existierenden Objekten (d.h. der Smartpointer zeigt intern auf
@@ -358,7 +292,7 @@ Dabei ist die Form "`->`" eine vereinfachte Darstellung von `(*ptr).`, d.h. ein 
 
 ## Aufgaben
 
-### A6.1: Klasse für Token (2P)
+### A6.1: Klasse für Token (1P)
 
 Implementieren Sie in C++ die Klasse `Token` mit der folgenden Schnittstelle:
 
@@ -396,14 +330,20 @@ Bei Bedarf können Sie zusätzliche Attribute und Methoden hinzufügen.
 
 Testen Sie Ihre `Token`-Klasse an selbst gewählten Beispielen.
 
-### A6.2: Reference Counter (1P)
+
+### A6.2: Implementierung eines einfachen Tokenizers (1P)
+
+Erstellen Sie eine Funktion `void tokenize(const string& input, vector<Token>& tokens)`, die einen gegebenen String als Eingabe erhält und diesen in Tokens (Wörter) splittet. Nutzen Sie Referenzen, um die Token-Liste zu aktualisieren. Testen Sie die Funktion mit verschiedenen Eingabestrings und geben Sie die Tokens aus.
+
+
+### A6.3: Reference Counter (1P)
 
 Implementieren Sie nun die Klasse `RefCounter` mit der obigen Schnittstelle. Auch hier können Sie bei Bedarf zusätzliche Attribute und Methoden hinzufügen.
 
 Testen Sie Ihre `RefCounter`-Klasse an selbst gewählten Beispielen.
 
 
-### A6.3: Smartpointer (3P)
+### A6.4: Smartpointer (3P)
 
 Implementieren Sie nun die Smartpointer für `Token`-Objekte mit folgender Signatur (wie oben, leicht erweitert):
 
@@ -482,33 +422,84 @@ Bei Bedarf können Sie zusätzliche Attribute und Methoden hinzufügen.
 Testen Sie Ihre `SmartToken`-Klasse an selbst gewählten Beispielen sowie an den obigen Beispielen.
 
 
-### A6.4: Ringpuffer (4P)
+### A6.5: Ringpuffer (4P)
 
 Ein Ringpuffer ist eine Form der abstrakten Datenstruktur "Warteschlange" (_Queue_), die nur
 eine beschränkte Anzahl $n$ von Elementen (Datensätzen) aufnehmen kann. Die Daten werden nach
-dem FIFO-Prinzip über die Funktion `write()` am Ende der Schlange eingefügt und mit der Funktion
-`read()` vom Anfang der Schlange entnommen.
+dem FIFO-Prinzip über die Funktion `writeBuffer()` am Ende der Schlange eingefügt und mit der Funktion
+`readBuffer()` vom Anfang der Schlange entnommen.
 
-Aus Effizienzgründen wird bei `read()` nur der Pointer auf das erste Element zurückgeliefert,
+Aus Effizienzgründen wird bei `readBuffer()` nur der Pointer auf das erste Element zurückgeliefert,
 das gelesene Element wird aber (noch) nicht aus dem Ringpuffer entfernt. Über ein Attribut
 `head` merkt man sich stattdessen, wo das nächste zu lesende Element liegt (auf dem Platz hinter
-dem aktuell gelesenen). Ist der Puffer voll, wird bei `write()` das älteste Element entfernt und
+dem aktuell gelesenen). Ist der Puffer voll, wird bei `writeBuffer()` das älteste Element entfernt und
 das neue Element auf dem frei gewordenen Platz im internen Array `elems` eingefügt.
 
-Der Ringpuffer soll Elemente vom Typ `T` (Template-Parameter) speichern. Es wird davon ausgegangen,
-dass die Pointer mit einem Allocator vom Typ `alloc_t` angelegt wurden; entsprechend werden die
-Elemente (Pointer) im Ringpuffer bei der Freigabe darüber auch wieder freigegeben.
+Unser Ringpuffer ist auf Elemente vom Typ `SmartToken` festgelegt. Es wird davon ausgegangen,
+dass diese Elemente Smartpointer mit der *shared pointer*-Semantik sind.^[Wenn Sie die obigen Aufgaben richtig gelöst haben, haben Sie genau diese Semantik vorliegen.] Da die `SmartToken` selbst (zum Teil) eine Pointersemantik
+implementiert haben (man kann die Smartpointer dereferenzieren), vermeiden wir Pointer auf die Smartpointer in der Schnittstelle und
+arbeiten stattdessen mit C++-Referenzen bzw. Kopien: Bei `writeBuffer()` wird ein `SmartToken` per C++-Referenz übergeben, und bei `readBuffer()` wird eine Kopie des gelesenen `SmartToken` zurückgeliefert.
 
 Der Puffer kann effizient durch ein zur Laufzeit angelegtes **Array** mit `size` (Template-Parameter)
 Plätzen zur Speicherung der Pointer auf die Elemente realisiert werden. Die Ringstruktur wird durch
 Modulo-Operationen auf den Array-Indizes realisiert.
 
 
+Implementieren Sie nun den Ringpuffer für `SmartToken`-Objekte mit folgender Signatur:
 
----
+```cpp
+class RingBuffer {
+public:
+    /**
+     * Constructor that creates a new ring buffer for max. `size` elements
+     *
+     * Initialises the attributes and allocates memory for `size` elements
+     * of type `SmartToken` and let the pointer `elems` point to this new
+     * array
+     *
+     * @param size is the max. number of elements that can be stored
+     */
+    RingBuffer(unsigned int size);
 
-TODO: (S3) Smartpointer (ohne Templates - also für konkreten Typ oder mit void-Pointer??, und ohne Operatoren) => Big3 noch in die erste Sitzung nehmen wg. Zuweisung und Destruktor? War B08 in SP. ANWENDUNGSBEISPIEL geben!
-Problem: Wir brauchen Klassen, Big3 und *Operatoren*. Templates könnte man durch feste Nutzlast ersetzen - vielleicht sowas wie MyString und statt der Operatoren Getter/Setter/Methoden?
+    /**
+     * Destructor
+     *
+     * free's the dynamically allocated array `elems`
+     */
+    ~RingBuffer();
 
-TODO: (S5) Speicherverwaltung auf Java-Seite vorbereiten. War B04 in SP (übersetzung von new xyz()? - klassen als java-klassen, heap simulieren?)
+    /**
+     * Reading the first (oldest) element
+     *
+     * If an element has been read, the `head` points to the next element
+     * and `count` is decremented. The read element is **not** released.
+     *
+     * @return Returns (a copy of) the first (i.e. oldest) element of the
+     * buffer, but does not (yet) release it; returns an empty `SmartToken`
+     * if buffer is empty
+     */
+    SmartToken readBuffer();
+
+    /**
+     * Adding a new element
+     *
+     * Appends the new element to the end of the queue. If the buffer is
+     * full, the oldest element will be overwritten by the new element. The
+     * old element will take care of releasing its memory (smart pointer).
+     *
+     * @param data is a reference to the element to be added
+     */
+    void writeBuffer(const SmartToken& data);
+
+private:
+    unsigned int count;     ///< number of elements currently stored in the buffer
+    unsigned int head;      ///< points to the beginning of the buffer (oldest element)
+    unsigned int size;      ///< length of array `elems`
+    SmartToken* elems;      ///< array with `size` places of type `SmartToken`, dynamically allocated
+};
+```
+
+Bei Bedarf können Sie zusätzliche Attribute und Methoden hinzufügen.
+
+Testen Sie Ihre `RingBuffer`-Klasse an selbst gewählten Beispielen. Überzeugen Sie sich insbesondere vom korrekten Zugriff auf die Ringstruktur und prüfen Sie, ob die Smartpointer wie gewünscht arbeiten. Prüfen Sie hierzu auch die `RefCounter` der beteiligten Smartpointer. Welche Sonderfälle können Sie identifizieren?
 
