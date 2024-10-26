@@ -11,10 +11,10 @@ hidden: true
 ## Zusammenfassung
 
 Ziel dieses Aufgabenblattes ist die praktische Anwendung der C++-Kenntnisse, insbesondere
-werden Pointer, Referenzen und Klassen angewendet und vertieft. Als Anwendungsbeispiel werden
-bestimmte in der C++-Welt wohlbekannte Smartpointer modelliert sowie ein einfacher Ringpuffer
-programmiert. Sie lernen mit dem *Reference Counting* nebenbei eine verbreitete Technik der
-*Garbage Collection* kennen.
+werden Sie Pointer, Referenzen und Klassen anwenden und vertiefen. Als Anwendungsbeispiel
+werden bestimmte in der C++-Welt wohlbekannte Smartpointer modelliert sowie ein einfacher
+Ringpuffer programmiert. Sie lernen mit dem *Reference Counting* nebenbei eine verbreitete
+Technik der *Garbage Collection* kennen.
 
 ## Methodik
 
@@ -48,10 +48,11 @@ C++ drei Möglichkeiten: als Kopie, als Referenz oder als Pointer.
 // Return as copy
 Token next_token() {
     Token wuppie = Token("wuppie", 1, 4);   // will be deleted automatically after this function call
+
     return wuppie;
 }
 int main() {
-    Token x = next_token();                 // copy constructor + assignment operator; no need to free
+    Token x = next_token();                 // copy constructor; no need to free
 }
 ```
 
@@ -91,12 +92,10 @@ Beispiel wäre das `wuppie`) als Kopie zurückgeben.
 -   Vorteil: Der Compiler kümmert sich um die Freigabe der lokalen Variable `wuppie`, d.h.
     nach Beendigung des Funktionsaufrufs wird das Objekt automatisch vom Stack entfernt. Da
     hierbei einfach der Stackpointer zurückgesetzt wird, ist diese "Freigabe" eine sehr
-    preiswerte Operation. (Anmerkung: Man spricht trotzdem von "Freigabe" des Objekts, obwohl
-    lediglich der Stackpointer zurückgesetzt wird und das Objekt zunächst auf dem Stack noch
-    vollständig ist. Es kann und wird aber im weiteren Verlauf des Programms überschrieben.)
+    preiswerte Operation.[^1]
 -   Nachteil: Der Aufrufer darf nicht einfach auf das Objekt auf dem Stack zugreifen (dieses
     ist ja nach Beendigung der Funktion nicht mehr gültig). Deshalb muss das Objekt bei der
-    Rückgabe kopiert werden (Copy-Konstruktor). Zusätzlich erfolgt beim Aufrufer noch eine
+    Rückgabe kopiert werden (Copy-Konstruktor). Zusätzlich erfolgt beim Aufrufer oft noch eine
     Zuweisung, bei der die Attribute des Objekts vermutlich erneut kopiert werden. Dies kann
     (je nach Aufbau der Objekte) sehr teuer sein!
 
@@ -105,8 +104,8 @@ dessen Lebensdauer über das Funktionsende hinausreicht. Das Objekt muss in dies
 auf dem Heap angelegt werden.
 
 -   Vorteil: Die Rückgabe erfordert lediglich die Kopie der Adresse des Objekts (also des
-    Pointers). Hier handelt es sich vereinfacht um einen Integer, d.h. diese Operation ist
-    relativ preiswert.
+    Pointers). Hier handelt es sich vereinfacht betrachtet um einen Integer, d.h. diese
+    Operation ist relativ preiswert.
 -   Nachteil: Das Objekt muss vom Aufrufer wieder freigegeben werden, sobald es nicht mehr
     benötigt wird. Dies muss man explizit programmieren!
 
@@ -130,7 +129,7 @@ Während man in Sprachen wie Java die Speicherverwaltung komplett dem Compiler �
 wie in Rust mit strikten Ownership-Modellen arbeitet, hat man in C++ die sogenannten
 [Smartpointer] erdacht. Diese ersetzen den direkten Umgang mit den einfachen Pointern (auch
 als *raw pointer* bezeichnet) und lösen das Problem der Freigabe der verwalteten
-Ressourcen.[^1] Es gibt verschiedene Modelle, insbesondere gibt es die Variante *unique
+Ressourcen.[^2] Es gibt verschiedene Modelle, insbesondere gibt es die Variante *unique
 pointer*, bei der immer nur genau ein Smartpointer gleichzeitig die selbe Ressource besitzen
 darf, und die *shared pointer*, bei der mehrere Smartpointer gleichzeitig die selbe Ressource
 verwalten können. Sobald die Lebensdauer des *unique pointer* oder des letzten *shared
@@ -179,17 +178,17 @@ Ein Smartpointer soll entsprechend folgende Eigenschaften haben:
 
 -   Verwendung soll analog zu normalen Pointern sein (Operatoren `*` und `->` überladen)
 -   Smartpointer haben niemals einen undefinierten Wert: entweder sie zeigen auf ein Objekt
-    oder auf `nullptr`[^2]
+    oder auf `nullptr`[^3]
 -   Kopieren von (*shared*) Smartpointern führt dazu, dass sich mehrere Smartpointer das
     verwiesene Objekt *teilen*
 -   Smartpointer löschen sich selbst (und das verwiesene Objekt, falls kein anderer
     Smartpointer mehr darauf zeigt), wenn die Smartpointer ungültig werden (bei Verlassen des
-    Scopes bzw. bei explizitem Aufruf von `delete`)
+    Scopes bzw. bei explizitem Aufruf von `delete` auf einen Pointer auf einen Smartpointer)
 -   Es gibt keine verwitweten Objekte mehr: Wenn mehrere Smartpointer auf das selbe Objekt
     zeigen, darf erst der letzte Smartpointer das Objekt aus dem Heap löschen
 -   Smartpointer funktionieren nur für mit `new` erzeugte Objekte
 
-Weitere übliche Eigenschaften, die wir auf diesem Blatt außen vor lassen[^3]:
+Weitere übliche Eigenschaften, die wir auf diesem Blatt außen vor lassen[^4]:
 
 -   Smartpointer sollen für beliebige Klassen nutzbar sein (Template-Klasse)
 -   Dereferenzierung von nicht existierenden Objekten (d.h. der Smartpointer zeigt intern auf
@@ -204,10 +203,10 @@ bekommen (Konstruktor) oder eine Referenz auf ein anderes Smartpointer-Objekt
 Im Smartpointer wird entsprechend der Pointer auf die zu verwaltende Ressource gespeichert.
 
 Für die Bestimmung, wie viele Smartpointer sich eine Ressource teilen, muss ein Zähler
-implementiert werden. Sobald sich ein weiterer Smartpointer die Ressource teilt, muss dort
-auch der Zähler (per Pointer!) übernommen werden und entsprechend inkrementiert werden. Im
-Destruktor muss der Zähler dekrementiert werden. Falls dabei der Zähler den Wert 0 erreicht,
-werden die Pointer auf die Ressource und den Zähler freigegeben.
+implementiert werden. Sobald sich ein weiterer Smartpointer die selbe Ressource teilt, muss
+dort auch der Zähler (per Pointer!) übernommen werden und entsprechend inkrementiert werden.
+Im Destruktor muss der Zähler dekrementiert werden. Falls dabei der Zähler den Wert 0
+erreicht, werden die Pointer auf die Ressource und den Zähler freigegeben.
 
 Bei einer Zuweisung verfährt man analog.
 
@@ -369,11 +368,11 @@ private:
 
 Trennen Sie Deklaration und Implementierung.
 
-Der Konstruktor muss den übergebenen `char*` kopieren, d.h. Sie müssen die Länge des C-Strings
-bestimmen, ausreichend viel Speicher mit `new` reservieren und danach den String kopieren
-(C-Funktion).
+Der Konstruktor muss den übergebenen `char*` kopieren, d.h. Sie müssen die Länge des
+übergebenen C-Strings bestimmen, ausreichend viel Speicher mit `new` für `char* lexem`
+reservieren und danach den String kopieren (C-Funktion).
 
-Sorgen Sie dafür, dass der Speicher beim Vernichten eines Token-Objekts wieder korrekt
+Sorgen Sie dafür, dass der Speicher beim Vernichten eines `Token`-Objekts wieder korrekt
 freigegeben wird.
 
 Bei Bedarf können Sie zusätzliche Attribute und Methoden hinzufügen.
@@ -480,20 +479,19 @@ eine beschränkte Anzahl $n$ von Elementen (Datensätzen) aufnehmen kann. Die Da
 dem FIFO-Prinzip über die Funktion `writeBuffer()` am Ende der Schlange eingefügt und mit der
 Funktion `readBuffer()` vom Anfang der Schlange entnommen.
 
-Aus Effizienzgründen wird bei `readBuffer()` nur der Pointer auf das erste Element
-zurückgeliefert, das gelesene Element wird aber (noch) nicht aus dem Ringpuffer entfernt. Über
-ein Attribut `head` merkt man sich stattdessen, wo das nächste zu lesende Element liegt (auf
-dem Platz hinter dem aktuell gelesenen). Ist der Puffer voll, wird bei `writeBuffer()` das
-älteste Element entfernt und das neue Element auf dem frei gewordenen Platz im internen Array
-`elems` eingefügt.
+Aus Effizienzgründen wird bei `readBuffer()` nur das erste Element zurückgeliefert, das
+gelesene Element wird aber (noch) nicht aus dem Ringpuffer entfernt. Über ein Attribut `head`
+merkt man sich stattdessen, wo das nächste zu lesende Element liegt (auf dem Platz hinter dem
+aktuell gelesenen). Ist der Puffer voll, wird bei `writeBuffer()` das älteste Element entfernt
+und das neue Element auf dem frei gewordenen Platz im internen Array `elems` eingefügt.
 
 Unser Ringpuffer ist auf Elemente vom Typ `SmartToken` festgelegt. Es wird davon ausgegangen,
-dass diese Elemente Smartpointer mit der *shared pointer*-Semantik sind.[^4] Da die
+dass diese Elemente Smartpointer mit der *shared pointer*-Semantik sind.[^5] Da die
 `SmartToken` selbst (zum Teil) eine Pointersemantik implementiert haben (man kann die
 Smartpointer dereferenzieren), vermeiden wir Pointer auf die Smartpointer in der Schnittstelle
 und arbeiten stattdessen mit C++-Referenzen bzw. Kopien: Bei `writeBuffer()` wird ein
-`SmartToken` per C++-Referenz übergeben, und bei `readBuffer()` wird eine Kopie des gelesenen
-`SmartToken` zurückgeliefert.
+`SmartToken` per konstanter C++-Referenz übergeben, und bei `readBuffer()` wird eine Kopie des
+gelesenen `SmartToken` zurückgeliefert.
 
 Der Puffer kann effizient durch ein zur Laufzeit angelegtes **Array** mit `size`
 (Template-Parameter) Plätzen zur Speicherung der Pointer auf die Elemente realisiert werden.
@@ -560,17 +558,21 @@ insbesondere vom korrekten Zugriff auf die Ringstruktur und prüfen Sie, ob die 
 wie gewünscht arbeiten. Prüfen Sie hierzu auch die `RefCounter` der beteiligten Smartpointer.
 Welche Sonderfälle können Sie identifizieren?
 
-[^1]: Dereferenzierung von Null-Pointern oder nicht initialisierten Pointern, Nutzung von
+[^1]: Anmerkung: Man spricht trotzdem von "Freigabe" des Objekts, obwohl lediglich der
+    Stackpointer zurückgesetzt wird und das Objekt zunächst auf dem Stack noch vollständig
+    ist. Es kann und wird aber im weiteren Verlauf des Programms überschrieben.
+
+[^2]: Dereferenzierung von Null-Pointern oder nicht initialisierten Pointern, Nutzung von
     `delete` für Pointer, die nicht mit `new` erstellt wurden, mehrfaches `delete`,
     Speicherlöcher durch Vergessen von `delete`, Dangling Pointer, verwitwete Objekte, ...
 
-[^2]: Sie müssen für `nullptr` den g++ auf C++11 oder höher umstellen (`--std=c++11`) und den
+[^3]: Sie müssen für `nullptr` den g++ auf C++11 oder höher umstellen (`--std=c++11`) und den
     Header `<cstddef>` includen.
 
-[^3]: Templates haben wir hier noch nicht behandelt, Exceptions werden wir gar nicht
+[^4]: Templates haben wir hier noch nicht behandelt, Exceptions werden wir gar nicht
     betrachten
 
-[^4]: Wenn Sie die obigen Aufgaben richtig gelöst haben, haben Sie genau diese Semantik
+[^5]: Wenn Sie die obigen Aufgaben richtig gelöst haben, haben Sie genau diese Semantik
     vorliegen.
 
   [Smartpointer]: https://en.cppreference.com/book/intro/smart_pointers
