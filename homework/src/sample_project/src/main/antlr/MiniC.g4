@@ -8,7 +8,6 @@ program :  stmt* EOF ;
 stmt    :  vardecl
         |  assign
         |  fndecl
-        |  fncall ';'
         |  expr ';'
         |  block
         |  while
