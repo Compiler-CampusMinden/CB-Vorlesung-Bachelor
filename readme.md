@@ -84,6 +84,23 @@ Sie _können_ hierzu den Raum J101 (siehe Stundenplan) nutzen.
 ::: {.tab title="IFM 3.1 CB (PO23, 3. Semester)"}
 
 `{{% notice style="note" title="News" %}}`{=markdown}
+`{{% expand title="28.10.24" %}}`{=markdown}
+
+### Info zum ANTLR-Meeting mit Edmonton am Di, 29.10.
+
+Am Dienstag, den 29.10., treffen wir uns wie angekündigt um 18 Uhr zum ersten Meeting mit den Studis und
+Kollegen von der University of Alberta (Edmonton, Kanada). Dazu nutzen wir unseren Zoom (vgl.
+[ILIAS IFM 3.1 CB (PO23, 3. Semester)]).
+
+**Bitte fügt eurem im Zoom angezeigten Namen ein _" (DE)"_ hinten an.**
+
+_Beispiel_: Euer angezeigter Name wäre normalerweise `Vorname Nachname`. Für die Sitzung am Dienstag hängt
+ihr bitte ein "` (DE)`" hinten dran und habt entsprechend den Anzeigenamen **`Vorname Nachname (DE)`**.
+
+Wir freuen uns auf eine spannende Einführung in ANTLR und ein lustiges Meeting!
+
+`{{% /expand %}}`{=markdown}
+
 `{{% expand title="21.10.24" %}}`{=markdown}
 
 ### Zeitänderung Gruppe 2 am 24.01.2025
@@ -179,6 +196,23 @@ Abgabe der Übungsblätter jeweils **Montag bis 09:00 Uhr** im [ILIAS](https://w
 ::: {.tab title="IFM 5.21 CB (PO18, 5. Semester)"}
 
 `{{% notice style="note" title="News" %}}`{=markdown}
+`{{% expand title="28.10.24" %}}`{=markdown}
+
+### Info zum ANTLR-Meeting mit Edmonton am Di, 29.10.
+
+Am Dienstag, den 29.10., treffen wir uns wie angekündigt um 18 Uhr zum ersten Meeting mit den Studis und
+Kollegen von der University of Alberta (Edmonton, Kanada). Dazu nutzen wir unseren Zoom (vgl.
+[IFM 5.21 CB (PO18, 5. Semester)]).
+
+**Bitte fügt eurem im Zoom angezeigten Namen ein _" (DE)"_ hinten an.**
+
+_Beispiel_: Euer angezeigter Name wäre normalerweise `Vorname Nachname`. Für die Sitzung am Dienstag hängt
+ihr bitte ein "` (DE)`" hinten dran und habt entsprechend den Anzeigenamen **`Vorname Nachname (DE)`**.
+
+Wir freuen uns auf eine spannende Einführung in ANTLR und ein lustiges Meeting!
+
+`{{% /expand %}}`{=markdown}
+
 `{{% expand title="23.10.24" %}}`{=markdown}
 
 ### Verschiebung des Praktikums zu Blatt 01 auf 30.10., 16 Uhr
