@@ -84,6 +84,16 @@ Sie _können_ hierzu den Raum J101 (siehe Stundenplan) nutzen.
 ::: {.tab title="IFM 3.1 CB (PO23, 3. Semester)"}
 
 `{{% notice style="note" title="News" %}}`{=markdown}
+`{{% expand title="29.10.24" %}}`{=markdown}
+
+### Verschiebung Praktikum zu B02 für Gruppe 3: Do, 07.11., 08:00 Uhr
+
+Wie bereits in der Vorlesung angekündigt, muss das Praktikum für Blatt 02 für Gruppe 3 aus
+gesundheitlichen Gründen leider von Montag, 04.11. auf Donnerstag, 07.11. verschoben werden.
+Start ist um 08:00 Uhr.
+
+`{{% /expand %}}`{=markdown}
+
 `{{% expand title="28.10.24" %}}`{=markdown}
 
 ### Info zum ANTLR-Meeting mit Edmonton am Di, 29.10.
@@ -175,7 +185,7 @@ Abgabe der Übungsblätter jeweils **Montag bis 09:00 Uhr** im [ILIAS](https://w
 |                      | 43    | 23.: [CFG]                                                                                                                                    | BC          | 21.: [B01] Reguläre Sprachen   | 21. / 22. / 25. (BC, *Präsenz*)                          |
 |                      | 44    | 29.: **18:00 - 19:30 Uhr (online): Edmonton I: ANTLR + Live-Coding**                                                                          | _Edmonton_  |                                |                                                          |
 |                      | 44    | 30.: [Lexer mit ANTLR], [Parser mit ANTLR]                                                                                                    | Carsten     |                                |                                                          |
-| November             | 45    | 06.: *Dienstbesprechung*                                                                                                                      |             | 04.: [B02] CFG                 | 04. / 05. / 08. (BC, *Präsenz*)                          |
+| November             | 45    | 06.: *Dienstbesprechung*                                                                                                                      |             | 04.: [B02] CFG                 | ~~04.~~ **07. 08:00** / 05. / 08. (BC, *Präsenz*)        |
 |                      | 46    | 13.: [Überblick Symboltabellen], [Symboltabellen: Scopes], [Symboltabellen: Funktionen], [Symboltabellen: Klassen]                            | Carsten     | 11.: [B03] ANTLR               | 11. / 12. / 15. (Carsten, *online*)                      |
 |                      | 47    | 20.: [**09:45 - 10:30 Uhr, 10:45 - 11:30 Uhr (B40): Parcoursprüfung: Station 1 ILIAS (Grammar, Lexing, Parsing), siehe Ankündigung**]{.alert} |             | 18.: [B04] Semantische Analyse | 18. / 19. / 22. (Carsten, *online*)                      |
 |                      | 48    | 26.: **18:00 - 19:30 Uhr (online): Edmonton II: Vorträge Mindener Projekte**                                                                  | _Minden_    |                                |                                                          |
