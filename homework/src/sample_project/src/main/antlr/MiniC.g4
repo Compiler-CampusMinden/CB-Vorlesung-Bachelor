@@ -51,5 +51,6 @@ type    :  'int' | 'string' | 'bool' ;
 ID      :  [a-z][a-zA-Z0-9]* ;
 NUMBER  :  [0-9]+ ;
 STRING  :  '"' (~[\n\r"])* '"' ;
+
 COMMENT :  '#' ~[\n\r]* -> skip ;
 WS      :  [ \t\n\r]+ -> skip ;

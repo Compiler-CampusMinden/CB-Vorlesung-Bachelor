@@ -20,4 +20,5 @@ atom  : ID | NUM ;
 // Lexer
 ID    : [a-z][a-zA-Z]* ;
 NUM   : [0-9]+ ;
+
 WS    : [ \t\n]+ -> skip ;
