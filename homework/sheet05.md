@@ -17,7 +17,7 @@ eine Lisp-artige Sprache.
 ## Methodik
 
 Sie finden im [Sample Project] zwei Grammatiken ([MiniLispA], [MiniLispB]), die (teilweise) zu
-der Zielsprache auf diesem Blatt passen. Analysieren Sie beide Grammatiken und entscheiden
+der Zielsprache auf diesem Blatt passen. Analysieren Sie beide Grammatiken und entscheiden Sie
 sich für eine der beiden Varianten. Vervollständigen Sie diese bzw. passen Sie diese an.
 
 Erstellen Sie mit dieser Grammatik und ANTLR wieder einen Lexer und Parser.
