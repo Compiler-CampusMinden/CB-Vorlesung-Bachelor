@@ -7,11 +7,7 @@ program :  expr+ EOF ;
 
 expr    :  literal
         |  symbol
-        |  list
-        |  def
-        |  fn
-        |  fcall
-        |  let
+        |  '(' expr* ')'
         ;
 
 literal :  NUMBER
@@ -20,16 +16,9 @@ literal :  NUMBER
         |  FALSE
         ;
 
-symbol  :  ID ;
-list    :  '(' 'list' expr* ')' ;
-def     :  '(' 'def' symbol expr ')' ;
-
-fn      :  '(' 'defn' symbol '(' symbol* ')' expr* ')' ;
-fcall   :  '(' op expr* ')' ;
-op      :  ID | '+' | '-' | '*' | '/' | '=' | '>' | '<' ;
-
-let     :  '(' 'let' '(' binding* ')' expr ')' ;
-binding :  symbol expr ;
+symbol  : ID
+        | OP
+        ;
 
 
 // Lexer
@@ -37,6 +26,7 @@ TRUE    :  'true' ;
 FALSE   :  'false' ;
 ID      :  [a-z][a-zA-Z0-9]* ;
 NUMBER  :  [0-9]+ ;
+OP      :  '+' | '-' | '*' | '/' | '=' | '>' | '<' ;
 STRING  :  '"' (~[\n\r"])* '"' ;
 COMMENT :  ';;' ~[\n\r]* -> skip ;
 WS      :  [ ,\t\n\r]+ -> skip ;
