@@ -241,11 +241,12 @@ Beispiel:
 Aus
 
 ``` python
-a := 0
-    if 10 < 1 do
-a := 42
+a     := 0
+    if    10 < 1
+       do
+a    :=     42
 else do
-        a := 7
+        a :=      7
   end
 ```
 
