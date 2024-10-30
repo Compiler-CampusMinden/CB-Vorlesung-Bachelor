@@ -16,9 +16,9 @@ eine Lisp-artige Sprache.
 
 ## Methodik
 
-Sie finden im [Sample Project] eine [Grammatik], die (teilweise) zu der Zielsprache auf diesem
-Blatt passt. Analysieren Sie diese Grammatik und vervollständigen Sie diese bzw. passen Sie
-diese an.
+Sie finden im [Sample Project] zwei Grammatiken ([MiniLispA], [MiniLispB]), die (teilweise) zu
+der Zielsprache auf diesem Blatt passen. Analysieren Sie beide Grammatiken und entscheiden Sie
+sich für eine der beiden Varianten. Vervollständigen Sie diese bzw. passen Sie diese an.
 
 Erstellen Sie mit dieser Grammatik und ANTLR wieder einen Lexer und Parser.
 
@@ -262,8 +262,9 @@ bzw. die restliche Liste ohne das erste Element zurückliefern:
     zurückgewiesen werden sollten. Welche Fehlerkategorien könnte es hier geben?
 
 2.  Definieren Sie für die obige Sprache eine geeignete ANTLR-Grammatik. Sie können dabei die
-    [Grammatik] im [Sample Project] als Ausgangspunkt nutzen und diese anpassen und
-    vervollständigen. Erzeugen Sie mithilfe der Grammatik und ANTLR einen Lexer und Parser.
+    Grammatik [MiniLispA] oder [MiniLispB] im [Sample Project] als Ausgangspunkt nutzen und
+    diese anpassen und vervollständigen. Erzeugen Sie mithilfe der Grammatik und ANTLR einen
+    Lexer und Parser.
 
 3.  Führen Sie die semantische Analyse durch: Sind alle Symbole bekannt, passen die Scopes?
 
@@ -286,12 +287,22 @@ Lesen Sie den zu interpretierenden Code aus einer Datei ein.
 
 Testen Sie Ihren Interpreter mit Ihren Beispielprogrammen.
 
-### A5.3: Interaktiver Interpreter (2P)
+### A5.3: Auswirkungen der Grammatik auf den Interpreter (2P)
+
+Sie haben sich vermutlich für eine der beiden Grammatiken ([MiniLispA], [MiniLispB])
+entschieden und auf der Basis Ihren Interpreter erstellt.
+
+Welche Auswirkungen hat die Grammatik auf den Interpreter? Machen Sie ein Gedankenexperiment:
+Überlegen Sie, was Sie alles in Ihrer Implementierung ändern müssten, wenn Sie die jeweils
+andere Grammatik-Variante nutzen würden.
+
+### Bonus: Interaktiver Interpreter (3P)
 
 Bauen Sie eine *REPL* ein, d.h. geben Sie nach dem Start des Interpreters einen Prompt aus und
 verarbeiten Sie die Eingaben interaktiv. Wie müssen Sie hier mit der Symboltabelle umgehen?
 
   [Sample Project]: https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/tree/master/homework/src/sample_project
-  [Grammatik]: https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/homework/src/sample_project/src/main/antlr/MiniLisp.g4
+  [MiniLispA]: https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/homework/src/sample_project/src/main/antlr/MiniLispA.g4
+  [MiniLispB]: https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/homework/src/sample_project/src/main/antlr/MiniLispB.g4
   [S-Expressions]: https://en.wikipedia.org/wiki/S-expression
   [*syntactic sugar*]: https://en.wikipedia.org/wiki/Syntactic_sugar
