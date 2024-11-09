@@ -26,12 +26,9 @@ Stellen Sie Ihre Konzepte und Lösungen im Rahmen eines Vortrags vor. Fokussiere
 dabei auf die Auswirkungen der oben beschriebenen Erweiterung der Sprache auf die Grammatik
 und die semantische Analyse. Der Vortrag soll 20 Minuten dauern.
 
-Am 20. November halten Sie den Vortrag zur Probe im Kreis der Kursgruppe. Hier bekommen Sie
-von der Gruppe Feedback, welches Sie zur Verbesserung Ihres Vortrags nutzen können. Dieser
-Vortrag zählt für das Testat im Praktikum.
-
-Am 26. November halten Sie den Vortrag als Station I Ihrer Parcoursprüfung auf dem zweiten
-Edmonton-Treffen (englische Sprache). Dieser Vortrag wird benotet.
+Die Vorträge werden im Praktikum am 27.11. bzw. am 04.12. durchgeführt. Wir werden dazu die
+Teams entsprechend aufteilen, Sie bekommen eine Mail. Abgabe der Lösung und des Vortrags im
+ILIAS ist für alle Teams aber bereits der 27.11. ...
 
 **Bewertungskriterien**
 
