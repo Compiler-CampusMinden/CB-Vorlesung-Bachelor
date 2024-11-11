@@ -269,6 +269,11 @@ noch keine Gedanken machen! Achten Sie auf die korrekten Einrücktiefen. Die Zei
 hier keine Rolle, es wird einfach direkt nach jedem Statement umgebrochen (bzw. wie bei den
 Kontrollstrukturen gezeigt).
 
+**Hinweis**: Das Thema Pretty Printing ist interessant und kann recht schnell ziemlich
+aufwändig werden. Sie finden im Paper ["A prettier printer"] von Philip Wadler
+[@wadler2003prettier] und im Blog ["The Hardest Program I've Ever Written"] von Bob Nystrom
+[@Nystrom2015] gut geschriebene Beiträge, um tiefer in die Materie einzusteigen.
+
 ### A3.3: AST (3P)
 
 Beim Parsen bekommen Sie von ANTLR einen Parse-Tree zurück, der direkt die Struktur Ihrer
@@ -291,3 +296,5 @@ auch einen zweiten Pretty-Printer für den AST implementieren.)
 
   [Starter-Projekt]: https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/tree/master/homework/src/sample_project
   [ANTLR-Plugin für IntelliJ]: https://plugins.jetbrains.com/plugin/7358-antlr-v4
+  ["A prettier printer"]: https://homepages.inf.ed.ac.uk/wadler/papers/prettier/prettier.pdf
+  ["The Hardest Program I've Ever Written"]: https://journal.stuffwithstuff.com/2015/09/08/the-hardest-program-ive-ever-written/
