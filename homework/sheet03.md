@@ -263,10 +263,11 @@ end
 
 werden.
 
-*Hinweis*: Es geht nur um die Ausgabe syntaktisch korrekter Programme. Sie brauchen sich um
-die Semantik (passende Typen o.ä.) noch keine Gedanken machen! Achten Sie auf die korrekten
-Einrücktiefen. Die Zeilenlänge spielt hier keine Rolle, es wird einfach direkt nach jedem
-Statement umgebrochen (bzw. wie bei den Kontrollstrukturen gezeigt).
+**Hinweis**: Es geht nur um die Ausgabe syntaktisch korrekter Programme. Sie brauchen sich um
+die Semantik (z.B. passende Typen wie etwa keine Multiplikation von Strings mit Integern o.ä.)
+noch keine Gedanken machen! Achten Sie auf die korrekten Einrücktiefen. Die Zeilenlänge spielt
+hier keine Rolle, es wird einfach direkt nach jedem Statement umgebrochen (bzw. wie bei den
+Kontrollstrukturen gezeigt).
 
 ### A3.3: AST (3P)
 
@@ -281,7 +282,8 @@ Programmieren Sie eine Transformation des Parse-Tree in die von Ihnen hier formu
 AST-Strukturen. Dies können Sie beispielsweise mit einer passenden Traversierung
 (Visitor-Pattern) erreichen.
 
-Passen Sie den Pretty-Printer so an, dass er auch den AST ausgeben kann.
+Passen Sie den Pretty-Printer so an, dass er auch den AST ausgeben kann. (Alternativ können
+auch einen zweiten Pretty-Printer für den AST implementieren.)
 
 [^1]: Um den Text lesbar zu halten, wird hier oft nur von "Parser" gesprochen - gemeint ist
     aber die gesamte auf diesem Blatt zu erstellende Toolchain: Lexer - Parser - AST -
