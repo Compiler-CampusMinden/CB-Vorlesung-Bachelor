@@ -99,6 +99,9 @@ und ANTLR.
 
 Die Prüfung wird auf einem ILIAS-System durchgeführt. Bitte denkt an euren Usernamen und das Passwort.
 
+Erlaubtes Hilfsmittel: Ein handschriftlich beschriebenes DIN-A4-Blatt (Vorder- und Rückseite können
+genutzt werden).
+
 `{{% /expand %}}`{=markdown}
 
 `{{% expand title="29.10.24" %}}`{=markdown}
