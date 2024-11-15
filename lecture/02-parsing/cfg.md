@@ -251,6 +251,25 @@ Für eine kontextfreie Grammatik $G$ ist nicht entscheidbar, ob es eine *LL(1)* 
 In der Praxis reichen *LL(1)* - Grammatiken oft. Hier gibt es effiziente Parsergeneratoren (hier: ANTLR), deren Eingabe eine LL-Grammatik ist, und die als Ausgabe den Quellcode eines (effizienten) tabellengesteuerten Parsers generieren.
 
 
+## Was brauchen wir zur Erzeugung eines LL(k)-Parsers?
+
+*   eine *LL(k)*-Grammatik
+*   die $First_k$-Mengen der rechten Seiten aller Produktionsregeln
+*   die $Follow_k$-Mengen aller Nichtterminale und der rechten Seiten aller Produktionsregeln
+*   das Endezeichen $\perp$ hinter dem Eingabewort
+
+**Def.:** Wir definieren $Follow$ - Mengen einer Grammatik wie folgt:
+
+$Follow_k(\beta) = \lbrace w \in T^\ast\ |\ \exists \alpha, \gamma \in (N \cup T)^\ast\ \text{mit}\ S \overset{\ast}{\Rightarrow}_l\ \alpha \beta \gamma\ \text{und}\ w \in First_k(\gamma) \rbrace$
+
+
+## Beispiel: First- und Follow-Mengen
+
+:::notes
+Hier entsteht ein Tafelbild.
+:::
+
+
 ##  Algorithmus: Konstruktion einer LL-Parsertabelle {.fragile}
 
 **Eingabe:** Eine  Grammatik $G = (N, T, P, S)$
@@ -259,18 +278,20 @@ In der Praxis reichen *LL(1)* - Grammatiken oft. Hier gibt es effiziente Parserg
 
 ![Algorithmus zur Generierung einer LL-Parsertabelle](images/LL-Parsertabelle.png){width="60%"}
 
-Hier ist $\perp$ das Endezeichen des Inputs.
 Statt $First_1(\alpha)$ wird oft nur $First(\alpha)$ geschrieben.
 
-## LL-Parsertabellen
+
+## Beispiel: LL-Parsertabellen
 
 :::notes
 Hier entsteht ein Tafelbild.
 :::
 
-## LL-Parsertabellen
+
+## LL-Parser
 
 Rekursive Programmierung bedeutet, dass das Laufzeitsystem einen Stack benutzt. Diesen Stack kann man auch "selbst programmieren", d. h. einen PDA implementieren. Dabei wird ebenfalls die oben genannte Tabelle zur Bestimmung der nächsten anzuwendenden Produktion benutzt. Der Stack enthält die zu erwartenden Eingabezeichen, wenn immer eine Linksableitung gebildet wird. Diese Zeichen im Stack werden mit dem Input gematcht.
+
 
 ## Algorithmus: Tabellengesteuertes LL-Parsen mit einem PDA {.fragile}
 
@@ -280,6 +301,11 @@ Rekursive Programmierung bedeutet, dass das Laufzeitsystem einen Stack benutzt. 
 
 ![Algorithmus zum tabellengesteuerten LL-Parsen](images/LL-Parser.png){width="49%"}
 
+
+## Beispiel: LL-Parsen
+:::notes
+Hier entsteht ein Tafelbild.
+:::
 
 
 ## Ergebnisse der Syntaxanalyse
