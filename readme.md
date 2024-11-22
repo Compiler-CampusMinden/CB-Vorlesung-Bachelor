@@ -344,7 +344,7 @@ Abgabe der Übungsblätter jeweils **Mittwoch bis 09:00 Uhr** im [ILIAS](https:/
 |                      | 18. | **Projektwoche Semester 1+3**                                                                                                            |               |                                                                                                                  |
 |                      | 25. | _Weihnachtspause_                                                                                                                        |               |                                                                                                                  |
 | Januar               | 01. | _Weihnachtspause_                                                                                                                        |               |                                                                                                                  |
-|                      | 08. | C++ II: [Operatoren], [Vererbung & Polymorphie], [Templates]                                                                             | Carsten       | [B06x] C++ und Pointer/Speicherverwaltung (Runtime in Java) (Carsten, *online*)                                  |
+|                      | 08. | C++ II: [Operatoren], [Vererbung & Polymorphie], [Templates]                                                                             | Carsten       | [B06x] Lisp in Lisp (Carsten, *online*)                                                                          |
 |                      | 15. | _Freies Arbeiten/Puffer_                                                                                                                 |               |                                                                                                                  |
 |                      | 22. | [**Parcoursprüfung: Station 2 [B07x] (VL- und Praktika-Slots, siehe Ankündigung)**]{.alert}                                              | Carsten, BC   | [B07x] Mini-Projekt (Carsten/BC, *online*)                                                                       |
 | _(Prüfungsphase I)_  |     | _Keine separate Prüfung_                                                                                                                 |               |                                                                                                                  |
@@ -402,7 +402,7 @@ Abgabe der Übungsblätter jeweils **Mittwoch bis 09:00 Uhr** im [ILIAS](https:/
 [B07]: homework/sheet07.md
 [B04x]: homework/sheet04x.md
 [B05x]: homework/sheet05x.md
-[B06x]: homework/sheet06.md
+[B06x]: homework/sheet06x.md
 [B07x]: homework/sheet07.md
 
 
