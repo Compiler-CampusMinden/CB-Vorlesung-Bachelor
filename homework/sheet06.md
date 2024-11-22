@@ -11,7 +11,7 @@ hidden: true
 
 ## Zusammenfassung
 
-Ziel dieses Aufgabenblattes ist die praktische Anwendung der C++-Kenntnisse, insbesondere
+Ziel dieses Aufgabenblattes ist die praktische Anwendung Ihrer C++-Kenntnisse, insbesondere
 werden Sie Pointer, Referenzen und Klassen anwenden und vertiefen. Als Anwendungsbeispiel
 werden Sie bestimmte in der C++-Welt wohlbekannte Smartpointer modellieren sowie einen
 einfachen Ringpuffer programmieren. Sie lernen mit dem *Reference Counting* nebenbei eine
