@@ -49,6 +49,7 @@ C++ drei Möglichkeiten: als Kopie, als Referenz oder als Pointer.
 // Return as copy
 Token next_token() {
     Token wuppie = Token("wuppie", 1, 4);   // will be deleted automatically after this function call
+    Token bar = Token("bar", 7, 10);        // not used, will be deleted automatically after this function call
 
     return wuppie;
 }
@@ -131,10 +132,11 @@ wie in Rust mit strikten Ownership-Modellen arbeitet, hat man in C++ die sogenan
 [Smartpointer] erdacht. Diese ersetzen den direkten Umgang mit den einfachen Pointern (auch
 als *raw pointer* bezeichnet) und lösen das Problem der Freigabe der verwalteten
 Ressourcen.[^2] Es gibt verschiedene Modelle, insbesondere gibt es die Variante *unique
-pointer*, bei der immer nur genau ein Smartpointer gleichzeitig die selbe Ressource besitzen
-darf, und die *shared pointer*, bei der mehrere Smartpointer gleichzeitig die selbe Ressource
-verwalten können. Sobald die Lebensdauer des *unique pointer* oder des letzten *shared
-pointer* endet, wird die verwaltete Ressource automatisch vom Smartpointer freigegeben.
+pointer*, bei der immer nur genau ein Smartpointer gleichzeitig eine bestimmte Ressource
+besitzen darf, und die *shared pointer*, bei der mehrere Smartpointer gleichzeitig die selbe
+Ressource verwalten können. Sobald die Lebensdauer des *unique pointer* oder des letzten
+*shared pointer* endet, wird die verwaltete Ressource automatisch vom Smartpointer
+freigegeben.
 
 Das folgende Beispiel arbeitet mit einer selbst implementierten Variante der *shared
 pointers*. Dabei ist die Klasse `SmartToken` ein Smartpointer für Objekte vom Typ `Token`:
@@ -189,7 +191,7 @@ Ein Smartpointer soll entsprechend folgende Eigenschaften haben:
     zeigen, darf erst der letzte Smartpointer das Objekt aus dem Heap löschen
 -   Smartpointer funktionieren nur für mit `new` erzeugte Objekte
 
-Weitere übliche Eigenschaften, die wir auf diesem Blatt außen vor lassen[^4]:
+Weitere übliche Eigenschaften, die wir auf diesem Blatt aber vereinfachend ignorieren[^4]:
 
 -   Smartpointer sollen für beliebige Klassen nutzbar sein (Template-Klasse)
 -   Dereferenzierung von nicht existierenden Objekten (d.h. der Smartpointer zeigt intern auf
@@ -318,11 +320,12 @@ public:
 };
 ```
 
-Damit lässt sich das folgende Verhalten realisieren:
+Damit lässt sich das folgende Verhalten realisieren (Vergleich *raw* Pointer
+vs. Smartpointer):
 
 ``` cpp
-Token* foo = new Token("foo", 9, 35);
-SmartToken wuppie = SmartToken(new Token("wuppie", 1, 4));
+Token* foo = new Token("foo", 9, 35);                       // raw pointer foo
+SmartToken wuppie = SmartToken(new Token("wuppie", 1, 4));  // smart pointer wuppie
 
 // Access via token pointer
 cout << (*foo).lexem    << endl;    // "foo"
