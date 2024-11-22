@@ -327,6 +327,9 @@ Hier finden Sie einen abonnierbaren [Google Kalender IFM 5.21 CB (PO18, 5. Semes
 Abgabe der Übungsblätter jeweils **Mittwoch bis 09:00 Uhr** im [ILIAS](https://www.hsbi.de/elearning/goto.php?target=exc_1420725&client_id=FH-Bielefeld). Vorstellung der Lösung im jeweiligen Praktikum in der Abgabewoche.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e0cfde1 (reset readme)
 | Monat                | Tag | Vorlesung                                                                                                                                | Lead          | Abgabe Aufgabenblatt & Vorstellung Praktikum                                                                     |
 |:---------------------|:----|:-----------------------------------------------------------------------------------------------------------------------------------------|:--------------|:-----------------------------------------------------------------------------------------------------------------|
 | Oktober              | 09. | [Orga] (*Zoom*); [Überblick], [Sprachen], [Anwendungen]                                                                                  | Carsten, BC   |                                                                                                                  |
@@ -350,6 +353,7 @@ Abgabe der Übungsblätter jeweils **Mittwoch bis 09:00 Uhr** im [ILIAS](https:/
 |                      | 22. | [**Parcoursprüfung: Station 2 [B07x] (VL- und Praktika-Slots, siehe Ankündigung)**]{.alert}                                              | Carsten, BC   | [B07x] Mini-Projekt (Carsten/BC, *online*)                                                                       |
 | _(Prüfungsphase I)_  |     | _Keine separate Prüfung_                                                                                                                 |               |                                                                                                                  |
 | _(Prüfungsphase II)_ |     | [**Parcoursprüfung: Do, 27. Mar 2025, 08-18 Uhr, mdl. Prüfung (alle Themen)**]{.alert} (je Prüfung ca. 45', Vergabe ca. 2 Wochen vorher) |               |                                                                                                                  |
+<<<<<<< HEAD
 =======
 | Monat                | Tag | Vorlesung                                                                                                                                | Lead          | Abgabe Aufgabenblatt & Vorstellung Praktikum          |
 |:---------------------|:----|:-----------------------------------------------------------------------------------------------------------------------------------------|:--------------|:------------------------------------------------------|
@@ -375,6 +379,8 @@ Abgabe der Übungsblätter jeweils **Mittwoch bis 09:00 Uhr** im [ILIAS](https:/
 | _(Prüfungsphase I)_  |     | _Keine separate Prüfung_                                                                                                                 |               |                                                       |
 | _(Prüfungsphase II)_ |     | [**Parcoursprüfung: Do, 27. Mar 2025, 08-18 Uhr, mdl. Prüfung (alle Themen)**]{.alert} (je Prüfung ca. 45', Vergabe ca. 2 Wochen vorher) |               |                                                       |
 >>>>>>> 653458e (fix readme)
+=======
+>>>>>>> e0cfde1 (reset readme)
 
 :::
 ::::::
@@ -428,7 +434,7 @@ Abgabe der Übungsblätter jeweils **Mittwoch bis 09:00 Uhr** im [ILIAS](https:/
 [B07]: homework/sheet07.md
 [B04x]: homework/sheet04x.md
 [B05x]: homework/sheet05x.md
-[B06x]: homework/sheet06x.md
+[B06x]: homework/sheet06.md
 [B07x]: homework/sheet07.md
 
 
