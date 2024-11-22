@@ -13,9 +13,9 @@ hidden: true
 
 Ziel dieses Aufgabenblattes ist die praktische Anwendung der C++-Kenntnisse, insbesondere
 werden Sie Pointer, Referenzen und Klassen anwenden und vertiefen. Als Anwendungsbeispiel
-werden bestimmte in der C++-Welt wohlbekannte Smartpointer modelliert sowie ein einfacher
-Ringpuffer programmiert. Sie lernen mit dem *Reference Counting* nebenbei eine verbreitete
-Technik der *Garbage Collection* kennen.
+werden Sie bestimmte in der C++-Welt wohlbekannte Smartpointer modellieren sowie einen
+einfachen Ringpuffer programmieren. Sie lernen mit dem *Reference Counting* nebenbei eine
+verbreitete Technik der *Garbage Collection* kennen.
 
 ## Methodik
 
