@@ -83,7 +83,7 @@ Token& next_token() {
 int main() {
     Token& x = next_token();                // no copy, `x` is just a new alias for `foo`
     ...
-    delete x;                               // caller needs to free this object
+    delete &x;                              // caller needs to free this object
 }
 ```
 
