@@ -48,8 +48,8 @@ C++ drei Möglichkeiten: als Kopie, als Referenz oder als Pointer.
 ``` cpp
 // Return as copy
 Token next_token() {
-    Token wuppie = Token("wuppie", 1, 4);   // will be deleted automatically after this function call
-    Token bar = Token("bar", 7, 10);        // not used, will be deleted automatically after this function call
+    Token wuppie = Token("wuppie", 1, 4);   // will be deleted automatically
+    Token bar = Token("bar", 7, 10);        // not used, will be deleted automatically
 
     return wuppie;
 }
@@ -61,7 +61,7 @@ int main() {
 ``` cpp
 // Return as pointer
 Token* next_token() {
-    Token* foo = new Token("foo", 9, 35);   // will be free'd manually (responsibility of caller)
+    Token* foo = new Token("foo", 9, 35);   // will be free'd manually
     Token* bar = new Token("bar", 7, 10);   // leaves a memory hole!!!
 
     return foo;
@@ -76,7 +76,7 @@ int main() {
 ``` cpp
 // Return as C++ reference
 Token& next_token() {
-    Token* foo = new Token("foo", 9, 35);   // will be free'd manually (responsibility of caller)
+    Token* foo = new Token("foo", 9, 35);   // will be free'd manually
     Token* bar = new Token("bar", 7, 10);   // leaves a memory hole!!!
 
     return *foo;
@@ -143,13 +143,20 @@ pointers*. Dabei ist die Klasse `SmartToken` ein Smartpointer für Objekte vom T
 
 ``` cpp
 void fluppie() {
-    SmartToken wuppie = SmartToken(new Token("wuppie", 1, 4));      // new smart pointer for token "wuppie": wuppie lives on the stack, the token lives on the heap (`new`)
+    // new smart pointer for token "wuppie":
+    // wuppie lives on the stack, the token lives on the heap (`new`)
+    SmartToken wuppie = SmartToken(new Token("wuppie", 1, 4));
 
     if (bla==42) {
-        SmartToken fluppie = SmartToken(wuppie);                    // fluppie shares resource with wuppie
-        SmartToken fluppie2(wuppie);                                // fluppie2 shares resource with wuppie
-        // at this point there are 3 smart pointers sharing the same resource (token "wuppie")
-        SmartToken foo = SmartToken(new Token("foo", 9, 35));       // new smart pointer for token "foo"
+        // fluppie shares resource with wuppie
+        SmartToken fluppie = SmartToken(wuppie);
+        // fluppie2 shares resource with wuppie
+        SmartToken fluppie2(wuppie);
+
+        // now there are 3 smart pointers sharing the same resource (token "wuppie")
+
+        // new smart pointer for token "foo"
+        SmartToken foo = SmartToken(new Token("foo", 9, 35));
     }   // fluppie, fluppie2, foo will be removed from the stack - foo releases its resource
 
     // wuppie is the only smart pointer with shared resource "wuppie"
