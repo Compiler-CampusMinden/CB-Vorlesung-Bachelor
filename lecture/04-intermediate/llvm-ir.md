@@ -10,7 +10,7 @@ outcomes:
   - k1: "Module von LLVM"
   - k1: "SSA"
 attachments:
-  - link: "https://raw.githubusercontent.com/Compiler-CampusMinden/AnnotatedSlides/master/llvm-ir.ann.ma.pdf"
+  - link: "https://raw.githubusercontent.com/Compiler-CampusMinden/AnnotatedSlides/master/llvm-ir.ann.ba.pdf"
     name: "Annotierte Folien: LLVM-IR"
 ---
 
