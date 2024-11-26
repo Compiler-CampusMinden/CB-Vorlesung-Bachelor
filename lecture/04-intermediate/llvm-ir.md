@@ -74,7 +74,7 @@ mit entkoppelten Komponenten, die über APIs kommunizieren (Modularität)
 ##  Wie arbeitet man damit?
 
 *   (mit Generatoren) ein Frontend entwickeln, das Programme über einen AST in
-LLVM IR übersetzt
+    LLVM IR übersetzt
 *   mit LLVM den Zwischencode optimieren
 *   mit LLVM Maschinencode oder VM-Code generieren
 
