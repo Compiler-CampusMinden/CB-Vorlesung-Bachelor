@@ -63,9 +63,9 @@ Sie _können_ hierzu den Raum J101 (siehe Stundenplan) nutzen.
 
 | Vorlesung (2 SWS)                               | Praktikum (2 SWS)                      |
 |:------------------------------------------------|:---------------------------------------|
-| Mi, 08:00 - 09:30 Uhr (online)                  | S5, G1: Mi, 09:30 - 11:00 Uhr (online) |
-| (Carsten: *Flipped Classroom*, BC: *Vorlesung*) | S5, G2: Mi, 09:30 - 11:00 Uhr (online) |
-|                                                 | S5, G3: Mi, 09:30 - 11:00 Uhr (online) |
+| Mi, 08:00 - 09:30 Uhr (online)                  | S5, G1: Mi, 09:45 - 11:15 Uhr (online) |
+| (Carsten: *Flipped Classroom*, BC: *Vorlesung*) | S5, G2: Mi, 09:45 - 11:15 Uhr (online) |
+|                                                 | S5, G3: Mi, 09:45 - 11:15 Uhr (online) |
 |                                                 | (Carsten: *online*, BC: *online*)      |
 
 Online-Sitzungen per Zoom (**Zugangsdaten siehe [IFM 5.21 CB (PO18, 5. Semester)]**).
