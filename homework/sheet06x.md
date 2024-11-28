@@ -47,7 +47,8 @@ Bauen Sie die dynamische Speicherverwaltung in Java nach:
 **Hinweis**: Erinnern Sie sich an Generics in Java: `B<E> extends A<E>`, aber NICHT
 `C<B> extends C<A>` (mit `B extends A`)! Generics werden hier nicht helfen. Denkbar wäre eine
 Vererbungshierarchie oder die Modellierung mit Hilfe eines Enums. Für dieses Blatt können Sie
-sich auf ein paar Beispiele beschränken - für das Mini-Projekt (nächstes Blatt) werden die
-nötigen Klassen dann beim Kompilieren durch Ihren Compiler angelegt.
+sich auf ein paar Beispiele für konkrete Pointertypen beschränken - für das Mini-Projekt
+(nächstes Blatt) werden die nötigen Klassen dann beim Kompilieren durch Ihren eigenen Compiler
+als Java-Strukturen angelegt.
 
   [Blatt 06]: sheet06.md
