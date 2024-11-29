@@ -86,6 +86,17 @@ Sie _können_ hierzu den Raum J101 (siehe Stundenplan) nutzen.
 `{{% notice style="note" title="News" %}}`{=markdown}
 `{{% expand title="29.11.24" %}}`{=markdown}
 
+### Anpassung der Gewichtung der Parcours-Stationen
+
+Auf vielfachen Wunsch passen wir die Gewichtung der Stationen der Parcoursprüfung an:
+
+-   Station I: 33 Punkte
+-   Station II: 50 Punkte
+
+`{{% /expand %}}`{=markdown}
+
+`{{% expand title="29.11.24" %}}`{=markdown}
+
 ### Ergebnisse und Einsicht Parcoursprüfung: Station 1 ILIAS
 
 Die erste Station der Parcoursprüfung vom 20.11. ist korrigiert.
@@ -97,6 +108,7 @@ schicken Sie bitte bis Donnerstag, 05.12., 16:00 Uhr eine kurze Mail an Carsten 
 Wir werden dann mit Ihnen für Freitag (06.12., zw. 15 und 17 Uhr) einen kurzen Gesprächstermin vereinbaren.
 
 `{{% /expand %}}`{=markdown}
+
 `{{% expand title="12.11.24" %}}`{=markdown}
 
 ### Organisation Parcoursprüfung: Station 1 ILIAS
@@ -441,7 +453,8 @@ Abgabe der Übungsblätter jeweils **Mittwoch bis 09:00 Uhr** im [ILIAS](https:/
     1.  ILIAS-Test (einzeln, 20.11.)
     2.  Vorstellung Mini-Projekt [B07] (3er Teams, letzte VL-Woche)
 
-    Beide Stationen ergeben zu je 50% die Gesamtnote.
+    Beide Stationen ergeben zusammen die Gesamtnote.
+    Die Gewichtung dabei ist: Station I 33 Punkte, Station II 50 Punkte.
 
 :::
 ::: {.tab title="Prüfung im zweiten Zeitraum"}
