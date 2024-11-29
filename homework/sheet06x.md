@@ -30,25 +30,27 @@ Bauen Sie die dynamische Speicherverwaltung in Java nach:
     und damit die Objekte erlauben. Die Datenstruktur muss eine interne Buchführung haben,
     welche der Plätze noch frei sind. Die Datenstruktur muss Methoden analog zu `new` und
     `delete` haben, damit man von außen Platz auf dem simulierten Heap reservieren kann bzw.
-    wieder freigeben kann. Bei `new` übergibt man eine `Object`-Referenz und erhält man einen
+    wieder freigeben kann. Bei `new` übergibt man eine `Object`-Referenz und erhält einen
     Pointer zurück, bei `delete` übergibt man einen Pointer.
 
 2.  Modellieren Sie Pointer.
 
-    Dies ist eine Datenstruktur, die auf ein Objekt im "Heap" "zeigt", indem sie den Index des
-    Objekts in der Heap-Datenstruktur speichert. Beachten Sie, dass Pointer in C++ typisiert
-    sind und realisieren Sie dies entsprechend. Die Datenstruktur soll zusätzlich eine Methode
-    zum "Dereferenzieren" aufweisen, damit man direkt auf das verwiesene Objekt zugreifen
-    kann. Dabei muss das Objekt von `Object` auf den jeweiligen Typ gecasted und
-    zurückgeliefert werden.
+    Dies ist eine Datenstruktur, die auf ein Objekt im simulierten Heap "zeigt", indem sie den
+    Index des Objekts in der Heap-Datenstruktur speichert. Beachten Sie, dass Pointer in C++
+    typisiert sind (`char*`, `int*`, `Foo*`) und realisieren Sie dies entsprechend. Die
+    Datenstruktur soll zusätzlich eine Methode zum "Dereferenzieren" aufweisen, damit man
+    direkt auf das verwiesene Objekt zugreifen kann. Dabei muss das Objekt aus dem "Heap"
+    geholt werden und von `Object` auf den jeweiligen Typ gecasted und zurückgeliefert werden.
 
 **Hinweis**: Diese Aufgabe ist eine Vorarbeit für das nächste Blatt (Mini-Projekt).
 
 **Hinweis**: Erinnern Sie sich an Generics in Java: `B<E> extends A<E>`, aber NICHT
-`C<B> extends C<A>` (mit `B extends A`)! Generics werden hier nicht helfen. Denkbar wäre eine
-Vererbungshierarchie oder die Modellierung mit Hilfe eines Enums. Für dieses Blatt können Sie
-sich auf ein paar Beispiele für konkrete Pointertypen beschränken - für das Mini-Projekt
-(nächstes Blatt) werden die nötigen Klassen dann beim Kompilieren durch Ihren eigenen Compiler
-als Java-Strukturen angelegt.
+`C<B> extends C<A>` (mit `B extends A`)! Generics werden hier also nicht helfen. Denkbar wäre
+eine Vererbungshierarchie und die Überschreibung des Rückgabetyps der Basismethode für die
+Dereferenzierung ([*covariant return type*]) oder ggf. die Modellierung mit Hilfe eines Enums.
+Für dieses Blatt können Sie sich auf ein paar Beispiele für konkrete Pointertypen
+beschränken - für das Mini-Projekt (nächstes Blatt) werden die nötigen Klassen dann beim
+Kompilieren dynamisch durch Ihren eigenen Compiler als Java-Strukturen angelegt.
 
   [Blatt 06]: sheet06.md
+  [*covariant return type*]: https://docs.oracle.com/javase/tutorial/java/javaOO/returnvalue.html
