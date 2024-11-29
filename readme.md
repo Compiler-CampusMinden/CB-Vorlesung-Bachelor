@@ -84,6 +84,19 @@ Sie _können_ hierzu den Raum J101 (siehe Stundenplan) nutzen.
 ::: {.tab title="IFM 3.1 CB (PO23, 3. Semester)"}
 
 `{{% notice style="note" title="News" %}}`{=markdown}
+`{{% expand title="29.11.24" %}}`{=markdown}
+
+### Ergebnisse und Einsicht Parcoursprüfung: Station 1 ILIAS
+
+Die erste Station der Parcoursprüfung vom 20.11. ist korrigiert.
+
+Die Einsicht findet von Montag, 02.12., 08:00 Uhr bis Donnerstag, 05.12., 16:00 Uhr online statt. Gehen
+Sie dazu bitte selbstständig auf den E-Assessment-Server (https://eassessment.hsbi.de/goto.php?target=crs_7284,
+via VPN) und schauen sich unter "Ergebnisse" die Bewertung Ihrer Antworten an. Wenn dabei Fragen auftreten,
+schicken Sie bitte bis Donnerstag, 05.12., 16:00 Uhr eine kurze Mail an Carsten Gips mit Ihren konkreten Fragen.
+Wir werden dann mit Ihnen für Freitag (06.12., zw. 15 und 17 Uhr) einen kurzen Gesprächstermin vereinbaren.
+
+`{{% /expand %}}`{=markdown}
 `{{% expand title="12.11.24" %}}`{=markdown}
 
 ### Organisation Parcoursprüfung: Station 1 ILIAS
