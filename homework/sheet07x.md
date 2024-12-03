@@ -11,7 +11,7 @@ hidden: true
 ## Aufgaben
 
 Bearbeiten Sie die auf [Blatt 07] definierten Aufgaben. Ergänzend sollen noch Pointer und
-dynamische Speicherverwaltung realisiert werden (vgl. Vorarbeiten auf [Blatt 06x]).
+dynamische Speicherverwaltung in Java realisiert werden (vgl. Vorarbeiten auf [Blatt 06x]).
 
   [Blatt 07]: sheet07.md
   [Blatt 06x]: sheet06x.md

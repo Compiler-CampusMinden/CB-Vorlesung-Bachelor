@@ -15,9 +15,12 @@ Entwickeln Sie in Ihrem 3er-Team gemeinsam einen Interpreter *oder* einen Compil
 Nutzen Sie als Implementierungssprache Java. Sie können ANTLR zur Erstellung Ihres Lexers und
 Parsers nutzen.
 
+Entwickeln Sie verschiedene Eingabebeispiele in unterschiedlicher Komplexität, mit denen Sie
+Ihren Interpreter bzw. Compiler testen können.
+
 ### Variante A: Interpreter
 
-Der Interpreter muss den zu interpretierenden Code aus einer Datei einlesen können.
+Der Interpreter muss den zu interpretierenden C++-Code aus einer Datei einlesen können.
 
 Sie brauchen keine interaktive Interpretation implementieren, d.h. eine REPL ist nicht
 notwendig. Der Interpreter muss bei Bedarf an relevanten Stellen einen Log-Output erzeugen, um
@@ -26,79 +29,72 @@ Konsole ausgegeben werden.
 
 ### Variante B: Compiler
 
-Der Compiler muss den zu kompilierenden Code aus einer Datei einlesen können.
+Der Compiler muss den zu kompilierenden C++-Code aus einer Datei einlesen können.
 
-Der Compiler soll gültigen Java-Code erzeugen und in eine Datei speichern. Definieren Sie ggf.
-nötige Hilfsbibliotheken, so dass man den generierten Code zusammen mit den Hilfsbibliotheken
-mit Java übersetzen und ausführen kann.
+Der Compiler soll aus dem eingegebenen C++-Code passenden gültigen Java-Code erzeugen und in
+eine Datei speichern. Definieren Sie ggf. nötige Hilfsbibliotheken, so dass man den
+generierten Code zusammen mit den Hilfsbibliotheken mit Java übersetzen und ausführen kann.
 
 ### Sprachumfang
 
 Sie sollen mindestens folgende C++-Konzepte unterstützen:
 
--   Basisdatentypen: `bool`, `int`, `double`, `char`
+-   Basisdatentypen: `bool`, `int`, `char`
 -   Variablen
 -   Arrays
 -   C++-Referenzen
--   Kontrollfluss: `if`-`then`-`else`, `for`-Schleifen
--   Funktionen
--   Klassen
+-   Zuweisungen und Expressions
+-   Kontrollfluss: `if`-`then`-`else`, `while`-Schleifen
+-   Funktionen (Definition, Deklaration, Aufrufe)
+-   Klassen (mit Attributen und Methoden)
 -   Einfach-Vererbung
 -   Polymorphie (dynamisch, statisch)
--   Eingebaute Funktionen: `print_bool`, `print_int`, `print_double`, `print_char`
+-   Eingebaute Funktionen: `print_bool`, `print_int`, `print_char` (Ausgabe eines Werts des
+    jeweiligen Typs auf der Konsole)
 
 Beachten Sie bei der Umsetzung, dass Polymorphie in C++ etwas anders funktioniert als in Java.
 
-Andere mit C++ verbundene Konzepte wie beispielsweise Präprozessor, Header-Files, Pointer oder
-Templates brauchen Sie nicht umsetzen.
+Andere mit C++ verbundene Konzepte wie beispielsweise Präprozessor, Header-Files, Pointer,
+Templates, Sichtbarkeiten in Klassen, Trennung Deklaration/Implementierung bei Klassen
+(Trennung .h und .cpp) oder Initialisierungslisten brauchen Sie nicht umsetzen.
 
-### Dokumente und Präsentation
+### Projektvorstellung: Walk-Through statt Präsentation
 
-Dokumentieren Sie den Entwicklungsprozess, die Herausforderungen und die Lösungen, die Sie
-gefunden haben. Erstellen Sie dazu ein PDF mit 10 bis 16 Seiten (DIN-A4). Behandeln Sie darin
-folgende Punkte:
+Stellen Sie Ihr Projekt am Semesterende vor (Termine siehe Fahrplan und Ankündigung).
 
--   Einführung ins Projekt
--   Technische Architektur des Interpreters bzw. Compilers
--   Reflexion: Herausforderungen und Lösungen
--   Fazit und Ausblick
+Jedes Team hat dafür 20 Minuten Zeit.
 
-Halten Sie eine Präsentation von ca. 30 Minuten (Termine siehe Fahrplan und Ankündigung), in
-der Sie den Interpreter bzw. Compiler vorstellen und die Architektur und die von Ihnen
-gewählten Lösungsansätze erläutern.
+Gehen Sie dabei am Code durch Ihr Projekt und diskutieren Sie relevante Teile, mindestens
+aber:
+
+-   Grammatik
+-   AST
+-   Semantische Analyse
+-   Interpreter bzw. Compiler
+
+Demonstrieren Sie die Funktionsfähigkeit mit Ihren C++-Codebeispielen.
+
+**Sie sollen keine Folien erstellen. Die Präsentation soll live in der IDE erfolgen.**
 
 ## Abgabeformat
 
-Reichen Sie alle relevanten Unterlagen elektronisch über ILIAS ein. Dazu gehören:
-
-1.  Quellcode des Interpreters bzw. Compilers (als ZIP)
-2.  Projektdokumentation (als PDF)
-3.  Präsentation (als PDF)
+Reichen Sie den als ZIP-Datei zusammengepackten Quellcode des Interpreters bzw. Compilers
+elektronisch über ILIAS ein.
 
 ## Bewertungskriterien
 
-1.  **Inhalt (50 Punkte)**
+1.  **Inhalt (40 Punkte)**
 
-    -   **Themenverständnis (30 Punkte)**: Wurde das Thema klar und umfassend dargestellt?
-        Wurde das Fachwissen adäquat vermittelt?
-    -   **Argumentation und Nachvollziehbarkeit (20 Punkte)**: Sind die Konzepte logisch und
-        schlüssig aufgebaut? Werden die Aussagen durch relevante Beispiele gestützt?
+    -   **Aufgabenstellung (30 Punkte)**: Wurden alle Aspekte der Zielsprache sinnvoll
+        umgesetzt?
+    -   **Argumentation und Nachvollziehbarkeit (10 Punkte)**: Sind die Konzepte logisch und
+        schlüssig dargestellt? Werden die Aussagen durch relevante Code-Stellen gestützt?
 
-2.  **Struktur (30 Punkte)**
+2.  **Verschiedenes (10 Punkte)**
 
-    -   **Aufbau (10 Punkte)**: Gibt es eine klare Einleitung, einen strukturierten Hauptteil
-        und einen prägnanten Schluss?
-    -   **Gestaltung (10 Punkte)**: Wurden geeignete und ansprechende visuelle Hilfsmittel
-        eingesetzt (Diagramme, Abbildungen)? Unterstützen diese die Inhalte oder lenken sie
-        eher ab?
-    -   **Roter Faden (10 Punkte)**: Wird der rote Faden während des gesamten Vortrags
+    -   **Roter Faden (5 Punkte)**: Wird der rote Faden während des gesamten Walk-Through
         beibehalten? Ist der Zusammenhang zwischen den einzelnen Punkten nachvollziehbar?
-
-3.  **Präsentation (20 Punkte)**
-
-    -   **Gestik, Mimik und Sprache (10 Punkte)**: Ist die Sprache klar, verständlich und
-        angemessen? Ist die Stimmlage dynamisch und ansprechend? Ist das Tempo angemessen?
-    -   **Zeitmanagement (10 Punkte)**: Wurde das der Zeitrahmen (30 Minuten pro Vortrag)
+    -   **Zeitmanagement (5 Punkte)**: Wurde der Zeitrahmen (20 Minuten pro Vortrag)
         eingehalten?
 
-Gesamtbewertung: 100 Punkte
+Gesamtbewertung: 50 Punkte
