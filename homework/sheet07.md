@@ -12,8 +12,8 @@ hidden: true
 
 Entwickeln Sie in Ihrem 3er-Team gemeinsam einen Interpreter *oder* einen Compiler für C++.
 
-Nutzen Sie als Implementierungssprache Java. Sie können ANTLR zur Erstellung Ihres Lexers und
-Parsers nutzen.
+Nutzen Sie als Implementierungssprache Java.[^1] Sie können ANTLR zur Erstellung Ihres Lexers
+und Parsers einsetzen.
 
 Entwickeln Sie verschiedene Eingabebeispiele in unterschiedlicher Komplexität, mit denen Sie
 Ihren Interpreter bzw. Compiler testen können.
@@ -98,3 +98,5 @@ elektronisch über ILIAS ein.
         eingehalten?
 
 Gesamtbewertung: 50 Punkte
+
+[^1]: Nach **Absprache** können Sie auch eine andere Implementierungssprache verwenden.
