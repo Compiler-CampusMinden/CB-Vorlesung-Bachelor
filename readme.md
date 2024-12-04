@@ -436,7 +436,7 @@ Abgabe der Übungsblätter jeweils **Mittwoch bis 09:00 Uhr** im [ILIAS](https:/
 [B04x]: homework/sheet04x.md
 [B05x]: homework/sheet05x.md
 [B06x]: homework/sheet06x.md
-[B07x]: homework/sheet07.md
+[B07x]: homework/sheet07x.md
 
 
 ## Prüfungsform, Note und Credits
