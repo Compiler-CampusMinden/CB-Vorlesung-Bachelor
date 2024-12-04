@@ -84,6 +84,13 @@ Sie _können_ hierzu den Raum J101 (siehe Stundenplan) nutzen.
 ::: {.tab title="IFM 3.1 CB (PO23, 3. Semester)"}
 
 `{{% notice style="note" title="News" %}}`{=markdown}
+`{{% expand title="04.12.24" %}}`{=markdown}
+
+Da die Projektwoche (16.-20.12.2024) mangels Interesse nicht stattfinden wird, biete ich eine
+zusätzliche Sprechstunde im Vorlesungsslot am 18.12. an.
+
+`{{% /expand %}}`{=markdown}
+
 `{{% expand title="29.11.24" %}}`{=markdown}
 
 ### Anpassung der Gewichtung der Parcours-Stationen
@@ -238,7 +245,7 @@ Abgabe der Übungsblätter jeweils **Montag bis 09:00 Uhr** im [ILIAS](https://w
 | Dezember             | 49    | 03.: **18:00 - 19:30 Uhr (online): Edmonton III: Vorträge Edmontoner Projekte**                                                                         | _Edmonton_  |                                |                                                          |
 |                      | 49    | 04.: [AST-basierte Interpreter 1], [AST-basierte Interpreter 2]                                                                                         | Carsten     |                                |                                                          |
 |                      | 50    | 11.: C++ I: [Basics], [Pointer & Referenzen], [Klassen], [Big 3]                                                                                        | Carsten     | 09.: [B05] Interpreter         | 09. / 10. / 13. (Carsten, *online*)                      |
-|                      | 51    | 18.: **Projektwoche Semester 1+3**                                                                                                                      |             |                                |                                                          |
+|                      | 51    | 18.: ~~Projektwoche Semester 1+3~~ Sprechstunde                                                                                                         |             |                                |                                                          |
 |                      | 52    | 25.: _Weihnachtspause_                                                                                                                                  |             |                                |                                                          |
 | Januar               | 01    | 01.: _Weihnachtspause_                                                                                                                                  |             |                                |                                                          |
 |                      | 02    | 08.: C++ II: [Operatoren], [Vererbung & Polymorphie], [Templates]                                                                                       | Carsten     | 06.: [B06] C++                 | 06. / 07. / 10. (Carsten, *online*)                      |
@@ -366,7 +373,7 @@ Abgabe der Übungsblätter jeweils **Mittwoch bis 09:00 Uhr** im [ILIAS](https:/
 | Dezember             | 03. | **18:00 - 19:30 Uhr (online): Edmonton III: Vorträge Edmontoner Projekte**                                                               | _Edmonton_    |                                                                                                                  |
 |                      | 04. | [AST-basierte Interpreter 1], [AST-basierte Interpreter 2]                                                                               | Carsten       | [**Parcoursprüfung: Station 1: Vorstellung der Lösung von [B04x] (online, 2 Teams, siehe Ankündigung)**]{.alert} |
 |                      | 11. | C++ I: [Basics], [Pointer & Referenzen], [Klassen], [Big 3]                                                                              | Carsten       | [B05x] Interpreter (Carsten, *online*)                                                                           |
-|                      | 18. | **Projektwoche Semester 1+3**                                                                                                            |               |                                                                                                                  |
+|                      | 18. | ~~Projektwoche Semester 1+3~~ Sprechstunde                                                                                               |               |                                                                                                                  |
 |                      | 25. | _Weihnachtspause_                                                                                                                        |               |                                                                                                                  |
 | Januar               | 01. | _Weihnachtspause_                                                                                                                        |               |                                                                                                                  |
 |                      | 08. | C++ II: [Operatoren], [Vererbung & Polymorphie], [Templates]                                                                             | Carsten       | [B06x] C++ und dyn. Speicherverwaltung (Carsten, *online*)                                                       |
