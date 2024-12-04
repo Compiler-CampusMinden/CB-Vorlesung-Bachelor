@@ -1,0 +1,1757 @@
+<!DOCTYPE html>
+<html lang="de-DE" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.135.0">
+    <meta name="generator" content="Relearn 6.4.1">
+    <meta name="description" content="Warum? C&#43;&#43; erlaubt ressourcenschonende Programmierung Objektorientierter &#34;Aufsatz&#34; auf C Verbreitet bei hardwarenaher und/oder rechenintensiver Software Sie werden C&#43;&#43; im Modul &#34;Computergrafik&#34; brauchen!
+Geschichte
+1971-73: Ritchie entwickelt die Sprache C Ab 1979: Entwicklung von C&#43;&#43; durch Bjarne Stroustrup bei AT&amp;T Erweiterung der prozeduralen Sprache C Ursprünglich &#34;C mit Klassen&#34;, später &#34;C&#43;&#43;&#34; (Inkrement-Operator) Bis heute: Fortlaufende Erweiterungen: alle 3 Jahre neuer Standard (C&#43;&#43;11, C&#43;&#43;14, ...) C/C&#43;&#43; vs. Java Java: Fokus auf Sicherheit und Robustheit Diverse Sicherheitschecks durch Compiler und VM (zb. Array-Zugriff) Speicherverwaltung (Garbage Collection), kein Speicherzugriff über Pointer Automatische Initialisierung von Variablen C/C&#43;&#43;: Fokus auf Effizienz (Speicher, Laufzeit) für korrekte Programme Vergleichsweise schwache Sicherheitschecks durch Compiler, keine VM (d.h. keine Prüfung von Array-Indizes u.a.) Keine Garbage Collection, Programmierer hat direkten Zugriff auf Speicher Keine automatische Initialisierung von Variablen Hello World! /* * HelloWorld.cpp (g&#43;&#43; -Wall HelloWorld.cpp) */ #include &lt;cstdio&gt; #include &lt;iostream&gt; #include &lt;cstdlib&gt; using namespace std; int main() { printf(&#34;Hello World from C&#43;&#43; :-)\n&#34;); cout &lt;&lt; &#34;Hello World from C&#43;&#43; :-)&#34; &lt;&lt; endl; std::cout &lt;&lt; &#34;Hello World from C&#43;&#43; :-)&#34; &lt;&lt; std::endl; return EXIT_SUCCESS; } Beobachtungen Jedes (ausführbare) C&#43;&#43;-Programm hat genau eine main()-Funktion. Die main()-Funktion ist keine Methode einer Klasse: In C/C&#43;&#43; gibt es Funktionen auch außerhalb von Klassen.">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Einführung in C&#43;&#43; (Erinnerungen an C)">
+    <meta name="twitter:description" content="Warum? C&#43;&#43; erlaubt ressourcenschonende Programmierung Objektorientierter &#34;Aufsatz&#34; auf C Verbreitet bei hardwarenaher und/oder rechenintensiver Software Sie werden C&#43;&#43; im Modul &#34;Computergrafik&#34; brauchen!
+Geschichte
+1971-73: Ritchie entwickelt die Sprache C Ab 1979: Entwicklung von C&#43;&#43; durch Bjarne Stroustrup bei AT&amp;T Erweiterung der prozeduralen Sprache C Ursprünglich &#34;C mit Klassen&#34;, später &#34;C&#43;&#43;&#34; (Inkrement-Operator) Bis heute: Fortlaufende Erweiterungen: alle 3 Jahre neuer Standard (C&#43;&#43;11, C&#43;&#43;14, ...) C/C&#43;&#43; vs. Java Java: Fokus auf Sicherheit und Robustheit Diverse Sicherheitschecks durch Compiler und VM (zb. Array-Zugriff) Speicherverwaltung (Garbage Collection), kein Speicherzugriff über Pointer Automatische Initialisierung von Variablen C/C&#43;&#43;: Fokus auf Effizienz (Speicher, Laufzeit) für korrekte Programme Vergleichsweise schwache Sicherheitschecks durch Compiler, keine VM (d.h. keine Prüfung von Array-Indizes u.a.) Keine Garbage Collection, Programmierer hat direkten Zugriff auf Speicher Keine automatische Initialisierung von Variablen Hello World! /* * HelloWorld.cpp (g&#43;&#43; -Wall HelloWorld.cpp) */ #include &lt;cstdio&gt; #include &lt;iostream&gt; #include &lt;cstdlib&gt; using namespace std; int main() { printf(&#34;Hello World from C&#43;&#43; :-)\n&#34;); cout &lt;&lt; &#34;Hello World from C&#43;&#43; :-)&#34; &lt;&lt; endl; std::cout &lt;&lt; &#34;Hello World from C&#43;&#43; :-)&#34; &lt;&lt; std::endl; return EXIT_SUCCESS; } Beobachtungen Jedes (ausführbare) C&#43;&#43;-Programm hat genau eine main()-Funktion. Die main()-Funktion ist keine Methode einer Klasse: In C/C&#43;&#43; gibt es Funktionen auch außerhalb von Klassen.">
+    <meta property="og:url" content="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp0-basics.html">
+    <meta property="og:title" content="Einführung in C&#43;&#43; (Erinnerungen an C)">
+    <meta property="og:description" content="Warum? C&#43;&#43; erlaubt ressourcenschonende Programmierung Objektorientierter &#34;Aufsatz&#34; auf C Verbreitet bei hardwarenaher und/oder rechenintensiver Software Sie werden C&#43;&#43; im Modul &#34;Computergrafik&#34; brauchen!
+Geschichte
+1971-73: Ritchie entwickelt die Sprache C Ab 1979: Entwicklung von C&#43;&#43; durch Bjarne Stroustrup bei AT&amp;T Erweiterung der prozeduralen Sprache C Ursprünglich &#34;C mit Klassen&#34;, später &#34;C&#43;&#43;&#34; (Inkrement-Operator) Bis heute: Fortlaufende Erweiterungen: alle 3 Jahre neuer Standard (C&#43;&#43;11, C&#43;&#43;14, ...) C/C&#43;&#43; vs. Java Java: Fokus auf Sicherheit und Robustheit Diverse Sicherheitschecks durch Compiler und VM (zb. Array-Zugriff) Speicherverwaltung (Garbage Collection), kein Speicherzugriff über Pointer Automatische Initialisierung von Variablen C/C&#43;&#43;: Fokus auf Effizienz (Speicher, Laufzeit) für korrekte Programme Vergleichsweise schwache Sicherheitschecks durch Compiler, keine VM (d.h. keine Prüfung von Array-Indizes u.a.) Keine Garbage Collection, Programmierer hat direkten Zugriff auf Speicher Keine automatische Initialisierung von Variablen Hello World! /* * HelloWorld.cpp (g&#43;&#43; -Wall HelloWorld.cpp) */ #include &lt;cstdio&gt; #include &lt;iostream&gt; #include &lt;cstdlib&gt; using namespace std; int main() { printf(&#34;Hello World from C&#43;&#43; :-)\n&#34;); cout &lt;&lt; &#34;Hello World from C&#43;&#43; :-)&#34; &lt;&lt; endl; std::cout &lt;&lt; &#34;Hello World from C&#43;&#43; :-)&#34; &lt;&lt; std::endl; return EXIT_SUCCESS; } Beobachtungen Jedes (ausführbare) C&#43;&#43;-Programm hat genau eine main()-Funktion. Die main()-Funktion ist keine Methode einer Klasse: In C/C&#43;&#43; gibt es Funktionen auch außerhalb von Klassen.">
+    <meta property="og:locale" content="de_DE">
+    <meta property="og:type" content="website">
+    <meta itemprop="name" content="Einführung in C&#43;&#43; (Erinnerungen an C)">
+    <meta itemprop="description" content="Warum? C&#43;&#43; erlaubt ressourcenschonende Programmierung Objektorientierter &#34;Aufsatz&#34; auf C Verbreitet bei hardwarenaher und/oder rechenintensiver Software Sie werden C&#43;&#43; im Modul &#34;Computergrafik&#34; brauchen!
+Geschichte
+1971-73: Ritchie entwickelt die Sprache C Ab 1979: Entwicklung von C&#43;&#43; durch Bjarne Stroustrup bei AT&amp;T Erweiterung der prozeduralen Sprache C Ursprünglich &#34;C mit Klassen&#34;, später &#34;C&#43;&#43;&#34; (Inkrement-Operator) Bis heute: Fortlaufende Erweiterungen: alle 3 Jahre neuer Standard (C&#43;&#43;11, C&#43;&#43;14, ...) C/C&#43;&#43; vs. Java Java: Fokus auf Sicherheit und Robustheit Diverse Sicherheitschecks durch Compiler und VM (zb. Array-Zugriff) Speicherverwaltung (Garbage Collection), kein Speicherzugriff über Pointer Automatische Initialisierung von Variablen C/C&#43;&#43;: Fokus auf Effizienz (Speicher, Laufzeit) für korrekte Programme Vergleichsweise schwache Sicherheitschecks durch Compiler, keine VM (d.h. keine Prüfung von Array-Indizes u.a.) Keine Garbage Collection, Programmierer hat direkten Zugriff auf Speicher Keine automatische Initialisierung von Variablen Hello World! /* * HelloWorld.cpp (g&#43;&#43; -Wall HelloWorld.cpp) */ #include &lt;cstdio&gt; #include &lt;iostream&gt; #include &lt;cstdlib&gt; using namespace std; int main() { printf(&#34;Hello World from C&#43;&#43; :-)\n&#34;); cout &lt;&lt; &#34;Hello World from C&#43;&#43; :-)&#34; &lt;&lt; endl; std::cout &lt;&lt; &#34;Hello World from C&#43;&#43; :-)&#34; &lt;&lt; std::endl; return EXIT_SUCCESS; } Beobachtungen Jedes (ausführbare) C&#43;&#43;-Programm hat genau eine main()-Funktion. Die main()-Funktion ist keine Methode einer Klasse: In C/C&#43;&#43; gibt es Funktionen auch außerhalb von Klassen.">
+    <meta itemprop="wordCount" content="3519">
+    <title>Einführung in C&#43;&#43; (Erinnerungen an C)</title>
+    <link href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp0-basics.html" rel="canonical" type="text/html" title="Einführung in C++ (Erinnerungen an C)">
+
+    
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/images/logo.png?1733335068" rel="icon" type="image/png">
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/fontawesome-all.min.css?1733335068" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/fontawesome-all.min.css?1733335068" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/nucleus.css?1733335068" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/auto-complete.css?1733335068" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/auto-complete.css?1733335068" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/perfect-scrollbar.min.css?1733335068" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/fonts.css?1733335068" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/fonts.css?1733335068" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/theme.css?1733335068" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/theme-auto.css?1733335068" rel="stylesheet" id="R-variant-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/chroma-auto.css?1733335068" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/variant.css?1733335068" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/print.css?1733335068" rel="stylesheet" media="print">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/format-print.css?1733335068" rel="stylesheet">
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/variant.js?1733335068"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..';
+      window.relearn.relBaseUri='..\/..\/..\/..\/..\/..';
+      window.relearn.absBaseUri='https:\/\/www.hsbi.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1360443';
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      window.index_js_url="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.search.js?1733335068";
+      // variant stuff
+      window.variants && variants.init( [ 'auto', 'zen-light', 'zen-dark', 'relearn-bright', 'relearn-light', 'relearn-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support print disableInlineCopyToClipboard" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp0-basics.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            Einführung in C&#43;&#43; (Erinnerungen an C)
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable " tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+<h1>Einführung in C&#43;&#43; (Erinnerungen an C)</h1>
+
+
+
+    
+
+
+
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-graduation-cap"></i> TL;DR
+  </div>
+  <div class="box-content">
+<p>Für C wurde ein paar Jahre nach der Entstehung ein objektorientierter Aufsatz entwickelt: C++.
+Beide Sprachversionen werden aktiv weiterentwickelt, vor allem in C++ gibt es ca. alle 3 Jahre
+einen neuen Standard mit teilweise recht umfangreichen Ergänzungen. Hier fließen analog zu Java
+immer mehr Programmierkonzepte mit ein, die aus anderen Sprachen stammen (etwa funktionale
+Programmierung). Das macht das Erlernen und Beherrschen der Sprache nicht unbedingt leichter.
+Die für uns wichtigsten Neuerungen kamen mit C11 und C++11 bzw. C++14.</p>
+<p>C und C++ versuchen (im Gegensatz zu Java) ressourcenschonende Sprachen zu sein: Ein korrektes
+Programm soll so schnell wie möglich ausgeführt werden können und dabei so effizient wie möglich
+sein (etwa in Bezug auf den Speicherbedarf). Deshalb gibt es keine Laufzeitumgebung, der Quellcode
+wird direkt in ein ausführbares (und damit Betriebssystem-abhängiges) Binary compiliert. Beide
+Sprachen erlauben dem Programmierer den Zugriff auf die Speicherverwaltung und damit viele Freiheiten.
+Die Kehrseite ist natürlich, dass Programmierfehler (etwa bei der Speicherallokation oder bei
+Indexberechnungen) nicht von der Laufzeitumgebung entdeckt und abgefangen werden können.</p>
+<p>C-Programme sehen auf den ersten Blick Java-Code relativ ähnlich. Das ist nicht verwunderlich,
+da Java zeitlich nach C/C++ entwickelt wurde und die Syntax und große Teile der Schlüsselwörter
+von C und C++ übernommen hat. C++ hat die C-Syntax übernommen und fügt neue objektorientierte
+Konzepte hinzu. Mit gewissen Einschränkungen funktioniert also C-Code auch in C++.</p>
+<p>In C++ gibt es Klassen (mit Methoden und Attributen), und zusätzlich gibt es Funktionen. Der
+Einsprungpunkt in ein Programm ist (analog zu Java) die Funktion <code>main()</code>, die ein <code>int</code> als
+Ergebnis zurückliefert. Dieser Integer kann vom Aufrufer ausgewertet werden, wobei der Wert 0
+typischerweise als Erfolg interpretiert wird. Achtung: Das ist eine <em>Konvention</em>, d.h. es kann
+Programme geben, die andere Werte zurückliefern. Die Werte müssen dokumentiert werden.</p>
+<p>Bevor der Compiler den Quelltext &quot;sieht&quot;, wird dieser von einem Präprozessor bearbeitet. Dieser
+hat verschiedene Aufgaben, unter anderem das Einbinden anderer Dateien. Dabei wird ein
+<code>#include &quot;dateiname&quot;</code> (sucht im aktuellen Ordner) bzw. <code>#include &lt;dateiname&gt;</code> (sucht im
+Standardverzeichnis) ersetzt durch den Inhalt der angegebenen Datei.</p>
+<p>C++-Code muss kompiliert werden. Dabei entsteht ein ausführbares Programm. Mit Make kann man den
+Kompiliervorgang über Regeln automatisieren (denken Sie an ANT in der Java-Welt, nur ohne XML).
+Eine Regel besteht aus einem Ziel (<em>Target</em>), einer Liste von Abhängigkeiten sowie einer Liste mit
+Aktionen (Anweisungen). Um ein Ziel zu &quot;bauen&quot; müssen zunächst alle Abhängigkeiten erfüllt sein
+(bzw. falls sie es nicht sind, erst noch &quot;gebaut&quot; werden - es muss entsprechend weitere Regeln
+geben, um diese Abhängigkeiten &quot;bauen&quot; zu können). Dann wird die Liste der Aktionen abgearbeitet.
+Ziele und Abhängigkeiten sind in der Regel Namen von Dateien, die existieren müssen bzw. über die
+Aktionen erzeugt werden sollen. Die Aktionen sind normale Befehlssequenzen, die man auch in einer
+Konsole eingeben könnte. Make berücksichtigt den Zeitstempel der Dateien: Ziele, die bereits
+existieren und deren Abhängigkeiten nicht neuer sind, werden nicht erneut gebaut.</p>
+<p>Die gute Nachricht: In Bezug auf Variablen, Operatoren und Kontrollfluss verhalten sich C und C++
+im Wesentlichen wie Java.</p>
+<p>Es gibt in C++ den Typ <code>bool</code> mit den Werten <code>true</code> und <code>false</code>. Zusätzlich werden Integerwerte
+im boolschen Kontext (etwa in einer <code>if</code>-Abfrage) ausgewertet, wobei der Wert 0 einem <code>false</code>
+entspricht und alle anderen Integer-Werte einem <code>true</code>. (Dies steht etwas im Widerspruch zu den
+Werten, die in der <code>main</code>-Funktion per <code>return</code> zurückgeliefert werden: Hier bedeutet 0 in der
+Regel, dass alles OK war.)</p>
+<p>Die Basisdatentypen sind (bis auf <code>char</code> und <code>bool</code>) in ihrer Größe maschinenabhängig. Es kann
+also sein, dass Code, der auf einem 64bit-Laptop ohne Probleme läuft, auf einem Raspberry PI
+Überläufe verursacht! Um besonders ressourcenschonend zu arbeiten, kann man die Speichergröße
+für einige Basisdatentypen durch die Typmodifikatoren <code>short</code> und <code>long</code> beeinflussen sowie
+die Interpretation von Zahlenwerten mit oder ohne Vorzeichen (<code>signed</code>, <code>unsigned</code>) einstellen.</p>
+<p>Die Anzahl der für einen Typ oder eine Variable/Struktur benötigten Bytes bekommt man mit
+dem Operator <code>sizeof</code> heraus.</p>
+<p>Mit <code>typedef</code> kann man einen neuen Namen für bereits existierende Typen vergeben.</p>
+<p>In C++ gibt es Funktionen (analog zu Methoden in Java), diese existieren unabhängig von Klassen.</p>
+<p>Wenn eine Funktion aufgerufen wird, muss dem Compiler die Signatur zur Prüfung bekannt sein. Das
+bedeutet, dass die Funktion entweder zuvor komplett definiert werden muss oder zumindest zuvor
+deklariert werden muss (die Definition kann auch später in der Datei kommen oder in einer anderen
+Datei). Das Vorab-Deklarieren einer Funktion nennt man auch &quot;Funktionsprototypen&quot;.</p>
+<p>Eine Deklaration darf (so lange sie konsistent ist) mehrfach vorkommen, eine Definition immer nur
+exakt einmal. Dabei werden alle Code-Teile, die zu einem Programm zusammencompiliert werden,
+gemeinsam betrachtet. =&gt; Das ist auch als <strong>One-Definition-Rule</strong> bekannt.</p>
+<p>In C++ gilt beim Funktionsaufruf immer zunächst immer die Parameterübergabe per <strong>call-by-value</strong>
+(dito bei der Rückgabe von Werten). Wenn Referenzen oder Pointer eingesetzt werden, wird dagegen
+auch ein <em>call-by-reference</em> möglich. (Dazu später mehr.)</p>
+<p>Unterscheidung in globale, lokale und lokale statische Variablen mit unterschiedlicher Lebensdauer
+und unterschiedlicher Initialisierung durch den Compiler.</p>
+  </div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+
+    
+    
+
+
+
+
+
+    
+
+    
+
+    
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+    
+
+    <div class="box notices cstyle tip">
+  <div class="box-label">
+    <i class="fas fa-lightbulb"></i> Lernziele
+  </div>
+  <div class="box-content">
+<ul> <li>(K1) Wie hängen C und C++ zusammen?</li> <li>(K1) Wichtigste Unterschiede und Gemeinsamkeiten zu Java</li> <li>(K1) Wichtigste Aufgaben des Präprozessors</li> <li>(K3) Aufbau, Übersetzen und Starten von einfachen C++-Programmen</li> <li>(K3) Standard-Ein-/Ausgabe-Kanäle in C++ sowie die Operatoren <code>&gt;&gt;</code> und <code>&lt;&lt;</code></li> <li>(K3) Nutzung der Basisdatentypen einschließlich der Modifikatoren</li> <li>(K3) Deklaration von Variablen, Nutzung von Kontrollstrukturen und Operatoren</li> <li>(K3) Interpretation von Integers im booleschen Kontext</li> <li>(K3) Nutzung des Scope-Operators <code>::</code>, Namensräume</li> <li>(K3) Benutzung von <code>sizeof</code> zur Bestimmung des Speicherbedarfs</li> <li>(K3) Benutzung von <code>typedef</code> zur Definition neuer Typen (Aliase bestehender Typen)</li> <li>(K3) Erinnerung: Automatisiertes Übersetzen mit Hilfe von GNU Make und einfachsten Makefiles</li> <li>(K2) Unterschied zwischen Deklaration und Definition, One Definition Rule</li> <li>(K2) Problematik bei der Deklaration parameterloser Funktionen</li> <li>(K2) Call-by-Value-Semantik bei der Parameterübergabe</li> <li>(K2) Sichtbarkeit und Initialisierung von Variablen</li> <li>(K3) Definition und Deklaration von Funktionen</li> <li>(K3) Nutzung lokaler und globaler und lokaler statischer Variablen</li></ul>
+  </div>
+</div>
+
+
+
+
+    <h2 id="warum">Warum?</h2>
+<ul>
+<li>C++ erlaubt ressourcenschonende Programmierung</li>
+<li>Objektorientierter &quot;Aufsatz&quot; auf C</li>
+<li>Verbreitet bei hardwarenaher und/oder rechenintensiver Software</li>
+</ul>
+<div class='center'>
+<p><span class='alert'><strong>Sie werden C++ im Modul &quot;Computergrafik&quot; brauchen!</strong></span></p>
+</div>
+<p><strong>Geschichte</strong></p>
+<ul>
+<li>1971-73: <span class='alert'>Ritchie</span> entwickelt die Sprache <span class='alert'>C</span></li>
+<li>Ab 1979: Entwicklung von <span class='alert'>C++</span> durch Bjarne <span class='alert'>Stroustrup</span> bei AT&amp;T
+<ul>
+<li>Erweiterung der prozeduralen Sprache C</li>
+<li>Ursprünglich &quot;C mit Klassen&quot;, später &quot;C++&quot; (Inkrement-Operator)</li>
+</ul>
+</li>
+<li>Bis heute: Fortlaufende Erweiterungen: alle 3 Jahre neuer Standard (C++11, C++14, ...)</li>
+</ul>
+<div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fa-fw fas fa-info-circle"></i> <strong>C/C++ vs. Java</strong>
+  </div>
+  <div class="box-content">
+<ul>
+<li>Java: Fokus auf Sicherheit und Robustheit
+<ul>
+<li>Diverse Sicherheitschecks durch Compiler und VM (zb. Array-Zugriff)</li>
+<li>Speicherverwaltung (Garbage Collection), kein Speicherzugriff über Pointer</li>
+<li>Automatische Initialisierung von Variablen</li>
+</ul>
+</li>
+<li>C/C++: Fokus auf Effizienz (Speicher, Laufzeit) für korrekte Programme
+<ul>
+<li>Vergleichsweise schwache Sicherheitschecks durch Compiler, keine VM
+(d.h. keine Prüfung von Array-Indizes u.a.)</li>
+<li>Keine Garbage Collection, Programmierer hat direkten Zugriff auf Speicher</li>
+<li>Keine automatische Initialisierung von Variablen</li>
+</ul>
+</li>
+</ul>
+  </div>
+</div>
+<h2 id="hello-world">Hello World!</h2>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * HelloWorld.cpp (g++ -Wall HelloWorld.cpp)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cstdio&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cstdlib&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;Hello World from C++  :-)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Hello World from C++  :-)&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Hello World from C++  :-)&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> EXIT_SUCCESS;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="beobachtungen">Beobachtungen</h3>
+<p>Jedes (ausführbare) C++-Programm hat genau eine <code>main()</code>-Funktion. Die <code>main()</code>-Funktion ist
+<em>keine Methode</em> einer Klasse: In C/C++ gibt es Funktionen auch außerhalb von Klassen.</p>
+<p>In C++ gibt es Namespaces (dazu später mehr). Die aus der Standardbibliothek importierten
+Funktionen sind in der Regel im Namespace <code>std</code> definiert. Mit <code>using namespace std;</code> können
+Sie auf die Elemente direkt zugreifen. Wenn Sie das <code>using namespace std;</code> weglassen, müssten
+Sie bei jeder Verwendung eines Symbols den Namensraum explizit dazu schreiben
+<code>std::cout &lt;&lt; &quot;Hello World from C++  :-)&quot; &lt;&lt; std::endl;</code>.</p>
+<p>Sie können im C++-Code auch Funktionen aus C benutzen, d.h. Sie können für die Ausgabe
+beispielsweise <code>printf</code> nutzen (dazu müssen Sie den Header <code>&lt;cstdio&gt;</code> importieren). Die
+&quot;richtige&quot; Ausgabe in C++ ist aber die Nutzung des Ausgabestreams <code>cout</code> und des
+Ausgabeoperators <code>&lt;&lt;</code>. Das <code>endl</code> sorgt für einen zum jeweiligen Betriebssystem passenden
+Zeilenumbruch.</p>
+<p>Der Rückgabewert signalisiert Erfolg bzw. Fehler der Programmausführung. Dabei steht der Wert
+0 traditionell für Erfolg (Konvention!). Besser Makros nutzen: <code>EXIT_SUCCESS</code> bzw.
+<code>EXIT_FAILURE</code> (in <code>cstdlib</code>).</p>
+<h3 id="präprozessor">Präprozessor</h3>
+<p>Der Präprozessor transformiert den Quellcode <em>vor</em> dem Compiler-Lauf. Zu den wichtigsten
+Aufgaben gehören dabei die Makrosubstitution (<code>#define Makroname Ersatztext</code>) und das Einfügen
+von Header-Dateien (und anderen Dateien) per <code>#include</code>. Es gibt dabei zwei Formen, die an
+unterschiedlichen Orten nach der angegebenen Datei suchen:</p>
+<ul>
+<li><code>#include &quot;dateiname&quot;</code> sucht im aktuellen Ordner</li>
+<li><code>#include &lt;dateiname&gt;</code> sucht im Standardverzeichnis</li>
+</ul>
+<p>Das <code>#include</code> kann wie in C genutzt werden, aber es gibt auch die Form ohne die Dateiendung
+&quot;.h&quot;. Da es in C keine Funktionsüberladung gibt (in C++ dagegen schon), müssen die C-Header
+speziell markiert sein, um sie in C++ verwenden zu können. Für die Standard-Header ist dies
+bereits erledigt, Sie finden diese mit einem &quot;c&quot; vorangestellt:</p>
+<ul>
+<li>Include in C: <code>#include &lt;stdio.h&gt;</code></li>
+<li>Include in C++: <code>#include &lt;cstdio&gt;</code></li>
+</ul>
+<h3 id="übersetzen-linken-ausführen">Übersetzen, Linken, Ausführen</h3>
+<p>C++-Dateien werden üblicherweise mit der Endung &quot;<strong>.cpp</strong>&quot; oder &quot;.cxx&quot; oder &quot;.cc&quot;
+abgespeichert, Header-Dateien mit den Endungen &quot;.hpp&quot; oder &quot;.hxx&quot; oder &quot;.hh&quot;.</p>
+<p>Zum Übersetzen und Linken in einem Arbeitsschritt rufen Sie den Compiler auf:
+<code>g++ HelloWorld.cpp</code> bzw. besser <strong><code>g++ -Wall -o helloworld HelloWorld.cpp</code></strong>. Die Option
+<code>-Wall</code> sorgt dafür, dass alle Warnungen aktiviert werden.</p>
+<p>Ausführen können Sie das erzeugte Programm in der Konsole mit: <code>./helloworld</code>. Der aktuelle
+Ordner ist üblicherweise (aus Sicherheitsgründen) nicht im Suchpfad für ausführbare Dateien
+enthalten. Deshalb muss man explizit angeben, dass ein Programm im aktuellen Ordner (<code>.</code>)
+ausgeführt werden soll.</p>
+<div style="text-align: right;"><span class="btn cstyle interactive default"><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/HelloWorld.cpp" target="_blank"><span class="title">Konsole: HelloWorld.cpp</span></a></span></div>
+<h2 id="variablen-operatoren-kontrollfluss">Variablen, Operatoren, Kontrollfluss</h2>
+<div class='center'>
+<p><span class='alert'><strong>Im Wesentlichen wie von C und Java gewohnt ... :-)</strong></span></p>
+</div>
+<ul>
+<li>
+<p>Wichtig(st)e Abweichung:</p>
+<p>Im booleschen Kontext wird <code>int</code> als Wahrheitswert interpretiert:
+Alle Werte ungleich 0 entsprechen <code>true</code> (!)</p>
+<p><strong>Anmerkung</strong>: Dies steht im Widerspruch zu den Werten, die in der <code>main</code>-Funktion per
+<code>return</code> zurückgeliefert werden: Hier bedeutet 0 in der Regel, dass alles OK war.</p>
+</li>
+</ul>
+<p>=&gt; Vorsicht mit</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> c;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (c<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>) { ... }</span></span></code></pre></div>
+<h2 id="ein--und-ausgabe-mit-printf-und-cincout">Ein- und Ausgabe mit <em>printf</em> und <em>cin/cout</em></h2>
+<ul>
+<li>
+<p><code>printf(formatstring, ...)</code></p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string foo <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;fluppie&#34;</span>;
+</span></span><span style="display:flex;"><span>printf(<span style="color:#e6db74">&#34;hello world : %s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, foo.c_str());</span></span></code></pre></div>
+<ul>
+<li>
+<p>Einbinden über <code>#include &lt;cstdio&gt;</code></p>
+</li>
+<li>
+<p>Format-String: Text und Formatierung der restlichen Parameter: <code>%[flags][width][.precision]conversion</code></p>
+<ul>
+<li>
+<p><code>flags</code>: hängt von der konkreten Ausgabe ab</p>
+</li>
+<li>
+<p><code>width</code>: Feldbreite</p>
+</li>
+<li>
+<p><code>precision</code>: Anzahl der Dezimalstellen</p>
+</li>
+<li>
+<p><code>conversion</code>: (Beispiele)</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left"></th>
+          <th style="text-align: left"></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">c</td>
+          <td style="text-align: left">Zeichen (Char)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">d</td>
+          <td style="text-align: left">Integer (dezimal)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">f</td>
+          <td style="text-align: left">Gleitkommazahl</td>
+      </tr>
+  </tbody>
+</table>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Standardkanäle: <code>cin</code> (Standardeingabe), <code>cout</code> (Standardausgabe), <code>cerr</code> (Standardfehlerausgabe)</p>
+<ul>
+<li>Genauer: <code>cout</code> ist ein Ausgabestrom, auf dem der Operator <code>&lt;&lt;</code> schreibt</li>
+<li>Einbinden über <code>#include &lt;iostream&gt;</code></li>
+<li>Implementierung der Ein- und Ausgabeoperatoren (<code>&gt;&gt;</code>, <code>&lt;&lt;</code>) für Basistypen und Standardklassen vorhanden</li>
+<li>Automatische Konvertierungen für Basistypen und Standardklassen</li>
+</ul>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// Ausgabe, auch verkettet
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>string foo <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;fluppie&#34;</span>;
+</span></span><span style="display:flex;"><span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;hello world : &#34;</span> <span style="color:#f92672">&lt;&lt;</span> foo <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// liest alle Ziffern bis zum ersten Nicht-Ziffernzeichen
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// (fuehrende Whitespaces werden ignoriert!)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> zahl; cin <span style="color:#f92672">&gt;&gt;</span> zahl;</span></span></code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// Einzelne Zeichen (auch Whitespaces) lesen
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">char</span> c; cin.get(c);</span></span></code></pre></div>
+</li>
+</ul>
+<div style="text-align: right;"><span class="btn cstyle interactive default"><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/cin.cpp" target="_blank"><span class="title">Beispiel: cin.cpp</span></a></span></div>
+<h2 id="sichtbarkeit-und-gültigkeit-und-namespaces">Sichtbarkeit und Gültigkeit und Namespaces</h2>
+<p>Wie in Java:</p>
+<ul>
+<li>Namen sind nur nach Deklaration und innerhalb des Blockes, in dem sie deklariert wurden, gültig</li>
+<li>Namen sind auch gültig für innerhalb des Blockes neu angelegte innere Blöcke</li>
+<li>Namen in inneren Blöcken können Namen aus äußeren Scopes überdecken</li>
+</ul>
+<p>Zusätzlich gibt es noch benannte Scopes und einen Scope-Operator.</p>
+<ul>
+<li>
+<p>C++ enthält den Scope-Operator <code>::</code> =&gt; Zugriff auf global sichtbare Variablen</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> a<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;lokal: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;global: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">::</span>a <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</li>
+<li>
+<p>Alle Namen aus <code>XYZ</code> zugänglich machen: <code>using namespace XYZ;</code></p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+</span></span><span style="display:flex;"><span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Hello World&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;</span></span></code></pre></div>
+</li>
+<li>
+<p>Alternativ gezielter Zugriff auf einzelne Namen: <code>XYZ::name</code></p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Hello World&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;</span></span></code></pre></div>
+</li>
+</ul>
+<!-- -->
+<ul>
+<li>
+<p>Namensraum <code>XYZ</code> deklarieren</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> XYZ {
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</li>
+</ul>
+<div style="text-align: right;"><span class="btn cstyle interactive default"><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/cppScope.cpp" target="_blank"><span class="title">Beispiel: cppScope.cpp</span></a></span></div>
+<h2 id="arrays-und-vektoren-in-c">Arrays und Vektoren in C++</h2>
+<ul>
+<li>
+<p>Syntax: <code>Typ Name[AnzahlElemente];</code></p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> myArray[<span style="color:#ae81ff">100</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> myArray2[] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>};</span></span></code></pre></div>
+<ul>
+<li>
+<p><span class='alert'>Compiler</span> reserviert sofort Speicher auf dem <span class='alert'>Stack</span>
+=&gt; <strong>statisch</strong>: im Programmlauf nicht änderbar</p>
+</li>
+<li>
+<p>Zugriff über den Indexoperator []</p>
+</li>
+<li>
+<p>Achtung: &quot;roher&quot; Speicher, d.h. <strong>keinerlei Methoden</strong></p>
+</li>
+<li>
+<p>Größe nachträglich bestimmen mit <code>sizeof</code>:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> myArray[<span style="color:#ae81ff">100</span>], i;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#66d9ef">sizeof</span>(myArray)<span style="color:#f92672">/</span><span style="color:#66d9ef">sizeof</span>(myArryay[<span style="color:#ae81ff">0</span>]);</span></span></code></pre></div>
+</li>
+</ul>
+<p><strong>Guter Stil</strong>: Anzahl der Elemente als Konstante deklarieren:
+Statt <code>int myArray[100];</code> besser</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#define LENGTH 100
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> myArray[LENGTH];</span></span></code></pre></div>
+</li>
+<li>
+<p>Vordefinierter Vektor-Datentyp <code>vector</code></p>
+<ul>
+<li>Einbinden über <code>#include &lt;vector&gt;</code></li>
+<li>Parametrisierter Datentyp (C++: Templates) - Nutzung analog wie in Java
+(Erstellung von Templateklassen und -methoden aber deutlich anders!)</li>
+<li>Anlegen eines neuen Arrays mit 10 Elementen für Integer:</li>
+</ul>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> v(<span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> meinVektor <span style="color:#f92672">=</span> {<span style="color:#ae81ff">1.1</span>, <span style="color:#ae81ff">2.2</span>, <span style="color:#ae81ff">3.3</span>, <span style="color:#ae81ff">4.4</span>};
+</span></span><span style="display:flex;"><span>meinVektor.push_back(<span style="color:#ae81ff">5.5</span>);
+</span></span><span style="display:flex;"><span>cout <span style="color:#f92672">&lt;&lt;</span> meinVektor.size() <span style="color:#f92672">&lt;&lt;</span> endl;</span></span></code></pre></div>
+<ul>
+<li>Zugriff auf Elemente:</li>
+</ul>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>cout <span style="color:#f92672">&lt;&lt;</span> v[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&lt;&lt;</span> endl;        <span style="color:#75715e">// ohne Bereichspruefung!
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>cout <span style="color:#f92672">&lt;&lt;</span> v.at(<span style="color:#ae81ff">1000</span>) <span style="color:#f92672">&lt;&lt;</span> endl;  <span style="color:#75715e">// mit interner Bereichspruefung
+</span></span></span></code></pre></div>
+<ul>
+<li>Zuweisung (mit Kopieren):</li>
+</ul>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> andererVektor;
+</span></span><span style="display:flex;"><span>andererVektor <span style="color:#f92672">=</span> meinVektor;</span></span></code></pre></div>
+<ul>
+<li>Dynamische Datenstruktur:</li>
+</ul>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> meineDaten;      <span style="color:#75715e">// initiale Groesse: 0
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>meineDaten.push_back(<span style="color:#ae81ff">123</span>);   <span style="color:#75715e">// Wert anhaengen
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>meineDaten.pop_back();  <span style="color:#75715e">// Wert loeschen
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>meineDaten.empty();     <span style="color:#75715e">// leer?
+</span></span></span></code></pre></div>
+</li>
+</ul>
+<p><span class='alert'><strong>Vorsicht!</strong></span> <code>vector&lt;int&gt; arr();</code> ist <strong>kein</strong> Vektor der Länge 0,
+sondern deklariert eine <strong>neue Funktion</strong>!</p>
+<h2 id="alias-namen-für-typen-mit-typedef-und-using">Alias-Namen für Typen mit <em>typedef</em> und <em>using</em></h2>
+<ul>
+<li>
+<p>Syntax: <code>typedef existTyp neuerName;</code> (C, C++)</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">long</span> uint32;
+</span></span><span style="display:flex;"><span>uint32 x, y, z;</span></span></code></pre></div>
+<p>Im Beispiel ist <code>uint32</code> ein neuer Name für den existierenden Typ <code>unsigned long</code>, d.h.
+die Variablen <code>x</code>, <code>y</code> und <code>z</code> sind <code>unsigned long</code>.</p>
+</li>
+<li>
+<p>Syntax: <code>using neuerName = existTyp;</code> (C++)</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">long</span> uint32;       <span style="color:#75715e">// C, C++
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> uint32 <span style="color:#f92672">=</span> <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">long</span>;       <span style="color:#75715e">// C++11
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> foo;       <span style="color:#75715e">// C, C++
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> foo <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>;       <span style="color:#75715e">// C++11
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#a6e22e">void</span> (<span style="color:#f92672">*</span>fp)(<span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">double</span>);     <span style="color:#75715e">// C, C++
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> fp <span style="color:#f92672">=</span> <span style="color:#66d9ef">void</span> (<span style="color:#f92672">*</span>)(<span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">double</span>);    <span style="color:#75715e">// C++11
+</span></span></span></code></pre></div>
+<p>Seit C++11 gibt es das Schlüsselwort <code>using</code> für Alias-Deklarationen (analog zu <code>typedef</code>).
+Dieses funktioniert im Gegensatz zu <code>typedef</code> auch für Templates mit (teilweise) gebundenen
+Template-Parametern.</p>
+</li>
+</ul>
+<h2 id="erinnerungen-an-c---vergleich-mit-c">Erinnerungen an C - Vergleich mit C++</h2>
+<div class="box notices cstyle important">
+  <div class="box-label">
+    <i class="fa-fw fas fa-bolt"></i> Erinnerungen an C - Vergleich mit C++
+  </div>
+  <div class="box-content">
+<div class="expand">
+  <input type="checkbox" id="R-expand-b20cb5f6efc4761ba821c6e8d5d7767d" aria-controls="R-expandcontent-b20cb5f6efc4761ba821c6e8d5d7767d">
+  <label class="expand-label" for="R-expand-b20cb5f6efc4761ba821c6e8d5d7767d">
+    <i class="expander-icon fa-fw fas fa-chevron-down"></i>
+    <i class="expander-icon fa-fw fas fa-chevron-right"></i> Expand me&hellip;
+  </label>
+  <div id="R-expandcontent-b20cb5f6efc4761ba821c6e8d5d7767d" class="expand-content">
+<h3 id="basisdatentypen">Basisdatentypen</h3>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left"></th>
+          <th style="text-align: left"></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><code>char</code></td>
+          <td style="text-align: left">Zeichen (ASCII, 8 Bit bzw. 1 Byte)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>int</code></td>
+          <td style="text-align: left">Ganze Zahl (16, 32 oder 64 Bit)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>float</code></td>
+          <td style="text-align: left">Gleitkommazahl (typ. 32 Bit)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>double</code></td>
+          <td style="text-align: left">Doppelt genaue Gleitkommazahl (typ. 64 Bit)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>void</code></td>
+          <td style="text-align: left">Ohne/kein Wert</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>bool</code></td>
+          <td style="text-align: left"><code>true</code>, <code>false</code></td>
+      </tr>
+  </tbody>
+</table>
+<p>Außerdem sind Arrays und Pointer mit diesen Typen möglich.</p>
+<h3 id="typmodifikatoren-ändern-bedeutung">Typmodifikatoren ändern Bedeutung</h3>
+<p>Vorangestellte Modifikatoren ändern Bedeutung:</p>
+<ol>
+<li>
+<p>Länge im Speicher</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left"></th>
+          <th style="text-align: left"></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><code>short</code></td>
+          <td style="text-align: left">Speicher: halbe Wortlänge</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>long</code></td>
+          <td style="text-align: left">Speicher: doppelte/dreifache Wortlänge</td>
+      </tr>
+  </tbody>
+</table>
+</li>
+<li>
+<p>Vorzeichen</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left"></th>
+          <th style="text-align: left"></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><code>signed</code></td>
+          <td style="text-align: left">mit Vorzeichen (Default bei Zahlen)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>unsigned</code></td>
+          <td style="text-align: left">ohne Vorzeichen</td>
+      </tr>
+  </tbody>
+</table>
+</li>
+</ol>
+<p>Anwendung auf ganze Zahlen:</p>
+<ul>
+<li><code>short</code> und <code>long</code> sind Synonyme für <code>short int</code> und <code>long int</code></li>
+<li><code>long long</code> ist typischerweise eine ganze Zahl mit 8 Byte</li>
+<li><code>unsigned char</code> sind Zahlen von 0, ..., 255 (1 Byte)</li>
+<li>zusätzlich: <code>long double</code> (nur diese Form)</li>
+</ul>
+<p>Sie können <code>short</code>, <code>long</code> und <code>long long</code> nur für ganze Zahlen (<code>int</code>) nutzen, mit der Ausnahme <code>long double</code>.
+Dagegen können <code>signed</code> und <code>unsigned</code> sowohl für <code>char</code> als auch für <code>int</code> benutzt werden.</p>
+<p>vgl. <a href="https://en.wikipedia.org/wiki/C_data_types" rel="external" target="_blank">en.wikipedia.org/wiki/C_data_types</a></p>
+<h3 id="größe-eines-datentyps-ist-maschinenabhängig">Größe eines Datentyps ist maschinenabhängig</h3>
+<div class='center'>
+<p><span class='alert'><strong>Der reservierte Speicherbereich und damit auch der Zahlenbereich für einen einfachen Typ in C/C++ ist maschinenabhängig!</strong></span></p>
+</div>
+<ul>
+<li>
+<p>Zahlenbereiche für konkrete Implementierung in Header-Files definiert</p>
+<p><code>limits.h</code> und <code>float.h</code>: Konstanten <code>INT_MAX</code>, <code>INT_MIN</code>, ...</p>
+</li>
+<li>
+<p>Alternativ Herausfinden der Größe in Bytes: Operator <code>sizeof</code></p>
+<p>Syntax: <code>sizeof(Typ)</code></p>
+</li>
+</ul>
+<p>Es gilt in C/C++:</p>
+<ul>
+<li><code>sizeof(unsigned char)</code> <span class="math align-center">$=$</span> 1</li>
+<li><code>sizeof(short int)</code> <span class="math align-center">$=$</span> 2</li>
+<li><code>sizeof(short int)</code> <span class="math align-center">$\le$</span> <code>sizeof(int)</code> <span class="math align-center">$\le$</span> <code>sizeof(long int)</code></li>
+<li><code>sizeof(float)</code> <span class="math align-center">$\le$</span> <code>sizeof(double)</code> <span class="math align-center">$\le$</span> <code>sizeof(long double)</code></li>
+</ul>
+<p><strong>Hinweis Arrays</strong>: <code>sizeof</code> gibt immer die Anzahl der Bytes für einen Typ oder eine
+Variable zurück. Bei Array ist das nicht unbedingt die Anzahl der Elemente im Array!</p>
+<p>Beispiel:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">char</span> a[<span style="color:#ae81ff">10</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">double</span> b[<span style="color:#ae81ff">10</span>];</span></span></code></pre></div>
+<p><code>sizeof(a)</code> würde den Wert 10 als Ergebnis liefern, da ein <code>char</code> in C/C++ immer exakt ein
+Byte benötigt und entsprechend 10 <code>char</code> 10 Byte. <code>sizeof(b)</code> ist maschinenabhängig und
+liefert die Anzahl der Bytes, die man für die Darstellung von 10 Double-Werten benötigt.</p>
+<p>Wenn man die Anzahl der Elemente im Array mit <code>sizeof</code> herausfinden will, muss man den
+Gesamtwert für das Array noch durch den Speicherbedarf eines Elements teilen, also
+beispielsweise <code>sizeof(b)/sizeof(b[0])</code>.</p>
+<h3 id="beispiele-für-schleifen-und-kontrollstrukturen-in-cc">(Beispiele für) Schleifen und Kontrollstrukturen in C/C++</h3>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> x<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, y<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (x<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">5</span>) {
+</span></span><span style="display:flex;"><span>    x<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(y<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>    y <span style="color:#f92672">=</span> y<span style="color:#f92672">-</span>x;
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    y <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>x;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (y<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>    y<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (x<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; x<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">10</span>; x<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    y <span style="color:#f92672">=</span> y<span style="color:#f92672">*</span>y;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="funktionen-in-c-und-c">Funktionen in C und C++</h3>
+<ul>
+<li>
+<p>Funktionen sind mit Methoden in Java vergleichbar</p>
+<p>=&gt; sind aber <span class='alert'>unabhängig</span> von Klassen bzw. Objekten</p>
+</li>
+<li>
+<p>Syntax:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Rueckgabetyp <span style="color:#a6e22e">Funktionsname</span>(Parameterliste) {
+</span></span><span style="display:flex;"><span>    Anweisungen (Implementierung)
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</li>
+<li>
+<p>Aufruf: Nennung des Namens (mit Argumenten) im Programmcode</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> foo(<span style="color:#ae81ff">42</span>);</span></span></code></pre></div>
+</li>
+</ul>
+<p>Anmerkung: Unterschied &quot;Parameter&quot; und &quot;Argument&quot;:</p>
+<ul>
+<li>Funktion hat &quot;Parameter&quot; in ihrer Parameterliste, auch &quot;formale Parameter&quot; genannt</li>
+<li>Beim Aufruf werden &quot;Argumente&quot; übergeben, auch &quot;aktuelle Parameter&quot; genannt</li>
+</ul>
+<p>In der Praxis verwendet man beide Begriffe i.d.R. synonym.</p>
+<h4 id="funktionen-deklaration-vs-definition">Funktionen: Deklaration vs. Definition</h4>
+<ul>
+<li>
+<p><strong>Deklaration</strong>: <span class='alert'>(Funktions-) Prototyp</span>: Festlegen von
+<span class='alert'>Signatur</span> (d.h. Funktionsname und Anzahl, Typ, Reihenfolge der Parameter) u. Rückgabetyp</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">machWas</span>(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>);</span></span></code></pre></div>
+</li>
+<li>
+<p><strong>Definition</strong>: <span class='alert'>Implementierung</span> der Funktion</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">machWas</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b) {
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;a: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, b: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> b <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</li>
+<li>
+<p>Compiler &quot;liest&quot; Quellcode von oben nach unten</p>
+</li>
+<li>
+<p>Funktionen müssen (wie alle anderen Symbole auch) <span class='alert'>vor</span> ihrer Verwendung zumindest
+<span class='alert'>deklariert</span> sein, d.h. es muss zumindest ihre Signatur bekannt sein (siehe nächste Folie)</p>
+</li>
+<li>
+<p>Deklaration: Variablennamen können weggelassen werden</p>
+</li>
+</ul>
+<div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fa-fw fas fa-info-circle"></i> Deklaration vs. Definition
+  </div>
+  <div class="box-content">
+<ul>
+<li><strong>Deklaration</strong>: Macht einen Namen bekannt und legt den Typ der Variablen bzw.
+die Schnittstelle der Funktionen fest.</li>
+<li><strong>Definition</strong>: Deklaration plus Reservierung von Speicherplatz für die
+Variable oder Implementierung einer Funktion/Struktur/...</li>
+</ul>
+  </div>
+</div>
+<div style="text-align: right;"><span class="btn cstyle interactive default"><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/simplefunction.cpp" target="_blank"><span class="title">Konsole: simplefunction.cpp</span></a></span></div>
+<h4 id="one-definition-rule-für-funktionen">One Definition Rule (für Funktionen)</h4>
+<div class='center'>
+<p>Jede Funktion darf im <strong>gesamten</strong> Programm nur <span class='alert'><strong>einmal definiert</strong></span> sein!</p>
+</div>
+<h4 id="funktionen-und-parameter">Funktionen und Parameter</h4>
+<ul>
+<li>
+<p>Funktionen &quot;ohne&quot; Parameter:</p>
+<p>Leere Parameter-Liste[^1] oder Schlüsselwort <code>void</code></p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fkt</span>();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fkt</span>(<span style="color:#66d9ef">void</span>);</span></span></code></pre></div>
+</li>
+<li>
+<p>Funktionen <strong>mit</strong> Parameter:</p>
+<ul>
+<li>Deklaration: Variablennamen können weggelassen werden</li>
+<li>Definition: Variablennamen müssen angegeben werden</li>
+</ul>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fkt</span>(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">char</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fkt</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">char</span> b);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fkt</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">char</span> b) { ... }</span></span></code></pre></div>
+</li>
+</ul>
+<h5 id="leere-parameterliste-in-c">Leere Parameterliste in C</h5>
+<p>Wenn eine Funktion keine Parameter hat, können Sie wie in C die Parameterliste
+entweder einfach leer lassen (<code>int fkt();</code>) oder das Schlüsselwort <code>void</code>
+nutzen (<code>int fkt(void);</code>).</p>
+<p>Betrachten Sie folgendes Beispiel:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">// Legal in C
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">wuppie</span>();                   <span style="color:#75715e">// Deklaration: &#34;Ich verrate Dir nicht, wieviele Parameter wuppie() hat.&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">wuppie</span>(<span style="color:#66d9ef">int</span> x) { <span style="color:#66d9ef">return</span> x; } <span style="color:#75715e">// Aufruf mit Argumenten =&gt; ist okay
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Fehler in C
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">fluppie</span>(<span style="color:#66d9ef">void</span>);               <span style="color:#75715e">// Deklaration: fluppie() hat KEINE Parameter!
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">fluppie</span>(<span style="color:#66d9ef">int</span> x) { <span style="color:#66d9ef">return</span> x; } <span style="color:#75715e">// Aufruf mit Argumenten =&gt; Compiler-Fehler
+</span></span></span></code></pre></div>
+<p>Wenn Sie eine mit leerer Parameterliste deklarierte Funktion definieren bzw.
+aufrufen, akzeptiert der C-Compiler dennoch <strong>alle</strong> übergebenen Parameter. Dies
+kann zu schwer verständlichen Fehlern führen! Sobald eine Funktion explizit
+mit dem Schlüsselwort <code>void</code> in der Parameterliste deklariert wird, <strong>muss</strong>
+diese dann auch ohne Parameter aufgerufen werden.</p>
+<p><span class='alert'>=&gt; <strong>Bevorzugen Sie in C die Variante mit dem Schlüsselwort <code>void</code>!</strong></span></p>
+<h5 id="leere-parameterliste-in-c-1">Leere Parameterliste in C++</h5>
+<p>Keine Parameter: Leere Liste und Schlüsselwort <code>void</code> <strong>gleichwertig</strong></p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fkt</span>();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fkt</span>(<span style="color:#66d9ef">void</span>);</span></span></code></pre></div>
+<h4 id="defaultparameter-in-c">Defaultparameter in C++</h4>
+<ul>
+<li>Parameter mit Defaultwerten am <span class='alert'><strong>Ende</strong></span> der Parameterliste</li>
+<li>Bei Trennung von Deklaration und Definition: Defaultparameter
+<span class='alert'><strong>nur</strong></span> in Deklaration</li>
+</ul>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// Deklaration
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">f</span>(<span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, <span style="color:#66d9ef">int</span> k<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Definition
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">f</span>(<span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j, <span style="color:#66d9ef">int</span> k) { ... }</span></span></code></pre></div>
+<h4 id="überladen-von-funktionen">Überladen von Funktionen</h4>
+<ul>
+<li>Funktionen im <strong>gleichen Gültigkeitsbereich</strong> können überladen werden</li>
+<li>Zu beachten:
+<ol>
+<li>Funktionsname identisch</li>
+<li>Signatur (Anzahl, Typen der Parameter) muss <span class='alert'>unterschiedlich</span> sein</li>
+<li>Rückgabewert darf variieren</li>
+</ol>
+</li>
+</ul>
+<p>=&gt; <span class='alert'>Warnung</span>: Überladene Funktionen sollten gleichartige
+Operationen für unterschiedliche Datentypen bereitstellen!</p>
+<h4 id="probleme-beim-überladen-von-funktionen">Probleme beim Überladen von Funktionen</h4>
+<ol>
+<li>
+<p>Defaultparameter</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">maximum</span>(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">maximum</span>(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>);</span></span></code></pre></div>
+</li>
+<li>
+<p>Identische Signatur, Unterschied nur im Rückgabewert</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">maximum</span>(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">double</span> <span style="color:#a6e22e">maximum</span>(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>);</span></span></code></pre></div>
+</li>
+<li>
+<p>Überladen nur für Funktionen des selben Gültigkeitsbereichs!</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">f</span>(<span style="color:#66d9ef">char</span> c) {
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;f(char): &#34;</span> <span style="color:#f92672">&lt;&lt;</span> c <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">f</span>(<span style="color:#66d9ef">int</span> i) {
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;f(int): &#34;</span> <span style="color:#f92672">&lt;&lt;</span> i <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> f(<span style="color:#66d9ef">int</span> i);  <span style="color:#75715e">// f(char) nicht mehr sichtbar!
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    f(<span style="color:#e6db74">&#39;a&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</li>
+</ol>
+<h4 id="parameterübergabe-in-cc-call-by-value">Parameterübergabe in C/C++: Call-by-Value</h4>
+<div class='columns'>
+<div class='column'>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">add_5</span>(<span style="color:#66d9ef">int</span> x) {
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">+=</span> <span style="color:#ae81ff">5</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> x;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> erg, i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    erg <span style="color:#f92672">=</span> add_5(i);
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</div>
+<div class='column'>
+<pre><code> Aufrufer-Sicht
+              i                      erg
+           +-----+                 +-----+
+           |     |                 |     |
+           +--+--+                 +--^--+
+              |                       |
+              |                       |
+--------------+-----------------------+-----
+  Kopie bei   |                Kopie  |
+  Aufruf      |                bei    |
+              |                return |
+           +--v--+                    |
+           |     +--------------------+
+           +-----+
+              x
+ Funktionssicht
+</code></pre>
+</div>
+</div>
+<ul>
+<li>Default in C/C++ ist die <span class='alert'>call-by-value</span> Semantik:
+<ul>
+<li>Argumente werden bei Übergabe <span class='alert'>kopiert</span></li>
+<li>Ergebniswerte werden bei Rückgabe <span class='alert'>kopiert</span></li>
+</ul>
+</li>
+<li>Folgen:
+<ul>
+<li>Keine Seiteneffekte durch Verändern von übergebenen Strukturen</li>
+<li>Negative Auswirkungen auf Laufzeit bei großen Daten</li>
+</ul>
+</li>
+</ul>
+<p>Ausnahme: Übergabe von C++-Referenzen oder Pointern
+(wobei Pointer streng genommen auch kopiert werden, also per call-by-value übergeben werden ...)</p>
+<h3 id="unterschiedliche-variablenarten">Unterschiedliche Variablenarten</h3>
+<h4 id="lokale-variablen-automatische-variablen">Lokale Variablen (&quot;automatische Variablen&quot;)</h4>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> b <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">f</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> b <span style="color:#f92672">=</span> <span style="color:#ae81ff">42</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> b <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> b <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<ul>
+<li>
+<p>Innerhalb einer Funktion (oder Blockes) definierte Variablen</p>
+</li>
+<li>
+<p>Gilt auch für Variablen aus Parameterliste</p>
+</li>
+<li>
+<p>Überdecken <strong>globale Variablen</strong> gleichen Namens</p>
+</li>
+<li>
+<p>Sichtbarkeit:</p>
+<ul>
+<li>Außerhalb der Funktion/Blockes nicht zugreifbar</li>
+<li>Beim Betreten der Funktion Reservierung von Speicherplatz für lokale
+Variablen</li>
+<li>Dieser wird beim Verlassen des Blockes/Funktion automatisch wieder
+freigegeben</li>
+<li>Namen sind nur nach Deklaration und innerhalb des Blockes, in dem sie
+deklariert wurden, gültig</li>
+<li>Namen sind auch gültig für innerhalb des Blockes neu angelegte innere
+Blöcke</li>
+</ul>
+<p>Software Engineering: Vermeiden Sie lokale Namen, die Namen aus einem
+äußeren Scope überdecken!</p>
+</li>
+</ul>
+<p>=&gt; Werden auch als <span class='alert'><strong>automatische Variablen</strong></span> bezeichnet</p>
+<h4 id="globale-variablen-externe-variablen">Globale Variablen (&quot;externe Variablen&quot;)</h4>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/* ======== Datei main.cpp (einzeln kompilierbar) ======== */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">int</span> global;  <span style="color:#75715e">// Deklaration
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> global;             <span style="color:#75715e">// Definition
+</span></span></span></code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/* ======== Datei foo.cpp (einzeln kompilierbar) ======== */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">int</span> global;      <span style="color:#75715e">// Deklaration
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">foo</span>() {
+</span></span><span style="display:flex;"><span>    global <span style="color:#f92672">=</span> <span style="color:#ae81ff">45</span>;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<ul>
+<li>Globale Variablen: Außerhalb <strong>jeder</strong> Funktion definierte Variablen</li>
+<li>Globale Variablen gelten in <span class='alert'>allen</span> Teilen des Programms</li>
+<li>Auch in anderen Dateien! =&gt; müssen bei <em>Nutzung</em> in Funktionen als <code>extern</code> deklariert werden</li>
+<li>Existieren die <strong>gesamte</strong> Programmlebensdauer über</li>
+</ul>
+<p>=&gt; Werden auch als <span class='alert'><strong>externe Variablen</strong></span> bezeichnet</p>
+<p>Die Dateien sind einzeln kompilierbar (<code>extern</code> sagt dem Compiler, dass
+die Variable woanders definiert ist) =&gt; erst der Linker löst das auf.</p>
+<p><em>Hinweis</em>: Bei globalen Konstanten in C++ brauchen Sie zusätzlich auch bei der Definition ein &quot;<code>extern</code>&quot;,
+da die Konstante sonst nur in ihrer Datei sichtbar ist.</p>
+<h4 id="statische-lokale-variablen">Statische lokale Variablen</h4>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">foo</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">42</span>;
+</span></span><span style="display:flex;"><span>    x<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    foo();  foo();  foo();
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<ul>
+<li>
+<p>Lokale Variablen mit &quot;Gedächtnis&quot;: Definition mit dem vorangestellten Schlüsselwort &quot;static&quot;</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> callCount;</span></span></code></pre></div>
+</li>
+<li>
+<p>Eigenschaften:</p>
+<ul>
+<li>Wert bleibt für die folgenden Funktionsaufrufe erhalten</li>
+<li>Wert kann in der Funktion verändert werden</li>
+<li>Dennoch: lokale Variable, d.h. von außen nicht sichtbar/gültig</li>
+</ul>
+</li>
+</ul>
+<p><em>Hinweis</em>: <code>static</code> für globale Variablen bedeutet etwas anderes! (s.u. &quot;Sichtbarkeit&quot;)</p>
+<h4 id="initialisierung-von-variablen">Initialisierung von Variablen</h4>
+<p>(Automatische) Initialisierung von Variablen hängt von ihrer Speicherklasse ab!</p>
+<ul>
+<li><strong>Automatisch</strong>
+<ul>
+<li>Werden <span class='alert'>nicht</span> automatisch initialisiert (!)</li>
+<li>Bei vorgegebenem Wert ab Aufruf der Funktion</li>
+</ul>
+</li>
+<li><strong>Extern</strong>
+<ul>
+<li>Mit dem Wert 0 oder vorgegebenem Wert</li>
+<li>Bereits vor Programmstart (im Code enthalten)</li>
+</ul>
+</li>
+<li><strong>Statisch</strong>
+<ul>
+<li>Mit dem Wert 0 oder vorgegebenem Wert</li>
+<li>Ab erstem Aufruf der Funktion</li>
+</ul>
+</li>
+</ul>
+<h4 id="sichtbarkeit-globaler-variablen-und-funktionen-beschränken">Sichtbarkeit globaler Variablen (und Funktionen) beschränken</h4>
+<ul>
+<li>Beschränkung der Gültigkeit von <strong>globalen Variablen</strong> auf die Datei, wo
+sie definiert sind: <strong>Schlüsselwort <code>static</code></strong>
+<ul>
+<li>werden (weiterhin) automatisch mit 0 initialisiert</li>
+<li>sind nun nur in der Datei sichtbar/gültig, wo sie definiert sind</li>
+<li>dient zur Vermeidung von Namenskonflikten bei globalen Variablen</li>
+</ul>
+</li>
+<li>Sichtbarkeitsbeschränkung gilt auch für <strong>Funktionen</strong></li>
+</ul>
+<p><code>static</code> für globale Variablen beschränkt deren Sichtbarkeit auf die Datei,
+wo sie definiert sind. D.h. man kann diese dann nicht in einer anderen Datei
+nutzen, nicht mal mit <code>extern</code> ...</p>
+<p><code>static</code> für Funktionen beschränkt deren Sichtbarkeit ebenfalls auf die Datei,
+wo sie definiert sind. Man kann sie dann nur in anderen Funktionen, die
+ebenfalls in der selben Datei definiert werden, nutzen. In anderen Dateien sind
+die <code>static</code> Funktionen <em>nicht</em> sichtbar. D.h. es macht auch keinen Sinn, sie
+in einer Header-Datei zu deklarieren! (In der Praxis liefert der gcc dann sogar
+einen Fehler!). Das ist mit <code>private</code> Methoden vergleichbar.</p>
+<h3 id="globale-konstanten">Globale Konstanten</h3>
+<h4 id="in-c-funktionieren-globale-konstanten-wie-globale-variablen">In C funktionieren globale Konstanten wie globale Variablen</h4>
+<ul>
+<li>
+<p><strong>Definition</strong> in einer Übersetzungseinheit ohne &quot;<code>extern</code>&quot;</p>
+<p>=&gt; Definition als &quot;<code>extern</code>&quot; wird in C mit einer Warnung quittiert!</p>
+</li>
+<li>
+<p>Nutzung in anderen Übersetzungseinheiten durch (erneute)
+<strong>Deklaration</strong> als &quot;<code>extern</code>&quot;</p>
+</li>
+<li>
+<p>Beispiel:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/* ======== Datei main.c ======== */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> PI<span style="color:#f92672">=</span><span style="color:#ae81ff">123</span>;       <span style="color:#75715e">// Definition OHNE &#34;extern&#34; (C)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fkt_a1</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> PI;
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/* ======== Datei a.c ======== */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> PI;    <span style="color:#75715e">// (erneute) Deklaration mit &#34;extern&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fkt_a1</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> PI;
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</li>
+</ul>
+<h4 id="in-c-sind-globale-konstanten-per-default-nur-in-ihrer-definitionsdatei-sichtbar">In C++ sind globale Konstanten per Default nur in ihrer Definitionsdatei sichtbar!</h4>
+<ul>
+<li>
+<p>Abhilfe: Definieren <em>und</em> Deklarieren mit <code>extern</code></p>
+</li>
+<li>
+<p>Beispiel:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">/* ======== Datei main.cpp ======== */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> PI<span style="color:#f92672">=</span><span style="color:#ae81ff">123</span>;    <span style="color:#75715e">// Definition MIT &#34;extern&#34; (C++)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    fkt_a1();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> PI;
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">/* ======== Datei a.cpp ======== */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> PI;        <span style="color:#75715e">// (erneute) Deklaration mit &#34;extern&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fkt_a1</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> PI;
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</li>
+</ul>
+<h4 id="alternativ-in-beiden-sprachen-konstanten-vorwärts-deklarieren">Alternativ: In beiden Sprachen Konstanten vorwärts deklarieren</h4>
+<p>Folgende Definition und (Vorwärts-) Deklaration der Konstanten <code>PI</code>
+funktioniert sowohl in C als auch in C++:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/* ======== Datei main.c ======== */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> PI;    <span style="color:#75715e">// (Vorwärts-) Deklaration mit &#34;extern&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> PI<span style="color:#f92672">=</span><span style="color:#ae81ff">123</span>;       <span style="color:#75715e">// Definition OHNE &#34;extern&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fkt_a1</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> PI;
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/* ======== Datei a.c ======== */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> PI;    <span style="color:#75715e">// (erneute) Deklaration mit &#34;extern&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fkt_a1</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> PI;
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="automatisieren-der-buildvorgänge-gnu-make">Automatisieren der Buildvorgänge: GNU Make</h3>
+<h4 id="makefile-textdatei-mit-regeln-für-das-programm-make">Makefile: Textdatei mit Regeln für das Programm <code>make</code></h4>
+<ul>
+<li>Abläufe automatisieren: Kompilieren, testen, Pakete bauen, aufräumen, ...</li>
+<li>Java: <code>ant</code>, C/C++: <code>make</code></li>
+<li>Achtung: Verschiedene Make-Dialekte! Wir nutzen <em>GNU Make</em>!</li>
+</ul>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-makefile" data-lang="makefile"><span style="display:flex;"><span> <span style="color:#75715e"># Kommentar</span>
+</span></span><span style="display:flex;"><span> Ziel1: AbhaengigkeitenListe1
+</span></span><span style="display:flex;"><span>     Aktionen1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> Ziel2: AbhaengigkeitenListe2
+</span></span><span style="display:flex;"><span>     Aktionen2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e"># ... und so weiter :-)</span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e"># ACHTUNG:</span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e"># Vor den Aktionen &lt;TAB&gt; benutzen, keine Leerzeichen!!!</span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e"># Vorsicht mit Editor-Einstellungen!</span>
+</span></span></code></pre></div>
+<p>Bedeutung: Um das Ziel <code>Ziel1</code> zu erzeugen, müssen alle Abhängigkeiten der Liste
+<code>AbhaengigkeitenListe1</code> erfüllt sein. Dann werden die Aktionen in <code>Aktionen1</code> durchgeführt,
+um <code>Ziel1</code> zu erzeugen. Aber nur, falls das Ziel <code>Ziel1</code> nicht existiert oder veraltet ist!</p>
+<p>Falls die Abhängigkeiten nicht erfüllt sind, wird nach Regeln gesucht, um diese zu erzeugen.
+Das bedeutet, dass u.U. zunächst weitere Targets &quot;gebaut&quot; werden, bevor die Aktionenliste
+ausgeführt wird.</p>
+<p>Die Ziele und Abhängigkeiten sind i.d.R. Dateien (müssen es aber nicht sein).</p>
+<h4 id="makefiles-fiktives-beispiel">Makefiles: Fiktives Beispiel</h4>
+<ul>
+<li>
+<p>Annahme: Projekt besteht aus der Datei <code>main.cpp</code>, daraus soll das Programm
+&quot;tollesProgramm&quot; erzeugt werden</p>
+</li>
+<li>
+<p>Passendes Makefile:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-makefile" data-lang="makefile"><span style="display:flex;"><span>CXXFLAGS <span style="color:#f92672">=</span> -Wall
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">.PHONY</span><span style="color:#f92672">:</span> all
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">all</span><span style="color:#f92672">:</span> tollesProgramm
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">tollesProgramm</span><span style="color:#f92672">:</span> main.o
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">$(</span>CXX<span style="color:#66d9ef">)</span> <span style="color:#66d9ef">$(</span>LDFLAGS<span style="color:#66d9ef">)</span> $&lt; <span style="color:#66d9ef">$(</span>LDLIBS<span style="color:#66d9ef">)</span> -o $@
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">%.o</span><span style="color:#f92672">:</span> %.cpp
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">$(</span>CXX<span style="color:#66d9ef">)</span> <span style="color:#66d9ef">$(</span>CXXFLAGS<span style="color:#66d9ef">)</span> -c $&lt; -o $@
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">.PHONY</span><span style="color:#f92672">:</span> clean
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">clean</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    rm -rf tollesProgramm *.o *.~
+</span></span></code></pre></div>
+</li>
+</ul>
+<p>Bedeutung: Um das Ziel <code>all</code> zu erzeugen, muss die Abhängigkeit <code>tollesProgramm</code> erfüllt sein.
+Beachten Sie, dass im Beispiel <code>all</code> kein Dateiname ist, <code>tollesProgramm</code> dagegen schon.</p>
+<p>Um <code>tollesProgramm</code> zu erzeugen, muss die Datei <code>main.o</code> vorhanden sein. Falls sie es nicht
+ist, wird sie mit Hilfe des dritten Targets erzeugt. Das <code>%</code> ist dabei ein Patternmatcher,
+d.h. wenn nach einem <code>main.o</code> gesucht ist, matcht <code>%.o</code> (das <code>%</code> bindet sich dabei an &quot;main&quot;)
+und auf der rechten Seite des Targets steht als Abhängigkeit <code>main.cpp</code>.</p>
+<p>Die Variablen <code>CXX</code>, <code>CXXFLAGS</code>, <code>LDFLAGS</code> und <code>LDLIBS</code> sind vordefinierte Variablen:</p>
+<ul>
+<li><code>CXX</code>: C++-Compiler, Default: <code>g++</code></li>
+<li><code>CXXFLAGS</code> Extra Flags für den C++-Compiler (nur für Kompilieren)</li>
+<li><code>LDFLAGS</code>: Extra Flags, die für das Linken genutzt werden (Beispiel: <code>-L.</code>; <strong>nicht</strong> <code>-lm</code>)</li>
+<li><code>LDLIBS</code>: Bibliotheken, die für das Linken genutzt werden (Beispiel: <code>-lm -lfoo</code>; <strong>nicht</strong> <code>-L.</code>)</li>
+</ul>
+<p>Die Variablen <code>$&lt;</code>, <code>$^</code> und <code>$@</code> lösen auf das Ziel bzw. die Abhängigkeiten eines Targets auf:</p>
+<ul>
+<li><code>$&lt;</code> =&gt; gibt die erste Abhängigkeit an</li>
+<li><code>$^</code> =&gt; gibt alle Abhängigkeiten an</li>
+<li><code>$@</code> =&gt; gibt das Ziel an</li>
+</ul>
+<p>Falls die Datei <code>tollesProgramm</code> nicht existiert oder aber älter ist als <code>main.o</code>, wird die
+Regel des Targets <code>tollesProgramm</code> ausgeführt, um die Datei <code>tollesProgramm</code> zu erzeugen:
+<code>g++ main.o -o tollesProgramm</code>.</p>
+<p><strong>Hinweis</strong>: Das Beispiel entspricht den minimalen Kenntnissen, die Sie über Make haben müssen.</p>
+<h4 id="makefiles-typische-aufrufe">Makefiles: Typische Aufrufe</h4>
+<ul>
+<li>
+<p><code>make</code>
+Sucht nach Datei mit dem Namen &quot;GNUmakefile&quot;, &quot;makefile&quot; oder &quot;Makefile&quot; und erzeugt das
+erste Ziel in der Datei</p>
+<p>Konvention: Das erste Ziel hat den Namen <code>all</code></p>
+</li>
+<li>
+<p><code>make -f &lt;datei&gt;</code>
+Sucht die Datei mit dem angegebenen Namen, erzeugt das erste Ziel in der Datei</p>
+</li>
+<li>
+<p><code>make -f &lt;datei&gt; &lt;ziel&gt;</code>
+Sucht die Datei mit dem angegebenen Namen, erzeugt das Ziel <code>&lt;ziel&gt;</code></p>
+</li>
+<li>
+<p><code>make &lt;ziel&gt;</code>
+Sucht nach Datei mit dem Namen &quot;GNUmakefile&quot;, &quot;makefile&quot; oder &quot;Makefile&quot; und erzeugt das
+Ziel <code>&lt;ziel&gt;</code></p>
+</li>
+</ul>
+  </div>
+</div>
+  </div>
+</div>
+<h2 id="wrap-up">Wrap-Up</h2>
+<ul>
+<li>
+<p>C/C++ sind enge Verwandte: kompilierte Sprachen, C++ fügt OO hinzu</p>
+</li>
+<li>
+<p>Funktionsweise einfachster Make-Files</p>
+</li>
+<li>
+<p>Wichtigste Unterschiede zu Java</p>
+<ul>
+<li>Kontrollfluss wie in Java</li>
+<li>Basisdatentypen vorhanden</li>
+<li>Typ-Modifikatoren zur Steuerung des Speicherbedarfs/Wertebereich</li>
+<li>Integer können im booleschen Kontext ausgewertet werden</li>
+<li>Operator <code>sizeof</code> zur Bestimmung des Speicherbedarfs</li>
+<li>Alias-Namen für existierende Typen mit <code>typedef</code> definierbar</li>
+<li>Funktionen mit Default-Parametern und Überladung</li>
+</ul>
+</li>
+</ul>
+
+
+    
+
+
+
+    
+
+
+
+    
+
+    <div class="box notices cstyle note">
+  <div class="box-label">
+    <i class="fas fa-puzzle-piece"></i> Challenges
+  </div>
+  <div class="box-content">
+<ul>
+<li>
+<p>Wie groß ist der Bereich der Basisdatentypen (Speicherbedarf, Zahlenbereich)?
+Wie können Sie das feststellen?</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span> a;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> b;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> x[<span style="color:#ae81ff">10</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> y[] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> z[<span style="color:#ae81ff">7</span>] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">3</span>};</span></span></code></pre></div>
+</li>
+<li>
+<p>Erklären Sie den Unterschied <code>sizeof(x)</code> vs. <code>sizeof(x)/sizeof(x[0])</code>!</p>
+</li>
+<li>
+<p>Warum ist der folgende Code-Schnipsel gefährlich?</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (i<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Vorsicht&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Vorsicht (auch hier)&#34;)</span>;</span></span></code></pre></div>
+</li>
+<li>
+<p>Limits kennen: Datentypen, Wertebereiche</p>
+<p>Schreiben Sie ein C-Programm, welches die größtmögliche <code>unsigned int</code> Zahl
+auf Ihrem System berechnet.</p>
+<p>Verwenden Sie hierzu <strong>nicht</strong> die Kenntnis der systemintern verwendeten Bytes
+(<code>sizeof</code>, ...). Nutzen Sie auch nicht die Konstanten/Makros/Funktionen aus
+<code>limits.h</code> oder <code>float.h</code> oder anderen Headerdateien!</p>
+</li>
+<li>
+<p>Erklären Sie die Probleme bei folgendem Code-Schnipsel:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">maximum</span>(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">double</span> <span style="color:#a6e22e">maximum</span>(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">char</span> <span style="color:#a6e22e">maximum</span>(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>);</span></span></code></pre></div>
+</li>
+<li>
+<p>Erklären Sie die Probleme bei folgendem Code-Schnipsel:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">maximum</span>(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">double</span> <span style="color:#a6e22e">maximum</span>(<span style="color:#66d9ef">double</span>, <span style="color:#66d9ef">double</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> maximum(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2.2</span>) <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</li>
+<li>
+<p>Erklären Sie den Unterschied zwischen</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> a<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">int</span> a;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p>und</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> a<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</li>
+</ul>
+  </div>
+</div>
+
+
+
+    
+
+
+
+
+    
+
+
+
+
+    
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                
+            
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                
+            
+            
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-book-reader"></i> Quellen
+  </div>
+  <div class="box-content">
+<ul> <li id='id_Breymann2011'>[Breymann2011] <strong>Der C++ Programmierer</strong><br>Breymann, U., Hanser, 2011. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-3-446-42691-7' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-3-446-42691-7</a>.</li> <li id='id_cppreference.com'>[cppreference.com] <a href='https://en.cppreference.com/w/' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'><strong>C and C++ Reference</strong></a><br>, cppreference.com.</li> <li id='id_cprogramming.com'>[cprogramming.com] <a href='https://www.cprogramming.com/' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'><strong>C Programming and C++ Programming</strong></a><br>Allain, A. und Hoffer, A..</li></ul>
+  </div>
+</div>
+
+
+
+
+
+
+<footer class="footline"><div style="color: darkgray; font-size: small;">
+<p style="margin-left: 4rem; margin-right: 4rem; margin-top: 6rem;">
+<!-- https://creativecommons.org/choose/ -->
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+Unless otherwise noted, <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor">this work</a> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/graphs/contributors">contributors</a> is licensed under <a rel="license" href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/LICENSE.md">CC BY-SA 4.0</a>.
+See the <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/CREDITS.md">credits</a> for a detailed list of contributing projects.
+
+</p>
+</div>
+
+</footer>
+</article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/clipboard.min.js?1733335068" defer></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/perfect-scrollbar.min.js?1733335068" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/mathjax/tex-mml-chtml.js?1733335068"></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/theme.js?1733335068" defer></script>
+  </body>
+</html>
