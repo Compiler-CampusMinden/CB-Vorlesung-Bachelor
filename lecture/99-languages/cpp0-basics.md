@@ -564,7 +564,9 @@ sondern deklariert eine **neue Funktion**!
 
 
 
+::: notes
 ## Erinnerungen an C - Vergleich mit C++
+:::
 
 ::::::::: notes
 `{{% notice style="important" title="Erinnerungen an C - Vergleich mit C++" %}}`{=markdown}
