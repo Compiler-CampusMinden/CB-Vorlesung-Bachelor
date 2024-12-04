@@ -30,32 +30,32 @@ Die Vorträge werden im Praktikum am 27.11. bzw. am 04.12. durchgeführt. Wir we
 Teams entsprechend aufteilen, Sie bekommen eine Mail. Abgabe der Lösung und des Vortrags im
 ILIAS ist für alle Teams aber bereits der 27.11. ...
 
-**Bewertungskriterien**
+## Bewertungskriterien
 
-1.  **Inhalt (50 Punkte)**
+1.  **Inhalt (25 Punkte)**
 
-    -   **Themenverständnis (30 Punkte)**: Wurde das Thema klar und umfassend dargestellt?
+    -   **Themenverständnis (15 Punkte)**: Wurde das Thema klar und umfassend dargestellt?
         Wurde das Fachwissen adäquat vermittelt?
-    -   **Argumentation und Nachvollziehbarkeit (20 Punkte)**: Sind die Konzepte logisch und
+    -   **Argumentation und Nachvollziehbarkeit (10 Punkte)**: Sind die Konzepte logisch und
         schlüssig aufgebaut? Werden die Aussagen durch relevante Beispiele gestützt?
 
-2.  **Struktur (30 Punkte)**
+2.  **Struktur (15 Punkte)**
 
-    -   **Aufbau (10 Punkte)**: Gibt es eine klare Einleitung, einen strukturierten Hauptteil
+    -   **Aufbau (5 Punkte)**: Gibt es eine klare Einleitung, einen strukturierten Hauptteil
         und einen prägnanten Schluss?
-    -   **Gestaltung (10 Punkte)**: Wurden geeignete und ansprechende visuelle Hilfsmittel
+    -   **Gestaltung (5 Punkte)**: Wurden geeignete und ansprechende visuelle Hilfsmittel
         eingesetzt (Diagramme, Abbildungen)? Unterstützen diese die Inhalte oder lenken sie
         eher ab?
-    -   **Roter Faden (10 Punkte)**: Wird der rote Faden während des gesamten Vortrags
+    -   **Roter Faden (5 Punkte)**: Wird der rote Faden während des gesamten Vortrags
         beibehalten? Ist der Zusammenhang zwischen den einzelnen Punkten nachvollziehbar?
 
-3.  **Präsentation (20 Punkte)**
+3.  **Präsentation (10 Punkte)**
 
-    -   **Gestik, Mimik und Sprache (10 Punkte)**: Ist die Sprache klar, verständlich und
+    -   **Gestik, Mimik und Sprache (5 Punkte)**: Ist die Sprache klar, verständlich und
         angemessen? Ist die Stimmlage dynamisch und ansprechend? Ist das Tempo angemessen?
-    -   **Zeitmanagement (10 Punkte)**: Wurde das der Zeitrahmen (20 Minuten pro Vortrag)
+    -   **Zeitmanagement (5 Punkte)**: Wurde der Zeitrahmen (20 Minuten pro Vortrag)
         eingehalten?
 
-Gesamtbewertung: 100 Punkte
+Gesamtbewertung: 50 Punkte
 
   [Blatt 04]: sheet04.md

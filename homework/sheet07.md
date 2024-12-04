@@ -1,63 +1,102 @@
 ---
 archetype: assignment
 title: "Blatt 07: Mini-Projekt C++"
-author: "BC George, Carsten Gips (HSBI)"
+author: "Carsten Gips, BC George (HSBI)"
 
 hidden: true
-
-sketch: true
 ---
 
+<!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94 --reference-links=true  sheet07.md  -o xxx.md  -->
 
-## A7.1: Mini-Python, Builder
+## Aufgabe
 
-Erweitern Sie Ihr Projekt zu einem Compiler, indem Sie unseren [CBuilder]
-einbinden. Erzeugen Sie damit aus dem geparsten Mini-Python-Code passenden
-C-Code, den Sie mit der im [CBuilder] mitgelieferten [C-Runtime] in ein
-lauffähiges Programm übersetzen und ausführen können. Beachten Sie dazu
-auch die [Dokumentation].
+Entwickeln Sie in Ihrem 3er-Team gemeinsam einen Interpreter *oder* einen Compiler für C++.
 
-[CBuilder]: https://github.com/Compiler-CampusMinden/Mini-Python-Builder
-[C-Runtime]: https://github.com/Compiler-CampusMinden/Mini-Python-Builder/tree/master/c-runtime
-[Dokumentation]: https://github.com/Compiler-CampusMinden/Mini-Python-Builder/tree/master/docs
+Nutzen Sie als Implementierungssprache Java.[^1] Sie sollen ANTLR zur Erstellung Ihres Lexers
+und Parsers einsetzen (Lernziel).
 
+Entwickeln Sie verschiedene Eingabebeispiele in unterschiedlicher Komplexität, mit denen Sie
+Ihren Interpreter bzw. Compiler testen können.
 
-## A7.2: Freie Aufgabe: Zusätzliche Konzepte und Features
+### Variante A: Interpreter
 
-Überlegen Sie sich zusätzliche Konzepte und Features, die Sie in Ihren
-Interpreter/Compiler einbauen wollen. Dies können zusätzliche Features
-auf Sprachebene sein oder Ergänzungen/Erweiterungen Ihres Interpreters
-bzw. Compilers. Geben Sie im ILIAS eine kurze Konzeptskizze als PDF ab.
+Der Interpreter muss den zu interpretierenden C++-Code aus einer Datei einlesen können.
 
-Beispiel: Sie könnten neue syntaktische Elemente in Mini-Python einführen,
-die intern auf die existierende Semantik abgebildet werden ([_syntactic sugar_]).
-Hier könnten Sie eine `for`-Schleife einbauen, die intern auf die bereits
-existierende `while`-Schleife abgebildet wird. (Sie sollen sich aber
-selbst Features überlegen - die `for`-Schleife können Sie also nicht
-nehmen :-)
+Sie brauchen keine interaktive Interpretation implementieren, d.h. eine REPL ist nicht
+notwendig. Der Interpreter muss bei Bedarf an relevanten Stellen einen Log-Output erzeugen, um
+die Arbeitsweise des Programms nachvollziehen zu können. Das Arbeitsergebnis soll auf der
+Konsole ausgegeben werden.
 
-Stellen Sie diese Ideen im Praktikum vor und verteidigen Sie diese.
+### Variante B: Compiler
 
-[_syntactic sugar_]: https://en.wikipedia.org/wiki/Syntactic_sugar
+Der Compiler muss den zu kompilierenden C++-Code aus einer Datei einlesen können.
 
+Der Compiler soll aus dem eingegebenen C++-Code passenden gültigen Java-Code erzeugen und in
+eine Datei speichern. Definieren Sie ggf. nötige Hilfsbibliotheken, so dass man den
+generierten Code zusammen mit den Hilfsbibliotheken mit Java übersetzen und ausführen kann.
 
----
+### Sprachumfang
 
+Sie sollen mindestens folgende C++-Konzepte unterstützen:
 
-## Ausblick Wochen 01 bis 04 in 2024
+-   Basisdatentypen: `bool`, `int`, `char`
+-   Variablen
+-   Arrays
+-   C++-Referenzen
+-   Zuweisungen und Expressions
+-   Kontrollfluss: `if`-`then`-`else`, `while`-Schleifen
+-   Funktionen (Definition, Deklaration, Aufrufe)
+-   Klassen (mit Attributen und Methoden)
+-   Einfach-Vererbung
+-   Polymorphie (dynamisch, statisch)
+-   Eingebaute Funktionen: `print_bool`, `print_int`, `print_char` (Ausgabe eines Werts des
+    jeweiligen Typs auf der Konsole)
 
-### Umsetzung
+Beachten Sie bei der Umsetzung, dass Polymorphie in C++ etwas anders funktioniert als in Java.
 
-Setzen Sie die im Praktikum abgestimmten Features bis zum Vortrag in den letzten
-beiden Sitzungen um. Nutzen Sie aktiv die freigewordenen VL-Slots.
-(_Wir hatten am Anfang des Semesters absichtlich einige Praktikumstermine mit
-Vorlesungen belegt, damit Sie möglichst schnell die Inhalte kennenlernen und
-dann die Praktikumsaufgaben entsprechend planen und umsetzen können. Zum
-Ausgleich sind nun einige Vorlesungstermine am Ende des Semesters der freien
-Arbeit gewidmet._)
+Andere mit C++ verbundene Konzepte wie beispielsweise Präprozessor, Header-Files, Pointer,
+Templates, Sichtbarkeiten in Klassen, Trennung Deklaration/Implementierung bei Klassen
+(Trennung .h und .cpp) oder Initialisierungslisten brauchen Sie nicht umsetzen.
 
-### Vortrag
+### Projektvorstellung: Walk-Through statt Präsentation
 
-Bereiten Sie Ihren Vortrag zur Vorstellung der Ergebnisse Ihrer freien Aufgabe
-(Konzeption und Umsetzung der zusätzlichen Features) in den letzten beiden
-Sitzungen vor.
+Stellen Sie Ihr Projekt am Semesterende vor (Termine siehe Fahrplan und Ankündigung).
+
+Jedes Team hat dafür 20 Minuten Zeit.
+
+Gehen Sie dabei am Code durch Ihr Projekt und diskutieren Sie relevante Teile, mindestens
+aber:
+
+-   Grammatik
+-   AST
+-   Semantische Analyse
+-   Interpreter bzw. Compiler
+
+Demonstrieren Sie die Funktionsfähigkeit mit Ihren C++-Codebeispielen.
+
+**Sie sollen keine Folien erstellen. Die Präsentation soll live in der IDE erfolgen.**
+
+## Abgabeformat
+
+Reichen Sie den als ZIP-Datei zusammengepackten Quellcode des Interpreters bzw. Compilers
+elektronisch über ILIAS ein.
+
+## Bewertungskriterien
+
+1.  **Inhalt (40 Punkte)**
+
+    -   **Aufgabenstellung (30 Punkte)**: Wurden alle Aspekte der Zielsprache sinnvoll
+        umgesetzt?
+    -   **Argumentation und Nachvollziehbarkeit (10 Punkte)**: Sind die Konzepte logisch und
+        schlüssig dargestellt? Werden die Aussagen durch relevante Code-Stellen gestützt?
+
+2.  **Verschiedenes (10 Punkte)**
+
+    -   **Roter Faden (5 Punkte)**: Wird der rote Faden während des gesamten Walk-Through
+        beibehalten? Ist der Zusammenhang zwischen den einzelnen Punkten nachvollziehbar?
+    -   **Zeitmanagement (5 Punkte)**: Wurde der Zeitrahmen (20 Minuten pro Vortrag)
+        eingehalten?
+
+Gesamtbewertung: 50 Punkte
+
+[^1]: Nach **Absprache** können Sie auch eine andere Implementierungssprache verwenden.
