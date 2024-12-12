@@ -591,7 +591,7 @@ int main() {
 }
 ```
 
-Fall man mit `::` zugreifen wollte, müsste das Attribut `static` sein und
+Falls man mit `::` zugreifen wollte, müsste das Attribut `static` sein und
 entsprechend außerhalb der Klasse initialisiert werden. Für ein "normales"
 Attribut braucht man dann einen extra Konstruktor und muss den Aufruf dann
 extra klammern: `MyClass<2>().Z` statt `MyClass<2>.Z`.
