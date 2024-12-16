@@ -106,9 +106,9 @@ outcomes:
     - k2: "Sichtbarkeit und Initialisierung von Variablen"
     - k3: "Definition und Deklaration von Funktionen"
     - k3: "Nutzung lokaler und globaler und lokaler statischer Variablen"
-#youtube:
-#  - link: "TODO"
-#    name: "VL Einführung in C++ (Erinnerungen an C)"
+youtube:
+  - link: "https://youtu.be/b9xOaxc8Uus"
+    name: "VL Einführung in C++ (Erinnerungen an C)"
 challenges: |
     *   Wie groß ist der Bereich der Basisdatentypen (Speicherbedarf, Zahlenbereich)?
         Wie können Sie das feststellen?
