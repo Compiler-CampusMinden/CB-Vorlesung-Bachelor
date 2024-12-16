@@ -260,10 +260,28 @@ Abgabe der Übungsblätter jeweils **Montag bis 09:00 Uhr** im [ILIAS](https://w
 `{{% notice style="note" title="News" %}}`{=markdown}
 `{{% expand title="16.12.24" %}}`{=markdown}
 
+### Anpassung der Gewichtung der beiden Stationen der Parcoursprüfung
+
+Es war ursprünglich vorgesehen, die Gesamtnote als Mittelwert der Noten der beiden
+Parcours-Stationen zu berechnen: Gewichtung 50% (Station 1) und 50% (Station 2).
+
+In Anlehnung an die Anpassung der Notenberechnung für das dritte Semester bieten
+wir an, die Gesamtnote alternativ mit der Gewichtung 40% (Station 1) und 60%
+(Station 2) zu berechnen.
+
+Wir werden für jede Person jeweils beide Verhältnisse berechnen und automatisch die
+bessere Note werten (individuelle Günstigerprüfung).
+
+Dies gilt für die Prüfung im ersten Zeitraum.
+
+`{{% /expand %}}`{=markdown}
+
+`{{% expand title="16.12.24" %}}`{=markdown}
+
 ### Feedback zu den Ergebnissen der Station 1 der Parcoursprüfung
 
-Wir möchten Ihnen im Praktikum am 18.12. ein Feedback zu den Ergebnissen der Station 1 der
-Parcoursprüfung geben.
+Wir möchten Ihnen im Praktikum am 18.12. ein Feedback zu den Ergebnissen der Station 1
+der Parcoursprüfung geben.
 
 `{{% /expand %}}`{=markdown}
 
@@ -502,7 +520,8 @@ Abgabe der Übungsblätter jeweils **Mittwoch bis 09:00 Uhr** im [ILIAS](https:/
     1.  Vortrag (3er Team, 27.11. bzw. 04.12. im Praktikum): Vorstellung der Lösung von [B04x]
     2.  Vorstellung Mini-Projekt [B07x] (3er Teams, letzte VL-Woche)
 
-    Beide Stationen ergeben zu je 50% die Gesamtnote.
+    Note für das Modul: Beide Stationen ergeben zu **je 50%** *oder* in der Gewichtung
+    **40% (Station 1) und 60% (Station 2)** die Gesamtnote (individuelle Günstigerprüfung).
 
 :::
 ::: {.tab title="Prüfung im zweiten Zeitraum"}
