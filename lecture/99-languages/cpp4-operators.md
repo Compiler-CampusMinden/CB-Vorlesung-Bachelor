@@ -26,9 +26,9 @@ outcomes:
     - k3: "Überladen von Operatoren (innerhalb bzw. außerhalb einer Klasse)"
     - k3: "Anwendung der Deklaration als `friend`"
     - k3: "Implementierung von Post- und Präfix-Operatoren"
-#youtube:
-#  - link: "TODO"
-#    name: "VL C++: Operatoren"
+youtube:
+  - link: "https://youtu.be/lCe0mmO613M"
+    name: "VL C++: Operatoren"
 challenges: |
     **Operator "++"**
 
