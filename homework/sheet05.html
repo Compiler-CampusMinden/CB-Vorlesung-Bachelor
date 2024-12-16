@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="de-DE" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.135.0">
+    <meta name="generator" content="Relearn 6.4.1">
+    <meta name="description" content="Zusammenfassung Ziel dieses Aufgabenblattes ist die Erstellung eines Tree-Walking-Interpreter mit ANTLR für eine Lisp-artige Sprache.
+Methodik Sie finden im Sample Project zwei Grammatiken (MiniLispA, MiniLispB), die (teilweise) zu der Zielsprache auf diesem Blatt passen. Analysieren Sie beide Grammatiken und entscheiden Sie sich für eine der beiden Varianten. Vervollständigen Sie diese bzw. passen Sie diese an.
+Erstellen Sie mit dieser Grammatik und ANTLR wieder einen Lexer und Parser.
+Es ist empfehlenswert, den Interpreter dreistufig zu realisieren:">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Blatt 05: Interpreter">
+    <meta name="twitter:description" content="Zusammenfassung Ziel dieses Aufgabenblattes ist die Erstellung eines Tree-Walking-Interpreter mit ANTLR für eine Lisp-artige Sprache.
+Methodik Sie finden im Sample Project zwei Grammatiken (MiniLispA, MiniLispB), die (teilweise) zu der Zielsprache auf diesem Blatt passen. Analysieren Sie beide Grammatiken und entscheiden Sie sich für eine der beiden Varianten. Vervollständigen Sie diese bzw. passen Sie diese an.
+Erstellen Sie mit dieser Grammatik und ANTLR wieder einen Lexer und Parser.
+Es ist empfehlenswert, den Interpreter dreistufig zu realisieren:">
+    <meta property="og:url" content="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet05.html">
+    <meta property="og:title" content="Blatt 05: Interpreter">
+    <meta property="og:description" content="Zusammenfassung Ziel dieses Aufgabenblattes ist die Erstellung eines Tree-Walking-Interpreter mit ANTLR für eine Lisp-artige Sprache.
+Methodik Sie finden im Sample Project zwei Grammatiken (MiniLispA, MiniLispB), die (teilweise) zu der Zielsprache auf diesem Blatt passen. Analysieren Sie beide Grammatiken und entscheiden Sie sich für eine der beiden Varianten. Vervollständigen Sie diese bzw. passen Sie diese an.
+Erstellen Sie mit dieser Grammatik und ANTLR wieder einen Lexer und Parser.
+Es ist empfehlenswert, den Interpreter dreistufig zu realisieren:">
+    <meta property="og:locale" content="de_DE">
+    <meta property="og:type" content="website">
+    <meta itemprop="name" content="Blatt 05: Interpreter">
+    <meta itemprop="description" content="Zusammenfassung Ziel dieses Aufgabenblattes ist die Erstellung eines Tree-Walking-Interpreter mit ANTLR für eine Lisp-artige Sprache.
+Methodik Sie finden im Sample Project zwei Grammatiken (MiniLispA, MiniLispB), die (teilweise) zu der Zielsprache auf diesem Blatt passen. Analysieren Sie beide Grammatiken und entscheiden Sie sich für eine der beiden Varianten. Vervollständigen Sie diese bzw. passen Sie diese an.
+Erstellen Sie mit dieser Grammatik und ANTLR wieder einen Lexer und Parser.
+Es ist empfehlenswert, den Interpreter dreistufig zu realisieren:">
+    <meta itemprop="wordCount" content="1278">
+    <title>Blatt 05: Interpreter</title>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet05/index.print.html" rel="alternate" type="text/html" title="Blatt 05: Interpreter">
+
+    
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/images/logo.png?1734345862" rel="icon" type="image/png">
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/fontawesome-all.min.css?1734345862" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/fontawesome-all.min.css?1734345862" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/nucleus.css?1734345862" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/auto-complete.css?1734345862" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/auto-complete.css?1734345862" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/perfect-scrollbar.min.css?1734345862" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/fonts.css?1734345862" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/fonts.css?1734345862" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/theme.css?1734345862" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/theme-auto.css?1734345862" rel="stylesheet" id="R-variant-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/chroma-auto.css?1734345862" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/variant.css?1734345862" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/print.css?1734345862" rel="stylesheet" media="print">
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/variant.js?1734345862"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..';
+      window.relearn.relBaseUri='..\/..\/..\/..\/..\/..';
+      window.relearn.absBaseUri='https:\/\/www.hsbi.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1360443';
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      window.index_js_url="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.search.js?1734345862";
+      // variant stuff
+      window.variants && variants.init( [ 'auto', 'zen-light', 'zen-dark', 'relearn-bright', 'relearn-light', 'relearn-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support html disableInlineCopyToClipboard" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet05.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li><a href="#zusammenfassung">Zusammenfassung</a></li>
+    <li><a href="#methodik">Methodik</a></li>
+    <li><a href="#sprachdefinition">Sprachdefinition</a>
+      <ul>
+        <li><a href="#eingebaute-funktionen">Eingebaute Funktionen</a></li>
+        <li><a href="#operatoren">Operatoren</a></li>
+        <li><a href="#kontrollstrukturen-if-else">Kontrollstrukturen (If-Else)</a></li>
+        <li><a href="#variablen-bindings-mit-def-anlegen">Variablen: Bindings mit <em>def</em> anlegen</a></li>
+        <li><a href="#funktionen-mit-defn-definieren">Funktionen mit <em>defn</em> definieren</a></li>
+        <li><a href="#lokale-scopes-mit-let">Lokale Scopes mit <em>let</em></a></li>
+        <li><a href="#rekursion">Rekursion</a></li>
+        <li><a href="#datenstrukturen">Datenstrukturen</a></li>
+      </ul>
+    </li>
+    <li><a href="#aufgaben">Aufgaben</a>
+      <ul>
+        <li><a href="#a51-grammatik-und-antlr-3p">A5.1: Grammatik und ANTLR (3P)</a></li>
+        <li><a href="#a52-tree-walking-interpreter-5p">A5.2: Tree-Walking-Interpreter (5P)</a></li>
+        <li><a href="#a53-auswirkungen-der-grammatik-auf-den-interpreter-2p">A5.3: Auswirkungen der Grammatik auf den Interpreter (2P)</a></li>
+        <li><a href="#bonus-interaktiver-interpreter-3p">Bonus: Interaktiver Interpreter (3P)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            Blatt 05: Interpreter
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-print" data-content-empty="disable" data-width-s="area-more" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet05/index.print.html" title="Print whole chapter (CTRL&#43;ALT&#43;p)"><i class="fa-fw fas fa-print"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable " tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+<h1>Blatt 05: Interpreter</h1>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        <p><strong>(10 Punkte)</strong></p>
+    
+
+    <h2 id="zusammenfassung">Zusammenfassung</h2>
+<p>Ziel dieses Aufgabenblattes ist die Erstellung eines Tree-Walking-Interpreter mit ANTLR für
+eine Lisp-artige Sprache.</p>
+<h2 id="methodik">Methodik</h2>
+<p>Sie finden im <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/tree/master/homework/src/sample_project" rel="external" target="_blank">Sample Project</a> zwei Grammatiken (<a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/homework/src/sample_project/src/main/antlr/MiniLispA.g4" rel="external" target="_blank">MiniLispA</a>, <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/homework/src/sample_project/src/main/antlr/MiniLispB.g4" rel="external" target="_blank">MiniLispB</a>), die (teilweise) zu
+der Zielsprache auf diesem Blatt passen. Analysieren Sie beide Grammatiken und entscheiden Sie
+sich für eine der beiden Varianten. Vervollständigen Sie diese bzw. passen Sie diese an.</p>
+<p>Erstellen Sie mit dieser Grammatik und ANTLR wieder einen Lexer und Parser.</p>
+<p>Es ist empfehlenswert, den Interpreter dreistufig zu realisieren:</p>
+<ol>
+<li>Einlesen aus einer Datei mit Lisp-Code und Parsen der Inhalte</li>
+<li>Aufbauen der Symboltabelle und Durchführung der semantischen Analyse</li>
+<li>Ablaufen des Parse-Tree/AST und Auswerten der Ausdrücke (Interpretation)</li>
+</ol>
+<h2 id="sprachdefinition">Sprachdefinition</h2>
+<p>Ein Programm besteht aus einem oder mehreren Ausdrücken (<em>Expressions</em>). Die Ausdrücke haben
+eine spezielle Form: Sie sind sogenannte <a href="https://en.wikipedia.org/wiki/S-expression" rel="external" target="_blank">S-Expressions</a>. Dies sind entweder Literale der Form
+<code>x</code> oder einfache listenartige Gebilde der Form <code>(. x y)</code>, wobei der <code>.</code> eine Operation (oder
+Funktion) darstellt und <code>x</code> und <code>y</code> selbst wieder S-Expressions sind.</p>
+<p>Die einfachste Form sind dabei Literale mit konkreten Werten der drei Datentypen <code>Integer</code>,
+<code>String</code> und <code>Boolean</code>:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span><span style="color:#ae81ff">42</span>          <span style="color:#75715e">;; Integer</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;hello&#34;</span>     <span style="color:#75715e">;; String</span>
+</span></span><span style="display:flex;"><span>true        <span style="color:#75715e">;; Boolean</span>
+</span></span><span style="display:flex;"><span>false       <span style="color:#75715e">;; Boolean</span></span></span></code></pre></div>
+<p>Für eine Variable <code>foo</code> wäre das Folgende ebenfalls eine S-Expression:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>foo         <span style="color:#75715e">;; Variable foo</span></span></span></code></pre></div>
+<p>(Über <code>;;</code> wird ein Kommentar eingeleitet, der bis zum Ende der Zeile geht.)</p>
+<p>Komplexere Ausdrücke werden über die Listenform gebildet:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(+ <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span>)               <span style="color:#75715e">;; 1 + 1</span>
+</span></span><span style="display:flex;"><span>(/ <span style="color:#ae81ff">10</span> <span style="color:#ae81ff">3</span>)              <span style="color:#75715e">;; 10 / 3</span>
+</span></span><span style="display:flex;"><span>(+ <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span>)           <span style="color:#75715e">;; 1 + 2 + 3 + 4</span>
+</span></span><span style="display:flex;"><span>(+ (+ (+ <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span>) <span style="color:#ae81ff">3</span>) <span style="color:#ae81ff">4</span>)   <span style="color:#75715e">;; (((1 + 2) + 3) + 4)</span>
+</span></span><span style="display:flex;"><span>(/ (+ <span style="color:#ae81ff">10</span> <span style="color:#ae81ff">2</span>) (+ <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">4</span>))  <span style="color:#75715e">;; ((10 + 2) / (2 + 4))</span></span></span></code></pre></div>
+<p>In der listenartigen Form ist der erste Eintrag der Liste immer eine Operation (oder ein
+Funktionsname), danach kommen je nach Operation/Funktion (die Arität muss passen!)
+entsprechende Einträge, die als Parameter für die Operation oder Funktion zu verstehen sind.</p>
+<p>Die Ausdrücke sind implizit von links nach rechts geklammert, d.h. der Ausdruck <code>(+ 1 2 3 4)</code>
+ist <a href="https://en.wikipedia.org/wiki/Syntactic_sugar" rel="external" target="_blank"><em>syntactic sugar</em></a> für <code>(+ (+ (+ 1 2) 3) 4)</code>.</p>
+<h3 id="eingebaute-funktionen">Eingebaute Funktionen</h3>
+<p>Es gibt zwei Funktionen, die fest in der Sprache integriert sind.</p>
+<p>Mit der eingebauten Funktion <code>print</code> kann der Wert eines Ausdrucks auf der Konsole ausgegeben
+werden:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(print <span style="color:#e6db74">&#34;hello world&#34;</span>)
+</span></span><span style="display:flex;"><span>(print <span style="color:#e6db74">&#34;wuppie\nfluppie\nfoo\nbar&#34;</span>)</span></span></code></pre></div>
+<p>Die eingebaute Funktion <code>str</code> verknüpft ihre Argumente und bildet einen String. Falls nötig,
+werden die Argumente vorher in einen String umgewandelt.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(str <span style="color:#ae81ff">42</span>)                              <span style="color:#75715e">;; liefert &#34;42&#34; zurück</span>
+</span></span><span style="display:flex;"><span>(str <span style="color:#e6db74">&#34;wuppie&#34;</span> <span style="color:#e6db74">&#34;fluppie&#34;</span> <span style="color:#e6db74">&#34;foo&#34;</span> <span style="color:#e6db74">&#34;bar&#34;</span>)  <span style="color:#75715e">;; liefert &#34;wuppiefluppiefoobar&#34; zurück</span>
+</span></span><span style="display:flex;"><span>(str <span style="color:#e6db74">&#34;one: &#34;</span> <span style="color:#ae81ff">1</span> <span style="color:#e6db74">&#34;, two: &#34;</span> <span style="color:#ae81ff">2</span>)           <span style="color:#75715e">;; liefert &#34;one: 1, two: 2&#34; zurück</span></span></span></code></pre></div>
+<h3 id="operatoren">Operatoren</h3>
+<p>Es gibt nur wenige vordefinierte Operatoren, diese mit der üblichen Semantik.</p>
+<h4 id="vergleichsoperatoren">Vergleichsoperatoren</h4>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">Operation</th>
+          <th style="text-align: center">Operator</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">Gleichheit</td>
+          <td style="text-align: center"><code>=</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Größer</td>
+          <td style="text-align: center"><code>&gt;</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Kleiner</td>
+          <td style="text-align: center"><code>&lt;</code></td>
+      </tr>
+  </tbody>
+</table>
+<p>Die Operanden müssen jeweils beide den selben Typ haben. Dabei sind <code>String</code> und <code>Integer</code>
+zulässig. Das Ergebnis ist immer vom Typ <code>Boolean</code>.</p>
+<h4 id="arithmetische-operatoren">Arithmetische Operatoren</h4>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">Operation</th>
+          <th style="text-align: center">Operator</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">Addition</td>
+          <td style="text-align: center"><code>+</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Subtraktion</td>
+          <td style="text-align: center"><code>-</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Multiplikation</td>
+          <td style="text-align: center"><code>*</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Division</td>
+          <td style="text-align: center"><code>/</code></td>
+      </tr>
+  </tbody>
+</table>
+<p>Die Operanden müssen jeweils beide den selben Typ haben. Dabei sind <code>String</code> und <code>Integer</code>
+zulässig. Das Ergebnis ist vom Typ der Operanden.</p>
+<h3 id="kontrollstrukturen-if-else">Kontrollstrukturen (If-Else)</h3>
+<p>Die <code>if-then-else</code>-Abfrage gibt es mit und ohne den <code>else</code>-Zweig:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(<span style="color:#66d9ef">if </span>boolean-form
+</span></span><span style="display:flex;"><span>    then-form
+</span></span><span style="display:flex;"><span>    optional-else-form)</span></span></code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(<span style="color:#66d9ef">if </span>(&lt; <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>    (print <span style="color:#e6db74">&#34;true&#34;</span>)    <span style="color:#75715e">;; then</span>
+</span></span><span style="display:flex;"><span>    (print <span style="color:#e6db74">&#34;false&#34;</span>))  <span style="color:#75715e">;; else</span></span></span></code></pre></div>
+<p>Dabei kann jeweils nur genau eine S-Expression genutzt werden. Wenn man mehrere Dinge
+berechnen möchte, nutzt man <code>do</code>:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(<span style="color:#a6e22e">do</span>
+</span></span><span style="display:flex;"><span>    (print <span style="color:#e6db74">&#34;wuppie&#34;</span>)
+</span></span><span style="display:flex;"><span>    (print <span style="color:#e6db74">&#34;fluppie&#34;</span>)
+</span></span><span style="display:flex;"><span>    (print <span style="color:#e6db74">&#34;foo&#34;</span>)
+</span></span><span style="display:flex;"><span>    (print <span style="color:#e6db74">&#34;bar&#34;</span>))</span></span></code></pre></div>
+<p>Beispiel:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(<span style="color:#66d9ef">if </span>(&lt; <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span>) (<span style="color:#66d9ef">do </span>(print <span style="color:#e6db74">&#34;true&#34;</span>) (print <span style="color:#e6db74">&#34;WUPPIE&#34;</span>)) (print <span style="color:#e6db74">&#34;false&#34;</span>))</span></span></code></pre></div>
+<p>oder anders formatiert:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(<span style="color:#66d9ef">if </span>(&lt; <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#66d9ef">do </span>(print <span style="color:#e6db74">&#34;true&#34;</span>)
+</span></span><span style="display:flex;"><span>        (print <span style="color:#e6db74">&#34;WUPPIE&#34;</span>))
+</span></span><span style="display:flex;"><span>    (print <span style="color:#e6db74">&#34;false&#34;</span>))</span></span></code></pre></div>
+<h3 id="variablen-bindings-mit-def-anlegen">Variablen: Bindings mit <em>def</em> anlegen</h3>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(<span style="color:#66d9ef">def </span>x <span style="color:#ae81ff">42</span>)  <span style="color:#75715e">;; definiert eine neue Variable mit dem Namen &#34;x&#34; und dem Wert 42</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>x           <span style="color:#75715e">;; liefert 42</span>
+</span></span><span style="display:flex;"><span>(+ x <span style="color:#ae81ff">7</span>)     <span style="color:#75715e">;; liefert 49</span></span></span></code></pre></div>
+<h3 id="funktionen-mit-defn-definieren">Funktionen mit <em>defn</em> definieren</h3>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span><span style="color:#75715e">;;     name   params  body</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">defn </span> hello  (<span style="color:#a6e22e">n</span>)     (str <span style="color:#e6db74">&#34;hello &#34;</span> n))  <span style="color:#75715e">;; Definition einer Funktion &#34;hello&#34; mit einem Parameter</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">hello</span> <span style="color:#e6db74">&#34;world&#34;</span>)                          <span style="color:#75715e">;; Aufruf der Funktion &#34;hello&#34; mit dem Argument &#34;world&#34;</span></span></span></code></pre></div>
+<h3 id="lokale-scopes-mit-let">Lokale Scopes mit <em>let</em></h3>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span><span style="color:#75715e">;;    bindings      use names here</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">let </span> (name value)  (<span style="color:#a6e22e">code</span> that uses name))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">def </span>x <span style="color:#ae81ff">99</span>)   <span style="color:#75715e">;; globale Variable x</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">def </span>y <span style="color:#ae81ff">101</span>)  <span style="color:#75715e">;; globale Variable y</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">def </span>z <span style="color:#ae81ff">42</span>)   <span style="color:#75715e">;; globale Variable z</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">let </span>(<span style="color:#a6e22e">x</span> <span style="color:#ae81ff">1</span>   <span style="color:#75715e">;; lokales x mit Wert 1(verdeckt globales x)</span>
+</span></span><span style="display:flex;"><span>      y <span style="color:#ae81ff">2</span>)  <span style="color:#75715e">;; lokales y mit Wert 2</span>
+</span></span><span style="display:flex;"><span>     (+ x y z))  <span style="color:#75715e">;; 1+2+42</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">defn </span> hello
+</span></span><span style="display:flex;"><span>       (<span style="color:#a6e22e">n</span>)
+</span></span><span style="display:flex;"><span>       (<span style="color:#66d9ef">let </span>(<span style="color:#a6e22e">l</span> <span style="color:#ae81ff">42</span>)  <span style="color:#75715e">;; l is valid in this scope</span>
+</span></span><span style="display:flex;"><span>            (str <span style="color:#e6db74">&#34;hello &#34;</span> n <span style="color:#e6db74">&#34;: &#34;</span> l)
+</span></span><span style="display:flex;"><span>       )  <span style="color:#75715e">;; end of local scope</span>
+</span></span><span style="display:flex;"><span>)  <span style="color:#75715e">;; end of function definition</span></span></span></code></pre></div>
+<p>Mit <code>let</code> können lokale Variablen erzeugt werden, die dann in dem jeweiligen Scope genutzt
+werden können. Dies funktioniert wie in anderen Sprachen mit Scopes.</p>
+<h3 id="rekursion">Rekursion</h3>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(<span style="color:#66d9ef">defn </span>fac (<span style="color:#a6e22e">n</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#66d9ef">if </span>(&lt; n <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        (* n (<span style="color:#a6e22e">fac</span> (- n <span style="color:#ae81ff">1</span>)))))</span></span></code></pre></div>
+<p>Da es kein <code>while</code> oder <code>for</code> gibt, müssen Schleifen über rekursive Aufrufe abgebildet werden.</p>
+<h3 id="datenstrukturen">Datenstrukturen</h3>
+<p>In unserer Sprache gibt es Listen:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>)          <span style="color:#75715e">;; Fehler!</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">def </span>v (<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>))  <span style="color:#75715e">;; Fehler!</span></span></span></code></pre></div>
+<p>Das Problem daran ist, dass unsere S-Expressions zwar bereits listenartige Strukturen sind,
+der erste Eintrag aber als Operator oder Funktion interpretiert wird. Der Ausdruck oben würde
+beim Auswerten versuchen, die &quot;Funktion&quot; 1 auf den Argumenten 2 und 3 aufzurufen ...</p>
+<p>Man braucht also eine Notation, die ein sofortiges Auswerten verhindert und nur die Liste an
+sich zurückliefert. Dies erreicht man durch die Funktion <code>list</code>:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(list <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>)          <span style="color:#75715e">;; (1 2 3)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">def </span>v (list <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>))  <span style="color:#75715e">;; v = (1 2 3)</span>
+</span></span><span style="display:flex;"><span>v                     <span style="color:#75715e">;; (1 2 3)</span></span></span></code></pre></div>
+<p>Mit der Funktion <code>nth</code> kann man auf das n-te Element einer Liste zugreifen:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(nth (list <span style="color:#e6db74">&#34;abc&#34;</span> false <span style="color:#ae81ff">99</span>) <span style="color:#ae81ff">2</span>)  <span style="color:#75715e">;; 99</span></span></span></code></pre></div>
+<p>Zusätzlich gibt es die beiden Funktionen <code>head</code> und <code>tail</code>, die das erste Element einer Liste
+bzw. die restliche Liste ohne das erste Element zurückliefern:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(<span style="color:#a6e22e">head</span> (list <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>))  <span style="color:#75715e">;; 1</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">tail</span> (list <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>))  <span style="color:#75715e">;; (2 3)</span></span></span></code></pre></div>
+<h2 id="aufgaben">Aufgaben</h2>
+<h3 id="a51-grammatik-und-antlr-3p">A5.1: Grammatik und ANTLR (3P)</h3>
+<ol>
+<li>
+<p>Erstellen Sie zunächst einige Programme in der Zielsprache. Diese sollten von einfachsten
+Ausdrücken bis hin zu komplexeren Programmen reichen. Definieren Sie beispielsweise eine
+Funktion, die rekursiv die Länge einer Liste berechnet.</p>
+<p>Definieren Sie neben gültigen Programmen auch solche, die in der semantischen Analyse
+zurückgewiesen werden sollten. Welche Fehlerkategorien könnte es hier geben?</p>
+</li>
+<li>
+<p>Definieren Sie für die obige Sprache eine geeignete ANTLR-Grammatik. Sie können dabei die
+Grammatik <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/homework/src/sample_project/src/main/antlr/MiniLispA.g4" rel="external" target="_blank">MiniLispA</a> oder <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/homework/src/sample_project/src/main/antlr/MiniLispB.g4" rel="external" target="_blank">MiniLispB</a> im <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/tree/master/homework/src/sample_project" rel="external" target="_blank">Sample Project</a> als Ausgangspunkt nutzen und
+diese anpassen und vervollständigen. Erzeugen Sie mithilfe der Grammatik und ANTLR einen
+Lexer und Parser.</p>
+</li>
+<li>
+<p>Führen Sie die semantische Analyse durch: Sind alle Symbole bekannt, passen die Scopes?</p>
+</li>
+</ol>
+<h3 id="a52-tree-walking-interpreter-5p">A5.2: Tree-Walking-Interpreter (5P)</h3>
+<p>Bauen Sie einen Tree-Walking-Interpreter in Ihr Projekt ein.</p>
+<p>Realisieren Sie die eingebauten Funktionen <code>print</code> und <code>str</code> dabei als <em>native</em> Funktionen.
+Realisieren Sie <code>list</code>, <code>nth</code>, <code>head</code> und <code>tail</code> sowie <code>def</code>, <code>let</code>, <code>defn</code>, <code>do</code> und die
+Operatoren und die Kontrollstrukturen geeignet.</p>
+<p>Lösen Sie die als &quot;<em>syntactic sugar</em>&quot; bezeichneten Ausdrücke auf und transformieren Sie den
+AST entsprechend: <code>(+ 1 2 3 4)</code> soll zu <code>(+ (+ (+ 1 2) 3) 4)</code> umgeformt werden. Analog für die
+anderen Operatoren der Sprache (Vergleiche, Arithmetik).</p>
+<p>Achten Sie auf die Datentypen. Die Typen von Variablen etc. sind erst zur Laufzeit bekannt und
+müssen dann passen.</p>
+<p>Lesen Sie den zu interpretierenden Code aus einer Datei ein.</p>
+<p>Testen Sie Ihren Interpreter mit Ihren Beispielprogrammen.</p>
+<h3 id="a53-auswirkungen-der-grammatik-auf-den-interpreter-2p">A5.3: Auswirkungen der Grammatik auf den Interpreter (2P)</h3>
+<p>Sie haben sich vermutlich für eine der beiden Grammatiken (<a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/homework/src/sample_project/src/main/antlr/MiniLispA.g4" rel="external" target="_blank">MiniLispA</a>, <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/homework/src/sample_project/src/main/antlr/MiniLispB.g4" rel="external" target="_blank">MiniLispB</a>)
+entschieden und auf der Basis Ihren Interpreter erstellt.</p>
+<p>Welche Auswirkungen hat die Grammatik auf den Interpreter? Machen Sie ein Gedankenexperiment:
+Überlegen Sie, was Sie alles in Ihrer Implementierung ändern müssten, wenn Sie die jeweils
+andere Grammatik-Variante nutzen würden.</p>
+<h3 id="bonus-interaktiver-interpreter-3p">Bonus: Interaktiver Interpreter (3P)</h3>
+<p>Bauen Sie eine <em>REPL</em> ein, d.h. geben Sie nach dem Start des Interpreters einen Prompt aus und
+verarbeiten Sie die Eingaben interaktiv. Wie müssen Sie hier mit der Symboltabelle umgehen?</p>
+
+
+    
+
+
+
+
+
+
+
+<footer class="footline"><div style="color: darkgray; font-size: small;">
+<p style="margin-left: 4rem; margin-right: 4rem; margin-top: 6rem;">
+<!-- https://creativecommons.org/choose/ -->
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+Unless otherwise noted, <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor">this work</a> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/graphs/contributors">contributors</a> is licensed under <a rel="license" href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/LICENSE.md">CC BY-SA 4.0</a>.
+See the <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/CREDITS.md">credits</a> for a detailed list of contributing projects.
+
+</p>
+</div>
+
+</footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+
+
+<a id="logo" href='https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1360443//index.html'>
+    <img style="max-width:35%" alt="icon" src='/elearning/data/FH-Bielefeld/lm_data/lm_1360443/images/logo.png'>
+</a>
+
+        </div>
+
+        <search><form action="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/search.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['de'];
+        </script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/auto-complete.js?1734345862" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/lunr/lunr.min.js?1734345862" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/lunr/lunr.stemmer.support.min.js?1734345862" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/lunr/lunr.multi.min.js?1734345862" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/lunr/lunr.de.min.js?1734345862" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/search.js?1734345862" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro.html">Überblick</a><ul id="R-subsections-4df4f48548517eafbcfd5260bf8ec879" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/overview.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/overview.html">Struktur eines Compilers</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/languages.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/languages.html">Programmiersprachen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/applications.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/applications.html">Anwendungen</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing.html">Lexikalische Analyse</a><ul id="R-subsections-8d37d4681a8464ded0759726543b315f" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing/regular.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing/regular.html">Reguläre Sprachen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing/antlr-lexing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing/antlr-lexing.html">Lexer mit ANTLR generieren</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing.html">Syntaktische Analyse</a><ul id="R-subsections-2fa42a0a95fa4e38203332af421076e1" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing/cfg.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing/cfg.html">CFG</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing/antlr-parsing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing/antlr-parsing.html">Parser mit ANTLR generieren</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics.html">Semantische Analyse</a><ul id="R-subsections-d88fb7065d61ee57361d9d4d71ff9c1f" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab0-intro.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab0-intro.html">SymbTab0: Überblick Symboltabellen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab1-scopes.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab1-scopes.html">SymbTab1: Nested Scopes</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab2-functions.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab2-functions.html">SymbTab2: Funktionen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab3-classes.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab3-classes.html">SymbTab3: Strukturen und Klassen</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate.html">Zwischencode</a><ul id="R-subsections-954600b07c36f58ed592d3873b4cb416" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate/intro-ir.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate/intro-ir.html">Überblick Zwischencode</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate/llvm-ir.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate/llvm-ir.html">LLVM als IR</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation.html">Interpreter</a><ul id="R-subsections-e1e14acafd0a08bb52afc3f0f0608d4c" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation/astdriven-part1.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation/astdriven-part1.html">AST-basierte Interpreter 1</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation/astdriven-part2.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation/astdriven-part2.html">AST-basierte Interpreter 2</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages.html">Programmiersprachen</a><ul id="R-subsections-a84558f596ca34bed293af92ceba5568" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp0-basics.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp0-basics.html">Einführung in C&#43;&#43;</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp1-pointer.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp1-pointer.html">C&#43;&#43;: Pointer und Referenzen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp2-classes.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp2-classes.html">C&#43;&#43;: Klassen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp3-big3.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp3-big3.html">C&#43;&#43;: Big 3</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp4-operators.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp4-operators.html">C&#43;&#43;: Operatoren</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp5-inheritance.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp5-inheritance.html">C&#43;&#43;: Vererbung und Polymorphie</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp6-templates.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp6-templates.html">C&#43;&#43;: Templates</a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.html#kursformat"><i class='fas fa-bookmark'></i> Zeiten</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.html#fahrplan"><i class='fas fa-bookmark'></i> Fahrplan</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.html#pr%C3%BCfungsform-note-und-credits"><i class='fas fa-bookmark'></i> Note/Credits</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.html#fahrplan"><i class='fas fa-bookmark'></i> News</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVariantSwitch">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet05.html" lang="de-DE" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch showVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-auto" value="auto" selected>Auto</option>
+                      <option id="R-select-variant-zen-light" value="zen-light">Zen Light</option>
+                      <option id="R-select-variant-zen-dark" value="zen-dark">Zen Dark</option>
+                      <option id="R-select-variant-relearn-bright" value="relearn-bright">Relearn Bright</option>
+                      <option id="R-select-variant-relearn-light" value="relearn-light">Relearn Light</option>
+                      <option id="R-select-variant-relearn-dark" value="relearn-dark">Relearn Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter"><p style="text-align: center;">
+<i class='fab fa-fw fa-github'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor">GitHub</a>
+<i class='fas fa-fw fa-tags'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/issues">Issues</a>
+<i class='fas fa-fw fa-bullhorn'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/CREDITS.md">Credits</a>
+<br />
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+
+</p>
+
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/clipboard.min.js?1734345862" defer></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/perfect-scrollbar.min.js?1734345862" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/mathjax/tex-mml-chtml.js?1734345862"></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/theme.js?1734345862" defer></script>
+  </body>
+</html>

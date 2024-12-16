@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+<html lang="de-DE" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.135.0">
+    <meta name="generator" content="Relearn 6.4.1">
+    <meta name="description" content="Kursbeschreibung Der Compiler ist das wichtigste Werkzeug in der Informatik. In der Königsdisziplin der Informatik schließt sich der Kreis, hier kommen die unterschiedlichen Algorithmen und Datenstrukturen und Programmiersprachenkonzepte zur Anwendung.
+In diesem Modul geht es um ein grundlegendes Verständnis für die wichtigsten Konzepte im Compilerbau. Wir schauen uns dazu relevante aktuelle Tools und Frameworks an und setzen diese bei der Erstellung eines kleinen Compiler-Frontends für C&#43;&#43; ein.">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="IFM 3.1 (PO23) / IFM 5.21 (PO18): Compilerbau (Winter 2024/25)">
+    <meta name="twitter:description" content="Kursbeschreibung Der Compiler ist das wichtigste Werkzeug in der Informatik. In der Königsdisziplin der Informatik schließt sich der Kreis, hier kommen die unterschiedlichen Algorithmen und Datenstrukturen und Programmiersprachenkonzepte zur Anwendung.
+In diesem Modul geht es um ein grundlegendes Verständnis für die wichtigsten Konzepte im Compilerbau. Wir schauen uns dazu relevante aktuelle Tools und Frameworks an und setzen diese bei der Erstellung eines kleinen Compiler-Frontends für C&#43;&#43; ein.">
+    <meta property="og:url" content="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.html">
+    <meta property="og:title" content="IFM 3.1 (PO23) / IFM 5.21 (PO18): Compilerbau (Winter 2024/25)">
+    <meta property="og:description" content="Kursbeschreibung Der Compiler ist das wichtigste Werkzeug in der Informatik. In der Königsdisziplin der Informatik schließt sich der Kreis, hier kommen die unterschiedlichen Algorithmen und Datenstrukturen und Programmiersprachenkonzepte zur Anwendung.
+In diesem Modul geht es um ein grundlegendes Verständnis für die wichtigsten Konzepte im Compilerbau. Wir schauen uns dazu relevante aktuelle Tools und Frameworks an und setzen diese bei der Erstellung eines kleinen Compiler-Frontends für C&#43;&#43; ein.">
+    <meta property="og:locale" content="de_DE">
+    <meta property="og:type" content="website">
+    <meta itemprop="name" content="IFM 3.1 (PO23) / IFM 5.21 (PO18): Compilerbau (Winter 2024/25)">
+    <meta itemprop="description" content="Kursbeschreibung Der Compiler ist das wichtigste Werkzeug in der Informatik. In der Königsdisziplin der Informatik schließt sich der Kreis, hier kommen die unterschiedlichen Algorithmen und Datenstrukturen und Programmiersprachenkonzepte zur Anwendung.
+In diesem Modul geht es um ein grundlegendes Verständnis für die wichtigsten Konzepte im Compilerbau. Wir schauen uns dazu relevante aktuelle Tools und Frameworks an und setzen diese bei der Erstellung eines kleinen Compiler-Frontends für C&#43;&#43; ein.">
+    <meta itemprop="wordCount" content="2769">
+    <title>IFM 3.1 (PO23) / IFM 5.21 (PO18): Compilerbau (Winter 2024/25)</title>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.print.html" rel="alternate" type="text/html" title="IFM 3.1 (PO23) / IFM 5.21 (PO18): Compilerbau (Winter 2024/25)">
+
+    
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/images/logo.png?1734345862" rel="icon" type="image/png">
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/fontawesome-all.min.css?1734345862" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/fontawesome-all.min.css?1734345862" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/nucleus.css?1734345862" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/auto-complete.css?1734345862" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/auto-complete.css?1734345862" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/perfect-scrollbar.min.css?1734345862" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/fonts.css?1734345862" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/fonts.css?1734345862" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/theme.css?1734345862" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/theme-auto.css?1734345862" rel="stylesheet" id="R-variant-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/chroma-auto.css?1734345862" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/variant.css?1734345862" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/print.css?1734345862" rel="stylesheet" media="print">
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/variant.js?1734345862"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='.';
+      window.relearn.relBaseUri='..\/..\/..\/..\/..';
+      window.relearn.absBaseUri='https:\/\/www.hsbi.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1360443';
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      window.index_js_url="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.search.js?1734345862";
+      // variant stuff
+      window.variants && variants.init( [ 'auto', 'zen-light', 'zen-dark', 'relearn-bright', 'relearn-light', 'relearn-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support html disableInlineCopyToClipboard" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li><a href="#kursbeschreibung">Kursbeschreibung</a></li>
+    <li><a href="#überblick-modulinhalte">Überblick Modulinhalte</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#kursformat">Kursformat</a></li>
+    <li><a href="#fahrplan">Fahrplan</a></li>
+    <li><a href="#prüfungsform-note-und-credits">Prüfungsform, Note und Credits</a></li>
+    <li><a href="#materialien">Materialien</a></li>
+    <li><a href="#förderungen-und-kooperationen">Förderungen und Kooperationen</a>
+      <ul>
+        <li><a href="#kooperation-mit-university-of-alberta-edmonton-kanada">Kooperation mit University of Alberta, Edmonton (Kanada)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            IFM 3.1 (PO23) / IFM 5.21 (PO18): Compilerbau (Winter 2024/25)
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-print" data-content-empty="disable" data-width-s="area-more" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.print.html" title="Print whole chapter (CTRL&#43;ALT&#43;p)"><i class="fa-fw fas fa-print"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable home" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="home">
+            <header class="headline">
+            </header>
+
+<h1 id="ifm-31-po23--ifm-521-po18-compilerbau-winter-202425">IFM 3.1 (PO23) / IFM 5.21 (PO18): Compilerbau (Winter 2024/25)</h1>
+
+<p><a href="#R-image-1cdde9c15dcf0324e7dc1b59345c384e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/architektur_cb.png?width=80%25&height=auto" style=" height: auto; width: 80%;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-1cdde9c15dcf0324e7dc1b59345c384e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/architektur_cb.png?width=80%25&height=auto"></a></p>
+<h2 id="kursbeschreibung">Kursbeschreibung</h2>
+<p>Der Compiler ist das wichtigste Werkzeug in der Informatik. In der Königsdisziplin der
+Informatik schließt sich der Kreis, hier kommen die unterschiedlichen Algorithmen und
+Datenstrukturen und Programmiersprachenkonzepte zur Anwendung.</p>
+<p>In diesem Modul geht es um ein grundlegendes Verständnis für die wichtigsten Konzepte
+im Compilerbau. Wir schauen uns dazu relevante aktuelle Tools und Frameworks an und
+setzen diese bei der Erstellung eines kleinen Compiler-Frontends für C++ ein.</p>
+<h2 id="überblick-modulinhalte">Überblick Modulinhalte</h2>
+<ol>
+<li>Lexikalische Analyse: Scanner/Lexer
+<ul>
+<li>Reguläre Sprachen</li>
+<li>Generierung mit ANTLR</li>
+</ul>
+</li>
+<li>Syntaxanalyse: Parser
+<ul>
+<li>Kontextfreie Grammatiken (CFG)</li>
+<li>LL-Parser (Top-Down-Parser)</li>
+<li>Generierung mit ANTLR</li>
+</ul>
+</li>
+<li>Semantische Analyse: Attributierte Grammatiken und Symboltabellen
+<ul>
+<li>Namen und Scopes</li>
+<li>Typen, Klassen, Polymorphie</li>
+</ul>
+</li>
+<li>Zwischencode: Intermediate Representation (IR), LLVM-IR</li>
+<li>Backend:
+<ul>
+<li>LLVM</li>
+<li>Interpreter: AST-Traversierung</li>
+</ul>
+</li>
+<li>C++ als zu verarbeitende Programmiersprache</li>
+</ol>
+<h2 id="team">Team</h2>
+<ul>
+<li><a href="https://www.hsbi.de/minden/ueber-uns/personenverzeichnis/birgit-christina-george" rel="external" target="_blank">BC George</a></li>
+<li><a href="https://www.hsbi.de/minden/ueber-uns/personenverzeichnis/carsten-gips" rel="external" target="_blank">Carsten Gips</a> (Sprechstunde nach Vereinbarung)</li>
+</ul>
+<h2 id="kursformat">Kursformat</h2>
+<div class="tab-panel" data-tab-group="modul-po">
+  <div class="tab-nav">
+    <div class="tab-nav-title">&#8203;</div>
+    <button
+      data-tab-item="ifm-31-cb-po23-3-semester"
+      class="tab-nav-button tab-panel-style cstyle initial active" tabindex="-1"
+      onclick="switchTab('modul-po','ifm-31-cb-po23-3-semester')"
+    >
+      <span class="tab-nav-text">IFM 3.1 CB (PO23, 3. Semester)</span>
+    </button>
+    <button
+      data-tab-item="ifm-521-cb-po18-5-semester"
+      class="tab-nav-button tab-panel-style cstyle initial"
+      onclick="switchTab('modul-po','ifm-521-cb-po18-5-semester')"
+    >
+      <span class="tab-nav-text">IFM 5.21 CB (PO18, 5. Semester)</span>
+    </button>
+  </div>
+  <div class="tab-content-container">
+    <div
+      data-tab-item="ifm-31-cb-po23-3-semester"
+      class="tab-content tab-panel-style cstyle initial active">
+      <div class="tab-content-text">
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">Vorlesung (2 SWS)</th>
+          <th style="text-align: left">Praktikum (2 SWS)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">Mi, 08:00 - 09:30 Uhr (online)</td>
+          <td style="text-align: left">S3, G1: Di, 11:30 - 13:00 Uhr (online/Präsenz J101)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">(Carsten: <em>Flipped Classroom</em>, BC: <em>Vorlesung</em>)</td>
+          <td style="text-align: left">S3, G2: Fr, 14:00 - 15:30 Uhr (online/Präsenz J101)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">S3, G3: Mo, 09:15 - 10:45 Uhr (online/Präsenz J101)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">(Carsten: <em>online</em>, BC: <em>Präsenz</em>)</td>
+      </tr>
+  </tbody>
+</table>
+<p>Online-Sitzungen per Zoom (<strong>Zugangsdaten siehe <a href="https://www.hsbi.de/elearning/goto.php?target=crs_1400596&client_id=FH-Bielefeld" rel="external" target="_blank">ILIAS IFM 3.1 CB (PO23, 3. Semester)</a></strong>).
+Sie <em>können</em> hierzu den Raum J101 (siehe Stundenplan) nutzen.</p>
+      </div>
+    </div>
+    <div
+      data-tab-item="ifm-521-cb-po18-5-semester"
+      class="tab-content tab-panel-style cstyle initial">
+      <div class="tab-content-text">
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">Vorlesung (2 SWS)</th>
+          <th style="text-align: left">Praktikum (2 SWS)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">Mi, 08:00 - 09:30 Uhr (online)</td>
+          <td style="text-align: left">S5, G1: Mi, 09:45 - 11:15 Uhr (online)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">(Carsten: <em>Flipped Classroom</em>, BC: <em>Vorlesung</em>)</td>
+          <td style="text-align: left">S5, G2: Mi, 09:45 - 11:15 Uhr (online)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">S5, G3: Mi, 09:45 - 11:15 Uhr (online)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">(Carsten: <em>online</em>, BC: <em>online</em>)</td>
+      </tr>
+  </tbody>
+</table>
+<p>Online-Sitzungen per Zoom (<strong>Zugangsdaten siehe <a href="https://www.hsbi.de/elearning/goto.php?target=crs_1400603&client_id=FH-Bielefeld" rel="external" target="_blank">IFM 5.21 CB (PO18, 5. Semester)</a></strong>).
+Sie <em>können</em> hierzu den Raum J101 (siehe Stundenplan) nutzen.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<h2 id="fahrplan">Fahrplan</h2>
+<div class="tab-panel" data-tab-group="modul-po">
+  <div class="tab-nav">
+    <div class="tab-nav-title">&#8203;</div>
+    <button
+      data-tab-item="ifm-31-cb-po23-3-semester"
+      class="tab-nav-button tab-panel-style cstyle initial active" tabindex="-1"
+      onclick="switchTab('modul-po','ifm-31-cb-po23-3-semester')"
+    >
+      <span class="tab-nav-text">IFM 3.1 CB (PO23, 3. Semester)</span>
+    </button>
+    <button
+      data-tab-item="ifm-521-cb-po18-5-semester"
+      class="tab-nav-button tab-panel-style cstyle initial"
+      onclick="switchTab('modul-po','ifm-521-cb-po18-5-semester')"
+    >
+      <span class="tab-nav-text">IFM 5.21 CB (PO18, 5. Semester)</span>
+    </button>
+  </div>
+  <div class="tab-content-container">
+    <div
+      data-tab-item="ifm-31-cb-po23-3-semester"
+      class="tab-content tab-panel-style cstyle initial active">
+      <div class="tab-content-text">
+<div class="box notices cstyle note">
+  <div class="box-label">
+    <i class="fa-fw fas fa-exclamation-circle"></i> News
+  </div>
+  <div class="box-content">
+<div class="expand">
+  <input type="checkbox" id="R-expand-129fc3e684e02ed8710a41961471c507" aria-controls="R-expandcontent-129fc3e684e02ed8710a41961471c507">
+  <label class="expand-label" for="R-expand-129fc3e684e02ed8710a41961471c507">
+    <i class="expander-icon fa-fw fas fa-chevron-down"></i>
+    <i class="expander-icon fa-fw fas fa-chevron-right"></i> 16.12.24
+  </label>
+  <div id="R-expandcontent-129fc3e684e02ed8710a41961471c507" class="expand-content">
+<h3 id="nachtrag-zur-anpassung-der-gewichtung-der-beiden-stationen-der-parcoursprüfung-war-2911">Nachtrag zur Anpassung der Gewichtung der beiden Stationen der Parcoursprüfung (war 29.11.)</h3>
+<p>Es war ursprünglich vorgesehen, die Gesamtnote als Mittelwert der Noten der beiden
+Parcours-Stationen zu berechnen: Gewichtung 50% (Station I) und 50% (Station II).</p>
+<p>Am 29.11. haben wir auf vielfachen Wunsch hin die Gewichtung der Stationen der
+Parcoursprüfung angepasst: Gewichtung 33 Punkte (Station I) und 50 Punkte (Station II).</p>
+<p>Um eine potentielle Benachteiligung zu vermeiden, werden wir eine individuelle
+Günstigerprüfung vornehmen: Wir werden für jede Person jeweils beide Verhältnisse
+berechnen und automatisch die bessere Note werten.</p>
+<p>Zusätzlich werden für Station I 3 Punkte Überhang gewährt. Von den 33 maximal
+erreichbaren Punkten werden 30 Punkte als 100% gewertet, darüber hinausgehende
+Punkte bleiben als Bonuspunkte erhalten.</p>
+<p>Dies gilt für die Prüfung im ersten Zeitraum.</p>
+  </div>
+</div>
+<div class="expand">
+  <input type="checkbox" id="R-expand-93f42a3f1466b49773c7bf38eabd8fce" aria-controls="R-expandcontent-93f42a3f1466b49773c7bf38eabd8fce">
+  <label class="expand-label" for="R-expand-93f42a3f1466b49773c7bf38eabd8fce">
+    <i class="expander-icon fa-fw fas fa-chevron-down"></i>
+    <i class="expander-icon fa-fw fas fa-chevron-right"></i> 04.12.24
+  </label>
+  <div id="R-expandcontent-93f42a3f1466b49773c7bf38eabd8fce" class="expand-content">
+<p>Da die Projektwoche (16.-20.12.2024) mangels Interesse nicht stattfinden wird, biete ich eine
+zusätzliche Sprechstunde im Vorlesungsslot am 18.12. an.</p>
+  </div>
+</div>
+<div class="expand">
+  <input type="checkbox" id="R-expand-66f2c3b0ad37e129f8085145a6b0e078" aria-controls="R-expandcontent-66f2c3b0ad37e129f8085145a6b0e078">
+  <label class="expand-label" for="R-expand-66f2c3b0ad37e129f8085145a6b0e078">
+    <i class="expander-icon fa-fw fas fa-chevron-down"></i>
+    <i class="expander-icon fa-fw fas fa-chevron-right"></i> 29.11.24
+  </label>
+  <div id="R-expandcontent-66f2c3b0ad37e129f8085145a6b0e078" class="expand-content">
+<h3 id="anpassung-der-gewichtung-der-parcours-stationen">Anpassung der Gewichtung der Parcours-Stationen</h3>
+<p>Auf vielfachen Wunsch passen wir die Gewichtung der Stationen der Parcoursprüfung an:</p>
+<ul>
+<li>Station I: 33 Punkte</li>
+<li>Station II: 50 Punkte</li>
+</ul>
+  </div>
+</div>
+<div class="expand">
+  <input type="checkbox" id="R-expand-f5453d1ff2a1cf1319f2c9ea051bcde4" aria-controls="R-expandcontent-f5453d1ff2a1cf1319f2c9ea051bcde4">
+  <label class="expand-label" for="R-expand-f5453d1ff2a1cf1319f2c9ea051bcde4">
+    <i class="expander-icon fa-fw fas fa-chevron-down"></i>
+    <i class="expander-icon fa-fw fas fa-chevron-right"></i> 29.11.24
+  </label>
+  <div id="R-expandcontent-f5453d1ff2a1cf1319f2c9ea051bcde4" class="expand-content">
+<h3 id="ergebnisse-und-einsicht-parcoursprüfung-station-1-ilias">Ergebnisse und Einsicht Parcoursprüfung: Station 1 ILIAS</h3>
+<p>Die erste Station der Parcoursprüfung vom 20.11. ist korrigiert.</p>
+<p>Die Einsicht findet von Montag, 02.12., 08:00 Uhr bis Donnerstag, 05.12., 16:00 Uhr online statt. Gehen
+Sie dazu bitte selbstständig auf den E-Assessment-Server (<a href="https://eassessment.hsbi.de/goto.php?target=crs_7284" rel="external" target="_blank">https://eassessment.hsbi.de/goto.php?target=crs_7284</a>,
+via VPN) und schauen sich unter &quot;Ergebnisse&quot; die Bewertung Ihrer Antworten an. Wenn dabei Fragen auftreten,
+schicken Sie bitte bis Donnerstag, 05.12., 16:00 Uhr eine kurze Mail an Carsten Gips mit Ihren konkreten Fragen.
+Wir werden dann mit Ihnen für Freitag (06.12., zw. 15 und 17 Uhr) einen kurzen Gesprächstermin vereinbaren.</p>
+  </div>
+</div>
+<div class="expand">
+  <input type="checkbox" id="R-expand-db993c12655917ef4ac4c8b1a12b44ac" aria-controls="R-expandcontent-db993c12655917ef4ac4c8b1a12b44ac">
+  <label class="expand-label" for="R-expand-db993c12655917ef4ac4c8b1a12b44ac">
+    <i class="expander-icon fa-fw fas fa-chevron-down"></i>
+    <i class="expander-icon fa-fw fas fa-chevron-right"></i> 12.11.24
+  </label>
+  <div id="R-expandcontent-db993c12655917ef4ac4c8b1a12b44ac" class="expand-content">
+<h3 id="organisation-parcoursprüfung-station-1-ilias">Organisation Parcoursprüfung: Station 1 ILIAS</h3>
+<p>Die erste Station der Parcoursprüfung findet wie im Fahrplan beschrieben am Mittwoch,
+den 20. November im B40 statt. Wir schreiben in zwei Durchgängen:</p>
+<ol>
+<li>09:45 - 10:30 Uhr: alle Studierenden, deren Nachname mit den Buchstaben &quot;A&quot; bis &quot;L&quot; beginnt,</li>
+<li>10:45 - 11:30 Uhr: alle Studierenden, deren Nachname mit den Buchstaben &quot;M&quot; bis &quot;Z&quot; beginnt.</li>
+</ol>
+<p>Thematisch geht es um die Themen der Wochen 41 bis 45, also insbesondere Lexer, CFG, LL-Parser
+und ANTLR.</p>
+<p>Die Prüfung wird auf einem ILIAS-System durchgeführt. Bitte denkt an euren Usernamen und das Passwort.</p>
+<p>Erlaubtes Hilfsmittel: Ein handschriftlich beschriebenes DIN-A4-Blatt (Vorder- und Rückseite können
+genutzt werden).</p>
+  </div>
+</div>
+<div class="expand">
+  <input type="checkbox" id="R-expand-e413b5a3ff98afdafc4f02fe82f33866" aria-controls="R-expandcontent-e413b5a3ff98afdafc4f02fe82f33866">
+  <label class="expand-label" for="R-expand-e413b5a3ff98afdafc4f02fe82f33866">
+    <i class="expander-icon fa-fw fas fa-chevron-down"></i>
+    <i class="expander-icon fa-fw fas fa-chevron-right"></i> 29.10.24
+  </label>
+  <div id="R-expandcontent-e413b5a3ff98afdafc4f02fe82f33866" class="expand-content">
+<h3 id="verschiebung-praktikum-zu-b02-für-gruppe-3-do-0711-0800-uhr">Verschiebung Praktikum zu B02 für Gruppe 3: Do, 07.11., 08:00 Uhr</h3>
+<p>Wie bereits in der Vorlesung angekündigt, muss das Praktikum für Blatt 02 für Gruppe 3 aus
+gesundheitlichen Gründen leider von Montag, 04.11. auf Donnerstag, 07.11. verschoben werden.
+Start ist um 08:00 Uhr.</p>
+  </div>
+</div>
+<div class="expand">
+  <input type="checkbox" id="R-expand-248013fffc4b98d2c6abaea178ccf0b1" aria-controls="R-expandcontent-248013fffc4b98d2c6abaea178ccf0b1">
+  <label class="expand-label" for="R-expand-248013fffc4b98d2c6abaea178ccf0b1">
+    <i class="expander-icon fa-fw fas fa-chevron-down"></i>
+    <i class="expander-icon fa-fw fas fa-chevron-right"></i> 28.10.24
+  </label>
+  <div id="R-expandcontent-248013fffc4b98d2c6abaea178ccf0b1" class="expand-content">
+<h3 id="info-zum-antlr-meeting-mit-edmonton-am-di-2910">Info zum ANTLR-Meeting mit Edmonton am Di, 29.10.</h3>
+<p>Am Dienstag, den 29.10., treffen wir uns wie angekündigt um 18 Uhr zum ersten Meeting mit den Studis und
+Kollegen von der University of Alberta (Edmonton, Kanada). Dazu nutzen wir unseren Zoom (vgl.
+<a href="https://www.hsbi.de/elearning/goto.php?target=crs_1400596&client_id=FH-Bielefeld" rel="external" target="_blank">ILIAS IFM 3.1 CB (PO23, 3. Semester)</a>).</p>
+<p><strong>Bitte fügt eurem im Zoom angezeigten Namen ein <em>&quot; (DE)&quot;</em> hinten an.</strong></p>
+<p><em>Beispiel</em>: Euer angezeigter Name wäre normalerweise <code>Vorname Nachname</code>. Für die Sitzung am Dienstag hängt
+ihr bitte ein &quot;<code>(DE)</code>&quot; hinten dran und habt entsprechend den Anzeigenamen <strong><code>Vorname Nachname (DE)</code></strong>.</p>
+<p>Wir freuen uns auf eine spannende Einführung in ANTLR und ein lustiges Meeting!</p>
+  </div>
+</div>
+<div class="expand">
+  <input type="checkbox" id="R-expand-583761d0e3bb6eff687c7ea2889dc06d" aria-controls="R-expandcontent-583761d0e3bb6eff687c7ea2889dc06d">
+  <label class="expand-label" for="R-expand-583761d0e3bb6eff687c7ea2889dc06d">
+    <i class="expander-icon fa-fw fas fa-chevron-down"></i>
+    <i class="expander-icon fa-fw fas fa-chevron-right"></i> 21.10.24
+  </label>
+  <div id="R-expandcontent-583761d0e3bb6eff687c7ea2889dc06d" class="expand-content">
+<h3 id="zeitänderung-gruppe-2-am-24012025">Zeitänderung Gruppe 2 am 24.01.2025</h3>
+<p>Das letzte Praktikum von Gruppe 2 (am Fr, 24.01.2025) findet eine Stunde später
+statt als sonst: 15:00 - 16:30 Uhr.</p>
+  </div>
+</div>
+<div class="expand">
+  <input type="checkbox" id="R-expand-fde03e365f9c032a582af00977df195f" aria-controls="R-expandcontent-fde03e365f9c032a582af00977df195f">
+  <label class="expand-label" for="R-expand-fde03e365f9c032a582af00977df195f">
+    <i class="expander-icon fa-fw fas fa-chevron-down"></i>
+    <i class="expander-icon fa-fw fas fa-chevron-right"></i> 16.10.24
+  </label>
+  <div id="R-expandcontent-fde03e365f9c032a582af00977df195f" class="expand-content">
+<h3 id="update-b01">Update B01</h3>
+<p>Bitte beachten Sie die Aktualisierung von B01.</p>
+<p>Die bisherigen Aufgaben 5 und 6 kamen versehentlich doppelt vor. Dies wurde
+korrigiert, d.h. es gibt jetzt eine Aufgabe weniger und Aufgabe 2 hat einen
+dritten Punkt neu dazu bekommen.</p>
+  </div>
+</div>
+<div class="expand">
+  <input type="checkbox" id="R-expand-4947f71d210a95a79f3eeff5eb1dc137" aria-controls="R-expandcontent-4947f71d210a95a79f3eeff5eb1dc137">
+  <label class="expand-label" for="R-expand-4947f71d210a95a79f3eeff5eb1dc137">
+    <i class="expander-icon fa-fw fas fa-chevron-down"></i>
+    <i class="expander-icon fa-fw fas fa-chevron-right"></i> 09.10.24
+  </label>
+  <div id="R-expandcontent-4947f71d210a95a79f3eeff5eb1dc137" class="expand-content">
+<h3 id="teams">Teams</h3>
+<p>Bitte bearbeiten Sie die Aufgaben in 3er Teams.</p>
+<p>Es ist empfehlenswert, wenn alle Personen im Team in der selben Stundenplangruppe
+(Praktikumsgruppe) sind. Sie können aber auch Teams über verschiedene Gruppen
+hinweg bilden. Geben Sie individuell im ILIAS ab und stellen Sie die Lösung dann
+individuell in Ihrer jeweiligen Praktikumsgruppe vor.</p>
+<p>Sie können Ihre Teams jederzeit selbstständig im Semester ändern/wechseln.</p>
+<p><strong>Achtung</strong>: Den Vortrag zu <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet07.html">B07</a> müssen Sie aber <strong>gemeinsam als Team</strong> halten.
+Wenn Ihre Teammitglieder aus verschiedenen Stundenplangruppen kommen sollten,
+findet der Vortrag in der Gruppe statt, aus der die meisten der Teammitglieder
+kommen. Bitte beachten Sie das bei der Teamwahl!</p>
+<h3 id="abgabe-ilias">Abgabe ILIAS</h3>
+<p>Das Abgabeverfahren im ILIAS wurde deutlich vereinfacht: Jede Person gibt für
+jedes Blatt individuell direkt im ILIAS an, welche Aufgaben das Team bearbeitet
+hat (also keine Teambildung und keine Textdatei mehr im ILIAS).</p>
+<p>Bitte darauf achten, dass Sie das die angegebenen Aufgaben auch vorstellen können
+müssen! Achten Sie bitte auch auf die mind. 60% für das Testat.</p>
+<h3 id="praktikum">Praktikum</h3>
+<p>Sie gehen einfach in das Praktikum, welches Ihrer Stundenplangruppe zugeordnet ist
+und stellen dort individuell die Lösungen Ihres Teams vor.</p>
+<p>Den Vortrag zu <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet07.html">B07</a> (letzte VL-Woche) halten Sie dann in die Praktikumsgruppe, in
+der die meisten Teammitglieder sind. Bitte prüfen Sie, ob das für Sie passt (vom
+Stundenplan her möglich ist) und wählen Sie ggf. ein anderes Team. Wir werden
+rechtzeitig eine entsprechende Planung organisieren. Einige Vorträge werden wir
+aber auch im Vorlesungsslot machen müssen, d.h. hier besteht bei Bedarf eine
+Ausweichmöglichkeit.</p>
+  </div>
+</div>
+  </div>
+</div>
+<p>Hier finden Sie einen abonnierbaren <a href="https://calendar.google.com/calendar/ical/07021c87022fe3f132fa2e2e799b230b5ab9c7088c85d152f2beab8f1b5218af%40group.calendar.google.com/public/basic.ics" rel="external" target="_blank">Google Kalender IFM 3.1 CB (PO23, 3. Semester)</a> mit allen Terminen der Veranstaltung zum Einbinden in Ihre Kalender-App.</p>
+<p>Abgabe der Übungsblätter jeweils <strong>Montag bis 09:00 Uhr</strong> im <a href="https://www.hsbi.de/elearning/goto.php?target=exc_1420724&client_id=FH-Bielefeld" rel="external" target="_blank">ILIAS</a>. Vorstellung der Lösung im jeweiligen Praktikum in der Abgabewoche.</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">Monat</th>
+          <th style="text-align: left">Woche</th>
+          <th style="text-align: left">Vorlesung</th>
+          <th style="text-align: left">Lead</th>
+          <th style="text-align: left">Abgabe Aufgabenblatt</th>
+          <th style="text-align: left">Vorstellung Praktikum</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">Oktober</td>
+          <td style="text-align: left">41</td>
+          <td style="text-align: left">09.: <a href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.html#%C3%BCberblick-modulinhalte" rel="external" target="_blank">Orga</a> (<em>Zoom</em>); <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/overview.html">Überblick</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/languages.html">Sprachen</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/applications.html">Anwendungen</a></td>
+          <td style="text-align: left">Carsten, BC</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">42</td>
+          <td style="text-align: left">16.: <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing/regular.html">Reguläre Sprachen</a></td>
+          <td style="text-align: left">BC</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">43</td>
+          <td style="text-align: left">23.: <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing/cfg.html">CFG</a></td>
+          <td style="text-align: left">BC</td>
+          <td style="text-align: left">21.: <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet01.html">B01</a> Reguläre Sprachen</td>
+          <td style="text-align: left">21. / 22. / 25. (BC, <em>Präsenz</em>)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">44</td>
+          <td style="text-align: left">29.: <strong>18:00 - 19:30 Uhr (online): Edmonton I: ANTLR + Live-Coding</strong></td>
+          <td style="text-align: left"><em>Edmonton</em></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">44</td>
+          <td style="text-align: left">30.: <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing/antlr-lexing.html">Lexer mit ANTLR</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing/antlr-parsing.html">Parser mit ANTLR</a></td>
+          <td style="text-align: left">Carsten</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">November</td>
+          <td style="text-align: left">45</td>
+          <td style="text-align: left">06.: <em>Dienstbesprechung</em></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">04.: <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet02.html">B02</a> CFG</td>
+          <td style="text-align: left"><del>04.</del> <strong>07. 08:00</strong> / 05. / 08. (BC, <em>Präsenz</em>)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">46</td>
+          <td style="text-align: left">13.: <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab0-intro.html">Überblick Symboltabellen</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab1-scopes.html">Symboltabellen: Scopes</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab2-functions.html">Symboltabellen: Funktionen</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab3-classes.html">Symboltabellen: Klassen</a></td>
+          <td style="text-align: left">Carsten</td>
+          <td style="text-align: left">11.: <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet03.html">B03</a> ANTLR</td>
+          <td style="text-align: left">11. / 12. / 15. (Carsten, <em>online</em>)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">47</td>
+          <td style="text-align: left">20.: <span class='alert'><strong>A-L: 09:45 - 10:30 Uhr, M-Z: 10:45 - 11:30 Uhr (B40): Parcoursprüfung: Station 1 ILIAS (Grammar, Lexing, Parsing), siehe Ankündigung</strong></span></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">18.: <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet04.html">B04</a> Semantische Analyse</td>
+          <td style="text-align: left">18. / 19. / 22. (Carsten, <em>online</em>)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">48</td>
+          <td style="text-align: left">26.: <strong>18:00 - 19:30 Uhr (online): Edmonton II: Vorträge Mindener Projekte</strong></td>
+          <td style="text-align: left"><em>Minden</em></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">48</td>
+          <td style="text-align: left">27.: <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate/intro-ir.html">Überblick Zwischencode</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate/llvm-ir.html">Überblick Backend (LLVM)</a></td>
+          <td style="text-align: left">BC, Carsten</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Dezember</td>
+          <td style="text-align: left">49</td>
+          <td style="text-align: left">03.: <strong>18:00 - 19:30 Uhr (online): Edmonton III: Vorträge Edmontoner Projekte</strong></td>
+          <td style="text-align: left"><em>Edmonton</em></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">49</td>
+          <td style="text-align: left">04.: <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation/astdriven-part1.html">AST-basierte Interpreter 1</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation/astdriven-part2.html">AST-basierte Interpreter 2</a></td>
+          <td style="text-align: left">Carsten</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">50</td>
+          <td style="text-align: left">11.: C++ I: <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp0-basics.html">Basics</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp1-pointer.html">Pointer &amp; Referenzen</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp2-classes.html">Klassen</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp3-big3.html">Big 3</a></td>
+          <td style="text-align: left">Carsten</td>
+          <td style="text-align: left">09.: <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet05.html">B05</a> Interpreter</td>
+          <td style="text-align: left">09. / 10. / 13. (Carsten, <em>online</em>)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">51</td>
+          <td style="text-align: left">18.: <del>Projektwoche Semester 1+3</del> C++ II: <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp4-operators.html">Operatoren</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp5-inheritance.html">Vererbung &amp; Polymorphie</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp6-templates.html">Templates</a></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">52</td>
+          <td style="text-align: left">25.: <em>Weihnachtspause</em></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Januar</td>
+          <td style="text-align: left">01</td>
+          <td style="text-align: left">01.: <em>Weihnachtspause</em></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">02</td>
+          <td style="text-align: left">08.: <em>Sprechstunde/Freies Arbeiten</em></td>
+          <td style="text-align: left">Carsten</td>
+          <td style="text-align: left">06.: <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet06.html">B06</a> C++</td>
+          <td style="text-align: left">06. / 07. / 10. (Carsten, <em>online</em>)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">03</td>
+          <td style="text-align: left">15.: <em>Freies Arbeiten/Puffer</em></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">04</td>
+          <td style="text-align: left">22.: <span class='alert'><strong>Parcoursprüfung: Station 2 <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet07.html">B07</a> (VL- und Praktika-Slots, siehe Ankündigung)</strong></span></td>
+          <td style="text-align: left">Carsten, BC</td>
+          <td style="text-align: left">20.: <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet07.html">B07</a> Mini-Projekt</td>
+          <td style="text-align: left">20. / 21. / 24. (<strong>15:00-16:30</strong>) (Carsten/BC, <em>online</em>)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><em>(Prüfungsphase I)</em></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"><em>Keine separate Prüfung</em></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><em>(Prüfungsphase II)</em></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"><span class='alert'><strong>Parcoursprüfung: Do, 27. Mar 2025, 08-18 Uhr, mdl. Prüfung (alle Themen)</strong></span> (je Prüfung ca. 45', Vergabe ca. 2 Wochen vorher)</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+  </tbody>
+</table>
+      </div>
+    </div>
+    <div
+      data-tab-item="ifm-521-cb-po18-5-semester"
+      class="tab-content tab-panel-style cstyle initial">
+      <div class="tab-content-text">
+<div class="box notices cstyle note">
+  <div class="box-label">
+    <i class="fa-fw fas fa-exclamation-circle"></i> News
+  </div>
+  <div class="box-content">
+<div class="expand">
+  <input type="checkbox" id="R-expand-2ee6c2d2909b455eb14e339f9708f7fe" aria-controls="R-expandcontent-2ee6c2d2909b455eb14e339f9708f7fe">
+  <label class="expand-label" for="R-expand-2ee6c2d2909b455eb14e339f9708f7fe">
+    <i class="expander-icon fa-fw fas fa-chevron-down"></i>
+    <i class="expander-icon fa-fw fas fa-chevron-right"></i> 16.12.24
+  </label>
+  <div id="R-expandcontent-2ee6c2d2909b455eb14e339f9708f7fe" class="expand-content">
+<h3 id="anpassung-der-gewichtung-der-beiden-stationen-der-parcoursprüfung">Anpassung der Gewichtung der beiden Stationen der Parcoursprüfung</h3>
+<p>Es war ursprünglich vorgesehen, die Gesamtnote als Mittelwert der Noten der beiden
+Parcours-Stationen zu berechnen: Gewichtung 50% (Station 1) und 50% (Station 2).</p>
+<p>In Anlehnung an die Anpassung der Notenberechnung für das dritte Semester bieten
+wir an, die Gesamtnote alternativ mit der Gewichtung 40% (Station 1) und 60%
+(Station 2) zu berechnen.</p>
+<p>Wir werden für jede Person jeweils beide Verhältnisse berechnen und automatisch die
+bessere Note werten (individuelle Günstigerprüfung).</p>
+<p>Dies gilt für die Prüfung im ersten Zeitraum.</p>
+  </div>
+</div>
+<div class="expand">
+  <input type="checkbox" id="R-expand-15694c8d474e6aeff31ad8e1c62e8d89" aria-controls="R-expandcontent-15694c8d474e6aeff31ad8e1c62e8d89">
+  <label class="expand-label" for="R-expand-15694c8d474e6aeff31ad8e1c62e8d89">
+    <i class="expander-icon fa-fw fas fa-chevron-down"></i>
+    <i class="expander-icon fa-fw fas fa-chevron-right"></i> 16.12.24
+  </label>
+  <div id="R-expandcontent-15694c8d474e6aeff31ad8e1c62e8d89" class="expand-content">
+<h3 id="feedback-zu-den-ergebnissen-der-station-1-der-parcoursprüfung">Feedback zu den Ergebnissen der Station 1 der Parcoursprüfung</h3>
+<p>Wir möchten Ihnen im Praktikum am 18.12. ein Feedback zu den Ergebnissen der Station 1
+der Parcoursprüfung geben.</p>
+  </div>
+</div>
+<div class="expand">
+  <input type="checkbox" id="R-expand-bcc970360f8217b4dac5e573ecf0b2a8" aria-controls="R-expandcontent-bcc970360f8217b4dac5e573ecf0b2a8">
+  <label class="expand-label" for="R-expand-bcc970360f8217b4dac5e573ecf0b2a8">
+    <i class="expander-icon fa-fw fas fa-chevron-down"></i>
+    <i class="expander-icon fa-fw fas fa-chevron-right"></i> 09.11.24
+  </label>
+  <div id="R-expandcontent-bcc970360f8217b4dac5e573ecf0b2a8" class="expand-content">
+<h3 id="umplanung-der-vorträge-zur-ersten-station-der-parcoursprüfung">Umplanung der Vorträge zur ersten Station der Parcoursprüfung</h3>
+<p>Die Vorträge zur Station 1 der Parcoursprüfung waren ursprünglich für den 20.11. (zur Probe) und
+dann live auf dem zweiten Edmonton-Meeting (26.11., mit Bewertung) geplant.</p>
+<p>Aus zeitlichen Gründen müssen wir leider etwas umplanen und die Vorträge um eine bzw. zwei Woche(n)
+verschieben. Wir werden dazu die Teams auf zwei Termine aufteilen: Die ersten drei Teams werden im
+Praktikum am 27.11. vortragen und die restlichen zwei Teams im Praktikum am 04.12. ... Abgabe für
+alle Teams im ILIAS ist aber bereits der 27.11.(!)</p>
+  </div>
+</div>
+<div class="expand">
+  <input type="checkbox" id="R-expand-2724e1731447c1780595f7c7d1eefc0a" aria-controls="R-expandcontent-2724e1731447c1780595f7c7d1eefc0a">
+  <label class="expand-label" for="R-expand-2724e1731447c1780595f7c7d1eefc0a">
+    <i class="expander-icon fa-fw fas fa-chevron-down"></i>
+    <i class="expander-icon fa-fw fas fa-chevron-right"></i> 28.10.24
+  </label>
+  <div id="R-expandcontent-2724e1731447c1780595f7c7d1eefc0a" class="expand-content">
+<h3 id="info-zum-antlr-meeting-mit-edmonton-am-di-2910">Info zum ANTLR-Meeting mit Edmonton am Di, 29.10.</h3>
+<p>Am Dienstag, den 29.10., treffen wir uns wie angekündigt um 18 Uhr zum ersten Meeting mit den Studis und
+Kollegen von der University of Alberta (Edmonton, Kanada). Dazu nutzen wir unseren Zoom (vgl.
+<a href="https://www.hsbi.de/elearning/goto.php?target=crs_1400603&client_id=FH-Bielefeld" rel="external" target="_blank">IFM 5.21 CB (PO18, 5. Semester)</a>).</p>
+<p><strong>Bitte fügt eurem im Zoom angezeigten Namen ein <em>&quot; (DE)&quot;</em> hinten an.</strong></p>
+<p><em>Beispiel</em>: Euer angezeigter Name wäre normalerweise <code>Vorname Nachname</code>. Für die Sitzung am Dienstag hängt
+ihr bitte ein &quot;<code>(DE)</code>&quot; hinten dran und habt entsprechend den Anzeigenamen <strong><code>Vorname Nachname (DE)</code></strong>.</p>
+<p>Wir freuen uns auf eine spannende Einführung in ANTLR und ein lustiges Meeting!</p>
+  </div>
+</div>
+<div class="expand">
+  <input type="checkbox" id="R-expand-fe1303c4ec8c105130882c83b176db99" aria-controls="R-expandcontent-fe1303c4ec8c105130882c83b176db99">
+  <label class="expand-label" for="R-expand-fe1303c4ec8c105130882c83b176db99">
+    <i class="expander-icon fa-fw fas fa-chevron-down"></i>
+    <i class="expander-icon fa-fw fas fa-chevron-right"></i> 23.10.24
+  </label>
+  <div id="R-expandcontent-fe1303c4ec8c105130882c83b176db99" class="expand-content">
+<h3 id="verschiebung-des-praktikums-zu-blatt-01-auf-3010-16-uhr">Verschiebung des Praktikums zu Blatt 01 auf 30.10., 16 Uhr</h3>
+<p>Das Praktikum zur Vorstellung von Blatt 01 musste aus gesundheitlichen Gründen
+um eine Woche verschoben werden.</p>
+<p><strong>Neuer Termin für die Vorstellung von Blatt 01: Mi, 30.10., 16:00 - 17:30 Uhr</strong>.</p>
+  </div>
+</div>
+<div class="expand">
+  <input type="checkbox" id="R-expand-2928a69bdba146851f5c7adbeca1fe12" aria-controls="R-expandcontent-2928a69bdba146851f5c7adbeca1fe12">
+  <label class="expand-label" for="R-expand-2928a69bdba146851f5c7adbeca1fe12">
+    <i class="expander-icon fa-fw fas fa-chevron-down"></i>
+    <i class="expander-icon fa-fw fas fa-chevron-right"></i> 16.10.24
+  </label>
+  <div id="R-expandcontent-2928a69bdba146851f5c7adbeca1fe12" class="expand-content">
+<h3 id="update-b01">Update B01</h3>
+<p>Bitte beachten Sie die Aktualisierung von B01.</p>
+<p>Die bisherigen Aufgaben 5 und 6 kamen versehentlich doppelt vor. Dies wurde
+korrigiert, d.h. es gibt jetzt eine Aufgabe weniger und Aufgabe 2 hat einen
+dritten Punkt neu dazu bekommen.</p>
+  </div>
+</div>
+<div class="expand">
+  <input type="checkbox" id="R-expand-9a127a493f675c1004608922afff454f" aria-controls="R-expandcontent-9a127a493f675c1004608922afff454f">
+  <label class="expand-label" for="R-expand-9a127a493f675c1004608922afff454f">
+    <i class="expander-icon fa-fw fas fa-chevron-down"></i>
+    <i class="expander-icon fa-fw fas fa-chevron-right"></i> 09.10.24
+  </label>
+  <div id="R-expandcontent-9a127a493f675c1004608922afff454f" class="expand-content">
+<h3 id="teams">Teams</h3>
+<p>Bitte bearbeiten Sie die Aufgaben in 3er Teams.</p>
+<p>Es ist empfehlenswert, wenn alle Personen im Team in der selben Stundenplangruppe
+(Praktikumsgruppe) sind. Sie können aber auch Teams über verschiedene Gruppen
+hinweg bilden. Geben Sie individuell im ILIAS ab und stellen Sie die Lösung dann
+individuell in Ihrer jeweiligen Praktikumsgruppe vor.</p>
+<p>Sie können Ihre Teams jederzeit selbstständig im Semester ändern/wechseln.</p>
+<p><strong>Achtung</strong>: Den Vortrag zu <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet07x.html">B07x</a> müssen Sie (wie auch den Vortrag zu <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet04x.html">B04x</a>) aber
+<strong>gemeinsam als Team</strong> halten. Wenn Ihre Teammitglieder aus verschiedenen
+Stundenplangruppen kommen sollten, findet der Vortrag in der Gruppe statt, aus der
+die meisten der Teammitglieder kommen. Bitte beachten Sie das bei der Teamwahl!</p>
+<h3 id="abgabe-ilias">Abgabe ILIAS</h3>
+<p>Das Abgabeverfahren im ILIAS wurde deutlich vereinfacht: Jede Person gibt für
+jedes Blatt individuell direkt im ILIAS an, welche Aufgaben das Team bearbeitet
+hat (also keine Teambildung und keine Textdatei mehr im ILIAS).</p>
+<p>Bitte darauf achten, dass Sie das die angegebenen Aufgaben auch vorstellen können
+müssen! Achten Sie bitte auch auf die mind. 60% für das Testat.</p>
+<h3 id="praktikum">Praktikum</h3>
+<p>Sie gehen einfach in das Praktikum, welches Ihrer Stundenplangruppe zugeordnet ist
+und stellen dort individuell die Lösungen Ihres Teams vor.</p>
+<p>Den Vortrag zu <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet07x.html">B07x</a> (letzte VL-Woche) halten Sie dann in die Praktikumsgruppe, in
+der die meisten Teammitglieder sind. Bitte prüfen Sie, ob das für Sie passt (vom
+Stundenplan her möglich ist) und wählen Sie ggf. ein anderes Team. Wir werden
+rechtzeitig eine entsprechende Planung organisieren. Einige Vorträge werden wir
+aber auch im Vorlesungsslot machen müssen, d.h. hier besteht bei Bedarf eine
+Ausweichmöglichkeit.</p>
+  </div>
+</div>
+  </div>
+</div>
+<p>Hier finden Sie einen abonnierbaren <a href="https://calendar.google.com/calendar/ical/643ebb4721e215c2b2f2ac0330d5642f6cf9efe18cd16548e2e08f8bfa199336%40group.calendar.google.com/public/basic.ics" rel="external" target="_blank">Google Kalender IFM 5.21 CB (PO18, 5. Semester)</a> mit allen Terminen der Veranstaltung zum Einbinden in Ihre Kalender-App.</p>
+<p>Abgabe der Übungsblätter jeweils <strong>Mittwoch bis 09:00 Uhr</strong> im <a href="https://www.hsbi.de/elearning/goto.php?target=exc_1420725&client_id=FH-Bielefeld" rel="external" target="_blank">ILIAS</a>. Vorstellung der Lösung im jeweiligen Praktikum in der Abgabewoche.</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">Monat</th>
+          <th style="text-align: left">Tag</th>
+          <th style="text-align: left">Vorlesung</th>
+          <th style="text-align: left">Lead</th>
+          <th style="text-align: left">Abgabe Aufgabenblatt &amp; Vorstellung Praktikum</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">Oktober</td>
+          <td style="text-align: left">09.</td>
+          <td style="text-align: left"><a href="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.html#%C3%BCberblick-modulinhalte" rel="external" target="_blank">Orga</a> (<em>Zoom</em>); <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/overview.html">Überblick</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/languages.html">Sprachen</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/applications.html">Anwendungen</a></td>
+          <td style="text-align: left">Carsten, BC</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">16.</td>
+          <td style="text-align: left"><a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing/regular.html">Reguläre Sprachen</a></td>
+          <td style="text-align: left">BC</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">23.</td>
+          <td style="text-align: left"><a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing/cfg.html">CFG</a></td>
+          <td style="text-align: left">BC</td>
+          <td style="text-align: left"><del><a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet01.html">B01</a> Reguläre Sprachen (BC, <em>online</em>)</del></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">29.</td>
+          <td style="text-align: left"><strong>18:00 - 19:30 Uhr (online): Edmonton I: ANTLR + Live-Coding</strong></td>
+          <td style="text-align: left"><em>Edmonton</em></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">30.</td>
+          <td style="text-align: left"><a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing/antlr-lexing.html">Lexer mit ANTLR</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing/antlr-parsing.html">Parser mit ANTLR</a></td>
+          <td style="text-align: left">Carsten</td>
+          <td style="text-align: left"><strong>16:00 Uhr: <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet01.html">B01</a> Reguläre Sprachen (BC, <em>online</em>)</strong></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">November</td>
+          <td style="text-align: left">06.</td>
+          <td style="text-align: left"><em>Dienstbesprechung</em></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"><a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet02.html">B02</a> CFG (BC, <em>online</em>)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">13.</td>
+          <td style="text-align: left"><a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab0-intro.html">Überblick Symboltabellen</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab1-scopes.html">Symboltabellen: Scopes</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab2-functions.html">Symboltabellen: Funktionen</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab3-classes.html">Symboltabellen: Klassen</a></td>
+          <td style="text-align: left">Carsten</td>
+          <td style="text-align: left"><a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet03.html">B03</a> ANTLR (Carsten, <em>online</em>)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">20.</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">26.</td>
+          <td style="text-align: left"><strong>18:00 - 19:30 Uhr (online): Edmonton II: Vorträge Mindener Projekte</strong></td>
+          <td style="text-align: left"><em>Minden (S5)</em></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">27.</td>
+          <td style="text-align: left"><a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate/intro-ir.html">Überblick Zwischencode</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate/llvm-ir.html">Überblick Backend (LLVM)</a></td>
+          <td style="text-align: left">BC, Carsten</td>
+          <td style="text-align: left"><span class='alert'><strong>Parcoursprüfung: Station 1: Vorstellung der Lösung von <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet04x.html">B04x</a> (online, 3 Teams, siehe Ankündigung)</strong></span></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Dezember</td>
+          <td style="text-align: left">03.</td>
+          <td style="text-align: left"><strong>18:00 - 19:30 Uhr (online): Edmonton III: Vorträge Edmontoner Projekte</strong></td>
+          <td style="text-align: left"><em>Edmonton</em></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">04.</td>
+          <td style="text-align: left"><a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation/astdriven-part1.html">AST-basierte Interpreter 1</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation/astdriven-part2.html">AST-basierte Interpreter 2</a></td>
+          <td style="text-align: left">Carsten</td>
+          <td style="text-align: left"><span class='alert'><strong>Parcoursprüfung: Station 1: Vorstellung der Lösung von <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet04x.html">B04x</a> (online, 2 Teams, siehe Ankündigung)</strong></span></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">11.</td>
+          <td style="text-align: left">C++ I: <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp0-basics.html">Basics</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp1-pointer.html">Pointer &amp; Referenzen</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp2-classes.html">Klassen</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp3-big3.html">Big 3</a></td>
+          <td style="text-align: left">Carsten</td>
+          <td style="text-align: left"><a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet05x.html">B05x</a> Interpreter (Carsten, <em>online</em>)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">18.</td>
+          <td style="text-align: left"><del>Projektwoche Semester 1+3</del> C++ II: <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp4-operators.html">Operatoren</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp5-inheritance.html">Vererbung &amp; Polymorphie</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp6-templates.html">Templates</a></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">Feedback zu Station 1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">25.</td>
+          <td style="text-align: left"><em>Weihnachtspause</em></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Januar</td>
+          <td style="text-align: left">01.</td>
+          <td style="text-align: left"><em>Weihnachtspause</em></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">08.</td>
+          <td style="text-align: left"><em>Sprechstunde/Freies Arbeiten</em></td>
+          <td style="text-align: left">Carsten</td>
+          <td style="text-align: left"><a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet06x.html">B06x</a> C++ und dyn. Speicherverwaltung (Carsten, <em>online</em>)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">15.</td>
+          <td style="text-align: left"><em>Freies Arbeiten/Puffer</em></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"></td>
+          <td style="text-align: left">22.</td>
+          <td style="text-align: left"><span class='alert'><strong>Parcoursprüfung: Station 2 <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet07x.html">B07x</a> (VL- und Praktika-Slots, siehe Ankündigung)</strong></span></td>
+          <td style="text-align: left">Carsten, BC</td>
+          <td style="text-align: left"><a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet07x.html">B07x</a> Mini-Projekt (Carsten/BC, <em>online</em>)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><em>(Prüfungsphase I)</em></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"><em>Keine separate Prüfung</em></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><em>(Prüfungsphase II)</em></td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"><span class='alert'><strong>Parcoursprüfung: Do, 27. Mar 2025, 08-18 Uhr, mdl. Prüfung (alle Themen)</strong></span> (je Prüfung ca. 45', Vergabe ca. 2 Wochen vorher)</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+  </tbody>
+</table>
+      </div>
+    </div>
+  </div>
+</div>
+<h2 id="prüfungsform-note-und-credits">Prüfungsform, Note und Credits</h2>
+<div class="tab-panel" data-tab-group="modul-po">
+  <div class="tab-nav">
+    <div class="tab-nav-title">&#8203;</div>
+    <button
+      data-tab-item="ifm-31-cb-po23-3-semester"
+      class="tab-nav-button tab-panel-style cstyle initial active" tabindex="-1"
+      onclick="switchTab('modul-po','ifm-31-cb-po23-3-semester')"
+    >
+      <span class="tab-nav-text">IFM 3.1 CB (PO23, 3. Semester)</span>
+    </button>
+    <button
+      data-tab-item="ifm-521-cb-po18-5-semester"
+      class="tab-nav-button tab-panel-style cstyle initial"
+      onclick="switchTab('modul-po','ifm-521-cb-po18-5-semester')"
+    >
+      <span class="tab-nav-text">IFM 5.21 CB (PO18, 5. Semester)</span>
+    </button>
+  </div>
+  <div class="tab-content-container">
+    <div
+      data-tab-item="ifm-31-cb-po23-3-semester"
+      class="tab-content tab-panel-style cstyle initial active">
+      <div class="tab-content-text">
+<p><strong>Parcoursprüfung plus Testat</strong>, 5 ECTS (PO23)</p>
+<ul>
+<li>
+<p><strong>Testat</strong>: Vergabe der Credit-Points</p>
+<ol>
+<li>Mindestens 4 der Übungsblätter <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet01.html">B01</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet02.html">B02</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet03.html">B03</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet04.html">B04</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet05.html">B05</a> und <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet06.html">B06</a> erfolgreich bearbeitet, <strong>und</strong></li>
+<li><strong>aktive</strong> Teilnahme an allen 3 Edmonton-Terminen.</li>
+</ol>
+<p>(&quot;erfolgreich bearbeitet&quot;: Bearbeitung in 3er Teams, je mindestens 60% bearbeitet,
+fristgerechte Abgabe der Lösungen im ILIAS, Vorstellung der Lösungen im Praktikum)</p>
+</li>
+</ul>
+<div class="tab-panel" data-tab-group="exams">
+  <div class="tab-nav">
+    <div class="tab-nav-title">&#8203;</div>
+    <button
+      data-tab-item="prüfung-im-ersten-zeitraum"
+      class="tab-nav-button tab-panel-style cstyle initial active" tabindex="-1"
+      onclick="switchTab('exams','prüfung-im-ersten-zeitraum')"
+    >
+      <span class="tab-nav-text">Prüfung im ersten Zeitraum</span>
+    </button>
+    <button
+      data-tab-item="prüfung-im-zweiten-zeitraum"
+      class="tab-nav-button tab-panel-style cstyle initial"
+      onclick="switchTab('exams','prüfung-im-zweiten-zeitraum')"
+    >
+      <span class="tab-nav-text">Prüfung im zweiten Zeitraum</span>
+    </button>
+  </div>
+  <div class="tab-content-container">
+    <div
+      data-tab-item="prüfung-im-ersten-zeitraum"
+      class="tab-content tab-panel-style cstyle initial active">
+      <div class="tab-content-text">
+<ul>
+<li>
+<p><strong>Stationen</strong>:</p>
+<ol>
+<li>ILIAS-Test (einzeln, 20.11.)</li>
+<li>Vorstellung Mini-Projekt <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet07.html">B07</a> (3er Teams, letzte VL-Woche)</li>
+</ol>
+<p>Note für das Modul: Beide Stationen ergeben zu <strong>je 50%</strong> <em>oder</em> in der Gewichtung
+<strong>30 Punkte (Station I) und 50 Punkte (Station II)</strong> die Gesamtnote (individuelle
+Günstigerprüfung).</p>
+<p>Für Station I werden 3 Punkte Überhang gewährt: Von den 33 maximal erreichbaren
+Punkten werden 30 Punkte als 100% gewertet, darüber hinausgehende Punkte bleiben
+als Bonuspunkte erhalten.</p>
+</li>
+</ul>
+      </div>
+    </div>
+    <div
+      data-tab-item="prüfung-im-zweiten-zeitraum"
+      class="tab-content tab-panel-style cstyle initial">
+      <div class="tab-content-text">
+<ul>
+<li>
+<p><strong>Stationen</strong>:</p>
+<ol>
+<li>Mündliche Prüfung (individuell, ca. 45 Minuten, zweiter Prüfungszeitraum)</li>
+</ol>
+<p>Die Note der mündlichen Prüfung ergibt die Gesamtnote.</p>
+</li>
+</ul>
+      </div>
+    </div>
+  </div>
+</div>
+      </div>
+    </div>
+    <div
+      data-tab-item="ifm-521-cb-po18-5-semester"
+      class="tab-content tab-panel-style cstyle initial">
+      <div class="tab-content-text">
+<p><strong>Parcoursprüfung plus Testat</strong>, 5 ECTS (PO18)</p>
+<ul>
+<li>
+<p><strong>Testat</strong>: Vergabe der Credit-Points</p>
+<ol>
+<li>Mindestens 4 der Übungsblätter <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet01.html">B01</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet02.html">B02</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet03.html">B03</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet04x.html">B04x</a>, <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet05x.html">B05x</a> und <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet06x.html">B06x</a> erfolgreich bearbeitet, <strong>und</strong></li>
+<li><strong>aktive</strong> Teilnahme an allen 3 Edmonton-Terminen.</li>
+</ol>
+<p>(&quot;erfolgreich bearbeitet&quot;: Bearbeitung in 3er Teams, je mindestens 60% bearbeitet,
+fristgerechte Abgabe der Lösungen im ILIAS, Vorstellung der Lösungen im Praktikum)</p>
+</li>
+</ul>
+<div class="tab-panel" data-tab-group="exams">
+  <div class="tab-nav">
+    <div class="tab-nav-title">&#8203;</div>
+    <button
+      data-tab-item="prüfung-im-ersten-zeitraum"
+      class="tab-nav-button tab-panel-style cstyle initial active" tabindex="-1"
+      onclick="switchTab('exams','prüfung-im-ersten-zeitraum')"
+    >
+      <span class="tab-nav-text">Prüfung im ersten Zeitraum</span>
+    </button>
+    <button
+      data-tab-item="prüfung-im-zweiten-zeitraum"
+      class="tab-nav-button tab-panel-style cstyle initial"
+      onclick="switchTab('exams','prüfung-im-zweiten-zeitraum')"
+    >
+      <span class="tab-nav-text">Prüfung im zweiten Zeitraum</span>
+    </button>
+  </div>
+  <div class="tab-content-container">
+    <div
+      data-tab-item="prüfung-im-ersten-zeitraum"
+      class="tab-content tab-panel-style cstyle initial active">
+      <div class="tab-content-text">
+<ul>
+<li>
+<p><strong>Stationen</strong>:</p>
+<ol>
+<li>Vortrag (3er Team, 27.11. bzw. 04.12. im Praktikum): Vorstellung der Lösung von <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet04x.html">B04x</a></li>
+<li>Vorstellung Mini-Projekt <a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet07x.html">B07x</a> (3er Teams, letzte VL-Woche)</li>
+</ol>
+<p>Note für das Modul: Beide Stationen ergeben zu <strong>je 50%</strong> <em>oder</em> in der Gewichtung
+<strong>40% (Station 1) und 60% (Station 2)</strong> die Gesamtnote (individuelle Günstigerprüfung).</p>
+</li>
+</ul>
+      </div>
+    </div>
+    <div
+      data-tab-item="prüfung-im-zweiten-zeitraum"
+      class="tab-content tab-panel-style cstyle initial">
+      <div class="tab-content-text">
+<ul>
+<li>
+<p><strong>Stationen</strong>:</p>
+<ol>
+<li>Mündliche Prüfung (individuell, ca. 45 Minuten, zweiter Prüfungszeitraum)</li>
+</ol>
+<p>Die Note der mündlichen Prüfung ergibt die Gesamtnote.</p>
+</li>
+</ul>
+      </div>
+    </div>
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+</div>
+<h2 id="materialien">Materialien</h2>
+<ol>
+<li><a href="https://learning.oreilly.com/library/view/compilers-principles-techniques/9789357054881/" rel="external" target="_blank">&quot;<strong>Compilers: Principles, Techniques, and Tools</strong>&quot;</a>.
+Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D. and Bansal, S., Pearson India, 2023.
+ISBN <a href="https://fhb-bielefeld.digibib.net/openurl?isbn=978-9-3570-5488-1" rel="external" target="_blank">978-9-3570-5488-1</a>.
+<a href="https://learning.oreilly.com/library/view/compilers-principles-techniques/9789357054881/" rel="external" target="_blank">Online</a> über die <a href="https://www.oreilly.com/library-access/" rel="external" target="_blank">O'Reilly-Lernplattform</a>.</li>
+<li><a href="https://github.com/munificent/craftinginterpreters" rel="external" target="_blank">&quot;<strong>Crafting Interpreters</strong>&quot;</a>.
+Nystrom, R., Genever Benning, 2021.
+ISBN <a href="https://fhb-bielefeld.digibib.net/openurl?isbn=978-0-9905829-3-9" rel="external" target="_blank">978-0-9905829-3-9</a>.
+<a href="https://www.craftinginterpreters.com/" rel="external" target="_blank">Online</a>.</li>
+<li><a href="https://learning.oreilly.com/library/view/the-definitive-antlr/9781941222621/" rel="external" target="_blank">&quot;<strong>The Definitive ANTLR 4 Reference</strong>&quot;</a>.
+Parr, T., Pragmatic Bookshelf, 2014. ISBN <a href="https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-9343-5699-9" rel="external" target="_blank">978-1-9343-5699-9</a>.
+<a href="https://learning.oreilly.com/library/view/the-definitive-antlr/9781941222621/" rel="external" target="_blank">Online</a> über die <a href="https://www.oreilly.com/library-access/" rel="external" target="_blank">O'Reilly-Lernplattform</a>.</li>
+<li><a href="https://learning.oreilly.com/library/view/writing-a-c/9781098182229/" rel="external" target="_blank">&quot;Writing a C Compiler&quot;</a>.
+Sandler, N., No Starch Press, 2024. ISBN <a href="https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-0981-8222-9" rel="external" target="_blank">978-1-0981-8222-9</a>.
+<a href="https://learning.oreilly.com/library/view/writing-a-c/9781098182229/" rel="external" target="_blank">Online</a> über die <a href="https://www.oreilly.com/library-access/" rel="external" target="_blank">O'Reilly-Lernplattform</a>.</li>
+</ol>
+<h2 id="förderungen-und-kooperationen">Förderungen und Kooperationen</h2>
+<h3 id="kooperation-mit-university-of-alberta-edmonton-kanada">Kooperation mit University of Alberta, Edmonton (Kanada)</h3>
+<p>Über das Projekt <a href="https://www.uni-bielefeld.de/international/profil/netzwerk/alberta-owl/we-can-virtuowl/" rel="external" target="_blank">&quot;We CAN virtuOWL&quot;</a> der Fachhochschule Bielefeld ist im Frühjahr 2021 eine
+Kooperation mit der <a href="https://www.hsbi.de/en/international-office/alberta-owl-cooperation" rel="external" target="_blank">University of Alberta</a> (Edmonton/Alberta, Kanada) im Modul &quot;Compilerbau&quot;
+gestartet.</p>
+<p>Wir freuen uns, auch in diesem Semester wieder drei gemeinsame Sitzungen für beide
+Hochschulen anbieten zu können. (Diese Termine werden in englischer Sprache durchgeführt.)</p>
+
+            <footer class="footline"><div style="color: darkgray; font-size: small;">
+<p style="margin-left: 4rem; margin-right: 4rem; margin-top: 6rem;">
+<!-- https://creativecommons.org/choose/ -->
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+Unless otherwise noted, <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor">this work</a> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/graphs/contributors">contributors</a> is licensed under <a rel="license" href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/LICENSE.md">CC BY-SA 4.0</a>.
+See the <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/CREDITS.md">credits</a> for a detailed list of contributing projects.
+
+</p>
+</div>
+
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+
+
+<a id="logo" href='https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1360443//index.html'>
+    <img style="max-width:35%" alt="icon" src='/elearning/data/FH-Bielefeld/lm_data/lm_1360443/images/logo.png'>
+</a>
+
+        </div>
+
+        <search><form action="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/search.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['de'];
+        </script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/auto-complete.js?1734345862" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/lunr/lunr.min.js?1734345862" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/lunr/lunr.stemmer.support.min.js?1734345862" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/lunr/lunr.multi.min.js?1734345862" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/lunr/lunr.de.min.js?1734345862" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/search.js?1734345862" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro.html">Überblick</a><ul id="R-subsections-4df4f48548517eafbcfd5260bf8ec879" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/overview.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/overview.html">Struktur eines Compilers</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/languages.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/languages.html">Programmiersprachen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/applications.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/applications.html">Anwendungen</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing.html">Lexikalische Analyse</a><ul id="R-subsections-8d37d4681a8464ded0759726543b315f" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing/regular.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing/regular.html">Reguläre Sprachen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing/antlr-lexing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing/antlr-lexing.html">Lexer mit ANTLR generieren</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing.html">Syntaktische Analyse</a><ul id="R-subsections-2fa42a0a95fa4e38203332af421076e1" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing/cfg.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing/cfg.html">CFG</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing/antlr-parsing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing/antlr-parsing.html">Parser mit ANTLR generieren</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics.html">Semantische Analyse</a><ul id="R-subsections-d88fb7065d61ee57361d9d4d71ff9c1f" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab0-intro.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab0-intro.html">SymbTab0: Überblick Symboltabellen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab1-scopes.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab1-scopes.html">SymbTab1: Nested Scopes</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab2-functions.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab2-functions.html">SymbTab2: Funktionen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab3-classes.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab3-classes.html">SymbTab3: Strukturen und Klassen</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate.html">Zwischencode</a><ul id="R-subsections-954600b07c36f58ed592d3873b4cb416" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate/intro-ir.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate/intro-ir.html">Überblick Zwischencode</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate/llvm-ir.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate/llvm-ir.html">LLVM als IR</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation.html">Interpreter</a><ul id="R-subsections-e1e14acafd0a08bb52afc3f0f0608d4c" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation/astdriven-part1.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation/astdriven-part1.html">AST-basierte Interpreter 1</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation/astdriven-part2.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation/astdriven-part2.html">AST-basierte Interpreter 2</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages.html">Programmiersprachen</a><ul id="R-subsections-a84558f596ca34bed293af92ceba5568" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp0-basics.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp0-basics.html">Einführung in C&#43;&#43;</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp1-pointer.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp1-pointer.html">C&#43;&#43;: Pointer und Referenzen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp2-classes.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp2-classes.html">C&#43;&#43;: Klassen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp3-big3.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp3-big3.html">C&#43;&#43;: Big 3</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp4-operators.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp4-operators.html">C&#43;&#43;: Operatoren</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp5-inheritance.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp5-inheritance.html">C&#43;&#43;: Vererbung und Polymorphie</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp6-templates.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp6-templates.html">C&#43;&#43;: Templates</a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.html#kursformat"><i class='fas fa-bookmark'></i> Zeiten</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.html#fahrplan"><i class='fas fa-bookmark'></i> Fahrplan</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.html#pr%C3%BCfungsform-note-und-credits"><i class='fas fa-bookmark'></i> Note/Credits</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.html#fahrplan"><i class='fas fa-bookmark'></i> News</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVariantSwitch">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.html" lang="de-DE" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch showVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-auto" value="auto" selected>Auto</option>
+                      <option id="R-select-variant-zen-light" value="zen-light">Zen Light</option>
+                      <option id="R-select-variant-zen-dark" value="zen-dark">Zen Dark</option>
+                      <option id="R-select-variant-relearn-bright" value="relearn-bright">Relearn Bright</option>
+                      <option id="R-select-variant-relearn-light" value="relearn-light">Relearn Light</option>
+                      <option id="R-select-variant-relearn-dark" value="relearn-dark">Relearn Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter"><p style="text-align: center;">
+<i class='fab fa-fw fa-github'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor">GitHub</a>
+<i class='fas fa-fw fa-tags'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/issues">Issues</a>
+<i class='fas fa-fw fa-bullhorn'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/CREDITS.md">Credits</a>
+<br />
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+
+</p>
+
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/clipboard.min.js?1734345862" defer></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/perfect-scrollbar.min.js?1734345862" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/mathjax/tex-mml-chtml.js?1734345862"></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/theme.js?1734345862" defer></script>
+  </body>
+</html>

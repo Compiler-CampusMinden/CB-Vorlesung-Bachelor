@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="de-DE" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.135.0">
+    <meta name="generator" content="Relearn 6.4.1">
+    <meta name="description" content="Vergleichsfunktion für zwei Integer? bool cmp(const int &amp;a, const int &amp;b) { return a&lt;b; } Und für double? Und für string? ... =&gt; Präprozessor-Makro?
+=&gt; Funktionen überladen?
+Überladen von Funktionen: Ähnliche Funktionalität für unterschiedliche Datentypen Mühselig, wenn exakt gleiche Funktionalität! (bessere) Antwort: Funktions-Templates Templates: Funktionen mit parametrisierten Datentypen Deklaration/Definition für (zunächst) unbestimmte Datentypen Bei Verwendung der Funktion: Konkretisierung der Datentypen Compiler erzeugt automatisch passende Funktionsinstanz Definition von Funktions-Templates template &lt;typename T&gt; bool cmp(const T &amp;a, const T &amp;b) { return a&lt;b; } Statt typename kann auch class geschrieben werden">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="C&#43;&#43;: Templates">
+    <meta name="twitter:description" content="Vergleichsfunktion für zwei Integer? bool cmp(const int &amp;a, const int &amp;b) { return a&lt;b; } Und für double? Und für string? ... =&gt; Präprozessor-Makro?
+=&gt; Funktionen überladen?
+Überladen von Funktionen: Ähnliche Funktionalität für unterschiedliche Datentypen Mühselig, wenn exakt gleiche Funktionalität! (bessere) Antwort: Funktions-Templates Templates: Funktionen mit parametrisierten Datentypen Deklaration/Definition für (zunächst) unbestimmte Datentypen Bei Verwendung der Funktion: Konkretisierung der Datentypen Compiler erzeugt automatisch passende Funktionsinstanz Definition von Funktions-Templates template &lt;typename T&gt; bool cmp(const T &amp;a, const T &amp;b) { return a&lt;b; } Statt typename kann auch class geschrieben werden">
+    <meta property="og:url" content="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp6-templates.html">
+    <meta property="og:title" content="C&#43;&#43;: Templates">
+    <meta property="og:description" content="Vergleichsfunktion für zwei Integer? bool cmp(const int &amp;a, const int &amp;b) { return a&lt;b; } Und für double? Und für string? ... =&gt; Präprozessor-Makro?
+=&gt; Funktionen überladen?
+Überladen von Funktionen: Ähnliche Funktionalität für unterschiedliche Datentypen Mühselig, wenn exakt gleiche Funktionalität! (bessere) Antwort: Funktions-Templates Templates: Funktionen mit parametrisierten Datentypen Deklaration/Definition für (zunächst) unbestimmte Datentypen Bei Verwendung der Funktion: Konkretisierung der Datentypen Compiler erzeugt automatisch passende Funktionsinstanz Definition von Funktions-Templates template &lt;typename T&gt; bool cmp(const T &amp;a, const T &amp;b) { return a&lt;b; } Statt typename kann auch class geschrieben werden">
+    <meta property="og:locale" content="de_DE">
+    <meta property="og:type" content="website">
+    <meta itemprop="name" content="C&#43;&#43;: Templates">
+    <meta itemprop="description" content="Vergleichsfunktion für zwei Integer? bool cmp(const int &amp;a, const int &amp;b) { return a&lt;b; } Und für double? Und für string? ... =&gt; Präprozessor-Makro?
+=&gt; Funktionen überladen?
+Überladen von Funktionen: Ähnliche Funktionalität für unterschiedliche Datentypen Mühselig, wenn exakt gleiche Funktionalität! (bessere) Antwort: Funktions-Templates Templates: Funktionen mit parametrisierten Datentypen Deklaration/Definition für (zunächst) unbestimmte Datentypen Bei Verwendung der Funktion: Konkretisierung der Datentypen Compiler erzeugt automatisch passende Funktionsinstanz Definition von Funktions-Templates template &lt;typename T&gt; bool cmp(const T &amp;a, const T &amp;b) { return a&lt;b; } Statt typename kann auch class geschrieben werden">
+    <meta itemprop="wordCount" content="1951">
+    <title>C&#43;&#43;: Templates</title>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp6-templates/index.print.html" rel="alternate" type="text/html" title="C++: Templates">
+
+    
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/images/logo.png?1734345862" rel="icon" type="image/png">
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/fontawesome-all.min.css?1734345862" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/fontawesome-all.min.css?1734345862" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/nucleus.css?1734345862" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/auto-complete.css?1734345862" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/auto-complete.css?1734345862" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/perfect-scrollbar.min.css?1734345862" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/fonts.css?1734345862" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/fonts.css?1734345862" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/theme.css?1734345862" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/theme-auto.css?1734345862" rel="stylesheet" id="R-variant-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/chroma-auto.css?1734345862" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/variant.css?1734345862" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/print.css?1734345862" rel="stylesheet" media="print">
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/variant.js?1734345862"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..';
+      window.relearn.relBaseUri='..\/..\/..\/..\/..\/..';
+      window.relearn.absBaseUri='https:\/\/www.hsbi.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1360443';
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      window.index_js_url="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.search.js?1734345862";
+      // variant stuff
+      window.variants && variants.init( [ 'auto', 'zen-light', 'zen-dark', 'relearn-bright', 'relearn-light', 'relearn-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support html disableInlineCopyToClipboard" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp6-templates.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li><a href="#vergleichsfunktion-für-zwei-integer">Vergleichsfunktion für zwei Integer?</a></li>
+    <li><a href="#definition-von-funktions-templates">Definition von Funktions-Templates</a></li>
+    <li><a href="#bestimmung-der-template-parameter-i-typ-inferenz">Bestimmung der Template-Parameter I: Typ-Inferenz</a></li>
+    <li><a href="#bestimmung-der-template-parameter-ii-explizite-angabe">Bestimmung der Template-Parameter II: Explizite Angabe</a></li>
+    <li><a href="#typ-inferenz-und-explizite-bestimmung-mischen">Typ-Inferenz und explizite Bestimmung mischen</a></li>
+    <li><a href="#typ-inferenz-funktioniert-nicht-immer">Typ-Inferenz funktioniert nicht immer!</a></li>
+    <li><a href="#spezialisierung-von-funktions-templates">Spezialisierung von Funktions-Templates</a>
+      <ul>
+        <li><a href="#alternativ-überladen-der-funktions-templates-mit-normalen-funktionen">Alternativ: Überladen der Funktions-Templates mit normalen Funktionen</a></li>
+        <li><a href="#aufruf-compiler-nimmt-die-am-besten-passende-variante">Aufruf: Compiler nimmt die am besten &quot;passende&quot; Variante:</a></li>
+      </ul>
+    </li>
+    <li><a href="#klassen-templates-in-c">Klassen-Templates in C++</a>
+      <ul>
+        <li><a href="#klassen-templates-in-c-variante-mit-konstanten">Klassen-Templates in C++ (Variante mit Konstanten)</a></li>
+        <li><a href="#beispiel-konstanten-als-template-parameter">Beispiel: Konstanten als Template-Parameter</a></li>
+        <li><a href="#klassen-templates-mit-defaults">Klassen-Templates mit Defaults</a></li>
+      </ul>
+    </li>
+    <li><a href="#klassen-templates-in-c-spezialisieren">Klassen-Templates in C++ spezialisieren</a>
+      <ul>
+        <li><a href="#partielle-spezialisierung">Partielle Spezialisierung</a></li>
+        <li><a href="#vergleich-verschiedene-spezialisierungen">Vergleich verschiedene Spezialisierungen</a></li>
+      </ul>
+    </li>
+    <li><a href="#mischen-von-klassen--und-funktions-templates">Mischen von Klassen- und Funktions-Templates</a></li>
+    <li><a href="#templates-java-vs-c">Templates: Java vs. C++</a></li>
+    <li><a href="#wrap-up">Wrap-Up</a></li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            C&#43;&#43;: Templates
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-print" data-content-empty="disable" data-width-s="area-more" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp6-templates/index.print.html" title="Print whole chapter (CTRL&#43;ALT&#43;p)"><i class="fa-fw fas fa-print"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable " tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+<h1>C&#43;&#43;: Templates</h1>
+
+
+
+    
+
+
+
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-graduation-cap"></i> TL;DR
+  </div>
+  <div class="box-content">
+<p>In C++ können Funktionen über <strong>Funktions-Templates</strong> definiert werden. Dafür stellt man
+ein <code>template &lt;typename T&gt;</code> mit einer Aufzählung <code>typename T</code> aller Template-Parameter der
+Funktionsdefinition voran. In der Funktion kann man dann den Typ <code>T</code> wie einen normalen
+anderen Typ nutzen.</p>
+<p>Funktions-Templates sind (vollständig) spezialisierbar. Dazu wiederholt man die komplette
+Funktionsdefinition (inkl. der dann leeren Template-Deklaration <code>template &lt;&gt;</code>) und legt alle
+Template-Parameter über die Funktionssignatur fest. Alle Spezialisierungen müssen nach dem
+eigentlichen (&quot;primären&quot;) Funktions-Template formuliert werden.</p>
+<p>Funktions-Templates sind überladbar mit &quot;normalen&quot; Funktionen und anderen Funktions-Templates.</p>
+<p>Beim Aufruf kann man die Template-Parameter entweder selbst festlegen (über eine Auflistung der
+Typen in spitzen Klammern hinter dem Funktionsnamen) oder den Compiler inferieren lassen. Dabei
+wird die am besten &quot;passende&quot; Variante genutzt:</p>
+<ol>
+<li>Zuerst die <strong>exakt</strong> passende normale Funktion,</li>
+<li>dann ein passendes spezialisiertes Template (bei mehreren passenden spezialisierten
+Templates das am meisten spezialisierte Template),</li>
+<li>dann das allgemeine (&quot;primäre&quot;) Template,</li>
+<li>ansonsten die normale Funktion mit impliziten Casts.</li>
+</ol>
+<p>In C++ können Klassen als <strong>Klassen-Templates</strong> definiert werden. Dafür stellt man ein
+<code>template &lt;typename T&gt;</code> mit einer Aufzählung <code>typename T</code> aller Template-Parameter der
+Klassendefinition voran. In der Klasse kann man dann den Typ <code>T</code> wie einen normalen
+anderen Typ nutzen. Bei der Implementierung der Methoden außerhalb der Klassendeklaration
+muss die Template-Deklaration (<code>template &lt;typename T&gt;</code>) wiederholt werden.</p>
+<p>Klassen-Templates sind spezialisierbar (vollständig und partiell). Dazu wiederholt man
+die komplette Klassendefinition (inkl. der Template-Deklaration <code>template &lt;typename T&gt;</code>)
+und entfernt aus der Template-Deklaration alle Typen, die man konkret festlegen möchte.
+Hinter dem Klassennamen werden dann in spitzen Klammern alle Typen (verbleibende
+Typ-Parameter aus der Template-Deklaration sowie die konkretisierten Typen) in der
+Reihenfolge angegeben, wie sie im primären Template vorkamen. Spezialisierungen müssen
+nach dem eigentlichen (&quot;primären&quot;) Klassen-Template formuliert werden.</p>
+<p>Klassen- und Funktions-Templates können gemischt werden.</p>
+<p>Bei der Instantiierung werden die Template-Parameter in spitzen Klammern hinter dem
+Klassennamen spezifiziert.</p>
+<p>Template-Parameter können einen konkreten (aufzählbaren) Typ haben (beispielsweise
+<code>int</code>). Template-Parameter können Default-Werte haben.</p>
+<p>Im Unterschied zu Java gibt es <strong>keine</strong> Type-Erasure. Der C++-Compiler stellt je <strong>instantiiertem</strong>
+Template eine <em>konkrete</em> Funktion bzw. Klasse bereit! Im resultierenden Code sind also nur diejenigen
+Funktionen und Klassen enthalten, die aus einem tatsächlichen Aufruf resultieren, das Template selbst
+ist nicht im Code enthalten. Dies gilt auch für Bibliotheken, weshalb sich diese beiden Konzepte etwas
+&quot;quer liegen&quot;.</p>
+  </div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+    
+    
+        
+        
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-podcast"></i> Videos (YouTube)
+  </div>
+  <div class="box-content">
+<ul> <li><a href='https://youtu.be/cOmV_2OTG5k' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>VL C++: Vererbung und Polymorphie</a></li></ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+
+    
+    
+
+
+
+
+
+    
+
+    
+
+    
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+        
+        
+        
+        
+    
+    
+
+    <div class="box notices cstyle tip">
+  <div class="box-label">
+    <i class="fas fa-lightbulb"></i> Lernziele
+  </div>
+  <div class="box-content">
+<ul> <li>(K2) Unterschied zu Java bei der Nutzung von Templates</li> <li>(K3) Erstellen und spezialisieren von Funktions-Templates</li> <li>(K3) Unterschied zwischen überladenen Funktionen und Funktions-Templates</li> <li>(K3) Aufruf (Nutzung) von Funktions-Templates</li> <li>(K2) Unterschied zu Java bei der Nutzung von Templates</li> <li>(K3) Erstellen und spezialisieren von Klassen-Templates</li> <li>(K3) Nutzung von Methoden-Templates innerhalb von Klassen-Templates</li> <li>(K3) Aufruf (Nutzung) von Klassen-Templates</li></ul>
+  </div>
+</div>
+
+
+
+
+    <h2 id="vergleichsfunktion-für-zwei-integer">Vergleichsfunktion für zwei Integer?</h2>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">cmp</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>a, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>b) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> a<span style="color:#f92672">&lt;</span>b;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<ul>
+<li>Und für <code>double</code>?</li>
+<li>Und für <code>string</code>?</li>
+<li>...</li>
+</ul>
+<p>=&gt; <span class='alert'>Präprozessor-Makro?</span></p>
+<p>=&gt; <span class='alert'>Funktionen überladen?</span></p>
+<ul>
+<li><strong>Überladen von Funktionen</strong>:
+<ul>
+<li>Ähnliche Funktionalität für unterschiedliche Datentypen</li>
+<li>Mühselig, wenn <span class='alert'>exakt gleiche</span> Funktionalität!</li>
+</ul>
+</li>
+<li>(bessere) <strong>Antwort</strong>: Funktions-Templates
+<ul>
+<li>Templates: Funktionen mit parametrisierten Datentypen</li>
+<li>Deklaration/Definition für (zunächst) unbestimmte Datentypen</li>
+<li>Bei Verwendung der Funktion:</li>
+<li>Konkretisierung der Datentypen</li>
+<li>Compiler erzeugt automatisch passende Funktionsinstanz</li>
+</ul>
+</li>
+</ul>
+<h2 id="definition-von-funktions-templates">Definition von Funktions-Templates</h2>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> cmp(<span style="color:#66d9ef">const</span> T <span style="color:#f92672">&amp;</span>a, <span style="color:#66d9ef">const</span> T <span style="color:#f92672">&amp;</span>b) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> a<span style="color:#f92672">&lt;</span>b;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<ul>
+<li>
+<p>Statt <code>typename</code> kann auch <code>class</code> geschrieben werden</p>
+</li>
+<li>
+<p>Konvention:</p>
+<ul>
+<li><code>typename</code> wenn sowohl Klassen als auch Basistypen</li>
+<li><code>class</code> falls eher Klassen-Typen</li>
+</ul>
+<p>=&gt; <code>class</code> gilt als veraltet, deshalb immer <code>typename</code> verwenden!</p>
+</li>
+<li>
+<p>Bei mehreren Typen &quot;<code>typename NAME</code>&quot; wiederholen
+(Komma-separierte Liste in <code>&lt;</code> und <code>&gt;</code>)</p>
+<p>beispielsweise so: (Achtung, soll nur die Verwendung demonstrieren, hat sonst keinen Sinn)</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T1, <span style="color:#66d9ef">typename</span> T2, <span style="color:#66d9ef">typename</span> T3<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>T1 cmp(<span style="color:#66d9ef">const</span> T2 <span style="color:#f92672">&amp;</span>a, <span style="color:#66d9ef">const</span> T3 <span style="color:#f92672">&amp;</span>b) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> a<span style="color:#f92672">&lt;</span>b;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</li>
+</ul>
+<p>Vorsicht: Im Beispiel oben muss <code>operator&lt;</code> für die verwendeten Typen
+<code>T</code> implementiert sein! (sonst Fehler zur Compile-Zeit)</p>
+<h2 id="bestimmung-der-template-parameter-i-typ-inferenz">Bestimmung der Template-Parameter I: Typ-Inferenz</h2>
+<p>Das Funktions-Template wird wie eine normale Funktion aufgerufen ...
+=&gt; Der Compiler inferiert Typen und erzeugt passende Funktionsinstanz(en).</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> cmp(<span style="color:#66d9ef">const</span> T <span style="color:#f92672">&amp;</span>a, <span style="color:#66d9ef">const</span> T <span style="color:#f92672">&amp;</span>b) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> a<span style="color:#f92672">&lt;</span>b;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    cmp(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">10</span>);                         <span style="color:#75715e">// cmp(int, int)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cmp(<span style="color:#ae81ff">2.2</span>, <span style="color:#ae81ff">10.1</span>);                     <span style="color:#75715e">// cmp(double, double)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cmp(string(<span style="color:#e6db74">&#34;abc&#34;</span>), string(<span style="color:#e6db74">&#34;ABC&#34;</span>));  <span style="color:#75715e">// cmp(string, string)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cmp(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3.4</span>);                        <span style="color:#75715e">// Compiler-FEHLER!!!
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}</span></span></code></pre></div>
+<p>Vorsicht bei Typ-Inferenz: Typen müssen <em>exakt</em> passen!</p>
+<h2 id="bestimmung-der-template-parameter-ii-explizite-angabe">Bestimmung der Template-Parameter II: Explizite Angabe</h2>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> cmp(<span style="color:#66d9ef">const</span> T <span style="color:#f92672">&amp;</span>a, <span style="color:#66d9ef">const</span> T <span style="color:#f92672">&amp;</span>b) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> a<span style="color:#f92672">&lt;</span>b;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    cmp<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(<span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74">&#39;A&#39;</span>);     <span style="color:#75715e">// cmp(int, int)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cmp<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3.4</span>);       <span style="color:#75715e">// cmp(int, int)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}</span></span></code></pre></div>
+<p>Bei expliziter Angabe der Typen beim Aufruf (<code>cmp&lt;int&gt;</code>) kann der Compiler automatisch casten.</p>
+<h2 id="typ-inferenz-und-explizite-bestimmung-mischen">Typ-Inferenz und explizite Bestimmung mischen</h2>
+<ul>
+<li>Compiler nutzt die vorgegebenen Typ-Parameter, ...</li>
+<li>... inferiert die restlichen, und ...</li>
+<li>... castet notfalls die Parameter</li>
+</ul>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T1, <span style="color:#66d9ef">typename</span> T2, <span style="color:#66d9ef">typename</span> T3<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> fkt(T2 a, T3 b, T2 c, <span style="color:#66d9ef">int</span> d) { ... }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    fkt<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span><span style="color:#f92672">*</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(<span style="color:#ae81ff">42</span>, <span style="color:#e6db74">&#34;HUHU&#34;</span>, <span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#ae81ff">99</span>);
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p>=&gt; In Parameterliste nicht vorkommende Typ-Parameter <strong>explizit</strong> angeben!</p>
+<ul>
+<li>Reihenfolge der Angabe der Typen in spitzen Klammern beim Aufruf wie in
+Template-Deklaration</li>
+<li>Wenn ein Typ-Parameter nicht in der Parameterliste der Funktion vorkommt, ist
+eine Inferenz für den Compiler unmöglich. Deshalb <strong>muss</strong> dieser Typ beim
+Aufruf explizit in der Liste mit den spitzen Klammern angegeben werden!</li>
+<li>Im Beispiel oben:
+<ul>
+<li>
+<p><code>fkt&lt;a, b, c&gt;(...)</code>: <code>a</code> wäre der Typ für <code>T1</code>, <code>b</code> für <code>T2</code>, <code>c</code> für <code>T3</code></p>
+</li>
+<li>
+<p>Mit <code>fkt&lt;..., int&gt;(...)</code> beim Aufruf wird <code>T2</code> zu <code>int</code> und damit für
+Parameter <code>c</code> der Char als <code>int</code> interpretiert (<code>T3</code> wird inferiert)</p>
+<p>Ohne <code>&lt;..., int&gt;</code> beim Aufruf gibt es ein Problem beim Erkennen von <code>T2</code>: <code>int</code> vs. <code>char</code> (<code>a=42</code>, <code>c='a'</code>) ...</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="typ-inferenz-funktioniert-nicht-immer">Typ-Inferenz funktioniert nicht immer!</h2>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>T zero() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x, y;
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> zero(); <span style="color:#75715e">// Fehler: couldn&#39;t deduce template parameter &#39;T&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    y <span style="color:#f92672">=</span> zero<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(); <span style="color:#75715e">// korrekter Aufruf
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}</span></span></code></pre></div>
+<p>Die Funktion hat keine Parameter - der Compiler hat also keine Chance, den Typ <code>T</code> zu
+inferieren. In diesem Fall <em>muss</em> der Typ beim Aufruf explizit angegeben werden.</p>
+<h2 id="spezialisierung-von-funktions-templates">Spezialisierung von Funktions-Templates</h2>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// Primaeres Template
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> cmp(<span style="color:#66d9ef">const</span> T <span style="color:#f92672">&amp;</span>a, <span style="color:#66d9ef">const</span> T <span style="color:#f92672">&amp;</span>b) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> a<span style="color:#f92672">&lt;</span>b;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// Spezialisiertes Template
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> cmp<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>a, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>b) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">abs</span>(a)<span style="color:#f92672">&lt;</span>abs(b);
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p>Spezialisierte Templates <span class='alert'><strong>nach</strong></span> &quot;primärem&quot; Template definieren</p>
+<p><strong>Achtung</strong>: Reihenfolge der Deklaration/Definition ist <em>wichtig</em>. Immer zuerst das
+allgemeine (&quot;primäre&quot;) Template definieren, danach dann die Spezialisierungen!
+Anderenfalls gibt es &quot;seltsame&quot; Fehlermeldungen vom Compiler oder sogar seltsames
+Verhalten.</p>
+<p><strong>Achtung</strong>: Im Unterschied zu Klassen-Templates können Funktions-Templates nur
+<strong>vollständig</strong> spezialisiert werden (d.h. bei mehreren Template-Parametern müssen
+dann <em>alle</em> Template-Parameter konkret spezifiziert werden)!</p>
+<p><em>Anmerkung</em>: Die Angabe der Typen in spitzen Klammern nach dem Funktionsnamen ist
+freiwillig, so lange <em>alle</em> Typ-Parameter in der Parameterliste der Funktion auftauchen.
+Man könnte die obige Spezialisierung also auch so schreiben (<code>cmp(</code> statt <code>cmp&lt;int&gt;(</code>):</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// Spezialisiertes Template
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> cmp(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>a, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>b) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">abs</span>(a)<span style="color:#f92672">&lt;</span>abs(b);
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h3 id="alternativ-überladen-der-funktions-templates-mit-normalen-funktionen">Alternativ: Überladen der Funktions-Templates mit normalen Funktionen</h3>
+<p>Überladen mit normalen Funktionen funktioniert wie bei spezialisierten
+Templates, d.h. auch hier zuerst das primäre Template definieren, danach
+eventuelle Spezialisierungen und danach Überladungen mit normalen Funktionen.</p>
+<p>Allerdings gibt es Unterschiede für eventuell nötige Typumwandlungen der
+Parameter beim Aufruf der Funktionen:</p>
+<ul>
+<li>In gewöhnlichen Funktionen sind automatische Typumwandlungen möglich</li>
+<li>In (spezialisierten) Templates sind keine automatischen Typumwandlungen
+erlaubt (sofern man mit Typ-Inferenz arbeitet, d.h. die Template-Typen
+nicht beim Aufruf explizit angegeben werden)</li>
+</ul>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> cmp(T a, T b) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> a<span style="color:#f92672">&lt;</span>b;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">cmp</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> abs(a)<span style="color:#f92672">&lt;</span>abs(b);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    cmp(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">6</span>);          <span style="color:#75715e">// true:  überladene normale Funktion
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cmp(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3.4</span>);        <span style="color:#75715e">// FALSE: überladene normale Funktion (Cast)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cmp<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3.4</span>);   <span style="color:#75715e">// FALSE: Template
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}</span></span></code></pre></div>
+<h3 id="aufruf-compiler-nimmt-die-am-besten-passende-variante">Aufruf: Compiler nimmt die am besten &quot;passende&quot; Variante:</h3>
+<ul>
+<li>Keine Template-Parameter beim Aufruf angegeben (d.h. Typ-Inferenz):
+<ol>
+<li>Zuerst <strong>exakt</strong> passende normale Funktion,</li>
+<li>dann passendes spezialisiertes Template (bei mehreren passenden spezialisierten
+Templates das am meisten spezialisierte Template, ohne Casts),</li>
+<li>dann das allgemeine (&quot;primäre&quot;) Template (ohne Casts),</li>
+<li>ansonsten normale Funktion mit impliziten Casts</li>
+</ol>
+</li>
+<li>Template-Parameter beim Aufruf angegeben: am besten passendes Template</li>
+</ul>
+<p><em>Hinweis</em>: Durch reine Deklaration von Spezialisierungen (d.h. ohne die
+entsprechende Implementierung) lässt sich die Instantiierung einer
+Templatefunktion für bestimmte Typen verhindern. Beispiel:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> cmp(<span style="color:#66d9ef">const</span> T <span style="color:#f92672">&amp;</span>a, <span style="color:#66d9ef">const</span> T <span style="color:#f92672">&amp;</span>b) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> a<span style="color:#f92672">&lt;</span>b;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> cmp<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>a, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>b);</span></span></code></pre></div>
+<p>Damit könnte man die <code>cmp</code>-Funktion nicht mehr für <code>int</code> benutzen (Compiler-
+bzw. Linker-Fehler).</p>
+<div style="text-align: right;"><span class="btn cstyle interactive default"><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/funktionsTemplates.cpp" target="_blank"><span class="title">Konsole: funktionsTemplates.cpp</span></a></span></div>
+<h2 id="klassen-templates-in-c">Klassen-Templates in C++</h2>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Matrix</span> {
+</span></span><span style="display:flex;"><span>    Matrix(<span style="color:#66d9ef">unsigned</span> rows <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, <span style="color:#66d9ef">unsigned</span> cols <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span> xyField;
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
+<p><em>Hinweis</em>:
+Template-Parameter innerhalb von Template-Parametern verursachen bei den
+schließenden spitzen Klammern u.U. Parser-Probleme. Diese lassen sich durch
+ein extra Leerzeichen (hat sonst keine Funktion!) umgehen: Statt
+<code>vector&lt;vector&lt;T&gt;&gt; xyField;</code> besser <code>vector&lt;vector&lt;T&gt; &gt; xyField;</code>
+schreiben.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    Matrix<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> m1;
+</span></span><span style="display:flex;"><span>    Matrix<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> m2(<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">3</span>);
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p>Template-Parameter gehören zur Schnittstelle und müssen bei der Instantiierung
+angegeben werden. <code>Matrix m;</code> würde im obigen Beispiel <strong>nicht</strong> funktionieren.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>Matrix<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span>Matrix(<span style="color:#66d9ef">unsigned</span> rows, <span style="color:#66d9ef">unsigned</span> cols) { ... }</span></span></code></pre></div>
+<div style="text-align: right;"><span class="btn cstyle interactive default"><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/matrix.cpp" target="_blank"><span class="title">Beispiel: matrix.cpp</span></a></span></div>
+<h3 id="klassen-templates-in-c-variante-mit-konstanten">Klassen-Templates in C++ (Variante mit Konstanten)</h3>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T, <span style="color:#66d9ef">unsigned</span> rows, <span style="color:#66d9ef">unsigned</span> cols<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Matrix</span> {
+</span></span><span style="display:flex;"><span>    Matrix();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span> xyField;
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
+<p>Template-Parameter können neben Typen auch konstante Werte (Basisdatentypen,
+außer <code>float</code> und <code>double</code>) sein. Innerhalb der Klasse <code>Matrix</code> kann auf
+die Werte von <code>rows</code> und <code>cols</code> zugegriffen werden.</p>
+<p><em>Achtung</em>: <code>rows</code> und <code>cols</code> sind <strong>keine</strong> Attribute der Klasse <code>Matrix</code>!</p>
+<p><em>Hinweis</em>: Konstanten als Template-Parameter funktioniert auch bei
+Funktions-Templates.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    Matrix<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span><span style="color:#f92672">&gt;</span> m1;
+</span></span><span style="display:flex;"><span>    Matrix<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">3</span><span style="color:#f92672">&gt;</span> m2;
+</span></span><span style="display:flex;"><span>    Matrix<span style="color:#f92672">&lt;</span>string, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span><span style="color:#f92672">&gt;</span> m3;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<div style="text-align: right;"><span class="btn cstyle interactive default"><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/matrix2.cpp" target="_blank"><span class="title">Beispiel: matrix2.cpp</span></a></span></div>
+<h3 id="beispiel-konstanten-als-template-parameter">Beispiel: Konstanten als Template-Parameter</h3>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span> I<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> print() {
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> I;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">5</span><span style="color:#f92672">&gt;</span>();</span></span></code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">unsigned</span> u<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">MyClass</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">enum</span> { X <span style="color:#f92672">=</span> u };
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cout <span style="color:#f92672">&lt;&lt;</span> MyClass<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">2</span><span style="color:#f92672">&gt;::</span>X <span style="color:#f92672">&lt;&lt;</span> endl;</span></span></code></pre></div>
+<ul>
+<li>Konstante muss explizit übergeben werden</li>
+<li>Wert muss eine zur Compile-Zeit bekannte Konstante sein</li>
+<li>Nur aufzählbare Typen für derartige Konstanten erlaubt
+(z.B. <code>int</code>, aber nicht <code>double</code>)</li>
+</ul>
+<p><em>Anmerkung</em>:
+Durch Konstruktion mit dem anonymen <code>enum</code> in der Klasse <code>MyClass</code> wird der
+Wert der Konstanten &quot;gespeichert&quot; und kann später (von außen) abgefragt werden.
+(Innerhalb der Klasse selbst können Sie natürlich jederzeit auf den Wert von
+<code>u</code> zugreifen.)</p>
+<p>Wollte man dies über ein normales Attribut erledigen, sähe der Code deutlich
+komplexer aus (zusätzlich zur oben gezeigten Variante mit dem <code>enum</code> einmal
+als statisches Attribut <code>Y</code> und einmal als &quot;normales&quot; Attribut <code>Z</code>):</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">unsigned</span> u<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">MyClass</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">enum</span> { X <span style="color:#f92672">=</span> u };
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">unsigned</span> Y;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">unsigned</span> Z;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    MyClass() <span style="color:#f92672">:</span> Z(u) {}
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">unsigned</span> u<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> MyClass<span style="color:#f92672">&lt;</span>u<span style="color:#f92672">&gt;::</span>Y <span style="color:#f92672">=</span> u;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> MyClass<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">2</span><span style="color:#f92672">&gt;::</span>X <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> MyClass<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">2</span><span style="color:#f92672">&gt;::</span>Y <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> MyClass<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">2</span><span style="color:#f92672">&gt;</span>().Z <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p>Falls man mit <code>::</code> zugreifen wollte, müsste das Attribut <code>static</code> sein und
+entsprechend außerhalb der Klasse initialisiert werden. Für ein &quot;normales&quot;
+Attribut braucht man dann einen extra Konstruktor und muss den Aufruf dann
+extra klammern: <code>MyClass&lt;2&gt;().Z</code> statt <code>MyClass&lt;2&gt;.Z</code>.</p>
+<p>Die Variante mit dem <code>enum</code> werden Sie entsprechend sehr häufig in C++ finden!</p>
+<h3 id="klassen-templates-mit-defaults">Klassen-Templates mit Defaults</h3>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T <span style="color:#f92672">=</span> <span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">unsigned</span> rows <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, <span style="color:#66d9ef">unsigned</span> cols <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Matrix</span> {
+</span></span><span style="display:flex;"><span>    Matrix();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span> xyField;
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    Matrix<span style="color:#f92672">&lt;&gt;</span> m1;    <span style="color:#75715e">// Leere spitze Klammern Pflicht!
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Matrix<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">3</span><span style="color:#f92672">&gt;</span> m2;
+</span></span><span style="display:flex;"><span>    Matrix<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> m3;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p>Leere spitze Klammern bei Klassen-Templates mit Default-Parameter Pflicht!</p>
+<p><em>Hinweis</em>: Defaults für Template-Parameter waren zunächst nur für Klassen-Templates
+erlaubt. Seit C++11 kann man solche Defaults auch bei Funktions-Templates
+einsetzen.</p>
+<div style="text-align: right;"><span class="btn cstyle interactive default"><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/matrix3.cpp" target="_blank"><span class="title">Beispiel: matrix3.cpp</span></a></span></div>
+<h2 id="klassen-templates-in-c-spezialisieren">Klassen-Templates in C++ spezialisieren</h2>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Matrix</span> {
+</span></span><span style="display:flex;"><span>    Matrix(<span style="color:#66d9ef">unsigned</span> rows, <span style="color:#66d9ef">unsigned</span> cols);
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span> vector<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span> xyField;
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Matrix</span><span style="color:#f92672">&lt;</span>uint<span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span>    Matrix(<span style="color:#66d9ef">unsigned</span> rows, <span style="color:#66d9ef">unsigned</span> cols);
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span> vector<span style="color:#f92672">&lt;</span>uint<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span> xyField;
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
+<div style="text-align: right;"><span class="badge cstyle default"><span class="badge-content">Hinweis auf Implementierung außerhalb der Klasse</span></span></div>
+<p><strong>ACHTUNG</strong>: Implementierung außerhalb der Klasse: Bei den Methoden des voll
+spezialisierten Templates das &quot;<code>template&lt;&gt;</code>&quot; <strong>weglassen</strong>! Alles andere ist
+ein Syntax-Fehler.</p>
+<p>Der Grund dafür bleibt ein Geheimnis des C++-Standards ... ;-)</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// Implementierung fuer primaeres Template
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>Matrix<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span>Matrix(<span style="color:#66d9ef">unsigned</span> rows, <span style="color:#66d9ef">unsigned</span> cols) { ... }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Implementierung fuer vollstaendig spezialisiertes Template
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>Matrix<span style="color:#f92672">&lt;</span>uint<span style="color:#f92672">&gt;::</span>Matrix(<span style="color:#66d9ef">unsigned</span> rows, <span style="color:#66d9ef">unsigned</span> cols) { ... }</span></span></code></pre></div>
+<h3 id="partielle-spezialisierung">Partielle Spezialisierung</h3>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T1, <span style="color:#66d9ef">typename</span> T2<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Array</span> {
+</span></span><span style="display:flex;"><span>    Array();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>T1<span style="color:#f92672">&gt;</span> v;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>T2<span style="color:#f92672">&gt;</span> w;
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Array</span><span style="color:#f92672">&lt;</span>T, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span>    Array();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> v;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> w;
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
+<p><strong>ACHTUNG</strong>: Implementierung außerhalb der Klasse: Bei den Methoden des partiell
+spezialisierten Templates muss das &quot;<code>template&lt;T&gt;</code>&quot; wieder benutzt werden!</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// Implementierung fuer primaeres Template
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T1, <span style="color:#66d9ef">typename</span> T2<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>Array<span style="color:#f92672">&lt;</span>T1, T2<span style="color:#f92672">&gt;::</span>Array() {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Implementierung fuer partiell spezialisiertes Template
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>Array<span style="color:#f92672">&lt;</span>T, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;::</span>Array() {}</span></span></code></pre></div>
+<h3 id="vergleich-verschiedene-spezialisierungen">Vergleich verschiedene Spezialisierungen</h3>
+<p>Allgemeine Templates vs. partiell spezialisierte Templates vs. vollständig spezialisierte Templates</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// Primaeres (allgemeines) Template
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">unsigned</span> line, <span style="color:#66d9ef">unsigned</span> column<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Matrix</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    Matrix();
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Partiell spezialisiertes Template
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">unsigned</span> line<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Matrix</span><span style="color:#f92672">&lt;</span>line, <span style="color:#ae81ff">1</span><span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    Matrix();
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Vollstaendig spezialisiertes Template
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Matrix</span><span style="color:#f92672">&lt;</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span><span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    Matrix();
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Aufrufe
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    Matrix<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span><span style="color:#f92672">&gt;</span> matrix;        <span style="color:#75715e">// allg. Template
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Matrix<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">1</span><span style="color:#f92672">&gt;</span> vector;       <span style="color:#75715e">// partiell spez. Templ.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Matrix<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span><span style="color:#f92672">&gt;</span> dreiKreuzDrei; <span style="color:#75715e">// vollst. spez. Templ.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Implementierung
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">unsigned</span> line, <span style="color:#66d9ef">unsigned</span> column<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>Matrix<span style="color:#f92672">&lt;</span>line, column<span style="color:#f92672">&gt;::</span>Matrix() { cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;allgemeines Template&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl; }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">unsigned</span> line<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>Matrix<span style="color:#f92672">&lt;</span>line, <span style="color:#ae81ff">1</span><span style="color:#f92672">&gt;::</span>Matrix() { cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;partiell spezialisiertes Template&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl; }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Matrix<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span><span style="color:#f92672">&gt;::</span>Matrix() { cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;vollstaendig spezialisiertes Template&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl; }</span></span></code></pre></div>
+<p>Regel: Das am meisten spezialisierte Template wird verwendet.</p>
+<h2 id="mischen-von-klassen--und-funktions-templates">Mischen von Klassen- und Funktions-Templates</h2>
+<p>Sie können innerhalb eines Klassen-Templates auch ein Funktions-Template
+(Methoden-Template) definieren. Bei der Implementierung außerhalb der
+Klasse müssen entsprechend alle Template-Deklarationen wiederholt werden!</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T, <span style="color:#66d9ef">unsigned</span> n<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Array</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">enum</span> { size <span style="color:#f92672">=</span> n };
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> C <span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> copy_from(<span style="color:#66d9ef">const</span> C <span style="color:#f92672">&amp;</span>c);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    T data[n];
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T, <span style="color:#66d9ef">unsigned</span> n<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> C<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> Array<span style="color:#f92672">&lt;</span>T,n<span style="color:#f92672">&gt;::</span>copy_from(<span style="color:#66d9ef">const</span> C <span style="color:#f92672">&amp;</span>c) { ... }</span></span></code></pre></div>
+<h2 id="templates-java-vs-c">Templates: Java vs. C++</h2>
+<ul>
+<li>
+<p>Templates sind nur <strong>Schablonen</strong>!</p>
+<p>Die Definitionen der Templates werden nicht in den Object-Code kompiliert!
+Erst bei der Instantiierung von Templates wird durch den Compiler eine
+passende Instanz erzeugt und im Object-Code zur Nutzung abgelegt.</p>
+</li>
+<li>
+<p><span class='alert'><strong>Unterschied zu Java</strong></span></p>
+<ul>
+<li>C++: Für <strong>jeden</strong> Aufruf/Typ eine passende <strong>Instanz</strong> (!)</li>
+<li>Java: Nur <strong>eine</strong> Klasse mit gemeinsamen Obertyp</li>
+</ul>
+</li>
+<li>
+<p>Offener Code: <span class='alert'><strong>Templates im <code>.h</code>-File implementieren!</strong></span></p>
+<p>Ohne die Template-Definition kann der Compiler keine Instanzen anlegen!</p>
+</li>
+<li>
+<p>Bibliotheken und Templates passen nicht recht</p>
+<p>Templates werden immer bei der ersten Verwendung instantiiert! Wird ein
+Template nicht im zu kompilierenden Code verwendet, dann generiert der
+Compiler auch nichts, was man in den Objektdateien finden könnte ...</p>
+<ul>
+<li>
+<p>Nur instantiierte Templates sind in einer dynamischen/statischen
+Bibliothek enthalten!</p>
+</li>
+<li>
+<p>Falls Einsatz nur für wenige Typen vorgesehen
+=&gt; Explizite Instantiierung:</p>
+<ul>
+<li>
+<p>Entweder mit &quot;<code>template</code>&quot;: <code>template class Matrix&lt;5,5&gt;;</code>, oder</p>
+</li>
+<li>
+<p>mit &quot;<code>typedef</code>&quot;: <code>typedef Matrix&lt;5,5&gt; Matrix5x5;</code></p>
+<p>=&gt; Dann aber nur in exakt diesen Versionen in der Bibliothek
+enthalten und entsprechend nur so nutzbar (sofern die
+Template-Definition nicht zur Verfügung steht)</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="wrap-up">Wrap-Up</h2>
+<ul>
+<li>
+<p>Generische Programmierung (Funktions-Templates)</p>
+<ul>
+<li><code>template &lt;typename T&gt;</code> der Funktionsdefinition voranstellen</li>
+<li>Funktions-Templates sind spezialisierbar und überladbar</li>
+<li>Aufruf: Compiler nimmt die am besten &quot;passende&quot; Variante</li>
+</ul>
+</li>
+<li>
+<p>Generische Programmierung (Klassen-Templates)</p>
+<ul>
+<li>Funktionsweise analog zu Funktions-Templates</li>
+<li>Bei Implementierung außerhalb der Deklaration: Template-Deklaration mitführen!</li>
+<li>Klassen-Templates lassen sich partiell spezialisieren</li>
+</ul>
+</li>
+<li>
+<p>Compiler stellt je instantiiertes Template eine konkrete Funktion/Klasse bereit</p>
+</li>
+</ul>
+
+
+    
+
+
+
+    
+
+
+
+    
+
+    <div class="box notices cstyle note">
+  <div class="box-label">
+    <i class="fas fa-puzzle-piece"></i> Challenges
+  </div>
+  <div class="box-content">
+<p><strong>Funktions-Templates</strong></p>
+<ul>
+<li>Wie kann eine Funktion als Funktions-Template definiert werden?</li>
+<li>Wie wird ein Funktions-Template benutzt, d.h. wie wird es aufgerufen?
+Worin liegt der Unterschied zu Java?</li>
+<li>Wie kann ein Funktions-Template spezialisiert werden? Was ist dabei zu beachten?</li>
+<li>Kann man Funktions-Templates überladen?</li>
+<li>Worin liegt der Unterschied zwischen einem spezialisierten Funktions-Template
+und einem überladenen Funktions-Template?</li>
+</ul>
+<p><strong>Funktions-Templates in C++</strong></p>
+<ol>
+<li>
+<p>Schreiben Sie in C++ eine Funktion <code>invert()</code>, die zu einem übergebenen
+numerischen Wert den negativen Wert zurückgibt. Realisieren Sie die
+Funktion als Funktions-Template.</p>
+<p>Testen Sie Ihre Implementierung mit den Typen <code>int</code>, <code>double</code> und <code>short</code>.</p>
+</li>
+<li>
+<p>Spezialisieren Sie das eben erstellte Funktions-Template, so daß <code>invert()</code>
+auch für <code>string</code> aufgerufen werden kann. In diesem Fall soll der String
+umgekehrt werden und zurückgeliefert werden, d.h. für die Eingabe von
+&quot;abcde&quot; soll &quot;edcba&quot; zurück geliefert werden.</p>
+<p>Testen Sie die Funktionen wiederum mit <code>int</code>, <code>double</code>, <code>short</code> und nun
+auch <code>string</code>.</p>
+</li>
+<li>
+<p>Schreiben Sie ein weiteres Funktions-Template <code>string getType(T t)</code> mit
+Template-Spezialisierungen, die den Typ des Parameters <code>t</code> als String
+zurückgibt. Für nicht bekannte Typen soll der String &quot;unbekannter Typ&quot;
+zurückgeliefert werden.</p>
+<p>Implementieren Sie mind. 3 Spezialisierungen.</p>
+<p><em>Hinweis:</em> Verwenden Sie an dieser Stelle keine explizite Typüberprüfung (in
+der Funktion)! Realisieren Sie die Reaktion auf unterschiedliche
+Parametertypen ausschließlich mit Hilfe von Templates.</p>
+</li>
+<li>
+<p>Erklären Sie folgenden Code-Schnipsel:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#75715e">// Definition
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T2, <span style="color:#66d9ef">typename</span> T1<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> f(T1 a, T2 b, <span style="color:#66d9ef">int</span> c) {
+</span></span><span style="display:flex;"><span>        ...
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Aufruf
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    f<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span> <span style="color:#f92672">*&gt;</span>(<span style="color:#ae81ff">99</span>, <span style="color:#e6db74">&#34;Hello World&#34;</span>, <span style="color:#ae81ff">42</span>);</span></span></code></pre></div>
+</li>
+<li>
+<p>Erklären Sie nun folgenden Code-Schnipsel:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T2, <span style="color:#66d9ef">typename</span> T1, <span style="color:#66d9ef">typename</span> T3<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> fkt(T2 a, T3 b, T2 c, <span style="color:#66d9ef">int</span> d) { ... }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fkt</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b, <span style="color:#66d9ef">int</span> c, <span style="color:#66d9ef">int</span> d) { ... }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    fkt<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">void</span><span style="color:#f92672">*&gt;</span>(<span style="color:#ae81ff">42</span>, <span style="color:#e6db74">&#34;HUHU&#34;</span>, <span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#ae81ff">99</span>);
+</span></span><span style="display:flex;"><span>    fkt<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>);
+</span></span><span style="display:flex;"><span>    fkt(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>);
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</li>
+</ol>
+<p><strong>Klassen-Templates und partielle Spezialisierung</strong></p>
+<p>Definieren Sie ein Klassen-Template zum Umgang mit Vektoren. Diese sollen
+Elemente eines unbestimmten Typs (Typ-Variable) aufnehmen. Die Größe des
+Vektors soll ebenfalls als Typ-Variable in die Template-Definition eingehen.
+Definieren Sie den <code>operator*</code> für das Skalarprodukt von zwei Vektoren.</p>
+<p>Erstellen Sie eine partielle Spezialisierung des Klassen-Templates zur
+Repräsentation von einstelligen Vektoren (Skalare).</p>
+<p>Schreiben Sie ein <code>main()</code>-Funktion, instantiieren einige Vektoren und berechnen
+Sie die Skalarprodukte.</p>
+<p><strong>Beispiel aus dem echten Leben</strong></p>
+<p>Erklären Sie das folgende Beispiel eines Klassen-Templates <code>RingBuffer</code>:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T, size_t size, <span style="color:#66d9ef">typename</span> alloc_t <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>allocator<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RingBuffer</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">typedef</span> AllocatorType alloc_t;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    RingBuffer(<span style="color:#66d9ef">const</span> alloc_t <span style="color:#f92672">&amp;</span>rb_allocator <span style="color:#f92672">=</span> alloc_t());
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">~</span>RingBuffer();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">writeBuffer</span>(T <span style="color:#f92672">*</span>data);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    alloc_t m_allocator;
+</span></span><span style="display:flex;"><span>    size_t count;
+</span></span><span style="display:flex;"><span>    size_t head;
+</span></span><span style="display:flex;"><span>    T <span style="color:#f92672">**</span>elems;
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
+  </div>
+</div>
+
+
+
+    
+
+
+
+
+    
+
+
+
+
+    
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                    
+                
+                
+            
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                
+            
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                
+            
+            
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-book-reader"></i> Quellen
+  </div>
+  <div class="box-content">
+<ul> <li id='id_Breymann2011'>[Breymann2011] <strong>Der C++ Programmierer</strong><br>Breymann, U., Hanser, 2011. ISBN <a href='https://fhb-bielefeld.digibib.net/openurl?isbn=978-3-446-42691-7' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'>978-3-446-42691-7</a>.</li> <li id='id_cppreference.com'>[cppreference.com] <a href='https://en.cppreference.com/w/' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'><strong>C and C++ Reference</strong></a><br>, cppreference.com.</li> <li id='id_cprogramming.com'>[cprogramming.com] <a href='https://www.cprogramming.com/' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'><strong>C Programming and C++ Programming</strong></a><br>Allain, A. und Hoffer, A..</li></ul>
+  </div>
+</div>
+
+
+
+
+
+
+<footer class="footline"><div style="color: darkgray; font-size: small;">
+<p style="margin-left: 4rem; margin-right: 4rem; margin-top: 6rem;">
+<!-- https://creativecommons.org/choose/ -->
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+Unless otherwise noted, <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor">this work</a> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/graphs/contributors">contributors</a> is licensed under <a rel="license" href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/LICENSE.md">CC BY-SA 4.0</a>.
+See the <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/CREDITS.md">credits</a> for a detailed list of contributing projects.
+
+</p>
+</div>
+
+</footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+
+
+<a id="logo" href='https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1360443//index.html'>
+    <img style="max-width:35%" alt="icon" src='/elearning/data/FH-Bielefeld/lm_data/lm_1360443/images/logo.png'>
+</a>
+
+        </div>
+
+        <search><form action="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/search.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['de'];
+        </script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/auto-complete.js?1734345862" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/lunr/lunr.min.js?1734345862" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/lunr/lunr.stemmer.support.min.js?1734345862" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/lunr/lunr.multi.min.js?1734345862" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/lunr/lunr.de.min.js?1734345862" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/search.js?1734345862" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro.html">Überblick</a><ul id="R-subsections-4df4f48548517eafbcfd5260bf8ec879" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/overview.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/overview.html">Struktur eines Compilers</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/languages.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/languages.html">Programmiersprachen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/applications.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/applications.html">Anwendungen</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing.html">Lexikalische Analyse</a><ul id="R-subsections-8d37d4681a8464ded0759726543b315f" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing/regular.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing/regular.html">Reguläre Sprachen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing/antlr-lexing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing/antlr-lexing.html">Lexer mit ANTLR generieren</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing.html">Syntaktische Analyse</a><ul id="R-subsections-2fa42a0a95fa4e38203332af421076e1" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing/cfg.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing/cfg.html">CFG</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing/antlr-parsing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing/antlr-parsing.html">Parser mit ANTLR generieren</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics.html">Semantische Analyse</a><ul id="R-subsections-d88fb7065d61ee57361d9d4d71ff9c1f" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab0-intro.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab0-intro.html">SymbTab0: Überblick Symboltabellen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab1-scopes.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab1-scopes.html">SymbTab1: Nested Scopes</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab2-functions.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab2-functions.html">SymbTab2: Funktionen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab3-classes.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab3-classes.html">SymbTab3: Strukturen und Klassen</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate.html">Zwischencode</a><ul id="R-subsections-954600b07c36f58ed592d3873b4cb416" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate/intro-ir.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate/intro-ir.html">Überblick Zwischencode</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate/llvm-ir.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate/llvm-ir.html">LLVM als IR</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation.html">Interpreter</a><ul id="R-subsections-e1e14acafd0a08bb52afc3f0f0608d4c" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation/astdriven-part1.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation/astdriven-part1.html">AST-basierte Interpreter 1</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation/astdriven-part2.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation/astdriven-part2.html">AST-basierte Interpreter 2</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages.html" class="parent "><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages.html">Programmiersprachen</a><ul id="R-subsections-a84558f596ca34bed293af92ceba5568" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp0-basics.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp0-basics.html">Einführung in C&#43;&#43;</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp1-pointer.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp1-pointer.html">C&#43;&#43;: Pointer und Referenzen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp2-classes.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp2-classes.html">C&#43;&#43;: Klassen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp3-big3.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp3-big3.html">C&#43;&#43;: Big 3</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp4-operators.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp4-operators.html">C&#43;&#43;: Operatoren</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp5-inheritance.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp5-inheritance.html">C&#43;&#43;: Vererbung und Polymorphie</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp6-templates.html" class="active"><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp6-templates.html">C&#43;&#43;: Templates</a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.html#kursformat"><i class='fas fa-bookmark'></i> Zeiten</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.html#fahrplan"><i class='fas fa-bookmark'></i> Fahrplan</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.html#pr%C3%BCfungsform-note-und-credits"><i class='fas fa-bookmark'></i> Note/Credits</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.html#fahrplan"><i class='fas fa-bookmark'></i> News</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVariantSwitch">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp6-templates.html" lang="de-DE" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch showVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-auto" value="auto" selected>Auto</option>
+                      <option id="R-select-variant-zen-light" value="zen-light">Zen Light</option>
+                      <option id="R-select-variant-zen-dark" value="zen-dark">Zen Dark</option>
+                      <option id="R-select-variant-relearn-bright" value="relearn-bright">Relearn Bright</option>
+                      <option id="R-select-variant-relearn-light" value="relearn-light">Relearn Light</option>
+                      <option id="R-select-variant-relearn-dark" value="relearn-dark">Relearn Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter"><p style="text-align: center;">
+<i class='fab fa-fw fa-github'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor">GitHub</a>
+<i class='fas fa-fw fa-tags'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/issues">Issues</a>
+<i class='fas fa-fw fa-bullhorn'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/CREDITS.md">Credits</a>
+<br />
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+
+</p>
+
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/clipboard.min.js?1734345862" defer></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/perfect-scrollbar.min.js?1734345862" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/mathjax/tex-mml-chtml.js?1734345862"></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/theme.js?1734345862" defer></script>
+  </body>
+</html>

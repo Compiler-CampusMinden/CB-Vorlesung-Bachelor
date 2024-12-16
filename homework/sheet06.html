@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="de-DE" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.135.0">
+    <meta name="generator" content="Relearn 6.4.1">
+    <meta name="description" content="Zusammenfassung Ziel dieses Aufgabenblattes ist die praktische Anwendung Ihrer C&#43;&#43;-Kenntnisse, insbesondere werden Sie Pointer, Referenzen und Klassen anwenden und vertiefen. Als Anwendungsbeispiel werden Sie bestimmte in der C&#43;&#43;-Welt wohlbekannte Smartpointer modellieren sowie einen einfachen Ringpuffer programmieren. Sie lernen mit dem Reference Counting nebenbei eine verbreitete Technik der Garbage Collection kennen.
+Methodik Sie werden auf diesem Blatt vier einfache Klassen in C&#43;&#43; implementieren.
+Es empfiehlt sich, zunächst die Beispiele gründlich zu analysieren, um die gewünschte Funktionsweise der einzelnen Klassen vorab präzise zu verstehen. Sie werden zu einigen Dingen in der C&#43;&#43;-Literatur recherchieren müssen.">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Blatt 06: C&#43;&#43;">
+    <meta name="twitter:description" content="Zusammenfassung Ziel dieses Aufgabenblattes ist die praktische Anwendung Ihrer C&#43;&#43;-Kenntnisse, insbesondere werden Sie Pointer, Referenzen und Klassen anwenden und vertiefen. Als Anwendungsbeispiel werden Sie bestimmte in der C&#43;&#43;-Welt wohlbekannte Smartpointer modellieren sowie einen einfachen Ringpuffer programmieren. Sie lernen mit dem Reference Counting nebenbei eine verbreitete Technik der Garbage Collection kennen.
+Methodik Sie werden auf diesem Blatt vier einfache Klassen in C&#43;&#43; implementieren.
+Es empfiehlt sich, zunächst die Beispiele gründlich zu analysieren, um die gewünschte Funktionsweise der einzelnen Klassen vorab präzise zu verstehen. Sie werden zu einigen Dingen in der C&#43;&#43;-Literatur recherchieren müssen.">
+    <meta property="og:url" content="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet06.html">
+    <meta property="og:title" content="Blatt 06: C&#43;&#43;">
+    <meta property="og:description" content="Zusammenfassung Ziel dieses Aufgabenblattes ist die praktische Anwendung Ihrer C&#43;&#43;-Kenntnisse, insbesondere werden Sie Pointer, Referenzen und Klassen anwenden und vertiefen. Als Anwendungsbeispiel werden Sie bestimmte in der C&#43;&#43;-Welt wohlbekannte Smartpointer modellieren sowie einen einfachen Ringpuffer programmieren. Sie lernen mit dem Reference Counting nebenbei eine verbreitete Technik der Garbage Collection kennen.
+Methodik Sie werden auf diesem Blatt vier einfache Klassen in C&#43;&#43; implementieren.
+Es empfiehlt sich, zunächst die Beispiele gründlich zu analysieren, um die gewünschte Funktionsweise der einzelnen Klassen vorab präzise zu verstehen. Sie werden zu einigen Dingen in der C&#43;&#43;-Literatur recherchieren müssen.">
+    <meta property="og:locale" content="de_DE">
+    <meta property="og:type" content="website">
+    <meta itemprop="name" content="Blatt 06: C&#43;&#43;">
+    <meta itemprop="description" content="Zusammenfassung Ziel dieses Aufgabenblattes ist die praktische Anwendung Ihrer C&#43;&#43;-Kenntnisse, insbesondere werden Sie Pointer, Referenzen und Klassen anwenden und vertiefen. Als Anwendungsbeispiel werden Sie bestimmte in der C&#43;&#43;-Welt wohlbekannte Smartpointer modellieren sowie einen einfachen Ringpuffer programmieren. Sie lernen mit dem Reference Counting nebenbei eine verbreitete Technik der Garbage Collection kennen.
+Methodik Sie werden auf diesem Blatt vier einfache Klassen in C&#43;&#43; implementieren.
+Es empfiehlt sich, zunächst die Beispiele gründlich zu analysieren, um die gewünschte Funktionsweise der einzelnen Klassen vorab präzise zu verstehen. Sie werden zu einigen Dingen in der C&#43;&#43;-Literatur recherchieren müssen.">
+    <meta itemprop="wordCount" content="3057">
+    <title>Blatt 06: C&#43;&#43;</title>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet06/index.print.html" rel="alternate" type="text/html" title="Blatt 06: C++">
+
+    
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/images/logo.png?1734345862" rel="icon" type="image/png">
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/fontawesome-all.min.css?1734345862" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/fontawesome-all.min.css?1734345862" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/nucleus.css?1734345862" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/auto-complete.css?1734345862" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/auto-complete.css?1734345862" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/perfect-scrollbar.min.css?1734345862" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/fonts.css?1734345862" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/fonts.css?1734345862" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/theme.css?1734345862" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/theme-auto.css?1734345862" rel="stylesheet" id="R-variant-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/chroma-auto.css?1734345862" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/variant.css?1734345862" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/print.css?1734345862" rel="stylesheet" media="print">
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/variant.js?1734345862"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..';
+      window.relearn.relBaseUri='..\/..\/..\/..\/..\/..';
+      window.relearn.absBaseUri='https:\/\/www.hsbi.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1360443';
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      window.index_js_url="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.search.js?1734345862";
+      // variant stuff
+      window.variants && variants.init( [ 'auto', 'zen-light', 'zen-dark', 'relearn-bright', 'relearn-light', 'relearn-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support html disableInlineCopyToClipboard" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet06.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li><a href="#zusammenfassung">Zusammenfassung</a></li>
+    <li><a href="#methodik">Methodik</a></li>
+    <li><a href="#speicherverwaltung-in-cc">Speicherverwaltung in C/C++</a>
+      <ul>
+        <li><a href="#beispiel-für-eine-tokenizer-funktion">Beispiel für eine Tokenizer-Funktion</a></li>
+        <li><a href="#smartpointer-als-lösung">Smartpointer als Lösung</a></li>
+        <li><a href="#reference-counting">Reference Counting</a></li>
+        <li><a href="#dereferenzierung-von-smartpointern">Dereferenzierung von Smartpointern</a></li>
+      </ul>
+    </li>
+    <li><a href="#aufgaben">Aufgaben</a>
+      <ul>
+        <li><a href="#a61-klasse-für-token-1p">A6.1: Klasse für Token (1P)</a></li>
+        <li><a href="#a62-implementierung-eines-einfachen-tokenizers-1p">A6.2: Implementierung eines einfachen Tokenizers (1P)</a></li>
+        <li><a href="#a63-reference-counter-1p">A6.3: Reference Counter (1P)</a></li>
+        <li><a href="#a64-smartpointer-3p">A6.4: Smartpointer (3P)</a></li>
+        <li><a href="#a65-ringpuffer-4p">A6.5: Ringpuffer (4P)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            Blatt 06: C&#43;&#43;
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-print" data-content-empty="disable" data-width-s="area-more" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet06/index.print.html" title="Print whole chapter (CTRL&#43;ALT&#43;p)"><i class="fa-fw fas fa-print"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable " tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+<h1>Blatt 06: C&#43;&#43;</h1>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        <p><strong>(10 Punkte)</strong></p>
+    
+
+    <h2 id="zusammenfassung">Zusammenfassung</h2>
+<p>Ziel dieses Aufgabenblattes ist die praktische Anwendung Ihrer C++-Kenntnisse, insbesondere
+werden Sie Pointer, Referenzen und Klassen anwenden und vertiefen. Als Anwendungsbeispiel
+werden Sie bestimmte in der C++-Welt wohlbekannte Smartpointer modellieren sowie einen
+einfachen Ringpuffer programmieren. Sie lernen mit dem <em>Reference Counting</em> nebenbei eine
+verbreitete Technik der <em>Garbage Collection</em> kennen.</p>
+<h2 id="methodik">Methodik</h2>
+<p>Sie werden auf diesem Blatt vier einfache Klassen in C++ implementieren.</p>
+<p>Es empfiehlt sich, zunächst die Beispiele gründlich zu analysieren, um die gewünschte
+Funktionsweise der einzelnen Klassen vorab präzise zu verstehen. Sie werden zu einigen Dingen
+in der C++-Literatur recherchieren müssen.</p>
+<p>Implementieren Sie immer eine Klasse vollständig und testen Sie Ihren Code sowohl mit den
+vorgegebenen Beispielen als auch mit eigenen Beispielen, bevor Sie sich an die nächste
+Aufgabe/Klasse setzen.</p>
+<h2 id="speicherverwaltung-in-cc">Speicherverwaltung in C/C++</h2>
+<p>C und C++ erlauben als hardwarenahe Programmiersprachen den direkten Umgang mit dem
+Programmspeicher (Heap). Ein Programm kann dynamisch zu jeder Zeit weiteren Speicher anfordern
+und so beispielsweise mitwachsende Datenstrukturen realisieren.</p>
+<p>Da der Heap-Speicher endlich ist, muss man nicht mehr benötigten Speicher auch wieder
+freigeben. Anderenfalls ist irgendwann der komplette Heap belegt und das Programm kann nicht
+mehr ordnungsgemäß arbeiten. Für die Freigabe ist man als Programmierer:in selbst zuständig.</p>
+<h3 id="beispiel-für-eine-tokenizer-funktion">Beispiel für eine Tokenizer-Funktion</h3>
+<p>Im folgenden Programmschnipsel soll eine Funktion <code>next_token()</code> das nächste Token berechnen.
+So eine Funktion findet sich typischerweise im Lexer. Für die Rückgabe des Tokens hat man in
+C++ drei Möglichkeiten: als Kopie, als Referenz oder als Pointer.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// Return as copy
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>Token <span style="color:#a6e22e">next_token</span>() {
+</span></span><span style="display:flex;"><span>    Token wuppie <span style="color:#f92672">=</span> Token(<span style="color:#e6db74">&#34;wuppie&#34;</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">4</span>);   <span style="color:#75715e">// will be deleted automatically
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Token bar <span style="color:#f92672">=</span> Token(<span style="color:#e6db74">&#34;bar&#34;</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">10</span>);        <span style="color:#75715e">// not used, will be deleted automatically
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> wuppie;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    Token x <span style="color:#f92672">=</span> next_token();                 <span style="color:#75715e">// copy constructor; no need to free
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}</span></span></code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// Return as pointer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>Token<span style="color:#f92672">*</span> <span style="color:#a6e22e">next_token</span>() {
+</span></span><span style="display:flex;"><span>    Token<span style="color:#f92672">*</span> foo <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Token(<span style="color:#e6db74">&#34;foo&#34;</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">35</span>);   <span style="color:#75715e">// will be free&#39;d manually
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Token<span style="color:#f92672">*</span> bar <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Token(<span style="color:#e6db74">&#34;bar&#34;</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">10</span>);   <span style="color:#75715e">// leaves a memory hole!!!
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> foo;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    Token<span style="color:#f92672">*</span> x <span style="color:#f92672">=</span> next_token();                <span style="color:#75715e">// only the pointer (i.e. address) will be copied
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    ...
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">delete</span> x;                               <span style="color:#75715e">// caller needs to free this object
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}</span></span></code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// Return as C++ reference
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>Token<span style="color:#f92672">&amp;</span> next_token() {
+</span></span><span style="display:flex;"><span>    Token<span style="color:#f92672">*</span> foo <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Token(<span style="color:#e6db74">&#34;foo&#34;</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">35</span>);   <span style="color:#75715e">// will be free&#39;d manually
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Token<span style="color:#f92672">*</span> bar <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Token(<span style="color:#e6db74">&#34;bar&#34;</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">10</span>);   <span style="color:#75715e">// leaves a memory hole!!!
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span>foo;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    Token<span style="color:#f92672">&amp;</span> x <span style="color:#f92672">=</span> next_token();                <span style="color:#75715e">// no copy, `x` is just a new alias for `foo`
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    ...
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">delete</span> <span style="color:#f92672">&amp;</span>x;                              <span style="color:#75715e">// caller needs to free this object
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}</span></span></code></pre></div>
+<p>Die Rückgabe per Kopie (Standardfall in C/C++) würde ein lokales Objekt auf dem Stack (im
+Beispiel wäre das <code>wuppie</code>) als Kopie zurückgeben.</p>
+<ul>
+<li>Vorteil: Der Compiler kümmert sich um die Freigabe der lokalen Variable <code>wuppie</code>, d.h.
+nach Beendigung des Funktionsaufrufs wird das Objekt automatisch vom Stack entfernt. Da
+hierbei einfach der Stackpointer zurückgesetzt wird, ist diese &quot;Freigabe&quot; eine sehr
+preiswerte Operation.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></li>
+<li>Nachteil: Der Aufrufer darf nicht einfach auf das Objekt auf dem Stack zugreifen (dieses
+ist ja nach Beendigung der Funktion nicht mehr gültig). Deshalb muss das Objekt bei der
+Rückgabe kopiert werden (Copy-Konstruktor). Zusätzlich erfolgt beim Aufrufer oft noch eine
+Zuweisung, bei der die Attribute des Objekts vermutlich erneut kopiert werden. Dies kann
+(je nach Aufbau der Objekte) sehr teuer sein!</li>
+</ul>
+<p>Die Rückgabe per Pointer erfordert ein Objekt, welches innerhalb der Funktion erzeugt wird und
+dessen Lebensdauer über das Funktionsende hinausreicht. Das Objekt muss in diesem Fall also
+auf dem Heap angelegt werden.</p>
+<ul>
+<li>Vorteil: Die Rückgabe erfordert lediglich die Kopie der Adresse des Objekts (also des
+Pointers). Hier handelt es sich vereinfacht betrachtet um einen Integer, d.h. diese
+Operation ist relativ preiswert.</li>
+<li>Nachteil: Das Objekt muss vom Aufrufer wieder freigegeben werden, sobald es nicht mehr
+benötigt wird. Dies muss man explizit programmieren!</li>
+</ul>
+<p>Die Rückgabe per C++-Referenz erfordert ebenfalls ein Objekt, welches innerhalb der Funktion
+erzeugt wird und dessen Lebensdauer über das Funktionsende hinausreicht. Das Objekt muss in
+diesem Fall also wieder auf dem Heap angelegt werden.</p>
+<ul>
+<li>Vorteil: Die Rückgabe erfordert keinerlei Kopien, da sich die Referenz <code>x</code> an das Objekt
+<code>foo</code> bindet und lediglich einen neuen Alias für dieses Objekt darstellt.</li>
+<li>Nachteil: Das Objekt muss vom Aufrufer wieder freigegeben werden, sobald es nicht mehr
+benötigt wird. Dies muss man explizit programmieren!</li>
+</ul>
+<p>Es hat sich gezeigt, dass der Umgang mit den Heap-Ressourcen sehr fehleranfällig ist. Ein
+Aspekt dabei ist, dass man häufig die Freigabe der Objekte vergisst oder dass die
+Programmpfade so unübersichtlich sind, dass man nicht genau weiss, ob und wann man Objekte
+freigeben soll (denken Sie an Exceptions).</p>
+<h3 id="smartpointer-als-lösung">Smartpointer als Lösung</h3>
+<p>Während man in Sprachen wie Java die Speicherverwaltung komplett dem Compiler überlässt oder
+wie in Rust mit strikten Ownership-Modellen arbeitet, hat man in C++ die sogenannten
+<a href="https://en.cppreference.com/book/intro/smart_pointers" rel="external" target="_blank">Smartpointer</a> erdacht. Diese ersetzen den direkten Umgang mit den einfachen Pointern (auch
+als <em>raw pointer</em> bezeichnet) und lösen das Problem der Freigabe der verwalteten
+Ressourcen.<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> Es gibt verschiedene Modelle, insbesondere gibt es die Variante <em>unique
+pointer</em>, bei der immer nur genau ein Smartpointer gleichzeitig eine bestimmte Ressource
+besitzen darf, und die <em>shared pointer</em>, bei der mehrere Smartpointer gleichzeitig die selbe
+Ressource verwalten können. Sobald die Lebensdauer des <em>unique pointer</em> oder des letzten
+<em>shared pointer</em> endet, wird die verwaltete Ressource automatisch vom Smartpointer
+freigegeben.</p>
+<p>Das folgende Beispiel arbeitet mit einer selbst implementierten Variante der <em>shared
+pointers</em>. Dabei ist die Klasse <code>SmartToken</code> ein Smartpointer für Objekte vom Typ <code>Token</code>:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fluppie</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// new smart pointer for token &#34;wuppie&#34;:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// wuppie lives on the stack, the token lives on the heap (`new`)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    SmartToken wuppie <span style="color:#f92672">=</span> SmartToken(<span style="color:#66d9ef">new</span> Token(<span style="color:#e6db74">&#34;wuppie&#34;</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">4</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (bla<span style="color:#f92672">==</span><span style="color:#ae81ff">42</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// fluppie shares resource with wuppie
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        SmartToken fluppie <span style="color:#f92672">=</span> SmartToken(wuppie);
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// fluppie2 shares resource with wuppie
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        SmartToken fluppie2(wuppie);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// now there are 3 smart pointers sharing the same resource (token &#34;wuppie&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// new smart pointer for token &#34;foo&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        SmartToken foo <span style="color:#f92672">=</span> SmartToken(<span style="color:#66d9ef">new</span> Token(<span style="color:#e6db74">&#34;foo&#34;</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">35</span>));
+</span></span><span style="display:flex;"><span>    }   <span style="color:#75715e">// fluppie, fluppie2, foo will be removed from the stack - foo releases its resource
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// wuppie is the only smart pointer with shared resource &#34;wuppie&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>} <span style="color:#75715e">// wuppie will be removed from the stack - wuppie releases its resource
+</span></span></span></code></pre></div>
+<p>Im Beispiel wird mit <code>new Token(&quot;wuppie&quot;, 1, 4)</code> ein neues Token-Objekt auf dem Heap angelegt.
+Der Smartpointer <code>wuppie</code> übernimmt die Ressource im Konstruktor und verwaltet den Pointer.
+Wichtig ist zu beobachten: Das Token wird auf dem Heap angelegt, während der Smartpointer
+<code>wuppie</code> eine normale lokale (&quot;automatische&quot;) Variable ist und auf dem Stack liegt.</p>
+<p>In der Kontrollstruktur werden weitere Smartpointer angelegt. Die ersten beiden (<code>fluppie</code>,
+<code>fluppie2</code>) teilen sich die Ressource (den Pointer auf das Token) mit <code>wuppie</code>. Es wird kein
+neues Token angelegt oder kopiert. Der dritte Smartpointer <code>foo</code> verwaltet ein weiteres Token.</p>
+<p>Mit der Kontrollstruktur endet auch die Lebensdauer der lokalen Variablen <code>fluppie</code>,
+<code>fluppie2</code> und <code>foo</code>, sie werden automatisch vom Stack entfernt. Da <code>foo</code> der letzte
+Smartpointer ist, der das Token &quot;foo&quot; verwaltet, wird hier die Ressource freigegeben. Bei
+<code>fluppie</code> und <code>fluppie2</code> werden nur die Smartpointer auf dem Stack entfernt, die verwaltete
+Ressource (Token &quot;wuppie&quot;) bleibt erhalten, da die noch von einem anderen Smartpointer
+verwaltet wird.</p>
+<p>Mit dem Ende der Funktion endet auch die Lebensdauer des Smartpointers <code>wuppie</code>. Er wird
+automatisch vom Stack entfernt, und da er im Beispiel der letzte Smartpointer ist, der das
+Token &quot;wuppie&quot; verwaltet, wird dabei automatisch der Pointer zu &quot;wuppie&quot; wieder freigegeben.</p>
+<p>Ein Smartpointer soll entsprechend folgende Eigenschaften haben:</p>
+<ul>
+<li>Verwendung soll analog zu normalen Pointern sein (Operatoren <code>*</code> und <code>-&gt;</code> überladen)</li>
+<li>Smartpointer haben niemals einen undefinierten Wert: entweder sie zeigen auf ein Objekt
+oder auf <code>nullptr</code><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></li>
+<li>Kopieren von (<em>shared</em>) Smartpointern führt dazu, dass sich mehrere Smartpointer das
+verwiesene Objekt <em>teilen</em></li>
+<li>Smartpointer löschen sich selbst (und das verwiesene Objekt, falls kein anderer
+Smartpointer mehr darauf zeigt), wenn die Smartpointer ungültig werden (bei Verlassen des
+Scopes bzw. bei explizitem Aufruf von <code>delete</code> auf einen Pointer auf einen Smartpointer)</li>
+<li>Es gibt keine verwitweten Objekte mehr: Wenn mehrere Smartpointer auf das selbe Objekt
+zeigen, darf erst der letzte Smartpointer das Objekt aus dem Heap löschen</li>
+<li>Smartpointer funktionieren nur für mit <code>new</code> erzeugte Objekte</li>
+</ul>
+<p>Weitere übliche Eigenschaften, die wir auf diesem Blatt aber vereinfachend ignorieren<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>:</p>
+<ul>
+<li>Smartpointer sollen für beliebige Klassen nutzbar sein (Template-Klasse)</li>
+<li>Dereferenzierung von nicht existierenden Objekten (d.h. der Smartpointer zeigt intern auf
+<code>nullptr</code>) führt nicht zum Programmabsturz, sondern zu einer Exception</li>
+</ul>
+<h3 id="reference-counting">Reference Counting</h3>
+<p>Smartpointer werden erzeugt, indem sie entweder einen Pointer auf die zu verwaltende Ressource
+bekommen (Konstruktor) oder eine Referenz auf ein anderes Smartpointer-Objekt
+(Copy-Konstruktor).</p>
+<p>Im Smartpointer wird entsprechend der Pointer auf die zu verwaltende Ressource gespeichert.</p>
+<p>Für die Bestimmung, wie viele Smartpointer sich eine Ressource teilen, muss ein Zähler
+implementiert werden. Sobald sich ein weiterer Smartpointer die selbe Ressource teilt, muss
+dort auch der Zähler (per Pointer!) übernommen werden und entsprechend inkrementiert werden.
+Im Destruktor muss der Zähler dekrementiert werden. Falls dabei der Zähler den Wert 0
+erreicht, werden die Pointer auf die Ressource und den Zähler freigegeben.</p>
+<p>Bei einer Zuweisung verfährt man analog.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SmartToken</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Constructor
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Constructs a new smart pointer from a raw pointer, sets the reference
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * counter to 1.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param p is a raw pointer to the token to be shared
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    SmartToken(Token<span style="color:#f92672">*</span> p <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Copy constructor
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Constructs a new smart pointer from another smart pointer, increments
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * the reference counter.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param sp is another smart pointer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    SmartToken(<span style="color:#66d9ef">const</span> SmartToken<span style="color:#f92672">&amp;</span> sp);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Destructor
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Decrements the reference counter. If it reaches zero, the shared token
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * will be free&#39;d.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">~</span>SmartToken();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Assignment
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Changes the shared token, thus we need first to perform something like
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * the destructor, followed by something like the constructor.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param sp is another smart pointer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    SmartToken<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">=</span>(<span style="color:#66d9ef">const</span> SmartToken<span style="color:#f92672">&amp;</span> sp);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    Token<span style="color:#f92672">*</span> pObj;        <span style="color:#75715e">///&lt; Pointer to the current shared token
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    RefCounter<span style="color:#f92672">*</span> rc;     <span style="color:#75715e">///&lt; Pointer to the reference counter (used for the current token)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RefCounter</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Default constructor
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    RefCounter();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Increment count
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">inc</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Decrement count
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">dec</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Compare the counter with zero
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return true if n==0, false otherwise
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isZero</span>() <span style="color:#66d9ef">const</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Hide copy constructor and assignment operator
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    RefCounter(<span style="color:#66d9ef">const</span> RefCounter<span style="color:#f92672">&amp;</span>) <span style="color:#f92672">=</span> <span style="color:#66d9ef">delete</span>;
+</span></span><span style="display:flex;"><span>    RefCounter<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">=</span>(<span style="color:#66d9ef">const</span> RefCounter<span style="color:#f92672">&amp;</span>) <span style="color:#f92672">=</span> <span style="color:#66d9ef">delete</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> n;     <span style="color:#75715e">///&lt; How many SmartToken share ownership of &#34;our&#34; object?
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};</span></span></code></pre></div>
+<h3 id="dereferenzierung-von-smartpointern">Dereferenzierung von Smartpointern</h3>
+<p>(<em>Anmerkung</em>: Dies ist ein Vorgriff auf die Lektion &quot;Operatoren&quot;. Betrachten und
+implementieren Sie die vorgegebenen Operatoren einfach wie normale Methoden.)</p>
+<p>Pointer lassen sich dereferenzieren, d.h. man greift direkt auf das verwiesene Objekt zu. Dies
+lässt sich auch für Smartpointer erreichen, indem die beiden Dereferenzierungsoperatoren
+überladen werden.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SmartToken</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Dereferences the smart pointer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return a reference to the shared token
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    Token<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">*</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Dereferences the smart pointer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return a pointer to the shared token
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    Token<span style="color:#f92672">*</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">-&gt;</span>();
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
+<p>Damit lässt sich das folgende Verhalten realisieren (Vergleich <em>raw</em> Pointer
+vs. Smartpointer):</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Token<span style="color:#f92672">*</span> foo <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Token(<span style="color:#e6db74">&#34;foo&#34;</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">35</span>);                       <span style="color:#75715e">// raw pointer foo
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>SmartToken wuppie <span style="color:#f92672">=</span> SmartToken(<span style="color:#66d9ef">new</span> Token(<span style="color:#e6db74">&#34;wuppie&#34;</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">4</span>));  <span style="color:#75715e">// smart pointer wuppie
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Access via token pointer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>cout <span style="color:#f92672">&lt;&lt;</span> (<span style="color:#f92672">*</span>foo).lexem    <span style="color:#f92672">&lt;&lt;</span> endl;    <span style="color:#75715e">// &#34;foo&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>cout <span style="color:#f92672">&lt;&lt;</span> foo<span style="color:#f92672">-&gt;</span>lexem      <span style="color:#f92672">&lt;&lt;</span> endl;    <span style="color:#75715e">// &#34;foo&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Access via smart pointer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>cout <span style="color:#f92672">&lt;&lt;</span> (<span style="color:#f92672">*</span>wuppie).lexem <span style="color:#f92672">&lt;&lt;</span> endl;    <span style="color:#75715e">// &#34;wuppie&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>cout <span style="color:#f92672">&lt;&lt;</span> wuppie<span style="color:#f92672">-&gt;</span>lexem   <span style="color:#f92672">&lt;&lt;</span> endl;    <span style="color:#75715e">// &#34;wuppie&#34;
+</span></span></span></code></pre></div>
+<p>Dabei ist die Form &quot;<code>-&gt;</code>&quot; eine vereinfachte Darstellung von <code>(*ptr).</code>, d.h. ein Pointer (linke
+Seite des Ausdrucks) wird dereferenziert und man greift auf Attribute oder Methoden des
+verwiesenen Objekts zu (rechte Seite des Ausdrucks).</p>
+<h2 id="aufgaben">Aufgaben</h2>
+<h3 id="a61-klasse-für-token-1p">A6.1: Klasse für Token (1P)</h3>
+<p>Implementieren Sie in C++ die Klasse <code>Token</code> mit der folgenden Schnittstelle:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Token</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Constructs a new token object.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param l is a pointer to the text of the token (to be copied)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param r is the row in input where this token was found
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param c is the column in input where this token starts
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    Token(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> l, <span style="color:#66d9ef">int</span> r, <span style="color:#66d9ef">int</span> c);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Destructs the token object and free&#39;s the stored lexem.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">~</span>Token();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> lexem;    <span style="color:#75715e">///&lt; Pointer to the text of the token
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> row;        <span style="color:#75715e">///&lt; Row in input where this token was found
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> col;        <span style="color:#75715e">///&lt; Column in input where this token starts
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};</span></span></code></pre></div>
+<p>Trennen Sie Deklaration und Implementierung.</p>
+<p>Der Konstruktor muss den übergebenen <code>char*</code> kopieren, d.h. Sie müssen die Länge des
+übergebenen C-Strings bestimmen, ausreichend viel Speicher mit <code>new</code> für <code>char* lexem</code>
+reservieren und danach den String kopieren (C-Funktion).</p>
+<p>Sorgen Sie dafür, dass der Speicher beim Vernichten eines <code>Token</code>-Objekts wieder korrekt
+freigegeben wird.</p>
+<p>Bei Bedarf können Sie zusätzliche Attribute und Methoden hinzufügen.</p>
+<p>Testen Sie Ihre <code>Token</code>-Klasse an selbst gewählten Beispielen.</p>
+<h3 id="a62-implementierung-eines-einfachen-tokenizers-1p">A6.2: Implementierung eines einfachen Tokenizers (1P)</h3>
+<p>Erstellen Sie eine Funktion <code>void tokenize(const string&amp; input, vector&lt;Token&gt;&amp; tokens)</code>, die
+einen gegebenen String als Eingabe erhält und diesen in Tokens (Wörter) splittet. Nutzen Sie
+Referenzen, um die Token-Liste zu aktualisieren. Testen Sie die Funktion mit verschiedenen
+Eingabestrings und geben Sie die Tokens aus.</p>
+<h3 id="a63-reference-counter-1p">A6.3: Reference Counter (1P)</h3>
+<p>Implementieren Sie nun die Klasse <code>RefCounter</code> mit der obigen Schnittstelle. Auch hier können
+Sie bei Bedarf zusätzliche Attribute und Methoden hinzufügen.</p>
+<p>Testen Sie Ihre <code>RefCounter</code>-Klasse an selbst gewählten Beispielen.</p>
+<h3 id="a64-smartpointer-3p">A6.4: Smartpointer (3P)</h3>
+<p>Implementieren Sie nun die Smartpointer für <code>Token</code>-Objekte mit folgender Signatur (wie oben,
+leicht erweitert):</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SmartToken</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Constructor
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Constructs a new smart pointer from a raw pointer, sets the reference
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * counter to 1.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param p is a raw pointer to the token to be shared
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    SmartToken(Token<span style="color:#f92672">*</span> p <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Copy constructor
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Constructs a new smart pointer from another smart pointer, increments
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * the reference counter.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param sp is another smart pointer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    SmartToken(<span style="color:#66d9ef">const</span> SmartToken<span style="color:#f92672">&amp;</span> sp);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Destructor
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Decrements the reference counter. If it reaches zero, the shared token
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * will be free&#39;d.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">~</span>SmartToken();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Assignment
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Changes the shared token, thus we need first to perform something like
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * the destructor, followed by something like the constructor.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param sp is another smart pointer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    SmartToken<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">=</span>(<span style="color:#66d9ef">const</span> SmartToken<span style="color:#f92672">&amp;</span> sp);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Dereferences the smart pointer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return a reference to the shared token
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    Token<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">*</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Dereferences the smart pointer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return a pointer to the shared token
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    Token<span style="color:#f92672">*</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">-&gt;</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Comparison
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param sp is another smart pointer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return true, if `sp` shares the same token
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">==</span>(<span style="color:#66d9ef">const</span> SmartToken<span style="color:#f92672">&amp;</span> sp) <span style="color:#66d9ef">const</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    Token<span style="color:#f92672">*</span> pObj;        <span style="color:#75715e">///&lt; Pointer to the current shared token
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    RefCounter<span style="color:#f92672">*</span> rc;     <span style="color:#75715e">///&lt; Pointer to the reference counter (used for the current token)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};</span></span></code></pre></div>
+<p>Bei Bedarf können Sie zusätzliche Attribute und Methoden hinzufügen.</p>
+<p>Testen Sie Ihre <code>SmartToken</code>-Klasse an selbst gewählten Beispielen sowie an den obigen
+Beispielen.</p>
+<h3 id="a65-ringpuffer-4p">A6.5: Ringpuffer (4P)</h3>
+<p>Ein Ringpuffer ist eine Form der abstrakten Datenstruktur &quot;Warteschlange&quot; (<em>Queue</em>), die nur
+eine beschränkte Anzahl <span class="math align-center">$n$</span> von Elementen (Datensätzen) aufnehmen kann. Die Daten werden nach
+dem FIFO-Prinzip über die Funktion <code>writeBuffer()</code> am Ende der Schlange eingefügt und mit der
+Funktion <code>readBuffer()</code> vom Anfang der Schlange entnommen.</p>
+<p>Aus Effizienzgründen wird bei <code>readBuffer()</code> nur das erste Element zurückgeliefert, das
+gelesene Element wird aber (noch) nicht aus dem Ringpuffer entfernt. Über ein Attribut <code>head</code>
+merkt man sich stattdessen, wo das nächste zu lesende Element liegt (auf dem Platz hinter dem
+aktuell gelesenen). Ist der Puffer voll, wird bei <code>writeBuffer()</code> das älteste Element entfernt
+und das neue Element auf dem frei gewordenen Platz im internen Array <code>elems</code> eingefügt.</p>
+<p>Unser Ringpuffer ist auf Elemente vom Typ <code>SmartToken</code> festgelegt. Es wird davon ausgegangen,
+dass diese Elemente Smartpointer mit der <em>shared pointer</em>-Semantik sind.<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup> Da die
+<code>SmartToken</code> selbst (zum Teil) eine Pointersemantik implementiert haben (man kann die
+Smartpointer dereferenzieren), vermeiden wir Pointer auf die Smartpointer in der Schnittstelle
+und arbeiten stattdessen mit C++-Referenzen bzw. Kopien: Bei <code>writeBuffer()</code> wird ein
+<code>SmartToken</code> per konstanter C++-Referenz übergeben, und bei <code>readBuffer()</code> wird eine Kopie des
+gelesenen <code>SmartToken</code> zurückgeliefert.</p>
+<p>Der Puffer kann effizient durch ein zur Laufzeit angelegtes <strong>Array</strong> mit <code>size</code>
+(Template-Parameter) Plätzen zur Speicherung der Pointer auf die Elemente realisiert werden.
+Die Ringstruktur wird durch Modulo-Operationen auf den Array-Indizes realisiert.</p>
+<p>Implementieren Sie nun den Ringpuffer für <code>SmartToken</code>-Objekte mit folgender Signatur:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RingBuffer</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Constructor that creates a new ring buffer for max. `size` elements
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Initialises the attributes and allocates memory for `size` elements
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * of type `SmartToken` and let the pointer `elems` point to this new
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * array
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param size is the max. number of elements that can be stored
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    RingBuffer(<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> size);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Destructor
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * free&#39;s the dynamically allocated array `elems`
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">~</span>RingBuffer();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Reading the first (oldest) element
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * If an element has been read, the `head` points to the next element
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * and `count` is decremented. The read element is **not** released.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return Returns (a copy of) the first (i.e. oldest) element of the
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * buffer, but does not (yet) release it; returns an empty `SmartToken`
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * if buffer is empty
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    SmartToken <span style="color:#a6e22e">readBuffer</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Adding a new element
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Appends the new element to the end of the queue. If the buffer is
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * full, the oldest element will be overwritten by the new element. The
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * old element will take care of releasing its memory (smart pointer).
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param data is a reference to the element to be added
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">writeBuffer</span>(<span style="color:#66d9ef">const</span> SmartToken<span style="color:#f92672">&amp;</span> data);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> count;     <span style="color:#75715e">///&lt; number of elements currently stored in the buffer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> head;      <span style="color:#75715e">///&lt; points to the beginning of the buffer (oldest element)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> size;      <span style="color:#75715e">///&lt; length of array `elems`
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    SmartToken<span style="color:#f92672">*</span> elems;      <span style="color:#75715e">///&lt; array with `size` places of type `SmartToken`, dynamically allocated
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};</span></span></code></pre></div>
+<p>Bei Bedarf können Sie zusätzliche Attribute und Methoden hinzufügen.</p>
+<p>Testen Sie Ihre <code>RingBuffer</code>-Klasse an selbst gewählten Beispielen. Überzeugen Sie sich
+insbesondere vom korrekten Zugriff auf die Ringstruktur und prüfen Sie, ob die Smartpointer
+wie gewünscht arbeiten. Prüfen Sie hierzu auch die <code>RefCounter</code> der beteiligten Smartpointer.
+Welche Sonderfälle können Sie identifizieren?</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Anmerkung: Man spricht trotzdem von &quot;Freigabe&quot; des Objekts, obwohl lediglich der
+Stackpointer zurückgesetzt wird und das Objekt zunächst auf dem Stack noch vollständig
+ist. Es kann und wird aber im weiteren Verlauf des Programms überschrieben.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>Dereferenzierung von Null-Pointern oder nicht initialisierten Pointern, Nutzung von
+<code>delete</code> für Pointer, die nicht mit <code>new</code> erstellt wurden, mehrfaches <code>delete</code>,
+Speicherlöcher durch Vergessen von <code>delete</code>, Dangling Pointer, verwitwete Objekte, ...&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>Sie müssen für <code>nullptr</code> den g++ auf C++11 oder höher umstellen (<code>--std=c++11</code>) und den
+Header <code>&lt;cstddef&gt;</code> includen.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>Templates haben wir hier noch nicht behandelt, Exceptions werden wir gar nicht
+betrachten&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p>Wenn Sie die obigen Aufgaben richtig gelöst haben, haben Sie genau diese Semantik
+vorliegen.&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+
+    
+
+
+
+
+
+
+
+<footer class="footline"><div style="color: darkgray; font-size: small;">
+<p style="margin-left: 4rem; margin-right: 4rem; margin-top: 6rem;">
+<!-- https://creativecommons.org/choose/ -->
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+Unless otherwise noted, <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor">this work</a> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/graphs/contributors">contributors</a> is licensed under <a rel="license" href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/LICENSE.md">CC BY-SA 4.0</a>.
+See the <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/CREDITS.md">credits</a> for a detailed list of contributing projects.
+
+</p>
+</div>
+
+</footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+
+
+<a id="logo" href='https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1360443//index.html'>
+    <img style="max-width:35%" alt="icon" src='/elearning/data/FH-Bielefeld/lm_data/lm_1360443/images/logo.png'>
+</a>
+
+        </div>
+
+        <search><form action="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/search.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['de'];
+        </script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/auto-complete.js?1734345862" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/lunr/lunr.min.js?1734345862" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/lunr/lunr.stemmer.support.min.js?1734345862" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/lunr/lunr.multi.min.js?1734345862" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/lunr/lunr.de.min.js?1734345862" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/search.js?1734345862" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro.html">Überblick</a><ul id="R-subsections-4df4f48548517eafbcfd5260bf8ec879" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/overview.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/overview.html">Struktur eines Compilers</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/languages.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/languages.html">Programmiersprachen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/applications.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/applications.html">Anwendungen</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing.html">Lexikalische Analyse</a><ul id="R-subsections-8d37d4681a8464ded0759726543b315f" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing/regular.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing/regular.html">Reguläre Sprachen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing/antlr-lexing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing/antlr-lexing.html">Lexer mit ANTLR generieren</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing.html">Syntaktische Analyse</a><ul id="R-subsections-2fa42a0a95fa4e38203332af421076e1" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing/cfg.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing/cfg.html">CFG</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing/antlr-parsing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing/antlr-parsing.html">Parser mit ANTLR generieren</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics.html">Semantische Analyse</a><ul id="R-subsections-d88fb7065d61ee57361d9d4d71ff9c1f" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab0-intro.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab0-intro.html">SymbTab0: Überblick Symboltabellen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab1-scopes.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab1-scopes.html">SymbTab1: Nested Scopes</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab2-functions.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab2-functions.html">SymbTab2: Funktionen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab3-classes.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab3-classes.html">SymbTab3: Strukturen und Klassen</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate.html">Zwischencode</a><ul id="R-subsections-954600b07c36f58ed592d3873b4cb416" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate/intro-ir.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate/intro-ir.html">Überblick Zwischencode</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate/llvm-ir.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate/llvm-ir.html">LLVM als IR</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation.html">Interpreter</a><ul id="R-subsections-e1e14acafd0a08bb52afc3f0f0608d4c" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation/astdriven-part1.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation/astdriven-part1.html">AST-basierte Interpreter 1</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation/astdriven-part2.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation/astdriven-part2.html">AST-basierte Interpreter 2</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages.html">Programmiersprachen</a><ul id="R-subsections-a84558f596ca34bed293af92ceba5568" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp0-basics.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp0-basics.html">Einführung in C&#43;&#43;</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp1-pointer.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp1-pointer.html">C&#43;&#43;: Pointer und Referenzen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp2-classes.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp2-classes.html">C&#43;&#43;: Klassen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp3-big3.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp3-big3.html">C&#43;&#43;: Big 3</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp4-operators.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp4-operators.html">C&#43;&#43;: Operatoren</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp5-inheritance.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp5-inheritance.html">C&#43;&#43;: Vererbung und Polymorphie</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp6-templates.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp6-templates.html">C&#43;&#43;: Templates</a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.html#kursformat"><i class='fas fa-bookmark'></i> Zeiten</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.html#fahrplan"><i class='fas fa-bookmark'></i> Fahrplan</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.html#pr%C3%BCfungsform-note-und-credits"><i class='fas fa-bookmark'></i> Note/Credits</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.html#fahrplan"><i class='fas fa-bookmark'></i> News</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVariantSwitch">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet06.html" lang="de-DE" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch showVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-auto" value="auto" selected>Auto</option>
+                      <option id="R-select-variant-zen-light" value="zen-light">Zen Light</option>
+                      <option id="R-select-variant-zen-dark" value="zen-dark">Zen Dark</option>
+                      <option id="R-select-variant-relearn-bright" value="relearn-bright">Relearn Bright</option>
+                      <option id="R-select-variant-relearn-light" value="relearn-light">Relearn Light</option>
+                      <option id="R-select-variant-relearn-dark" value="relearn-dark">Relearn Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter"><p style="text-align: center;">
+<i class='fab fa-fw fa-github'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor">GitHub</a>
+<i class='fas fa-fw fa-tags'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/issues">Issues</a>
+<i class='fas fa-fw fa-bullhorn'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/CREDITS.md">Credits</a>
+<br />
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+
+</p>
+
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/clipboard.min.js?1734345862" defer></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/perfect-scrollbar.min.js?1734345862" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/mathjax/tex-mml-chtml.js?1734345862"></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/theme.js?1734345862" defer></script>
+  </body>
+</html>
