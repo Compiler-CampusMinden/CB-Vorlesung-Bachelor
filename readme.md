@@ -258,6 +258,15 @@ Abgabe der Übungsblätter jeweils **Montag bis 09:00 Uhr** im [ILIAS](https://w
 ::: {.tab title="IFM 5.21 CB (PO18, 5. Semester)"}
 
 `{{% notice style="note" title="News" %}}`{=markdown}
+`{{% expand title="16.12.24" %}}`{=markdown}
+
+### Feedback zu den Ergebnissen der Station 1 der Parcoursprüfung
+
+Wir möchten Ihnen im Praktikum am 18.12. ein Feedback zu den Ergebnissen der Station 1 der
+Parcoursprüfung geben.
+
+`{{% /expand %}}`{=markdown}
+
 `{{% expand title="09.11.24" %}}`{=markdown}
 
 ### Umplanung der Vorträge zur ersten Station der Parcoursprüfung
@@ -373,7 +382,7 @@ Abgabe der Übungsblätter jeweils **Mittwoch bis 09:00 Uhr** im [ILIAS](https:/
 | Dezember             | 03. | **18:00 - 19:30 Uhr (online): Edmonton III: Vorträge Edmontoner Projekte**                                                               | _Edmonton_    |                                                                                                                  |
 |                      | 04. | [AST-basierte Interpreter 1], [AST-basierte Interpreter 2]                                                                               | Carsten       | [**Parcoursprüfung: Station 1: Vorstellung der Lösung von [B04x] (online, 2 Teams, siehe Ankündigung)**]{.alert} |
 |                      | 11. | C++ I: [Basics], [Pointer & Referenzen], [Klassen], [Big 3]                                                                              | Carsten       | [B05x] Interpreter (Carsten, *online*)                                                                           |
-|                      | 18. | ~~Projektwoche Semester 1+3~~ C++ II: [Operatoren], [Vererbung & Polymorphie], [Templates]                                               |               |                                                                                                                  |
+|                      | 18. | ~~Projektwoche Semester 1+3~~ C++ II: [Operatoren], [Vererbung & Polymorphie], [Templates]                                               |               | Feedback zu Station 1                                                                                            |
 |                      | 25. | _Weihnachtspause_                                                                                                                        |               |                                                                                                                  |
 | Januar               | 01. | _Weihnachtspause_                                                                                                                        |               |                                                                                                                  |
 |                      | 08. | _Sprechstunde/Freies Arbeiten_                                                                                                           | Carsten       | [B06x] C++ und dyn. Speicherverwaltung (Carsten, *online*)                                                       |
