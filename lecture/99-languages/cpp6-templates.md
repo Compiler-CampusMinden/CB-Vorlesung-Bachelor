@@ -65,9 +65,9 @@ outcomes:
     - k3: "Erstellen und spezialisieren von Klassen-Templates"
     - k3: "Nutzung von Methoden-Templates innerhalb von Klassen-Templates"
     - k3: "Aufruf (Nutzung) von Klassen-Templates"
-#youtube:
-#  - link: "TODO"
-#    name: "VL C++: Vererbung und Polymorphie"
+youtube:
+  - link: "https://youtu.be/cOmV_2OTG5k"
+    name: "VL C++: Vererbung und Polymorphie"
 challenges: |
     **Funktions-Templates**
 
