@@ -84,6 +84,28 @@ Sie _können_ hierzu den Raum J101 (siehe Stundenplan) nutzen.
 ::: {.tab title="IFM 3.1 CB (PO23, 3. Semester)"}
 
 `{{% notice style="note" title="News" %}}`{=markdown}
+`{{% expand title="16.12.24" %}}`{=markdown}
+
+### Nachtrag zur Anpassung der Gewichtung der beiden Stationen der Parcoursprüfung (war 29.11.)
+
+Es war ursprünglich vorgesehen, die Gesamtnote als Mittelwert der Noten der beiden
+Parcours-Stationen zu berechnen: Gewichtung 50% (Station I) und 50% (Station II).
+
+Am 29.11. haben wir auf vielfachen Wunsch hin die Gewichtung der Stationen der
+Parcoursprüfung angepasst: Gewichtung 33 Punkte (Station I) und 50 Punkte (Station II).
+
+Um eine potentielle Benachteiligung zu vermeiden, werden wir eine individuelle
+Günstigerprüfung vornehmen: Wir werden für jede Person jeweils beide Verhältnisse
+berechnen und automatisch die bessere Note werten.
+
+Zusätzlich werden für Station I 3 Punkte Überhang gewährt. Von den 33 maximal
+erreichbaren Punkten werden 30 Punkte als 100% gewertet, darüber hinausgehende
+Punkte bleiben als Bonuspunkte erhalten.
+
+Dies gilt für die Prüfung im ersten Zeitraum.
+
+`{{% /expand %}}`{=markdown}
+
 `{{% expand title="04.12.24" %}}`{=markdown}
 
 Da die Projektwoche (16.-20.12.2024) mangels Interesse nicht stattfinden wird, biete ich eine
@@ -487,8 +509,13 @@ Abgabe der Übungsblätter jeweils **Mittwoch bis 09:00 Uhr** im [ILIAS](https:/
     1.  ILIAS-Test (einzeln, 20.11.)
     2.  Vorstellung Mini-Projekt [B07] (3er Teams, letzte VL-Woche)
 
-    Beide Stationen ergeben zusammen die Gesamtnote.
-    Die Gewichtung dabei ist: Station I 33 Punkte, Station II 50 Punkte.
+    Note für das Modul: Beide Stationen ergeben zu **je 50%** *oder* in der Gewichtung
+    **30 Punkte (Station I) und 50 Punkte (Station II)** die Gesamtnote (individuelle
+    Günstigerprüfung).
+
+    Für Station I werden 3 Punkte Überhang gewährt: Von den 33 maximal erreichbaren
+    Punkten werden 30 Punkte als 100% gewertet, darüber hinausgehende Punkte bleiben
+    als Bonuspunkte erhalten.
 
 :::
 ::: {.tab title="Prüfung im zweiten Zeitraum"}
