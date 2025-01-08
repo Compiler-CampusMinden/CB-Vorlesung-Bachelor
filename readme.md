@@ -84,6 +84,21 @@ Sie _können_ hierzu den Raum J101 (siehe Stundenplan) nutzen.
 ::: {.tab title="IFM 3.1 CB (PO23, 3. Semester)"}
 
 `{{% notice style="note" title="News" %}}`{=markdown}
+`{{% expand title="08.01.25" %}}`{=markdown}
+
+### Planung Parcoursprüfung Station 2: Bitte tragt euch als Team im Etherpad ein
+
+Wie bereits angekündigt, finden KW4 (Mo. 20.01., Di. 21.01., Fr. 24.01.) die Vorstellungen von B07
+im Rahmen der Parcoursprüfung statt (Station 2). Jedes Team hat 20 Minuten für die Vorstellung der
+wichtigsten Aspekte zum Projekt, danach sind 10 Minuten für Fragen und Diskussion eingeplant.
+
+Bitte tragt euch bis zum 12. Januar als Team jeweils zu einem der Zeitslots im Etherpad ein. Ihr
+findet den Link im ILIAS.
+
+Wenn die vorgeschlagenen Termine nicht reichen sollten, meldet euch bitte zeitnah per E-Mail!
+
+`{{% /expand %}}`{=markdown}
+
 `{{% expand title="16.12.24" %}}`{=markdown}
 
 ### Nachtrag zur Anpassung der Gewichtung der beiden Stationen der Parcoursprüfung (war 29.11.)
@@ -280,6 +295,20 @@ Abgabe der Übungsblätter jeweils **Montag bis 09:00 Uhr** im [ILIAS](https://w
 ::: {.tab title="IFM 5.21 CB (PO18, 5. Semester)"}
 
 `{{% notice style="note" title="News" %}}`{=markdown}
+`{{% expand title="08.01.25" %}}`{=markdown}
+
+### Planung Parcoursprüfung Station 2: Bitte tragt euch als Team im Etherpad ein
+
+Wie bereits angekündigt, finden am Mittwoch, den 22. Januar die Vorstellungen von B07x im
+Rahmen der Parcoursprüfung statt (Station 2). Jedes Team hat 20 Minuten für die Vorstellung
+der wichtigsten Aspekte zum Projekt, danach sind 10 Minuten für Fragen und Diskussion
+eingeplant.
+
+Bitte tragt euch bis zum 12. Januar als Team jeweils zu einem der Zeitslots im Etherpad ein.
+Ihr findet den Link im ILIAS.
+
+`{{% /expand %}}`{=markdown}
+
 `{{% expand title="16.12.24" %}}`{=markdown}
 
 ### Anpassung der Gewichtung der beiden Stationen der Parcoursprüfung
