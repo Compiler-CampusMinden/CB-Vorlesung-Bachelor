@@ -84,6 +84,17 @@ Sie _können_ hierzu den Raum J101 (siehe Stundenplan) nutzen.
 ::: {.tab title="IFM 3.1 CB (PO23, 3. Semester)"}
 
 `{{% notice style="note" title="News" %}}`{=markdown}
+`{{% expand title="09.01.25" %}}`{=markdown}
+
+### Parcoursprüfung: Feedbackgespräche am Do, 30.01., 15:30-18:00 Uhr
+
+Wir bieten am Donnerstag, 30.01.25, von 15:30 bis 18:00 Uhr Feedbackgespräche zur Bewertung
+der Ergebnisse von B07 (Parcoursprüfung, Station 2) an.
+
+Es ist eine vorherige eine Anmeldung im ILIAS notwendig.
+
+`{{% /expand %}}`{=markdown}
+
 `{{% expand title="08.01.25" %}}`{=markdown}
 
 ### Planung Parcoursprüfung Station 2: Bitte tragt euch als Team im Etherpad ein
@@ -288,13 +299,24 @@ Abgabe der Übungsblätter jeweils **Montag bis 09:00 Uhr** im [ILIAS](https://w
 |                      | 02    | 08.: _Sprechstunde/Freies Arbeiten_                                                                                                                     | Carsten     | 06.: [B06] C++                 | 06. / 07. / 10. (Carsten, *online*)                      |
 |                      | 03    | 15.: _Freies Arbeiten/Puffer_                                                                                                                           |             |                                |                                                          |
 |                      | 04    | 22.: [**Parcoursprüfung: Station 2 [B07] (VL- und Praktika-Slots, siehe Ankündigung)**]{.alert}                                                         | Carsten, BC | 20.: [B07] Mini-Projekt        | 20. / 21. / 24. (**15:00-16:30**) (Carsten/BC, *online*) |
-| _(Prüfungsphase I)_  |       | _Keine separate Prüfung_                                                                                                                                |             |                                |                                                          |
+| _(Prüfungsphase I)_  | 05    | 30.: **Feedback-Gespräche (15:30 - 18:00 Uhr, online)**                                                                                                 |             |                                |                                                          |
 | _(Prüfungsphase II)_ |       | [**Parcoursprüfung: Do, 27. Mar 2025, 08-18 Uhr, mdl. Prüfung (alle Themen)**]{.alert} (je Prüfung ca. 45', Vergabe ca. 2 Wochen vorher)                |             |                                |                                                          |
 
 :::
 ::: {.tab title="IFM 5.21 CB (PO18, 5. Semester)"}
 
 `{{% notice style="note" title="News" %}}`{=markdown}
+`{{% expand title="09.01.25" %}}`{=markdown}
+
+### Parcoursprüfung: Feedbackgespräche am Do, 30.01., 14:00-15:30 Uhr
+
+Wir bieten am Donnerstag, 30.01.25, von 14:00 bis 15:30 Uhr Feedbackgespräche zur Bewertung
+der Ergebnisse von B07x (Parcoursprüfung, Station 2) an.
+
+Es ist eine vorherige eine Anmeldung im ILIAS notwendig.
+
+`{{% /expand %}}`{=markdown}
+
 `{{% expand title="08.01.25" %}}`{=markdown}
 
 ### Planung Parcoursprüfung Station 2: Bitte tragt euch als Team im Etherpad ein
@@ -457,7 +479,7 @@ Abgabe der Übungsblätter jeweils **Mittwoch bis 09:00 Uhr** im [ILIAS](https:/
 |                      | 08. | _Sprechstunde/Freies Arbeiten_                                                                                                           | Carsten       | [B06x] C++ und dyn. Speicherverwaltung (Carsten, *online*)                                                       |
 |                      | 15. | _Freies Arbeiten/Puffer_                                                                                                                 |               |                                                                                                                  |
 |                      | 22. | [**Parcoursprüfung: Station 2 [B07x] (VL- und Praktika-Slots, siehe Ankündigung)**]{.alert}                                              | Carsten, BC   | [B07x] Mini-Projekt (Carsten/BC, *online*)                                                                       |
-| _(Prüfungsphase I)_  |     | _Keine separate Prüfung_                                                                                                                 |               |                                                                                                                  |
+| _(Prüfungsphase I)_  | 30. | **Feedback-Gespräche (14:00 - 15:30 Uhr, online)**                                                                                       |               |                                                                                                                  |
 | _(Prüfungsphase II)_ |     | [**Parcoursprüfung: Do, 27. Mar 2025, 08-18 Uhr, mdl. Prüfung (alle Themen)**]{.alert} (je Prüfung ca. 45', Vergabe ca. 2 Wochen vorher) |               |                                                                                                                  |
 
 :::
