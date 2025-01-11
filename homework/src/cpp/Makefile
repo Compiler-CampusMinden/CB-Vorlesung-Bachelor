@@ -1,4 +1,4 @@
-all: vars refs expr ifthenelse
+all: vars refs expr ifthenelse while
 
 %: %.cpp driver.h
 	g++ -include driver.h $<
