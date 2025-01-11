@@ -58,6 +58,10 @@ Andere mit C++ verbundene Konzepte wie beispielsweise Präprozessor, Header-File
 Templates, Sichtbarkeiten in Klassen, Trennung Deklaration/Implementierung bei Klassen
 (Trennung .h und .cpp) oder Initialisierungslisten brauchen Sie nicht umsetzen.
 
+Sie finden im [CB-Repo](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/tree/master/homework/src/cpp)
+einige Beispiele, die mindestens umgesetzt werden sollten und die Sie zum Testen Ihres Interpreters bzw. Compilers
+nutzen können. Beachten Sie, dass diese Sammlung nicht vollständig ist.
+
 ### Projektvorstellung: Walk-Through statt Präsentation
 
 Stellen Sie Ihr Projekt am Semesterende vor (Termine siehe Fahrplan und Ankündigung).
