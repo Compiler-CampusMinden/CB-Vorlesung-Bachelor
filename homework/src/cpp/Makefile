@@ -1,4 +1,4 @@
-all: vars refs expr ifthenelse while func class inheritance
+all: vars refs expr ifthenelse while func class inheritance polymorphie
 
 %: %.cpp driver.h
 	g++ -include driver.h $<
