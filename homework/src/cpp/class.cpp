@@ -16,6 +16,14 @@ public:     // es reicht, wenn alles public ist (hier nur, damit das Beispiel mi
     int value;
 };
 
+class C {
+public:     // es reicht, wenn alles public ist (hier nur, damit das Beispiel mit g++ kompiliert)
+    C() { value = 0; }
+    C(int x) { value = x; }
+
+    int value;
+};
+
 
 int main() {
     {
@@ -46,6 +54,7 @@ int main() {
         print_int(z.value);     // 99
     }
 
+
     {
         // Klasse mit selbst implementierten C'toren und Zuweisung
         print_char('B');        // 'B'
@@ -68,6 +77,35 @@ int main() {
         print_int(z.value);     // 7
 
         B foo;
+        foo = z;
+        z.value = 99;
+        print_int(foo.value);   // 7
+        print_int(z.value);     // 99
+    }
+
+
+    {
+        // Klasse mit TEILWEISE selbst implementierten C'toren und Zuweisung, Rest Default vom Compiler
+        print_char('C');        // 'C'
+
+        C x;
+        x.value = 9;
+        print_int(x.value);     // 9
+
+        C y(x);
+        print_int(x.value);     // 9
+        print_int(y.value);     // 9
+
+        y.value = 7;
+        print_int(x.value);     // 9
+        print_int(y.value);     // 7
+
+        C z = y;
+        print_int(x.value);     // 9
+        print_int(y.value);     // 7
+        print_int(z.value);     // 7
+
+        C foo;
         foo = z;
         z.value = 99;
         print_int(foo.value);   // 7
