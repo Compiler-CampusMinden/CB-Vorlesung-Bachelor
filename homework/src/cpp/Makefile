@@ -1,4 +1,4 @@
-all: vars refs expr
+all: vars refs expr ctrlflow
 
 %: driver.cpp %.cpp
 	g++ $< -D$@

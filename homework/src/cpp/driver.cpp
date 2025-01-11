@@ -19,3 +19,8 @@
 #ifdef expr
 #include "expr.cpp"
 #endif
+
+// ctrlflow.cpp: g++ driver.cpp -Dctrlflow
+#ifdef ctrlflow
+#include "ctrlflow.cpp"
+#endif
