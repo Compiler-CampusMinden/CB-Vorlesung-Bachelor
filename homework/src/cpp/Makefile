@@ -1,4 +1,4 @@
-all: vars refs expr ctrlflow
+all: vars refs expr ifthenelse
 
 %: %.cpp driver.h
 	g++ -include driver.h $<
