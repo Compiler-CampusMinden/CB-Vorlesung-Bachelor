@@ -1,7 +1,7 @@
 all: vars refs expr ctrlflow
 
-%: driver.cpp %.cpp
-	g++ $< -D$@
+%: %.cpp driver.h
+	g++ -include driver.h $<
 	./a.out
 
 clean:
