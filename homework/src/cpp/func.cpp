@@ -53,6 +53,15 @@ int f95(int n) {
     }
 }
 
+// McCarthy 91 function (see https://en.wikipedia.org/wiki/McCarthy_91_function)
+int mc91(int n) {
+    if (n > 100) {
+        return n - 10;
+    } else {
+        return mc91(mc91(n + 11));
+    }
+}
+
 
 int main() {
     // einfacher Funktionsaufruf, vorher definiert
@@ -87,6 +96,16 @@ int main() {
     print_int(f95(1));      // 1
     print_int(f95(2));      // 5
     print_int(f95(10));     // 977
+
+    print_int(mc91(0));     // 91
+    print_int(mc91(1));     // 91
+    print_int(mc91(11));    // 91
+    print_int(mc91(42));    // 91
+    print_int(mc91(100));   // 91
+    print_int(mc91(101));   // 91
+    print_int(mc91(200));   // 190
+    print_int(mc91(300));   // 290
+
 
     // diese Aufrufe dürfen nicht gehen
 //    fluppie(1, 2, 3, h);
