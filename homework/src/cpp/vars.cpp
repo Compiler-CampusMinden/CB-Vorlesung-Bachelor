@@ -1,3 +1,8 @@
+/*
+ * Einfache Testfälle für Variablen in C++
+ *
+ */
+
 
 int main() {
     // Variablen mit Basisdatentypen (ohne Initialisierung)

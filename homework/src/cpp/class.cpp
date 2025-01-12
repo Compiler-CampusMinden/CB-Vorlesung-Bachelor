@@ -1,3 +1,9 @@
+/*
+ * Einfache Testfälle für Klassen in C++
+ *
+ */
+
+
 class A {
 public:     // es reicht, wenn alles public ist (hier nur, damit das Beispiel mit g++ kompiliert)
     int value;

@@ -1,3 +1,9 @@
+/*
+ * Einfache Testfälle für statische und dynamische Polymorphie in C++
+ *
+ */
+
+
 class A {
 public:     // es reicht, wenn alles public ist (hier nur, damit das Beispiel mit g++ kompiliert)
     A(int x) { aval = x; }

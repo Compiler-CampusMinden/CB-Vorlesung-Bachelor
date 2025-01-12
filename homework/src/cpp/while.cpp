@@ -1,3 +1,8 @@
+/*
+ * Einfache Testfälle für Kontrollfluss (while) in C++
+ *
+ */
+
 
 int main() {
     // simple while-loop
