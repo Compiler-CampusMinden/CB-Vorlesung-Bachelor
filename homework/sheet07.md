@@ -56,11 +56,11 @@ Beachten Sie bei der Umsetzung, dass Polymorphie in C++ etwas anders funktionier
 
 Andere mit C++ verbundene Konzepte wie beispielsweise Präprozessor, Header-Files, Pointer,
 Templates, Sichtbarkeiten in Klassen, Trennung Deklaration/Implementierung bei Klassen
-(Trennung .h und .cpp) oder Initialisierungslisten brauchen Sie nicht umsetzen.
+(Trennung .h und .cpp) oder Initialisierungslisten[^2] brauchen Sie nicht umsetzen.
 
-Sie finden im [CB-Repo](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/tree/master/homework/src/cpp)
-einige Beispiele, die mindestens umgesetzt werden sollten und die Sie zum Testen Ihres Interpreters bzw. Compilers
-nutzen können. Beachten Sie, dass diese Sammlung nicht vollständig ist.
+Sie finden im [CB-Repo] einige Beispiele, die mindestens umgesetzt werden sollten und die Sie
+zum Testen Ihres Interpreters bzw. Compilers nutzen können. Beachten Sie, dass diese Sammlung
+nicht vollständig ist.
 
 ### Projektvorstellung: Walk-Through statt Präsentation
 
@@ -104,3 +104,8 @@ elektronisch über ILIAS ein.
 Gesamtbewertung: 50 Punkte
 
 [^1]: Nach **Absprache** können Sie auch eine andere Implementierungssprache verwenden.
+
+[^2]: Leider werden Initialisierungslisten für den Aufruf der Basisklassenkonstruktoren
+    benötigt, sofern der Defaultkonstruktor der Basisklasse nicht ausreicht.
+
+  [CB-Repo]: https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/tree/master/homework/src/cpp
