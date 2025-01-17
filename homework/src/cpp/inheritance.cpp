@@ -6,6 +6,7 @@
 
 class A {
 public:     // es reicht, wenn alles public ist (hier nur, damit das Beispiel mit g++ kompiliert)
+    A() { aval = 99; }
     A(int x) { aval = x; }
 
     void foo() { print_char('A'); print_char('f'); print_int(aval); }
@@ -15,8 +16,7 @@ public:     // es reicht, wenn alles public ist (hier nur, damit das Beispiel mi
 
 class B : public A {
 public:     // es reicht, wenn alles public ist (hier nur, damit das Beispiel mit g++ kompiliert)
-    // C'tor muss Basisklasse initialisieren
-    B(int x) : A(x+3) { bval = x; }
+    B(int x) { bval = x; }
 
     // überschriebene Methode aus A
     void foo() { print_char('B'); print_char('f'); print_int(aval); print_int(bval); }
@@ -34,15 +34,15 @@ int main() {
     B y(7);
 
     x.foo();    // A, f, 2
-    y.foo();    // B, f, 10, 7
-    y.bar();    // B, b, 10, 7
+    y.foo();    // B, f, 99, 7
+    y.bar();    // B, b, 99, 7
 
     x.aval = 8;
     y.bval = 4;
 
     x.foo();    // A, f, 8
-    y.foo();    // B, f, 10, 4
-    y.bar();    // B, b, 10, 4
+    y.foo();    // B, f, 99, 4
+    y.bar();    // B, b, 99, 4
 
 
     return 0;
