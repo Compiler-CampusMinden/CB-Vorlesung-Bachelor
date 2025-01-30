@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="de-DE" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.135.0">
+    <meta name="generator" content="Relearn 6.4.1">
+    <meta name="description" content="Zusammenfassung Ziel dieses Aufgabenblattes ist die Erstellung eines einfachen Pretty Printers für eine einfache fiktive Sprache mit Expressions und Kontrollstrukturen.
+Dazu werden Sie eine passende kontextfreie Grammatik definieren mit Lexer- und Parser-Regeln und dabei auch übliche Vorrangregeln beachten.
+Für diese Grammatik erstellen Sie mit Hilfe von ANTLR einen Lexer und einen Parser, die zu einem Eingabeprogramm einen Parse-Tree erzeugen.
+Den im Parse-Tree repräsentierten Code des Eingabeprogramms können Sie mit Hilfe einer Traversierung konsistent eingerückt wieder auf der Standardausgabe ausgeben - das ist der Pretty Printer.">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Blatt 03: ANTLR">
+    <meta name="twitter:description" content="Zusammenfassung Ziel dieses Aufgabenblattes ist die Erstellung eines einfachen Pretty Printers für eine einfache fiktive Sprache mit Expressions und Kontrollstrukturen.
+Dazu werden Sie eine passende kontextfreie Grammatik definieren mit Lexer- und Parser-Regeln und dabei auch übliche Vorrangregeln beachten.
+Für diese Grammatik erstellen Sie mit Hilfe von ANTLR einen Lexer und einen Parser, die zu einem Eingabeprogramm einen Parse-Tree erzeugen.
+Den im Parse-Tree repräsentierten Code des Eingabeprogramms können Sie mit Hilfe einer Traversierung konsistent eingerückt wieder auf der Standardausgabe ausgeben - das ist der Pretty Printer.">
+    <meta property="og:url" content="https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet03.html">
+    <meta property="og:title" content="Blatt 03: ANTLR">
+    <meta property="og:description" content="Zusammenfassung Ziel dieses Aufgabenblattes ist die Erstellung eines einfachen Pretty Printers für eine einfache fiktive Sprache mit Expressions und Kontrollstrukturen.
+Dazu werden Sie eine passende kontextfreie Grammatik definieren mit Lexer- und Parser-Regeln und dabei auch übliche Vorrangregeln beachten.
+Für diese Grammatik erstellen Sie mit Hilfe von ANTLR einen Lexer und einen Parser, die zu einem Eingabeprogramm einen Parse-Tree erzeugen.
+Den im Parse-Tree repräsentierten Code des Eingabeprogramms können Sie mit Hilfe einer Traversierung konsistent eingerückt wieder auf der Standardausgabe ausgeben - das ist der Pretty Printer.">
+    <meta property="og:locale" content="de_DE">
+    <meta property="og:type" content="website">
+    <meta itemprop="name" content="Blatt 03: ANTLR">
+    <meta itemprop="description" content="Zusammenfassung Ziel dieses Aufgabenblattes ist die Erstellung eines einfachen Pretty Printers für eine einfache fiktive Sprache mit Expressions und Kontrollstrukturen.
+Dazu werden Sie eine passende kontextfreie Grammatik definieren mit Lexer- und Parser-Regeln und dabei auch übliche Vorrangregeln beachten.
+Für diese Grammatik erstellen Sie mit Hilfe von ANTLR einen Lexer und einen Parser, die zu einem Eingabeprogramm einen Parse-Tree erzeugen.
+Den im Parse-Tree repräsentierten Code des Eingabeprogramms können Sie mit Hilfe einer Traversierung konsistent eingerückt wieder auf der Standardausgabe ausgeben - das ist der Pretty Printer.">
+    <meta itemprop="wordCount" content="1216">
+    <title>Blatt 03: ANTLR</title>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet03/index.print.html" rel="alternate" type="text/html" title="Blatt 03: ANTLR">
+
+    
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/images/logo.png?1738236294" rel="icon" type="image/png">
+
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/fontawesome-all.min.css?1738236294" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/fontawesome-all.min.css?1738236294" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/nucleus.css?1738236294" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/auto-complete.css?1738236294" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/auto-complete.css?1738236294" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/perfect-scrollbar.min.css?1738236294" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/fonts.css?1738236294" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/fonts.css?1738236294" rel="stylesheet"></noscript>
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/theme.css?1738236294" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/theme-auto.css?1738236294" rel="stylesheet" id="R-variant-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/chroma-auto.css?1738236294" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/variant.css?1738236294" rel="stylesheet">
+    <link href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/css/print.css?1738236294" rel="stylesheet" media="print">
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/variant.js?1738236294"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..';
+      window.relearn.relBaseUri='..\/..\/..\/..\/..\/..';
+      window.relearn.absBaseUri='https:\/\/www.hsbi.de\/elearning\/data\/FH-Bielefeld\/lm_data\/lm_1360443';
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      window.index_js_url="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.search.js?1738236294";
+      // variant stuff
+      window.variants && variants.init( [ 'auto', 'zen-light', 'zen-dark', 'relearn-bright', 'relearn-light', 'relearn-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script><style type="text/css">
+
+ 
+.center {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+.alert {
+    color: #ff3333;
+}
+.bsp {
+    padding: 0.05cm;
+    border-width: 0.05cm;
+    border-style: solid;
+    border-color: #ddd;
+    background-color: #ddd;
+    border-radius: 25px;
+    float: right;
+}
+.cbox {
+    padding: 0.2cm;
+    border-width: 0.1cm;
+    border-style: solid;
+    border-color: #4070a0;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    overflow: auto;
+}
+.blueArrow {
+    color: #4070a0;
+    font-family: "Courier New", "Courier", monospace;
+    font-weight: bold;
+}
+.origin {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+.showme {
+    background-color: #ededed;
+    font-size: 0.8em;
+}
+
+
+ 
+.tldr {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.recap {
+    
+    
+   margin: 4px 0px 26px 0px;
+}
+.bib {
+    background: #dbe4ed;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.outcomes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.quizzes {
+    background: #d9e9d5;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.challenges {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+.assignments {
+    background: #ebe4d6;
+    padding: 12px;
+    margin: 4px 0px 26px 0px;
+}
+h1.tldr, h1.recap, h1.bib, h1.outcomes, h1.quizzes, h1.challenges, h1.assignments {
+    padding: 0px;
+}
+
+
+ 
+.noJsAlert {
+    padding: 20px;
+    background-color: #f44336;  
+    color: white;
+    margin-bottom: 15px;
+}
+
+
+ 
+.embed-video-player {
+    position: relative;
+    padding-bottom: 56%;
+    height: 0;
+    overflow: hidden;
+}
+.youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+
+
+ 
+#header-wrapper {
+    padding:0.6rem;
+}
+
+
+ 
+#shortcuts {
+    padding-top: 2.0rem;
+}
+
+
+ 
+#chapter p {
+    text-align: left;
+}
+
+
+ 
+figcaption h4 {
+    margin-top:-2.5rem;
+}
+.border1 {
+    border:1px solid black;
+}
+
+ 
+td ul, td ol {
+    margin: 0 0 1rem 0.5rem;
+    padding: 0 0 0 0.5rem;
+}
+
+ 
+h1 { font-size:2.8rem !important;}
+h2 { font-size:2.2rem; margin:1.2rem 0}
+h3 { font-size:1.9rem; text-align:left !important; font-weight:400 !important;}
+h4 { font-size:1.6rem}
+h5 { font-size:1.3rem}
+h6 { font-size:1rem}
+
+h2 {
+    width:100% !important;
+    border-bottom:1px solid #5e5e5e !important;
+    padding-bottom: 2px;
+}
+.tldr h2, .recap h2, .bib h2, .outcomes h2, .quizzes h2, .challenges h2, .assignments h2 {
+    margin:0.5rem 0
+}
+
+.btn-crossreference, .btn-crossreference:hover {
+    cursor: initial;
+}
+
+</style>
+
+  </head>
+  <body class="mobile-support html disableInlineCopyToClipboard" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet03.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li><a href="#zusammenfassung">Zusammenfassung</a></li>
+    <li><a href="#methodik">Methodik</a></li>
+    <li><a href="#sprachdefinition">Sprachdefinition</a>
+      <ul>
+        <li><a href="#anweisungen-statements">Anweisungen (<em>Statements</em>)</a></li>
+        <li><a href="#ausdrücke-expressions">Ausdrücke (<em>Expressions</em>)</a></li>
+        <li><a href="#bezeichner">Bezeichner</a></li>
+        <li><a href="#variablen">Variablen</a></li>
+        <li><a href="#kommentare">Kommentare</a></li>
+        <li><a href="#kontrollstrukturen">Kontrollstrukturen</a></li>
+        <li><a href="#datentypen">Datentypen</a></li>
+        <li><a href="#beispiele">Beispiele</a></li>
+      </ul>
+    </li>
+    <li><a href="#aufgaben">Aufgaben</a>
+      <ul>
+        <li><a href="#a31-grammatik-4p">A3.1: Grammatik (4P)</a></li>
+        <li><a href="#a32-pretty-printer-3p">A3.2: Pretty Printer (3P)</a></li>
+        <li><a href="#a33-ast-3p">A3.3: AST (3P)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            Blatt 03: ANTLR
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-print" data-content-empty="disable" data-width-s="area-more" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet03/index.print.html" title="Print whole chapter (CTRL&#43;ALT&#43;p)"><i class="fa-fw fas fa-print"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable " tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+<h1>Blatt 03: ANTLR</h1>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        <p><strong>(10 Punkte)</strong></p>
+    
+
+    <h2 id="zusammenfassung">Zusammenfassung</h2>
+<p>Ziel dieses Aufgabenblattes ist die Erstellung eines einfachen <em>Pretty Printers</em> für eine
+einfache fiktive Sprache mit Expressions und Kontrollstrukturen.</p>
+<p>Dazu werden Sie eine passende kontextfreie Grammatik definieren mit Lexer- und Parser-Regeln
+und dabei auch übliche Vorrangregeln beachten.</p>
+<p>Für diese Grammatik erstellen Sie mit Hilfe von ANTLR einen Lexer und einen Parser, die zu
+einem Eingabeprogramm einen Parse-Tree erzeugen.</p>
+<p>Den im Parse-Tree repräsentierten Code des Eingabeprogramms können Sie mit Hilfe einer
+Traversierung konsistent eingerückt wieder auf der Standardausgabe ausgeben - das ist der
+<em>Pretty Printer</em>.</p>
+<p>Sie werden merken, dass viele Strukturen im Parse-Tree für diese Aufgabe nicht relevant sind
+und den Baum mit einer weiteren Traversierung in einen vereinfachten Baum, den sogenannten
+Abstract-Syntex-Tree (<em>AST</em>), transformieren und diesen erneut als formatierten Code auf der
+Konsole ausgeben.</p>
+<h2 id="methodik">Methodik</h2>
+<p>Nutzen Sie das <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/tree/master/homework/src/sample_project" rel="external" target="_blank">Starter-Projekt</a> in der Vorgabe.</p>
+<p>Laden Sie sich das Projekt herunter, binden Sie es in Ihre IDE ein und vergewissern Sie sich,
+dass alles funktioniert: Führen Sie das enthaltene Programm aus, ändern Sie die mitgelieferten
+Beispielgrammatik.</p>
+<p>Bauen Sie dann Ihre Grammatik für die Aufgabe schrittweise auf. Testen Sie diese mit Hilfe der
+Beispielprogramme der Zielsprache (s.u.) und überlegen Sie sich selbst weitere Code-Schnipsel,
+die Sie mit Ihrem Parser einlesen bzw. die Ihr Parser zurückweisen sollte.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> Es empfiehlt
+sich, in dieser Phase mit dem <a href="https://plugins.jetbrains.com/plugin/7358-antlr-v4" rel="external" target="_blank">ANTLR-Plugin für IntelliJ</a> zu arbeiten.</p>
+<p>Erkunden Sie dann die Strukturen Ihres Parse-Trees. Diese sind an die Regeln Ihrer Grammatik
+gekoppelt und sind deshalb so individuell wie Ihre Grammatik. Mit einer Traversierung des
+Baumes können Sie die gewünschte Ausgabe programmieren und auch die Erstellung des
+vereinfachten Baumes (AST).</p>
+<h2 id="sprachdefinition">Sprachdefinition</h2>
+<p>Ein Programm besteht aus einer oder mehreren Anweisungen (<em>Statements</em>).</p>
+<h3 id="anweisungen-statements">Anweisungen (<em>Statements</em>)</h3>
+<p>Eine Anweisung ist eine einzeilige Befehlsfolge, beispielsweise eine Zuweisung oder eine
+Operation. Sie muss immer mit einem Newline abgeschlossen werden. Eine Anweisung hat keinen
+Wert.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>a <span style="color:#f92672">:=</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">5</span>  <span style="color:#75715e"># Zuweisung des Ausdruckes 10-5 (Integer-Wert 5) an die Variable a</span>
+</span></span><span style="display:flex;"><span>b <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;foo&#34;</span>   <span style="color:#75715e"># Zuweisung des Ausdrucks &#34;foo&#34; (String) an die Variable b</span></span></span></code></pre></div>
+<p>Kontrollstrukturen (s.u.) zählen ebenfalls als Anweisungen.</p>
+<h3 id="ausdrücke-expressions">Ausdrücke (<em>Expressions</em>)</h3>
+<p>Die einfachsten Ausdrücke sind Integer- oder String-Literale. Variablen sind ebenfalls
+Ausdrücke. Komplexere Ausdrücke werden mit Hilfe von Operationen gebildet, dabei sind die
+Operanden jeweils auch wieder Ausdrücke. Ein Ausdruck hat/ergibt immer einen Wert.</p>
+<p>Die Operatoren besitzen eine Rangfolge, um verschachtelte Operationen aufzulösen. Sie dürfen
+daher nicht einfach von links nach rechts aufgelöst werden. Die Rangfolge der Operatoren
+entspricht der üblichen Semantik (vgl. Java, C, Python).</p>
+<p>Es gibt in unserer Sprache folgende Operationen mit der üblichen Semantik:</p>
+<h4 id="vergleichsoperatoren">Vergleichsoperatoren</h4>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">Operation</th>
+          <th style="text-align: center">Operator</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">Gleichheit</td>
+          <td style="text-align: center"><code>==</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Ungleichheit</td>
+          <td style="text-align: center"><code>!=</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Größer</td>
+          <td style="text-align: center"><code>&gt;</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Kleiner</td>
+          <td style="text-align: center"><code>&lt;</code></td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="arithmetische-operatoren">Arithmetische Operatoren</h4>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">Operation</th>
+          <th style="text-align: center">Operator</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">Addition / String-Literal-Verkettung</td>
+          <td style="text-align: center"><code>+</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Subtraktion</td>
+          <td style="text-align: center"><code>-</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Multiplikation</td>
+          <td style="text-align: center"><code>*</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Division</td>
+          <td style="text-align: center"><code>/</code></td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="beispiele-für-ausdrücke">Beispiele für Ausdrücke</h4>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ae81ff">10</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">5</span>  <span style="color:#75715e"># Der Integer-Wert 5</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;foo&#34;</span>   <span style="color:#75715e"># Der String &#34;foo&#34;</span>
+</span></span><span style="display:flex;"><span>a       <span style="color:#75715e"># Wert der Variablen a</span>
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">+</span> b   <span style="color:#75715e"># Ergebnis der Addition der Variablen a und b</span></span></span></code></pre></div>
+<h3 id="bezeichner">Bezeichner</h3>
+<p>Werden zur Bezeichnung von Variablen verwendet. Sie bestehen aus einer Zeichenkette der
+Zeichen <code>a-z</code>,<code>A-Z</code>, <code>0-9</code>, <code>_</code>. Bezeichner dürfen nicht mit einer Ziffer <code>0-9</code> beginnen.</p>
+<h3 id="variablen">Variablen</h3>
+<p>Variablen bestehen aus einem eindeutigen Bezeichner (Variablennamen). Den Variablen können
+Werte zugewiesen werden und Variablen können als Werte verwendet werden. Die Zuweisung erfolgt
+mithilfe des <code>:=</code>-Operators. Auf der rechten Seite der Zuweisung können auch Ausdrücke stehen.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>a <span style="color:#f92672">:=</span> <span style="color:#ae81ff">5</span>      <span style="color:#75715e"># Zuweisung des Wertes 5 an die Variable a</span>
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">:=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>  <span style="color:#75715e"># Zuweisung des Wertes 5 an die Variable a</span></span></span></code></pre></div>
+<h3 id="kommentare">Kommentare</h3>
+<p>Kommentare werden durch das Zeichen <code>#</code> eingeleitet und umfassen sämtliche Zeichen bis zum
+nächsten Newline.</p>
+<h3 id="kontrollstrukturen">Kontrollstrukturen</h3>
+<h4 id="while-schleife">While-Schleife</h4>
+<p>While-Schleifen werden mit dem Schlüsselwort <code>while</code> eingeleitet. Sie bestehen im Weiteren aus
+einer Bedingung, die durch ein <code>do</code> abgeschlossen wird, einer Folge von Anweisungen und werden
+mit dem Schlüsselwort <code>end</code> abgeschlossen.</p>
+<p>Die Bedingung kann aus einem Vergleichsausdruck bestehen.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> <span style="color:#f92672">&lt;</span>Bedingung<span style="color:#f92672">&gt;</span> do
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;</span>Anweisung_1<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;</span>Anweisung_2<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>end</span></span></code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>a <span style="color:#f92672">:=</span> <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>b <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> a <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span> do
+</span></span><span style="display:flex;"><span>    a <span style="color:#f92672">:=</span> a <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    b <span style="color:#f92672">:=</span> b <span style="color:#f92672">+</span> <span style="color:#ae81ff">9</span>
+</span></span><span style="display:flex;"><span>end</span></span></code></pre></div>
+<h4 id="bedingte-anweisung-if-else">Bedingte Anweisung (If-Else)</h4>
+<p>Eine bedingte Anweisung besteht immer aus genau einer <code>if</code>-Anweisung, gefolgt von einer
+Bedingung, die mit einem <code>do</code> abgeschlossen wird und einer Folge von Anweisungen.</p>
+<p>Danach wird die bedingte Anweisung entweder mit dem Schlüsselwort <code>end</code> abgeschlossen oder es
+folgt genau ein <code>else</code>-Teil.</p>
+<p>Ein <code>else</code>-Teil wird mit dem Schlüsselwort <code>else</code> eingeleitet. Darauf folgt ein <code>do</code> und eine
+Folge von Anweisungen. Der <code>else</code>-Teil wird mit dem Schlüsselwort <code>end</code> abgeschlossen.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">&lt;</span>Bedingung<span style="color:#f92672">&gt;</span> do
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;</span>Anweisung_1<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;</span>Anweisung_2<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>end</span></span></code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">&lt;</span>Bedingung<span style="color:#f92672">&gt;</span> do
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;</span>Anweisung<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span> do
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;</span>Anweisung<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>end</span></span></code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>a <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;abc&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> a <span style="color:#f92672">&lt;</span> <span style="color:#e6db74">&#34;abc&#34;</span> do
+</span></span><span style="display:flex;"><span>    a <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;wuppie&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span> do
+</span></span><span style="display:flex;"><span>    a <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;nope&#34;</span>
+</span></span><span style="display:flex;"><span>end</span></span></code></pre></div>
+<h3 id="datentypen">Datentypen</h3>
+<p>Unsere Sprache hat zwei eingebaute Datentypen, für die entsprechende Literale erkannt werden
+müssen:</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">Datentyp</th>
+          <th style="text-align: left">Definition der Literale</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><code>int</code></td>
+          <td style="text-align: left">eine beliebige Folge der Ziffern <code>0-9</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>string</code></td>
+          <td style="text-align: left">eine beliebige Folge von ASCII-Zeichen, eingeschlossen in <code>&quot;</code></td>
+      </tr>
+  </tbody>
+</table>
+<p>Die Sprache ist dynamisch typisiert, d.h. beim Parsen werden Ihnen keine Typ-Angaben im Code
+begegnen. Aber Sie müssen die entsprechenden Werte (Literale) parsen können.</p>
+<h3 id="beispiele">Beispiele</h3>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>a <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;wuppie fluppie&#34;</span></span></span></code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>a <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1</span> do
+</span></span><span style="display:flex;"><span>    a <span style="color:#f92672">:=</span> <span style="color:#ae81ff">42</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span> do
+</span></span><span style="display:flex;"><span>    a <span style="color:#f92672">:=</span> <span style="color:#ae81ff">7</span>
+</span></span><span style="display:flex;"><span>end</span></span></code></pre></div>
+<h2 id="aufgaben">Aufgaben</h2>
+<h3 id="a31-grammatik-4p">A3.1: Grammatik (4P)</h3>
+<p>Definieren Sie für die obige Sprache eine geeignete ANTLR-Grammatik.</p>
+<p>Sie werden sowohl Lexer- als auch (rekursive) Parser-Regeln benötigen. Beachten Sie die
+üblichen Vorrangregeln für die Operatoren, orientieren Sie sich hier an Sprachen wie Java oder
+Python oder C.</p>
+<h3 id="a32-pretty-printer-3p">A3.2: Pretty Printer (3P)</h3>
+<p>Erzeugen Sie mithilfe der Grammatik und ANTLR einen Lexer und Parser. Damit können Sie
+syntaktisch korrekte Eingabe-Programme in einen Parse-Tree überführen.</p>
+<p>Programmieren Sie eine Traversierung Ihres Parse-Trees, in der Sie syntaktisch korrekte
+Programme konsistent eingerückt ausgeben können.</p>
+<p>Jede Anweisung soll auf einer eigenen Zeile stehen. Die Einrückung soll mit Leerzeichen
+erfolgen und konsistent sein. Sie brauchen keine Begrenzung der Zeilenlänge implementieren.</p>
+<p>Demonstrieren Sie die Fähigkeiten an mehreren Beispielen mit unterschiedlicher Komplexität.</p>
+<p>Beispiel:</p>
+<p>Aus</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>a     <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>    <span style="color:#ae81ff">10</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>       do
+</span></span><span style="display:flex;"><span>a    <span style="color:#f92672">:=</span>     <span style="color:#ae81ff">42</span>      <span style="color:#75715e"># Zuweisung des Wertes 42 an die Variable a</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span> do
+</span></span><span style="display:flex;"><span>        a <span style="color:#f92672">:=</span>      <span style="color:#ae81ff">7</span>
+</span></span><span style="display:flex;"><span>  end</span></span></code></pre></div>
+<p>soll</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>a <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1</span> do
+</span></span><span style="display:flex;"><span>    a <span style="color:#f92672">:=</span> <span style="color:#ae81ff">42</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span> do
+</span></span><span style="display:flex;"><span>    a <span style="color:#f92672">:=</span> <span style="color:#ae81ff">7</span>
+</span></span><span style="display:flex;"><span>end</span></span></code></pre></div>
+<p>werden.</p>
+<p><strong>Hinweis</strong>: Es geht nur um die Ausgabe syntaktisch korrekter Programme. Sie brauchen sich um
+die Semantik (z.B. passende Typen wie etwa keine Multiplikation von Strings mit Integern o.ä.)
+noch keine Gedanken machen! Achten Sie auf die korrekten Einrücktiefen. Die Zeilenlänge spielt
+hier keine Rolle, es wird einfach direkt nach jedem Statement umgebrochen (bzw. wie bei den
+Kontrollstrukturen gezeigt).</p>
+<p><strong>Hinweis</strong>: Das Thema Pretty Printing ist interessant und kann recht schnell ziemlich
+aufwändig werden. Sie finden im Paper <a href="https://homepages.inf.ed.ac.uk/wadler/papers/prettier/prettier.pdf" rel="external" target="_blank">&quot;A prettier printer&quot;</a> von Philip Wadler
+<a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet03.html#id_wadler2003prettier">[wadler2003prettier]</a> und im Blog <a href="https://journal.stuffwithstuff.com/2015/09/08/the-hardest-program-ive-ever-written/" rel="external" target="_blank">&quot;The Hardest Program I've Ever Written&quot;</a> von Bob Nystrom
+<a href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet03.html#id_Nystrom2015">[Nystrom2015]</a> gut geschriebene Beiträge, um tiefer in die Materie einzusteigen.</p>
+<h3 id="a33-ast-3p">A3.3: AST (3P)</h3>
+<p>Beim Parsen bekommen Sie von ANTLR einen Parse-Tree zurück, der direkt die Struktur Ihrer
+Grammatik widerspiegelt. Die einzelnen Zweige sind damit in der Regel aber auch viel zu tief
+verschachtelt.</p>
+<p>Überlegen Sie sich, welche Informationen/Knoten Sie für die formatierte Ausgabe wirklich
+benötigen - das ist Ihr Abstract-Syntex-Tree (<em>AST</em>).</p>
+<p>Programmieren Sie eine Transformation des Parse-Tree in die von Ihnen hier formulierten
+AST-Strukturen. Dies können Sie beispielsweise mit einer passenden Traversierung
+(Visitor-Pattern) erreichen.</p>
+<p>Passen Sie den Pretty-Printer so an, dass er auch den AST ausgeben kann. (Alternativ können
+auch einen zweiten Pretty-Printer für den AST implementieren.)</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Um den Text lesbar zu halten, wird hier oft nur von &quot;Parser&quot; gesprochen - gemeint ist
+aber die gesamte auf diesem Blatt zu erstellende Toolchain: Lexer - Parser - AST -
+Ausgabe.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+
+    
+
+
+
+
+    
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                
+            
+            
+            
+        
+    
+        
+        
+
+        
+            
+            
+            
+            
+            
+
+            
+            
+                
+                    
+                
+            
+            
+            
+            
+            
+            
+
+            
+            
+                
+            
+            
+                
+                
+                
+            
+            
+            
+        
+    
+    
+
+    <div class="box notices cstyle info">
+  <div class="box-label">
+    <i class="fas fa-book-reader"></i> Quellen
+  </div>
+  <div class="box-content">
+<ul> <li id='id_Nystrom2015'>[Nystrom2015] <a href='https://journal.stuffwithstuff.com/2015/09/08/the-hardest-program-ive-ever-written/' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'><strong>The Hardest Program I've Ever Written</strong></a><br>Nystrom, R., 2015.</li> <li id='id_wadler2003prettier'>[wadler2003prettier] <a href='https://homepages.inf.ed.ac.uk/wadler/papers/prettier/prettier.pdf' class='icon reading' target='_blank' rel='nofollow noopener noreferrer'><strong>A prettier printer</strong></a><br>Wadler, P., Citeseer, 2003.</li></ul>
+  </div>
+</div>
+
+
+
+
+
+
+<footer class="footline"><div style="color: darkgray; font-size: small;">
+<p style="margin-left: 4rem; margin-right: 4rem; margin-top: 6rem;">
+<!-- https://creativecommons.org/choose/ -->
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+Unless otherwise noted, <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor">this work</a> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/bcg7" property="cc:attributionName" rel="cc:attributionURL">BC George</a>, <a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/cagix" property="cc:attributionName" rel="cc:attributionURL">Carsten Gips</a>, and <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/graphs/contributors">contributors</a> is licensed under <a rel="license" href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/LICENSE.md">CC BY-SA 4.0</a>.
+See the <a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/CREDITS.md">credits</a> for a detailed list of contributing projects.
+
+</p>
+</div>
+
+</footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+
+
+<a id="logo" href='https://www.hsbi.de/elearning/data/FH-Bielefeld/lm_data/lm_1360443//index.html'>
+    <img style="max-width:35%" alt="icon" src='/elearning/data/FH-Bielefeld/lm_data/lm_1360443/images/logo.png'>
+</a>
+
+        </div>
+
+        <search><form action="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/search.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['de'];
+        </script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/auto-complete.js?1738236294" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/lunr/lunr.min.js?1738236294" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/lunr/lunr.stemmer.support.min.js?1738236294" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/lunr/lunr.multi.min.js?1738236294" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/lunr/lunr.de.min.js?1738236294" defer></script>
+        <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/search.js?1738236294" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro.html">Überblick</a><ul id="R-subsections-4df4f48548517eafbcfd5260bf8ec879" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/overview.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/overview.html">Struktur eines Compilers</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/languages.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/languages.html">Programmiersprachen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/applications.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/00-intro/applications.html">Anwendungen</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing.html">Lexikalische Analyse</a><ul id="R-subsections-8d37d4681a8464ded0759726543b315f" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing/regular.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing/regular.html">Reguläre Sprachen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing/antlr-lexing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/01-lexing/antlr-lexing.html">Lexer mit ANTLR generieren</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing.html">Syntaktische Analyse</a><ul id="R-subsections-2fa42a0a95fa4e38203332af421076e1" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing/cfg.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing/cfg.html">CFG</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing/antlr-parsing.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/02-parsing/antlr-parsing.html">Parser mit ANTLR generieren</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics.html">Semantische Analyse</a><ul id="R-subsections-d88fb7065d61ee57361d9d4d71ff9c1f" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab0-intro.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab0-intro.html">SymbTab0: Überblick Symboltabellen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab1-scopes.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab1-scopes.html">SymbTab1: Nested Scopes</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab2-functions.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab2-functions.html">SymbTab2: Funktionen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab3-classes.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/03-semantics/symbtab3-classes.html">SymbTab3: Strukturen und Klassen</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate.html">Zwischencode</a><ul id="R-subsections-954600b07c36f58ed592d3873b4cb416" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate/intro-ir.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate/intro-ir.html">Überblick Zwischencode</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate/llvm-ir.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/04-intermediate/llvm-ir.html">LLVM als IR</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation.html">Interpreter</a><ul id="R-subsections-e1e14acafd0a08bb52afc3f0f0608d4c" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation/astdriven-part1.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation/astdriven-part1.html">AST-basierte Interpreter 1</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation/astdriven-part2.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/06-interpretation/astdriven-part2.html">AST-basierte Interpreter 2</a></li></ul></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages.html">Programmiersprachen</a><ul id="R-subsections-a84558f596ca34bed293af92ceba5568" class="morespace collapsible-menu">
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp0-basics.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp0-basics.html">Einführung in C&#43;&#43;</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp1-pointer.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp1-pointer.html">C&#43;&#43;: Pointer und Referenzen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp2-classes.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp2-classes.html">C&#43;&#43;: Klassen</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp3-big3.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp3-big3.html">C&#43;&#43;: Big 3</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp4-operators.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp4-operators.html">C&#43;&#43;: Operatoren</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp5-inheritance.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp5-inheritance.html">C&#43;&#43;: Vererbung und Polymorphie</a></li>
+          <li data-nav-id="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp6-templates.html" class=""><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/99-languages/cpp6-templates.html">C&#43;&#43;: Templates</a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.html#kursformat"><i class='fas fa-bookmark'></i> Zeiten</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.html#fahrplan"><i class='fas fa-bookmark'></i> Fahrplan</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.html#pr%C3%BCfungsform-note-und-credits"><i class='fas fa-bookmark'></i> Note/Credits</a></li>
+            <li><a class="padding" href="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/index.html#fahrplan"><i class='fas fa-bookmark'></i> News</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVariantSwitch">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/homework/sheet03.html" lang="de-DE" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch showVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-auto" value="auto" selected>Auto</option>
+                      <option id="R-select-variant-zen-light" value="zen-light">Zen Light</option>
+                      <option id="R-select-variant-zen-dark" value="zen-dark">Zen Dark</option>
+                      <option id="R-select-variant-relearn-bright" value="relearn-bright">Relearn Bright</option>
+                      <option id="R-select-variant-relearn-light" value="relearn-light">Relearn Light</option>
+                      <option id="R-select-variant-relearn-dark" value="relearn-dark">Relearn Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter"><p style="text-align: center;">
+<i class='fab fa-fw fa-github'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor">GitHub</a>
+<i class='fas fa-fw fa-tags'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/issues">Issues</a>
+<i class='fas fa-fw fa-bullhorn'></i><a href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/CREDITS.md">Credits</a>
+<br />
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0;margin:0;display:inline;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+
+</p>
+
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/clipboard.min.js?1738236294" defer></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/perfect-scrollbar.min.js?1738236294" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/mathjax/tex-mml-chtml.js?1738236294"></script>
+    <script src="/elearning/data/FH-Bielefeld/lm_data/lm_1360443/js/theme.js?1738236294" defer></script>
+  </body>
+</html>
