@@ -17,12 +17,9 @@ dependencies {
     testImplementation 'org.mockito:mockito-core:5.14.1'
 }
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
-    sourceCompatibility = JavaVersion.VERSION_21
-}
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)  // use current Long-Term Support (LTS) release
+java.sourceCompatibility = JavaVersion.VERSION_21
+java.targetCompatibility = JavaVersion.VERSION_21
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
