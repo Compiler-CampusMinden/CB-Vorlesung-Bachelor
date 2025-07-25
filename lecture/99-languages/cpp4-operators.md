@@ -1,5 +1,4 @@
 ---
-archetype: lecture-cg
 title: "C++: Operatoren"
 author: "Carsten Gips (HSBI)"
 readings:

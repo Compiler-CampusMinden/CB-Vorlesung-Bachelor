@@ -1,5 +1,4 @@
 ---
-archetype: assignment
 title: "Blatt 02: CFG"
 author: "BC George, Carsten Gips (HSBI)"
 points: "10 Punkte"

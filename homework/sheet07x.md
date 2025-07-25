@@ -1,5 +1,4 @@
 ---
-archetype: assignment
 title: "Blatt 07x: Mini-Projekt C++ (IFM 5.21 CB PO18, 5. Semester)"
 author: "Carsten Gips, BC George (HSBI)"
 

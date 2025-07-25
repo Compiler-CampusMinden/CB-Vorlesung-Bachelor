@@ -1,5 +1,4 @@
 ---
-archetype: lecture-cg
 title: "C++: Klassen"
 author: "Carsten Gips (HSBI)"
 readings:

@@ -1,5 +1,4 @@
 ---
-archetype: lecture-cg
 title: "C++: Pointer und Referenzen"
 author: "Carsten Gips (HSBI)"
 readings:

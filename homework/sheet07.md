@@ -1,5 +1,4 @@
 ---
-archetype: assignment
 title: "Blatt 07: Mini-Projekt C++"
 author: "Carsten Gips, BC George (HSBI)"
 

@@ -1,5 +1,4 @@
 ---
-archetype: lecture-cg
 title: "C++: Vererbung und Polymorphie"
 author: "Carsten Gips (HSBI)"
 readings:

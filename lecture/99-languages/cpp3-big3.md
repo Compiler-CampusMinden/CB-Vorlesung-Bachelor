@@ -1,5 +1,4 @@
 ---
-archetype: lecture-cg
 title: "C++: Big 3"
 author: "Carsten Gips (HSBI)"
 readings:

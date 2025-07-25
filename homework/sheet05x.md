@@ -1,5 +1,4 @@
 ---
-archetype: assignment
 title: "Blatt 05x: Interpreter (IFM 5.21 CB PO18, 5. Semester)"
 author: "Carsten Gips, BC George (HSBI)"
 points: "10 Punkte"

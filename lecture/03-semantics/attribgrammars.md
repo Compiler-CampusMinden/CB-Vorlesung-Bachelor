@@ -1,5 +1,4 @@
 ---
-archetype: lecture-bc
 title: "Typen und Attributierte Grammatiken"
 linkTitle: "Attributierte Grammatiken"
 author: "BC George (HSBI)"

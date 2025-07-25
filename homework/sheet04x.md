@@ -1,5 +1,4 @@
 ---
-archetype: assignment
 title: "Blatt 04x: Semantische Analyse (IFM 5.21 CB PO18, 5. Semester)"
 author: "Carsten Gips, BC George (HSBI)"
 points: "10 Punkte"

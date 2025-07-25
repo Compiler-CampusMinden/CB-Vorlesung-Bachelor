@@ -1,5 +1,4 @@
 ---
-archetype: "home"
 title: "IFM 3.1 (PO23) / IFM 5.21 (PO18): Compilerbau (Winter 2024/25)"
 ---
 

@@ -1,5 +1,4 @@
 ---
-archetype: assignment
 title: "Blatt 04: Semantische Analyse"
 author: "Carsten Gips, BC George (HSBI)"
 points: "10 Punkte"

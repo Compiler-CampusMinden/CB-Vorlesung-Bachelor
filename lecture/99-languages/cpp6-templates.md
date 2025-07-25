@@ -1,5 +1,4 @@
 ---
-archetype: lecture-cg
 title: "C++: Templates"
 author: "Carsten Gips (HSBI)"
 readings:

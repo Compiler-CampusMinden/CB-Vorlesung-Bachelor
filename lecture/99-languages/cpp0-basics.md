@@ -1,5 +1,4 @@
 ---
-archetype: lecture-cg
 title: "Einführung in C++ (Erinnerungen an C)"
 linkTitle: "Einführung in C++"
 author: "Carsten Gips (HSBI)"
