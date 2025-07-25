@@ -756,7 +756,7 @@ int i;
 scanf("%d", i);
 ```
 
-::: showme
+::: details
 Tipp: `i` ist **kein** Pointer :)
 :::
 
@@ -778,7 +778,7 @@ int *matvec(int **A, int *x, int N) {
 }
 ```
 
-::: showme
+::: details
 Tipp: `y[i] += ...` setzt sinnvolle Werte in `y[i]` voraus ...
 :::
 
@@ -796,7 +796,7 @@ for (int i=0; i<N; i++) {
 }
 ```
 
-::: showme
+::: details
 Tipp: Jedes `p[i]` kann einen `int` speichern, bekommt aber einen Pointer
 zugewiesen (könnte deutlich breiter im Speicher sein als ein `int`) ...
 :::
@@ -815,7 +815,7 @@ for (int i=0; i<=N; i++) {
 }
 ```
 
-::: showme
+::: details
 Tipp: Hier läuft `i` um einen Platz zu weit ...
 :::
 
@@ -828,7 +828,7 @@ char s[8];
 gets(s);
 ```
 
-::: showme
+::: details
 Tipp: Wenn hier mehr als 7 Zeichen eingegeben werden, gibt es Probleme :)
 :::
 
@@ -844,7 +844,7 @@ int *search(int *p, int val) {
 }
 ```
 
-::: showme
+::: details
 Tipp: Jeder Pointer hat einen Typ, und der Ausdruck "Pointer + 1" rutscht um
 so viele Bytes im Speicher weiter, wie der Typ breit ist. D.h. mit einem
 "Pointer + 1" gelangt man zum nächsten Element, während der obige Ausdruck

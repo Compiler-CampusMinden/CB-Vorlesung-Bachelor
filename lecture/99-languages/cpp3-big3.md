@@ -90,7 +90,7 @@ challenges: |
         dem es zu Datenverlust kommt, wenn die Selbstzuweisung nicht unterbunden
         wird.
 
-        ::: showme
+        ::: details
         Wenn vor der Wertzuweisung der alte Inhalt freigegeben werden muss, führt
         Selbstzuweisung zum Fehler.
 
