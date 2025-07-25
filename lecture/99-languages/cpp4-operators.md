@@ -2,9 +2,9 @@
 title: "C++: Operatoren"
 author: "Carsten Gips (HSBI)"
 readings:
-  - key: "Breymann2011"
-  - key: "cppreference.com"
-  - key: "cprogramming.com"
+  - "@Breymann2011"
+  - "@cppreference.com"
+  - "@cprogramming.com"
 tldr: |
     In C++ können existierende Operatoren überladen werden, etwa für die Nutzung mit eigenen Klassen. Dabei
     kann die Überladung innerhalb einer Klassendefinition passieren (analog zur Implementierung einer Methode)

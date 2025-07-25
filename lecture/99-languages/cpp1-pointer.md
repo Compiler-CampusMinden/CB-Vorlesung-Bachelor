@@ -2,9 +2,9 @@
 title: "C++: Pointer und Referenzen"
 author: "Carsten Gips (HSBI)"
 readings:
-  - key: "Breymann2011"
-  - key: "cppreference.com"
-  - key: "cprogramming.com"
+  - "@Breymann2011"
+  - "@cppreference.com"
+  - "@cprogramming.com"
 tldr: |
     Es gibt viele Arten Speicher, die sich vor allem in der Größe und Geschwindigkeit unterscheiden
     (Cache, RAM, SSD, Festplatte, ...). Der Kernel stellt jedem Prozess einen linearen Adressraum

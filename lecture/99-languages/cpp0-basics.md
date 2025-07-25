@@ -2,9 +2,9 @@
 title: "Einführung in C++ (Erinnerungen an C)"
 author: "Carsten Gips (HSBI)"
 readings:
-  - key: "Breymann2011"
-  - key: "cppreference.com"
-  - key: "cprogramming.com"
+  - "@Breymann2011"
+  - "@cppreference.com"
+  - "@cprogramming.com"
 tldr: |
     Für C wurde ein paar Jahre nach der Entstehung ein objektorientierter Aufsatz entwickelt: C++.
     Beide Sprachversionen werden aktiv weiterentwickelt, vor allem in C++ gibt es ca. alle 3 Jahre

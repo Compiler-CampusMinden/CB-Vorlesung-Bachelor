@@ -2,9 +2,9 @@
 title: "C++: Vererbung und Polymorphie"
 author: "Carsten Gips (HSBI)"
 readings:
-  - key: "Breymann2011"
-  - key: "cppreference.com"
-  - key: "cprogramming.com"
+  - "@Breymann2011"
+  - "@cppreference.com"
+  - "@cprogramming.com"
 tldr: |
     Vererbung analog zu Java passiert in C++ über die "`public`-Vererbung": `Subklasse : public Superklasse`.
     Dabei gibt es in C++ **keine** gemeinsame Oberklasse wie `Object` und entsprechend kein `super`. (Es

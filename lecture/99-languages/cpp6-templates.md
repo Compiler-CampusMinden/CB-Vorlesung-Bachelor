@@ -2,9 +2,9 @@
 title: "C++: Templates"
 author: "Carsten Gips (HSBI)"
 readings:
-  - key: "Breymann2011"
-  - key: "cppreference.com"
-  - key: "cprogramming.com"
+  - "@Breymann2011"
+  - "@cppreference.com"
+  - "@cprogramming.com"
 tldr: |
     In C++ können Funktionen über **Funktions-Templates** definiert werden. Dafür stellt man
     ein `template <typename T>` mit einer Aufzählung `typename T` aller Template-Parameter der

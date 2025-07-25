@@ -2,9 +2,9 @@
 title: "C++: Klassen"
 author: "Carsten Gips (HSBI)"
 readings:
-  - key: "Breymann2011"
-  - key: "cppreference.com"
-  - key: "cprogramming.com"
+  - "@Breymann2011"
+  - "@cppreference.com"
+  - "@cprogramming.com"
 tldr: |
     Klassen werden in C++ mit dem Schlüsselwort `class` definiert. Dabei müssen Klassendefinitionen immer
     mit einem Semikolon abgeschlossen werden(!). Bei Trennung von Deklaration und Implementierung muss die

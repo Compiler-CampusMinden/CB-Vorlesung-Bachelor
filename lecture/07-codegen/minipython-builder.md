@@ -2,8 +2,7 @@
 title: "Einstieg Builder für Mini-Python"
 author: "BC George (HSBI)"
 readings:
-  - key: "Torczon2012"
-    comment: "Kapitel 5 Intermediate Representation"
+  - "@Torczon2012: Kapitel 5 Intermediate Representation"
 outcomes:
   - k1: "**Zwischencode**"
   - k2: "*CBuilder*"
