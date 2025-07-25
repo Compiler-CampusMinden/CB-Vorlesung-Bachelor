@@ -1,5 +1,6 @@
 ---
 title: "IFM 3.1 (PO23) / IFM 5.21 (PO18): Compilerbau (Winter 2024/25)"
+has_license: true
 ---
 
 
@@ -668,3 +669,12 @@ Hochschulen anbieten zu können. (Diese Termine werden in englischer Sprache dur
 
 ["We CAN virtuOWL"]: https://www.uni-bielefeld.de/international/profil/netzwerk/alberta-owl/we-can-virtuowl/
 [University of Alberta]: https://www.hsbi.de/en/international-office/alberta-owl-cooperation
+
+
+---
+
+# LICENSE
+
+![](https://licensebuttons.net/l/by-sa/4.0/88x31.png)
+
+Unless otherwise noted, [this work](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor) by [BC George](https://github.com/bcg7), [Carsten Gips](https://github.com/cagix) and [contributors](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/graphs/contributors) is licensed under [CC BY-SA 4.0](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/LICENSE.md). See the [credits](CREDITS.md) for a detailed list of contributing projects.
