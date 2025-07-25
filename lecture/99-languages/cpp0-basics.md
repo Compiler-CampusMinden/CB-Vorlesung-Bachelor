@@ -203,7 +203,7 @@ challenges: |
 -   Verbreitet bei hardwarenaher und/oder rechenintensiver Software
 
 ::: center
-[**Sie werden C++ im Modul "Computergrafik" brauchen!**]{.alert}
+**Sie werden C++ im Modul "Computergrafik" brauchen!**
 :::
 
 \bigskip
@@ -211,8 +211,8 @@ challenges: |
 
 **Geschichte**
 
--   1971-73: [Ritchie]{.alert} entwickelt die Sprache [C]{.alert}
--   Ab 1979: Entwicklung von [C++]{.alert} durch Bjarne [Stroustrup]{.alert} bei AT&T
+-   1971-73: Ritchie entwickelt die Sprache C
+-   Ab 1979: Entwicklung von C++ durch Bjarne Stroustrup bei AT&T
     -   Erweiterung der prozeduralen Sprache C
     -   Ursprünglich "C mit Klassen", später "C++" (Inkrement-Operator)
 -   Bis heute: Fortlaufende Erweiterungen: alle 3 Jahre neuer Standard (C++11, C++14, ...)
@@ -315,7 +315,7 @@ ausgeführt werden soll.
 ## Variablen, Operatoren, Kontrollfluss
 
 ::: center
-[**Im Wesentlichen wie von C und Java gewohnt ... :-)**]{.alert}
+**Im Wesentlichen wie von C und Java gewohnt ... :-)**
 :::
 
 \bigskip
@@ -453,7 +453,7 @@ Zusätzlich gibt es noch benannte Scopes und einen Scope-Operator.
     ```
 
     ::: notes
-    -   [Compiler]{.alert} reserviert sofort Speicher auf dem [Stack]{.alert} \newline
+    -   Compiler reserviert sofort Speicher auf dem Stack \newline
         => **statisch**: im Programmlauf nicht änderbar
     -   Zugriff über den Indexoperator []
     -   Achtung: "roher" Speicher, d.h. **keinerlei Methoden**
@@ -519,7 +519,7 @@ Zusätzlich gibt es noch benannte Scopes und einen Scope-Operator.
     :::
 
 ::: notes
-[**Vorsicht!**]{.alert} `vector<int> arr();` ist **kein** Vektor der Länge 0,
+**Vorsicht!** `vector<int> arr();` ist **kein** Vektor der Länge 0,
 sondern deklariert eine **neue Funktion**!
 :::
 
@@ -618,7 +618,7 @@ vgl. [en.wikipedia.org/wiki/C_data_types](https://en.wikipedia.org/wiki/C_data_t
 ### Größe eines Datentyps ist maschinenabhängig
 
 ::: center
-[**Der reservierte Speicherbereich und damit auch der Zahlenbereich für einen einfachen Typ in C/C++ ist maschinenabhängig!**]{.alert}
+**Der reservierte Speicherbereich und damit auch der Zahlenbereich für einen einfachen Typ in C/C++ ist maschinenabhängig!**
 :::
 
 -   Zahlenbereiche für konkrete Implementierung in Header-Files definiert
@@ -685,7 +685,7 @@ for (x=0; x<10; x++) {
 
 -   Funktionen sind mit Methoden in Java vergleichbar
 
-    => sind aber [unabhängig]{.alert} von Klassen bzw. Objekten
+    => sind aber unabhängig von Klassen bzw. Objekten
 
 -   Syntax:
 
@@ -710,14 +710,14 @@ In der Praxis verwendet man beide Begriffe i.d.R. synonym.
 
 #### Funktionen: Deklaration vs. Definition
 
--   **Deklaration**: [(Funktions-) Prototyp]{.alert}: Festlegen von
-    [Signatur]{.alert} [(d.h. Funktionsname und Anzahl, Typ, Reihenfolge der Parameter)]{.notes} u. Rückgabetyp
+-   **Deklaration**: (Funktions-) Prototyp: Festlegen von
+    Signatur [(d.h. Funktionsname und Anzahl, Typ, Reihenfolge der Parameter)]{.notes} u. Rückgabetyp
 
     ``` cpp
     void machWas(int, int);
     ```
 
--   **Definition**: [Implementierung]{.alert} der Funktion
+-   **Definition**: Implementierung der Funktion
 
     ``` cpp
     void machWas(int a, int b) {
@@ -726,8 +726,8 @@ In der Praxis verwendet man beide Begriffe i.d.R. synonym.
     ```
 
 -   Compiler "liest" Quellcode von oben nach unten
--   Funktionen müssen [(wie alle anderen Symbole auch)]{.notes} [vor]{.alert} ihrer Verwendung zumindest
-    [deklariert]{.alert} sein, d.h. es muss zumindest ihre Signatur bekannt sein (siehe nächste Folie)
+-   Funktionen müssen [(wie alle anderen Symbole auch)]{.notes} vor ihrer Verwendung zumindest
+    deklariert sein, d.h. es muss zumindest ihre Signatur bekannt sein (siehe nächste Folie)
 -   Deklaration: Variablennamen können weggelassen werden
 
 `{{% notice style="info" title="Deklaration vs. Definition" %}}`{=markdown}
@@ -742,14 +742,14 @@ In der Praxis verwendet man beide Begriffe i.d.R. synonym.
 #### One Definition Rule (für Funktionen)
 
 ::: center
-Jede Funktion darf im **gesamten** Programm nur [**einmal definiert**]{.alert} sein!
+Jede Funktion darf im **gesamten** Programm nur **einmal definiert** sein!
 :::
 
 #### Funktionen und Parameter
 
 -   Funktionen "ohne" Parameter:
 
-    Leere Parameter-Liste^[Achtung: C-Compiler akzeptiert [**alle**]{.alert}
+    Leere Parameter-Liste^Achtung: C-Compiler akzeptiert [**alle**
     Parameter!] oder Schlüsselwort `void`
 
     ```c
@@ -793,7 +793,7 @@ kann zu schwer verständlichen Fehlern führen! Sobald eine Funktion explizit
 mit dem Schlüsselwort `void` in der Parameterliste deklariert wird, **muss**
 diese dann auch ohne Parameter aufgerufen werden.
 
-[=> **Bevorzugen Sie in C die Variante mit dem Schlüsselwort `void`!**]{.alert}
+=> **Bevorzugen Sie in C die Variante mit dem Schlüsselwort `void`!**
 
 ##### Leere Parameterliste in C++
 
@@ -806,9 +806,9 @@ void fkt(void);
 
 #### Defaultparameter in C++
 
--   Parameter mit Defaultwerten am [**Ende**]{.alert} der Parameterliste
+-   Parameter mit Defaultwerten am **Ende** der Parameterliste
 -   Bei Trennung von Deklaration und Definition: Defaultparameter
-    [**nur**]{.alert} in Deklaration
+    **nur** in Deklaration
 
 ``` cpp
 // Deklaration
@@ -823,10 +823,10 @@ void f(int i, int j, int k) { ... }
 -   Funktionen im **gleichen Gültigkeitsbereich** können überladen werden
 -   Zu beachten:
     1.  Funktionsname identisch
-    2.  Signatur (Anzahl, Typen der Parameter) muss [unterschiedlich]{.alert} sein
+    2.  Signatur (Anzahl, Typen der Parameter) muss unterschiedlich sein
     3.  Rückgabewert darf variieren
 
-=> [Warnung]{.alert}: Überladene Funktionen sollten gleichartige
+=> Warnung: Überladene Funktionen sollten gleichartige
 Operationen für unterschiedliche Datentypen bereitstellen!
 
 #### Probleme beim Überladen von Funktionen
@@ -909,9 +909,9 @@ int main() {
 :::
 ::::::
 
--   Default in C/C++ ist die [call-by-value]{.alert} Semantik:
-    -   Argumente werden bei Übergabe [kopiert]{.alert}
-    -   Ergebniswerte werden bei Rückgabe [kopiert]{.alert}
+-   Default in C/C++ ist die call-by-value Semantik:
+    -   Argumente werden bei Übergabe kopiert
+    -   Ergebniswerte werden bei Rückgabe kopiert
 -   Folgen:
     -   Keine Seiteneffekte durch Verändern von übergebenen Strukturen
     -   Negative Auswirkungen auf Laufzeit bei großen Daten
@@ -957,7 +957,7 @@ int main() {
     Software Engineering: Vermeiden Sie lokale Namen, die Namen aus einem
     äußeren Scope überdecken!
 
-=> Werden auch als [**automatische Variablen**]{.alert} bezeichnet
+=> Werden auch als **automatische Variablen** bezeichnet
 
 #### Globale Variablen ("externe Variablen")
 
@@ -980,11 +980,11 @@ void foo() {
 ```
 
 -   Globale Variablen: Außerhalb **jeder** Funktion definierte Variablen
--   Globale Variablen gelten in [allen]{.alert} Teilen des Programms
+-   Globale Variablen gelten in allen Teilen des Programms
 -   Auch in anderen Dateien! => müssen bei _Nutzung_ in Funktionen als `extern` deklariert werden
 -   Existieren die **gesamte** Programmlebensdauer über
 
-=> Werden auch als [**externe Variablen**]{.alert} bezeichnet
+=> Werden auch als **externe Variablen** bezeichnet
 
 Die Dateien sind einzeln kompilierbar (`extern` sagt dem Compiler, dass
 die Variable woanders definiert ist) => erst der Linker löst das auf.
@@ -1023,7 +1023,7 @@ _Hinweis_: `static` für globale Variablen bedeutet etwas anderes! [(s.u. "Sicht
 (Automatische) Initialisierung von Variablen hängt von ihrer Speicherklasse ab!
 
 -   **Automatisch**
-    -   Werden [nicht]{.alert} automatisch initialisiert (!)
+    -   Werden nicht automatisch initialisiert (!)
     -   Bei vorgegebenem Wert ab Aufruf der Funktion
 -   **Extern**
     -   Mit dem Wert 0 oder vorgegebenem Wert

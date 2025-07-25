@@ -355,10 +355,10 @@ zusätzlich (nicht in Abbildung dargestellt):
 
 -   Dynamisch wachsend und schrumpfend
 -   Bereich für dynamischen Speicher (Allokation während der Laufzeit)
--   Zugriff und Verwaltung aus [laufendem]{.alert} Programm => **Pointer**
+-   Zugriff und Verwaltung aus laufendem Programm => **Pointer**
     -   `malloc()`/`calloc()`/`free()` (C)
     -   `new`/`delete` (C++)
-    -   typischerweise [**Pointer**]{.alert}
+    -   typischerweise **Pointer**
 -   **KEINE automatische Pflege - Programmierer ist selbst verantwortlich!**
 :::::::::
 
@@ -410,7 +410,7 @@ Im Beispiel:
 ### Pointer sind besondere Variablen
 
 ::: center
-Der [Wert]{.alert} eines Pointers wird als [**Adresse**]{.alert} im Speicher behandelt
+Der Wert eines Pointers wird als **Adresse** im Speicher behandelt
 :::
 
 Der Wert von `iptr` ist nicht ein beliebiger Integer, sondern eine Adresse. In
@@ -498,7 +498,7 @@ von `ptr2` würde auf die Adresse von `i` zugriffen werden und dort gelesen/gesc
 ### Pointer und Scopes
 
 ::: center
-[**Nicht auf Variablen außerhalb ihres Scopes zugreifen!**]{.alert}
+**Nicht auf Variablen außerhalb ihres Scopes zugreifen!**
 :::
 
 ```c
@@ -542,10 +542,10 @@ int* murks() {
 ### Pointer und Initialisierung
 
 ::: center
-Pointer werden vom Compiler [**nicht**]{.alert} initialisiert!
+Pointer werden vom Compiler **nicht** initialisiert!
 :::
 
--   Zeigen ohne explizite Initialisierung auf [**zufällige**]{.alert} Adresse
+-   Zeigen ohne explizite Initialisierung auf **zufällige** Adresse
 -   Dereferenzierung uninitialisierter Pointer problematisch
 
 **Explizite Null-Pointer**:
@@ -557,7 +557,7 @@ Pointer werden vom Compiler [**nicht**]{.alert} initialisiert!
 
 ## Speicherverwaltung
 
--   C: [**Funktionen**]{.alert} zur Verwaltung dynamischen Speichers: `malloc()`,
+-   C: **Funktionen** zur Verwaltung dynamischen Speichers: `malloc()`,
     `free()`, ... (in `<stdlib.h>`)
 
     ::: notes
@@ -580,7 +580,7 @@ Pointer werden vom Compiler [**nicht**]{.alert} initialisiert!
     ```
 \bigskip
 
--   C++: [**Operatoren**]{.alert}: `new` und `delete`
+-   C++: **Operatoren**: `new` und `delete`
 
     ::: notes
     -   Direkte Angabe des Zieltyps
@@ -654,7 +654,7 @@ _Hinweis_: Pointer-Variablen `i` und `x` liegen auf Stack, angeforderter Speiche
 
 -   `delete` darf nur auf mit `new` erzeugte Objekte angewendet werden
     -   Vorsicht bei Pointern auf Stack-Variablen!
-    -   [**NIE**]{.alert} mischen mit `malloc()`/`calloc()`/`free()`!
+    -   **NIE** mischen mit `malloc()`/`calloc()`/`free()`!
 
     ```cpp
     int *p = (int *) malloc(sizeof(int));
@@ -664,7 +664,7 @@ _Hinweis_: Pointer-Variablen `i` und `x` liegen auf Stack, angeforderter Speiche
 #### delete[] genau nur bei new[]
 
 -   `delete[]` darf nur auf mit `new[]` erzeugte Objekte angewendet werden
-    (und [**muss**]{.alert} dort auch angewendet werden)
+    (und **muss** dort auch angewendet werden)
 
     `delete` auf mit `new[]` erzeugtes Array würde nur
     erstes Element freigeben!
@@ -720,7 +720,7 @@ Freigabe des Pointers komplett in der Hand des Aufrufers.
 
 #### Double Free und Stale Pointer
 
--   `free()` darf nur [einmal pro Objekt]{.alert} aufgerufen werden
+-   `free()` darf nur einmal pro Objekt aufgerufen werden
     -   Hintergrund: Intern wird eine Freispeicherliste verwaltet
 
 -   Nach `free()` ist der Zeiger undefiniert:
@@ -731,7 +731,7 @@ Freigabe des Pointers komplett in der Hand des Aufrufers.
 
 -   Mehrere Pointer auf ein Objekt: Einmal `free()` reicht!
     -   Die anderen Pointer dürfen anschließend aber auch nicht mehr
-        dereferenziert werden ([stale/dangling pointer]{.alert})
+        dereferenziert werden (stale/dangling pointer)
 
 #### Beispiel Stale Pointer
 
@@ -914,7 +914,7 @@ Array-Elements == konstanter Zeiger auf den Anfang des Arrays) verändert würde
 ### Array-Namen sind wie konstante Pointer
 
 :::center
-[**Array-Namen können NICHT umgebogen werden!**]{.alert}
+**Array-Namen können NICHT umgebogen werden!**
 :::
 
 ```c
@@ -954,7 +954,7 @@ x = *(pb++);
 
 => Arrays können wie konstante Pointer behandelt werden.
 
-=> Pointer dürfen [**nicht immer wie Arrays**]{.alert} behandelt werden!
+=> Pointer dürfen **nicht immer wie Arrays** behandelt werden!
 (Syntaktisch zulässig, semantisch normalerweise nicht!)
 
 ### Pointerarithmetik: Typen beachten
@@ -962,7 +962,7 @@ x = *(pb++);
 -   Pointer zeigen auf Objekte mit einem bestimmten Typ
 -   Typen haben unterschiedliche Speicherbreite
 -   Inkrementierung/Dekrementierung: Pointer zeigt nicht auf nächste
-    Speicheradresse, sondern auf die [Adresse des nächsten Werts]{.alert}!
+    Speicheradresse, sondern auf die Adresse des nächsten Werts!
 
 ```c
 double d[10];
@@ -1033,7 +1033,7 @@ int &iref = i;   // Referenz: neuer Name fuer i
 ```
 
 ::::::::: notes
--   Referenz bildet [Alias-Namen]{.alert} für ein Objekt
+-   Referenz bildet Alias-Namen für ein Objekt
 -   Objekt hat damit mehrere Namen, über die es ansprechbar ist
 -   Referenzen in C++ mit Hilfe des `&`-Operators deklarieren
 
@@ -1125,8 +1125,8 @@ int main() {
 }
 ```
 
--   Pointer wird nach wie vor per [call-by-value]{.alert} übergeben:
-    -   Wert wird bei Übergabe [kopiert]{.alert} (hier Adresse von `i`)
+-   Pointer wird nach wie vor per call-by-value übergeben:
+    -   Wert wird bei Übergabe kopiert (hier Adresse von `i`)
     -   Kopierter Wert ist immer noch ein Pointer (hier Pointer auf `i`, da
         Adresse von `i`)
     -   Dereferenzierung des kopierten Pointers: Zugriff auf das
@@ -1177,7 +1177,7 @@ int main() {
 => `const`-heit ist Bestandteil der Signatur!
 
 ::: center
-[**Arbeiten Sie (wo möglich/sinnvoll) mit (konstanten) Referenzen!**]{.alert}
+**Arbeiten Sie (wo möglich/sinnvoll) mit (konstanten) Referenzen!**
 :::
 
 ### Rückgabe von Werten per Referenz

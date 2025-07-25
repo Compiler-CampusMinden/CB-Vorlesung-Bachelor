@@ -194,14 +194,14 @@ bool cmp(const int &a, const int &b) {
 -   Und für `string`?
 -   ...
 
-=> [Präprozessor-Makro?]{.alert}
+=> Präprozessor-Makro?
 
-=> [Funktionen überladen?]{.alert}
+=> Funktionen überladen?
 
 ::: notes
 -   **Überladen von Funktionen**:
     -   Ähnliche Funktionalität für unterschiedliche Datentypen
-    -   Mühselig, wenn [exakt gleiche]{.alert} Funktionalität!
+    -   Mühselig, wenn exakt gleiche Funktionalität!
 -   (bessere) **Antwort**: Funktions-Templates
     -   Templates: Funktionen mit parametrisierten Datentypen
     -   Deklaration/Definition für (zunächst) unbestimmte Datentypen
@@ -367,7 +367,7 @@ bool cmp<int>(const int &a, const int &b) {
 
 \smallskip
 
-Spezialisierte Templates [**nach**]{.alert} "primärem" Template definieren
+Spezialisierte Templates **nach** "primärem" Template definieren
 
 ::: notes
 **Achtung**: Reihenfolge der Deklaration/Definition ist _wichtig_. Immer zuerst das
@@ -790,12 +790,12 @@ void Array<T,n>::copy_from(const C &c) { ... }
     passende Instanz erzeugt und im Object-Code zur Nutzung abgelegt.
     :::
 
--   [**Unterschied zu Java**]{.alert}
+-   **Unterschied zu Java**
 
     -   C++: Für **jeden** Aufruf/Typ eine passende **Instanz** (!)
     -   Java: Nur **eine** Klasse mit gemeinsamen Obertyp
 
--   Offener Code: [**Templates im `.h`-File implementieren!**]{.alert}
+-   Offener Code: **Templates im `.h`-File implementieren!**
 
     ::: notes
     Ohne die Template-Definition kann der Compiler keine Instanzen anlegen!

@@ -48,9 +48,9 @@ challenges: |
     <!--
     `o1 = o2++;` entspricht `o1 = o2.operator++(int);` und muss
 
-    1.  [erst]{.alert} eine [Kopie]{.alert} von `o2` erzeugen,
+    1.  erst eine Kopie von `o2` erzeugen,
     2.  dann `o2` inkrementieren, und
-    3.  die ursprüngliche [Kopie]{.alert} von `o2` zurückliefern
+    3.  die ursprüngliche Kopie von `o2` zurückliefern
 
     \bigskip
     => Rückgabe einer **Kopie** (keine Referenz)!
@@ -164,7 +164,7 @@ class MyString {
 ```
 
 ::: notes
-[**So funktioniert das leider nicht!**]{.alert}
+**So funktioniert das leider nicht!**
 :::
 
 \pause
@@ -176,7 +176,7 @@ class MyString {
         => Geht aber nicht, da System-weite Klasse!
 
 \smallskip
-=> Lösung: Operator [**außerhalb**]{.alert} der Klasse überladen => 2 Parameter
+=> Lösung: Operator **außerhalb** der Klasse überladen => 2 Parameter
 
 
 ## Überladen von Operatoren _außerhalb_ von Klassen (cnt.)
@@ -193,7 +193,7 @@ ostream &operator<<(ostream &out, const MyString &s) {
 
 \bigskip
 
--   [Nachteil]{.alert}: Benötigt Zugriff auf Klassen-Interna
+-   Nachteil: Benötigt Zugriff auf Klassen-Interna
     -   entweder umständlich über Getter-Funktionen
     -   oder als `friend` der Klasse `MyString` deklarieren
 
@@ -239,10 +239,10 @@ class Dummy {
 \smallskip
 
 -   **Ausnahmen**:
-    1.  [**.**]{.alert}
-    2.  [**::**]{.alert}
-    3.  [**?:**]{.alert}
-    4.  [**sizeof**]{.alert}
+    1.  **.**
+    2.  **::**
+    3.  **?:**
+    4.  **sizeof**
 
 \bigskip
 \bigskip
@@ -266,7 +266,7 @@ s != "123";     // ???
 
 \bigskip
 
--   Operatoren **in** Klasse überladen: [Typ der linken Seite muss]{.alert} [**exakt**]{.alert} [passen]{.alert}
+-   Operatoren **in** Klasse überladen: Typ der linken Seite muss **exakt** passen
 
     ::: notes
     ```cpp
@@ -298,7 +298,7 @@ s != "123";     // ???
     :::
 
 ::: notes
-[**NIEMALS**]{.alert} beide Formen [gleichzeitig]{.alert} für einen Operator implementieren!
+**NIEMALS** beide Formen gleichzeitig für einen Operator implementieren!
 :::
 
 
@@ -319,11 +319,11 @@ s != "123";     // ???
 
 ## Weitere Anmerkungen
 
--   Operatoren werden [**nicht**]{.alert} vom System zusammengesetzt
+-   Operatoren werden **nicht** vom System zusammengesetzt
 
     ::: notes
-    -   `operator+` und `operator+=` sind zwei [verschiedene]{.alert} Operatoren!
-    -   Implementierung ist prinzipiell [unabhängig]{.alert}! \newline
+    -   `operator+` und `operator+=` sind zwei verschiedene Operatoren!
+    -   Implementierung ist prinzipiell unabhängig! \newline
         => Erwartung: `operator+=` $\;==\;$ (`operator+` $\;+\;$ `operator=`)
     :::
 

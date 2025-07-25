@@ -147,7 +147,7 @@ challenges: |
 
 ::: notes
 Neben dem eigentlichen Konstruktor existieren in C++ weitere wichtige Konstruktoren/Operatoren:
-die sogenannten ["Big Three"]{.alert}:
+die sogenannten "Big Three":
 
 -   Copy-Konstruktor
 -   Destruktor: Gegenstück zum Konstruktor
@@ -203,7 +203,7 @@ Dummy::Dummy &operator=(const Dummy &d) {
 -   Wird aufgerufen bei:
     -   Deklaration mit Initialisierung mit Objekt
     -   Objektübergabe und -rückgabe mit Call-by-Value
-    -   [Nicht bei Zuweisung]{.alert}
+    -   Nicht bei Zuweisung
 -   Default-Copy-Konstruktor kopiert einfach elementweise \newline
     => bei Pointern also nur **flache Kopie**
 

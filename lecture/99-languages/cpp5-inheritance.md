@@ -188,7 +188,7 @@ Analog zu Java:
     -   anschließend Behandlung der zusätzlichen Attribute
 
 -   Eigene Konstruktoren verketten:
-    -   [Zuerst]{.alert} Basisklassen-Konstruktor aufrufen (in
+    -   Zuerst Basisklassen-Konstruktor aufrufen (in
         Initialisierungsliste!) \newline
         => Konkreten Konstruktor nehmen, nicht `super` wie in Java
 :::::::::
@@ -239,12 +239,12 @@ Analog zu Java:
 ::::::::: notes
 ## Abstrakte Klassen
 
--   Eine **Klasse** ist [abstrakt]{.alert}, wenn sie mindestens eine abstrakte Methode hat
--   Eine **Methode** ist in C++ [abstrakt]{.alert}, wenn sie
-    1.  als [virtuell]{.alert} deklariert ist, **und**
+-   Eine **Klasse** ist abstrakt, wenn sie mindestens eine abstrakte Methode hat
+-   Eine **Methode** ist in C++ abstrakt, wenn sie
+    1.  als virtuell deklariert ist, **und**
     2.  der Deklaration ein "`=0`" folgt
 
-[Abstrakte Methoden]{.alert} können [Implementierung]{.alert} haben! => Implementierung [außerhalb]{.alert} der Klassendeklaration
+Abstrakte Methoden können Implementierung haben! => Implementierung außerhalb der Klassendeklaration
 
 ```cpp
 class Person {
@@ -281,13 +281,13 @@ cout << p.toString() << endl;
 Antwort: Es wird die falsche Methode aufgerufen!
 
 -   `s.toString()` => `Student::toString()` => wie erwartet
--   `p.toString()` => `Person::toString()` => [**unerwartet**]{.alert}!
+-   `p.toString()` => `Person::toString()` => **unerwartet**!
 :::
 
 
 ## Polymorphie: statisch und dynamisch
 
--   C++ entscheidet zur [**Kompilierzeit**]{.alert}, welche Methode aufgerufen wird
+-   C++ entscheidet zur **Kompilierzeit**, welche Methode aufgerufen wird
     -   `p` ist vom Typ `Person` => `p.toString()`
         => `Person::toString()`
     -   Dieses Verhalten wird **statisches Binden** genannt.
@@ -353,12 +353,12 @@ cout << "Objekt p (Person):  " << p.toString() << endl;
 -   `p` hat aber nur Speicherplatz für genau eine `Person`
     => "Abschneiden" aller Elemente, die nicht Bestandteil von
     `Person` sind!
--   Slicing passiert immer beim [Kopieren/Zuweisen]{.alert} von Objekten
+-   Slicing passiert immer beim Kopieren/Zuweisen von Objekten
 :::
 
 \bigskip
-=> **Dyn. Polymorphie** in C++ immer über [**Referenzen**]{.alert}
-(bzw. Pointer) **und** [**virtuelle Methoden**]{.alert}
+=> **Dyn. Polymorphie** in C++ immer über **Referenzen**
+(bzw. Pointer) **und** **virtuelle Methoden**
 
 ::: notes
 Wir hatten die Methode `toString` in der Basisklasse `Person` zwar als `virtual` deklariert,
@@ -487,7 +487,7 @@ class HiWi: public Student, public Angestellter {...};
 
 \bigskip
 
--   `Person` ist jetzt eine [virtuelle Basisklasse]{.alert}
+-   `Person` ist jetzt eine virtuelle Basisklasse
 -   Auswirkungen erst in Klasse `HiWi`
 -   Dadurch sind gemeinsam genutzte Anteile nur einfach vorhanden
 
@@ -508,8 +508,8 @@ HiWi h("Anne", 23.0, 40.0);         // jetzt auch nur EIN name-Feld
 
 Virtuelle Ableitung: Potentiell Konflikte zwischen Konstruktoren!
 
--   Gemeinsam geerbtes Attribut nur noch [einmal]{.alert} vorhanden
--   Konstruktoren werden [nacheinander]{.alert} aufgerufen, alle wollen das
+-   Gemeinsam geerbtes Attribut nur noch einmal vorhanden
+-   Konstruktoren werden nacheinander aufgerufen, alle wollen das
     gemeinsame Attribut initialisieren (durch Aufruf des Konstruktors der
     jeweiligen Basisklasse)
 -   Zuletzt aufgerufener Konstruktor würde "gewinnen"
@@ -517,7 +517,7 @@ Virtuelle Ableitung: Potentiell Konflikte zwischen Konstruktoren!
 Deshalb gibt es bei virtueller Ableitung folgende Sonderregeln:
 
 1.  Für virtuelle Basisklassen ist **Mechanismus des Weiterreichens** von
-    Initialisierungswerten [**deaktiviert**]{.alert}
+    Initialisierungswerten **deaktiviert**
 
 2.  Konstruktor einer virtuellen Basisklasse kann in Initialisierungsliste von
     indirekten Unterklassen aufgerufen werden
@@ -533,7 +533,7 @@ Deshalb gibt es bei virtueller Ableitung folgende Sonderregeln:
 
 Warum ist die Möglichkeit dennoch nützlich?
 
--   In Java kann man nur von einer Klasse erben, aber viele [Interfaces]{.alert}
+-   In Java kann man nur von einer Klasse erben, aber viele Interfaces
     implementieren. In C++ gibt es keine Interfaces ...
 
     => Interfaces mit abstrakten Klassen Interfaces simulieren

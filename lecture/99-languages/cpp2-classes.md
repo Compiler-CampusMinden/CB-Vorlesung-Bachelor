@@ -165,7 +165,7 @@ private:
 }
 ```
 
-[**Warum nicht Referenzen?**]{.alert}
+**Warum nicht Referenzen?**
 :::::::::
 
 
@@ -193,7 +193,7 @@ Dummy c=99;
 \bigskip
 \bigskip
 
-[**=> Kein Aufruf von `new`!**]{.alert}
+**=> Kein Aufruf von `new`!**
 
 [(`new` würde zwar auch ein neues Objekt anlegen, aber **auf dem Heap**!)]{.notes}
 
@@ -207,7 +207,7 @@ nicht selbst mindestens einen Konstruktor definiert.
 Dieser parameterlose Defaultkonstruktor wendet für jedes Attribut dessen parameterlosen
 Konstruktor an, für primitive Typen erfolgt keine garantierte Initialisierung!
 
-[**Achtung**]{.alert}: Default-Konstruktor wird ohne Klammern aufgerufen!
+**Achtung**: Default-Konstruktor wird ohne Klammern aufgerufen!
 
 ```cpp
 Dummy a;    // Korrekt
@@ -260,8 +260,8 @@ private:
 ::: notes
 Hier erfolgt die Initialisierung in **zwei** Schritten:
 
-1.  Attribut wird angelegt und mit [Defaultwert/-konstruktor]{.alert} des Datentyps initialisiert
-2.  [Anschließend]{.alert} wird die [Zuweisung]{.alert} im Body des Konstruktors ausgeführt
+1.  Attribut wird angelegt und mit Defaultwert/-konstruktor des Datentyps initialisiert
+2.  Anschließend wird die Zuweisung im Body des Konstruktors ausgeführt
 
 Das klappt natürlich nur, wenn es einen parameterlosen Konstruktor für das Attribut
 gibt.
@@ -292,8 +292,8 @@ private:
 ::: notes
 In diesem Fall erfolgt die Initialisierung in nur einem Schritt:
 
-1.  Attribut wird angelegt und [direkt]{.alert} mit übergebenen Wert
-    ([Kopie]{.alert}) initialisiert
+1.  Attribut wird angelegt und direkt mit übergebenen Wert
+    (Kopie) initialisiert
 
 Das klappt natürlich nur, wenn ein passender Konstruktor für das Attribut
 existiert.
