@@ -5,7 +5,7 @@ points: "10 Punkte"
 no_beamer: true
 ---
 
-<!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94 --reference-links=true  sheet01.md  -o xxx.md  -->
+<!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94  sheet01.md  -o xxx.md  -->
 
 # A1.1: Sprachen von regulären Ausdrücken (1P)
 
