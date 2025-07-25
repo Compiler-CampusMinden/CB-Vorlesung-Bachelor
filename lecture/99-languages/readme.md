@@ -1,6 +1,5 @@
 ---
 title: "Programmiersprachen und -konzepte"
-linkTitle: "Programmiersprachen"
 ---
 
 

@@ -1,6 +1,5 @@
 ---
 title: "Einführung in C++ (Erinnerungen an C)"
-linkTitle: "Einführung in C++"
 author: "Carsten Gips (HSBI)"
 readings:
   - key: "Breymann2011"

@@ -1,6 +1,5 @@
 ---
 title: "Einstieg Builder für Mini-Python"
-linkTitle: "Mini-Python (Builder)"
 author: "BC George (HSBI)"
 readings:
   - key: "Torczon2012"
