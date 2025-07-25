@@ -142,7 +142,7 @@ Abgabe der Übungsblätter jeweils **Montag bis 09:00 Uhr** im [ILIAS](https://w
 
 # Prüfungsform, Note und Credits
 
-**Parcoursprüfung plus Testat**, 5 ECTS (PO23)
+**Parcoursprüfung plus Testat**, 5 ECTS
 
 *   **Testat**: Vergabe der Credit-Points
     1.  Mindestens 4 der Übungsblätter [B01], [B02], [B03], [B04], [B05] und [B06] erfolgreich bearbeitet, **und**
