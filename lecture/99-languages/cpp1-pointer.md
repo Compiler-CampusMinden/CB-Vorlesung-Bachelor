@@ -690,7 +690,7 @@ _Hinweis_: Pointer-Variablen `i` und `x` liegen auf Stack, angeforderter Speiche
     }
     ```
 
-[Warum nur "etwas besser"?]{.bsp}
+[Warum nur "etwas besser"?]{.ex}
 
 Jetzt haben Sie aber ein neues Problem: Der Aufrufer der Funktion muss wissen,
 dass diese Speicher alloziert und muss sich selbst um die Freigabe kümmern.

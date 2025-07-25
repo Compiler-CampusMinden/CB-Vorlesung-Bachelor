@@ -275,7 +275,7 @@ cout << s.toString() << endl;
 cout << p.toString() << endl;
 ```
 
-[Konsole: polyStat.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/polyStat.cpp"}
+[Konsole: polyStat.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/polyStat.cpp"}
 
 ::: notes
 Antwort: Es wird die falsche Methode aufgerufen!
@@ -328,7 +328,7 @@ class Person {
 };
 ```
 
-[Konsole: polyDyn.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/polyDyn.cpp"}
+[Konsole: polyDyn.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/polyDyn.cpp"}
 
 
 ## Vorsicht Slicing
@@ -342,7 +342,7 @@ cout << "Objekt s (Student): " << s.toString() << endl;
 cout << "Objekt p (Person):  " << p.toString() << endl;
 ```
 
-[Konsole polySlicing.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/polySlicing.cpp"}
+[Konsole polySlicing.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/polySlicing.cpp"}
 
 \pause
 
@@ -436,7 +436,7 @@ class HiWi: public Student, public Angestellter {...};
 
 ![](images/mehrfachvererbung-studi_new.png){width="50%"}
 
-[Hinweis Speicherlayout ...]{.bsp}
+[Hinweis Speicherlayout ...]{.ex}
 
 ::::::::: notes
 ### Problem 1: Gleichnamige Methoden aus Basisklassen geerbt
@@ -466,13 +466,13 @@ Namenskollision bei Mehrfachvererbung auflösen:
     cout << h.Angestellter::toString() << endl;
     ```
 
-[Konsole vererbungMultiMethoden.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/vererbungMultiMethoden.cpp"}
+[Konsole vererbungMultiMethoden.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/vererbungMultiMethoden.cpp"}
 
 ### Problem 2: Gemeinsam geerbte Attribute sind mehrfach vorhanden
 
 ![](images/mehrfachvererbung-attributkollision_new.png){width="50%"}
 
-[Konsole vererbungMultiAttribute.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/vererbungMultiAttribute.cpp"}
+[Konsole vererbungMultiAttribute.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/vererbungMultiAttribute.cpp"}
 :::::::::
 
 
@@ -500,7 +500,7 @@ HiWi h("Anne", 23.0, 40.0);         // jetzt auch nur EIN name-Feld
 ```
 :::
 
-[Konsole vererbungMultiVirtual.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/vererbungMultiVirtual.cpp"}
+[Konsole vererbungMultiVirtual.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/vererbungMultiVirtual.cpp"}
 
 
 ::::::::: notes
@@ -524,7 +524,7 @@ Deshalb gibt es bei virtueller Ableitung folgende Sonderregeln:
 
     Sonst wird der Defaultkonstruktor der virtuellen Basisklasse genutzt!
 
-[Konsole vererbungMultiVirtual.cpp (Basiskonstruktor)]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/vererbungMultiVirtual.cpp"}
+[Konsole vererbungMultiVirtual.cpp (Basiskonstruktor)]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/vererbungMultiVirtual.cpp"}
 :::::::::
 
 

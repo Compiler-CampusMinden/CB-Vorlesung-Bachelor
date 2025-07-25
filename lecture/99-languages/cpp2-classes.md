@@ -271,7 +271,7 @@ Beim Anlegen von `birthday` im Speicher wird der **Defaultkonstruktor** für
 `Date` aufgerufen. Danach wird im Body der übergebene Datumswert **zugewiesen**.
 :::
 
-[Konsole: studiInitBody.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/studiInitBody.cpp"}
+[Konsole: studiInitBody.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/studiInitBody.cpp"}
 
 
 ## Konstruktoren: Initialisierungslisten
@@ -305,7 +305,7 @@ Beispiel oben:
 Beim Anlegen von `birthday` im Speicher wird direkt der übergebene Wert **kopiert**.
 :::
 
-[Konsole: studiInitListe.cpp (ohne/mit `-Wall`)]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/studiInitListe.cpp"}
+[Konsole: studiInitListe.cpp (ohne/mit `-Wall`)]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/studiInitListe.cpp"}
 
 
 ::::::::: notes

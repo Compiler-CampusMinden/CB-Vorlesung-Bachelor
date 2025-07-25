@@ -138,7 +138,7 @@ challenges: |
     // -> und dann der Zuweisungsoperator (links und rechts Foo's)
     ```
 
-    [Beispiel: bigthree.cpp]{.bsp}
+    [Beispiel: bigthree.cpp]{.ex}
     -->
 ---
 
@@ -193,7 +193,7 @@ Dummy::Dummy &operator=(const Dummy &d) {
     -   wenn explizit `delete` für einen Pointer auf ein Objekt (auf dem Heap!) aufgerufen wird
 -   Default-Destruktor ruft Destruktoren der Objekt-Attribute auf
 
-[Konsole: destruktor.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/destruktor.cpp"}
+[Konsole: destruktor.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/destruktor.cpp"}
 :::::::::
 
 ::::::::: notes
@@ -209,7 +209,7 @@ Dummy::Dummy &operator=(const Dummy &d) {
 
 "**Merkregel**": Linke Seite unfertiges Objekt (noch zu bauen), rechte Seite fertiges Objekt.
 
-[Konsole: copyKonstruktor.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/copyKonstruktor.cpp"}
+[Konsole: copyKonstruktor.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/copyKonstruktor.cpp"}
 :::::::::
 
 ::::::::: notes
@@ -223,7 +223,7 @@ Dummy::Dummy &operator=(const Dummy &d) {
 
 "**Merkregel**": Linke Seite fertiges Objekt, rechte Seite fertiges Objekt.
 
-[Konsole: zuweisungsOperator.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/zuweisungsOperator.cpp"}
+[Konsole: zuweisungsOperator.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/zuweisungsOperator.cpp"}
 :::::::::
 
 ::::::::: notes
@@ -360,7 +360,7 @@ auf den Pointer auf das Objekt im Heap), d.h. Sie brauchen im Destruktor **kein*
 Auch wenn es zunächst irgendwie sinnvoll aussieht - rufen Sie **niemals nie** `delete this` im Destruktor auf!
 `{{% /notice %}}`{=markdown}
 
-[Konsole: deletethis.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/deletethis.cpp"}
+[Konsole: deletethis.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/deletethis.cpp"}
 :::
 
 
@@ -425,7 +425,7 @@ int Studi::getCount() {
 -   Deklaration als `static` **nicht** in Implementierung wiederholen
 -   Statische Attribute: Initialisierung **immer** außerhalb der Klasse!
 
-[Konsole: Studi.cpp (static)]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/Studi.cpp"}
+[Konsole: Studi.cpp (static)]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/Studi.cpp"}
 :::
 
 
@@ -467,7 +467,7 @@ const foo wuppie(foo&, foo&);
 Hier darf der Rückgabewert nicht als L-Wert benutzt werden: `wuppie(a,b) = c;` ist verboten.
 :::
 
-[Konsole: Studi.cpp (const)]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/Studi.cpp"}
+[Konsole: Studi.cpp (const)]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/Studi.cpp"}
 
 
 ## Wrap-Up

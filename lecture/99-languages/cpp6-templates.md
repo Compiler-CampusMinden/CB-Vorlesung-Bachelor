@@ -454,7 +454,7 @@ Damit könnte man die `cmp`-Funktion nicht mehr für `int` benutzen (Compiler-
 bzw. Linker-Fehler).
 :::::::::
 
-[Konsole: funktionsTemplates.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/funktionsTemplates.cpp"}
+[Konsole: funktionsTemplates.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/funktionsTemplates.cpp"}
 
 
 ## Klassen-Templates in C++
@@ -498,7 +498,7 @@ Matrix<T>::Matrix(unsigned rows, unsigned cols) { ... }
 ```
 
 ::: notes
-[Beispiel: matrix.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/matrix.cpp"}
+[Beispiel: matrix.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/matrix.cpp"}
 :::
 
 
@@ -530,7 +530,7 @@ int main() {
 }
 ```
 
-[Beispiel: matrix2.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/matrix2.cpp"}
+[Beispiel: matrix2.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/matrix2.cpp"}
 :::::::::
 
 
@@ -624,7 +624,7 @@ _Hinweis_: Defaults für Template-Parameter waren zunächst nur für Klassen-Tem
 erlaubt. Seit C++11 kann man solche Defaults auch bei Funktions-Templates
 einsetzen.
 
-[Beispiel: matrix3.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/matrix3.cpp"}
+[Beispiel: matrix3.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/matrix3.cpp"}
 :::::::::
 
 
@@ -648,7 +648,7 @@ class Matrix<uint> {
 };
 ```
 
-[Hinweis auf Implementierung außerhalb der Klasse]{.bsp}
+[Hinweis auf Implementierung außerhalb der Klasse]{.ex}
 
 ::: notes
 **ACHTUNG**: Implementierung außerhalb der Klasse: Bei den Methoden des voll

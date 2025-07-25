@@ -55,7 +55,7 @@ challenges: |
     \bigskip
     => Rückgabe einer **Kopie** (keine Referenz)!
 
-    [Konsole: MyString.cpp (operator++)]{.bsp}
+    [Konsole: MyString.cpp (operator++)]{.ex}
     -->
 
     **C'toren und Operatoren: Was muss noch _deklariert_ werden?**

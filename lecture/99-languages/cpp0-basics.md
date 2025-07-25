@@ -309,7 +309,7 @@ enthalten. Deshalb muss man explizit angeben, dass ein Programm im aktuellen Ord
 ausgeführt werden soll.
 :::::::::
 
-[Konsole: HelloWorld.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/HelloWorld.cpp"}
+[Konsole: HelloWorld.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/HelloWorld.cpp"}
 
 
 ## Variablen, Operatoren, Kontrollfluss
@@ -392,7 +392,7 @@ if (c=4) { ... }
     ```
     :::
 
-[Beispiel: cin.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/cin.cpp"}
+[Beispiel: cin.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/cin.cpp"}
 
 
 ## Sichtbarkeit und Gültigkeit und Namespaces
@@ -440,7 +440,7 @@ Zusätzlich gibt es noch benannte Scopes und einen Scope-Operator.
     ```
 :::
 
-[Beispiel: cppScope.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/cppScope.cpp"}
+[Beispiel: cppScope.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/cppScope.cpp"}
 
 
 ## Arrays und Vektoren in C++
@@ -737,7 +737,7 @@ In der Praxis verwendet man beide Begriffe i.d.R. synonym.
     Variable oder Implementierung einer Funktion/Struktur/...
 `{{% /notice %}}`{=markdown}
 
-[Konsole: simplefunction.cpp]{.bsp href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/simplefunction.cpp"}
+[Konsole: simplefunction.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/simplefunction.cpp"}
 
 #### One Definition Rule (für Funktionen)
 
