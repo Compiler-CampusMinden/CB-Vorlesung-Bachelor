@@ -48,15 +48,16 @@ setzen diese bei der Erstellung eines kleinen Compiler-Frontends für C++ ein.
 
 # Kursformat
 
-| Vorlesung (2 SWS)                               | Praktikum (2 SWS)                                   |
-|:------------------------------------------------|:----------------------------------------------------|
-| Mi, 08:00 - 09:30 Uhr (online)                  | S3, G1: Di, 11:30 - 13:00 Uhr (online/Präsenz J101) |
-| (Carsten: *Flipped Classroom*, BC: *Vorlesung*) | S3, G2: Fr, 14:00 - 15:30 Uhr (online/Präsenz J101) |
-|                                                 | S3, G3: Mo, 09:15 - 10:45 Uhr (online/Präsenz J101) |
-|                                                 | (Carsten: *online*, BC: *Präsenz*)                  |
+| Vorlesung (2 SWS)            | Praktikum (2 SWS)                        |
+|:-----------------------------|:-----------------------------------------|
+| Mo, 09:00 - 10:30 Uhr (Zoom) | G1: Fr, 09:45 - 11:15 Uhr (Zoom)         |
+|                              | G2: Fr, 11:30 - 13:00 Uhr (Zoom)         |
+|                              | G3: Fr, 09:45 - 11:15 Uhr (Präsenz J101) |
+|                              | G4: Fr, 11:30 - 13:00 Uhr (Präsenz J101) |
 
-Online-Sitzungen per Zoom (**Zugangsdaten siehe [ILIAS](https://www.hsbi.de/elearning/goto.php?target=crs_1400596&client_id=FH-Bielefeld)**).
-Sie _können_ hierzu den Raum J101 (siehe Stundenplan) nutzen.
+Durchführung der Vorlesung als *Flipped Classroom* (Carsten) bzw. als *reguläre Vorlesung* (BC).
+Alle Online-Sitzungen per Zoom.
+(Zugangsdaten siehe [ILIAS](https://www.hsbi.de/elearning/goto.php?target=crs_1400597&client_id=FH-Bielefeld))
 
 
 # Fahrplan
