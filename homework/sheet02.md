@@ -2,6 +2,7 @@
 title: "Blatt 02: CFG"
 author: "BC George, Carsten Gips (HSBI)"
 points: "10 Punkte"
+no_beamer: true
 ---
 
 <!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94 --reference-links=true  sheet02.md  -o xxx.md  -->

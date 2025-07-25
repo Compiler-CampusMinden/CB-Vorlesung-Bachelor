@@ -1,6 +1,7 @@
 ---
 title: "Blatt 07: Mini-Projekt C++"
 author: "Carsten Gips, BC George (HSBI)"
+no_beamer: true
 ---
 
 <!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94 --reference-links=true  sheet07.md  -o xxx.md  -->
