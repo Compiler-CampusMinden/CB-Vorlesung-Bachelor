@@ -2,8 +2,6 @@
 title: "Blatt 01: Reguläre Sprachen"
 author: "BC George, Carsten Gips (HSBI)"
 points: "10 Punkte"
-
-hidden: true
 ---
 
 <!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94 --reference-links=true  sheet01.md  -o xxx.md  -->

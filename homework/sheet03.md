@@ -2,8 +2,6 @@
 title: "Blatt 03: ANTLR"
 author: "Carsten Gips, BC George (HSBI)"
 points: "10 Punkte"
-
-hidden: true
 ---
 
 <!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94 --reference-links=true  sheet03.md  -o xxx.md  -->
