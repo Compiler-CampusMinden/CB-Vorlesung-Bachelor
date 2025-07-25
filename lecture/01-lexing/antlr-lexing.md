@@ -627,17 +627,3 @@ Lexer mit ANTLR generieren: Lexer-Regeln werden mit **Großbuchstaben** geschrie
 *   Längster Match gewinnt, Gleichstand: zuerst definierte Regel
 *   _non greedy_-Regeln: versuche so _wenig_ Zeichen zu matchen wie möglich
 *   Aktionen beim Matchen
-
-
-
-
-
-
-
-<!-- DO NOT REMOVE - THIS IS A LAST SLIDE TO INDICATE THE LICENSE AND POSSIBLE EXCEPTIONS (IMAGES, ...). -->
-::: slides
-## LICENSE
-![](https://licensebuttons.net/l/by-sa/4.0/88x31.png)
-
-Unless otherwise noted, this work is licensed under CC BY-SA 4.0.
-:::
