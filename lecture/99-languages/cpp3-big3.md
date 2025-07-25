@@ -356,9 +356,9 @@ automatische Variable), auf dem Heap durch das vorherige Aufrufen von `delete`
 auf den Pointer auf das Objekt im Heap), d.h. Sie brauchen im Destruktor **kein**
 `delete` auf "sich selbst" (das ist wie oben demonstriert sogar schädlich)!
 
-`{{% notice style="caution" title="Warnung" %}}`{=markdown}
+::: warning
 Auch wenn es zunächst irgendwie sinnvoll aussieht - rufen Sie **niemals nie** `delete this` im Destruktor auf!
-`{{% /notice %}}`{=markdown}
+:::
 
 [Konsole: deletethis.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/deletethis.cpp"}
 :::

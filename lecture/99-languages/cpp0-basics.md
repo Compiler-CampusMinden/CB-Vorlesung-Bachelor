@@ -217,8 +217,10 @@ challenges: |
     -   Ursprünglich "C mit Klassen", später "C++" (Inkrement-Operator)
 -   Bis heute: Fortlaufende Erweiterungen: alle 3 Jahre neuer Standard (C++11, C++14, ...)
 
-::: notes
-`{{% notice style="info" title="**C/C++ vs. Java**" %}}`{=markdown}
+:::::: notes
+::: tip
+**C/C++ vs. Java**
+
 -   Java: Fokus auf Sicherheit und Robustheit
     -   Diverse Sicherheitschecks durch Compiler und VM (zb. Array-Zugriff)
     -   Speicherverwaltung (Garbage Collection), kein Speicherzugriff über Pointer
@@ -228,8 +230,8 @@ challenges: |
         (d.h. keine Prüfung von Array-Indizes u.a.)
     -   Keine Garbage Collection, Programmierer hat direkten Zugriff auf Speicher
     -   Keine automatische Initialisierung von Variablen
-`{{% /notice %}}`{=markdown}
 :::
+::::::
 
 
 # Hello World!
@@ -567,8 +569,7 @@ sondern deklariert eine **neue Funktion**!
 :::
 
 ::::::::: notes
-`{{% notice style="important" title="Erinnerungen an C - Vergleich mit C++" %}}`{=markdown}
-`{{% expand title="Expand me..." %}}`{=markdown}
+:::::: details
 
 ## Basisdatentypen
 
@@ -730,12 +731,14 @@ In der Praxis verwendet man beide Begriffe i.d.R. synonym.
     deklariert sein, d.h. es muss zumindest ihre Signatur bekannt sein (siehe nächste Folie)
 -   Deklaration: Variablennamen können weggelassen werden
 
-`{{% notice style="info" title="Deklaration vs. Definition" %}}`{=markdown}
+::: tip
+**Deklaration vs. Definition**
+
 -   **Deklaration**: Macht einen Namen bekannt und legt den Typ der Variablen bzw.
     die Schnittstelle der Funktionen fest.
 -   **Definition**: Deklaration plus Reservierung von Speicherplatz für die
     Variable oder Implementierung einer Funktion/Struktur/...
-`{{% /notice %}}`{=markdown}
+:::
 
 [Konsole: simplefunction.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/simplefunction.cpp"}
 
@@ -1239,8 +1242,7 @@ Regel des Targets `tollesProgramm` ausgeführt, um die Datei `tollesProgramm` zu
     Sucht nach Datei mit dem Namen "GNUmakefile", "makefile" oder "Makefile" und erzeugt das
     Ziel `<ziel>`
 
-`{{% /expand %}}`{=markdown}
-`{{% /notice %}}`{=markdown}
+::::::
 :::::::::
 
 
