@@ -1,6 +1,7 @@
 ---
 title: "Einstieg Builder für Mini-Python"
 author: "BC George (HSBI)"
+slide_numbering: fraction
 readings:
   - "@Torczon2012: Kapitel 5 Intermediate Representation"
 outcomes:
