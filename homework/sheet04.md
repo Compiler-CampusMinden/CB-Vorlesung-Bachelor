@@ -6,13 +6,13 @@ points: "10 Punkte"
 
 <!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94 --reference-links=true  sheet04.md  -o xxx.md  -->
 
-## Zusammenfassung
+# Zusammenfassung
 
 Ziel dieses Aufgabenblattes ist die Erstellung einer Symboltabelle und eines einfachen
 Type-Checkers für eine fiktive statisch typisierte Sprache mit Expressions, Kontrollstrukturen
 und Funktionen.
 
-## Methodik
+# Methodik
 
 Sie finden im [Sample Project] eine [Grammatik], die (teilweise) zu der Zielsprache auf diesem
 Blatt passt. Analysieren Sie diese Grammatik und vervollständigen Sie diese bzw. passen Sie
@@ -28,11 +28,11 @@ Es ist empfehlenswert, den Type-Checker dreiphasig zu realisieren:
 2.  Prüfen bei Funktionsaufrufen auf vorhandene/sichtbare Funktionsdefinitionen
 3.  Prüfen der verwendeten Typen
 
-## Sprachdefinition
+# Sprachdefinition
 
 Ein Programm besteht aus einer oder mehreren Anweisungen (*Statements*).
 
-### Anweisungen (*Statements*)
+## Anweisungen (*Statements*)
 
 Eine Anweisung ist eine Befehlsfolge, beispielsweise eine Deklaration (Funktionen), Definition
 (Variablen, Funktionen), Zuweisung, ein Funktionsaufruf oder eine Operation. Sie muss immer
@@ -47,7 +47,7 @@ func1(a, c);     # Funktionsaufruf mit Variablen a und c
 
 Kontrollstrukturen und Code-Blöcke sowie `return`-Statements zählen ebenfalls als Anweisung.
 
-### Code-Blöcke und Scopes
+## Code-Blöcke und Scopes
 
 Code-Blöcke werden in geschweifte Klammern eingeschlossen und enthalten eine beliebige Anzahl
 von Anweisungen.
@@ -77,7 +77,7 @@ int d;
 }
 ```
 
-### Ausdrücke (*Expressions*)
+## Ausdrücke (*Expressions*)
 
 Die einfachsten Ausdrücke sind Integer- oder String-Literale. Variablen und Funktionsaufrufe
 sind ebenfalls Ausdrücke. Komplexere Ausdrücke werden mit Hilfe von Operationen gebildet,
@@ -91,7 +91,7 @@ entspricht der üblichen Semantik (vgl. Java, C, Python).
 
 Es gibt in unserer Sprache folgende Operationen mit der üblichen Semantik:
 
-#### Vergleichsoperatoren
+### Vergleichsoperatoren
 
 | Operation    | Operator |
 |:-------------|:--------:|
@@ -103,7 +103,7 @@ Es gibt in unserer Sprache folgende Operationen mit der üblichen Semantik:
 Die Operanden müssen jeweils beide den selben Typ haben. Dabei sind `string` und `int`
 zulässig. Das Ergebnis ist immer vom Typ `bool`.
 
-#### Arithmetische Operatoren
+### Arithmetische Operatoren
 
 | Operation                            | Operator |
 |:-------------------------------------|:--------:|
@@ -116,7 +116,7 @@ Die Operanden müssen jeweils beide den selben Typ haben. Für `+` sind `string`
 zulässig, für die anderen Operatoren (`-`, `*`, `/`) nur `int`. Das Ergebnis ist vom Typ der
 Operanden.
 
-#### Beispiele für Ausdrücke
+### Beispiele für Ausdrücke
 
 ``` python
 10 - 5       # Der Integer-Wert 5
@@ -128,13 +128,13 @@ func1(a, b)  # Ergebnis des Funktionsaufrufs
 
 Ausdrücke werden nicht mit einem Semikolon abgeschlossen. Sie sind also Teil einer Anweisung.
 
-### Bezeichner
+## Bezeichner
 
 Werden zur Bezeichnung von Variablen und Funktionsnamen verwendet. Sie bestehen aus einer
 Zeichenkette der Zeichen `a-z`,`A-Z`, `0-9`. Bezeichner dürfen nicht mit einer Ziffer `0-9`
 beginnen.
 
-### Variablen
+## Variablen
 
 Variablen bestehen aus einem eindeutigen Bezeichner (Variablennamen). Den Variablen können
 Werte zugewiesen werden und Variablen können als Werte verwendet werden. Die Zuweisung erfolgt
@@ -164,14 +164,14 @@ int a = 42;
 }
 ```
 
-### Kommentare
+## Kommentare
 
 Kommentare werden durch das Zeichen `#` eingeleitet und umfassen sämtliche Zeichen bis zum
 nächsten Newline.
 
-### Kontrollstrukturen
+## Kontrollstrukturen
 
-#### While-Schleife
+### While-Schleife
 
 While-Schleifen werden mit dem Schlüsselwort `while` eingeleitet. Sie bestehen im Weiteren aus
 einer Bedingung in runden Klammern und einem in geschweiften Klammern formulierten Code-Block.
@@ -193,7 +193,7 @@ while (a > 0) {
 }
 ```
 
-#### Bedingte Anweisung (If-Else)
+### Bedingte Anweisung (If-Else)
 
 Eine bedingte Anweisung besteht immer aus genau einer `if`-Anweisung, und einer oder keiner
 `else`-Anweisung.
@@ -234,9 +234,9 @@ if (a > 0) {
 }
 ```
 
-### Funktionen
+## Funktionen
 
-#### Funktionsdefinition
+### Funktionsdefinition
 
 Eine Funktionsdefinition macht dem Compiler die Implementierung einer Funktion bekannt.
 
@@ -265,7 +265,7 @@ bool func1(int a, string b) {
 }
 ```
 
-#### Funktionsaufrufe
+### Funktionsaufrufe
 
 Funktionsaufrufe bestehen aus einem Bezeichner (Funktionsname) gefolgt von einer in Klammern
 angegebenen Liste der Argumente, die auch leer sein kann. Als Argumente können alle passend
@@ -293,7 +293,7 @@ int foo(int a) {
 }
 ```
 
-### Datentypen
+## Datentypen
 
 Unsere Sprache hat drei eingebaute Datentypen:
 
@@ -303,7 +303,7 @@ Unsere Sprache hat drei eingebaute Datentypen:
 | `string` | eine beliebige Folge von ASCII-Zeichen, eingeschlossen in `"` |
 | `bool`   | eines der beiden Schlüsselwörter `T` oder `F`                 |
 
-### Beispiele
+## Beispiele
 
 ``` c
 string a = "wuppie fluppie";
@@ -335,9 +335,9 @@ int n = 10;
 f95(n);
 ```
 
-## Aufgaben
+# Aufgaben
 
-### A4.1: Grammatik und AST (2P)
+## A4.1: Grammatik und AST (2P)
 
 Erstellen Sie eine ANTLR-Grammatik für die Zielsprache. Sie können dabei die [Grammatik] im
 [Sample Project] als Ausgangspunkt nutzen und diese anpassen und vervollständigen.
@@ -349,20 +349,20 @@ Programmieren Sie eine Traversierung des Parse-Trees, die den AST erzeugt. Teste
 den obigen Beispielprogrammen und definieren Sie sich selbst weitere Programme
 unterschiedlicher Komplexität für diesen Zweck.
 
-### A4.2: Aufbau der Symboltabelle (2P)
+## A4.2: Aufbau der Symboltabelle (2P)
 
 Bauen Sie für den AST eine Symboltabelle auf. Führen Sie dabei die im ersten Lauf möglichen
 Prüfungen durch, beispielsweise ob referenzierte Variablen tatsächlich bereits definiert und
 sichtbar sind oder ob eine Variable oder Funktion in einem Scope mehrfach definiert wird oder
 ob Variablen als Funktion genutzt werden. Geben Sie erkannte Fehler auf der Konsole aus.
 
-### A4.3: Symboltabelle: Funktionsaufrufe (1P)
+## A4.3: Symboltabelle: Funktionsaufrufe (1P)
 
 Implementieren Sie einen zweiten Lauf. Dabei soll für Funktionsaufrufe geprüft werden, ob
 diese Funktionen bereits definiert sind und im Scope sichtbar sind. Geben Sie erkannte Fehler
 auf der Konsole aus.
 
-### A4.4: Symboltabelle: Typprüfungen (5P)
+## A4.4: Symboltabelle: Typprüfungen (5P)
 
 Implementieren Sie einen dritten Lauf. Führen Sie die Typprüfung durch: Haben die Operanden in
 Ausdrücken die richtigen Typen, passen die Typen der Funktionsargumente, passen die Typen bei

@@ -7,7 +7,7 @@ has_license: true
 ![](admin/images/architektur_cb.png){width="80%"}
 
 
-## Kursbeschreibung
+# Kursbeschreibung
 
 Der Compiler ist das wichtigste Werkzeug in der Informatik. In der Königsdisziplin der
 Informatik schließt sich der Kreis, hier kommen die unterschiedlichen Algorithmen und
@@ -18,7 +18,7 @@ im Compilerbau. Wir schauen uns dazu relevante aktuelle Tools und Frameworks an 
 setzen diese bei der Erstellung eines kleinen Compiler-Frontends für C++ ein.
 
 
-## Überblick Modulinhalte
+# Überblick Modulinhalte
 
 1.  Lexikalische Analyse: Scanner/Lexer
     *   Reguläre Sprachen
@@ -37,13 +37,13 @@ setzen diese bei der Erstellung eines kleinen Compiler-Frontends für C++ ein.
 6.  C++ als zu verarbeitende Programmiersprache
 
 
-## Team
+# Team
 
 *   [BC George](https://www.hsbi.de/minden/ueber-uns/personenverzeichnis/birgit-christina-george)
 *   [Carsten Gips](https://www.hsbi.de/minden/ueber-uns/personenverzeichnis/carsten-gips) (Sprechstunde nach Vereinbarung)
 
 
-## Kursformat
+# Kursformat
 
 :::::: {.tabs groupid="modul-po"}
 ::: {.tab title="IFM 3.1 CB (PO23, 3. Semester)"}
@@ -78,7 +78,7 @@ Sie _können_ hierzu den Raum J101 (siehe Stundenplan) nutzen.
 [IFM 5.21 CB (PO18, 5. Semester)]: https://www.hsbi.de/elearning/goto.php?target=crs_1400603&client_id=FH-Bielefeld
 
 
-## Fahrplan
+# Fahrplan
 
 :::::: {.tabs groupid="modul-po"}
 ::: {.tab title="IFM 3.1 CB (PO23, 3. Semester)"}
@@ -97,7 +97,7 @@ Startzeiten erfolgt per Mail über das LSF ca. eine Woche vorher.
 
 `{{% expand title="09.01.25" %}}`{=markdown}
 
-### Parcoursprüfung: Feedbackgespräche am Do, 30.01., 15:30-18:00 Uhr
+## Parcoursprüfung: Feedbackgespräche am Do, 30.01., 15:30-18:00 Uhr
 
 Wir bieten am Donnerstag, 30.01.25, von 15:30 bis 18:00 Uhr Feedbackgespräche zur Bewertung
 der Ergebnisse von B07 (Parcoursprüfung, Station 2) an.
@@ -108,7 +108,7 @@ Es ist eine vorherige eine Anmeldung im ILIAS notwendig.
 
 `{{% expand title="08.01.25" %}}`{=markdown}
 
-### Planung Parcoursprüfung Station 2: Bitte tragt euch als Team im Etherpad ein
+## Planung Parcoursprüfung Station 2: Bitte tragt euch als Team im Etherpad ein
 
 Wie bereits angekündigt, finden KW4 (Mo. 20.01., Di. 21.01., Fr. 24.01.) die Vorstellungen von B07
 im Rahmen der Parcoursprüfung statt (Station 2). Jedes Team hat 20 Minuten für die Vorstellung der
@@ -123,7 +123,7 @@ Wenn die vorgeschlagenen Termine nicht reichen sollten, meldet euch bitte zeitna
 
 `{{% expand title="16.12.24" %}}`{=markdown}
 
-### Nachtrag zur Anpassung der Gewichtung der beiden Stationen der Parcoursprüfung (war 29.11.)
+## Nachtrag zur Anpassung der Gewichtung der beiden Stationen der Parcoursprüfung (war 29.11.)
 
 Es war ursprünglich vorgesehen, die Gesamtnote als Mittelwert der Noten der beiden
 Parcours-Stationen zu berechnen: Gewichtung 50% (Station I) und 50% (Station II).
@@ -152,7 +152,7 @@ zusätzliche Sprechstunde im Vorlesungsslot am 18.12. an.
 
 `{{% expand title="29.11.24" %}}`{=markdown}
 
-### Anpassung der Gewichtung der Parcours-Stationen
+## Anpassung der Gewichtung der Parcours-Stationen
 
 Auf vielfachen Wunsch passen wir die Gewichtung der Stationen der Parcoursprüfung an:
 
@@ -163,7 +163,7 @@ Auf vielfachen Wunsch passen wir die Gewichtung der Stationen der Parcoursprüfu
 
 `{{% expand title="29.11.24" %}}`{=markdown}
 
-### Ergebnisse und Einsicht Parcoursprüfung: Station 1 ILIAS
+## Ergebnisse und Einsicht Parcoursprüfung: Station 1 ILIAS
 
 Die erste Station der Parcoursprüfung vom 20.11. ist korrigiert.
 
@@ -177,7 +177,7 @@ Wir werden dann mit Ihnen für Freitag (06.12., zw. 15 und 17 Uhr) einen kurzen 
 
 `{{% expand title="12.11.24" %}}`{=markdown}
 
-### Organisation Parcoursprüfung: Station 1 ILIAS
+## Organisation Parcoursprüfung: Station 1 ILIAS
 
 Die erste Station der Parcoursprüfung findet wie im Fahrplan beschrieben am Mittwoch,
 den 20. November im B40 statt. Wir schreiben in zwei Durchgängen:
@@ -197,7 +197,7 @@ genutzt werden).
 
 `{{% expand title="29.10.24" %}}`{=markdown}
 
-### Verschiebung Praktikum zu B02 für Gruppe 3: Do, 07.11., 08:00 Uhr
+## Verschiebung Praktikum zu B02 für Gruppe 3: Do, 07.11., 08:00 Uhr
 
 Wie bereits in der Vorlesung angekündigt, muss das Praktikum für Blatt 02 für Gruppe 3 aus
 gesundheitlichen Gründen leider von Montag, 04.11. auf Donnerstag, 07.11. verschoben werden.
@@ -207,7 +207,7 @@ Start ist um 08:00 Uhr.
 
 `{{% expand title="28.10.24" %}}`{=markdown}
 
-### Info zum ANTLR-Meeting mit Edmonton am Di, 29.10.
+## Info zum ANTLR-Meeting mit Edmonton am Di, 29.10.
 
 Am Dienstag, den 29.10., treffen wir uns wie angekündigt um 18 Uhr zum ersten Meeting mit den Studis und
 Kollegen von der University of Alberta (Edmonton, Kanada). Dazu nutzen wir unseren Zoom (vgl.
@@ -224,7 +224,7 @@ Wir freuen uns auf eine spannende Einführung in ANTLR und ein lustiges Meeting!
 
 `{{% expand title="21.10.24" %}}`{=markdown}
 
-### Zeitänderung Gruppe 2 am 24.01.2025
+## Zeitänderung Gruppe 2 am 24.01.2025
 
 Das letzte Praktikum von Gruppe 2 (am Fr, 24.01.2025) findet eine Stunde später
 statt als sonst: 15:00 - 16:30 Uhr.
@@ -233,7 +233,7 @@ statt als sonst: 15:00 - 16:30 Uhr.
 
 `{{% expand title="16.10.24" %}}`{=markdown}
 
-### Update B01
+## Update B01
 
 Bitte beachten Sie die Aktualisierung von B01.
 
@@ -245,7 +245,7 @@ dritten Punkt neu dazu bekommen.
 
 `{{% expand title="09.10.24" %}}`{=markdown}
 
-### Teams
+## Teams
 
 Bitte bearbeiten Sie die Aufgaben in 3er Teams.
 
@@ -261,7 +261,7 @@ Wenn Ihre Teammitglieder aus verschiedenen Stundenplangruppen kommen sollten,
 findet der Vortrag in der Gruppe statt, aus der die meisten der Teammitglieder
 kommen. Bitte beachten Sie das bei der Teamwahl!
 
-### Abgabe ILIAS
+## Abgabe ILIAS
 
 Das Abgabeverfahren im ILIAS wurde deutlich vereinfacht: Jede Person gibt für
 jedes Blatt individuell direkt im ILIAS an, welche Aufgaben das Team bearbeitet
@@ -270,7 +270,7 @@ hat (also keine Teambildung und keine Textdatei mehr im ILIAS).
 Bitte darauf achten, dass Sie das die angegebenen Aufgaben auch vorstellen können
 müssen! Achten Sie bitte auch auf die mind. 60% für das Testat.
 
-### Praktikum
+## Praktikum
 
 Sie gehen einfach in das Praktikum, welches Ihrer Stundenplangruppe zugeordnet ist
 und stellen dort individuell die Lösungen Ihres Teams vor.
@@ -330,7 +330,7 @@ Startzeiten erfolgt per Mail über das LSF ca. eine Woche vorher.
 
 `{{% expand title="09.01.25" %}}`{=markdown}
 
-### Parcoursprüfung: Feedbackgespräche am Do, 30.01., 14:00-15:30 Uhr
+## Parcoursprüfung: Feedbackgespräche am Do, 30.01., 14:00-15:30 Uhr
 
 Wir bieten am Donnerstag, 30.01.25, von 14:00 bis 15:30 Uhr Feedbackgespräche zur Bewertung
 der Ergebnisse von B07x (Parcoursprüfung, Station 2) an.
@@ -341,7 +341,7 @@ Es ist eine vorherige eine Anmeldung im ILIAS notwendig.
 
 `{{% expand title="08.01.25" %}}`{=markdown}
 
-### Planung Parcoursprüfung Station 2: Bitte tragt euch als Team im Etherpad ein
+## Planung Parcoursprüfung Station 2: Bitte tragt euch als Team im Etherpad ein
 
 Wie bereits angekündigt, finden am Mittwoch, den 22. Januar die Vorstellungen von B07x im
 Rahmen der Parcoursprüfung statt (Station 2). Jedes Team hat 20 Minuten für die Vorstellung
@@ -355,7 +355,7 @@ Ihr findet den Link im ILIAS.
 
 `{{% expand title="16.12.24" %}}`{=markdown}
 
-### Anpassung der Gewichtung der beiden Stationen der Parcoursprüfung
+## Anpassung der Gewichtung der beiden Stationen der Parcoursprüfung
 
 Es war ursprünglich vorgesehen, die Gesamtnote als Mittelwert der Noten der beiden
 Parcours-Stationen zu berechnen: Gewichtung 50% (Station 1) und 50% (Station 2).
@@ -373,7 +373,7 @@ Dies gilt für die Prüfung im ersten Zeitraum.
 
 `{{% expand title="16.12.24" %}}`{=markdown}
 
-### Feedback zu den Ergebnissen der Station 1 der Parcoursprüfung
+## Feedback zu den Ergebnissen der Station 1 der Parcoursprüfung
 
 Wir möchten Ihnen im Praktikum am 18.12. ein Feedback zu den Ergebnissen der Station 1
 der Parcoursprüfung geben.
@@ -382,7 +382,7 @@ der Parcoursprüfung geben.
 
 `{{% expand title="09.11.24" %}}`{=markdown}
 
-### Umplanung der Vorträge zur ersten Station der Parcoursprüfung
+## Umplanung der Vorträge zur ersten Station der Parcoursprüfung
 
 Die Vorträge zur Station 1 der Parcoursprüfung waren ursprünglich für den 20.11. (zur Probe) und
 dann live auf dem zweiten Edmonton-Meeting (26.11., mit Bewertung) geplant.
@@ -396,7 +396,7 @@ alle Teams im ILIAS ist aber bereits der 27.11.(!)
 
 `{{% expand title="28.10.24" %}}`{=markdown}
 
-### Info zum ANTLR-Meeting mit Edmonton am Di, 29.10.
+## Info zum ANTLR-Meeting mit Edmonton am Di, 29.10.
 
 Am Dienstag, den 29.10., treffen wir uns wie angekündigt um 18 Uhr zum ersten Meeting mit den Studis und
 Kollegen von der University of Alberta (Edmonton, Kanada). Dazu nutzen wir unseren Zoom (vgl.
@@ -413,7 +413,7 @@ Wir freuen uns auf eine spannende Einführung in ANTLR und ein lustiges Meeting!
 
 `{{% expand title="23.10.24" %}}`{=markdown}
 
-### Verschiebung des Praktikums zu Blatt 01 auf 30.10., 16 Uhr
+## Verschiebung des Praktikums zu Blatt 01 auf 30.10., 16 Uhr
 
 Das Praktikum zur Vorstellung von Blatt 01 musste aus gesundheitlichen Gründen
 um eine Woche verschoben werden.
@@ -424,7 +424,7 @@ um eine Woche verschoben werden.
 
 `{{% expand title="16.10.24" %}}`{=markdown}
 
-### Update B01
+## Update B01
 
 Bitte beachten Sie die Aktualisierung von B01.
 
@@ -436,7 +436,7 @@ dritten Punkt neu dazu bekommen.
 
 `{{% expand title="09.10.24" %}}`{=markdown}
 
-### Teams
+## Teams
 
 Bitte bearbeiten Sie die Aufgaben in 3er Teams.
 
@@ -452,7 +452,7 @@ Sie können Ihre Teams jederzeit selbstständig im Semester ändern/wechseln.
 Stundenplangruppen kommen sollten, findet der Vortrag in der Gruppe statt, aus der
 die meisten der Teammitglieder kommen. Bitte beachten Sie das bei der Teamwahl!
 
-### Abgabe ILIAS
+## Abgabe ILIAS
 
 Das Abgabeverfahren im ILIAS wurde deutlich vereinfacht: Jede Person gibt für
 jedes Blatt individuell direkt im ILIAS an, welche Aufgaben das Team bearbeitet
@@ -461,7 +461,7 @@ hat (also keine Teambildung und keine Textdatei mehr im ILIAS).
 Bitte darauf achten, dass Sie das die angegebenen Aufgaben auch vorstellen können
 müssen! Achten Sie bitte auch auf die mind. 60% für das Testat.
 
-### Praktikum
+## Praktikum
 
 Sie gehen einfach in das Praktikum, welches Ihrer Stundenplangruppe zugeordnet ist
 und stellen dort individuell die Lösungen Ihres Teams vor.
@@ -561,7 +561,7 @@ Abgabe der Übungsblätter jeweils **Mittwoch bis 09:00 Uhr** im [ILIAS](https:/
 [B07x]: homework/sheet07x.md
 
 
-## Prüfungsform, Note und Credits
+# Prüfungsform, Note und Credits
 
 :::::::::::: {.tabs groupid="modul-po"}
 ::::::::: {.tab title="IFM 3.1 CB (PO23, 3. Semester)"}
@@ -638,7 +638,7 @@ Abgabe der Übungsblätter jeweils **Mittwoch bis 09:00 Uhr** im [ILIAS](https:/
 ::::::::::::
 
 
-## Materialien
+# Materialien
 
 1.  ["**Compilers: Principles, Techniques, and Tools**"](https://learning.oreilly.com/library/view/compilers-principles-techniques/9789357054881/).
     Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D. and Bansal, S., Pearson India, 2023.
@@ -656,9 +656,9 @@ Abgabe der Übungsblätter jeweils **Mittwoch bis 09:00 Uhr** im [ILIAS](https:/
     [Online](https://learning.oreilly.com/library/view/writing-a-c/9781098182229/) über die [O'Reilly-Lernplattform](https://www.oreilly.com/library-access/).
 
 
-## Förderungen und Kooperationen
+# Förderungen und Kooperationen
 
-### Kooperation mit University of Alberta, Edmonton (Kanada)
+## Kooperation mit University of Alberta, Edmonton (Kanada)
 
 Über das Projekt ["We CAN virtuOWL"] der Fachhochschule Bielefeld ist im Frühjahr 2021 eine
 Kooperation mit der [University of Alberta] (Edmonton/Alberta, Kanada) im Modul "Compilerbau"

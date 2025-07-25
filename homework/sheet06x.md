@@ -6,7 +6,7 @@ points: "10 Punkte"
 
 <!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94 --reference-links=true  sheet06x.md  -o xxx.md  -->
 
-## Aufgaben
+# Aufgaben
 
 Bearbeiten Sie die auf [Blatt 06] definierten Aufgaben A6.1 (Token, 1P), A6.2 (Tokenizer, 1P),
 A6.3 (Reference Counter, 1P) und A6.4 (Smartpointer, 3P).

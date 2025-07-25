@@ -5,7 +5,7 @@ author: "Carsten Gips, BC George (HSBI)"
 
 <!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94 --reference-links=true  sheet07x.md  -o xxx.md  -->
 
-## Aufgaben
+# Aufgaben
 
 Bearbeiten Sie die auf [Blatt 07] definierten Aufgaben. Ergänzend sollen noch Pointer und
 dynamische Speicherverwaltung in Java realisiert werden (vgl. Vorarbeiten auf [Blatt 06x]).

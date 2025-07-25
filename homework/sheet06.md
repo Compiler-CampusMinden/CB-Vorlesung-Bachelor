@@ -6,7 +6,7 @@ points: "10 Punkte"
 
 <!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94 --reference-links=true  sheet06.md  -o xxx.md  -->
 
-## Zusammenfassung
+# Zusammenfassung
 
 Ziel dieses Aufgabenblattes ist die praktische Anwendung Ihrer C++-Kenntnisse, insbesondere
 werden Sie Pointer, Referenzen und Klassen anwenden und vertiefen. Als Anwendungsbeispiel
@@ -14,7 +14,7 @@ werden Sie bestimmte in der C++-Welt wohlbekannte Smartpointer modellieren sowie
 einfachen Ringpuffer programmieren. Sie lernen mit dem *Reference Counting* nebenbei eine
 verbreitete Technik der *Garbage Collection* kennen.
 
-## Methodik
+# Methodik
 
 Sie werden auf diesem Blatt vier einfache Klassen in C++ implementieren.
 
@@ -26,7 +26,7 @@ Implementieren Sie immer eine Klasse vollständig und testen Sie Ihren Code sowo
 vorgegebenen Beispielen als auch mit eigenen Beispielen, bevor Sie sich an die nächste
 Aufgabe/Klasse setzen.
 
-## Speicherverwaltung in C/C++
+# Speicherverwaltung in C/C++
 
 C und C++ erlauben als hardwarenahe Programmiersprachen den direkten Umgang mit dem
 Programmspeicher (Heap). Ein Programm kann dynamisch zu jeder Zeit weiteren Speicher anfordern
@@ -36,7 +36,7 @@ Da der Heap-Speicher endlich ist, muss man nicht mehr benötigten Speicher auch 
 freigeben. Anderenfalls ist irgendwann der komplette Heap belegt und das Programm kann nicht
 mehr ordnungsgemäß arbeiten. Für die Freigabe ist man als Programmierer:in selbst zuständig.
 
-### Beispiel für eine Tokenizer-Funktion
+## Beispiel für eine Tokenizer-Funktion
 
 Im folgenden Programmschnipsel soll eine Funktion `next_token()` das nächste Token berechnen.
 So eine Funktion findet sich typischerweise im Lexer. Für die Rückgabe des Tokens hat man in
@@ -122,7 +122,7 @@ Aspekt dabei ist, dass man häufig die Freigabe der Objekte vergisst oder dass d
 Programmpfade so unübersichtlich sind, dass man nicht genau weiss, ob und wann man Objekte
 freigeben soll (denken Sie an Exceptions).
 
-### Smartpointer als Lösung
+## Smartpointer als Lösung
 
 Während man in Sprachen wie Java die Speicherverwaltung komplett dem Compiler überlässt oder
 wie in Rust mit strikten Ownership-Modellen arbeitet, hat man in C++ die sogenannten
@@ -201,7 +201,7 @@ Weitere übliche Eigenschaften, die wir auf diesem Blatt aber vereinfachend igno
 -   Dereferenzierung von nicht existierenden Objekten (d.h. der Smartpointer zeigt intern auf
     `nullptr`) führt nicht zum Programmabsturz, sondern zu einer Exception
 
-### Reference Counting
+## Reference Counting
 
 Smartpointer werden erzeugt, indem sie entweder einen Pointer auf die zu verwaltende Ressource
 bekommen (Konstruktor) oder eine Referenz auf ein anderes Smartpointer-Objekt
@@ -296,7 +296,7 @@ private:
 };
 ```
 
-### Dereferenzierung von Smartpointern
+## Dereferenzierung von Smartpointern
 
 (*Anmerkung*: Dies ist ein Vorgriff auf die Lektion "Operatoren". Betrachten und
 implementieren Sie die vorgegebenen Operatoren einfach wie normale Methoden.)
@@ -344,9 +344,9 @@ Dabei ist die Form "`->`" eine vereinfachte Darstellung von `(*ptr).`, d.h. ein 
 Seite des Ausdrucks) wird dereferenziert und man greift auf Attribute oder Methoden des
 verwiesenen Objekts zu (rechte Seite des Ausdrucks).
 
-## Aufgaben
+# Aufgaben
 
-### A6.1: Klasse für Token (1P)
+## A6.1: Klasse für Token (1P)
 
 Implementieren Sie in C++ die Klasse `Token` mit der folgenden Schnittstelle:
 
@@ -387,21 +387,21 @@ Bei Bedarf können Sie zusätzliche Attribute und Methoden hinzufügen.
 
 Testen Sie Ihre `Token`-Klasse an selbst gewählten Beispielen.
 
-### A6.2: Implementierung eines einfachen Tokenizers (1P)
+## A6.2: Implementierung eines einfachen Tokenizers (1P)
 
 Erstellen Sie eine Funktion `void tokenize(const string& input, vector<Token>& tokens)`, die
 einen gegebenen String als Eingabe erhält und diesen in Tokens (Wörter) splittet. Nutzen Sie
 Referenzen, um die Token-Liste zu aktualisieren. Testen Sie die Funktion mit verschiedenen
 Eingabestrings und geben Sie die Tokens aus.
 
-### A6.3: Reference Counter (1P)
+## A6.3: Reference Counter (1P)
 
 Implementieren Sie nun die Klasse `RefCounter` mit der obigen Schnittstelle. Auch hier können
 Sie bei Bedarf zusätzliche Attribute und Methoden hinzufügen.
 
 Testen Sie Ihre `RefCounter`-Klasse an selbst gewählten Beispielen.
 
-### A6.4: Smartpointer (3P)
+## A6.4: Smartpointer (3P)
 
 Implementieren Sie nun die Smartpointer für `Token`-Objekte mit folgender Signatur (wie oben,
 leicht erweitert):
@@ -480,7 +480,7 @@ Bei Bedarf können Sie zusätzliche Attribute und Methoden hinzufügen.
 Testen Sie Ihre `SmartToken`-Klasse an selbst gewählten Beispielen sowie an den obigen
 Beispielen.
 
-### A6.5: Ringpuffer (4P)
+## A6.5: Ringpuffer (4P)
 
 Ein Ringpuffer ist eine Form der abstrakten Datenstruktur "Warteschlange" (*Queue*), die nur
 eine beschränkte Anzahl $n$ von Elementen (Datensätzen) aufnehmen kann. Die Daten werden nach

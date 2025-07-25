@@ -60,7 +60,7 @@ Hier entsteht ein Tafelbild.
 Hier entsteht ein Tafelbild.
 :::
 
-##
+## Def.: deterministischer endlicher Automat
 
 **Def.:** Ein **deterministischer endlicher Automat** (DFA) ist ein 5-Tupel
 $A = (Q, \Sigma, \delta, q_0, F)$ mit

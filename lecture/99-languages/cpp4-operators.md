@@ -104,7 +104,7 @@ challenges: |
 ---
 
 
-## Überladen von Operatoren _in_ Klassen
+# Überladen von Operatoren _in_ Klassen
 
 \bigskip
 
@@ -145,7 +145,7 @@ Analog weitere Operatoren, etwa `operator==`, `operator+`, ... überladen
 :::
 
 
-## Überladen von Operatoren _außerhalb_ von Klassen
+# Überladen von Operatoren _außerhalb_ von Klassen
 
 \bigskip
 
@@ -179,7 +179,7 @@ class MyString {
 => Lösung: Operator **außerhalb** der Klasse überladen => 2 Parameter
 
 
-## Überladen von Operatoren _außerhalb_ von Klassen (cnt.)
+# Überladen von Operatoren _außerhalb_ von Klassen (cnt.)
 
 ::: notes
 Operator außerhalb der Klasse überladen => 2 Parameter
@@ -206,7 +206,7 @@ ostream &operator<<(ostream &out, const MyString &s) {
 Verkettung: `cout << s1 << s2 << endl;`
 
 
-## Meine Freunde dürfen in mein Wohnzimmer
+# Meine Freunde dürfen in mein Wohnzimmer
 
 ```cpp
 void test();
@@ -227,7 +227,7 @@ class Dummy {
 ```
 
 
-## (Fast) alle Operatoren lassen sich überladen
+# (Fast) alle Operatoren lassen sich überladen
 
 ::: notes
 -   Alle normalen arithmetischen Operatoren
@@ -256,7 +256,7 @@ class Dummy {
 Vgl. Tabelle 9.1 (S. 318) im @Breymann2011
 
 
-## Implizite Typkonvertierungen bei Aufruf
+# Implizite Typkonvertierungen bei Aufruf
 
 ```cpp
 MyString s;
@@ -302,7 +302,7 @@ s != "123";     // ???
 :::
 
 
-## Anmerkung zu "++" und "-$\,$-" Operatoren: Präfix und Postfix
+# Anmerkung zu "++" und "-$\,$-" Operatoren: Präfix und Postfix
 
 -   Präfix: \quad `o1 = ++o2;`
     -   Objekt soll **vor Auswertung** inkrementiert werden
@@ -317,7 +317,7 @@ s != "123";     // ???
         [(=> `int` dient nur zur Unterscheidung der Präfix-Variante, wird **nie** benutzt)]{.notes}
 
 
-## Weitere Anmerkungen
+# Weitere Anmerkungen
 
 -   Operatoren werden **nicht** vom System zusammengesetzt
 
@@ -351,7 +351,7 @@ s != "123";     // ???
     :::
 
 
-## Wrap-Up
+# Wrap-Up
 
 -   Überladen von Operatoren (innerhalb und außerhalb einer Klasse)
     -   Innerhalb: 1 Parameter (Objekt auf der rechten Seite)

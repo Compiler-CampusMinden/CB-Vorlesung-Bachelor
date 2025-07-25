@@ -302,7 +302,7 @@ challenges: |
 ---
 
 
-## Virtueller Speicher
+# Virtueller Speicher
 
 ```
             +-----------------------------------------+
@@ -331,7 +331,7 @@ challenges: |
     -   MMU bildet logische Adressen aus virtuellem Speicher auf den physikalischen Speicher ab
     -   Transparent für den Prozess
 
-### Segmente des virtuellen Speichers: Text (read-only)
+## Segmente des virtuellen Speichers: Text (read-only)
 
 -   Programm Code
 -   Konstanten, String Literale
@@ -341,7 +341,7 @@ zusätzlich (nicht in Abbildung dargestellt):
 -   Bereich initialisierter Daten (globale und static Variablen (explizit initialisiert))
 -   Bereich uninitialisierter Daten (globale und static Variablen (uninitialisiert) => Wert 0)
 
-### Segmente des virtuellen Speichers: Stack
+## Segmente des virtuellen Speichers: Stack
 
 -   Dynamisch wachsend und schrumpfend
 -   Stackframe je Funktionsaufruf:
@@ -351,7 +351,7 @@ zusätzlich (nicht in Abbildung dargestellt):
     -   Nach Funktionsrückkehr wird der Stackpointer ("Top of Stack") weiter gesetzt
     -   Dadurch "Bereinigung": Speicher der lokalen Variablen wird freigegeben
 
-### Segmente des virtuellen Speichers: Data (Heap)
+## Segmente des virtuellen Speichers: Data (Heap)
 
 -   Dynamisch wachsend und schrumpfend
 -   Bereich für dynamischen Speicher (Allokation während der Laufzeit)
@@ -363,7 +363,7 @@ zusätzlich (nicht in Abbildung dargestellt):
 :::::::::
 
 
-## Konzept eines Pointers
+# Konzept eines Pointers
 
 ```c
 int i = 99;
@@ -390,7 +390,7 @@ iptr = &i;  /* Wert von iptr ist gleich Adresse von i */
 ```
 
 ::::::::: notes
-### Pointer sind Variablen
+## Pointer sind Variablen
 
 -   haben Namen und Wert
 -   können mit Operatoren verändert werden
@@ -407,7 +407,7 @@ Im Beispiel:
     -   Wert: 10125
     -   Speicherzelle (Adresse): 27890
 
-### Pointer sind besondere Variablen
+## Pointer sind besondere Variablen
 
 ::: center
 Der Wert eines Pointers wird als **Adresse** im Speicher behandelt
@@ -419,7 +419,7 @@ Variable `i` abgelegt ist.
 
 Wirkung/Interpretation: Variable `iptr` "zeigt" auf die Adresse von Variable `i`.
 
-### Pointer und Adressen (Syntax)
+## Pointer und Adressen (Syntax)
 
 -   Deklaration
 
@@ -439,7 +439,7 @@ Wirkung/Interpretation: Variable `iptr` "zeigt" auf die Adresse von Variable `i`
 -   `iptr` ist ein Pointer auf eine (beliebige) Speicherzelle mit Inhalt vom Typ `int`
 -   Nach Zuweisung: `iptr` ist ein Pointer auf die Speicherzelle der Variablen `i`
 
-### Dereferenzierung: Zugriff auf Ziel
+## Dereferenzierung: Zugriff auf Ziel
 
 -   Dereferenzierung mit `*`:
 
@@ -452,7 +452,7 @@ Wirkung/Interpretation: Variable `iptr` "zeigt" auf die Adresse von Variable `i`
     *iptr = 2;  // Zugriff auf verwiesene Speicherzelle i
     ```
 
-### Pointer: Schreibweisen
+## Pointer: Schreibweisen
 
 -   Position des `*` zwischen Typ und Name beliebig
 
@@ -476,7 +476,7 @@ Wirkung/Interpretation: Variable `iptr` "zeigt" auf die Adresse von Variable `i`
     iptr->attribut;
     ```
 
-### Pointer: Zuweisungen an andere Pointer
+## Pointer: Zuweisungen an andere Pointer
 
 ```c
 int i=99, *iptr, *ptr2;
@@ -495,7 +495,7 @@ Der Wert von `iptr` ist die Adresse von `i`. Wenn dieser Wert kopiert oder zugew
 sich an dieser Adresse nichts. `ptr2` bekommt diesen Wert zugewiesen, d.h. bei einer Dereferenzierung
 von `ptr2` würde auf die Adresse von `i` zugriffen werden und dort gelesen/geschrieben werden.
 
-### Pointer und Scopes
+## Pointer und Scopes
 
 ::: center
 **Nicht auf Variablen außerhalb ihres Scopes zugreifen!**
@@ -520,7 +520,7 @@ int* murks() {
 }
 ```
 
-### Hotelzimmer-Analogie
+## Hotelzimmer-Analogie
 
 -   Wenn Sie in ein Hotel einchecken, bekommen Sie den Schlüssel zu **Ihrem** Zimmer
     -   _Pointer_ == Schlüssel
@@ -539,7 +539,7 @@ int* murks() {
             einem Fremden ein!
         -   Bei Dereferenzierung greifen Sie auf "fremde" Variablen (Speicherbereiche) zu!
 
-### Pointer und Initialisierung
+## Pointer und Initialisierung
 
 ::: center
 Pointer werden vom Compiler **nicht** initialisiert!
@@ -555,7 +555,7 @@ Pointer werden vom Compiler **nicht** initialisiert!
 :::::::::
 
 
-## Speicherverwaltung
+# Speicherverwaltung
 
 -   C: **Funktionen** zur Verwaltung dynamischen Speichers: `malloc()`,
     `free()`, ... (in `<stdlib.h>`)
@@ -600,7 +600,7 @@ Pointer werden vom Compiler **nicht** initialisiert!
     ```
 
 ::::::::: notes
-### Speicher allozieren: Standardidiom
+## Speicher allozieren: Standardidiom
 
 In C müssen Sie die Rückgabe von `malloc` prüfen:
 
@@ -630,7 +630,7 @@ try {
 
 _Hinweis_: Pointer-Variablen `i` und `x` liegen auf Stack, angeforderter Speicher im Heap!
 
-### Pointer und Typen
+## Pointer und Typen
 
 -   Typ eines Zeigers relevant, wird vom Compiler geprüft
 -   Zuweisung ohne expliziten Cast nur an allgemeinere Typen/Oberklassen
@@ -648,9 +648,9 @@ _Hinweis_: Pointer-Variablen `i` und `x` liegen auf Stack, angeforderter Speiche
         cp = (char *) vp; /* OK */
         ```
 
-### Fallstricke dynamischer Speicherverwaltung
+## Fallstricke dynamischer Speicherverwaltung
 
-#### Nur new und delete kombinieren bzw. malloc und free
+### Nur new und delete kombinieren bzw. malloc und free
 
 -   `delete` darf nur auf mit `new` erzeugte Objekte angewendet werden
     -   Vorsicht bei Pointern auf Stack-Variablen!
@@ -661,7 +661,7 @@ _Hinweis_: Pointer-Variablen `i` und `x` liegen auf Stack, angeforderter Speiche
     delete p;  // FEHLER! Absturzgefahr
     ```
 
-#### delete[] genau nur bei new[]
+### delete[] genau nur bei new[]
 
 -   `delete[]` darf nur auf mit `new[]` erzeugte Objekte angewendet werden
     (und **muss** dort auch angewendet werden)
@@ -669,7 +669,7 @@ _Hinweis_: Pointer-Variablen `i` und `x` liegen auf Stack, angeforderter Speiche
     `delete` auf mit `new[]` erzeugtes Array würde nur
     erstes Element freigeben!
 
-#### Vorsicht mit Pointern auf lokale Variablen
+### Vorsicht mit Pointern auf lokale Variablen
 
 -   Funktioniert technisch, ist aber gefährlich:
 
@@ -701,7 +701,7 @@ Besser wäre, wenn der Aufrufer einen Pointer übergibt, mit dem dann in der
 Funktion gearbeitet wird. Dann liegt die Verantwortung für die Erstellung und
 Freigabe des Pointers komplett in der Hand des Aufrufers.
 
-#### Memory Leaks
+### Memory Leaks
 
 -   Pointer-Variablen unterliegen den Gültigkeitsregeln für Variablen
 
@@ -718,7 +718,7 @@ Freigabe des Pointers komplett in der Hand des Aufrufers.
     /* ist aber nicht mehr zugreifbar -> SPEICHERLOCH! */
     ```
 
-#### Double Free und Stale Pointer
+### Double Free und Stale Pointer
 
 -   `free()` darf nur einmal pro Objekt aufgerufen werden
     -   Hintergrund: Intern wird eine Freispeicherliste verwaltet
@@ -733,7 +733,7 @@ Freigabe des Pointers komplett in der Hand des Aufrufers.
     -   Die anderen Pointer dürfen anschließend aber auch nicht mehr
         dereferenziert werden (stale/dangling pointer)
 
-#### Beispiel Stale Pointer
+### Beispiel Stale Pointer
 
 ```c
     int *i, *k; i = (int *) malloc(sizeof(*i)); k = i;
@@ -747,7 +747,7 @@ Freigabe des Pointers komplett in der Hand des Aufrufers.
 
 _Anmerkung_: Anwendung auf `NULL`-Pointer bewirkt nichts und ist unschädlich
 
-#### Dereferenzieren von "Bad Pointern"
+### Dereferenzieren von "Bad Pointern"
 
 Der klassische Scanf-Bug :)
 
@@ -760,7 +760,7 @@ scanf("%d", i);
 Tipp: `i` ist **kein** Pointer :)
 :::
 
-#### Auslesen von nicht-initialisiertem Speicher
+### Auslesen von nicht-initialisiertem Speicher
 
 Wenn Programmierer denken, dass irgendwer den Heap zwischendurch immer mal
 wieder auf 0 setzt ...
@@ -782,7 +782,7 @@ int *matvec(int **A, int *x, int N) {
 Tipp: `y[i] += ...` setzt sinnvolle Werte in `y[i]` voraus ...
 :::
 
-#### Überschreiben von Speicher I
+### Überschreiben von Speicher I
 
 Allokation von falschen Größen
 
@@ -801,7 +801,7 @@ Tipp: Jedes `p[i]` kann einen `int` speichern, bekommt aber einen Pointer
 zugewiesen (könnte deutlich breiter im Speicher sein als ein `int`) ...
 :::
 
-#### Überschreiben von Speicher II
+### Überschreiben von Speicher II
 
 Indexberechnung kaputt, sogenannte "_off-by-one-errors_"
 
@@ -819,7 +819,7 @@ for (int i=0; i<=N; i++) {
 Tipp: Hier läuft `i` um einen Platz zu weit ...
 :::
 
-#### Überschreiben von Speicher III
+### Überschreiben von Speicher III
 
 Einlesen von Strings, zu kleine Buffer
 
@@ -832,7 +832,7 @@ gets(s);
 Tipp: Wenn hier mehr als 7 Zeichen eingegeben werden, gibt es Probleme :)
 :::
 
-#### Überschreiben von Speicher IV
+### Überschreiben von Speicher IV
 
 Pointerarithmetik falsch verstanden
 
@@ -853,7 +853,7 @@ so viele Bytes im Speicher weiter, wie der Typ breit ist. D.h. mit einem
 :::::::::
 
 
-## Pointer und Arrays
+# Pointer und Arrays
 
 Ein Array-Name ist wie ein _konstanter_ Pointer auf Array-Anfang: `a[i] == *(a+i)`
 
@@ -883,7 +883,7 @@ a = &c;  /* FEHLER */
 ```
 
 ::::::::: notes
-### Iteration durch Arrays (Varianten)
+## Iteration durch Arrays (Varianten)
 
 ```c
 int a[10], *pa=a;
@@ -911,7 +911,7 @@ for (int k=0; k<10; k++)
 `*a++` ist nicht erlaubt, weil dadurch der Name des Arrays (== Adresse des ersten
 Array-Elements == konstanter Zeiger auf den Anfang des Arrays) verändert würde.
 
-### Array-Namen sind wie konstante Pointer
+## Array-Namen sind wie konstante Pointer
 
 :::center
 **Array-Namen können NICHT umgebogen werden!**
@@ -928,7 +928,7 @@ pa++;
 a++;
 ```
 
-### Selbsttest: Was bedeutet was, was ist erlaubt/nicht erlaubt, was kommt raus? Warum?
+## Selbsttest: Was bedeutet was, was ist erlaubt/nicht erlaubt, was kommt raus? Warum?
 
 ```c
 int a[10], *pa, *pb, x;
@@ -957,7 +957,7 @@ x = *(pb++);
 => Pointer dürfen **nicht immer wie Arrays** behandelt werden!
 (Syntaktisch zulässig, semantisch normalerweise nicht!)
 
-### Pointerarithmetik: Typen beachten
+## Pointerarithmetik: Typen beachten
 
 -   Pointer zeigen auf Objekte mit einem bestimmten Typ
 -   Typen haben unterschiedliche Speicherbreite
@@ -980,7 +980,7 @@ printf("%ld\n", sizeof(*d1)); // Breite Pointerdatentyp
 :::::::::
 
 
-## Referenzen in C++
+# Referenzen in C++
 
 ::: center
 `Typ & Name = Objekt;`
@@ -1002,11 +1002,11 @@ int &s=r;    // aequivalent zu int &s = i;
 
 
 ::: slides
-## Referenzen bilden Alias-Namen
+# Referenzen bilden Alias-Namen
 :::
 
 ::: notes
-### Referenzen bilden Alias-Namen
+## Referenzen bilden Alias-Namen
 :::
 
 ```c
@@ -1037,7 +1037,7 @@ int &iref = i;   // Referenz: neuer Name fuer i
 -   Objekt hat damit mehrere Namen, über die es ansprechbar ist
 -   Referenzen in C++ mit Hilfe des `&`-Operators deklarieren
 
-### Eigenschaften von Referenzen in C++
+## Eigenschaften von Referenzen in C++
 
 -   Referenzen müssen bei Deklaration initialisiert werden
 -   Referenzen können nicht um-assigned werden
@@ -1055,7 +1055,7 @@ int &iref = i;   // Referenz: neuer Name fuer i
     int &r=i, &s=j;   // korrekt
     ```
 
-### Referenzen als Funktionsparameter
+## Referenzen als Funktionsparameter
 
 -   Signatur:
 
@@ -1086,7 +1086,7 @@ Funktion und nicht auf die Variable `y` im äußeren Scope.
 :::::::::
 
 
-## Call-by-Reference Semantik in C++
+# Call-by-Reference Semantik in C++
 
 ::: slides
 ```cpp
@@ -1103,7 +1103,7 @@ int main() {
 :::
 
 ::::::::: notes
-### Variante A: Pointer (C und C++)
+## Variante A: Pointer (C und C++)
 
 Mit Hilfe von Pointern lässt sich die Call-by-Reference Semantik in C und in C++ simulieren.
 
@@ -1132,7 +1132,7 @@ int main() {
     -   Dereferenzierung des kopierten Pointers: Zugriff auf das
         Original-Objekt (hier `i`)
 
-### Variante B: Referenzen (nur C++)
+## Variante B: Referenzen (nur C++)
 
 Referenzen müssen bei der Deklaration initialisiert werden und binden sich an das dabei genutzte
 Objekt. Sie stellen letztlich lediglich einen neuen Namen für das Objekt dar.
@@ -1160,7 +1160,7 @@ int main() {
     ist nichts anderes als `i += 5`
 -   Bei weiteren Aufrufen wird `x` dann neu gebunden
 
-### Call-by-Reference: const
+## Call-by-Reference: const
 
 -   Nachteil bei Call-by-Reference:
 
@@ -1180,14 +1180,14 @@ int main() {
 **Arbeiten Sie (wo möglich/sinnvoll) mit (konstanten) Referenzen!**
 :::
 
-### Rückgabe von Werten per Referenz
+## Rückgabe von Werten per Referenz
 
 -   Normalerweise per call-by-value (Kopie)
 -   Mit Referenzen oder Pointern auch als call-by-reference
 :::::::::
 
 ::: slides
-## Rückgabe von Werten per Referenz
+# Rückgabe von Werten per Referenz
 :::
 
 ```cpp
@@ -1237,7 +1237,7 @@ Die Zuweisung `int  z = fkt1(2, "c");` ist unbedenklich, da `z` eine normale Int
 ist und hier das übliche Kopieren der Rückgabe von `ftk1` in die Variable stattfindet.
 
 
-### Diskussion
+## Diskussion
 
 In C++ können Sie Call-by-Reference über Pointer und/oder über Referenzen erreichen.
 
@@ -1253,7 +1253,7 @@ für `bar foo(wuppie&,  bar)` entscheiden.
 
 
 ::::::::: notes
-## Vergleich Pointer mit Referenzen
+# Vergleich Pointer mit Referenzen
 
 | Referenzen                                                   | Pointer                                                                                            |
 |:-------------------------------------------------------------|:---------------------------------------------------------------------------------------------------|
@@ -1265,7 +1265,7 @@ für `bar foo(wuppie&,  bar)` entscheiden.
 :::::::::
 
 
-## Wrap-Up
+# Wrap-Up
 
 -   Virtueller Speicher: [Kernel stellt Prozessen linearen Adressraum bereit,]{.notes}
     Segmente: Text, Stack, Heap

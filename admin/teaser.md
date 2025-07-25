@@ -10,7 +10,7 @@ fhmedia:
 ---
 
 
-## Sprachen verstehen, (formale) Texte transformieren
+# Sprachen verstehen, (formale) Texte transformieren
 
 ![](https://github.com/munificent/craftinginterpreters/blob/master/site/image/a-map-of-the-territory/mountain.png?raw=true){width="92%"}
 

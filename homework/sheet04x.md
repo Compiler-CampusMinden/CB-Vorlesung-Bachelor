@@ -6,7 +6,7 @@ points: "10 Punkte"
 
 <!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94 --reference-links=true  sheet04x.md  -o xxx.md  -->
 
-## Aufgaben
+# Aufgaben
 
 Betrachten Sie die auf [Blatt 04] definierte Sprache. Ergänzen Sie diese Sprache um Arrays und
 Pointer. Benutzen Sie dabei die aus C/C++ bekannte Syntax.
@@ -17,7 +17,7 @@ Lösen Sie mit dieser erweiterten Sprachdefinition die auf [Blatt 04] gestellten
 interessant, d.h. (Funktionen/Operatoren für die) dynamische Speicherverwaltung brauchen Sie
 nicht implementieren!
 
-## Vorstellung (Station I der Parcoursprüfung)
+# Vorstellung (Station I der Parcoursprüfung)
 
 Stellen Sie Ihre Konzepte und Lösungen im Rahmen eines Vortrags vor. Fokussieren Sie sich
 dabei auf die Auswirkungen der oben beschriebenen Erweiterung der Sprache auf die Grammatik
@@ -27,7 +27,7 @@ Die Vorträge werden im Praktikum am 27.11. bzw. am 04.12. durchgeführt. Wir we
 Teams entsprechend aufteilen, Sie bekommen eine Mail. Abgabe der Lösung und des Vortrags im
 ILIAS ist für alle Teams aber bereits der 27.11. ...
 
-## Bewertungskriterien
+# Bewertungskriterien
 
 1.  **Inhalt (25 Punkte)**
 

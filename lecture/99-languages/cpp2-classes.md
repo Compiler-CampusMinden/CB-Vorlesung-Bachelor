@@ -75,7 +75,7 @@ challenges: |
 ---
 
 
-## OOP in C++
+# OOP in C++
 
 \bigskip
 
@@ -111,16 +111,16 @@ private:
 ::::::
 
 ::::::::: notes
-### OOP in C++: Unterschiede zu Java
+## OOP in C++: Unterschiede zu Java
 
 -   Klassendefinition muss mit Semikolon beendet werden
 -   Sichtbarkeit wird immer blockweise eingestellt (per Default immer `private`)
 -   Wie bei Funktionen: Deklaration muss vor Verwendung (= Aufruf) bekannt sein
 -   `this` ist keine Referenz, sondern ein **Pointer** auf das eigene Objekt
 
-### Objektlayout: Java vs. C++
+## Objektlayout: Java vs. C++
 
-#### Java: Referenzen auf Objekte
+### Java: Referenzen auf Objekte
 
 ```java
 class Student {
@@ -138,7 +138,7 @@ Für Objekte wird nur eine Referenz auf die Objekte gehalten. Die Attribute selb
 liegen aber außerhalb der Klasse, dadurch benötigt das Objekt selbst nur relativ wenig
 Platz im Speicher.
 
-#### C++: Alles direkt im Objekt
+### C++: Alles direkt im Objekt
 
 ```cpp
 class Student {
@@ -169,7 +169,7 @@ private:
 :::::::::
 
 
-## Objekte erzeugen mit Konstruktoren
+# Objekte erzeugen mit Konstruktoren
 
 ```cpp
 class Dummy {
@@ -199,7 +199,7 @@ Dummy c=99;
 
 
 ::::::::: notes
-## Default-Konstruktoren
+# Default-Konstruktoren
 
 Der C++-Compiler generiert einen **parameterlosen Defaultkonstruktor** - sofern man
 nicht selbst mindestens einen Konstruktor definiert.
@@ -216,7 +216,7 @@ Dummy a();  // FALSCH!!! (Deklaration einer Funktion `a()`, die ein `Dummy` zuru
 :::::::::
 
 
-## C++: Trennung .h und .cpp
+# C++: Trennung .h und .cpp
 
 ```cpp
 // .h
@@ -240,7 +240,7 @@ Dummy::Dummy(int c) {
 [Klassenname ist der Scope für die Methoden]{.notes}
 
 
-## Konstruktoren: Normale (Java-like) Initialisierung
+# Konstruktoren: Normale (Java-like) Initialisierung
 
 ```cpp
 class Student {
@@ -274,7 +274,7 @@ Beim Anlegen von `birthday` im Speicher wird der **Defaultkonstruktor** für
 [Konsole: studiInitBody.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/studiInitBody.cpp"}
 
 
-## Konstruktoren: Initialisierungslisten
+# Konstruktoren: Initialisierungslisten
 
 ```cpp
 class Student {
@@ -309,7 +309,7 @@ Beim Anlegen von `birthday` im Speicher wird direkt der übergebene Wert **kopie
 
 
 ::::::::: notes
-## Zwang zu Initialisierungslisten
+# Zwang zu Initialisierungslisten
 
 In manchen Fällen **muss** man die Initialisierung der Attribute per
 Initialisierungsliste durchführen.
@@ -335,7 +335,7 @@ Hier einige Beispiele:
 
 
 ::::::::: notes
-## C++11 und delegierende Konstruktoren
+# C++11 und delegierende Konstruktoren
 
 ```cpp
 class C {
@@ -363,7 +363,7 @@ Delegierende Konstruktoren gibt es ab C++11:
 :::::::::
 
 
-## C++ und explizite Konstruktoren
+# C++ und explizite Konstruktoren
 
 -   Implizite Konvertierung mit einelementigen Konstruktoren:
 
@@ -397,7 +397,7 @@ Delegierende Konstruktoren gibt es ab C++11:
     ```
 
 
-## Wrap-Up
+# Wrap-Up
 
 -   Klassendefinition mit Semikolon abschließen (!)
 -   Sichtbarkeiten blockweise, keine für Klasse

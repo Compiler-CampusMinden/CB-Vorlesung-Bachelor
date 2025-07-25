@@ -179,7 +179,7 @@ challenges: |
 ---
 
 
-## Vergleichsfunktion für zwei Integer?
+# Vergleichsfunktion für zwei Integer?
 
 ```cpp
 bool cmp(const int &a, const int &b) {
@@ -211,7 +211,7 @@ bool cmp(const int &a, const int &b) {
 :::
 
 
-## Definition von Funktions-Templates
+# Definition von Funktions-Templates
 
 ```cpp
 template <typename T>
@@ -248,7 +248,7 @@ Vorsicht: Im Beispiel oben muss `operator<` für die verwendeten Typen
 `T` implementiert sein! \newline (sonst Fehler zur Compile-Zeit)
 
 
-## Bestimmung der Template-Parameter I: Typ-Inferenz
+# Bestimmung der Template-Parameter I: Typ-Inferenz
 
 ::: notes
 Das Funktions-Template wird wie eine normale Funktion aufgerufen ...
@@ -274,7 +274,7 @@ Vorsicht bei Typ-Inferenz: Typen müssen *exakt* passen!
 :::
 
 
-## Bestimmung der Template-Parameter II: Explizite Angabe
+# Bestimmung der Template-Parameter II: Explizite Angabe
 
 ```cpp
 template <typename T>
@@ -294,7 +294,7 @@ Bei expliziter Angabe der Typen beim Aufruf (`cmp<int>`) kann der Compiler autom
 
 
 ::::::::: notes
-## Typ-Inferenz und explizite Bestimmung mischen
+# Typ-Inferenz und explizite Bestimmung mischen
 
 -   Compiler nutzt die vorgegebenen Typ-Parameter, ...
 -   ... inferiert die restlichen, und ...
@@ -327,7 +327,7 @@ int main() {
 
 
 ::::::::: notes
-## Typ-Inferenz funktioniert nicht immer!
+# Typ-Inferenz funktioniert nicht immer!
 
 ```cpp
 template <typename T>
@@ -347,7 +347,7 @@ inferieren. In diesem Fall *muss* der Typ beim Aufruf explizit angegeben werden.
 :::::::::
 
 
-## Spezialisierung von Funktions-Templates
+# Spezialisierung von Funktions-Templates
 
 ```cpp
 // Primaeres Template
@@ -393,7 +393,7 @@ bool cmp(const int &a, const int &b) {
 :::
 
 ::::::::: notes
-### Alternativ: Überladen der Funktions-Templates mit normalen Funktionen
+## Alternativ: Überladen der Funktions-Templates mit normalen Funktionen
 
 Überladen mit normalen Funktionen funktioniert wie bei spezialisierten
 Templates, d.h. auch hier zuerst das primäre Template definieren, danach
@@ -426,7 +426,7 @@ int main() {
 :::::::::
 
 ::::::::: notes
-### Aufruf: Compiler nimmt die am besten "passende" Variante:
+## Aufruf: Compiler nimmt die am besten "passende" Variante:
 
 -   Keine Template-Parameter beim Aufruf angegeben (d.h. Typ-Inferenz):
     1.  Zuerst **exakt** passende normale Funktion,
@@ -457,7 +457,7 @@ bzw. Linker-Fehler).
 [Konsole: funktionsTemplates.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/funktionsTemplates.cpp"}
 
 
-## Klassen-Templates in C++
+# Klassen-Templates in C++
 
 ```cpp
 template <typename T>
@@ -503,7 +503,7 @@ Matrix<T>::Matrix(unsigned rows, unsigned cols) { ... }
 
 
 ::::::::: notes
-### Klassen-Templates in C++ (Variante mit Konstanten)
+## Klassen-Templates in C++ (Variante mit Konstanten)
 
 ```cpp
 template <typename T, unsigned rows, unsigned cols>
@@ -535,7 +535,7 @@ int main() {
 
 
 ::::::::: notes
-### Beispiel: Konstanten als Template-Parameter
+## Beispiel: Konstanten als Template-Parameter
 
 ```cpp
 template <int I>
@@ -600,7 +600,7 @@ Die Variante mit dem `enum` werden Sie entsprechend sehr häufig in C++ finden!
 
 
 ::::::::: notes
-### Klassen-Templates mit Defaults
+## Klassen-Templates mit Defaults
 
 ```cpp
 template <typename T = int, unsigned rows = 1, unsigned cols = 1>
@@ -628,7 +628,7 @@ einsetzen.
 :::::::::
 
 
-## Klassen-Templates in C++ spezialisieren
+# Klassen-Templates in C++ spezialisieren
 
 ```cpp
 template <typename T>
@@ -669,7 +669,7 @@ Matrix<uint>::Matrix(unsigned rows, unsigned cols) { ... }
 
 
 ::::::::: notes
-### Partielle Spezialisierung
+## Partielle Spezialisierung
 
 ```cpp
 template <typename T1, typename T2>
@@ -705,7 +705,7 @@ Array<T, int>::Array() {}
 
 
 ::::::::: notes
-### Vergleich verschiedene Spezialisierungen
+## Vergleich verschiedene Spezialisierungen
 
 Allgemeine Templates vs. partiell spezialisierte Templates vs. vollständig spezialisierte Templates
 
@@ -755,7 +755,7 @@ Regel: Das am meisten spezialisierte Template wird verwendet.
 
 
 ::::::::: notes
-## Mischen von Klassen- und Funktions-Templates
+# Mischen von Klassen- und Funktions-Templates
 
 Sie können innerhalb eines Klassen-Templates auch ein Funktions-Template
 (Methoden-Template) definieren. Bei der Implementierung außerhalb der
@@ -780,7 +780,7 @@ void Array<T,n>::copy_from(const C &c) { ... }
 :::::::::
 
 
-## Templates: Java vs. C++
+# Templates: Java vs. C++
 
 -   Templates sind nur **Schablonen**!
 
@@ -822,7 +822,7 @@ void Array<T,n>::copy_from(const C &c) { ... }
     :::
 
 
-## Wrap-Up
+# Wrap-Up
 
 -   Generische Programmierung (Funktions-Templates)
     -   `template <typename T>` der Funktionsdefinition voranstellen

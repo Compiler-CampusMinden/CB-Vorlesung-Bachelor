@@ -196,7 +196,7 @@ challenges: |
 ---
 
 
-## Warum?
+# Warum?
 
 -   C++ erlaubt ressourcenschonende Programmierung
 -   Objektorientierter "Aufsatz" auf C
@@ -232,7 +232,7 @@ challenges: |
 :::
 
 
-## Hello World!
+# Hello World!
 
 ``` c++
 /*
@@ -255,7 +255,7 @@ int main() {
 ```
 
 ::::::::: notes
-### Beobachtungen
+## Beobachtungen
 
 Jedes (ausführbare) C++-Programm hat genau eine `main()`-Funktion. Die `main()`-Funktion ist
 _keine Methode_ einer Klasse: In C/C++ gibt es Funktionen auch außerhalb von Klassen.
@@ -276,7 +276,7 @@ Der Rückgabewert signalisiert Erfolg bzw. Fehler der Programmausführung. Dabei
 0 traditionell für Erfolg (Konvention!). Besser Makros nutzen: `EXIT_SUCCESS` bzw.
 `EXIT_FAILURE` (in `cstdlib`).
 
-### Präprozessor
+## Präprozessor
 
 Der Präprozessor transformiert den Quellcode _vor_ dem Compiler-Lauf. Zu den wichtigsten
 Aufgaben gehören dabei die Makrosubstitution (`#define Makroname Ersatztext`) und das Einfügen
@@ -294,7 +294,7 @@ bereits erledigt, Sie finden diese mit einem "c" vorangestellt:
 -   Include in C: `#include <stdio.h>`
 -   Include in C++: `#include <cstdio>`
 
-### Übersetzen, Linken, Ausführen
+## Übersetzen, Linken, Ausführen
 
 C++-Dateien werden üblicherweise mit der Endung "**.cpp**" oder ".cxx" oder ".cc"
 abgespeichert, Header-Dateien mit den Endungen ".hpp" oder ".hxx" oder ".hh".
@@ -312,7 +312,7 @@ ausgeführt werden soll.
 [Konsole: HelloWorld.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/HelloWorld.cpp"}
 
 
-## Variablen, Operatoren, Kontrollfluss
+# Variablen, Operatoren, Kontrollfluss
 
 ::: center
 **Im Wesentlichen wie von C und Java gewohnt ... :-)**
@@ -341,7 +341,7 @@ if (c=4) { ... }
 ```
 
 
-## Ein- und Ausgabe mit *printf* und *cin/cout*
+# Ein- und Ausgabe mit *printf* und *cin/cout*
 
 -   `printf(formatstring, ...)`
 
@@ -395,7 +395,7 @@ if (c=4) { ... }
 [Beispiel: cin.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/cin.cpp"}
 
 
-## Sichtbarkeit und Gültigkeit und Namespaces
+# Sichtbarkeit und Gültigkeit und Namespaces
 
 ::: notes
 Wie in Java:
@@ -443,7 +443,7 @@ Zusätzlich gibt es noch benannte Scopes und einen Scope-Operator.
 [Beispiel: cppScope.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/cppScope.cpp"}
 
 
-## Arrays und Vektoren in C++
+# Arrays und Vektoren in C++
 
 -   Syntax: `Typ Name[AnzahlElemente];`
 
@@ -524,7 +524,7 @@ sondern deklariert eine **neue Funktion**!
 :::
 
 
-## Alias-Namen für Typen mit *typedef* und *using*
+# Alias-Namen für Typen mit *typedef* und *using*
 
 *   Syntax: `typedef existTyp neuerName;` (C, C++)
 
@@ -563,14 +563,14 @@ sondern deklariert eine **neue Funktion**!
 
 
 ::: notes
-## Erinnerungen an C - Vergleich mit C++
+# Erinnerungen an C - Vergleich mit C++
 :::
 
 ::::::::: notes
 `{{% notice style="important" title="Erinnerungen an C - Vergleich mit C++" %}}`{=markdown}
 `{{% expand title="Expand me..." %}}`{=markdown}
 
-### Basisdatentypen
+## Basisdatentypen
 
 |          |                                             |
 |:---------|:--------------------------------------------|
@@ -584,7 +584,7 @@ sondern deklariert eine **neue Funktion**!
 Außerdem sind Arrays und Pointer mit diesen Typen möglich.
 
 
-### Typmodifikatoren ändern Bedeutung
+## Typmodifikatoren ändern Bedeutung
 
 Vorangestellte Modifikatoren ändern Bedeutung:
 
@@ -615,7 +615,7 @@ Dagegen können `signed` und `unsigned` sowohl für `char` als auch für `int` b
 vgl. [en.wikipedia.org/wiki/C_data_types](https://en.wikipedia.org/wiki/C_data_types)
 
 
-### Größe eines Datentyps ist maschinenabhängig
+## Größe eines Datentyps ist maschinenabhängig
 
 ::: center
 **Der reservierte Speicherbereich und damit auch der Zahlenbereich für einen einfachen Typ in C/C++ ist maschinenabhängig!**
@@ -655,7 +655,7 @@ Gesamtwert für das Array noch durch den Speicherbedarf eines Elements teilen, a
 beispielsweise `sizeof(b)/sizeof(b[0])`.
 
 
-### (Beispiele für) Schleifen und Kontrollstrukturen in C/C++
+## (Beispiele für) Schleifen und Kontrollstrukturen in C/C++
 
 ``` c
 int x=5, y=1;
@@ -681,7 +681,7 @@ for (x=0; x<10; x++) {
 ```
 
 
-### Funktionen in C und C++
+## Funktionen in C und C++
 
 -   Funktionen sind mit Methoden in Java vergleichbar
 
@@ -708,7 +708,7 @@ Anmerkung: Unterschied "Parameter" und "Argument":
 
 In der Praxis verwendet man beide Begriffe i.d.R. synonym.
 
-#### Funktionen: Deklaration vs. Definition
+### Funktionen: Deklaration vs. Definition
 
 -   **Deklaration**: (Funktions-) Prototyp: Festlegen von
     Signatur [(d.h. Funktionsname und Anzahl, Typ, Reihenfolge der Parameter)]{.notes} u. Rückgabetyp
@@ -739,13 +739,13 @@ In der Praxis verwendet man beide Begriffe i.d.R. synonym.
 
 [Konsole: simplefunction.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/simplefunction.cpp"}
 
-#### One Definition Rule (für Funktionen)
+### One Definition Rule (für Funktionen)
 
 ::: center
 Jede Funktion darf im **gesamten** Programm nur **einmal definiert** sein!
 :::
 
-#### Funktionen und Parameter
+### Funktionen und Parameter
 
 -   Funktionen "ohne" Parameter:
 
@@ -769,7 +769,7 @@ Jede Funktion darf im **gesamten** Programm nur **einmal definiert** sein!
     void fkt(int a, char b) { ... }
     ```
 
-##### Leere Parameterliste in C
+#### Leere Parameterliste in C
 
 Wenn eine Funktion keine Parameter hat, können Sie wie in C die Parameterliste
 entweder einfach leer lassen (`int fkt();`) oder das Schlüsselwort `void`
@@ -795,7 +795,7 @@ diese dann auch ohne Parameter aufgerufen werden.
 
 => **Bevorzugen Sie in C die Variante mit dem Schlüsselwort `void`!**
 
-##### Leere Parameterliste in C++
+#### Leere Parameterliste in C++
 
 Keine Parameter: Leere Liste und Schlüsselwort `void` **gleichwertig**
 
@@ -804,7 +804,7 @@ void fkt();
 void fkt(void);
 ```
 
-#### Defaultparameter in C++
+### Defaultparameter in C++
 
 -   Parameter mit Defaultwerten am **Ende** der Parameterliste
 -   Bei Trennung von Deklaration und Definition: Defaultparameter
@@ -818,7 +818,7 @@ void f(int i, int j=1, int k=2);
 void f(int i, int j, int k) { ... }
 ```
 
-#### Überladen von Funktionen
+### Überladen von Funktionen
 
 -   Funktionen im **gleichen Gültigkeitsbereich** können überladen werden
 -   Zu beachten:
@@ -829,7 +829,7 @@ void f(int i, int j, int k) { ... }
 => Warnung: Überladene Funktionen sollten gleichartige
 Operationen für unterschiedliche Datentypen bereitstellen!
 
-#### Probleme beim Überladen von Funktionen
+### Probleme beim Überladen von Funktionen
 
 1.  Defaultparameter
 
@@ -867,7 +867,7 @@ Operationen für unterschiedliche Datentypen bereitstellen!
     }
     ```
 
-#### Parameterübergabe in C/C++: Call-by-Value
+### Parameterübergabe in C/C++: Call-by-Value
 
 :::::: columns
 ::: {.column width="40%"}
@@ -920,9 +920,9 @@ Ausnahme: Übergabe von C++-Referenzen oder Pointern
 (wobei Pointer streng genommen auch kopiert werden, also per call-by-value übergeben werden ...)
 
 
-### Unterschiedliche Variablenarten
+## Unterschiedliche Variablenarten
 
-#### Lokale Variablen ("automatische Variablen")
+### Lokale Variablen ("automatische Variablen")
 
 ```cpp
 int b = 1;
@@ -959,7 +959,7 @@ int main() {
 
 => Werden auch als **automatische Variablen** bezeichnet
 
-#### Globale Variablen ("externe Variablen")
+### Globale Variablen ("externe Variablen")
 
 ```c
 /* ======== Datei main.cpp (einzeln kompilierbar) ======== */
@@ -992,7 +992,7 @@ die Variable woanders definiert ist) => erst der Linker löst das auf.
 _Hinweis_: Bei globalen Konstanten in C++ brauchen Sie zusätzlich auch bei der Definition ein "`extern`",
 da die Konstante sonst nur in ihrer Datei sichtbar ist.
 
-#### Statische lokale Variablen
+### Statische lokale Variablen
 
 ```cpp
 void foo() {
@@ -1018,7 +1018,7 @@ int main() {
 
 _Hinweis_: `static` für globale Variablen bedeutet etwas anderes! [(s.u. "Sichtbarkeit")]{.notes}
 
-#### Initialisierung von Variablen
+### Initialisierung von Variablen
 
 (Automatische) Initialisierung von Variablen hängt von ihrer Speicherklasse ab!
 
@@ -1032,7 +1032,7 @@ _Hinweis_: `static` für globale Variablen bedeutet etwas anderes! [(s.u. "Sicht
     -   Mit dem Wert 0 oder vorgegebenem Wert
     -   Ab erstem Aufruf der Funktion
 
-#### Sichtbarkeit globaler Variablen (und Funktionen) beschränken
+### Sichtbarkeit globaler Variablen (und Funktionen) beschränken
 
 -   Beschränkung der Gültigkeit von **globalen Variablen** auf die Datei, wo
     sie definiert sind: **Schlüsselwort `static`**
@@ -1053,9 +1053,9 @@ in einer Header-Datei zu deklarieren! (In der Praxis liefert der gcc dann sogar
 einen Fehler!). Das ist mit `private` Methoden vergleichbar.
 
 
-### Globale Konstanten
+## Globale Konstanten
 
-#### In C funktionieren globale Konstanten wie globale Variablen
+### In C funktionieren globale Konstanten wie globale Variablen
 
 -   **Definition** in einer Übersetzungseinheit ohne "`extern`"
 
@@ -1086,7 +1086,7 @@ einen Fehler!). Das ist mit `private` Methoden vergleichbar.
     }
     ```
 
-#### In C++ sind globale Konstanten per Default nur in ihrer Definitionsdatei sichtbar!
+### In C++ sind globale Konstanten per Default nur in ihrer Definitionsdatei sichtbar!
 
 -   Abhilfe: Definieren _und_ Deklarieren mit `extern`
 
@@ -1112,7 +1112,7 @@ einen Fehler!). Das ist mit `private` Methoden vergleichbar.
     }
     ```
 
-#### Alternativ: In beiden Sprachen Konstanten vorwärts deklarieren
+### Alternativ: In beiden Sprachen Konstanten vorwärts deklarieren
 
 Folgende Definition und (Vorwärts-) Deklaration der Konstanten `PI`
 funktioniert sowohl in C als auch in C++:
@@ -1139,9 +1139,9 @@ void fkt_a1() {
 ```
 
 
-### Automatisieren der Buildvorgänge: GNU Make
+## Automatisieren der Buildvorgänge: GNU Make
 
-#### Makefile: Textdatei mit Regeln für das Programm `make`
+### Makefile: Textdatei mit Regeln für das Programm `make`
 
 -   Abläufe automatisieren: Kompilieren, testen, Pakete bauen, aufräumen, ...
 -   Java: `ant`, C/C++: `make`
@@ -1171,7 +1171,7 @@ ausgeführt wird.
 
 Die Ziele und Abhängigkeiten sind i.d.R. Dateien (müssen es aber nicht sein).
 
-#### Makefiles: Fiktives Beispiel
+### Makefiles: Fiktives Beispiel
 
 -   Annahme: Projekt besteht aus der Datei `main.cpp`, daraus soll das Programm
     "tollesProgramm" erzeugt werden
@@ -1221,7 +1221,7 @@ Regel des Targets `tollesProgramm` ausgeführt, um die Datei `tollesProgramm` zu
 
 **Hinweis**: Das Beispiel entspricht den minimalen Kenntnissen, die Sie über Make haben müssen.
 
-#### Makefiles: Typische Aufrufe
+### Makefiles: Typische Aufrufe
 
 -   `make` \newline
     Sucht nach Datei mit dem Namen "GNUmakefile", "makefile" oder "Makefile" und erzeugt das
@@ -1246,7 +1246,7 @@ Regel des Targets `tollesProgramm` ausgeführt, um die Datei `tollesProgramm` zu
 
 
 
-## Wrap-Up
+# Wrap-Up
 
 -   C/C++ sind enge Verwandte: kompilierte Sprachen, C++ fügt OO hinzu
 -   Funktionsweise einfachster Make-Files

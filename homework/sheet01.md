@@ -6,13 +6,13 @@ points: "10 Punkte"
 
 <!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94 --reference-links=true  sheet01.md  -o xxx.md  -->
 
-## A1.1: Sprachen von regulären Ausdrücken (1P)
+# A1.1: Sprachen von regulären Ausdrücken (1P)
 
 Welche Sprache wird von dem folgenden regulären Ausdruck beschrieben?
 
 $a\ +\ a\ (a\ +\ b)^*\ a$
 
-## A1.2: Bezeichner in Programmiersprachen (3P)
+# A1.2: Bezeichner in Programmiersprachen (3P)
 
 Betrachten Sie eine Programmiersprache, in der die Bezeichner (= Namen für Variablen,
 Funktionen, Klassen, Methoden, ...) folgenden Aufbau haben:
@@ -41,14 +41,14 @@ Ihre Grammatik alle zulässigen Bezeichner generieren können muss, aber keinen 
 unzulässigen generieren darf. Wählen Sie zwei Bezeichner aus der Sprache und zeigen Sie die
 Ableitungsbäume dazu.
 
-## A1.3: Gleitkommazahlen in Programmiersprachen (2P)
+# A1.3: Gleitkommazahlen in Programmiersprachen (2P)
 
 Recherchieren Sie zunächst den Aufbau von Gleitkommazahlen in Python und Java.
 
 Erstellen Sie für jede der beiden Programmiersprachen reguläre Ausdrücke, DFAs und reguläre
 Grammatiken wie in Aufgabe 1. Verifizieren Sie Ihre Lösungen wie in Aufgabe 1.
 
-## A1.4: Mailadressen? (1P)
+# A1.4: Mailadressen? (1P)
 
 Warum ist der folgende regex ungeeignet für die Verarbeitung von Mailadressen?
 
@@ -63,12 +63,12 @@ Anmerkung: Diese Darstellung wird ab jetzt akzeptiert.
 
 Verbessern Sie den gegebenen regulären Ausdruck.
 
-## A1.5: Der zweitletzte Buchstabe (1P)
+# A1.5: Der zweitletzte Buchstabe (1P)
 
 Entwickeln Sie einen DFA, der nur Wörter über $\Sigma = \lbrace 1,2,3 \rbrace$ akzeptiert,
 deren zweitletztes Zeichen dasselbe ist wie das zweite.
 
-## A1.6: Sprache einer regulären Grammatik (2P)
+# A1.6: Sprache einer regulären Grammatik (2P)
 
 Welche Sprache generiert die folgende Grammatik?
 

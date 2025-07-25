@@ -148,7 +148,7 @@ challenges: |
 ---
 
 
-## Vererbung: "IS-A"-Beziehung zw. Klassen
+# Vererbung: "IS-A"-Beziehung zw. Klassen
 
 ```cpp
 class Student : public Person { ... }
@@ -181,7 +181,7 @@ Analog zu Java:
 :::
 
 ::::::::: notes
-### Vererbung und Konstruktoren
+## Vererbung und Konstruktoren
 
 -   Defaultkonstruktoren werden automatisch richtig verkettet
     -   zuerst Aufruf des Basisklassen-Konstruktors
@@ -194,7 +194,7 @@ Analog zu Java:
 :::::::::
 
 ::::::::: notes
-### Vererbung und Destruktoren
+## Vererbung und Destruktoren
 
 -   Defaultdestruktoren werden automatisch richtig verkettet
     -   zuerst werden die Destruktoren der zusätzlichen Attribute aufgerufen
@@ -205,7 +205,7 @@ Analog zu Java:
 :::::::::
 
 ::::::::: notes
-### Vererbung und Operatoren
+## Vererbung und Operatoren
 
 -   Defaultoperatoren werden automatisch richtig verkettet
     -   zuerst Aufruf des Basisklassen-Operators
@@ -227,7 +227,7 @@ Analog zu Java:
 :::::::::
 
 ::::::::: notes
-### Vererbung von Freundschaften
+## Vererbung von Freundschaften
 
 -   Freundschaften werden nicht vererbt!
 -   `friends` der Basisklasse haben keinen Zugriff auf zusätzliche
@@ -237,7 +237,7 @@ Analog zu Java:
 
 
 ::::::::: notes
-## Abstrakte Klassen
+# Abstrakte Klassen
 
 -   Eine **Klasse** ist abstrakt, wenn sie mindestens eine abstrakte Methode hat
 -   Eine **Methode** ist in C++ abstrakt, wenn sie
@@ -258,7 +258,7 @@ string Person::toString() const { ... }  // Implementierung :-)
 :::::::::
 
 
-## Polymorphie: Was passiert im folgenden Beispiel?
+# Polymorphie: Was passiert im folgenden Beispiel?
 
 ::: notes
 IS-A Beziehung: Objekte können als Objekte ihrer Oberklasse behandelt werden
@@ -285,7 +285,7 @@ Antwort: Es wird die falsche Methode aufgerufen!
 :::
 
 
-## Polymorphie: statisch und dynamisch
+# Polymorphie: statisch und dynamisch
 
 -   C++ entscheidet zur **Kompilierzeit**, welche Methode aufgerufen wird
     -   `p` ist vom Typ `Person` => `p.toString()`
@@ -298,7 +298,7 @@ Antwort: Es wird die falsche Methode aufgerufen!
     -   Typ eines Objektes wird zur **Laufzeit** ausgewertet
 
 
-## Dynamisches Binden geht auch in C++ ...
+# Dynamisches Binden geht auch in C++ ...
 
 ::: notes
 Für dynamische Polymorphie müssen in C++ drei Bedingungen erfüllt sein:
@@ -331,7 +331,7 @@ class Person {
 [Konsole: polyDyn.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/polyDyn.cpp"}
 
 
-## Vorsicht Slicing
+# Vorsicht Slicing
 
 ```cpp
 Student s("Heinz", 10.0);
@@ -406,7 +406,7 @@ Erst damit erfüllen wir die dritte Bedingung und haben echte dynamische Polymor
 
 
 ::::::::: notes
-## Anmerkungen zu Polymorphie in C++
+# Anmerkungen zu Polymorphie in C++
 
 -   **Gestaltung der API**:
     -   Zum Überschreiben gedachte Methoden als virtuell deklarieren
@@ -422,7 +422,7 @@ Erst damit erfüllen wir die dritte Bedingung und haben echte dynamische Polymor
 :::::::::
 
 
-## Mehrfachvererbung in C++
+# Mehrfachvererbung in C++
 
 \bigskip
 \bigskip
@@ -439,7 +439,7 @@ class HiWi: public Student, public Angestellter {...};
 [Hinweis Speicherlayout ...]{.ex}
 
 ::::::::: notes
-### Problem 1: Gleichnamige Methoden aus Basisklassen geerbt
+## Problem 1: Gleichnamige Methoden aus Basisklassen geerbt
 
 ![](images/mehrfachvererbung-namenskollision_new.png){width="50%"}
 
@@ -468,7 +468,7 @@ Namenskollision bei Mehrfachvererbung auflösen:
 
 [Konsole vererbungMultiMethoden.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/vererbungMultiMethoden.cpp"}
 
-### Problem 2: Gemeinsam geerbte Attribute sind mehrfach vorhanden
+## Problem 2: Gemeinsam geerbte Attribute sind mehrfach vorhanden
 
 ![](images/mehrfachvererbung-attributkollision_new.png){width="50%"}
 
@@ -476,7 +476,7 @@ Namenskollision bei Mehrfachvererbung auflösen:
 :::::::::
 
 
-## Mehrfachvererbung in C++: Virtuelle Basisklassen
+# Mehrfachvererbung in C++: Virtuelle Basisklassen
 
 ```cpp
 class Angestellter: virtual public Person {...};
@@ -504,7 +504,7 @@ HiWi h("Anne", 23.0, 40.0);         // jetzt auch nur EIN name-Feld
 
 
 ::::::::: notes
-## Sonderregeln bei virtueller Ableitung
+# Sonderregeln bei virtueller Ableitung
 
 Virtuelle Ableitung: Potentiell Konflikte zwischen Konstruktoren!
 
@@ -529,7 +529,7 @@ Deshalb gibt es bei virtueller Ableitung folgende Sonderregeln:
 
 
 ::::::::: notes
-## Mehrfachvererbung in C++ ist ein recht kompliziertes Thema
+# Mehrfachvererbung in C++ ist ein recht kompliziertes Thema
 
 Warum ist die Möglichkeit dennoch nützlich?
 
@@ -548,7 +548,7 @@ Java auf Verhalten beschränkt, d.h. Attribute (Zustand) ist in Java-Interfaces
 :::::::::
 
 
-## Wrap-Up
+# Wrap-Up
 
 -   [`public`-Vererbung in C++:]{.notes} `Subklasse : public Superklasse`
 -   Keine gemeinsame Oberklasse wie `Object`, kein `super`

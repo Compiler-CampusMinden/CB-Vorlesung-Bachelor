@@ -6,7 +6,7 @@ points: "10 Punkte"
 
 <!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94 --reference-links=true  sheet05x.md  -o xxx.md  -->
 
-## Aufgaben
+# Aufgaben
 
 Betrachten Sie die auf [Blatt 05] definierte Sprache.
 

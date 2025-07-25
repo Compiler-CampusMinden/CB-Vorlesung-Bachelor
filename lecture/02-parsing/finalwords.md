@@ -33,7 +33,7 @@ fhmedia:
 ---
 
 
-## Grenze Lexer und Parser (Faustregeln)
+# Grenze Lexer und Parser (Faustregeln)
 
 ::: notes
 Der Lexer verwendet einfache reguläre Ausdrücke, während der Parser
@@ -94,7 +94,7 @@ andersherum: Man sollte dem Parser nicht unnötige Arbeit aufbürden.
     :::
 
 
-## Diskussion: Parsen von Adressbüchern und Telefonnummern
+# Diskussion: Parsen von Adressbüchern und Telefonnummern
 
 ::: notes
 Typischer Aufbau eines Adressbuch-Eintrags:
@@ -159,7 +159,7 @@ sind hier nicht dargestellt.
 :::
 
 
-## Wrap-Up
+# Wrap-Up
 
 *   Grenze zw. Lexer und Parser ist gleitend
 *   Ziel: möglichst hohe Abstraktion auf jeder Ebene erreichen

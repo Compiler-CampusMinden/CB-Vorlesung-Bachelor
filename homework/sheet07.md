@@ -5,7 +5,7 @@ author: "Carsten Gips, BC George (HSBI)"
 
 <!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94 --reference-links=true  sheet07.md  -o xxx.md  -->
 
-## Aufgabe
+# Aufgabe
 
 Entwickeln Sie in Ihrem 3er-Team gemeinsam einen Interpreter *oder* einen Compiler für C++.
 
@@ -15,7 +15,7 @@ und Parsers einsetzen (Lernziel).
 Entwickeln Sie verschiedene Eingabebeispiele in unterschiedlicher Komplexität, mit denen Sie
 Ihren Interpreter bzw. Compiler testen können.
 
-### Variante A: Interpreter
+## Variante A: Interpreter
 
 Der Interpreter muss den zu interpretierenden C++-Code aus einer Datei einlesen können.
 
@@ -24,7 +24,7 @@ notwendig. Der Interpreter muss bei Bedarf an relevanten Stellen einen Log-Outpu
 die Arbeitsweise des Programms nachvollziehen zu können. Das Arbeitsergebnis soll auf der
 Konsole ausgegeben werden.
 
-### Variante B: Compiler
+## Variante B: Compiler
 
 Der Compiler muss den zu kompilierenden C++-Code aus einer Datei einlesen können.
 
@@ -32,7 +32,7 @@ Der Compiler soll aus dem eingegebenen C++-Code passenden gültigen Java-Code er
 eine Datei speichern. Definieren Sie ggf. nötige Hilfsbibliotheken, so dass man den
 generierten Code zusammen mit den Hilfsbibliotheken mit Java übersetzen und ausführen kann.
 
-### Sprachumfang
+## Sprachumfang
 
 Sie sollen mindestens folgende C++-Konzepte unterstützen:
 
@@ -59,7 +59,7 @@ Sie finden im [CB-Repo] einige Beispiele, die mindestens umgesetzt werden sollte
 zum Testen Ihres Interpreters bzw. Compilers nutzen können. Beachten Sie, dass diese Sammlung
 nicht vollständig ist.
 
-### Projektvorstellung: Walk-Through statt Präsentation
+## Projektvorstellung: Walk-Through statt Präsentation
 
 Stellen Sie Ihr Projekt am Semesterende vor (Termine siehe Fahrplan und Ankündigung).
 
@@ -77,12 +77,12 @@ Demonstrieren Sie die Funktionsfähigkeit mit Ihren C++-Codebeispielen.
 
 **Sie sollen keine Folien erstellen. Die Präsentation soll live in der IDE erfolgen.**
 
-## Abgabeformat
+# Abgabeformat
 
 Reichen Sie den als ZIP-Datei zusammengepackten Quellcode des Interpreters bzw. Compilers
 elektronisch über ILIAS ein.
 
-## Bewertungskriterien
+# Bewertungskriterien
 
 1.  **Inhalt (40 Punkte)**
 

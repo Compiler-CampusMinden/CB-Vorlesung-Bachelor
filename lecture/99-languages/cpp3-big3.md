@@ -143,7 +143,7 @@ challenges: |
 ---
 
 
-## Big Three
+# Big Three
 
 ::: notes
 Neben dem eigentlichen Konstruktor existieren in C++ weitere wichtige Konstruktoren/Operatoren:
@@ -184,7 +184,7 @@ Dummy::Dummy &operator=(const Dummy &d) {
 ```
 
 ::::::::: notes
-### Big Three: Destruktor
+## Big Three: Destruktor
 
 -   Syntax: `Dummy::~Dummy();` \newline
     (Konstruktor mit vorgesetzter Tilde)
@@ -197,7 +197,7 @@ Dummy::Dummy &operator=(const Dummy &d) {
 :::::::::
 
 ::::::::: notes
-### Big Three: Copy-Konstruktor
+## Big Three: Copy-Konstruktor
 
 -   Syntax: `Dummy::Dummy(const Dummy &);`
 -   Wird aufgerufen bei:
@@ -213,7 +213,7 @@ Dummy::Dummy &operator=(const Dummy &d) {
 :::::::::
 
 ::::::::: notes
-### Big Three: Zuweisungsoperator
+## Big Three: Zuweisungsoperator
 
 -   Syntax: `Dummy &Dummy::operator=(const Dummy &)`
 -   Wird aufgerufen:
@@ -227,7 +227,7 @@ Dummy::Dummy &operator=(const Dummy &d) {
 :::::::::
 
 ::::::::: notes
-### Big Three: Defaults
+## Big Three: Defaults
 
 Analog zum Default-Konstruktor kann der Compiler auch Defaults für die Big Three
 (Copy-Konstruktor, Destruktor, Zuweisungsoperator) generieren. Das funktioniert
@@ -291,7 +291,7 @@ Analyse:
 :::::::::
 
 ::::::::: notes
-### Hinweis Abarbeitungsreihenfolge
+## Hinweis Abarbeitungsreihenfolge
 
 ```cpp
 Dummy a(0); Dummy b(1); Dummy c(2); Dummy d(3);
@@ -300,7 +300,7 @@ a = b = c = d; // entspricht: a.operator=(b.operator=(c.operator=(d)));
 :::::::::
 
 
-## delete this?
+# delete this?
 
 ::: notes
 Erinnerung:
@@ -364,7 +364,7 @@ Auch wenn es zunächst irgendwie sinnvoll aussieht - rufen Sie **niemals nie** `
 :::
 
 
-## C++11: *default* und *delete*
+# C++11: *default* und *delete*
 
 ```cpp
 class Dummy {
@@ -402,7 +402,7 @@ private:
 :::
 
 
-## Statische Methoden und Attribute
+# Statische Methoden und Attribute
 
 ```cpp
 class Studi {
@@ -429,7 +429,7 @@ int Studi::getCount() {
 :::
 
 
-## Konstante Methoden und Kontexte
+# Konstante Methoden und Kontexte
 
 ```cpp
 class Studi {
@@ -470,7 +470,7 @@ Hier darf der Rückgabewert nicht als L-Wert benutzt werden: `wuppie(a,b) = c;` 
 [Konsole: Studi.cpp (const)]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/Studi.cpp"}
 
 
-## Wrap-Up
+# Wrap-Up
 
 -   Klassen: Destruktoren, Copy-Konstruktor, Zuweisungsoperator
 -   Vorsicht mit Default-\*struktoren/-operatoren

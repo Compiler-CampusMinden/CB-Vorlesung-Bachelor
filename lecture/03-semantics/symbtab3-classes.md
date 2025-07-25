@@ -63,7 +63,7 @@ challenges: |
 ---
 
 
-## Strukturen
+# Strukturen
 
 :::::: columns
 ::: {.column width="32%"}
@@ -94,7 +94,7 @@ void f() {
 ::::::
 
 
-## Strukturen: Erweiterung der Symbole und Scopes
+# Strukturen: Erweiterung der Symbole und Scopes
 
 ![](images/structscopesuml.png){width="80%"}
 
@@ -109,7 +109,7 @@ dar, weshalb `Struct` auch noch das Interface `Type` "implementiert".
 :::
 
 
-## Strukturen: Auflösen von Namen
+# Strukturen: Auflösen von Namen
 
 ``` python
 class Struct(Scope, Symbol, Type):
@@ -161,7 +161,7 @@ void f() {
 :::::::::
 
 
-## Klassen
+# Klassen
 
 :::::: columns
 ::: {.column width="32%"}
@@ -192,7 +192,7 @@ public
 ::::::
 
 
-## Klassen: Erweiterung der Symbole und Scopes
+# Klassen: Erweiterung der Symbole und Scopes
 
 ![](images/classscopesuml.png){width="80%"}
 
@@ -203,7 +203,7 @@ Bei Klassen kommt in den Tabellen ein weiterer Pointer `parentClazz` auf die
 Elternklasse hinzu (in der Superklasse ist der Wert `None`).
 :::
 
-## Klassen: Auflösen von Namen
+# Klassen: Auflösen von Namen
 
 ``` {.python size="footnotesize"}
 class Clazz(Struct):
@@ -283,7 +283,7 @@ wie gezeigt in Klassen (Methoden) auf globale Variablen verweisen ...
 :::
 
 
-## Wrap-Up
+# Wrap-Up
 
 *   Symboltabellen: Verwaltung von Symbolen und Typen (Informationen über Bezeichner)
 

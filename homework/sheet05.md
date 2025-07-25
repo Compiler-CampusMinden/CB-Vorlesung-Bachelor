@@ -6,12 +6,12 @@ points: "10 Punkte"
 
 <!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94 --reference-links=true  sheet05.md  -o xxx.md  -->
 
-## Zusammenfassung
+# Zusammenfassung
 
 Ziel dieses Aufgabenblattes ist die Erstellung eines Tree-Walking-Interpreter mit ANTLR für
 eine Lisp-artige Sprache.
 
-## Methodik
+# Methodik
 
 Sie finden im [Sample Project] zwei Grammatiken ([MiniLispA], [MiniLispB]), die (teilweise) zu
 der Zielsprache auf diesem Blatt passen. Analysieren Sie beide Grammatiken und entscheiden Sie
@@ -25,7 +25,7 @@ Es ist empfehlenswert, den Interpreter dreistufig zu realisieren:
 2.  Aufbauen der Symboltabelle und Durchführung der semantischen Analyse
 3.  Ablaufen des Parse-Tree/AST und Auswerten der Ausdrücke (Interpretation)
 
-## Sprachdefinition
+# Sprachdefinition
 
 Ein Programm besteht aus einem oder mehreren Ausdrücken (*Expressions*). Die Ausdrücke haben
 eine spezielle Form: Sie sind sogenannte [S-Expressions]. Dies sind entweder Literale der Form
@@ -67,7 +67,7 @@ entsprechende Einträge, die als Parameter für die Operation oder Funktion zu v
 Die Ausdrücke sind implizit von links nach rechts geklammert, d.h. der Ausdruck `(+ 1 2 3 4)`
 ist [*syntactic sugar*] für `(+ (+ (+ 1 2) 3) 4)`.
 
-### Eingebaute Funktionen
+## Eingebaute Funktionen
 
 Es gibt zwei Funktionen, die fest in der Sprache integriert sind.
 
@@ -88,11 +88,11 @@ werden die Argumente vorher in einen String umgewandelt.
 (str "one: " 1 ", two: " 2)           ;; liefert "one: 1, two: 2" zurück
 ```
 
-### Operatoren
+## Operatoren
 
 Es gibt nur wenige vordefinierte Operatoren, diese mit der üblichen Semantik.
 
-#### Vergleichsoperatoren
+### Vergleichsoperatoren
 
 | Operation  | Operator |
 |:-----------|:--------:|
@@ -103,7 +103,7 @@ Es gibt nur wenige vordefinierte Operatoren, diese mit der üblichen Semantik.
 Die Operanden müssen jeweils beide den selben Typ haben. Dabei sind `String` und `Integer`
 zulässig. Das Ergebnis ist immer vom Typ `Boolean`.
 
-#### Arithmetische Operatoren
+### Arithmetische Operatoren
 
 | Operation      | Operator |
 |:---------------|:--------:|
@@ -115,7 +115,7 @@ zulässig. Das Ergebnis ist immer vom Typ `Boolean`.
 Die Operanden müssen jeweils beide den selben Typ haben. Dabei sind `String` und `Integer`
 zulässig. Das Ergebnis ist vom Typ der Operanden.
 
-### Kontrollstrukturen (If-Else)
+## Kontrollstrukturen (If-Else)
 
 Die `if-then-else`-Abfrage gibt es mit und ohne den `else`-Zweig:
 
@@ -157,7 +157,7 @@ oder anders formatiert:
     (print "false"))
 ```
 
-### Variablen: Bindings mit *def* anlegen
+## Variablen: Bindings mit *def* anlegen
 
 ``` clojure
 (def x 42)  ;; definiert eine neue Variable mit dem Namen "x" und dem Wert 42
@@ -166,7 +166,7 @@ x           ;; liefert 42
 (+ x 7)     ;; liefert 49
 ```
 
-### Funktionen mit *defn* definieren
+## Funktionen mit *defn* definieren
 
 ``` clojure
 ;;     name   params  body
@@ -175,7 +175,7 @@ x           ;; liefert 42
 (hello "world")                          ;; Aufruf der Funktion "hello" mit dem Argument "world"
 ```
 
-### Lokale Scopes mit *let*
+## Lokale Scopes mit *let*
 
 ``` clojure
 ;;    bindings      use names here
@@ -199,7 +199,7 @@ x           ;; liefert 42
 Mit `let` können lokale Variablen erzeugt werden, die dann in dem jeweiligen Scope genutzt
 werden können. Dies funktioniert wie in anderen Sprachen mit Scopes.
 
-### Rekursion
+## Rekursion
 
 ``` clojure
 (defn fac (n)
@@ -210,7 +210,7 @@ werden können. Dies funktioniert wie in anderen Sprachen mit Scopes.
 
 Da es kein `while` oder `for` gibt, müssen Schleifen über rekursive Aufrufe abgebildet werden.
 
-### Datenstrukturen
+## Datenstrukturen
 
 In unserer Sprache gibt es Listen:
 
@@ -247,9 +247,9 @@ bzw. die restliche Liste ohne das erste Element zurückliefern:
 (tail (list 1 2 3))  ;; (2 3)
 ```
 
-## Aufgaben
+# Aufgaben
 
-### A5.1: Grammatik und ANTLR (3P)
+## A5.1: Grammatik und ANTLR (3P)
 
 1.  Erstellen Sie zunächst einige Programme in der Zielsprache. Diese sollten von einfachsten
     Ausdrücken bis hin zu komplexeren Programmen reichen. Definieren Sie beispielsweise eine
@@ -265,7 +265,7 @@ bzw. die restliche Liste ohne das erste Element zurückliefern:
 
 3.  Führen Sie die semantische Analyse durch: Sind alle Symbole bekannt, passen die Scopes?
 
-### A5.2: Tree-Walking-Interpreter (5P)
+## A5.2: Tree-Walking-Interpreter (5P)
 
 Bauen Sie einen Tree-Walking-Interpreter in Ihr Projekt ein.
 
@@ -284,7 +284,7 @@ Lesen Sie den zu interpretierenden Code aus einer Datei ein.
 
 Testen Sie Ihren Interpreter mit Ihren Beispielprogrammen.
 
-### A5.3: Auswirkungen der Grammatik auf den Interpreter (2P)
+## A5.3: Auswirkungen der Grammatik auf den Interpreter (2P)
 
 Sie haben sich vermutlich für eine der beiden Grammatiken ([MiniLispA], [MiniLispB])
 entschieden und auf der Basis Ihren Interpreter erstellt.
@@ -293,7 +293,7 @@ Welche Auswirkungen hat die Grammatik auf den Interpreter? Machen Sie ein Gedank
 Überlegen Sie, was Sie alles in Ihrer Implementierung ändern müssten, wenn Sie die jeweils
 andere Grammatik-Variante nutzen würden.
 
-### Bonus: Interaktiver Interpreter (3P)
+## Bonus: Interaktiver Interpreter (3P)
 
 Bauen Sie eine *REPL* ein, d.h. geben Sie nach dem Start des Interpreters einen Prompt aus und
 verarbeiten Sie die Eingaben interaktiv. Wie müssen Sie hier mit der Symboltabelle umgehen?

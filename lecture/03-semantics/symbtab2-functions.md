@@ -38,7 +38,7 @@ challenges: |
 ---
 
 
-## Funktionen und Scopes
+# Funktionen und Scopes
 
 :::::: columns
 ::: {.column width="36%"}
@@ -68,7 +68,7 @@ void g(int z){}
 ::::::
 
 ::: notes
-### Behandlung von Funktionsdefinitionen
+## Behandlung von Funktionsdefinitionen
 
 *   Jeder Symboltabelleneintrag braucht ein Feld, das angibt, ob es sich um eine
     Variable, eine Funktion, ... handelt. Alternativ eine eigene Klasse ableiten ...
@@ -80,7 +80,7 @@ void g(int z){}
 *   Die formalen Parameter werden als Einträge in der Symboltabelle für den Scope der
     Funktion angelegt and entsprechend als Parameter gekennzeichnet.
 
-### Behandlung von Funktionsaufrufen
+## Behandlung von Funktionsaufrufen
 
 *   Der Name der Funktion steht als Bezeichner in der Symboltabelle des Scopes, in dem
     die Funktion aufgerufen wird und wird als Aufruf gekennzeichnet.
@@ -91,14 +91,14 @@ void g(int z){}
 :::
 
 
-## Erweiterung des Klassendiagramms für Funktions-Scopes
+# Erweiterung des Klassendiagramms für Funktions-Scopes
 
 ![](images/functionscopesuml.png){width="80%"}
 
 [Eigene Modellierung nach einer Idee in [@Parr2010, p. 147]]{.origin}
 
 
-## Funktionen sind Symbole *und* Scopes
+# Funktionen sind Symbole *und* Scopes
 
 ``` python
 class Function(Scope, Symbol):
@@ -107,7 +107,7 @@ class Function(Scope, Symbol):
         enclosingScope = enclScope          # ... and "Scope"
 ```
 
-## Funktionen: Listener
+# Funktionen: Listener
 
 ::: notes
 Den Listener zum Aufbau der Scopes könnte man entsprechend erweitern:
@@ -198,7 +198,7 @@ gespeichert werden (weiteres Feld/Attribut in `Function`)!
 :::
 
 
-## Wrap-Up
+# Wrap-Up
 
 *   Symboltabellen: Verwaltung von Symbolen und Typen (Informationen über Bezeichner)
 
