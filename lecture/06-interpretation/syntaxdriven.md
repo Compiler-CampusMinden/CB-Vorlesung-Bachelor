@@ -8,7 +8,7 @@ readings:
 tldr: |
   Zur Einordnung noch einmal die bisher betrachteten Phasen und die jeweiligen Ergebnisse:
 
-  ![](https://raw.githubusercontent.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/master/lecture/06-interpretation/images/architektur_cb.png)
+  ![](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/06-interpretation/images/architektur_cb.png?raw=true)
 
   |   | Phase                          | Ergebnis                                                        |
   |:--|:-------------------------------|:----------------------------------------------------------------|

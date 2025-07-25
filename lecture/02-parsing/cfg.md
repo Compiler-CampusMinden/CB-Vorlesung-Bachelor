@@ -13,7 +13,7 @@ outcomes:
   - k1: "LL-Parser"
   - k2: "Zusammenhang zwischen PDAs und kontextfreien Grammatiken"
 attachments:
-  - link: "https://raw.githubusercontent.com/Compiler-CampusMinden/AnnotatedSlides/master/frontend_parsing_cfg.ann.ba.pdf"
+  - link: "https://github.com/Compiler-CampusMinden/AnnotatedSlides/blob/master/frontend_parsing_cfg.ann.ba.pdf"
     name: "Annotierte Folien: CFG, LL-Parser"
 ---
 

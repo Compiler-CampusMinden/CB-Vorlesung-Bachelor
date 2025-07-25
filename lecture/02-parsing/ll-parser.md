@@ -10,7 +10,7 @@ outcomes:
   - k2: "Schreiben von LL-Parsern"
   - k3: "Top-Down Analyse programmieren"
 attachments:
-  - link: "https://raw.githubusercontent.com/Compiler-CampusMinden/AnnotatedSlides/master/ll-parser.ann.ba.pdf"
+  - link: "https://github.com/Compiler-CampusMinden/AnnotatedSlides/blob/master/ll-parser.ann.ba.pdf"
     name: "Annotierte Folien: LL-Parser"
 ---
 

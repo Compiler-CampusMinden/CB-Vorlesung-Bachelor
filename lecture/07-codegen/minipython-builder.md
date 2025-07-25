@@ -9,7 +9,7 @@ outcomes:
 assignments:
   - topic: sheet04
 attachments:
-  - link: "https://raw.githubusercontent.com/Compiler-CampusMinden/AnnotatedSlides/master/minipython-builder.ann.ba.pdf"
+  - link: "https://github.com/Compiler-CampusMinden/AnnotatedSlides/blob/master/minipython-builder.ann.ba.pdf"
     name: "Annotierte Folien: Minipython CBuilder"
 ---
 
