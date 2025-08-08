@@ -23,7 +23,7 @@ Sie Ihren Parse-Tree in einen AST.
 
 Es ist empfehlenswert, den Type-Checker dreiphasig zu realisieren:
 
-1.  Aufbauen der Symboltabelle und Prüfen von z.B. Deklaration/Definition vs. Benutzung (Variablen) usw.
+1.  Aufbauen der Symboltabelle und Prüfen von z.B. Deklaration/Definition vs. Benutzung (Variablen) usw.
 2.  Prüfen bei Funktionsaufrufen auf vorhandene/sichtbare Funktionsdefinitionen
 3.  Prüfen der verwendeten Typen
 

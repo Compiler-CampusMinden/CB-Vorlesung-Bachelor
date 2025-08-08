@@ -305,7 +305,7 @@ public:
 };
 ```
 
-Damit lässt sich das folgende Verhalten realisieren (Vergleich *raw* Pointer vs. Smartpointer):
+Damit lässt sich das folgende Verhalten realisieren (Vergleich *raw* Pointer vs. Smartpointer):
 
 ``` cpp
 Token* foo = new Token("foo", 9, 35);                       // raw pointer foo

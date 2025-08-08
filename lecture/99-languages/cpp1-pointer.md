@@ -1088,7 +1088,7 @@ char *p;
 delete p;
 ```
 
-**Referenzen vs. Pointer: Welche der Aufrufe sind zulässig?**
+**Referenzen vs. Pointer: Welche der Aufrufe sind zulässig?**
 
 ``` cpp
 void f1(int*);

@@ -104,7 +104,7 @@ Initialisierung durch den Compiler.
 
 :::: notes
 ::: tip
-**C/C++ vs. Java**
+**C/C++ vs. Java**
 
 -   Java: Fokus auf Sicherheit und Robustheit
     -   Diverse Sicherheitschecks durch Compiler und VM (zb. Array-Zugriff)
@@ -581,7 +581,7 @@ Anmerkung: Unterschied "Parameter" und "Argument":
 
 In der Praxis verwendet man beide Begriffe i.d.R. synonym.
 
-### Funktionen: Deklaration vs. Definition
+### Funktionen: Deklaration vs. Definition
 
 -   **Deklaration**: (Funktions-) Prototyp: Festlegen von Signatur [(d.h. Funktionsname und Anzahl, Typ, Reihenfolge der
     Parameter)]{.notes} u. Rückgabetyp
@@ -606,7 +606,7 @@ In der Praxis verwendet man beide Begriffe i.d.R. synonym.
 -   Deklaration: Variablennamen können weggelassen werden
 
 ::: tip
-**Deklaration vs. Definition**
+**Deklaration vs. Definition**
 
 -   **Deklaration**: Macht einen Namen bekannt und legt den Typ der Variablen bzw. die Schnittstelle der Funktionen
     fest.
@@ -1153,7 +1153,7 @@ Falls die Datei `tollesProgramm` nicht existiert oder aber älter ist als `main.
     ```
     -->
 
--   Erklären Sie den Unterschied `sizeof(x)` vs. `sizeof(x)/sizeof(x[0])`!
+-   Erklären Sie den Unterschied `sizeof(x)` vs. `sizeof(x)/sizeof(x[0])`!
 
 -   Warum ist der folgende Code-Schnipsel gefährlich?
 

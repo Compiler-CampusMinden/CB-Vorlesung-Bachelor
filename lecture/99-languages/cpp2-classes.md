@@ -29,7 +29,7 @@ Für den Aufruf eines Konstruktors ist kein `new` notwendig, es sei denn, man m�
 (inkl. Pointer auf das Objekt).
 
 Beachten Sie den Unterschied der Initialisierung der Attribute bei einer Initialisierung im Body des Konstruktors
-vs. der Initialisierung über eine **Initialisierungsliste**. (Nutzen Sie in C++ nach Möglichkeit
+vs. der Initialisierung über eine **Initialisierungsliste**. (Nutzen Sie in C++ nach Möglichkeit
 Initialisierungslisten.)
 :::
 
@@ -77,7 +77,7 @@ private:
 -   Wie bei Funktionen: Deklaration muss vor Verwendung (= Aufruf) bekannt sein
 -   `this` ist keine Referenz, sondern ein **Pointer** auf das eigene Objekt
 
-## Objektlayout: Java vs. C++
+## Objektlayout: Java vs. C++
 
 ### Java: Referenzen auf Objekte
 
@@ -358,7 +358,7 @@ Delegierende Konstruktoren gibt es ab C++11:
 -   k2: Explizite Konstruktoren
 -   k2: Problematik mit Defaultkonstruktoren/-operatoren (Pointer)
 -   k3: Konstruktoren (eigene, Default)
--   k3: Unterschied Initialisierungslisten vs. Initialisierung im Body
+-   k3: Unterschied Initialisierungslisten vs. Initialisierung im Body
 :::
 
 ::: challenges

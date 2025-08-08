@@ -190,7 +190,7 @@ int main() {
     -   Mit `fkt<..., int>(...)` beim Aufruf wird `T2` zu `int` und damit für Parameter `c` der Char als `int`
         interpretiert (`T3` wird inferiert)
 
-        Ohne `<..., int>` beim Aufruf gibt es ein Problem beim Erkennen von `T2`: `int` vs. `char` (`a=42`, `c='a'`) ...
+        Ohne `<..., int>` beim Aufruf gibt es ein Problem beim Erkennen von `T2`: `int` vs. `char` (`a=42`, `c='a'`) ...
 :::
 
 ::: notes
@@ -551,7 +551,7 @@ Array<T, int>::Array() {}
 ::: notes
 ## Vergleich verschiedene Spezialisierungen
 
-Allgemeine Templates vs. partiell spezialisierte Templates vs. vollständig spezialisierte Templates
+Allgemeine Templates vs. partiell spezialisierte Templates vs. vollständig spezialisierte Templates
 
 ``` cpp
 // Primaeres (allgemeines) Template
@@ -621,7 +621,7 @@ void Array<T,n>::copy_from(const C &c) { ... }
 ```
 :::
 
-# Templates: Java vs. C++
+# Templates: Java vs. C++
 
 -   Templates sind nur **Schablonen**!
 
