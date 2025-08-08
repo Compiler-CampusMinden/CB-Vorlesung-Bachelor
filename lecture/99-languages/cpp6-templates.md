@@ -116,7 +116,7 @@ bool cmp(const T &a, const T &b) {
 
 \bigskip
 
-Vorsicht: Im Beispiel oben muss `operator<` für die verwendeten Typen `T` implementiert sein! `\newline `{=tex}(sonst
+Vorsicht: Im Beispiel oben muss `operator<` für die verwendeten Typen `T` implementiert sein! `\newline`{=tex}(sonst
 Fehler zur Compile-Zeit)
 
 # Bestimmung der Template-Parameter I: Typ-Inferenz

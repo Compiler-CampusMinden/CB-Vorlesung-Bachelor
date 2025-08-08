@@ -217,14 +217,14 @@ s != "123";     // ???
 
 # Anmerkung zu "++" und "-$\,$-" Operatoren: Präfix und Postfix
 
--   Präfix: `\quad `{=tex}`o1 = ++o2;`
+-   Präfix: `\quad`{=tex}`o1 = ++o2;`
     -   Objekt soll **vor Auswertung** inkrementiert werden
     -   Signatur: `Typ &operator++()`
 
 \bigskip
 \smallskip
 
--   Postfix: `\quad `{=tex}`o1 = o2++;`
+-   Postfix: `\quad`{=tex}`o1 = o2++;`
     -   Objekt soll erst **nach Auswertung** inkrementiert werden
     -   Signatur: `Typ operator++(int)` [(=\> `int` dient nur zur Unterscheidung der Präfix-Variante, wird **nie**
         benutzt)]{.notes}
