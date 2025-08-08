@@ -1,11 +1,9 @@
 ---
-title: "Blatt 02: CFG"
-author: "BC George, Carsten Gips (HSBI)"
-points: "10 Punkte"
+author: BC George, Carsten Gips (HSBI)
 no_beamer: true
+points: 10 Punkte
+title: "Blatt 02: CFG"
 ---
-
-<!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94  sheet02.md  -o xxx.md  -->
 
 # A2.1: PDA (2P)
 
@@ -82,5 +80,4 @@ Berechnen die die *First-* und *Follow-Mengen* der Grammatik.
 
 Zeigen Sie, dass die Grammatik LL(1) ist.
 
-Konstruieren Sie die LL-Parsertabelle für die Grammatik und simulieren Sie das Parsen des
-Wortes *1233*.
+Konstruieren Sie die LL-Parsertabelle für die Grammatik und simulieren Sie das Parsen des Wortes *1233*.
