@@ -68,5 +68,3 @@ Package-Deklaration mit in die generierten Sourcen hineingenerieren lassen.
 
 Wenn Sie die Grammatik einzeln übersetzen wollen, können Sie dies mit
 `./gradlew generateGrammarSource` tun.
-
-<!--  pandoc -s -f markdown -t markdown+smart-grid_tables-multiline_tables-simple_tables --columns=94 readme.md -o xxx.md  -->
