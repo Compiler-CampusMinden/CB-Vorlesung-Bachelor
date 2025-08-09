@@ -79,20 +79,25 @@ statt *n x m* Compiler zu schreiben.
 
 ## Wer setzt LLVM ein?
 
-    Adobe   AMD   Apple   ARM   Google
+```
+Adobe   AMD     Apple       ARM     Google
 
-    IBM   Intel   Mozilla   Nvidia   Qualcomm
+IBM     Intel   Mozilla     Nvidia  Qualcomm
 
-    Samsung ...
+Samsung ...
+```
 
 ## Externe LLVM-Projekte
 
 Für folgende Sprachen gibt es Compiler oder Anbindungen an LLVM (neben Clang):
-`\bigskip`{=tex}
 
-    Crack   Go   Haskell   Java   Julia   Kotlin
+\bigskip
 
-    Lua   Numba   Python   Ruby   Rust   Swift   ...
+```
+Crack   Go      Haskell     Java    Julia   Kotlin
+
+Lua     Numba   Python      Ruby    Rust    Swift   ...
+```
 
 \bigskip
 
@@ -101,11 +106,13 @@ LLVM](https://llvm.org/ProjectsWithLLVM/)
 
 ## Unterstützte Prozessorarchitekturen
 
-x86 AMD64 PowerPC PowerPC 64Bit Thumb
+```
+x86   AMD64   PowerPC   PowerPC   64Bit   Thumb
 
-SPARC Alpha CellSPU PIC16 MIPS
+SPARC   Alpha   CellSPU   PIC16   MIPS
 
-MSP430 System z XMOS Xcore ...
+MSP430   System z   XMOS   Xcore   ...
+```
 
 # Einige Komponenten von LLVM
 
