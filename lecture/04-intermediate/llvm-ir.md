@@ -81,7 +81,7 @@ statt *n x m* Compiler zu schreiben.
 
     Adobe   AMD   Apple   ARM   Google
 
-IBM Intel Mozilla Nvidia Qualcomm
+    IBM   Intel   Mozilla   Nvidia   Qualcomm
 
 Samsung ...
 
