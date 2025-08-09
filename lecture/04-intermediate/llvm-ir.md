@@ -90,7 +90,7 @@ statt *n x m* Compiler zu schreiben.
 Für folgende Sprachen gibt es Compiler oder Anbindungen an LLVM (neben Clang):
 `\bigskip`{=tex}
 
-Crack Go Haskell Java Julia Kotlin
+    Crack   Go   Haskell   Java   Julia   Kotlin
 
 Lua Numba Python Ruby Rust Swift ...
 
