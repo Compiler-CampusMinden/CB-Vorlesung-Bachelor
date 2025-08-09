@@ -13,7 +13,8 @@ $$L = \lbrace w \in \lbrace a, b, c \rbrace^* \; | \; w \; \text{hat doppelt so 
 
 akzeptiert.
 
-Beschreiben Sie Schritt für Schritt, wie der PDA die Eingaben *bcaba* und *bccac* abarbeitet.
+Beschreiben Sie Schritt für Schritt, wie der PDA die Eingaben *bcaba* und *bccac*
+abarbeitet.
 
 # A2.2: Akzeptierte Sprache (1P)
 
@@ -34,7 +35,8 @@ $$\begin{eqnarray}
 \delta(q_3,\epsilon, \perp) &=& (q_4, \epsilon)  \nonumber
 \end{eqnarray}$$
 
-Zeichnen Sie den Automaten. Geben Sie das 7-Tupel des PDa an. Welche Sprache akzeptiert er?
+Zeichnen Sie den Automaten. Geben Sie das 7-Tupel des PDa an. Welche Sprache
+akzeptiert er?
 
 # A2.3: Kontextfreie Sprache (1P)
 
@@ -59,7 +61,8 @@ Entwickeln Sie eine kontextfreie Grammatik für die Sprache
 
 $$L = \lbrace a^ib^jc^k \; | \; i = j \lor j = k \rbrace$$
 
-Zeigen Sie, dass die Grammatik mehrdeutig ist. Entwickeln Sie einen PDA für diese Sprache.
+Zeigen Sie, dass die Grammatik mehrdeutig ist. Entwickeln Sie einen PDA für diese
+Sprache.
 
 # A2.5: Kontextfreie Grammatik (4P)
 
@@ -80,4 +83,5 @@ Berechnen die die *First-* und *Follow-Mengen* der Grammatik.
 
 Zeigen Sie, dass die Grammatik LL(1) ist.
 
-Konstruieren Sie die LL-Parsertabelle für die Grammatik und simulieren Sie das Parsen des Wortes *1233*.
+Konstruieren Sie die LL-Parsertabelle für die Grammatik und simulieren Sie das Parsen
+des Wortes *1233*.

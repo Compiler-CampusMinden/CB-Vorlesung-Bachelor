@@ -15,8 +15,9 @@ title: LLVM als IR
 ## Motivation
 :::
 
-Es ist ein neuer Prozessor entwickelt worden mit einem neuen Befehlssatz, und es sollen für zwei Programmiersprachen
-Compiler entwickelt werden, die diesen Befehlssatz als Ziel haben.
+Es ist ein neuer Prozessor entwickelt worden mit einem neuen Befehlssatz, und es
+sollen für zwei Programmiersprachen Compiler entwickelt werden, die diesen
+Befehlssatz als Ziel haben.
 
 Was tun?
 
@@ -61,7 +62,8 @@ mit entkoppelten Komponenten, die über APIs kommunizieren (Modularität)
 
 ## Wie arbeitet man damit?
 
--   (mit Generatoren) ein Frontend entwickeln, das Programme über einen AST in LLVM IR übersetzt
+-   (mit Generatoren) ein Frontend entwickeln, das Programme über einen AST in LLVM
+    IR übersetzt
 -   mit LLVM den Zwischencode optimieren
 -   mit LLVM Maschinencode oder VM-Code generieren
 
@@ -77,37 +79,39 @@ statt *n x m* Compiler zu schreiben.
 
 ## Wer setzt LLVM ein?
 
-Adobe      AMD      Apple      ARM      Google
+Adobe AMD Apple ARM Google
 
-IBM        Intel        Mozilla      Nvidia      Qualcomm
+IBM Intel Mozilla Nvidia Qualcomm
 
-Samsung       ...
+Samsung ...
 
 ## Externe LLVM-Projekte
 
-Für folgende Sprachen gibt es Compiler oder Anbindungen an LLVM (neben Clang): `\bigskip`{=tex}
+Für folgende Sprachen gibt es Compiler oder Anbindungen an LLVM (neben Clang):
+`\bigskip`{=tex}
 
-Crack      Go     Haskell      Java      Julia      Kotlin
+Crack Go Haskell Java Julia Kotlin
 
-Lua      Numba      Python     Ruby      Rust      Swift      ...
+Lua Numba Python Ruby Rust Swift ...
 
 \bigskip
 
-Für weitere Projekte siehe [Projects built with LLVM](https://llvm.org/ProjectsWithLLVM/)
+Für weitere Projekte siehe [Projects built with
+LLVM](https://llvm.org/ProjectsWithLLVM/)
 
 ## Unterstützte Prozessorarchitekturen
 
-x86      AMD64      PowerPC      PowerPC 64Bit      Thumb
+x86 AMD64 PowerPC PowerPC 64Bit Thumb
 
-SPARC      Alpha      CellSPU      PIC16      MIPS
+SPARC Alpha CellSPU PIC16 MIPS
 
-MSP430     System z      XMOS      Xcore      ...
+MSP430 System z XMOS Xcore ...
 
 # Einige Komponenten von LLVM
 
 ## Einige Komponenten (Projekte) von LLVM
 
--   Der LLVM-Kern incl. Optimierer
+-   Der LLVM-Kern incl. Optimierer
 -   MLIR für IR-Dialekte
 -   Der Compiler Clang
 -   Die Compiler-Runtime-Bibliothek
@@ -158,14 +162,16 @@ MSP430     System z      XMOS      Xcore      ...
 
 ## Der Compiler Clang
 
-**Clang**: schneller C/C++/Objective-C - Compiler auf Basis von LLVM mit aussagekräftigen Fehlermeldungen und Warnungen
+**Clang**: schneller C/C++/Objective-C - Compiler auf Basis von LLVM mit
+aussagekräftigen Fehlermeldungen und Warnungen
 
 ![](./images/opt_chain.png)
 
 ## Die Sanitizer in der Compiler-Runtime-Bibliothek
 
-Sanitizer: Methoden zur Instrumentierung (Code der in das kompilierte Programm eingebettet wird) zur Erleichterung der
-Lokalisierung und Analyse verschiedenster Fehlerquellen, z. B.:
+Sanitizer: Methoden zur Instrumentierung (Code der in das kompilierte Programm
+eingebettet wird) zur Erleichterung der Lokalisierung und Analyse verschiedenster
+Fehlerquellen, z. B.:
 
 -   Speicherfehler und Speicherlecks (z. B. use-after-free)
 -   Race Conditions
@@ -178,7 +184,8 @@ Lokalisierung und Analyse verschiedenster Fehlerquellen, z. B.:
 ## Wrap-Up
 :::
 
-LLVM ist eine (fast) komplette Infrastruktur zur Entwicklung von Compilern und compilerähnlichen Programmen.
+LLVM ist eine (fast) komplette Infrastruktur zur Entwicklung von Compilern und
+compilerähnlichen Programmen.
 
 Die wichtigsten Bestandteile:
 

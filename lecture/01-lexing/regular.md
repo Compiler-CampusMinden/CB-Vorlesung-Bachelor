@@ -27,15 +27,16 @@ Hier entsteht ein Tafelbild.
 
 ## Alphabete
 
-**Def.:** Ein **Alphabet** $\Sigma$ ist eine endliche, nicht-leere Menge von Symbolen. Die Symbole eines Alphabets
-heißen *Buchstaben*.
+**Def.:** Ein **Alphabet** $\Sigma$ ist eine endliche, nicht-leere Menge von
+Symbolen. Die Symbole eines Alphabets heißen *Buchstaben*.
 
-**Def.:** Ein **Wort** $w$ *über einem Alphabet* $\Sigma$ ist eine endliche Folge von Symbolen aus $\Sigma$. $\epsilon$
-ist das leere Wort. Die *Länge* $\vert w \vert$ eines Wortes $w$ ist die Anzahl von Buchstaben, die es enthält
-(Kardinalität).
+**Def.:** Ein **Wort** $w$ *über einem Alphabet* $\Sigma$ ist eine endliche Folge von
+Symbolen aus $\Sigma$. $\epsilon$ ist das leere Wort. Die *Länge* $\vert w \vert$
+eines Wortes $w$ ist die Anzahl von Buchstaben, die es enthält (Kardinalität).
 
-**Def.:** Eine **Sprache** $L$ *über einem Alphabet* $\Sigma$ ist eine Menge von Wörtern über diesem Alphabet. Sprachen
-können endlich oder unendlich viele Wörter enthalten.
+**Def.:** Eine **Sprache** $L$ *über einem Alphabet* $\Sigma$ ist eine Menge von
+Wörtern über diesem Alphabet. Sprachen können endlich oder unendlich viele Wörter
+enthalten.
 
 ## Beispiel
 
@@ -51,14 +52,15 @@ Hier entsteht ein Tafelbild.
 
 ## Def.: deterministischer endlicher Automat
 
-**Def.:** Ein **deterministischer endlicher Automat** (DFA) ist ein 5-Tupel $A = (Q, \Sigma, \delta, q_0, F)$ mit
+**Def.:** Ein **deterministischer endlicher Automat** (DFA) ist ein 5-Tupel
+$A = (Q, \Sigma, \delta, q_0, F)$ mit
 
 -   $Q$ : endliche Menge von **Zuständen**
 
 -   $\Sigma$ : Alphabet von **Eingabesymbolen**
 
--   $\delta$ : die (eventuell partielle) **Übergangsfunktion** $(Q \times \Sigma) \rightarrow Q$, $\delta$ kann partiell
-    sein
+-   $\delta$ : die (eventuell partielle) **Übergangsfunktion**
+    $(Q \times \Sigma) \rightarrow Q$, $\delta$ kann partiell sein
 
 -   $q_0 \in Q$ : der **Startzustand**
 
@@ -66,13 +68,16 @@ Hier entsteht ein Tafelbild.
 
 ## Die Übergangsfunktion
 
-**Def.:** Wir definieren $\delta^{\ast}: (Q \times \Sigma^{\ast}) \rightarrow Q$: induktiv wie folgt:
+**Def.:** Wir definieren $\delta^{\ast}: (Q \times \Sigma^{\ast}) \rightarrow Q$:
+induktiv wie folgt:
 
 -   Basis: $\delta^{\ast}(q, \epsilon) = q\ \forall q \in Q$
 
--   Induktion: $\delta^{\ast}(q, a_1, \ldots, a_n) = \delta(\delta^{\ast}(q, a_1, \ldots , a_{n-1}), a_n)$
+-   Induktion:
+    $\delta^{\ast}(q, a_1, \ldots, a_n) = \delta(\delta^{\ast}(q, a_1, \ldots , a_{n-1}), a_n)$
 
-**Def.:** Ein DFA akzeptiert ein Wort $w \in \Sigma^{\ast}$ genau dann, wenn $\delta^{\ast}(q_0, w) \in F.$
+**Def.:** Ein DFA akzeptiert ein Wort $w \in \Sigma^{\ast}$ genau dann, wenn
+$\delta^{\ast}(q_0, w) \in F.$
 
 ## Beispiel
 
@@ -82,13 +87,15 @@ Hier entsteht ein Tafelbild.
 
 ## Nichtdeterministische endliche Automaten
 
-**Def.:** Ein **nichtdeterministischer endlicher Automat** (NFA) ist ein 5-Tupel $A = (Q, \Sigma, \delta, q_0, F)$ mit
+**Def.:** Ein **nichtdeterministischer endlicher Automat** (NFA) ist ein 5-Tupel
+$A = (Q, \Sigma, \delta, q_0, F)$ mit
 
 -   $Q$ : endliche Menge von **Zuständen**
 
 -   $\Sigma$ : Alphabet von **Eingabesymbolen**
 
--   $\delta$ : die (eventuell partielle) **Übergangsfunktion** $(Q \times \Sigma) \rightarrow Q$
+-   $\delta$ : die (eventuell partielle) **Übergangsfunktion**
+    $(Q \times \Sigma) \rightarrow Q$
 
 -   $q_0 \in Q$ : der **Startzustand**
 
@@ -96,7 +103,8 @@ Hier entsteht ein Tafelbild.
 
 ## Akzeptierte Sprachen
 
-**Def.:** Sei A ein DFA oder ein NFA. Dann ist **L(A)** die von A akzeptierte Sprache, d. h.
+**Def.:** Sei A ein DFA oder ein NFA. Dann ist **L(A)** die von A akzeptierte
+Sprache, d. h.
 
 $L(A) = \lbrace \text{Wörter}\ w\ |\ \delta^*(q_0, w) \in F \rbrace$
 
@@ -108,7 +116,8 @@ NFAs sind so nicht zu programmieren, aber:
 
 \medskip
 
-**Satz:** Eine Sprache $L$ wird von einem NFA akzeptiert $\Leftrightarrow L$ wird von einem DFA akzeptiert.
+**Satz:** Eine Sprache $L$ wird von einem NFA akzeptiert $\Leftrightarrow L$ wird von
+einem DFA akzeptiert.
 
 D. h. es existieren Algorithmen zur
 
@@ -119,19 +128,22 @@ D. h. es existieren Algorithmen zur
 
 ## Reguläre Ausdrücke definieren Sprachen
 
-**Def.:** Induktive Definition von **regulären Ausdrücken** (regex) und der von ihnen repräsentierten Sprache **L**:
+**Def.:** Induktive Definition von **regulären Ausdrücken** (regex) und der von ihnen
+repräsentierten Sprache **L**:
 
 -   Basis:
 
     -   $\epsilon$ und $\emptyset$ sind reguläre Ausdrücke mit $L(\epsilon) =
           \lbrace \epsilon\rbrace$, $L(\emptyset)=\emptyset$
-    -   Sei $a$ ein Symbol $\Rightarrow$ $a$ ist ein regex mit $L(a) = \lbrace a\rbrace$
+    -   Sei $a$ ein Symbol $\Rightarrow$ $a$ ist ein regex mit
+        $L(a) = \lbrace a\rbrace$
 
 -   Induktion: Seien $E,\ F$ reguläre Ausdrücke. Dann gilt:
 
     -   $E+F$ ist ein regex und bezeichnet die Vereinigung $L(E + F) = L(E)\cup L(F)$
     -   $EF$ ist ein regex und bezeichnet die Konkatenation $L(EF) = L(E)L(F)$
-    -   $E^{\ast}$ ist ein regex und bezeichnet die Kleene-Hülle $L(E^{\ast})=(L(E))^{\ast}$
+    -   $E^{\ast}$ ist ein regex und bezeichnet die Kleene-Hülle
+        $L(E^{\ast})=(L(E))^{\ast}$
     -   $(E)$ ist ein regex mit $L((E)) = L(E)$
 
 Vorrangregeln der Operatoren für reguläre Ausdrücke: \*, Konkatenation, +
@@ -168,30 +180,35 @@ Hier entsteht ein Tafelbild.
 
 \medskip
 
-$\qquad X \rightarrow Y$ mit $X \in (N \cup T)^{\ast} N  (N \cup T)^{\ast}, Y \in (N \cup T)^{\ast}$
+$\qquad X \rightarrow Y$ mit
+$X \in (N \cup T)^{\ast} N  (N \cup T)^{\ast}, Y \in (N \cup T)^{\ast}$
 
 ## Ableitungen
 
-**Def.:** Sei $G = (N, T, P, S)$ eine Grammatik, sei $\alpha A \beta$ eine Zeichenkette über $(N \cup T)^{\ast}$ und sei
-$A$ $\rightarrow \gamma$ eine Produktion von $G$.
+**Def.:** Sei $G = (N, T, P, S)$ eine Grammatik, sei $\alpha A \beta$ eine
+Zeichenkette über $(N \cup T)^{\ast}$ und sei $A$ $\rightarrow \gamma$ eine
+Produktion von $G$.
 
-Wir schreiben: $\alpha A \beta \Rightarrow \alpha \gamma \beta$ ($\alpha A \beta$ leitet $\alpha \gamma \beta$ ab).
+Wir schreiben: $\alpha A \beta \Rightarrow \alpha \gamma \beta$ ($\alpha A \beta$
+leitet $\alpha \gamma \beta$ ab).
 
 \medskip
 
-**Def.:** Wir definieren die Relation $\overset{\ast}{\Rightarrow}$ induktiv wie folgt:
+**Def.:** Wir definieren die Relation $\overset{\ast}{\Rightarrow}$ induktiv wie
+folgt:
 
--   Basis: $\forall \alpha \in (N \cup T)^{\ast} \alpha \overset{\ast}{\Rightarrow} \alpha$ (Jede Zeichenkette leitet
-    sich selbst ab.)
+-   Basis:
+    $\forall \alpha \in (N \cup T)^{\ast} \alpha \overset{\ast}{\Rightarrow} \alpha$
+    (Jede Zeichenkette leitet sich selbst ab.)
 
--   Induktion: Wenn $\alpha \overset{\ast}{\Rightarrow} \beta$ und $\beta\Rightarrow \gamma$ dann
-    $\alpha \overset{\ast}{\Rightarrow} \gamma$
+-   Induktion: Wenn $\alpha \overset{\ast}{\Rightarrow} \beta$ und
+    $\beta\Rightarrow \gamma$ dann $\alpha \overset{\ast}{\Rightarrow} \gamma$
 
 \medskip
 
 **Def.:** Sei $G = (N, T ,P, S)$ eine formale Grammatik. Dann ist
-$L(G) = \lbrace \text{Wörter}\ w\ \text{über}\ T \mid S \overset{\ast}{\Rightarrow} w\rbrace$ die von $G$ erzeugte
-Sprache.
+$L(G) = \lbrace \text{Wörter}\ w\ \text{über}\ T \mid S \overset{\ast}{\Rightarrow} w\rbrace$
+die von $G$ erzeugte Sprache.
 
 ## Beispiel
 
@@ -201,7 +218,8 @@ Hier entsteht ein Tafelbild.
 
 ## Reguläre Grammatiken
 
-**Def.:** Eine **reguläre (oder type-3-) Grammatik** ist eine formale Grammatik mit den folgenden Einschränkungen:
+**Def.:** Eine **reguläre (oder type-3-) Grammatik** ist eine formale Grammatik mit
+den folgenden Einschränkungen:
 
 -   Alle Produktionen sind entweder von der Form
 
@@ -218,23 +236,24 @@ Hier entsteht ein Tafelbild.
 
 ## Reguläre Sprachen und ihre Grenzen
 
-**Satz:** Die von endlichen Automaten akzeptiert Sprachklasse, die von regulären Ausdrücken beschriebene Sprachklasse
-und die von regulären Grammatiken erzeugte Sprachklasse sind identisch und heißen **reguläre Sprachen**.
+**Satz:** Die von endlichen Automaten akzeptiert Sprachklasse, die von regulären
+Ausdrücken beschriebene Sprachklasse und die von regulären Grammatiken erzeugte
+Sprachklasse sind identisch und heißen **reguläre Sprachen**.
 
 \medskip
 
 **Reguläre Sprachen**
 
 -   einfache Struktur
--   Matchen von Symbolen (z. B. Klammern) nicht möglich, da die fixe Anzahl von Zuständen eines DFAs die Erkennung
-    solcher Sprachen verhindert.
+-   Matchen von Symbolen (z. B. Klammern) nicht möglich, da die fixe Anzahl von
+    Zuständen eines DFAs die Erkennung solcher Sprachen verhindert.
 
 ## Wozu reguläre Sprachen im Compilerbau?
 
 -   Reguläre Ausdrücke
 
-    -   definieren Schlüsselwörter und alle weiteren Symbole einer Programmiersprache, z. B. den Aufbau von
-        Gleitkommazahlen
+    -   definieren Schlüsselwörter und alle weiteren Symbole einer
+        Programmiersprache, z. B. den Aufbau von Gleitkommazahlen
     -   werden (oft von einem Generator) in DFAs umgewandelt
     -   sind die Basis des *Scanners* oder *Lexers*
 
@@ -244,15 +263,16 @@ und die von regulären Grammatiken erzeugte Sprachklasse sind identisch und hei�
 
 -   Ein **Lexer**
 
-    -   wandelt mittels DFAs aus regulären Ausdrücken die Folge von Zeichen der Quelldatei in eine Folge von sog. Token
-        um
+    -   wandelt mittels DFAs aus regulären Ausdrücken die Folge von Zeichen der
+        Quelldatei in eine Folge von sog. Token um
 
-    -   bekommt als Input eine Liste von Paaren aus regulären Ausdrücken und Tokennamen, z. B. ("while", WHILE)
+    -   bekommt als Input eine Liste von Paaren aus regulären Ausdrücken und
+        Tokennamen, z. B. ("while", WHILE)
 
     -   Kommentare und Strings müssen richtig erkannt werden. (Schachtelungen)
 
-    -   liefert Paare von Token und deren Werte, sofern benötigt, z. B. (WHILE, \_), oder (IDENTIFIER, "radius") oder
-        (INTEGERZAHL, "334")
+    -   liefert Paare von Token und deren Werte, sofern benötigt, z. B. (WHILE, \_),
+        oder (IDENTIFIER, "radius") oder (INTEGERZAHL, "334")
 
 ## Wie geht es weiter?
 
@@ -260,10 +280,12 @@ und die von regulären Grammatiken erzeugte Sprachklasse sind identisch und hei�
 
     -   führt mit Hilfe des Tokenstreams vom Lexer die Syntaxanalyse durch
 
-    -   basiert auf einer sog. kontextfreien Grammatik, deren Terminale die Token sind
+    -   basiert auf einer sog. kontextfreien Grammatik, deren Terminale die Token
+        sind
 
-    -   liefert die syntaktische Struktur in Form eines Ableitungsbaums (**syntax tree**, **parse tree**), bzw. einen
-        **AST** (abstract syntax tree) ohne redundante Informationen im Ableitungsbaum (z. B. Semikolons)
+    -   liefert die syntaktische Struktur in Form eines Ableitungsbaums (**syntax
+        tree**, **parse tree**), bzw. einen **AST** (abstract syntax tree) ohne
+        redundante Informationen im Ableitungsbaum (z. B. Semikolons)
 
     -   liefert evtl. Fehlermeldungen
 
@@ -289,5 +311,6 @@ und die von regulären Grammatiken erzeugte Sprachklasse sind identisch und hei�
 -   k1: Reguläre Grammatiken
 -   k2: Zusammenhänge und Gesetzmäßigkeiten bzgl. der oben genannten Konstrukte
 -   k3: DFAs, reguläre Ausdrücke, reguläre Grammatiken entwickeln
--   k3: Einen DFA entwickeln, der alle Schlüsselwörter, Namen und weitere Symbole einer Programmiersprache akzeptiert
+-   k3: Einen DFA entwickeln, der alle Schlüsselwörter, Namen und weitere Symbole
+    einer Programmiersprache akzeptiert
 :::

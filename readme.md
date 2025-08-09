@@ -8,12 +8,13 @@ title: "IFM 3.1: Compilerbau (Winter 2025/26)"
 
 # Kursbeschreibung
 
-Der Compiler ist das wichtigste Werkzeug in der Informatik. In der Königsdisziplin der Informatik schließt sich der
-Kreis, hier kommen die unterschiedlichen Algorithmen und Datenstrukturen und Programmiersprachenkonzepte zur Anwendung.
+Der Compiler ist das wichtigste Werkzeug in der Informatik. In der Königsdisziplin
+der Informatik schließt sich der Kreis, hier kommen die unterschiedlichen Algorithmen
+und Datenstrukturen und Programmiersprachenkonzepte zur Anwendung.
 
-In diesem Modul geht es um ein grundlegendes Verständnis für die wichtigsten Konzepte im Compilerbau. Wir schauen uns
-dazu relevante aktuelle Tools und Frameworks an und setzen diese bei der Erstellung eines kleinen Compiler-Frontends für
-C++ ein.
+In diesem Modul geht es um ein grundlegendes Verständnis für die wichtigsten Konzepte
+im Compilerbau. Wir schauen uns dazu relevante aktuelle Tools und Frameworks an und
+setzen diese bei der Erstellung eines kleinen Compiler-Frontends für C++ ein.
 
 # Überblick Modulinhalte
 
@@ -35,9 +36,11 @@ C++ ein.
 
 # Team
 
--   [BC George](https://www.hsbi.de/minden/ueber-uns/personenverzeichnis/birgit-christina-george)
--   [Carsten Gips](https://www.hsbi.de/minden/ueber-uns/personenverzeichnis/carsten-gips) (Sprechstunde nach
-    Vereinbarung)
+-   [BC
+    George](https://www.hsbi.de/minden/ueber-uns/personenverzeichnis/birgit-christina-george)
+-   [Carsten
+    Gips](https://www.hsbi.de/minden/ueber-uns/personenverzeichnis/carsten-gips)
+    (Sprechstunde nach Vereinbarung)
 
 # Kursformat
 
@@ -48,7 +51,8 @@ C++ ein.
 |                              | G3: Fr, 09:45 - 11:15 Uhr (Präsenz J101) |
 |                              | G4: Fr, 11:30 - 13:00 Uhr (Präsenz J101) |
 
-Durchführung der Vorlesung als *Flipped Classroom* (Carsten) bzw. als *reguläre Vorlesung* (BC). Zugangsdaten Zoom siehe
+Durchführung der Vorlesung als *Flipped Classroom* (Carsten) bzw. als *reguläre
+Vorlesung* (BC). Zugangsdaten Zoom siehe
 [ILIAS](https://www.hsbi.de/elearning/goto.php?target=crs_1400597&client_id=FH-Bielefeld).
 
 # Fahrplan
@@ -58,8 +62,8 @@ Kalender](https://calendar.google.com/calendar/ical/07021c87022fe3f132fa2e2e799b
 mit allen Terminen der Veranstaltung zum Einbinden in Ihre Kalender-App.
 
 Abgabe der Übungsblätter jeweils **Montag bis 09:00 Uhr** im
-[ILIAS](https://www.hsbi.de/elearning/goto.php?target=exc_1420724&client_id=FH-Bielefeld). Vorstellung der Lösung im
-jeweiligen Praktikum in der Abgabewoche.
+[ILIAS](https://www.hsbi.de/elearning/goto.php?target=exc_1420724&client_id=FH-Bielefeld).
+Vorstellung der Lösung im jeweiligen Praktikum in der Abgabewoche.
 
 | Monat                | Woche | Vorlesung                                                                                                                                                                                                                                                                                 | Lead        | Abgabe Aufgabenblatt                                | Vorstellung Praktikum                                     |
 |:---------------------|:------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------|:----------------------------------------------------|:----------------------------------------------------------|
@@ -90,26 +94,31 @@ jeweiligen Praktikum in der Abgabewoche.
 **Parcoursprüfung plus Testat**, 5 ECTS
 
 -   **Testat**: Vergabe der Credit-Points
-    1.  Mindestens 4 der Übungsblätter [B01](homework/sheet01.md), [B02](homework/sheet02.md),
-        [B03](homework/sheet03.md), [B04](homework/sheet04.md), [B05](homework/sheet05.md) und
+    1.  Mindestens 4 der Übungsblätter [B01](homework/sheet01.md),
+        [B02](homework/sheet02.md), [B03](homework/sheet03.md),
+        [B04](homework/sheet04.md), [B05](homework/sheet05.md) und
         [B06](homework/sheet06.md) erfolgreich bearbeitet, **und**
     2.  **aktive** Teilnahme an allen 3 Edmonton-Terminen.
 
-    ("erfolgreich bearbeitet": Bearbeitung in 3er Teams, je mindestens 60% bearbeitet, fristgerechte Abgabe der Lösungen
-    im ILIAS, Vorstellung der Lösungen im Praktikum)
+    ("erfolgreich bearbeitet": Bearbeitung in 3er Teams, je mindestens 60%
+    bearbeitet, fristgerechte Abgabe der Lösungen im ILIAS, Vorstellung der Lösungen
+    im Praktikum)
 
 ## Prüfung im ersten Zeitraum
 
 -   **Stationen**:
 
     1.  ILIAS-Test (einzeln, 20.11.)
-    2.  Vorstellung Mini-Projekt [B07](homework/sheet07.md) (3er Teams, letzte VL-Woche)
+    2.  Vorstellung Mini-Projekt [B07](homework/sheet07.md) (3er Teams, letzte
+        VL-Woche)
 
-    Note für das Modul: Beide Stationen ergeben zu **je 50%** *oder* in der Gewichtung **30 Punkte (Station I) und 50
-    Punkte (Station II)** die Gesamtnote (individuelle Günstigerprüfung).
+    Note für das Modul: Beide Stationen ergeben zu **je 50%** *oder* in der
+    Gewichtung **30 Punkte (Station I) und 50 Punkte (Station II)** die Gesamtnote
+    (individuelle Günstigerprüfung).
 
-    Für Station I werden 3 Punkte Überhang gewährt: Von den 33 maximal erreichbaren Punkten werden 30 Punkte als 100%
-    gewertet, darüber hinausgehende Punkte bleiben als Bonuspunkte erhalten.
+    Für Station I werden 3 Punkte Überhang gewährt: Von den 33 maximal erreichbaren
+    Punkten werden 30 Punkte als 100% gewertet, darüber hinausgehende Punkte bleiben
+    als Bonuspunkte erhalten.
 
 ## Prüfung im zweiten Zeitraum
 
@@ -121,45 +130,55 @@ jeweiligen Praktikum in der Abgabewoche.
 # Materialien
 
 1.  ["**Compilers: Principles, Techniques, and
-    Tools**"](https://learning.oreilly.com/library/view/compilers-principles-techniques/9789357054881/). Aho, A. V. und
-    Lam, M. S. und Sethi, R. und Ullman, J. D. and Bansal, S., Pearson India, 2023. ISBN
+    Tools**"](https://learning.oreilly.com/library/view/compilers-principles-techniques/9789357054881/).
+    Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D. and Bansal, S., Pearson
+    India, 2023. ISBN
     [978-9-3570-5488-1](https://fhb-bielefeld.digibib.net/openurl?isbn=978-9-3570-5488-1).
-    [Online](https://learning.oreilly.com/library/view/compilers-principles-techniques/9789357054881/) über die
-    [O'Reilly-Lernplattform](https://www.oreilly.com/library-access/).
-2.  ["**Crafting Interpreters**"](https://github.com/munificent/craftinginterpreters). Nystrom, R., Genever
-    Benning, 2021. ISBN [978-0-9905829-3-9](https://fhb-bielefeld.digibib.net/openurl?isbn=978-0-9905829-3-9).
+    [Online](https://learning.oreilly.com/library/view/compilers-principles-techniques/9789357054881/)
+    über die [O'Reilly-Lernplattform](https://www.oreilly.com/library-access/).
+2.  ["**Crafting
+    Interpreters**"](https://github.com/munificent/craftinginterpreters). Nystrom,
+    R., Genever Benning, 2021. ISBN
+    [978-0-9905829-3-9](https://fhb-bielefeld.digibib.net/openurl?isbn=978-0-9905829-3-9).
     [Online](https://www.craftinginterpreters.com/).
 3.  ["**The Definitive ANTLR 4
-    Reference**"](https://learning.oreilly.com/library/view/the-definitive-antlr/9781941222621/). Parr, T., Pragmatic
-    Bookshelf, 2014. ISBN [978-1-9343-5699-9](https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-9343-5699-9).
-    [Online](https://learning.oreilly.com/library/view/the-definitive-antlr/9781941222621/) über die
-    [O'Reilly-Lernplattform](https://www.oreilly.com/library-access/).
-4.  ["Writing a C Compiler"](https://learning.oreilly.com/library/view/writing-a-c/9781098182229/). Sandler, N., No
-    Starch Press, 2024. ISBN [978-1-0981-8222-9](https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-0981-8222-9).
-    [Online](https://learning.oreilly.com/library/view/writing-a-c/9781098182229/) über die
-    [O'Reilly-Lernplattform](https://www.oreilly.com/library-access/).
+    Reference**"](https://learning.oreilly.com/library/view/the-definitive-antlr/9781941222621/).
+    Parr, T., Pragmatic Bookshelf, 2014. ISBN
+    [978-1-9343-5699-9](https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-9343-5699-9).
+    [Online](https://learning.oreilly.com/library/view/the-definitive-antlr/9781941222621/)
+    über die [O'Reilly-Lernplattform](https://www.oreilly.com/library-access/).
+4.  ["Writing a C
+    Compiler"](https://learning.oreilly.com/library/view/writing-a-c/9781098182229/).
+    Sandler, N., No Starch Press, 2024. ISBN
+    [978-1-0981-8222-9](https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-0981-8222-9).
+    [Online](https://learning.oreilly.com/library/view/writing-a-c/9781098182229/)
+    über die [O'Reilly-Lernplattform](https://www.oreilly.com/library-access/).
 
 # Förderungen und Kooperationen
 
 ## Kooperation mit University of Alberta, Edmonton (Kanada)
 
 Über das Projekt ["We CAN
-virtuOWL"](https://www.uni-bielefeld.de/international/profil/netzwerk/alberta-owl/we-can-virtuowl/) der Fachhochschule
-Bielefeld ist im Frühjahr 2021 eine Kooperation mit der [University of
-Alberta](https://www.hsbi.de/en/international-office/alberta-owl-cooperation) (Edmonton/Alberta, Kanada) im Modul
-"Compilerbau" gestartet.
+virtuOWL"](https://www.uni-bielefeld.de/international/profil/netzwerk/alberta-owl/we-can-virtuowl/)
+der Fachhochschule Bielefeld ist im Frühjahr 2021 eine Kooperation mit der
+[University of
+Alberta](https://www.hsbi.de/en/international-office/alberta-owl-cooperation)
+(Edmonton/Alberta, Kanada) im Modul "Compilerbau" gestartet.
 
-Wir freuen uns, auch in diesem Semester wieder drei gemeinsame Sitzungen für beide Hochschulen anbieten zu können.
-(Diese Termine werden in englischer Sprache durchgeführt.)
+Wir freuen uns, auch in diesem Semester wieder drei gemeinsame Sitzungen für beide
+Hochschulen anbieten zu können. (Diese Termine werden in englischer Sprache
+durchgeführt.)
 
-------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
 
 # LICENSE
 
 ![](https://licensebuttons.net/l/by-sa/4.0/88x31.png)
 
-Unless otherwise noted, [this work](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor) by [BC
+Unless otherwise noted, [this
+work](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor) by [BC
 George](https://github.com/bcg7), [Carsten Gips](https://github.com/cagix) and
-[contributors](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/graphs/contributors) is licensed under [CC
-BY-SA 4.0](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/LICENSE.md). See the
-[credits](CREDITS.md) for a detailed list of contributing projects.
+[contributors](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/graphs/contributors)
+is licensed under [CC BY-SA
+4.0](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/LICENSE.md).
+See the [credits](CREDITS.md) for a detailed list of contributing projects.

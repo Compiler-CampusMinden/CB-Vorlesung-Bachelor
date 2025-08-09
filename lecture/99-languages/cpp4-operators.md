@@ -4,19 +4,23 @@ title: "C++: Operatoren"
 ---
 
 ::: tldr
-In C++ können existierende Operatoren überladen werden, etwa für die Nutzung mit eigenen Klassen. Dabei kann die
-Überladung innerhalb einer Klassendefinition passieren (analog zur Implementierung einer Methode) oder außerhalb der
-Klasse (analog zur Definition einer überladenen Funktion).
+In C++ können existierende Operatoren überladen werden, etwa für die Nutzung mit
+eigenen Klassen. Dabei kann die Überladung innerhalb einer Klassendefinition
+passieren (analog zur Implementierung einer Methode) oder außerhalb der Klasse
+(analog zur Definition einer überladenen Funktion).
 
-Beim Überladen in einer Klasse hat der Operator nur einen Parameter (beim Aufruf das Objekt auf der rechten Seite) und
-man kann auf die Attribute der Klasse direkt zugreifen. Bei der Überladung außerhalb der Klasse hat der Operator zwei
-Parameter und darf nicht auf die Attribute der Klasse zugreifen.
+Beim Überladen in einer Klasse hat der Operator nur einen Parameter (beim Aufruf das
+Objekt auf der rechten Seite) und man kann auf die Attribute der Klasse direkt
+zugreifen. Bei der Überladung außerhalb der Klasse hat der Operator zwei Parameter
+und darf nicht auf die Attribute der Klasse zugreifen.
 
-Man kann Funktionen, Methoden/Operatoren und Klassen als `friend` einer Klasse deklarieren. Damit bricht man die
-Kapselung auf und erlaubt den Freunden den direkten Zugriff auf die internen Attribute einer Klasse.
+Man kann Funktionen, Methoden/Operatoren und Klassen als `friend` einer Klasse
+deklarieren. Damit bricht man die Kapselung auf und erlaubt den Freunden den direkten
+Zugriff auf die internen Attribute einer Klasse.
 
-Um bei der Implementierung von Post- und Präfix-Operatoren die Variante für den Compiler unterscheidbar zu machen, hat
-die Signatur der Postfix-Variante einen Dummy-Parameter vom Typ `int`. Dieser wird beim Aufruf aber nicht genutzt.
+Um bei der Implementierung von Post- und Präfix-Operatoren die Variante für den
+Compiler unterscheidbar zu machen, hat die Signatur der Postfix-Variante einen
+Dummy-Parameter vom Typ `int`. Dieser wird beim Aufruf aber nicht genutzt.
 :::
 
 ::: youtube
@@ -90,7 +94,8 @@ class MyString {
 
 -   Erinnerung: `cout << a` entspricht `cout.operator<<(a)`
     -   Operator kann nicht in `MyString` überladen werden!
-    -   Klasse `ostream` müsste erweitert werden `\newline`{=tex} =\> Geht aber nicht, da System-weite Klasse!
+    -   Klasse `ostream` müsste erweitert werden `\newline`{=tex} =\> Geht aber
+        nicht, da System-weite Klasse!
 
 \smallskip
 
@@ -115,12 +120,14 @@ ostream &operator<<(ostream &out, const MyString &s) {
 
     -   oder als `friend` der Klasse `MyString` deklarieren
 
-        [Alternativ Zugriffsmethoden (aka *Getter*) nutzen wie `toString()` ...]{.notes}
+        [Alternativ Zugriffsmethoden (aka *Getter*) nutzen wie `toString()`
+        ...]{.notes}
 
 \bigskip
 \bigskip
 
-**Anmerkung**: Rückgabe der Referenz auf den Stream erlaubt die typische Verkettung: `cout << s1 << s2 << endl;`
+**Anmerkung**: Rückgabe der Referenz auf den Stream erlaubt die typische Verkettung:
+`cout << s1 << s2 << endl;`
 
 # Meine Freunde dürfen in mein Wohnzimmer
 
@@ -147,7 +154,8 @@ class Dummy {
 ::: notes
 -   Alle normalen arithmetischen Operatoren
 -   Zuweisung, Vergleich, Ein-/Ausgabe
--   Index-Operator `[]`, Pointer-Dereferenzierung `*` und `->`, sowie `()`, `new` und `delete` (auch in `[]`-Form)
+-   Index-Operator `[]`, Pointer-Dereferenzierung `*` und `->`, sowie `()`, `new` und
+    `delete` (auch in `[]`-Form)
 :::
 
 \smallskip
@@ -163,8 +171,8 @@ class Dummy {
 
 -   Anmerkungen:
     -   Beim Überladen muss die Arität erhalten bleiben
-    -   Nur *existierende* Operatoren lassen sich überladen `\newline`{=tex} =\> Es lassen sich keine neuen Operatoren
-        erschaffen
+    -   Nur *existierende* Operatoren lassen sich überladen `\newline`{=tex} =\> Es
+        lassen sich keine neuen Operatoren erschaffen
 
 \bigskip
 
@@ -195,8 +203,8 @@ s != "123";     // ???
     "123" != s;    // KEIN operator!=(char*, MyString&) vorhanden!
     ```
 
-    Das ist letztlich wie bei einem Methodenaufruf: Um die richtige Methode aufzurufen, muss der Typ (die Klasse) des
-    Objekts bekannt sein.
+    Das ist letztlich wie bei einem Methodenaufruf: Um die richtige Methode
+    aufzurufen, muss der Typ (die Klasse) des Objekts bekannt sein.
     :::
 
 -   Operatoren **außerhalb** überladen: Konvertierung auf *beiden* Seiten möglich
@@ -226,8 +234,8 @@ s != "123";     // ???
 
 -   Postfix: `\quad`{=tex}`o1 = o2++;`
     -   Objekt soll erst **nach Auswertung** inkrementiert werden
-    -   Signatur: `Typ operator++(int)` [(=\> `int` dient nur zur Unterscheidung der Präfix-Variante, wird **nie**
-        benutzt)]{.notes}
+    -   Signatur: `Typ operator++(int)` [(=\> `int` dient nur zur Unterscheidung der
+        Präfix-Variante, wird **nie** benutzt)]{.notes}
 
 # Weitere Anmerkungen
 
@@ -235,8 +243,8 @@ s != "123";     // ???
 
     ::: notes
     -   `operator+` und `operator+=` sind zwei verschiedene Operatoren!
-    -   Implementierung ist prinzipiell unabhängig! `\newline`{=tex} =\> Erwartung: `operator+=` $\;==\;$ (`operator+`
-        $\;+\;$ `operator=`)
+    -   Implementierung ist prinzipiell unabhängig! `\newline`{=tex} =\> Erwartung:
+        `operator+=` $\;==\;$ (`operator+` $\;+\;$ `operator=`)
     :::
 
 \bigskip
@@ -298,7 +306,8 @@ private:
 };
 ```
 
-Implementieren Sie den `operator++` sowohl in der Präfix- als auch in der Postfix-Variante.
+Implementieren Sie den `operator++` sowohl in der Präfix- als auch in der
+Postfix-Variante.
 
 <!--
 `o1 = o2++;` entspricht `o1 = o2.operator++(int);` und muss

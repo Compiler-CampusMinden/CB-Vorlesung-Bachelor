@@ -7,17 +7,19 @@ title: "Blatt 05: Interpreter"
 
 # Zusammenfassung
 
-Ziel dieses Aufgabenblattes ist die Erstellung eines Tree-Walking-Interpreter mit ANTLR für eine Lisp-artige Sprache.
+Ziel dieses Aufgabenblattes ist die Erstellung eines Tree-Walking-Interpreter mit
+ANTLR für eine Lisp-artige Sprache.
 
 # Methodik
 
 Sie finden im [Sample
-Project](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/tree/master/homework/src/sample_project) zwei
-Grammatiken
+Project](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/tree/master/homework/src/sample_project)
+zwei Grammatiken
 ([MiniLispA](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/homework/src/sample_project/src/main/antlr/MiniLispA.g4),
 [MiniLispB](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/homework/src/sample_project/src/main/antlr/MiniLispB.g4)),
-die (teilweise) zu der Zielsprache auf diesem Blatt passen. Analysieren Sie beide Grammatiken und entscheiden Sie sich
-für eine der beiden Varianten. Vervollständigen Sie diese bzw. passen Sie diese an.
+die (teilweise) zu der Zielsprache auf diesem Blatt passen. Analysieren Sie beide
+Grammatiken und entscheiden Sie sich für eine der beiden Varianten. Vervollständigen
+Sie diese bzw. passen Sie diese an.
 
 Erstellen Sie mit dieser Grammatik und ANTLR wieder einen Lexer und Parser.
 
@@ -29,12 +31,15 @@ Es ist empfehlenswert, den Interpreter dreistufig zu realisieren:
 
 # Sprachdefinition
 
-Ein Programm besteht aus einem oder mehreren Ausdrücken (*Expressions*). Die Ausdrücke haben eine spezielle Form: Sie
-sind sogenannte [S-Expressions](https://en.wikipedia.org/wiki/S-expression). Dies sind entweder Literale der Form `x`
-oder einfache listenartige Gebilde der Form `(. x y)`, wobei der `.` eine Operation (oder Funktion) darstellt und `x`
-und `y` selbst wieder S-Expressions sind.
+Ein Programm besteht aus einem oder mehreren Ausdrücken (*Expressions*). Die
+Ausdrücke haben eine spezielle Form: Sie sind sogenannte
+[S-Expressions](https://en.wikipedia.org/wiki/S-expression). Dies sind entweder
+Literale der Form `x` oder einfache listenartige Gebilde der Form `(. x y)`, wobei
+der `.` eine Operation (oder Funktion) darstellt und `x` und `y` selbst wieder
+S-Expressions sind.
 
-Die einfachste Form sind dabei Literale mit konkreten Werten der drei Datentypen `Integer`, `String` und `Boolean`:
+Die einfachste Form sind dabei Literale mit konkreten Werten der drei Datentypen
+`Integer`, `String` und `Boolean`:
 
 ``` clojure
 42          ;; Integer
@@ -61,26 +66,29 @@ Komplexere Ausdrücke werden über die Listenform gebildet:
 (/ (+ 10 2) (+ 2 4))  ;; ((10 + 2) / (2 + 4))
 ```
 
-In der listenartigen Form ist der erste Eintrag der Liste immer eine Operation (oder ein Funktionsname), danach kommen
-je nach Operation/Funktion (die Arität muss passen!) entsprechende Einträge, die als Parameter für die Operation oder
-Funktion zu verstehen sind.
+In der listenartigen Form ist der erste Eintrag der Liste immer eine Operation (oder
+ein Funktionsname), danach kommen je nach Operation/Funktion (die Arität muss
+passen!) entsprechende Einträge, die als Parameter für die Operation oder Funktion zu
+verstehen sind.
 
-Die Ausdrücke sind implizit von links nach rechts geklammert, d.h. der Ausdruck `(+ 1 2 3 4)` ist [*syntactic
-sugar*](https://en.wikipedia.org/wiki/Syntactic_sugar) für `(+ (+ (+ 1 2) 3) 4)`.
+Die Ausdrücke sind implizit von links nach rechts geklammert, d.h. der Ausdruck
+`(+ 1 2 3 4)` ist [*syntactic sugar*](https://en.wikipedia.org/wiki/Syntactic_sugar)
+für `(+ (+ (+ 1 2) 3) 4)`.
 
 ## Eingebaute Funktionen
 
 Es gibt zwei Funktionen, die fest in der Sprache integriert sind.
 
-Mit der eingebauten Funktion `print` kann der Wert eines Ausdrucks auf der Konsole ausgegeben werden:
+Mit der eingebauten Funktion `print` kann der Wert eines Ausdrucks auf der Konsole
+ausgegeben werden:
 
 ``` clojure
 (print "hello world")
 (print "wuppie\nfluppie\nfoo\nbar")
 ```
 
-Die eingebaute Funktion `str` verknüpft ihre Argumente und bildet einen String. Falls nötig, werden die Argumente vorher
-in einen String umgewandelt.
+Die eingebaute Funktion `str` verknüpft ihre Argumente und bildet einen String. Falls
+nötig, werden die Argumente vorher in einen String umgewandelt.
 
 ``` clojure
 (str 42)                              ;; liefert "42" zurück
@@ -100,8 +108,8 @@ Es gibt nur wenige vordefinierte Operatoren, diese mit der üblichen Semantik.
 | Größer     |   `>`    |
 | Kleiner    |   `<`    |
 
-Die Operanden müssen jeweils beide den selben Typ haben. Dabei sind `String` und `Integer` zulässig. Das Ergebnis ist
-immer vom Typ `Boolean`.
+Die Operanden müssen jeweils beide den selben Typ haben. Dabei sind `String` und
+`Integer` zulässig. Das Ergebnis ist immer vom Typ `Boolean`.
 
 ### Arithmetische Operatoren
 
@@ -112,8 +120,8 @@ immer vom Typ `Boolean`.
 | Multiplikation |   `*`    |
 | Division       |   `/`    |
 
-Die Operanden müssen jeweils beide den selben Typ haben. Dabei sind `String` und `Integer` zulässig. Das Ergebnis ist
-vom Typ der Operanden.
+Die Operanden müssen jeweils beide den selben Typ haben. Dabei sind `String` und
+`Integer` zulässig. Das Ergebnis ist vom Typ der Operanden.
 
 ## Kontrollstrukturen (If-Else)
 
@@ -131,7 +139,8 @@ Die `if-then-else`-Abfrage gibt es mit und ohne den `else`-Zweig:
     (print "false"))  ;; else
 ```
 
-Dabei kann jeweils nur genau eine S-Expression genutzt werden. Wenn man mehrere Dinge berechnen möchte, nutzt man `do`:
+Dabei kann jeweils nur genau eine S-Expression genutzt werden. Wenn man mehrere Dinge
+berechnen möchte, nutzt man `do`:
 
 ``` clojure
 (do
@@ -195,8 +204,8 @@ x           ;; liefert 42
 )  ;; end of function definition
 ```
 
-Mit `let` können lokale Variablen erzeugt werden, die dann in dem jeweiligen Scope genutzt werden können. Dies
-funktioniert wie in anderen Sprachen mit Scopes.
+Mit `let` können lokale Variablen erzeugt werden, die dann in dem jeweiligen Scope
+genutzt werden können. Dies funktioniert wie in anderen Sprachen mit Scopes.
 
 ## Rekursion
 
@@ -207,7 +216,8 @@ funktioniert wie in anderen Sprachen mit Scopes.
         (* n (fac (- n 1)))))
 ```
 
-Da es kein `while` oder `for` gibt, müssen Schleifen über rekursive Aufrufe abgebildet werden.
+Da es kein `while` oder `for` gibt, müssen Schleifen über rekursive Aufrufe
+abgebildet werden.
 
 ## Datenstrukturen
 
@@ -218,12 +228,13 @@ In unserer Sprache gibt es Listen:
 (def v (1 2 3))  ;; Fehler!
 ```
 
-Das Problem daran ist, dass unsere S-Expressions zwar bereits listenartige Strukturen sind, der erste Eintrag aber als
-Operator oder Funktion interpretiert wird. Der Ausdruck oben würde beim Auswerten versuchen, die "Funktion" 1 auf den
-Argumenten 2 und 3 aufzurufen ...
+Das Problem daran ist, dass unsere S-Expressions zwar bereits listenartige Strukturen
+sind, der erste Eintrag aber als Operator oder Funktion interpretiert wird. Der
+Ausdruck oben würde beim Auswerten versuchen, die "Funktion" 1 auf den Argumenten 2
+und 3 aufzurufen ...
 
-Man braucht also eine Notation, die ein sofortiges Auswerten verhindert und nur die Liste an sich zurückliefert. Dies
-erreicht man durch die Funktion `list`:
+Man braucht also eine Notation, die ein sofortiges Auswerten verhindert und nur die
+Liste an sich zurückliefert. Dies erreicht man durch die Funktion `list`:
 
 ``` clojure
 (list 1 2 3)          ;; (1 2 3)
@@ -238,8 +249,8 @@ Mit der Funktion `nth` kann man auf das n-te Element einer Liste zugreifen:
 (nth (list "abc" false 99) 2)  ;; 99
 ```
 
-Zusätzlich gibt es die beiden Funktionen `head` und `tail`, die das erste Element einer Liste bzw. die restliche Liste
-ohne das erste Element zurückliefern:
+Zusätzlich gibt es die beiden Funktionen `head` und `tail`, die das erste Element
+einer Liste bzw. die restliche Liste ohne das erste Element zurückliefern:
 
 ``` clojure
 (head (list 1 2 3))  ;; 1
@@ -250,36 +261,41 @@ ohne das erste Element zurückliefern:
 
 ## A5.1: Grammatik und ANTLR (3P)
 
-1.  Erstellen Sie zunächst einige Programme in der Zielsprache. Diese sollten von einfachsten Ausdrücken bis hin zu
-    komplexeren Programmen reichen. Definieren Sie beispielsweise eine Funktion, die rekursiv die Länge einer Liste
-    berechnet.
+1.  Erstellen Sie zunächst einige Programme in der Zielsprache. Diese sollten von
+    einfachsten Ausdrücken bis hin zu komplexeren Programmen reichen. Definieren Sie
+    beispielsweise eine Funktion, die rekursiv die Länge einer Liste berechnet.
 
-    Definieren Sie neben gültigen Programmen auch solche, die in der semantischen Analyse zurückgewiesen werden sollten.
-    Welche Fehlerkategorien könnte es hier geben?
+    Definieren Sie neben gültigen Programmen auch solche, die in der semantischen
+    Analyse zurückgewiesen werden sollten. Welche Fehlerkategorien könnte es hier
+    geben?
 
-2.  Definieren Sie für die obige Sprache eine geeignete ANTLR-Grammatik. Sie können dabei die Grammatik
+2.  Definieren Sie für die obige Sprache eine geeignete ANTLR-Grammatik. Sie können
+    dabei die Grammatik
     [MiniLispA](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/homework/src/sample_project/src/main/antlr/MiniLispA.g4)
     oder
     [MiniLispB](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/homework/src/sample_project/src/main/antlr/MiniLispB.g4)
     im [Sample
-    Project](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/tree/master/homework/src/sample_project) als
-    Ausgangspunkt nutzen und diese anpassen und vervollständigen. Erzeugen Sie mithilfe der Grammatik und ANTLR einen
-    Lexer und Parser.
+    Project](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/tree/master/homework/src/sample_project)
+    als Ausgangspunkt nutzen und diese anpassen und vervollständigen. Erzeugen Sie
+    mithilfe der Grammatik und ANTLR einen Lexer und Parser.
 
-3.  Führen Sie die semantische Analyse durch: Sind alle Symbole bekannt, passen die Scopes?
+3.  Führen Sie die semantische Analyse durch: Sind alle Symbole bekannt, passen die
+    Scopes?
 
 ## A5.2: Tree-Walking-Interpreter (5P)
 
 Bauen Sie einen Tree-Walking-Interpreter in Ihr Projekt ein.
 
-Realisieren Sie die eingebauten Funktionen `print` und `str` dabei als *native* Funktionen. Realisieren Sie `list`,
-`nth`, `head` und `tail` sowie `def`, `let`, `defn`, `do` und die Operatoren und die Kontrollstrukturen geeignet.
+Realisieren Sie die eingebauten Funktionen `print` und `str` dabei als *native*
+Funktionen. Realisieren Sie `list`, `nth`, `head` und `tail` sowie `def`, `let`,
+`defn`, `do` und die Operatoren und die Kontrollstrukturen geeignet.
 
-Lösen Sie die als "*syntactic sugar*" bezeichneten Ausdrücke auf und transformieren Sie den AST entsprechend:
-`(+ 1 2 3 4)` soll zu `(+ (+ (+ 1 2) 3) 4)` umgeformt werden. Analog für die anderen Operatoren der Sprache (Vergleiche,
-Arithmetik).
+Lösen Sie die als "*syntactic sugar*" bezeichneten Ausdrücke auf und transformieren
+Sie den AST entsprechend: `(+ 1 2 3 4)` soll zu `(+ (+ (+ 1 2) 3) 4)` umgeformt
+werden. Analog für die anderen Operatoren der Sprache (Vergleiche, Arithmetik).
 
-Achten Sie auf die Datentypen. Die Typen von Variablen etc. sind erst zur Laufzeit bekannt und müssen dann passen.
+Achten Sie auf die Datentypen. Die Typen von Variablen etc. sind erst zur Laufzeit
+bekannt und müssen dann passen.
 
 Lesen Sie den zu interpretierenden Code aus einer Datei ein.
 
@@ -292,10 +308,12 @@ Sie haben sich vermutlich für eine der beiden Grammatiken
 [MiniLispB](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/homework/src/sample_project/src/main/antlr/MiniLispB.g4))
 entschieden und auf der Basis Ihren Interpreter erstellt.
 
-Welche Auswirkungen hat die Grammatik auf den Interpreter? Machen Sie ein Gedankenexperiment: Überlegen Sie, was Sie
-alles in Ihrer Implementierung ändern müssten, wenn Sie die jeweils andere Grammatik-Variante nutzen würden.
+Welche Auswirkungen hat die Grammatik auf den Interpreter? Machen Sie ein
+Gedankenexperiment: Überlegen Sie, was Sie alles in Ihrer Implementierung ändern
+müssten, wenn Sie die jeweils andere Grammatik-Variante nutzen würden.
 
 ## Bonus: Interaktiver Interpreter (3P)
 
-Bauen Sie eine *REPL* ein, d.h. geben Sie nach dem Start des Interpreters einen Prompt aus und verarbeiten Sie die
-Eingaben interaktiv. Wie müssen Sie hier mit der Symboltabelle umgehen?
+Bauen Sie eine *REPL* ein, d.h. geben Sie nach dem Start des Interpreters einen
+Prompt aus und verarbeiten Sie die Eingaben interaktiv. Wie müssen Sie hier mit der
+Symboltabelle umgehen?
