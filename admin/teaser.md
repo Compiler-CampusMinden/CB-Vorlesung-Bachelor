@@ -1,6 +1,6 @@
 ---
-title: "Modulvorstellung Compilerbau"
-author: "BC George & Carsten Gips (HSBI)"
+author: BC George & Carsten Gips (HSBI)
+title: Modulvorstellung Compilerbau
 ---
 
 ::: youtube
@@ -11,7 +11,10 @@ author: "BC George & Carsten Gips (HSBI)"
 
 ![](https://github.com/munificent/craftinginterpreters/blob/master/site/image/a-map-of-the-territory/mountain.png?raw=true){width="92%"}
 
-[[A Map of the Territory (mountain.png)](https://github.com/munificent/craftinginterpreters/blob/master/site/image/a-map-of-the-territory/mountain.png) by [Bob Nystrom](https://github.com/munificent) on Github.com ([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
+[[A Map of the Territory
+(mountain.png)](https://github.com/munificent/craftinginterpreters/blob/master/site/image/a-map-of-the-territory/mountain.png)
+by [Bob Nystrom](https://github.com/munificent) on Github.com
+([MIT](https://github.com/munificent/craftinginterpreters/blob/master/LICENSE))]{.origin}
 
 \bigskip
 \bigskip

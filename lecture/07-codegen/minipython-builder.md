@@ -47,7 +47,8 @@ Hier entsteht ein Tafelbild.
 
 -   bei der Portierung eines Compilers muss nur das Backend neu geschrieben werden
 
--   verschiedene Frontends (Sprachen) können denselben Zwischencode (Backend) benutzen
+-   verschiedene Frontends (Sprachen) können denselben Zwischencode (Backend)
+    benutzen
 
 -   wenn der Zielprozessor nicht sehr mächtig ist
 
@@ -96,9 +97,10 @@ Den CBuilder gibt es schon!
 Das Projekt enthält ein Gradle-Buildscript und ein Makefile.
 
 ::: notes
-Der [CBuilder](https://github.com/Compiler-CampusMinden/Mini-Python-Builder) bringt eine C-Runtime mit. Sie finden
-Hinweise zur Nutzung des CBuildes in der
-[Doku](https://github.com/Compiler-CampusMinden/Mini-Python-Builder/blob/master/docs/usage_cbuilder.md) sowie zur
+Der [CBuilder](https://github.com/Compiler-CampusMinden/Mini-Python-Builder) bringt
+eine C-Runtime mit. Sie finden Hinweise zur Nutzung des CBuildes in der
+[Doku](https://github.com/Compiler-CampusMinden/Mini-Python-Builder/blob/master/docs/usage_cbuilder.md)
+sowie zur
 [Runtime](https://github.com/Compiler-CampusMinden/Mini-Python-Builder/blob/master/docs/usage_generated_code.md).
 :::
 
@@ -110,9 +112,11 @@ Hinweise zur Nutzung des CBuildes in der
 
 ## Und für Windows?
 
-Der generierte Code benötigt Funktionen aus dem POSIX.1-2008-Standard, läuft also nicht direkt unter Windows. Abhilfe:
+Der generierte Code benötigt Funktionen aus dem POSIX.1-2008-Standard, läuft also
+nicht direkt unter Windows. Abhilfe:
 
-1)  mit **MSYS2** arbeiten (`pacman -S make` und `pacman -S gcc` zur Installation von Make und gcc aufrufen) oder
+1)  mit **MSYS2** arbeiten (`pacman -S make` und `pacman -S gcc` zur Installation
+    von Make und gcc aufrufen) oder
 
 2)  **WSL** (Windows Subsytem für Linux) benutzen oder
 
@@ -122,13 +126,14 @@ Der generierte Code benötigt Funktionen aus dem POSIX.1-2008-Standard, läuft a
 
 ## Und für den Mac
 
-Sie können Make und clang (und einige weitere Kommandozeilen-Tools) mittels `xcode-select --install` installieren.
-Alternativen können Sie auch [Homebrew](https://brew.sh/) oder andere Alternativen nutzen.
+Sie können Make und clang (und einige weitere Kommandozeilen-Tools) mittels
+`xcode-select --install` installieren. Alternativen können Sie auch
+[Homebrew](https://brew.sh/) oder andere Alternativen nutzen.
 
 ## Installation des CBuilders (Linux)
 
--   das [Repo](https://github.com/Compiler-CampusMinden/Mini-Python-Builder) clonen: ergibt Gradle-Projekt
-    (`build.gradle` im Hauptverzeichnis vom Git-Repo)
+-   das [Repo](https://github.com/Compiler-CampusMinden/Mini-Python-Builder) clonen:
+    ergibt Gradle-Projekt (`build.gradle` im Hauptverzeichnis vom Git-Repo)
 -   das ANTLR-Projekt (Ihren bisherigen Quellcode) hineinkopieren
 -   Main-Klasse festlegen (siehe
     [Doku](https://github.com/Compiler-CampusMinden/Mini-Python-Builder/blob/master/docs/usage_cbuilder.md))
@@ -139,20 +144,24 @@ Alternativen können Sie auch [Homebrew](https://brew.sh/) oder andere Alternati
 
 -   die Aufrufe des CBuilders in Ihr Projekt integrieren
 
--   den CBuilder ausführen (z. B. über `./gradlew run`). Das generierte C-Programm wird z. B. als `./src/program.c`
-    geschrieben. [Den Ordner können Sie im Builder beim Aufruf von `ProgramBuilder#writeProgram(outputFolder)` selbst
+-   den CBuilder ausführen (z. B. über `./gradlew run`). Das generierte C-Programm
+    wird z. B. als `./src/program.c` geschrieben. [Den Ordner können Sie im Builder
+    beim Aufruf von `ProgramBuilder#writeProgram(outputFolder)` selbst
     angeben.]{.notes}
 
--   in diesem Verzeichnis **Make** aufrufen: `make all` übersetzt das Programm, `make run` führt es auch aus,
-    `make clean` entfernt überflüssige erzeugte Dateien.
+-   in diesem Verzeichnis **Make** aufrufen: `make all` übersetzt das Programm,
+    `make run` führt es auch aus, `make clean` entfernt überflüssige erzeugte
+    Dateien.
 
--   Das übersetzte Programm (`./bin/program`) läuft in einer Konsole (mit `input`- und `print`-Anweisungen)
+-   Das übersetzte Programm (`./bin/program`) läuft in einer Konsole (mit `input`-
+    und `print`-Anweisungen)
 
 # Java-Interface des CBuilders
 
 ## Anlegen des CBuilders und Definieren der Funktionalität
 
-Auszug aus der [Doku](https://github.com/Compiler-CampusMinden/Mini-Python-Builder/blob/master/docs/usage_cbuilder.md):
+Auszug aus der
+[Doku](https://github.com/Compiler-CampusMinden/Mini-Python-Builder/blob/master/docs/usage_cbuilder.md):
 
 ``` java
 ProgramBuilder builder = new ProgramBuilder();
@@ -168,7 +177,8 @@ builder.writeProgram(outputFolder); // Erzeugt den C-Code (inkl. Runtime)
 
 ## Definition von Literalen
 
-Auszug aus der [Doku](https://github.com/Compiler-CampusMinden/Mini-Python-Builder/blob/master/docs/usage_cbuilder.md):
+Auszug aus der
+[Doku](https://github.com/Compiler-CampusMinden/Mini-Python-Builder/blob/master/docs/usage_cbuilder.md):
 
 ``` java
 new StringLiteral("foo");   // String mit Inhalt "foo" erzeugen
@@ -190,7 +200,8 @@ Reference varA = new Reference("a");
 
 ## Anlegen von Variablen in Funktionen
 
-Lokale Variablen in Funktionen müssen mit der Funktion zusammen definiert werden. Siehe dort.
+Lokale Variablen in Funktionen müssen mit der Funktion zusammen definiert werden.
+Siehe dort.
 
 ## Logische Operatoren
 
@@ -206,8 +217,9 @@ builder.addStatement(assignA);
 
 ## Arithmetische Operatoren und Vergleichsoperatoren
 
-Arithmetische Operatoren werden in Form von Methodenaufrufen realisiert. Das geht, weil alle Variablen in Python von
-`object` erben, wo die Operatoren als Methoden definiert sind (und man sie so auch überladen kann).
+Arithmetische Operatoren werden in Form von Methodenaufrufen realisiert. Das geht,
+weil alle Variablen in Python von `object` erben, wo die Operatoren als Methoden
+definiert sind (und man sie so auch überladen kann).
 
 Methodennamen:
 
@@ -228,11 +240,13 @@ Assignment assignD = new Assignment(varD, add);
 
 ## Kontrollstrukturen
 
-siehe [Doku](https://github.com/Compiler-CampusMinden/Mini-Python-Builder/blob/master/docs/usage_cbuilder.md)
+siehe
+[Doku](https://github.com/Compiler-CampusMinden/Mini-Python-Builder/blob/master/docs/usage_cbuilder.md)
 
 ## Built-In-Funktionen
 
-Auszug aus der [Doku](https://github.com/Compiler-CampusMinden/Mini-Python-Builder/blob/master/docs/usage_cbuilder.md):
+Auszug aus der
+[Doku](https://github.com/Compiler-CampusMinden/Mini-Python-Builder/blob/master/docs/usage_cbuilder.md):
 
 ``` java
 Reference printRef = new Reference("print");
@@ -278,19 +292,23 @@ builder.addStatement(callPrint);
 
 -   Typ `MPyClass`
 
--   Angabe der Referenz auf Elternklasse (`__MPytype_Object`, wenn keine eigene Oberklasse vorhanden ist)
+-   Angabe der Referenz auf Elternklasse (`__MPytype_Object`, wenn keine eigene
+    Oberklasse vorhanden ist)
 
 -   `__init__()` muss **immer** implementiert werden
 
--   in `__init__()` **muss** als erstes `super` (Klasse `SuperCall` aufgerufen werden
+-   in `__init__()` **muss** als erstes `super` (Klasse `SuperCall` aufgerufen
+    werden
 
--   Alle Methodendefinitionen **müssen** als ersten Parameter `self` enthalten, nicht jedoch die Methodenaufrufe.
+-   Alle Methodendefinitionen **müssen** als ersten Parameter `self` enthalten,
+    nicht jedoch die Methodenaufrufe.
 
 ## Methodennamen
 
-Methoden werden vom CBuilder in normale Funktionen umgesetzt, d. h. gleichnamige Methoden in unterschiedlichen Klassen
-würden zu Fehlern führen. Eindeutige Namen werden automatisch durch die Methode `Function#createUniqueCName()` im
-Konstruktor erzeugt.
+Methoden werden vom CBuilder in normale Funktionen umgesetzt, d. h. gleichnamige
+Methoden in unterschiedlichen Klassen würden zu Fehlern führen. Eindeutige Namen
+werden automatisch durch die Methode `Function#createUniqueCName()` im Konstruktor
+erzeugt.
 
 ## Methoden: *\_\_init\_\_(self)* anlegen
 
@@ -427,10 +445,11 @@ builder.addStatement(new Call(printRef, List.of(callGetX)));
 
 ## Das sollen Sie heute mitnehmen
 
--   Zwischencode ist ein wichtiger Bestandteil eines Compilers, insbesondere für die Optimierung
+-   Zwischencode ist ein wichtiger Bestandteil eines Compilers, insbesondere für die
+    Optimierung
 
--   Über die Java-API des CBuilders kann aus dem AST heraus Zwischencode in C erzeugt und mit einem vorhandenen
-    C-Compiler in Maschinencode übersetzt werden.
+-   Über die Java-API des CBuilders kann aus dem AST heraus Zwischencode in C
+    erzeugt und mit einem vorhandenen C-Compiler in Maschinencode übersetzt werden.
 
 ::: readings
 -   @Torczon2012: Kapitel 5 Intermediate Representation
