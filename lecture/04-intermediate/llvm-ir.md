@@ -79,7 +79,7 @@ statt *n x m* Compiler zu schreiben.
 
 ## Wer setzt LLVM ein?
 
-Adobe AMD Apple ARM Google
+    Adobe   AMD   Apple   ARM   Google
 
 IBM Intel Mozilla Nvidia Qualcomm
 
