@@ -1,103 +1,88 @@
 ---
-title: "Einstieg Builder für Mini-Python"
-author: "BC George (HSBI)"
+author: BC George (HSBI)
 slide_numbering: fraction
-readings:
-  - "@Torczon2012: Kapitel 5 Intermediate Representation"
-outcomes:
-  - k1: "**Zwischencode**"
-  - k2: "*CBuilder*"
-assignments:
-  - topic: sheet04
-attachments:
-  - link: "https://github.com/Compiler-CampusMinden/AnnotatedSlides/blob/master/minipython-builder.ann.ba.pdf"
-    name: "Annotierte Folien: Minipython CBuilder"
+title: Einstieg Builder für Mini-Python
 ---
 
+::: attachments
+-   [Annotierte Folien: Minipython
+    CBuilder](https://github.com/Compiler-CampusMinden/AnnotatedSlides/blob/master/minipython-builder.ann.ba.pdf)
+:::
 
 # Wiederholung
 
 ## Wo stehen wir?
 
-:::notes
+::: notes
 Hier entsteht ein Tafelbild.
 :::
-
-
 
 # Motivation
 
 ## Was muss als nächstes getan werden?
 
-:::notes
+::: notes
 Hier entsteht ein Tafelbild.
 :::
 
 ## Themen für heute
 
-*   Zwischencode
-*   CBuilder
-
-
+-   Zwischencode
+-   CBuilder
 
 # Zwischencodeerzeugung
 
 ## Was ist Zwischencode?
 
-*   eine quellcode- und maschinencodeunabhängige Darstellung des Programms
-*   Grundlage für einen Interpreter oder Compiler
+-   eine quellcode- und maschinencodeunabhängige Darstellung des Programms
+-   Grundlage für einen Interpreter oder Compiler
 
 ## Warum Zwischencode?
 
-*   zentrale Datenstruktur im Übersetzungsprozess
+-   zentrale Datenstruktur im Übersetzungsprozess
 
-*   wird am häufigsten durchlaufen (Anzahl Pässe)
+-   wird am häufigsten durchlaufen (Anzahl Pässe)
 
-*   maschinenunabhängige Analysen und Optimierungen (z. B. _dead code elimination_)
+-   maschinenunabhängige Analysen und Optimierungen (z. B. *dead code elimination*)
 
-*   bei der Portierung eines Compilers muss nur das Backend neu geschrieben werden
+-   bei der Portierung eines Compilers muss nur das Backend neu geschrieben werden
 
-*   verschiedene Frontends (Sprachen) können denselben Zwischencode (Backend) benutzen
+-   verschiedene Frontends (Sprachen) können denselben Zwischencode (Backend)
+    benutzen
 
-*   wenn der Zielprozessor nicht sehr mächtig ist
+-   wenn der Zielprozessor nicht sehr mächtig ist
 
 ## Ein Wort zur Optimierung
 
-*   Codegeschwindigkeit erhöhen
+-   Codegeschwindigkeit erhöhen
 
-*   möglichst kleine ausführbare Dateien erzeugen
+-   möglichst kleine ausführbare Dateien erzeugen
 
-*   möglichst energiesparende Programme erzeugen
+-   möglichst energiesparende Programme erzeugen
 
-*   Die meisten Optimierungen finden auf dem Zwischencode statt
-
-
+-   Die meisten Optimierungen finden auf dem Zwischencode statt
 
 # Unser Zwischencode
 
 ## Und wenn wir C als Zwischencode nehmen?
 
-*   wird durchaus so eingesetzt (Haskell, Lush, Eiffel, ...)
+-   wird durchaus so eingesetzt (Haskell, Lush, Eiffel, ...)
 
-*   compilierter C-Code ist sehr schnell
+-   compilierter C-Code ist sehr schnell
 
-*   C-Compiler existiert für fast alle Plattformen
+-   C-Compiler existiert für fast alle Plattformen
 
-*   Man bekommt die Optimierung umsonst
+-   Man bekommt die Optimierung umsonst
 
-*   C ist relativ nah an Python
-
-
+-   C ist relativ nah an Python
 
 # Generierung unseres Zwischencodes
 
 ## Was ist zu tun?
 
-:::notes
+::: notes
 Hier entsteht ein Tafelbild.
 :::
-
-
 
 # CBuilder
 
@@ -107,30 +92,35 @@ Den CBuilder gibt es schon!
 
 ## Wo ist er zu finden?
 
-[https://github.com/Compiler-CampusMinden/Mini-Python-Builder](https://github.com/Compiler-CampusMinden/Mini-Python-Builder)
+<https://github.com/Compiler-CampusMinden/Mini-Python-Builder>
 
 Das Projekt enthält ein Gradle-Buildscript und ein Makefile.
 
 ::: notes
-Der [CBuilder](https://github.com/Compiler-CampusMinden/Mini-Python-Builder) bringt eine C-Runtime mit. Sie finden Hinweise
-zur Nutzung des CBuildes in der [Doku] sowie zur [Runtime](https://github.com/Compiler-CampusMinden/Mini-Python-Builder/blob/master/docs/usage_generated_code.md).
+Der [CBuilder](https://github.com/Compiler-CampusMinden/Mini-Python-Builder) bringt
+eine C-Runtime mit. Sie finden Hinweise zur Nutzung des CBuildes in der
+[Doku](https://github.com/Compiler-CampusMinden/Mini-Python-Builder/blob/master/docs/usage_cbuilder.md)
+sowie zur
+[Runtime](https://github.com/Compiler-CampusMinden/Mini-Python-Builder/blob/master/docs/usage_generated_code.md).
 :::
 
 ## Was wird unter Linux benötigt?
 
-*   Make
+-   Make
 
-*   gcc oder clang
+-   gcc oder clang
 
 ## Und für Windows?
 
-Der generierte Code benötigt Funktionen aus dem POSIX.1-2008-Standard, läuft also nicht direkt unter Windows.
-Abhilfe:
-1)  mit **MSYS2** arbeiten (`pacman -S make` und `pacman -S gcc` zur Installation von Make und gcc aufrufen)  oder
+Der generierte Code benötigt Funktionen aus dem POSIX.1-2008-Standard, läuft also
+nicht direkt unter Windows. Abhilfe:
 
-2)  **WSL** (Windows Subsytem für Linux) benutzen   oder
+1)  mit **MSYS2** arbeiten (`pacman -S make` und `pacman -S gcc` zur Installation
+    von Make und gcc aufrufen) oder
 
-3)  **Docker** einsetzen    oder
+2)  **WSL** (Windows Subsytem für Linux) benutzen oder
+
+3)  **Docker** einsetzen oder
 
 4)  mit einer virtuellen Maschine arbeiten
 
@@ -142,29 +132,36 @@ Sie können Make und clang (und einige weitere Kommandozeilen-Tools) mittels
 
 ## Installation des CBuilders (Linux)
 
-*   das [Repo](https://github.com/Compiler-CampusMinden/Mini-Python-Builder) clonen: ergibt Gradle-Projekt (`build.gradle` im Hauptverzeichnis vom Git-Repo)
-*   das ANTLR-Projekt (Ihren bisherigen Quellcode) hineinkopieren
-*   Main-Klasse festlegen (siehe [Doku])
-
+-   das [Repo](https://github.com/Compiler-CampusMinden/Mini-Python-Builder) clonen:
+    ergibt Gradle-Projekt (`build.gradle` im Hauptverzeichnis vom Git-Repo)
+-   das ANTLR-Projekt (Ihren bisherigen Quellcode) hineinkopieren
+-   Main-Klasse festlegen (siehe
+    [Doku](https://github.com/Compiler-CampusMinden/Mini-Python-Builder/blob/master/docs/usage_cbuilder.md))
 
 # Benutzung des CBuilders
 
 ## Toolchain
 
-*   die Aufrufe des CBuilders in Ihr Projekt integrieren
+-   die Aufrufe des CBuilders in Ihr Projekt integrieren
 
-*   den CBuilder ausführen (z. B. über `./gradlew run`). Das generierte C-Programm wird z. B. als `./src/program.c` geschrieben.
-    [Den Ordner können Sie im Builder beim Aufruf von `ProgramBuilder#writeProgram(outputFolder)` selbst angeben.]{.notes}
+-   den CBuilder ausführen (z. B. über `./gradlew run`). Das generierte C-Programm
+    wird z. B. als `./src/program.c` geschrieben. [Den Ordner können Sie im Builder
+    beim Aufruf von `ProgramBuilder#writeProgram(outputFolder)` selbst
+    angeben.]{.notes}
 
-*   in diesem Verzeichnis **Make** aufrufen: `make all` übersetzt das Programm, `make run` führt es auch aus, `make clean` entfernt überflüssige erzeugte Dateien.
+-   in diesem Verzeichnis **Make** aufrufen: `make all` übersetzt das Programm,
+    `make run` führt es auch aus, `make clean` entfernt überflüssige erzeugte
+    Dateien.
 
-*   Das übersetzte Programm (`./bin/program`) läuft in einer Konsole (mit `input`- und `print`-Anweisungen)
-
+-   Das übersetzte Programm (`./bin/program`) läuft in einer Konsole (mit `input`-
+    und `print`-Anweisungen)
 
 # Java-Interface des CBuilders
+
 ## Anlegen des CBuilders und Definieren der Funktionalität
 
-Auszug aus der [Doku]:
+Auszug aus der
+[Doku](https://github.com/Compiler-CampusMinden/Mini-Python-Builder/blob/master/docs/usage_cbuilder.md):
 
 ``` java
 ProgramBuilder builder = new ProgramBuilder();
@@ -180,13 +177,13 @@ builder.writeProgram(outputFolder); // Erzeugt den C-Code (inkl. Runtime)
 
 ## Definition von Literalen
 
-Auszug aus der [Doku]:
+Auszug aus der
+[Doku](https://github.com/Compiler-CampusMinden/Mini-Python-Builder/blob/master/docs/usage_cbuilder.md):
 
 ``` java
 new StringLiteral("foo");   // String mit Inhalt "foo" erzeugen
 new IntLiteral(5);          // Integer mit Wert "5" erzeugen
 new BoolLiteral(true);      // Boolean mit Wert "True" erzeugen
-
 ```
 
 ## Anlegen von globalen Variablen
@@ -195,7 +192,7 @@ new BoolLiteral(true);      // Boolean mit Wert "True" erzeugen
 builder.addVariable(new VariableDeclaration("a"));
 ```
 
-Danach wird mit  Referenzen auf die Variablen gearbeitet:
+Danach wird mit Referenzen auf die Variablen gearbeitet:
 
 ``` java
 Reference varA = new Reference("a");
@@ -203,7 +200,8 @@ Reference varA = new Reference("a");
 
 ## Anlegen von Variablen in Funktionen
 
-Lokale Variablen in Funktionen müssen mit der Funktion zusammen definiert werden. Siehe dort.
+Lokale Variablen in Funktionen müssen mit der Funktion zusammen definiert werden.
+Siehe dort.
 
 ## Logische Operatoren
 
@@ -219,7 +217,9 @@ builder.addStatement(assignA);
 
 ## Arithmetische Operatoren und Vergleichsoperatoren
 
-Arithmetische Operatoren werden in Form von Methodenaufrufen realisiert. Das geht, weil alle Variablen in Python von `object` erben, wo die Operatoren als Methoden definiert sind (und man sie so auch überladen kann).
+Arithmetische Operatoren werden in Form von Methodenaufrufen realisiert. Das geht,
+weil alle Variablen in Python von `object` erben, wo die Operatoren als Methoden
+definiert sind (und man sie so auch überladen kann).
 
 Methodennamen:
 
@@ -227,7 +227,6 @@ Methodennamen:
 __add__(),  __sub__(),  __mul__(),  __div__()
 
 __eq__(), __ne__(),__ge__(),__gt__(), __le__(), __lt__()
-
 ```
 
 Beispiel mit anschließender Zuweisung:
@@ -238,14 +237,16 @@ AttributeReference addA = new AttributeReference("__add__", varA);
 Expression add = new Call(addA, List.of(new Expression[] { varB }));
 Assignment assignD = new Assignment(varD, add);
 ```
+
 ## Kontrollstrukturen
 
-siehe [Doku]
-
+siehe
+[Doku](https://github.com/Compiler-CampusMinden/Mini-Python-Builder/blob/master/docs/usage_cbuilder.md)
 
 ## Built-In-Funktionen
 
-Auszug aus der [Doku]:
+Auszug aus der
+[Doku](https://github.com/Compiler-CampusMinden/Mini-Python-Builder/blob/master/docs/usage_cbuilder.md):
 
 ``` java
 Reference printRef = new Reference("print");
@@ -253,6 +254,7 @@ List<Expression> parameterRefList = List.of(new Expression[] {varA});
 Call printCall = new Call(printRef, parameterRefList);
 builder.addStatement(printCall);
 ```
+
 ## Eigene Funktionen definieren: Funktionskörper
 
 ``` java
@@ -277,6 +279,7 @@ List<VariableDeclaration> localVariables = List.of(new VariableDeclaration[]
 Function func1 = new Function("func1", body, parameterArguments, localVariables);
 builder.addFunction(func1);
 ```
+
 ## eigene Funktionen aufrufen
 
 ``` java
@@ -287,20 +290,25 @@ builder.addStatement(callPrint);
 
 ## Klassen definieren
 
-*   Typ `MPyClass`
+-   Typ `MPyClass`
 
-*   Angabe der Referenz auf Elternklasse (`__MPytype_Object`, wenn keine eigene Oberklasse vorhanden ist)
+-   Angabe der Referenz auf Elternklasse (`__MPytype_Object`, wenn keine eigene
+    Oberklasse vorhanden ist)
 
-*   `__init__()` muss **immer** implementiert werden
+-   `__init__()` muss **immer** implementiert werden
 
-*   in `__init__()` **muss** als erstes `super` (Klasse `SuperCall` aufgerufen werden
+-   in `__init__()` **muss** als erstes `super` (Klasse `SuperCall` aufgerufen
+    werden
 
-*   Alle Methodendefinitionen **müssen** als ersten Parameter `self` enthalten, nicht jedoch die Methodenaufrufe.
+-   Alle Methodendefinitionen **müssen** als ersten Parameter `self` enthalten,
+    nicht jedoch die Methodenaufrufe.
 
 ## Methodennamen
 
-Methoden werden vom CBuilder in normale Funktionen umgesetzt, d. h. gleichnamige Methoden in unterschiedlichen Klassen würden zu Fehlern führen. Eindeutige Namen werden automatisch durch die Methode `Function#createUniqueCName()` im Konstruktor erzeugt.
-
+Methoden werden vom CBuilder in normale Funktionen umgesetzt, d. h. gleichnamige
+Methoden in unterschiedlichen Klassen würden zu Fehlern führen. Eindeutige Namen
+werden automatisch durch die Methode `Function#createUniqueCName()` im Konstruktor
+erzeugt.
 
 ## Methoden: *\_\_init\_\_(self)* anlegen
 
@@ -312,6 +320,7 @@ Function methodInit = new Function("__init__", initBody, initParamList, List.of(
 ```
 
 ## Methoden: *foo(self, x)* anlegen
+
 ``` java
 List<Argument> fooParamList = List.of(new Argument[]
     {new Argument("self", 0), new Argument("x", 1)});
@@ -319,6 +328,7 @@ Function methodFooA = new Function("foo", List.of(), fooParamList, List.of());
 ```
 
 ## Methoden: Klasse *A* anlegen
+
 ``` java
 List<Function> functionListA = List.of(new Function[] { methodInit, methodFooA });
 Reference refToObject = new Reference("__MPyType_Object");
@@ -432,14 +442,20 @@ builder.addStatement(new Call(printRef, List.of(callGetX)));
 ```
 
 # Wrap-Up
+
 ## Das sollen Sie heute mitnehmen
 
-*   Zwischencode ist ein wichtiger Bestandteil eines Compilers, insbesondere für die Optimierung
+-   Zwischencode ist ein wichtiger Bestandteil eines Compilers, insbesondere für die
+    Optimierung
 
-*   Über die Java-API des CBuilders kann aus dem AST heraus Zwischencode in C erzeugt und mit einem vorhandenen C-Compiler in Maschinencode übersetzt werden.
+-   Über die Java-API des CBuilders kann aus dem AST heraus Zwischencode in C
+    erzeugt und mit einem vorhandenen C-Compiler in Maschinencode übersetzt werden.
 
+::: readings
+-   @Torczon2012: Kapitel 5 Intermediate Representation
+:::
 
-
-
-
-[Doku]: https://github.com/Compiler-CampusMinden/Mini-Python-Builder/blob/master/docs/usage_cbuilder.md
+::: outcomes
+-   k1: Zwischencode
+-   k2: CBuilder
+:::

@@ -1,163 +1,68 @@
 ---
+author: Carsten Gips (HSBI)
 title: "C++: Vererbung und Polymorphie"
-author: "Carsten Gips (HSBI)"
-readings:
-  - "@Breymann2011"
-  - "@cppreference.com"
-  - "@cprogramming.com"
-tldr: |
-    Vererbung analog zu Java passiert in C++ über die "`public`-Vererbung": `Subklasse : public Superklasse`.
-    Dabei gibt es in C++ **keine** gemeinsame Oberklasse wie `Object` und entsprechend kein `super`. (Es
-    kann auch private Vererbung geben.)
-
-    Operatoren und *struktoren werden in den vom Compiler erzeugten Defaults richtig verkettet. Bei der
-    eigenen Implementierung von Operatoren und Konstruktoren muss zunächst der Operator/Konstruktor der
-    Basisklasse aufgerufen werden (Basisklassen-Konstruktoren dabei in der Initialisierungsliste!), danach
-    erfolgt die Implementierung für die eigenen Attribute der abgeleiteten Klasse. Der Zugriff auf die
-    Elemente der Elternklasse erfolgt dabei über den Namen der Elternklasse und den Scope-Operator (nicht
-    mit `super`!). Destruktoren von abgeleiteten Klassen müssen sich dagegen nur um die zusätzlichen
-    Attribute der abgeleiteten Klasse kümmern, der Basisklassendestruktor wird automatisch verkettet bzw.
-    aufgerufen.
-
-    Abstrakte Klassen in C++ haben mindestens eine abstrakte Methode. Eine Methode ist abstrakt, wenn sie
-    als "`virtual`" deklariert ist **und** der Deklaration ein "`=0`" folgt.
-
-    In C++ hat man aus Effizienzgründen per Default statische Polymorphie. Bei der Zuweisung eines Objekts
-    einer abgeleiteten Klasse (rechte Seite) an ein Objekt vom Typ der Oberklasse (linke Seite) erfolgt
-    dabei "Slicing", d.h. alle zusätzlichen Eigenschaften der abgeleiteten Klasse gehen dabei verloren.
-    Dynamische Polymorphie kann man in C++ nutzen, indem man (a) die gewünschten Methoden in der Basisklasse
-    als `virtual` deklariert und (b) für den Zugriff auf die Objekte der abgeleiteten Klasse Pointer oder
-    Referenzen vom Basisklassen-Typ benutzt.
-
-    In C++ ist Mehrfachvererbung möglich, d.h. eine Klasse kann von mehreren anderen Klassen erben. Damit
-    erbt sie auch das Objekt-Layout aller Elternklassen.
-
-    Bei rautenförmigen Vererbungsbeziehung führt dies zu Problemen, da Attribute und Methoden der gemeinsamen
-    Basisklasse mehrfach vorhanden (über jeden Zweig der Raute).
-
-    Zur Umgehung des Problems kann man die gemeinsam genutzten Basisklassen "`virtual`" deklarieren. Dadurch
-    sind gemeinsam genutzte Attribute und Methoden nur noch einfach vorhanden. Da die Klassen "in der Raute"
-    ihrerseits den Konstruktor der Basisklasse aufrufen (könnten) und es dadurch zu Konflikten beim Setzen
-    der Attribute der Basisklasse kommen kann, gelten bei virtueller Ableitung Sonderregeln: Für die virtuelle
-    Basisklasse wird die Weiterleitung der Werte aufgehoben (es muss also ein parameterloser Konstruktor existieren,
-    der durch die direkten Unterklassen aufgerufen wird) und die Klasse am "unteren Ende der Raute" kann direkt
-    den Konstruktor der virtuellen Basisklasse am "oberen Ende der Raute" aufrufen.
-outcomes:
-    - k2: "Unterschied zwischen `public`- und `private`-Vererbung"
-    - k2: "Unterschied Überladen und Überschreiben"
-    - k2: "Slicing in C++"
-    - k2: "Probleme bei Mehrfachvererbung und Einsatz virtueller Basisklassen"
-    - k3: "`public`-Vererbung in C++"
-    - k3: "Verkettung von Operatoren und *struktoren"
-    - k3: "Statische und dynamische Polymorphie in C++"
-    - k3: "Abstrakte Klassen in C++"
-    - k2: "Probleme bei Mehrfachvererbung und Einsatz virtueller Basisklassen"
-    - k3: "Praktischer Umgang mit Mehrfachvererbung"
-youtube:
-  - link: "https://youtu.be/yiIXDWRpKU4"
-    name: "VL C++: Vererbung und Polymorphie"
-challenges: |
-    **Destruktoren und Vererbung**
-
-    Welcher Destruktor würde im folgenden Beispiel aufgerufen?!
-
-    ```cpp
-    Student *s3 = new Student("Holger", 1.0);
-    Person  *p  = s3;
-
-    delete p;
-    ```
-
-    **Vererbung**
-
-    *   Welche Formen der (einfachen) Vererbung gibt es in C++ neben der
-        `public`-Form noch? Was bewirken diese Formen?
-    *   Warum wird in C++ die `public`-Form der Vererbung vorgezogen
-        (zumindest, wenn man dynamische Polymorphie nutzen will)?
-    *   Wie müssen Konstruktoren/Destruktoren richtig verkettet werden?
-    *   Arbeiten Sie das Beispiel auf S. 274 im @Breymann2011:
-        "Der C++ Programmierer" durch.
-
-    **Virtuelle Methoden, Dynamische Polymorphie in C++**
-
-    1.  Was sind virtuelle Methoden und wie setze ich diese ein?
-    2.  Wozu brauche ich in C++ virtuelle Klassen? Was muss beachtet werden?
-    3.  Was passiert in C++, wenn eine virtuelle Methode innerhalb von Konstruktoren
-        verwendet wird? Schreiben Sie ein kurzes Programm zur Verdeutlichung.
-    4.  Wie verhält es sich mit der Problematik aus (a) in Java?
-    5.  Wie unterscheiden sich in C++ virtuelle und nicht virtuelle Destruktoren?
-        Schreiben Sie ein kurzes Programm zur Verdeutlichung.
-    6.  Was passiert, wenn in C++ aus einem Destruktor heraus eine virtuelle
-        Methode aufgerufen wird?
-
-    *Hinweis:*
-    Möglicherweise müssen jeweils mehrere Fälle betrachtet werden!
-
-    <!-- XXX
-    a) C++, Konstruktor, Aufruf virtueller Methode:
-        * es wird die jeweilige Methode der Klasse des aktuell genutzten Konstruktors genommen
-        * unabhängig von virtual oder nicht!
-        * Grund: Speicherlayout! Basisklasse kennt evtl. zusätzliche Felder nicht ...
-    b) Java, Konstruktor, überschriebene Methode:
-        * es wird immer die **tiefste** implementierte Methode genommen (bezogen auf den polymorphen Typ)
-    c) C++, Destruktor:
-        * bei nicht-virtuellem Destruktor klappt die polymorphe Zerstörung nicht (zerstört nur die Basisklasse)
-        * bei virtuellem Destruktor wird erst die abgeleitete Klasse zerstört, danach die Basisklasse
-    d) C++, Destruktor, Aufruf virtueller Methode:
-        * es wird die jeweilige Methode der Klasse des aktuell genutzten Destruktors genommen
-        * unabhängig von virtual oder nicht!
-        * Grund: Speicherlayout! Basisklasse kennt evtl. zusätzliche Felder nicht ...
-
-    * C++
-        vor VolkswagenVirtuell
-            brummm (virtual)!
-            quietsch (nonvirtual)!
-        nach Basis
-            brummm brumm (virtual)
-            quietsch quietsch (nonvirtual)
-
-            brummm brumm (virtual)
-
-            Destruktor VW (virtual):    brummm brumm (virtual)  quietsch quietsch (nonvirtual)
-            Destruktor Auto (virtual):  brummm (virtual)!   quietsch (nonvirtual)!
-        nach VolkswagenVirtuell
-
-        vor VolkswagenNonVirtuell
-            brummm (nonvirtual)!
-            quietsch (nonvirtual)!
-        nach Basis
-            brummm brumm (nonvirtual)
-            quietsch quietsch (nonvirtual)
-
-            brummm (nonvirtual)!
-
-            Destruktor Auto (nonvirtual):   brummm (nonvirtual)!    quietsch (nonvirtual)!
-        nach VolkswagenNonVirtuell
-
-    * Java
-        vor Volkswagen
-            brummm brummm
-            quietsch quietsch
-        nach Basis
-            brummm brummm
-            quietsch quietsch
-
-            brummm brummm
-        nach Volkswagen
-    -->
 ---
 
+::: tldr
+Vererbung analog zu Java passiert in C++ über die "`public`-Vererbung":
+`Subklasse : public Superklasse`. Dabei gibt es in C++ **keine** gemeinsame
+Oberklasse wie `Object` und entsprechend kein `super`. (Es kann auch private
+Vererbung geben.)
+
+Operatoren und \*struktoren werden in den vom Compiler erzeugten Defaults richtig
+verkettet. Bei der eigenen Implementierung von Operatoren und Konstruktoren muss
+zunächst der Operator/Konstruktor der Basisklasse aufgerufen werden
+(Basisklassen-Konstruktoren dabei in der Initialisierungsliste!), danach erfolgt die
+Implementierung für die eigenen Attribute der abgeleiteten Klasse. Der Zugriff auf
+die Elemente der Elternklasse erfolgt dabei über den Namen der Elternklasse und den
+Scope-Operator (nicht mit `super`!). Destruktoren von abgeleiteten Klassen müssen
+sich dagegen nur um die zusätzlichen Attribute der abgeleiteten Klasse kümmern, der
+Basisklassendestruktor wird automatisch verkettet bzw. aufgerufen.
+
+Abstrakte Klassen in C++ haben mindestens eine abstrakte Methode. Eine Methode ist
+abstrakt, wenn sie als "`virtual`" deklariert ist **und** der Deklaration ein "`=0`"
+folgt.
+
+In C++ hat man aus Effizienzgründen per Default statische Polymorphie. Bei der
+Zuweisung eines Objekts einer abgeleiteten Klasse (rechte Seite) an ein Objekt vom
+Typ der Oberklasse (linke Seite) erfolgt dabei "Slicing", d.h. alle zusätzlichen
+Eigenschaften der abgeleiteten Klasse gehen dabei verloren. Dynamische Polymorphie
+kann man in C++ nutzen, indem man (a) die gewünschten Methoden in der Basisklasse
+als `virtual` deklariert und (b) für den Zugriff auf die Objekte der abgeleiteten
+Klasse Pointer oder Referenzen vom Basisklassen-Typ benutzt.
+
+In C++ ist Mehrfachvererbung möglich, d.h. eine Klasse kann von mehreren anderen
+Klassen erben. Damit erbt sie auch das Objekt-Layout aller Elternklassen.
+
+Bei rautenförmigen Vererbungsbeziehung führt dies zu Problemen, da Attribute und
+Methoden der gemeinsamen Basisklasse mehrfach vorhanden (über jeden Zweig der
+Raute).
+
+Zur Umgehung des Problems kann man die gemeinsam genutzten Basisklassen "`virtual`"
+deklarieren. Dadurch sind gemeinsam genutzte Attribute und Methoden nur noch einfach
+vorhanden. Da die Klassen "in der Raute" ihrerseits den Konstruktor der Basisklasse
+aufrufen (könnten) und es dadurch zu Konflikten beim Setzen der Attribute der
+Basisklasse kommen kann, gelten bei virtueller Ableitung Sonderregeln: Für die
+virtuelle Basisklasse wird die Weiterleitung der Werte aufgehoben (es muss also ein
+parameterloser Konstruktor existieren, der durch die direkten Unterklassen
+aufgerufen wird) und die Klasse am "unteren Ende der Raute" kann direkt den
+Konstruktor der virtuellen Basisklasse am "oberen Ende der Raute" aufrufen.
+:::
+
+::: youtube
+-   [VL C++: Vererbung und Polymorphie](https://youtu.be/yiIXDWRpKU4)
+:::
 
 # Vererbung: "IS-A"-Beziehung zw. Klassen
 
-```cpp
+``` cpp
 class Student : public Person { ... }
 ```
 
 \pause
 \bigskip
 
-```cpp
+``` cpp
 Student(const string &name = "", double c = 0.0)
 : Person(name), credits(c) { }
 
@@ -172,50 +77,48 @@ Analog zu Java:
 -   `Person`: Basisklasse
 -   `: public`: Vererbungsbeziehung (analog zu `extends` in Java)
 -   `public`-Vererbung: Verhalten wie in Java
--   Hinweis: Es gibt weitere Spielarten (`protected`, `private`), vgl. Semesterliteratur
+-   Hinweis: Es gibt weitere Spielarten (`protected`, `private`), vgl.
+    Semesterliteratur
 -   Ab C++11:
-    -   Schlüsselwort `override`:
-        Die Methode muss eine virtuelle Methode der Klassenhierarchie überschreiben.
-    -   Schlüsselwort `final`:
-        Die virtuelle Methode darf nicht in abgeleiteten Klassen überschrieben werden.
+    -   Schlüsselwort `override`: Die Methode muss eine virtuelle Methode der
+        Klassenhierarchie überschreiben.
+    -   Schlüsselwort `final`: Die virtuelle Methode darf nicht in abgeleiteten
+        Klassen überschrieben werden.
 :::
 
-::::::::: notes
+::: notes
 ## Vererbung und Konstruktoren
 
 -   Defaultkonstruktoren werden automatisch richtig verkettet
     -   zuerst Aufruf des Basisklassen-Konstruktors
     -   anschließend Behandlung der zusätzlichen Attribute
-
 -   Eigene Konstruktoren verketten:
-    -   Zuerst Basisklassen-Konstruktor aufrufen (in
-        Initialisierungsliste!) \newline
-        => Konkreten Konstruktor nehmen, nicht `super` wie in Java
-:::::::::
+    -   Zuerst Basisklassen-Konstruktor aufrufen (in Initialisierungsliste!)
+        `\newline`{=tex} =\> Konkreten Konstruktor nehmen, nicht `super` wie in Java
+:::
 
-::::::::: notes
+::: notes
 ## Vererbung und Destruktoren
 
 -   Defaultdestruktoren werden automatisch richtig verkettet
     -   zuerst werden die Destruktoren der zusätzlichen Attribute aufgerufen
     -   dann der Destruktor der Basisklasse
-
 -   Eigene Destruktoren werden automatisch verkettet
 -   Destruktor abgeleiteter Klasse muss sich nur um zusätzliche Attribute kümmern
-:::::::::
+:::
 
-::::::::: notes
+::: notes
 ## Vererbung und Operatoren
 
 -   Defaultoperatoren werden automatisch richtig verkettet
     -   zuerst Aufruf des Basisklassen-Operators
     -   anschließend Behandlung der zusätzlichen Attribute
-
 -   Eigene Operatoren am Beispiel Zuweisungsoperator:
     -   Zuerst den Zuweisungsoperator der Basisklasse aufrufen
+
     -   Zugriff über Superklassennamen und Scope-Operator (nicht mit `super`!)
 
-        ```cpp
+        ``` cpp
         const Student &operator=(const Student &s) {
             if (this != &s) {
                 Person::operator=(s);
@@ -224,19 +127,18 @@ Analog zu Java:
             return *this;
         }
         ```
-:::::::::
+:::
 
-::::::::: notes
+::: notes
 ## Vererbung von Freundschaften
 
 -   Freundschaften werden nicht vererbt!
--   `friends` der Basisklasse haben keinen Zugriff auf zusätzliche
-    private Attribute/Methoden der Unterklassen
+-   `friends` der Basisklasse haben keinen Zugriff auf zusätzliche private
+    Attribute/Methoden der Unterklassen
 -   Aber: weiterhin Zugriff auf die geerbten privaten Elemente!
-:::::::::
+:::
 
-
-::::::::: notes
+::: notes
 # Abstrakte Klassen
 
 -   Eine **Klasse** ist abstrakt, wenn sie mindestens eine abstrakte Methode hat
@@ -244,9 +146,10 @@ Analog zu Java:
     1.  als virtuell deklariert ist, **und**
     2.  der Deklaration ein "`=0`" folgt
 
-Abstrakte Methoden können Implementierung haben! => Implementierung außerhalb der Klassendeklaration
+Abstrakte Methoden können Implementierung haben! =\> Implementierung außerhalb der
+Klassendeklaration
 
-```cpp
+``` cpp
 class Person {
 public:
     virtual string toString() const = 0;
@@ -255,8 +158,7 @@ public:
 
 string Person::toString() const { ... }  // Implementierung :-)
 ```
-:::::::::
-
+:::
 
 # Polymorphie: Was passiert im folgenden Beispiel?
 
@@ -264,7 +166,7 @@ string Person::toString() const { ... }  // Implementierung :-)
 IS-A Beziehung: Objekte können als Objekte ihrer Oberklasse behandelt werden
 :::
 
-```cpp
+``` cpp
 class Person { ... }
 class Student : public Person { ... }
 
@@ -275,21 +177,20 @@ cout << s.toString() << endl;
 cout << p.toString() << endl;
 ```
 
-[Konsole: polyStat.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/polyStat.cpp"}
+[Konsole: polyStat.cpp]{.ex
+href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/polyStat.cpp"}
 
 ::: notes
 Antwort: Es wird die falsche Methode aufgerufen!
 
--   `s.toString()` => `Student::toString()` => wie erwartet
--   `p.toString()` => `Person::toString()` => **unerwartet**!
+-   `s.toString()` =\> `Student::toString()` =\> wie erwartet
+-   `p.toString()` =\> `Person::toString()` =\> **unerwartet**!
 :::
-
 
 # Polymorphie: statisch und dynamisch
 
 -   C++ entscheidet zur **Kompilierzeit**, welche Methode aufgerufen wird
-    -   `p` ist vom Typ `Person` => `p.toString()`
-        => `Person::toString()`
+    -   `p` ist vom Typ `Person` =\> `p.toString()` =\> `Person::toString()`
     -   Dieses Verhalten wird **statisches Binden** genannt.
 
 \bigskip
@@ -297,43 +198,43 @@ Antwort: Es wird die falsche Methode aufgerufen!
 -   Von Java her bekannt: **dynamisches Binden**
     -   Typ eines Objektes wird zur **Laufzeit** ausgewertet
 
-
 # Dynamisches Binden geht auch in C++ ...
 
 ::: notes
 Für dynamische Polymorphie müssen in C++ drei Bedingungen erfüllt sein:
 :::
 
-1.  Methoden in **Basisklasse** als **virtuelle Funktion** deklarieren \newline
-    => Schlüsselwort `virtual`
+1.  Methoden in **Basisklasse** als **virtuelle Funktion** deklarieren
+    `\newline`{=tex} =\> Schlüsselwort `virtual`
 
 \smallskip
 
 2.  Virtuelle Methoden in Subklasse normal überschreiben (gleiche Signatur)
 
     ::: notes
-    Zusätzlich muss der Rückgabetyp exakt übereinstimmen \newline
-    (Ausnahme: Rückgabe Pointer/Referenz auf _abgeleitete_ Klasse)
+    Zusätzlich muss der Rückgabetyp exakt übereinstimmen `\newline`{=tex} (Ausnahme:
+    Rückgabe Pointer/Referenz auf *abgeleitete* Klasse)
     :::
 
 \smallskip
 
-3.  Objekte mittels Basisklassen-Referenzen bzw. -Pointer zugreifen (siehe nächste Folie)
+3.  Objekte mittels Basisklassen-Referenzen bzw. -Pointer zugreifen (siehe nächste
+    Folie)
 
 \bigskip
 
-```cpp
+``` cpp
 class Person {
     virtual string toString() const { ... }
 };
 ```
 
-[Konsole: polyDyn.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/polyDyn.cpp"}
-
+[Konsole: polyDyn.cpp]{.ex
+href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/polyDyn.cpp"}
 
 # Vorsicht Slicing
 
-```cpp
+``` cpp
 Student s("Heinz", 10.0);
 Person p("Holger");
 
@@ -342,41 +243,44 @@ cout << "Objekt s (Student): " << s.toString() << endl;
 cout << "Objekt p (Person):  " << p.toString() << endl;
 ```
 
-[Konsole polySlicing.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/polySlicing.cpp"}
+[Konsole polySlicing.cpp]{.ex
+href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/polySlicing.cpp"}
 
 \pause
 
 ::: notes
-=> `p` ist vom Typ `Person`
+=\> `p` ist vom Typ `Person`
 
 -   Zuweisung von Objekten vom Typ `Student` ist erlaubt (Polymorphie)
--   `p` hat aber nur Speicherplatz für genau eine `Person`
-    => "Abschneiden" aller Elemente, die nicht Bestandteil von
-    `Person` sind!
+-   `p` hat aber nur Speicherplatz für genau eine `Person` =\> "Abschneiden" aller
+    Elemente, die nicht Bestandteil von `Person` sind!
 -   Slicing passiert immer beim Kopieren/Zuweisen von Objekten
 :::
 
 \bigskip
-=> **Dyn. Polymorphie** in C++ immer über **Referenzen**
-(bzw. Pointer) **und** **virtuelle Methoden**
 
-::: notes
-Wir hatten die Methode `toString` in der Basisklasse `Person` zwar als `virtual` deklariert,
-und wir hatten diese Methode in der ableitenden Klasse `Studi` passend überschrieben.
+=\> **Dyn. Polymorphie** in C++ immer über **Referenzen** (bzw. Pointer) **und**
+**virtuelle Methoden**
+
+:::: notes
+Wir hatten die Methode `toString` in der Basisklasse `Person` zwar als `virtual`
+deklariert, und wir hatten diese Methode in der ableitenden Klasse `Studi` passend
+überschrieben.
 
 Damit haben wir aber nur zwei der drei Bedingungen für dynamische Polymorphie in C++
-erfüllt. Wenn wir Objekte vom Typ `Studi` über eine normale Variable vom Typ `Person`
-handhaben, haben wir immer noch statische Polymorphie - uns stehen also nur die Methoden
-aus und in `Person` zur Verfügung.
+erfüllt. Wenn wir Objekte vom Typ `Studi` über eine normale Variable vom Typ
+`Person` handhaben, haben wir immer noch statische Polymorphie - uns stehen also nur
+die Methoden aus und in `Person` zur Verfügung.
 
-Zusätzlich haben wir durch die Zuweisung `p = s;` das Objekt `s` in den Speicherbereich
-von `p` "gequetscht". Dieses ist vom Typ `Person` und hat auch nur (Speicher-) Platz für
-Elemente dieses Typs. Alles andere wird bei der Zuweisung "abgeschnitten", d.h. `p` ist
-immer noch ein Objekt vom Typ `Person`, der zusätzliche Rest aus `Studi` fehlt ...
+Zusätzlich haben wir durch die Zuweisung `p = s;` das Objekt `s` in den
+Speicherbereich von `p` "gequetscht". Dieses ist vom Typ `Person` und hat auch nur
+(Speicher-) Platz für Elemente dieses Typs. Alles andere wird bei der Zuweisung
+"abgeschnitten", d.h. `p` ist immer noch ein Objekt vom Typ `Person`, der
+zusätzliche Rest aus `Studi` fehlt ...
 
 Wir könnten das durch Pointer oder Referenzen heilen:
 
-```cpp
+``` cpp
 // Variante mit Basisklassen-Pointer
 Student s("Heinz", 10.0);
 Person *p;
@@ -387,12 +291,12 @@ cout << "Objekt p (Person):  " << p->toString() << endl;
 ```
 
 ::: notes
-*Anmerkung*: Der Operator `->` ist die zusammengefasste Dereferenzierung des Pointers und
-der nachfolgende Zugriff auf Methoden oder Attribute. Man könnte also entsprechend auch
-`(*p).toString()` statt `p->toString()` schreiben.
+*Anmerkung*: Der Operator `->` ist die zusammengefasste Dereferenzierung des
+Pointers und der nachfolgende Zugriff auf Methoden oder Attribute. Man könnte also
+entsprechend auch `(*p).toString()` statt `p->toString()` schreiben.
 :::
 
-```cpp
+``` cpp
 // Variante mit Basisklassen-Referenz
 Student s("Heinz", 10.0);
 Person &p = s;
@@ -401,11 +305,11 @@ cout << "Objekt s (Student): " << s.toString() << endl;
 cout << "Objekt p (Person):  " << p.toString() << endl;
 ```
 
-Erst damit erfüllen wir die dritte Bedingung und haben echte dynamische Polymorphie in C++.
-:::
+Erst damit erfüllen wir die dritte Bedingung und haben echte dynamische Polymorphie
+in C++.
+::::
 
-
-::::::::: notes
+::: notes
 # Anmerkungen zu Polymorphie in C++
 
 -   **Gestaltung der API**:
@@ -415,19 +319,19 @@ Erst damit erfüllen wir die dritte Bedingung und haben echte dynamische Polymor
     -   Deklaration als virtuelle Funktion nur im Deklarationsteil
     -   Keine Wiederholung im Implementierungsteil (analog zu Defaultwerten)
 -   "Virtualität vererbt sich":
-    -   Virtuelle Funktionen sind virtuell in der Vererbungshierarchie hinab ab
-        der ersten Deklaration als virtuell
--   Virtualität ist "teuer": Es muss eine Tabelle aller virtuellen Funktionen aufgebaut werden und zur
-    Laufzeit geprüft werden, welche Funktion genommen werden soll
-:::::::::
-
+    -   Virtuelle Funktionen sind virtuell in der Vererbungshierarchie hinab ab der
+        ersten Deklaration als virtuell
+-   Virtualität ist "teuer": Es muss eine Tabelle aller virtuellen Funktionen
+    aufgebaut werden und zur Laufzeit geprüft werden, welche Funktion genommen
+    werden soll
+:::
 
 # Mehrfachvererbung in C++
 
 \bigskip
 \bigskip
 
-```cpp
+``` cpp
 class HiWi: public Student, public Angestellter {...};
 ```
 
@@ -438,7 +342,7 @@ class HiWi: public Student, public Angestellter {...};
 
 [Hinweis Speicherlayout ...]{.ex}
 
-::::::::: notes
+::: notes
 ## Problem 1: Gleichnamige Methoden aus Basisklassen geerbt
 
 ![](images/mehrfachvererbung-namenskollision_new.png){width="50%"}
@@ -447,7 +351,7 @@ Namenskollision bei Mehrfachvererbung auflösen:
 
 -   Scope-Operator `::` nutzen:
 
-    ```cpp
+    ``` cpp
     HiWi h("Anne", 23.0, 40.0);
 
     cout << h.Student::toString() << endl;
@@ -458,7 +362,7 @@ Namenskollision bei Mehrfachvererbung auflösen:
 
 -   Methode in abgeleiteter Klasse überschreiben
 
-    ```cpp
+    ``` cpp
     HiWi h("Anne", 23.0, 40.0);
 
     cout << h.toString() << endl;
@@ -466,19 +370,20 @@ Namenskollision bei Mehrfachvererbung auflösen:
     cout << h.Angestellter::toString() << endl;
     ```
 
-[Konsole vererbungMultiMethoden.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/vererbungMultiMethoden.cpp"}
+[Konsole vererbungMultiMethoden.cpp]{.ex
+href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/vererbungMultiMethoden.cpp"}
 
 ## Problem 2: Gemeinsam geerbte Attribute sind mehrfach vorhanden
 
 ![](images/mehrfachvererbung-attributkollision_new.png){width="50%"}
 
-[Konsole vererbungMultiAttribute.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/vererbungMultiAttribute.cpp"}
-:::::::::
-
+[Konsole vererbungMultiAttribute.cpp]{.ex
+href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/vererbungMultiAttribute.cpp"}
+:::
 
 # Mehrfachvererbung in C++: Virtuelle Basisklassen
 
-```cpp
+``` cpp
 class Angestellter: virtual public Person {...};
 class Student: virtual public Person {...};
 
@@ -492,7 +397,7 @@ class HiWi: public Student, public Angestellter {...};
 -   Dadurch sind gemeinsam genutzte Anteile nur einfach vorhanden
 
 ::: notes
-```cpp
+``` cpp
 Student s("Heinz", 10.0);           // wie vorher: nur EIN name-Feld
 Angestellter a("Holger", 80.5);     // wie vorher: nur EIN name-Feld
 
@@ -500,18 +405,18 @@ HiWi h("Anne", 23.0, 40.0);         // jetzt auch nur EIN name-Feld
 ```
 :::
 
-[Konsole vererbungMultiVirtual.cpp]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/vererbungMultiVirtual.cpp"}
+[Konsole vererbungMultiVirtual.cpp]{.ex
+href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/vererbungMultiVirtual.cpp"}
 
-
-::::::::: notes
+::: notes
 # Sonderregeln bei virtueller Ableitung
 
 Virtuelle Ableitung: Potentiell Konflikte zwischen Konstruktoren!
 
 -   Gemeinsam geerbtes Attribut nur noch einmal vorhanden
--   Konstruktoren werden nacheinander aufgerufen, alle wollen das
-    gemeinsame Attribut initialisieren (durch Aufruf des Konstruktors der
-    jeweiligen Basisklasse)
+-   Konstruktoren werden nacheinander aufgerufen, alle wollen das gemeinsame
+    Attribut initialisieren (durch Aufruf des Konstruktors der jeweiligen
+    Basisklasse)
 -   Zuletzt aufgerufener Konstruktor würde "gewinnen"
 
 Deshalb gibt es bei virtueller Ableitung folgende Sonderregeln:
@@ -524,11 +429,11 @@ Deshalb gibt es bei virtueller Ableitung folgende Sonderregeln:
 
     Sonst wird der Defaultkonstruktor der virtuellen Basisklasse genutzt!
 
-[Konsole vererbungMultiVirtual.cpp (Basiskonstruktor)]{.ex href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/vererbungMultiVirtual.cpp"}
-:::::::::
+[Konsole vererbungMultiVirtual.cpp (Basiskonstruktor)]{.ex
+href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/vererbungMultiVirtual.cpp"}
+:::
 
-
-::::::::: notes
+::: notes
 # Mehrfachvererbung in C++ ist ein recht kompliziertes Thema
 
 Warum ist die Möglichkeit dennoch nützlich?
@@ -536,17 +441,16 @@ Warum ist die Möglichkeit dennoch nützlich?
 -   In Java kann man nur von einer Klasse erben, aber viele Interfaces
     implementieren. In C++ gibt es keine Interfaces ...
 
-    => Interfaces mit abstrakten Klassen Interfaces simulieren
+    =\> Interfaces mit abstrakten Klassen Interfaces simulieren
 
-    => Mehrfachvererbung!
+    =\> Mehrfachvererbung!
 
-Tatsächlich dürfen Java-Interfaces mittlerweile auch Verhalten implementieren
-und vererben, wodurch eine ähnliche Situation wie hier in C++ entsteht und es
-ausgefeilte Regeln für die Konfliktauflösung braucht. Allerdings ist das in
-Java auf Verhalten beschränkt, d.h. Attribute (Zustand) ist in Java-Interfaces
-(noch) nicht erlaubt.
-:::::::::
-
+Tatsächlich dürfen Java-Interfaces mittlerweile auch Verhalten implementieren und
+vererben, wodurch eine ähnliche Situation wie hier in C++ entsteht und es
+ausgefeilte Regeln für die Konfliktauflösung braucht. Allerdings ist das in Java auf
+Verhalten beschränkt, d.h. Attribute (Zustand) ist in Java-Interfaces (noch) nicht
+erlaubt.
+:::
 
 # Wrap-Up
 
@@ -565,5 +469,115 @@ Java auf Verhalten beschränkt, d.h. Attribute (Zustand) ist in Java-Interfaces
 \smallskip
 
 -   Konzept der Mehrfachvererbung
--   Problem bei rautenförmiger Vererbungsbeziehung: Attribute und Methoden mehrfach vorhanden
+-   Problem bei rautenförmiger Vererbungsbeziehung: Attribute und Methoden mehrfach
+    vorhanden
 -   Virtuelle Basisklassen: Gemeinsam genutzte Attribute nur noch einfach vorhanden
+
+::: readings
+-   @Breymann2011
+-   @cppreference.com
+-   @cprogramming.com
+:::
+
+::: outcomes
+-   k2: Unterschied zwischen public- und private-Vererbung
+-   k2: Unterschied Überladen und Überschreiben
+-   k2: Slicing in C++
+-   k2: Probleme bei Mehrfachvererbung und Einsatz virtueller Basisklassen
+-   k3: public-Vererbung in C++
+-   k3: Verkettung von Operatoren und \*struktoren
+-   k3: Statische und dynamische Polymorphie in C++
+-   k3: Abstrakte Klassen in C++
+-   k2: Probleme bei Mehrfachvererbung und Einsatz virtueller Basisklassen
+-   k3: Praktischer Umgang mit Mehrfachvererbung
+:::
+
+::: challenges
+**Destruktoren und Vererbung**
+
+Welcher Destruktor würde im folgenden Beispiel aufgerufen?!
+
+``` cpp
+Student *s3 = new Student("Holger", 1.0);
+Person  *p  = s3;
+
+delete p;
+```
+
+**Vererbung**
+
+-   Welche Formen der (einfachen) Vererbung gibt es in C++ neben der `public`-Form
+    noch? Was bewirken diese Formen?
+-   Warum wird in C++ die `public`-Form der Vererbung vorgezogen (zumindest, wenn
+    man dynamische Polymorphie nutzen will)?
+-   Wie müssen Konstruktoren/Destruktoren richtig verkettet werden?
+-   Arbeiten Sie das Beispiel auf S. 274 im @Breymann2011: "Der C++ Programmierer"
+    durch.
+
+**Virtuelle Methoden, Dynamische Polymorphie in C++**
+
+1.  Was sind virtuelle Methoden und wie setze ich diese ein?
+2.  Wozu brauche ich in C++ virtuelle Klassen? Was muss beachtet werden?
+3.  Was passiert in C++, wenn eine virtuelle Methode innerhalb von Konstruktoren
+    verwendet wird? Schreiben Sie ein kurzes Programm zur Verdeutlichung.
+4.  Wie verhält es sich mit der Problematik aus (a) in Java?
+5.  Wie unterscheiden sich in C++ virtuelle und nicht virtuelle Destruktoren?
+    Schreiben Sie ein kurzes Programm zur Verdeutlichung.
+6.  Was passiert, wenn in C++ aus einem Destruktor heraus eine virtuelle Methode
+    aufgerufen wird?
+
+*Hinweis:* Möglicherweise müssen jeweils mehrere Fälle betrachtet werden!
+
+<!-- XXX
+a) C++, Konstruktor, Aufruf virtueller Methode:
+    * es wird die jeweilige Methode der Klasse des aktuell genutzten Konstruktors genommen
+    * unabhängig von virtual oder nicht!
+    * Grund: Speicherlayout! Basisklasse kennt evtl. zusätzliche Felder nicht ...
+b) Java, Konstruktor, überschriebene Methode:
+    * es wird immer die **tiefste** implementierte Methode genommen (bezogen auf den polymorphen Typ)
+c) C++, Destruktor:
+    * bei nicht-virtuellem Destruktor klappt die polymorphe Zerstörung nicht (zerstört nur die Basisklasse)
+    * bei virtuellem Destruktor wird erst die abgeleitete Klasse zerstört, danach die Basisklasse
+d) C++, Destruktor, Aufruf virtueller Methode:
+    * es wird die jeweilige Methode der Klasse des aktuell genutzten Destruktors genommen
+    * unabhängig von virtual oder nicht!
+    * Grund: Speicherlayout! Basisklasse kennt evtl. zusätzliche Felder nicht ...
+
+* C++
+    vor VolkswagenVirtuell
+        brummm (virtual)!
+        quietsch (nonvirtual)!
+    nach Basis
+        brummm brumm (virtual)
+        quietsch quietsch (nonvirtual)
+
+        brummm brumm (virtual)
+
+        Destruktor VW (virtual):    brummm brumm (virtual)  quietsch quietsch (nonvirtual)
+        Destruktor Auto (virtual):  brummm (virtual)!   quietsch (nonvirtual)!
+    nach VolkswagenVirtuell
+
+    vor VolkswagenNonVirtuell
+        brummm (nonvirtual)!
+        quietsch (nonvirtual)!
+    nach Basis
+        brummm brumm (nonvirtual)
+        quietsch quietsch (nonvirtual)
+
+        brummm (nonvirtual)!
+
+        Destruktor Auto (nonvirtual):   brummm (nonvirtual)!    quietsch (nonvirtual)!
+    nach VolkswagenNonVirtuell
+
+* Java
+    vor Volkswagen
+        brummm brummm
+        quietsch quietsch
+    nach Basis
+        brummm brummm
+        quietsch quietsch
+
+        brummm brummm
+    nach Volkswagen
+-->
+:::
