@@ -677,7 +677,7 @@ Jede Funktion darf im **gesamten** Programm nur **einmal definiert** sein!
 
 -   Funktionen "ohne" Parameter:
 
-    Leere Parameter-Liste\^Achtung: C-Compiler akzeptiert \[**alle** Parameter!\]
+    Leere Parameter-Liste^[Achtung: C-Compiler akzeptiert **alle** Parameter!]
     oder Schlüsselwort `void`
 
     ``` c
