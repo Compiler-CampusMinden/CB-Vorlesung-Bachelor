@@ -30,9 +30,10 @@ Hier entsteht ein Tafelbild.
 **Def.:** Ein **Alphabet** $\Sigma$ ist eine endliche, nicht-leere Menge von
 Symbolen. Die Symbole eines Alphabets heißen *Buchstaben*.
 
-**Def.:** Ein **Wort** $w$ *über einem Alphabet* $\Sigma$ ist eine endliche Folge von
-Symbolen aus $\Sigma$. $\epsilon$ ist das leere Wort. Die *Länge* $\vert w \vert$
-eines Wortes $w$ ist die Anzahl von Buchstaben, die es enthält (Kardinalität).
+**Def.:** Ein **Wort** $w$ *über einem Alphabet* $\Sigma$ ist eine endliche Folge
+von Symbolen aus $\Sigma$. $\epsilon$ ist das leere Wort. Die *Länge*
+$\vert w \vert$ eines Wortes $w$ ist die Anzahl von Buchstaben, die es enthält
+(Kardinalität).
 
 **Def.:** Eine **Sprache** $L$ *über einem Alphabet* $\Sigma$ ist eine Menge von
 Wörtern über diesem Alphabet. Sprachen können endlich oder unendlich viele Wörter
@@ -116,8 +117,8 @@ NFAs sind so nicht zu programmieren, aber:
 
 \medskip
 
-**Satz:** Eine Sprache $L$ wird von einem NFA akzeptiert $\Leftrightarrow L$ wird von
-einem DFA akzeptiert.
+**Satz:** Eine Sprache $L$ wird von einem NFA akzeptiert $\Leftrightarrow L$ wird
+von einem DFA akzeptiert.
 
 D. h. es existieren Algorithmen zur
 
@@ -128,8 +129,8 @@ D. h. es existieren Algorithmen zur
 
 ## Reguläre Ausdrücke definieren Sprachen
 
-**Def.:** Induktive Definition von **regulären Ausdrücken** (regex) und der von ihnen
-repräsentierten Sprache **L**:
+**Def.:** Induktive Definition von **regulären Ausdrücken** (regex) und der von
+ihnen repräsentierten Sprache **L**:
 
 -   Basis:
 
@@ -140,7 +141,8 @@ repräsentierten Sprache **L**:
 
 -   Induktion: Seien $E,\ F$ reguläre Ausdrücke. Dann gilt:
 
-    -   $E+F$ ist ein regex und bezeichnet die Vereinigung $L(E + F) = L(E)\cup L(F)$
+    -   $E+F$ ist ein regex und bezeichnet die Vereinigung
+        $L(E + F) = L(E)\cup L(F)$
     -   $EF$ ist ein regex und bezeichnet die Konkatenation $L(EF) = L(E)L(F)$
     -   $E^{\ast}$ ist ein regex und bezeichnet die Kleene-Hülle
         $L(E^{\ast})=(L(E))^{\ast}$

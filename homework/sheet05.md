@@ -68,8 +68,8 @@ Komplexere Ausdrücke werden über die Listenform gebildet:
 
 In der listenartigen Form ist der erste Eintrag der Liste immer eine Operation (oder
 ein Funktionsname), danach kommen je nach Operation/Funktion (die Arität muss
-passen!) entsprechende Einträge, die als Parameter für die Operation oder Funktion zu
-verstehen sind.
+passen!) entsprechende Einträge, die als Parameter für die Operation oder Funktion
+zu verstehen sind.
 
 Die Ausdrücke sind implizit von links nach rechts geklammert, d.h. der Ausdruck
 `(+ 1 2 3 4)` ist [*syntactic sugar*](https://en.wikipedia.org/wiki/Syntactic_sugar)
@@ -87,8 +87,8 @@ ausgegeben werden:
 (print "wuppie\nfluppie\nfoo\nbar")
 ```
 
-Die eingebaute Funktion `str` verknüpft ihre Argumente und bildet einen String. Falls
-nötig, werden die Argumente vorher in einen String umgewandelt.
+Die eingebaute Funktion `str` verknüpft ihre Argumente und bildet einen String.
+Falls nötig, werden die Argumente vorher in einen String umgewandelt.
 
 ``` clojure
 (str 42)                              ;; liefert "42" zurück
@@ -139,8 +139,8 @@ Die `if-then-else`-Abfrage gibt es mit und ohne den `else`-Zweig:
     (print "false"))  ;; else
 ```
 
-Dabei kann jeweils nur genau eine S-Expression genutzt werden. Wenn man mehrere Dinge
-berechnen möchte, nutzt man `do`:
+Dabei kann jeweils nur genau eine S-Expression genutzt werden. Wenn man mehrere
+Dinge berechnen möchte, nutzt man `do`:
 
 ``` clojure
 (do
@@ -228,10 +228,10 @@ In unserer Sprache gibt es Listen:
 (def v (1 2 3))  ;; Fehler!
 ```
 
-Das Problem daran ist, dass unsere S-Expressions zwar bereits listenartige Strukturen
-sind, der erste Eintrag aber als Operator oder Funktion interpretiert wird. Der
-Ausdruck oben würde beim Auswerten versuchen, die "Funktion" 1 auf den Argumenten 2
-und 3 aufzurufen ...
+Das Problem daran ist, dass unsere S-Expressions zwar bereits listenartige
+Strukturen sind, der erste Eintrag aber als Operator oder Funktion interpretiert
+wird. Der Ausdruck oben würde beim Auswerten versuchen, die "Funktion" 1 auf den
+Argumenten 2 und 3 aufzurufen ...
 
 Man braucht also eine Notation, die ein sofortiges Auswerten verhindert und nur die
 Liste an sich zurückliefert. Dies erreicht man durch die Funktion `list`:

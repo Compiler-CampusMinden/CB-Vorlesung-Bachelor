@@ -29,10 +29,10 @@ Arbeitsergebnis soll auf der Konsole ausgegeben werden.
 
 Der Compiler muss den zu kompilierenden C++-Code aus einer Datei einlesen können.
 
-Der Compiler soll aus dem eingegebenen C++-Code passenden gültigen Java-Code erzeugen
-und in eine Datei speichern. Definieren Sie ggf. nötige Hilfsbibliotheken, so dass
-man den generierten Code zusammen mit den Hilfsbibliotheken mit Java übersetzen und
-ausführen kann.
+Der Compiler soll aus dem eingegebenen C++-Code passenden gültigen Java-Code
+erzeugen und in eine Datei speichern. Definieren Sie ggf. nötige Hilfsbibliotheken,
+so dass man den generierten Code zusammen mit den Hilfsbibliotheken mit Java
+übersetzen und ausführen kann.
 
 ## Sprachumfang
 
@@ -51,13 +51,13 @@ Sie sollen mindestens folgende C++-Konzepte unterstützen:
 -   Eingebaute Funktionen: `print_bool`, `print_int`, `print_char` (Ausgabe eines
     Werts des jeweiligen Typs auf der Konsole)
 
-Beachten Sie bei der Umsetzung, dass Polymorphie in C++ etwas anders funktioniert als
-in Java.
+Beachten Sie bei der Umsetzung, dass Polymorphie in C++ etwas anders funktioniert
+als in Java.
 
 Andere mit C++ verbundene Konzepte wie beispielsweise Präprozessor, Header-Files,
 Pointer, Templates, Sichtbarkeiten in Klassen, Trennung Deklaration/Implementierung
-bei Klassen (Trennung .h und .cpp) oder Initialisierungslisten[^2] brauchen Sie nicht
-umsetzen.
+bei Klassen (Trennung .h und .cpp) oder Initialisierungslisten[^2] brauchen Sie
+nicht umsetzen.
 
 Sie finden im
 [CB-Repo](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/tree/master/homework/src/cpp)
@@ -67,7 +67,8 @@ nicht vollständig ist.
 
 ## Projektvorstellung: Walk-Through statt Präsentation
 
-Stellen Sie Ihr Projekt am Semesterende vor (Termine siehe Fahrplan und Ankündigung).
+Stellen Sie Ihr Projekt am Semesterende vor (Termine siehe Fahrplan und
+Ankündigung).
 
 Jedes Team hat dafür 20 Minuten Zeit.
 
@@ -102,8 +103,8 @@ Compilers elektronisch über ILIAS ein.
 2.  **Verschiedenes (10 Punkte)**
 
     -   **Roter Faden (5 Punkte)**: Wird der rote Faden während des gesamten
-        Walk-Through beibehalten? Ist der Zusammenhang zwischen den einzelnen Punkten
-        nachvollziehbar?
+        Walk-Through beibehalten? Ist der Zusammenhang zwischen den einzelnen
+        Punkten nachvollziehbar?
     -   **Zeitmanagement (5 Punkte)**: Wurde der Zeitrahmen (20 Minuten pro Vortrag)
         eingehalten?
 
@@ -113,5 +114,5 @@ Gesamtbewertung: 50 Punkte
     verwenden.
 
 [^2]: Leider werden Initialisierungslisten für den Aufruf der
-    Basisklassenkonstruktoren benötigt, sofern der Defaultkonstruktor der Basisklasse
-    nicht ausreicht.
+    Basisklassenkonstruktoren benötigt, sofern der Defaultkonstruktor der
+    Basisklasse nicht ausreicht.

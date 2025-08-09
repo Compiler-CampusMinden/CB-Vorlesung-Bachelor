@@ -24,8 +24,8 @@ Die Sichtbarkeiten für die Attribute und Methoden werden blockweise definiert. 
 die Klassen selbst gibt es keine Einstellungen für die Sichtbarkeit.
 
 Objekt-Layout: Die Daten (Attribute) liegen direkt im Objekt (anderenfalls Pointer
-nutzen). Sofern der Typ der Attribute eine Klasse ist, kann man diese Attribute nicht
-mit `NULL` initialisieren (kein Pointer, keine Referenz).
+nutzen). Sofern der Typ der Attribute eine Klasse ist, kann man diese Attribute
+nicht mit `NULL` initialisieren (kein Pointer, keine Referenz).
 
 Für den Aufruf eines Konstruktors ist kein `new` notwendig, es sei denn, man möchte
 das neue Objekt auf dem Heap haben (inkl. Pointer auf das Objekt).
@@ -94,7 +94,8 @@ class Student {
 
 ![](images/objektLayoutJava.png)
 
-In Java werden im Objektlayout lediglich die primitiven Attribute direkt gespeichert.
+In Java werden im Objektlayout lediglich die primitiven Attribute direkt
+gespeichert.
 
 Für Objekte wird nur eine Referenz auf die Objekte gehalten. Die Attribute selbst
 liegen aber außerhalb der Klasse, dadurch benötigt das Objekt selbst nur relativ
@@ -115,8 +116,8 @@ class Student {
 In C++ werden alle Attribute innerhalb des Objektlayouts gespeichert. Ein Objekt mit
 vielen oder großen Feldern braucht also auch entsprechend viel Platz im Speicher.
 
-Wollte man eine Java-ähnliche Lösung aufbauen, müsste man in C++ entsprechend Pointer
-einsetzen:
+Wollte man eine Java-ähnliche Lösung aufbauen, müsste man in C++ entsprechend
+Pointer einsetzen:
 
 ``` cpp
 class Student {
@@ -256,8 +257,8 @@ In diesem Fall erfolgt die Initialisierung in nur einem Schritt:
 
 Das klappt natürlich nur, wenn ein passender Konstruktor für das Attribut existiert.
 
-**Achtung**: Die Reihenfolge der Auswertung der Initialisierungslisten wird durch die
-Reihenfolge der Attribut-Deklarationen in der Klasse bestimmt!!!
+**Achtung**: Die Reihenfolge der Auswertung der Initialisierungslisten wird durch
+die Reihenfolge der Attribut-Deklarationen in der Klasse bestimmt!!!
 
 Beispiel oben: Beim Anlegen von `birthday` im Speicher wird direkt der übergebene
 Wert **kopiert**.
@@ -285,8 +286,8 @@ Hier einige Beispiele:
 
     Bei "normaler" Initialisierung würde das Attribut zunächst per parameterfreiem
     Konstruktor angelegt (s.o.), danach existiert es und ist konstant und darf nicht
-    mehr geändert werden (müsste es aber, um die eigentlich gewünschten Werte im Body
-    zu setzen) ...
+    mehr geändert werden (müsste es aber, um die eigentlich gewünschten Werte im
+    Body zu setzen) ...
 
 -   Attribute, die **Referenzen** sind
 

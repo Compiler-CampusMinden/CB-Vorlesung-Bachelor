@@ -18,9 +18,9 @@ effizient wie möglich sein (etwa in Bezug auf den Speicherbedarf). Deshalb gibt
 keine Laufzeitumgebung, der Quellcode wird direkt in ein ausführbares (und damit
 Betriebssystem-abhängiges) Binary compiliert. Beide Sprachen erlauben dem
 Programmierer den Zugriff auf die Speicherverwaltung und damit viele Freiheiten. Die
-Kehrseite ist natürlich, dass Programmierfehler (etwa bei der Speicherallokation oder
-bei Indexberechnungen) nicht von der Laufzeitumgebung entdeckt und abgefangen werden
-können.
+Kehrseite ist natürlich, dass Programmierfehler (etwa bei der Speicherallokation
+oder bei Indexberechnungen) nicht von der Laufzeitumgebung entdeckt und abgefangen
+werden können.
 
 C-Programme sehen auf den ersten Blick Java-Code relativ ähnlich. Das ist nicht
 verwunderlich, da Java zeitlich nach C/C++ entwickelt wurde und die Syntax und große
@@ -46,32 +46,33 @@ kann man den Kompiliervorgang über Regeln automatisieren (denken Sie an ANT in 
 Java-Welt, nur ohne XML). Eine Regel besteht aus einem Ziel (*Target*), einer Liste
 von Abhängigkeiten sowie einer Liste mit Aktionen (Anweisungen). Um ein Ziel zu
 "bauen" müssen zunächst alle Abhängigkeiten erfüllt sein (bzw. falls sie es nicht
-sind, erst noch "gebaut" werden - es muss entsprechend weitere Regeln geben, um diese
-Abhängigkeiten "bauen" zu können). Dann wird die Liste der Aktionen abgearbeitet.
-Ziele und Abhängigkeiten sind in der Regel Namen von Dateien, die existieren müssen
-bzw. über die Aktionen erzeugt werden sollen. Die Aktionen sind normale
-Befehlssequenzen, die man auch in einer Konsole eingeben könnte. Make berücksichtigt
-den Zeitstempel der Dateien: Ziele, die bereits existieren und deren Abhängigkeiten
-nicht neuer sind, werden nicht erneut gebaut.
+sind, erst noch "gebaut" werden - es muss entsprechend weitere Regeln geben, um
+diese Abhängigkeiten "bauen" zu können). Dann wird die Liste der Aktionen
+abgearbeitet. Ziele und Abhängigkeiten sind in der Regel Namen von Dateien, die
+existieren müssen bzw. über die Aktionen erzeugt werden sollen. Die Aktionen sind
+normale Befehlssequenzen, die man auch in einer Konsole eingeben könnte. Make
+berücksichtigt den Zeitstempel der Dateien: Ziele, die bereits existieren und deren
+Abhängigkeiten nicht neuer sind, werden nicht erneut gebaut.
 
 Die gute Nachricht: In Bezug auf Variablen, Operatoren und Kontrollfluss verhalten
 sich C und C++ im Wesentlichen wie Java.
 
 Es gibt in C++ den Typ `bool` mit den Werten `true` und `false`. Zusätzlich werden
-Integerwerte im boolschen Kontext (etwa in einer `if`-Abfrage) ausgewertet, wobei der
-Wert 0 einem `false` entspricht und alle anderen Integer-Werte einem `true`. (Dies
-steht etwas im Widerspruch zu den Werten, die in der `main`-Funktion per `return`
-zurückgeliefert werden: Hier bedeutet 0 in der Regel, dass alles OK war.)
+Integerwerte im boolschen Kontext (etwa in einer `if`-Abfrage) ausgewertet, wobei
+der Wert 0 einem `false` entspricht und alle anderen Integer-Werte einem `true`.
+(Dies steht etwas im Widerspruch zu den Werten, die in der `main`-Funktion per
+`return` zurückgeliefert werden: Hier bedeutet 0 in der Regel, dass alles OK war.)
 
 Die Basisdatentypen sind (bis auf `char` und `bool`) in ihrer Größe
 maschinenabhängig. Es kann also sein, dass Code, der auf einem 64bit-Laptop ohne
 Probleme läuft, auf einem Raspberry PI Überläufe verursacht! Um besonders
-ressourcenschonend zu arbeiten, kann man die Speichergröße für einige Basisdatentypen
-durch die Typmodifikatoren `short` und `long` beeinflussen sowie die Interpretation
-von Zahlenwerten mit oder ohne Vorzeichen (`signed`, `unsigned`) einstellen.
+ressourcenschonend zu arbeiten, kann man die Speichergröße für einige
+Basisdatentypen durch die Typmodifikatoren `short` und `long` beeinflussen sowie die
+Interpretation von Zahlenwerten mit oder ohne Vorzeichen (`signed`, `unsigned`)
+einstellen.
 
-Die Anzahl der für einen Typ oder eine Variable/Struktur benötigten Bytes bekommt man
-mit dem Operator `sizeof` heraus.
+Die Anzahl der für einen Typ oder eine Variable/Struktur benötigten Bytes bekommt
+man mit dem Operator `sizeof` heraus.
 
 Mit `typedef` kann man einen neuen Namen für bereits existierende Typen vergeben.
 
@@ -122,8 +123,8 @@ Compiler.
 -   Ab 1979: Entwicklung von C++ durch Bjarne Stroustrup bei AT&T
     -   Erweiterung der prozeduralen Sprache C
     -   Ursprünglich "C mit Klassen", später "C++" (Inkrement-Operator)
--   Bis heute: Fortlaufende Erweiterungen: alle 3 Jahre neuer Standard (C++11, C++14,
-    ...)
+-   Bis heute: Fortlaufende Erweiterungen: alle 3 Jahre neuer Standard (C++11,
+    C++14, ...)
 
 :::: notes
 ::: tip
@@ -531,7 +532,8 @@ Sie können `short`, `long` und `long long` nur für ganze Zahlen (`int`) nutzen
 der Ausnahme `long double`. Dagegen können `signed` und `unsigned` sowohl für `char`
 als auch für `int` benutzt werden.
 
-vgl. [en.wikipedia.org/wiki/C_data_types](https://en.wikipedia.org/wiki/C_data_types)
+vgl.
+[en.wikipedia.org/wiki/C_data_types](https://en.wikipedia.org/wiki/C_data_types)
 
 ## Größe eines Datentyps ist maschinenabhängig
 
@@ -630,7 +632,8 @@ In der Praxis verwendet man beide Begriffe i.d.R. synonym.
 ### Funktionen: Deklaration vs. Definition
 
 -   **Deklaration**: (Funktions-) Prototyp: Festlegen von Signatur [(d.h.
-    Funktionsname und Anzahl, Typ, Reihenfolge der Parameter)]{.notes} u. Rückgabetyp
+    Funktionsname und Anzahl, Typ, Reihenfolge der Parameter)]{.notes} u.
+    Rückgabetyp
 
     ``` cpp
     void machWas(int, int);
@@ -713,8 +716,8 @@ int fluppie(int x) { return x; } // Aufruf mit Argumenten => Compiler-Fehler
 ```
 
 Wenn Sie eine mit leerer Parameterliste deklarierte Funktion definieren bzw.
-aufrufen, akzeptiert der C-Compiler dennoch **alle** übergebenen Parameter. Dies kann
-zu schwer verständlichen Fehlern führen! Sobald eine Funktion explizit mit dem
+aufrufen, akzeptiert der C-Compiler dennoch **alle** übergebenen Parameter. Dies
+kann zu schwer verständlichen Fehlern führen! Sobald eine Funktion explizit mit dem
 Schlüsselwort `void` in der Parameterliste deklariert wird, **muss** diese dann auch
 ohne Parameter aufgerufen werden.
 
@@ -967,9 +970,9 @@ int main() {
 definiert sind. D.h. man kann diese dann nicht in einer anderen Datei nutzen, nicht
 mal mit `extern` ...
 
-`static` für Funktionen beschränkt deren Sichtbarkeit ebenfalls auf die Datei, wo sie
-definiert sind. Man kann sie dann nur in anderen Funktionen, die ebenfalls in der
-selben Datei definiert werden, nutzen. In anderen Dateien sind die `static`
+`static` für Funktionen beschränkt deren Sichtbarkeit ebenfalls auf die Datei, wo
+sie definiert sind. Man kann sie dann nur in anderen Funktionen, die ebenfalls in
+der selben Datei definiert werden, nutzen. In anderen Dateien sind die `static`
 Funktionen *nicht* sichtbar. D.h. es macht auch keinen Sinn, sie in einer
 Header-Datei zu deklarieren! (In der Praxis liefert der gcc dann sogar einen
 Fehler!). Das ist mit `private` Methoden vergleichbar.
@@ -1087,8 +1090,8 @@ durchgeführt, um `Ziel1` zu erzeugen. Aber nur, falls das Ziel `Ziel1` nicht
 existiert oder veraltet ist!
 
 Falls die Abhängigkeiten nicht erfüllt sind, wird nach Regeln gesucht, um diese zu
-erzeugen. Das bedeutet, dass u.U. zunächst weitere Targets "gebaut" werden, bevor die
-Aktionenliste ausgeführt wird.
+erzeugen. Das bedeutet, dass u.U. zunächst weitere Targets "gebaut" werden, bevor
+die Aktionenliste ausgeführt wird.
 
 Die Ziele und Abhängigkeiten sind i.d.R. Dateien (müssen es aber nicht sein).
 
@@ -1120,20 +1123,21 @@ Bedeutung: Um das Ziel `all` zu erzeugen, muss die Abhängigkeit `tollesProgramm
 erfüllt sein. Beachten Sie, dass im Beispiel `all` kein Dateiname ist,
 `tollesProgramm` dagegen schon.
 
-Um `tollesProgramm` zu erzeugen, muss die Datei `main.o` vorhanden sein. Falls sie es
-nicht ist, wird sie mit Hilfe des dritten Targets erzeugt. Das `%` ist dabei ein
+Um `tollesProgramm` zu erzeugen, muss die Datei `main.o` vorhanden sein. Falls sie
+es nicht ist, wird sie mit Hilfe des dritten Targets erzeugt. Das `%` ist dabei ein
 Patternmatcher, d.h. wenn nach einem `main.o` gesucht ist, matcht `%.o` (das `%`
 bindet sich dabei an "main") und auf der rechten Seite des Targets steht als
 Abhängigkeit `main.cpp`.
 
-Die Variablen `CXX`, `CXXFLAGS`, `LDFLAGS` und `LDLIBS` sind vordefinierte Variablen:
+Die Variablen `CXX`, `CXXFLAGS`, `LDFLAGS` und `LDLIBS` sind vordefinierte
+Variablen:
 
 -   `CXX`: C++-Compiler, Default: `g++`
 -   `CXXFLAGS` Extra Flags für den C++-Compiler (nur für Kompilieren)
 -   `LDFLAGS`: Extra Flags, die für das Linken genutzt werden (Beispiel: `-L.`;
     **nicht** `-lm`)
--   `LDLIBS`: Bibliotheken, die für das Linken genutzt werden (Beispiel: `-lm -lfoo`;
-    **nicht** `-L.`)
+-   `LDLIBS`: Bibliotheken, die für das Linken genutzt werden (Beispiel:
+    `-lm -lfoo`; **nicht** `-L.`)
 
 Die Variablen `$<`, `$^` und `$@` lösen auf das Ziel bzw. die Abhängigkeiten eines
 Targets auf:
@@ -1143,8 +1147,8 @@ Targets auf:
 -   `$@` =\> gibt das Ziel an
 
 Falls die Datei `tollesProgramm` nicht existiert oder aber älter ist als `main.o`,
-wird die Regel des Targets `tollesProgramm` ausgeführt, um die Datei `tollesProgramm`
-zu erzeugen: `g++ main.o -o tollesProgramm`.
+wird die Regel des Targets `tollesProgramm` ausgeführt, um die Datei
+`tollesProgramm` zu erzeugen: `g++ main.o -o tollesProgramm`.
 
 **Hinweis**: Das Beispiel entspricht den minimalen Kenntnissen, die Sie über Make
 haben müssen.
@@ -1201,8 +1205,8 @@ haben müssen.
 -   k3: Nutzung des Scope-Operators ::, Namensräume
 -   k3: Benutzung von sizeof zur Bestimmung des Speicherbedarfs
 -   k3: Benutzung von typedef zur Definition neuer Typen (Aliase bestehender Typen)
--   k3: Erinnerung: Automatisiertes Übersetzen mit Hilfe von GNU Make und einfachsten
-    Makefiles
+-   k3: Erinnerung: Automatisiertes Übersetzen mit Hilfe von GNU Make und
+    einfachsten Makefiles
 -   k2: Unterschied zwischen Deklaration und Definition, One Definition Rule
 -   k2: Problematik bei der Deklaration parameterloser Funktionen
 -   k2: Call-by-Value-Semantik bei der Parameterübergabe
@@ -1212,8 +1216,8 @@ haben müssen.
 :::
 
 ::: challenges
--   Wie groß ist der Bereich der Basisdatentypen (Speicherbedarf, Zahlenbereich)? Wie
-    können Sie das feststellen?
+-   Wie groß ist der Bereich der Basisdatentypen (Speicherbedarf, Zahlenbereich)?
+    Wie können Sie das feststellen?
 
     ``` c
     unsigned char a;

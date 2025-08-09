@@ -32,19 +32,19 @@ Nutzen Sie das
 in der Vorgabe.
 
 Laden Sie sich das Projekt herunter, binden Sie es in Ihre IDE ein und vergewissern
-Sie sich, dass alles funktioniert: Führen Sie das enthaltene Programm aus, ändern Sie
-die mitgelieferten Beispielgrammatik.
+Sie sich, dass alles funktioniert: Führen Sie das enthaltene Programm aus, ändern
+Sie die mitgelieferten Beispielgrammatik.
 
 Bauen Sie dann Ihre Grammatik für die Aufgabe schrittweise auf. Testen Sie diese mit
 Hilfe der Beispielprogramme der Zielsprache (s.u.) und überlegen Sie sich selbst
 weitere Code-Schnipsel, die Sie mit Ihrem Parser einlesen bzw. die Ihr Parser
-zurückweisen sollte.[^1] Es empfiehlt sich, in dieser Phase mit dem [ANTLR-Plugin für
-IntelliJ](https://plugins.jetbrains.com/plugin/7358-antlr-v4) zu arbeiten.
+zurückweisen sollte.[^1] Es empfiehlt sich, in dieser Phase mit dem [ANTLR-Plugin
+für IntelliJ](https://plugins.jetbrains.com/plugin/7358-antlr-v4) zu arbeiten.
 
 Erkunden Sie dann die Strukturen Ihres Parse-Trees. Diese sind an die Regeln Ihrer
 Grammatik gekoppelt und sind deshalb so individuell wie Ihre Grammatik. Mit einer
-Traversierung des Baumes können Sie die gewünschte Ausgabe programmieren und auch die
-Erstellung des vereinfachten Baumes (AST).
+Traversierung des Baumes können Sie die gewünschte Ausgabe programmieren und auch
+die Erstellung des vereinfachten Baumes (AST).
 
 # Sprachdefinition
 
@@ -53,8 +53,8 @@ Ein Programm besteht aus einer oder mehreren Anweisungen (*Statements*).
 ## Anweisungen (*Statements*)
 
 Eine Anweisung ist eine einzeilige Befehlsfolge, beispielsweise eine Zuweisung oder
-eine Operation. Sie muss immer mit einem Newline abgeschlossen werden. Eine Anweisung
-hat keinen Wert.
+eine Operation. Sie muss immer mit einem Newline abgeschlossen werden. Eine
+Anweisung hat keinen Wert.
 
 ``` python
 a := 10 - 5  # Zuweisung des Ausdruckes 10-5 (Integer-Wert 5) an die Variable a
@@ -67,12 +67,12 @@ Kontrollstrukturen (s.u.) zählen ebenfalls als Anweisungen.
 
 Die einfachsten Ausdrücke sind Integer- oder String-Literale. Variablen sind
 ebenfalls Ausdrücke. Komplexere Ausdrücke werden mit Hilfe von Operationen gebildet,
-dabei sind die Operanden jeweils auch wieder Ausdrücke. Ein Ausdruck hat/ergibt immer
-einen Wert.
+dabei sind die Operanden jeweils auch wieder Ausdrücke. Ein Ausdruck hat/ergibt
+immer einen Wert.
 
-Die Operatoren besitzen eine Rangfolge, um verschachtelte Operationen aufzulösen. Sie
-dürfen daher nicht einfach von links nach rechts aufgelöst werden. Die Rangfolge der
-Operatoren entspricht der üblichen Semantik (vgl. Java, C, Python).
+Die Operatoren besitzen eine Rangfolge, um verschachtelte Operationen aufzulösen.
+Sie dürfen daher nicht einfach von links nach rechts aufgelöst werden. Die Rangfolge
+der Operatoren entspricht der üblichen Semantik (vgl. Java, C, Python).
 
 Es gibt in unserer Sprache folgende Operationen mit der üblichen Semantik:
 
@@ -158,8 +158,8 @@ Eine bedingte Anweisung besteht immer aus genau einer `if`-Anweisung, gefolgt vo
 einer Bedingung, die mit einem `do` abgeschlossen wird und einer Folge von
 Anweisungen.
 
-Danach wird die bedingte Anweisung entweder mit dem Schlüsselwort `end` abgeschlossen
-oder es folgt genau ein `else`-Teil.
+Danach wird die bedingte Anweisung entweder mit dem Schlüsselwort `end`
+abgeschlossen oder es folgt genau ein `else`-Teil.
 
 Ein `else`-Teil wird mit dem Schlüsselwort `else` eingeleitet. Darauf folgt ein `do`
 und eine Folge von Anweisungen. Der `else`-Teil wird mit dem Schlüsselwort `end`
@@ -191,8 +191,8 @@ end
 
 ## Datentypen
 
-Unsere Sprache hat zwei eingebaute Datentypen, für die entsprechende Literale erkannt
-werden müssen:
+Unsere Sprache hat zwei eingebaute Datentypen, für die entsprechende Literale
+erkannt werden müssen:
 
 | Datentyp | Definition der Literale                                       |
 |:---------|:--------------------------------------------------------------|
@@ -269,9 +269,9 @@ end
 
 werden.
 
-**Hinweis**: Es geht nur um die Ausgabe syntaktisch korrekter Programme. Sie brauchen
-sich um die Semantik (z.B. passende Typen wie etwa keine Multiplikation von Strings
-mit Integern o.ä.) noch keine Gedanken machen! Achten Sie auf die korrekten
+**Hinweis**: Es geht nur um die Ausgabe syntaktisch korrekter Programme. Sie
+brauchen sich um die Semantik (z.B. passende Typen wie etwa keine Multiplikation von
+Strings mit Integern o.ä.) noch keine Gedanken machen! Achten Sie auf die korrekten
 Einrücktiefen. Die Zeilenlänge spielt hier keine Rolle, es wird einfach direkt nach
 jedem Statement umgebrochen (bzw. wie bei den Kontrollstrukturen gezeigt).
 
@@ -286,8 +286,8 @@ einzusteigen.
 ## A3.3: AST (3P)
 
 Beim Parsen bekommen Sie von ANTLR einen Parse-Tree zurück, der direkt die Struktur
-Ihrer Grammatik widerspiegelt. Die einzelnen Zweige sind damit in der Regel aber auch
-viel zu tief verschachtelt.
+Ihrer Grammatik widerspiegelt. Die einzelnen Zweige sind damit in der Regel aber
+auch viel zu tief verschachtelt.
 
 Überlegen Sie sich, welche Informationen/Knoten Sie für die formatierte Ausgabe
 wirklich benötigen - das ist Ihr Abstract-Syntex-Tree (*AST*).

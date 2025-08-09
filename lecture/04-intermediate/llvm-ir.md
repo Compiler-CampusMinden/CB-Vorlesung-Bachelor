@@ -118,7 +118,8 @@ MSP430 System z XMOS Xcore ...
 
 ## Der LLVM-Kern
 
-**LLVM Core**: Optimierer und Codegenerator für viele CPU- und auch GPU-Architekturen
+**LLVM Core**: Optimierer und Codegenerator für viele CPU- und auch
+GPU-Architekturen
 
 -   Optimierer arbeitet unabhängig von der Zielarchitektur (nur auf der LLVM IR)
 -   sehr gut dokumentiert

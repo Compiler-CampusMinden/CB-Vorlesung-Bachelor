@@ -11,16 +11,16 @@ Typ `T` wie einen normalen anderen Typ nutzen.
 
 Funktions-Templates sind (vollständig) spezialisierbar. Dazu wiederholt man die
 komplette Funktionsdefinition (inkl. der dann leeren Template-Deklaration
-`template <>`) und legt alle Template-Parameter über die Funktionssignatur fest. Alle
-Spezialisierungen müssen nach dem eigentlichen ("primären") Funktions-Template
+`template <>`) und legt alle Template-Parameter über die Funktionssignatur fest.
+Alle Spezialisierungen müssen nach dem eigentlichen ("primären") Funktions-Template
 formuliert werden.
 
 Funktions-Templates sind überladbar mit "normalen" Funktionen und anderen
 Funktions-Templates.
 
 Beim Aufruf kann man die Template-Parameter entweder selbst festlegen (über eine
-Auflistung der Typen in spitzen Klammern hinter dem Funktionsnamen) oder den Compiler
-inferieren lassen. Dabei wird die am besten "passende" Variante genutzt:
+Auflistung der Typen in spitzen Klammern hinter dem Funktionsnamen) oder den
+Compiler inferieren lassen. Dabei wird die am besten "passende" Variante genutzt:
 
 1.  Zuerst die **exakt** passende normale Funktion,
 2.  dann ein passendes spezialisiertes Template (bei mehreren passenden
@@ -38,10 +38,10 @@ außerhalb der Klassendeklaration muss die Template-Deklaration
 Klassen-Templates sind spezialisierbar (vollständig und partiell). Dazu wiederholt
 man die komplette Klassendefinition (inkl. der Template-Deklaration
 `template <typename T>`) und entfernt aus der Template-Deklaration alle Typen, die
-man konkret festlegen möchte. Hinter dem Klassennamen werden dann in spitzen Klammern
-alle Typen (verbleibende Typ-Parameter aus der Template-Deklaration sowie die
-konkretisierten Typen) in der Reihenfolge angegeben, wie sie im primären Template
-vorkamen. Spezialisierungen müssen nach dem eigentlichen ("primären")
+man konkret festlegen möchte. Hinter dem Klassennamen werden dann in spitzen
+Klammern alle Typen (verbleibende Typ-Parameter aus der Template-Deklaration sowie
+die konkretisierten Typen) in der Reihenfolge angegeben, wie sie im primären
+Template vorkamen. Spezialisierungen müssen nach dem eigentlichen ("primären")
 Klassen-Template formuliert werden.
 
 Klassen- und Funktions-Templates können gemischt werden.
@@ -136,8 +136,8 @@ implementiert sein! `\newline`{=tex}(sonst Fehler zur Compile-Zeit)
 # Bestimmung der Template-Parameter I: Typ-Inferenz
 
 ::: notes
-Das Funktions-Template wird wie eine normale Funktion aufgerufen ... =\> Der Compiler
-inferiert Typen und erzeugt passende Funktionsinstanz(en).
+Das Funktions-Template wird wie eine normale Funktion aufgerufen ... =\> Der
+Compiler inferiert Typen und erzeugt passende Funktionsinstanz(en).
 :::
 
 ``` cpp
@@ -199,8 +199,8 @@ int main() {
 -   Reihenfolge der Angabe der Typen in spitzen Klammern beim Aufruf wie in
     Template-Deklaration
 -   Wenn ein Typ-Parameter nicht in der Parameterliste der Funktion vorkommt, ist
-    eine Inferenz für den Compiler unmöglich. Deshalb **muss** dieser Typ beim Aufruf
-    explizit in der Liste mit den spitzen Klammern angegeben werden!
+    eine Inferenz für den Compiler unmöglich. Deshalb **muss** dieser Typ beim
+    Aufruf explizit in der Liste mit den spitzen Klammern angegeben werden!
 -   Im Beispiel oben:
     -   `fkt<a, b, c>(...)`: `a` wäre der Typ für `T1`, `b` für `T2`, `c` für `T3`
 
@@ -227,8 +227,8 @@ int main() {
 }
 ```
 
-Die Funktion hat keine Parameter - der Compiler hat also keine Chance, den Typ `T` zu
-inferieren. In diesem Fall *muss* der Typ beim Aufruf explizit angegeben werden.
+Die Funktion hat keine Parameter - der Compiler hat also keine Chance, den Typ `T`
+zu inferieren. In diesem Fall *muss* der Typ beim Aufruf explizit angegeben werden.
 :::
 
 # Spezialisierung von Funktions-Templates
@@ -265,8 +265,8 @@ dann *alle* Template-Parameter konkret spezifiziert werden)!
 
 *Anmerkung*: Die Angabe der Typen in spitzen Klammern nach dem Funktionsnamen ist
 freiwillig, so lange *alle* Typ-Parameter in der Parameterliste der Funktion
-auftauchen. Man könnte die obige Spezialisierung also auch so schreiben (`cmp(` statt
-`cmp<int>(`):
+auftauchen. Man könnte die obige Spezialisierung also auch so schreiben (`cmp(`
+statt `cmp<int>(`):
 
 ``` cpp
 // Spezialisiertes Template
@@ -322,9 +322,9 @@ int main() {
     4.  ansonsten normale Funktion mit impliziten Casts
 -   Template-Parameter beim Aufruf angegeben: am besten passendes Template
 
-*Hinweis*: Durch reine Deklaration von Spezialisierungen (d.h. ohne die entsprechende
-Implementierung) lässt sich die Instantiierung einer Templatefunktion für bestimmte
-Typen verhindern. Beispiel:
+*Hinweis*: Durch reine Deklaration von Spezialisierungen (d.h. ohne die
+entsprechende Implementierung) lässt sich die Instantiierung einer Templatefunktion
+für bestimmte Typen verhindern. Beispiel:
 
 ``` cpp
 template <typename T>
@@ -355,9 +355,9 @@ class Matrix {
 
 ::: notes
 *Hinweis*: Template-Parameter innerhalb von Template-Parametern verursachen bei den
-schließenden spitzen Klammern u.U. Parser-Probleme. Diese lassen sich durch ein extra
-Leerzeichen (hat sonst keine Funktion!) umgehen: Statt `vector<vector<T>> xyField;`
-besser `vector<vector<T> > xyField;` schreiben.
+schließenden spitzen Klammern u.U. Parser-Probleme. Diese lassen sich durch ein
+extra Leerzeichen (hat sonst keine Funktion!) umgehen: Statt
+`vector<vector<T>> xyField;` besser `vector<vector<T> > xyField;` schreiben.
 :::
 
 \bigskip
@@ -696,8 +696,8 @@ void Array<T,n>::copy_from(const C &c) { ... }
         -   mit "`typedef`": `typedef Matrix<5,5> Matrix5x5;`
 
             =\> Dann aber nur in exakt diesen Versionen in der Bibliothek enthalten
-            und entsprechend nur so nutzbar (sofern die Template-Definition nicht zur
-            Verfügung steht)
+            und entsprechend nur so nutzbar (sofern die Template-Definition nicht
+            zur Verfügung steht)
     :::
 
 # Wrap-Up
@@ -740,12 +740,12 @@ void Array<T,n>::copy_from(const C &c) { ... }
 **Funktions-Templates**
 
 -   Wie kann eine Funktion als Funktions-Template definiert werden?
--   Wie wird ein Funktions-Template benutzt, d.h. wie wird es aufgerufen? Worin liegt
-    der Unterschied zu Java?
+-   Wie wird ein Funktions-Template benutzt, d.h. wie wird es aufgerufen? Worin
+    liegt der Unterschied zu Java?
 -   Wie kann ein Funktions-Template spezialisiert werden? Was ist dabei zu beachten?
 -   Kann man Funktions-Templates überladen?
--   Worin liegt der Unterschied zwischen einem spezialisierten Funktions-Template und
-    einem überladenen Funktions-Template?
+-   Worin liegt der Unterschied zwischen einem spezialisierten Funktions-Template
+    und einem überladenen Funktions-Template?
 
 **Funktions-Templates in C++**
 
@@ -764,9 +764,9 @@ void Array<T,n>::copy_from(const C &c) { ... }
     `string`.
 
 3.  Schreiben Sie ein weiteres Funktions-Template `string getType(T t)` mit
-    Template-Spezialisierungen, die den Typ des Parameters `t` als String zurückgibt.
-    Für nicht bekannte Typen soll der String "unbekannter Typ" zurückgeliefert
-    werden.
+    Template-Spezialisierungen, die den Typ des Parameters `t` als String
+    zurückgibt. Für nicht bekannte Typen soll der String "unbekannter Typ"
+    zurückgeliefert werden.
 
     Implementieren Sie mind. 3 Spezialisierungen.
 
@@ -815,8 +815,8 @@ eines unbestimmten Typs (Typ-Variable) aufnehmen. Die Größe des Vektors soll
 ebenfalls als Typ-Variable in die Template-Definition eingehen. Definieren Sie den
 `operator*` für das Skalarprodukt von zwei Vektoren.
 
-Erstellen Sie eine partielle Spezialisierung des Klassen-Templates zur Repräsentation
-von einstelligen Vektoren (Skalare).
+Erstellen Sie eine partielle Spezialisierung des Klassen-Templates zur
+Repräsentation von einstelligen Vektoren (Skalare).
 
 Schreiben Sie ein `main()`-Funktion, instantiieren einige Vektoren und berechnen Sie
 die Skalarprodukte.

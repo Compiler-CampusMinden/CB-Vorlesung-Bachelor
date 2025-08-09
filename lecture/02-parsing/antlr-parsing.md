@@ -14,9 +14,9 @@ Parser-Regel auftauchen. Die Token müssen jeweils matchen, die Parser-Regeln we
 in einen Aufruf der jeweiligen generierten Funktion übersetzt.
 
 Parser-Regeln können aus mehreren Alternativen bestehen, diese werden per `|`
-separiert. Dabei hat bei Mehrdeutigkeiten die erste passende Alternative Vorrang. Wie
-bei Lexer-Regeln können Teile per `?` ein- oder keinmal vorkommen, per `*` beliebig
-oft oder per `+` ein- oder mehrfach.
+separiert. Dabei hat bei Mehrdeutigkeiten die erste passende Alternative Vorrang.
+Wie bei Lexer-Regeln können Teile per `?` ein- oder keinmal vorkommen, per `*`
+beliebig oft oder per `+` ein- oder mehrfach.
 
 ANTLR erlaubt im Gegensatz zu allgemeinen LL-Parsern direkte Links-Rekursion.
 (Indirekte Links-Rekursion funktioniert allerdings nicht.)
@@ -154,9 +154,9 @@ stmt  : expr | ID  ;
 expr  : ID   | NUM ;
 ```
 
-Bei der Eingabe "foo" würde die Alternative `ID` in der Regel `expr` "gewinnen", weil
-sie in der Grammatik vor der Alternative `ID` in der Regel `stmt` kommt und damit
-Vorrang hat.
+Bei der Eingabe "foo" würde die Alternative `ID` in der Regel `expr` "gewinnen",
+weil sie in der Grammatik vor der Alternative `ID` in der Regel `stmt` kommt und
+damit Vorrang hat.
 
 ## Parse-Tree
 
@@ -176,12 +176,12 @@ unserem Beispiel kann für das "a" das Token `ID` produziert werden, das "=" mat
 ebenfalls. Die "42" wird erklärt, indem für `expr` ein `term` und dort ein `atom`
 aufgerufen wird. Für das `atom` muss entweder ein Token `ID` oder `NUM` als nächstes
 Token kommen - hier wird die "42" wird als Token `NUM` verarbeitet. Da die weiteren
-Regelteile in `term` und `expr` optional sind, haben wir damit ein `expr` erfüllt und
-das nachfolgende `;`-Token schließt die erste Alternative der Regel `stmt`
+Regelteile in `term` und `expr` optional sind, haben wir damit ein `expr` erfüllt
+und das nachfolgende `;`-Token schließt die erste Alternative der Regel `stmt`
 erfolgreich ab.
 
-Im entstehenden Parse-Tree sind diese Abläufe und grammatikalischen Strukturen direkt
-erkennbar. Jede erfolgreich durchlaufene Parserregel wird zu einem Knoten im
+Im entstehenden Parse-Tree sind diese Abläufe und grammatikalischen Strukturen
+direkt erkennbar. Jede erfolgreich durchlaufene Parserregel wird zu einem Knoten im
 Parse-Tree. Die Token werden als Terminale (Blätter) in den Baum eingehängt.
 
 *Anmerkung*: Der Parse-Tree ist das Ergebnis der Parsers-Phase im Compiler und dient
@@ -218,18 +218,18 @@ In diesem Fall würde die Startregel bei der Eingabe "aa; bb;" nur den ersten Te
 "aa;" konsumieren (als Token `ID`) und das folgende "bb;" ignorieren. Das wäre in
 diesem Fall aber auch kein Fehler.
 
-Wenn der gesamte Eingabestrom durch die Startregel erklärt werden soll, dann muss das
-vordefinierte Token `EOF` am Ende der Startregel eingesetzt werden:
+Wenn der gesamte Eingabestrom durch die Startregel erklärt werden soll, dann muss
+das vordefinierte Token `EOF` am Ende der Startregel eingesetzt werden:
 
 ``` antlr
 start : stmt EOF;
 ```
 
 Hier würde die Eingabe "aa; bb;" zu einem Fehler führen, da nur der Teil "aa;" durch
-die Startregel abgedeckt ist (Token `ID`), und der Rest "bb;" zwar sogar ein gültiges
-Token wären (ebenfalls `ID` und `;`), aber eben nicht mehr von der Startregel
-akzeptiert. Durch das `EOF` soll die Startregel aber den gesamten Input konsumieren
-und erklären, was hier nicht geht und entsprechend zum Fehler führt.
+die Startregel abgedeckt ist (Token `ID`), und der Rest "bb;" zwar sogar ein
+gültiges Token wären (ebenfalls `ID` und `;`), aber eben nicht mehr von der
+Startregel akzeptiert. Durch das `EOF` soll die Startregel aber den gesamten Input
+konsumieren und erklären, was hier nicht geht und entsprechend zum Fehler führt.
 
 (vgl.
 [github.com/antlr/antlr4/blob/master/doc/parser-rules.md](https://github.com/antlr/antlr4/blob/master/doc/parser-rules.md#start-rules-and-eof))
@@ -286,10 +286,10 @@ ist. ANTLR löst diese Links-Rekursion automatisch auf (vgl.
 [github.com/antlr/antlr4/blob/master/doc/left-recursion.md](https://github.com/antlr/antlr4/blob/master/doc/left-recursion.md)).
 
 Da bei Mehrdeutigkeit in der Grammatik, also bei der Anwendbarkeit mehrerer
-Alternativen stets die erste Alternative genommen wird, lassen sich die Vorrangregeln
-durch die Reihenfolge der Alternativen in der `expr`-Regel implementieren: Die
-Multiplikation hat Vorrang von der Addition, und diese hat wiederum Vorrang von einer
-einfachen `ID`.
+Alternativen stets die erste Alternative genommen wird, lassen sich die
+Vorrangregeln durch die Reihenfolge der Alternativen in der `expr`-Regel
+implementieren: Die Multiplikation hat Vorrang von der Addition, und diese hat
+wiederum Vorrang von einer einfachen `ID`.
 :::
 
 ::: notes
@@ -329,8 +329,8 @@ definiert. Dabei sind die Lexeme für `'func'` und `FOR` auch in `ID` enthalten.
 Dennoch werden `'func'` und `FOR` erkannt und nicht über `ID` gematcht, weil sie
 *vor* der Regel `ID` definiert sind.
 
-Tatsächlich sortiert ANTLR die Regeln intern um, so dass alle Parser-Regeln *vor* den
-Lexer-Regeln definiert sind. Die impliziten Token werden dabei noch vor den
+Tatsächlich sortiert ANTLR die Regeln intern um, so dass alle Parser-Regeln *vor*
+den Lexer-Regeln definiert sind. Die impliziten Token werden dabei noch vor den
 expliziten Token-Regeln angeordnet. Im obigen Beispiel hat also `'func'` eine höhere
 Priorität als `FOR`, und `FOR` hat eine höhere Priorität als `ID`. Aus diesem Grund
 gibt es die Konvention, die Parser-Regeln in der Grammatik vor den Lexer-Regeln zu
@@ -368,8 +368,8 @@ expr : e '*' e ;
 Jede Regel liefert ein passend zu dieser Regel generiertes Kontext-Objekt zurück.
 Darüber kann man das/die Kontextobjekt(e) der Sub-Regeln abfragen.
 
-Die Regel `s` liefert entsprechend ein `SContext`-Objekt und die Regel `expr` liefert
-ein `ExprContext`-Objekt zurück.
+Die Regel `s` liefert entsprechend ein `SContext`-Objekt und die Regel `expr`
+liefert ein `ExprContext`-Objekt zurück.
 
 In der Aktion fragt man das Kontextobjekt über `ctx` ab, in den Listener- und
 Visitor-Methoden erhält man die Kontextobjekte als Parameter.
@@ -416,8 +416,9 @@ Analog wird für die beiden Alternativen je ein eigener Kontext erzeugt.
 ::: notes
 ANTLR (generiert auf Wunsch) zur Grammatik passende Listener (Interface und leere
 Basisimplementierung). Beim Traversieren mit dem Default-`ParseTreeWalker` wird der
-Parse-Tree mit Tiefensuche abgelaufen und jeweils beim Eintritt in bzw. beim Austritt
-aus einen/m Knoten der passende Listener mit dem passenden Kontext-Objekt aufgerufen.
+Parse-Tree mit Tiefensuche abgelaufen und jeweils beim Eintritt in bzw. beim
+Austritt aus einen/m Knoten der passende Listener mit dem passenden Kontext-Objekt
+aufgerufen.
 
 Damit kann man die Grammatik "für sich" halten, d.h. unabhängig von einer konkreten
 Zielsprache und die Aktionen über die Listener (oder Visitors, s.u.) ausführen.
@@ -595,7 +596,8 @@ noch viele weitere Dinge möglich. Bitte nutzen Sie aktiv die Dokumentation auf
 
 # Wrap-Up
 
-Parser mit ANTLR generieren: Parser-Regeln werden mit **Kleinbuchstaben** geschrieben
+Parser mit ANTLR generieren: Parser-Regeln werden mit **Kleinbuchstaben**
+geschrieben
 
 \bigskip
 
@@ -605,7 +607,8 @@ Parser mit ANTLR generieren: Parser-Regeln werden mit **Kleinbuchstaben** geschr
 -   ANTLR erlaubt direkte Links-Rekursion
 -   ANTLR erzeugt Parse-Tree
 -   Benannte Alternativen und Regel-Elemente
--   Traversierung des Parse-Tree: Listener oder Visitoren, Zugriff auf Kontextobjekte
+-   Traversierung des Parse-Tree: Listener oder Visitoren, Zugriff auf
+    Kontextobjekte
 
 ::: readings
 -   @@Parr2014

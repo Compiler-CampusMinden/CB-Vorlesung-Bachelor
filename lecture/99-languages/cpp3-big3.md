@@ -13,14 +13,14 @@ freigegeben.
 Der Default-Destruktor ruft die Destruktoren der Objekt-Attribute auf. Der
 Copy-Konstruktor wird aufgerufen, wenn die linke Seite (einer scheinbaren
 "Zuweisung") ein unfertiges Objekt ist (noch zu bauen) und die rechte Seite ein
-fertiges Objekt ist. Der Zuweisungs-Operator wird dagegen aufgerufen, wenn auf beiden
-Seiten ein fertiges Objekt vorliegt.
+fertiges Objekt ist. Der Zuweisungs-Operator wird dagegen aufgerufen, wenn auf
+beiden Seiten ein fertiges Objekt vorliegt.
 
 Innerhalb einer Klasse kann man über den **Pointer `this`** auf das eigene Objekt
 zugreifen (analog zu `self` in Python oder `this` in Java, dort aber Referenzen).
 
-Bei statischen Methoden und Attributen wird die Deklaration als `static` **nicht** in
-der Implementierung wiederholt! Statische Attribute müssen außerhalb der
+Bei statischen Methoden und Attributen wird die Deklaration als `static` **nicht**
+in der Implementierung wiederholt! Statische Attribute müssen außerhalb der
 Klassendefinition einmal initialisiert werden!
 
 Methoden können als "konstant" ausgezeichnet werden (`const` rechts von der
@@ -99,8 +99,8 @@ href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master
 -   Default-Copy-Konstruktor kopiert einfach elementweise `\newline`{=tex} =\> bei
     Pointern also nur **flache Kopie**
 
-"**Merkregel**": Linke Seite unfertiges Objekt (noch zu bauen), rechte Seite fertiges
-Objekt.
+"**Merkregel**": Linke Seite unfertiges Objekt (noch zu bauen), rechte Seite
+fertiges Objekt.
 
 [Konsole: copyKonstruktor.cpp]{.ex
 href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/99-languages/src/copyKonstruktor.cpp"}
@@ -181,8 +181,8 @@ Analyse:
     Speicher wie der Pointer `value` in `a`.
 4.  Der Ausdruck `c=b` ist eine Zuweisung (warum?). Auch hier wird der vom Compiler
     bereitgestellte Default genutzt (elementweise Zuweisung). Damit zeigt nun auch
-    der Pointer `value` in `c` auf den selben Speicher wie die `value`-Pointer in `a`
-    und `b`.
+    der Pointer `value` in `c` auf den selben Speicher wie die `value`-Pointer in
+    `a` und `b`.
 :::
 
 ::: notes
@@ -235,12 +235,12 @@ einen Pointer auf das Objekt, wobei dieses mit `new` angelegt wurde).
 
 Im Destruktor sollten **durch das Objekt verwaltete Resourcen freigegeben** werden,
 d.h. sämtliche im Objekt mit `new` oder `malloc` allozierten Resourcen auf dem Heap
-müssen freigegeben werden. Außerdem sollten ggf. offene Verbindungen (offene Dateien,
-Datenbankverbindungen, Kommunikation, ...) geschlossen werden, wenn sie durch das
-Objekt geöffnet wurden bzw. in der Verantwortung des Objekts stehen. Einfache
-Datentypen oder Objekte, die nicht per Referenz oder Pointer im Objekt verwaltet
-werden, werden automatisch freigegeben (denken Sie an das Speichermodell - diese
-Daten "stehen" direkt im Speicherbereich des Objekts).
+müssen freigegeben werden. Außerdem sollten ggf. offene Verbindungen (offene
+Dateien, Datenbankverbindungen, Kommunikation, ...) geschlossen werden, wenn sie
+durch das Objekt geöffnet wurden bzw. in der Verantwortung des Objekts stehen.
+Einfache Datentypen oder Objekte, die nicht per Referenz oder Pointer im Objekt
+verwaltet werden, werden automatisch freigegeben (denken Sie an das Speichermodell -
+diese Daten "stehen" direkt im Speicherbereich des Objekts).
 
 Der Speicherbereich für das Objekt selbst wird nach Beendigung des Destruktors
 automatisch freigegeben (auf dem Stack wegen des Verlassen des Scopes (=\>
@@ -287,8 +287,8 @@ private:
         -   Indirektion
         -   Elementzugriff
         -   Elementindirektion
--   Vor C++11: Default-Methode/-Operator verbieten: Sichtbarkeit auf `private` setzen
-    (Definition nicht nötig)
+-   Vor C++11: Default-Methode/-Operator verbieten: Sichtbarkeit auf `private`
+    setzen (Definition nicht nötig)
 -   Ab C++11: Schlüsselwort `delete`: Entfernt Default-Methode/-Operator
 -   C++11: Default-Methode/-Operator zusätzlich zu selbst implementierten:
     Schlüsselwort `default`
@@ -346,8 +346,8 @@ int Studi::getCredits() {
 Das `const` gehört zur Signatur der Methode!
 
 So wie im Beispiel gezeigt, gibt es jetzt zwei Methoden `getCredits()` - eine davon
-ist konstant. Konstante Methoden dürfen auf konstanten Objekten/Referenzen aufgerufen
-werden.
+ist konstant. Konstante Methoden dürfen auf konstanten Objekten/Referenzen
+aufgerufen werden.
 
 Was passiert, wenn das `const` auf der linken Seite steht? Dann bezieht es sich auf
 den Rückgabewert:

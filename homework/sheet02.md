@@ -83,5 +83,5 @@ Berechnen die die *First-* und *Follow-Mengen* der Grammatik.
 
 Zeigen Sie, dass die Grammatik LL(1) ist.
 
-Konstruieren Sie die LL-Parsertabelle für die Grammatik und simulieren Sie das Parsen
-des Wortes *1233*.
+Konstruieren Sie die LL-Parsertabelle für die Grammatik und simulieren Sie das
+Parsen des Wortes *1233*.

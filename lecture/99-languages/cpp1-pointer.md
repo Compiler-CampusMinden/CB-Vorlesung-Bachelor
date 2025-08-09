@@ -10,8 +10,8 @@ einen linearen Adressraum bereit und abstrahiert dabei von den darunter liegende
 physikalischen Speichermedien (es gibt eine Abbildung auf die jeweiligen
 Speichermedien durch die MMU, dies ist aber nicht Bestandteil dieses Kurses).
 
-Den virtuellen Speicher kann man grob in drei Segmente aufteilen: Text (hier befindet
-sich der Programmcode des Prozesses), Stack (automatische Verwaltung, für
+Den virtuellen Speicher kann man grob in drei Segmente aufteilen: Text (hier
+befindet sich der Programmcode des Prozesses), Stack (automatische Verwaltung, für
 Funktionsaufrufe und lokale Variablen) und Heap (Verwaltung durch den Programmierer,
 dynamische Bereitstellung von Speicher während der Laufzeit des Programms).
 
@@ -55,14 +55,15 @@ eines Arrays werden vom Compiler direkt aufeinanderfolgend im Speicher angeordne
 der Array-Name ist wie ein (konstanter) Pointer auf das erste Element. Tatsächlich
 übersetzt der Compiler Indexzugriffe für ein Array in die passende
 Pointerdereferenzierung: `a[i]` wird zu `*(a+i)`. Ein Pointer kann wiederum auch auf
-das erste Element eines zusammenhängenden Speicherbereichs zeigen, etwa wenn man über
-`malloc` Speicherplatz für mehrere Elemente anfordert. Da der Compiler aus einem
-Indexzugriff ohnehin die Pointerdereferenzierung macht, könnte man so einen Pointer
-auch per Indexzugriff abfragen. Dies ist aber gefährlich: Es funktioniert auch, wenn
-der Pointer nur auf *ein* anderes Objekt zeigt und nicht auf einen Speicherbereich
-... Ein Arrayname wird vom Compiler fest der ersten Speicheradresse des Arrays
-zugeordnet und kann nicht verändert werden, der Inhalt eines (nicht-konstanten)
-Pointer dagegen schon (der Pointer selbst wird auch fest im Speicher angelegt).
+das erste Element eines zusammenhängenden Speicherbereichs zeigen, etwa wenn man
+über `malloc` Speicherplatz für mehrere Elemente anfordert. Da der Compiler aus
+einem Indexzugriff ohnehin die Pointerdereferenzierung macht, könnte man so einen
+Pointer auch per Indexzugriff abfragen. Dies ist aber gefährlich: Es funktioniert
+auch, wenn der Pointer nur auf *ein* anderes Objekt zeigt und nicht auf einen
+Speicherbereich ... Ein Arrayname wird vom Compiler fest der ersten Speicheradresse
+des Arrays zugeordnet und kann nicht verändert werden, der Inhalt eines
+(nicht-konstanten) Pointer dagegen schon (der Pointer selbst wird auch fest im
+Speicher angelegt).
 
 Pointer haben einen Typ: Die Pointerarithmetik berücksichtigt die Speicherbreite des
 Typs! Damit springt man mit `ptr+1` automatisch zum nächsten Objekt und nicht
@@ -182,9 +183,9 @@ Im Beispiel:
 Der Wert eines Pointers wird als **Adresse** im Speicher behandelt
 :::
 
-Der Wert von `iptr` ist nicht ein beliebiger Integer, sondern eine Adresse. In diesem
-Fall handelt es sich um die Adresse im virtuellen Speicher, wo die Variable `i`
-abgelegt ist.
+Der Wert von `iptr` ist nicht ein beliebiger Integer, sondern eine Adresse. In
+diesem Fall handelt es sich um die Adresse im virtuellen Speicher, wo die Variable
+`i` abgelegt ist.
 
 Wirkung/Interpretation: Variable `iptr` "zeigt" auf die Adresse von Variable `i`.
 
@@ -263,10 +264,10 @@ Jetzt zeigen zwei Pointer auf die Speicherzelle von Variable `i`: `iptr` (wegen
 `iptr = &i`), und weil der Wert von `iptr` in `ptr2` kopiert wurde (`ptr2 = iptr`),
 zeigt nun auch `ptr2` auf `i`.
 
-Der Wert von `iptr` ist die Adresse von `i`. Wenn dieser Wert kopiert oder zugewiesen
-wird, ändert sich an dieser Adresse nichts. `ptr2` bekommt diesen Wert zugewiesen,
-d.h. bei einer Dereferenzierung von `ptr2` würde auf die Adresse von `i` zugriffen
-werden und dort gelesen/geschrieben werden.
+Der Wert von `iptr` ist die Adresse von `i`. Wenn dieser Wert kopiert oder
+zugewiesen wird, ändert sich an dieser Adresse nichts. `ptr2` bekommt diesen Wert
+zugewiesen, d.h. bei einer Dereferenzierung von `ptr2` würde auf die Adresse von `i`
+zugriffen werden und dort gelesen/geschrieben werden.
 
 ## Pointer und Scopes
 
@@ -306,8 +307,8 @@ int* murks() {
     -   Sie haben noch den Pointer
     -   Die Variable, auf die der Pointer zeigt, ist ungültig
 -   Wenn Sie jetzt auf das Zimmer gehen, kommen Sie (evtl.) noch rein
-    -   Evtl. ist das Zimmer noch nicht wieder belegt, und Sie finden Ihr vergessenes
-        Handy
+    -   Evtl. ist das Zimmer noch nicht wieder belegt, und Sie finden Ihr
+        vergessenes Handy
     -   Bei Dereferenzierung erhalten Sie noch den alten Wert der Variablen
         -   Evtl. wurde das Zimmer bereits wieder vergeben =\> Sie "brechen" bei
             einem Fremden ein!
@@ -332,8 +333,8 @@ Pointer werden vom Compiler **nicht** initialisiert!
 
 # Speicherverwaltung
 
--   C: **Funktionen** zur Verwaltung dynamischen Speichers: `malloc()`, `free()`, ...
-    (in `<stdlib.h>`)
+-   C: **Funktionen** zur Verwaltung dynamischen Speichers: `malloc()`, `free()`,
+    ... (in `<stdlib.h>`)
 
     ::: notes
     ``` c
@@ -341,7 +342,8 @@ Pointer werden vom Compiler **nicht** initialisiert!
     ```
 
     -   Alloziert `size` Bytes auf dem Heap und liefert Adresse zurück
-    -   Pointer auf `void`, da Typ unbekannt - vor Nutzung auf korrekten Typ umcasten
+    -   Pointer auf `void`, da Typ unbekannt - vor Nutzung auf korrekten Typ
+        umcasten
     -   Im Fehlerfall wird ein Null-Pointer zurückgeliefert: `NULL`
     -   Achtung: Speicher ist nicht initialisiert!
     :::
@@ -414,8 +416,8 @@ Heap!
     -   Jeder Zeiger auf Typ `T` kann automatisch zum `void`-Pointer konvertiert
         werden
 
-    -   Für Zuweisung von `void`-Pointern an Pointer auf Typ `T` expliziter Cast nach
-        `T*` nötig (siehe auch nachfolgenden Hinweis zu C11)
+    -   Für Zuweisung von `void`-Pointern an Pointer auf Typ `T` expliziter Cast
+        nach `T*` nötig (siehe auch nachfolgenden Hinweis zu C11)
 
         ``` c
         char *cp;
@@ -537,8 +539,8 @@ Tipp: `i` ist **kein** Pointer :)
 
 ### Auslesen von nicht-initialisiertem Speicher
 
-Wenn Programmierer denken, dass irgendwer den Heap zwischendurch immer mal wieder auf
-0 setzt ...
+Wenn Programmierer denken, dass irgendwer den Heap zwischendurch immer mal wieder
+auf 0 setzt ...
 
 ``` c
 /* return y = Ax */
@@ -620,9 +622,9 @@ int *search(int *p, int val) {
 ```
 
 ::: details
-Tipp: Jeder Pointer hat einen Typ, und der Ausdruck "Pointer + 1" rutscht um so viele
-Bytes im Speicher weiter, wie der Typ breit ist. D.h. mit einem "Pointer + 1" gelangt
-man zum nächsten Element, während der obige Ausdruck `p += sizeof(int);` um
+Tipp: Jeder Pointer hat einen Typ, und der Ausdruck "Pointer + 1" rutscht um so
+viele Bytes im Speicher weiter, wie der Typ breit ist. D.h. mit einem "Pointer + 1"
+gelangt man zum nächsten Element, während der obige Ausdruck `p += sizeof(int);` um
 `sizeof(int)` Elemente weiterspringt!
 :::
 :::::::::
@@ -737,8 +739,8 @@ zulässig, semantisch normalerweise nicht!)
 
 -   Pointer zeigen auf Objekte mit einem bestimmten Typ
 -   Typen haben unterschiedliche Speicherbreite
--   Inkrementierung/Dekrementierung: Pointer zeigt nicht auf nächste Speicheradresse,
-    sondern auf die Adresse des nächsten Werts!
+-   Inkrementierung/Dekrementierung: Pointer zeigt nicht auf nächste
+    Speicheradresse, sondern auf die Adresse des nächsten Werts!
 
 ``` c
 double d[10];
@@ -853,8 +855,8 @@ Zugriff auf `a` ist wie ein Zugriff auf `x`. Änderungen von `a` sind also Ände
 von `x`.
 
 Der zweite Parameter bindet sich an den *Wert* von `y`, d.h. `b` hat den Wert `'a'`.
-Zwar kann auch `b` verändert werden, das hat dann aber nur Auswirkungen innerhalb der
-Funktion und nicht auf die Variable `y` im äußeren Scope.
+Zwar kann auch `b` verändert werden, das hat dann aber nur Auswirkungen innerhalb
+der Funktion und nicht auf die Variable `y` im äußeren Scope.
 :::
 
 # Call-by-Reference Semantik in C++
@@ -911,9 +913,9 @@ Referenzen müssen bei der Deklaration initialisiert werden und binden sich an d
 dabei genutzte Objekt. Sie stellen letztlich lediglich einen neuen Namen für das
 Objekt dar.
 
-Bei der Übergabe von Variablen an Referenz-Parameter einer Funktion binden sich diese
-Parameter an die übergebenen Objekte. Jeder Zugriff innerhalb der Funktion auf einen
-Referenz-Parameter bewirken einen Zugriff auf das ursprüngliche Objekt.
+Bei der Übergabe von Variablen an Referenz-Parameter einer Funktion binden sich
+diese Parameter an die übergebenen Objekte. Jeder Zugriff innerhalb der Funktion auf
+einen Referenz-Parameter bewirken einen Zugriff auf das ursprüngliche Objekt.
 
 ``` cpp
 int add_5(int &x) {
@@ -930,16 +932,16 @@ int main() {
 -   Funktionsparameter `x` ist eine Referenz
 -   Bei Aufruf der Funktion wird dieser Parameter initialisiert - die Referenz `x`
     bindet sich im Beispiel an die Variable `i`
--   Zugriffe auf `x` in der Funktion sind also Zugriffe auf das Original-Objekt `i` -
-    `x += 5` ist nichts anderes als `i += 5`
+-   Zugriffe auf `x` in der Funktion sind also Zugriffe auf das Original-Objekt
+    `i` - `x += 5` ist nichts anderes als `i += 5`
 -   Bei weiteren Aufrufen wird `x` dann neu gebunden
 
 ## Call-by-Reference: const
 
 -   Nachteil bei Call-by-Reference:
 
-    [Übergebenes]{.notes} Objekt könnte durch die Funktion (unbeabsichtigt) verändert
-    werden
+    [Übergebenes]{.notes} Objekt könnte durch die Funktion (unbeabsichtigt)
+    verändert werden
 
 -   Abhilfe: Deklaration der Parameter als konstant (Schlüsselwort `const`):
 
@@ -1030,7 +1032,7 @@ sollten Sie sich für `bar foo(wuppie&,  bar)` entscheiden.
 # Vergleich Pointer mit Referenzen
 
 | Referenzen | Pointer |
-|:--------------------------------|:---------------------------------------------------|
+|:--------------------------------|:--------------------------------------------------|
 | Alias-Name für Objekte/Variablen, kein eigener Speicherplatz | "Echte" Variablen mit eigenem Speicherplatz (für den Wert des Pointers) |
 | Können nicht auf andere Objekte "umgebogen" werden | Können auf andere Objekte zeigen (falls nicht const) |
 | Operationen agieren direkt auf dem referenzierten Objekt | Operationen auf referenzierten Objekt als auch auf dem Pointer selbst |
@@ -1072,7 +1074,8 @@ sollten Sie sich für `bar foo(wuppie&,  bar)` entscheiden.
 ::: outcomes
 -   k1: Virtueller Speicher, Segmente: Text, Data, Stack
 -   k2: Pointer sind Variablen, Wert wird als Adresse interpretiert
--   k2: Pointer als spezielle Variablen: Wert des Pointers als Adresse interpretieren
+-   k2: Pointer als spezielle Variablen: Wert des Pointers als Adresse
+    interpretieren
 -   k2: Initialisierung und Scopes bei Pointern
 -   k3: Zuweisen einer Adresse an einen Pointer
 -   k3: Dereferenzierung eines Pointers und Zugriff auf das referenzierte Element

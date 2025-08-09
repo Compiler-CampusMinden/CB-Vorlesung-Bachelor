@@ -4,19 +4,19 @@ title: Lexer mit ANTLR generieren
 ---
 
 ::: tldr
-ANTLR ist ein Parser-Generator, der aus einer Grammatik einen Parser in verschiedenen
-Zielsprachen (Java, Python, C++, ...) generieren kann.
+ANTLR ist ein Parser-Generator, der aus einer Grammatik einen Parser in
+verschiedenen Zielsprachen (Java, Python, C++, ...) generieren kann.
 
 In der ANTLR-Grammatik werden die Parser-Regeln klein geschrieben, die Lexer-Regeln
-werden mit **Großbuchstaben** geschrieben. Jede Lexer-Regel liefert ein Token zurück,
-dabei ist der Tokenname die linke Seite der Regel. Wie bei Flex gewinnt der längste
-Match, und bei Gleichstand (mehrere längste Regeln matchen) gewinnt die zuerst
-definierte Regel.
+werden mit **Großbuchstaben** geschrieben. Jede Lexer-Regel liefert ein Token
+zurück, dabei ist der Tokenname die linke Seite der Regel. Wie bei Flex gewinnt der
+längste Match, und bei Gleichstand (mehrere längste Regeln matchen) gewinnt die
+zuerst definierte Regel.
 
 Die Lexer-Regeln können mit Aktionen annotiert werden, die beim Matchen der
 jeweiligen Regel abgearbeitet werden. Diese Aktionen müssen in der
-Zielprogrammiersprache formuliert werden, da sie in die generierte Lexerklasse in die
-jeweiligen Methoden eingebettet werden.
+Zielprogrammiersprache formuliert werden, da sie in die generierte Lexerklasse in
+die jeweiligen Methoden eingebettet werden.
 :::
 
 ::: youtube
@@ -54,10 +54,10 @@ a= [5  , 6]     ;
 Normalerweise werden für spätere Phasen unwichtige Elemente wie White-Space oder
 Kommentare entfernt.
 
-Durch diese Vorverarbeitung wird eine höhere Abstraktionsstufe erreicht und es können
-erste grobe Fehler gefunden werden. Dadurch kann der Parser auf einer abstrakteren
-Stufe arbeiten und muss nicht mehr den gesamten ursprünglichen Zeichenstrom
-verarbeiten.
+Durch diese Vorverarbeitung wird eine höhere Abstraktionsstufe erreicht und es
+können erste grobe Fehler gefunden werden. Dadurch kann der Parser auf einer
+abstrakteren Stufe arbeiten und muss nicht mehr den gesamten ursprünglichen
+Zeichenstrom verarbeiten.
 
 *Anmerkung*: In dieser Phase steht die Geschwindigkeit stark im Vordergrund: Der
 Lexer "sieht" *alle* Zeichen im Input. Deshalb findet man häufig von Hand kodierte
@@ -73,7 +73,8 @@ Lexer, obwohl die Erstellung der Lexer auch durch Generatoren erledigt werden k�
 
     ::: notes
     Der Tokenname ist ein abstraktes Symbol, welches eine lexikalische Einheit
-    repräsentiert (Kategorie). Die Tokennamen sind die Eingabesymbole für den Parser.
+    repräsentiert (Kategorie). Die Tokennamen sind die Eingabesymbole für den
+    Parser.
 
     Token werden i.d.R. einfach über ihren Namen referenziert. Token werden häufig
     zur Unterscheidung von anderen Symbolen in der Grammatik in Fettschrift oder mit
@@ -144,15 +145,15 @@ Lexer, obwohl die Erstellung der Lexer auch durch Generatoren erledigt werden k�
     ::: notes
     Normalerweise benötigt man Kommentare und White-Spaces in den folgenden Stufen
     nicht und entfernt diese deshalb aus dem Eingabestrom. Dabei könnte man etwa
-    White-Spaces in den Pattern der restlichen Token berücksichtigen, was die Pattern
-    aber sehr komplex macht. Die Alternative sind zusätzliche Pattern, die auf die
-    White-Space und anderen nicht benötigten Inhalt matchen und diesen "geräuschlos"
-    entfernen. Mit diesen Pattern werden keine Token erzeugt, d.h. der Parser und die
-    anderen Stufen bemerken nichts von diesem Inhalt.
+    White-Spaces in den Pattern der restlichen Token berücksichtigen, was die
+    Pattern aber sehr komplex macht. Die Alternative sind zusätzliche Pattern, die
+    auf die White-Space und anderen nicht benötigten Inhalt matchen und diesen
+    "geräuschlos" entfernen. Mit diesen Pattern werden keine Token erzeugt, d.h. der
+    Parser und die anderen Stufen bemerken nichts von diesem Inhalt.
 
     Gelegentlich benötigt man aber auch Informationen über White-Spaces,
-    beispielsweise in Python. Dann müssen diese Token wie normale Token an den Parser
-    weitergereicht werden.
+    beispielsweise in Python. Dann müssen diese Token wie normale Token an den
+    Parser weitergereicht werden.
     :::
 
 ::: notes
@@ -162,7 +163,7 @@ Interpunktions-Token) kann man sich das Attribut auch sparen, da das Lexem durch
 Tokennamen eindeutig rekonstruierbar ist.
 
 | Token     | Beschreibung                                         | Beispiel-Lexeme      |
-|:----------|:-----------------------------------------------------|:---------------------|
+|:-----------|:--------------------------------------------------|:---------------------|
 | `if`      | Zeichen `i` und `f`                                  | `if`                 |
 | `relop`   | `<` oder `>` oder `<=` oder `>=` oder `==` oder `!=` | `<`, `<=`            |
 | `id`      | Buchstabe, gefolgt von Buchstaben oder Ziffern       | `pi`, `count`, `x3`  |
@@ -170,8 +171,8 @@ Tokennamen eindeutig rekonstruierbar ist.
 | `literal` | Alle Zeichen außer `"`, in `"` eingeschlossen        | `"core dumped"`      |
 
 *Anmerkung*: Wenn es mehrere matchende REs gibt, wird in der Regel das längste Lexem
-bevorzugt. Wenn es mehrere gleich lange Alternativen gibt, muss man mit Vorrangregeln
-bzgl. der Token arbeiten.
+bevorzugt. Wenn es mehrere gleich lange Alternativen gibt, muss man mit
+Vorrangregeln bzgl. der Token arbeiten.
 :::
 
 # Hello World
@@ -193,13 +194,14 @@ href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master
 
 -   `start` ist eine Parser-Regel =\> Eine Parser-Regel pro Grammatik wird benötigt,
     damit man den generierten Parser am Ende auch starten kann ...
--   Die anderen beiden Regeln (mit großem Anfangsbuchstaben) aus der obigen Grammatik
-    zählen zum Lexer
+-   Die anderen beiden Regeln (mit großem Anfangsbuchstaben) aus der obigen
+    Grammatik zählen zum Lexer
 
 ## ANTLR einrichten
 
--   Aktuelle Version herunterladen: [antlr.org](https://www.antlr.org/download.html),
-    für Java als Zielsprache: ["Complete ANTLR 4.x Java binaries
+-   Aktuelle Version herunterladen:
+    [antlr.org](https://www.antlr.org/download.html), für Java als Zielsprache:
+    ["Complete ANTLR 4.x Java binaries
     jar"](https://www.antlr.org/download/antlr-4.11.1-complete.jar)
 -   CLASSPATH setzen:
     `export CLASSPATH=".:/<pathToJar>/antlr-4.11.1-complete.jar:$CLASSPATH"`
@@ -262,8 +264,8 @@ Nach dem Übersetzen finden sich folgende Dateien und Klassen vor:
         |-- HelloVisitor.java
         |-- Main.java
 
-*Anmerkung*: Die Ordnerstruktur wurde durch ein ANTLR-Plugin für Eclipse erzeugt. Bei
-Ausführung in der Konsole liegen alle Dateien in einem Ordner.
+*Anmerkung*: Die Ordnerstruktur wurde durch ein ANTLR-Plugin für Eclipse erzeugt.
+Bei Ausführung in der Konsole liegen alle Dateien in einem Ordner.
 
 *Anmerkung*: Per Default werden nur die Listener angelegt, für die Visitoren muss
 eine extra Option mitgegeben werden.
@@ -277,8 +279,8 @@ scannende `CharStream` gesetzt. Über die Methode `Lexer#nextToken()` kann man s
 die erkannten Token der Reihe nach zurückgeben lassen. (Diese Methode wird letztlich
 vom Parser benutzt.)
 
-Die restlichen Dateien werden für den Parser und verschiedene Arten der Traversierung
-des AST generiert (vgl. [AST-basierte
+Die restlichen Dateien werden für den Parser und verschiedene Arten der
+Traversierung des AST generiert (vgl. [AST-basierte
 Interpreter](../06-interpretation/astdriven-part1.md)).
 
 ## Bedeutung der Ausgabe
@@ -426,8 +428,8 @@ Lexer-Regel]{.notes} gilt "*first match wins*"
 
 `.*? ('4' | '42')`
 
-=\> [Der Teil]{.notes} `'42'` [auf der rechten Seite]{.notes} ist "toter Code" (wegen
-der non-greedy Sub-Regel `.*?`)!
+=\> [Der Teil]{.notes} `'42'` [auf der rechten Seite]{.notes} ist "toter Code"
+(wegen der non-greedy Sub-Regel `.*?`)!
 
 ::: notes
 Die Eingabe "x4" würde korrekt erkannt, währende "x42" nur als "x4" erkannt wird und
@@ -486,21 +488,21 @@ Die Methodenaufrufe wirken sich immer auf das gerade erstellte Token aus.
 ## Aktionen mit den Lexer-Regeln
 
 Aktionen für Lexer-Regeln sind Code-Blöcke in der Zielsprache, eingeschlossen in
-geschweifte Klammern. Die Code-Blöcke werden direkt in die generierten Lexer-Methoden
-kopiert.
+geschweifte Klammern. Die Code-Blöcke werden direkt in die generierten
+Lexer-Methoden kopiert.
 
 Zusätzlich:
 
--   `@header`: Package-Deklarationen und/oder Importe (wird vor der Klassendefinition
-    eingefügt)
+-   `@header`: Package-Deklarationen und/oder Importe (wird vor der
+    Klassendefinition eingefügt)
 -   `@members`: zusätzliche Attribute für die generierten Lexer- (und Parser-)
     Klassen.
 
 Mit `@lexer::header` bzw. `@lexer::members` werden diese Codeblöcke nur in den
 generierten Lexer eingefügt.
 
-*Anmerkung*: Lexer-Aktionen müssen am Ende der äußersten Alternative erscheinen. Wenn
-eine Lexer-Regel mehr als eine Alternative hat, müssen diese in runde Klammern
+*Anmerkung*: Lexer-Aktionen müssen am Ende der äußersten Alternative erscheinen.
+Wenn eine Lexer-Regel mehr als eine Alternative hat, müssen diese in runde Klammern
 eingeschlossen werden.
 
 (vgl.
@@ -603,9 +605,9 @@ Ergänzen Sie Ihre Grammatik um Lexer-Aktionen, so dass Sie die Zeilen, die Zeic
 **Lexing mit ANTLR**
 
 IBAN für Deutschland bestehen aus dem Kürzel "DE" sowie einer zweistelligen
-Checksumme, gefolgt von 2x 4 Ziffern für die Bank (ehemalige Bankleitzahl) sowie 2x 4
-Ziffern für die ehemalige Kontonummer sowie zwei weiteren Ziffern. Typisch sind zwei
-Formate:
+Checksumme, gefolgt von 2x 4 Ziffern für die Bank (ehemalige Bankleitzahl) sowie 2x
+4 Ziffern für die ehemalige Kontonummer sowie zwei weiteren Ziffern. Typisch sind
+zwei Formate:
 
 -   Menschenlesbares Format: `DEcc bbbb bbbb kkkk kkkk xx`
 -   Maschinenlesbares Format: `DEccbbbbbbbbkkkkkkkkxx`

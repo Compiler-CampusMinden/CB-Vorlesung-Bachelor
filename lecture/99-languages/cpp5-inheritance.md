@@ -27,15 +27,16 @@ In C++ hat man aus Effizienzgründen per Default statische Polymorphie. Bei der
 Zuweisung eines Objekts einer abgeleiteten Klasse (rechte Seite) an ein Objekt vom
 Typ der Oberklasse (linke Seite) erfolgt dabei "Slicing", d.h. alle zusätzlichen
 Eigenschaften der abgeleiteten Klasse gehen dabei verloren. Dynamische Polymorphie
-kann man in C++ nutzen, indem man (a) die gewünschten Methoden in der Basisklasse als
-`virtual` deklariert und (b) für den Zugriff auf die Objekte der abgeleiteten Klasse
-Pointer oder Referenzen vom Basisklassen-Typ benutzt.
+kann man in C++ nutzen, indem man (a) die gewünschten Methoden in der Basisklasse
+als `virtual` deklariert und (b) für den Zugriff auf die Objekte der abgeleiteten
+Klasse Pointer oder Referenzen vom Basisklassen-Typ benutzt.
 
 In C++ ist Mehrfachvererbung möglich, d.h. eine Klasse kann von mehreren anderen
 Klassen erben. Damit erbt sie auch das Objekt-Layout aller Elternklassen.
 
 Bei rautenförmigen Vererbungsbeziehung führt dies zu Problemen, da Attribute und
-Methoden der gemeinsamen Basisklasse mehrfach vorhanden (über jeden Zweig der Raute).
+Methoden der gemeinsamen Basisklasse mehrfach vorhanden (über jeden Zweig der
+Raute).
 
 Zur Umgehung des Problems kann man die gemeinsam genutzten Basisklassen "`virtual`"
 deklarieren. Dadurch sind gemeinsam genutzte Attribute und Methoden nur noch einfach
@@ -43,9 +44,9 @@ vorhanden. Da die Klassen "in der Raute" ihrerseits den Konstruktor der Basiskla
 aufrufen (könnten) und es dadurch zu Konflikten beim Setzen der Attribute der
 Basisklasse kommen kann, gelten bei virtueller Ableitung Sonderregeln: Für die
 virtuelle Basisklasse wird die Weiterleitung der Werte aufgehoben (es muss also ein
-parameterloser Konstruktor existieren, der durch die direkten Unterklassen aufgerufen
-wird) und die Klasse am "unteren Ende der Raute" kann direkt den Konstruktor der
-virtuellen Basisklasse am "oberen Ende der Raute" aufrufen.
+parameterloser Konstruktor existieren, der durch die direkten Unterklassen
+aufgerufen wird) und die Klasse am "unteren Ende der Raute" kann direkt den
+Konstruktor der virtuellen Basisklasse am "oberen Ende der Raute" aufrufen.
 :::
 
 ::: youtube
@@ -267,15 +268,15 @@ deklariert, und wir hatten diese Methode in der ableitenden Klasse `Studi` passe
 überschrieben.
 
 Damit haben wir aber nur zwei der drei Bedingungen für dynamische Polymorphie in C++
-erfüllt. Wenn wir Objekte vom Typ `Studi` über eine normale Variable vom Typ `Person`
-handhaben, haben wir immer noch statische Polymorphie - uns stehen also nur die
-Methoden aus und in `Person` zur Verfügung.
+erfüllt. Wenn wir Objekte vom Typ `Studi` über eine normale Variable vom Typ
+`Person` handhaben, haben wir immer noch statische Polymorphie - uns stehen also nur
+die Methoden aus und in `Person` zur Verfügung.
 
 Zusätzlich haben wir durch die Zuweisung `p = s;` das Objekt `s` in den
 Speicherbereich von `p` "gequetscht". Dieses ist vom Typ `Person` und hat auch nur
 (Speicher-) Platz für Elemente dieses Typs. Alles andere wird bei der Zuweisung
-"abgeschnitten", d.h. `p` ist immer noch ein Objekt vom Typ `Person`, der zusätzliche
-Rest aus `Studi` fehlt ...
+"abgeschnitten", d.h. `p` ist immer noch ein Objekt vom Typ `Person`, der
+zusätzliche Rest aus `Studi` fehlt ...
 
 Wir könnten das durch Pointer oder Referenzen heilen:
 
@@ -290,8 +291,8 @@ cout << "Objekt p (Person):  " << p->toString() << endl;
 ```
 
 ::: notes
-*Anmerkung*: Der Operator `->` ist die zusammengefasste Dereferenzierung des Pointers
-und der nachfolgende Zugriff auf Methoden oder Attribute. Man könnte also
+*Anmerkung*: Der Operator `->` ist die zusammengefasste Dereferenzierung des
+Pointers und der nachfolgende Zugriff auf Methoden oder Attribute. Man könnte also
 entsprechend auch `(*p).toString()` statt `p->toString()` schreiben.
 :::
 
@@ -321,8 +322,8 @@ in C++.
     -   Virtuelle Funktionen sind virtuell in der Vererbungshierarchie hinab ab der
         ersten Deklaration als virtuell
 -   Virtualität ist "teuer": Es muss eine Tabelle aller virtuellen Funktionen
-    aufgebaut werden und zur Laufzeit geprüft werden, welche Funktion genommen werden
-    soll
+    aufgebaut werden und zur Laufzeit geprüft werden, welche Funktion genommen
+    werden soll
 :::
 
 # Mehrfachvererbung in C++
@@ -413,8 +414,9 @@ href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master
 Virtuelle Ableitung: Potentiell Konflikte zwischen Konstruktoren!
 
 -   Gemeinsam geerbtes Attribut nur noch einmal vorhanden
--   Konstruktoren werden nacheinander aufgerufen, alle wollen das gemeinsame Attribut
-    initialisieren (durch Aufruf des Konstruktors der jeweiligen Basisklasse)
+-   Konstruktoren werden nacheinander aufgerufen, alle wollen das gemeinsame
+    Attribut initialisieren (durch Aufruf des Konstruktors der jeweiligen
+    Basisklasse)
 -   Zuletzt aufgerufener Konstruktor würde "gewinnen"
 
 Deshalb gibt es bei virtueller Ableitung folgende Sonderregeln:
@@ -444,9 +446,10 @@ Warum ist die Möglichkeit dennoch nützlich?
     =\> Mehrfachvererbung!
 
 Tatsächlich dürfen Java-Interfaces mittlerweile auch Verhalten implementieren und
-vererben, wodurch eine ähnliche Situation wie hier in C++ entsteht und es ausgefeilte
-Regeln für die Konfliktauflösung braucht. Allerdings ist das in Java auf Verhalten
-beschränkt, d.h. Attribute (Zustand) ist in Java-Interfaces (noch) nicht erlaubt.
+vererben, wodurch eine ähnliche Situation wie hier in C++ entsteht und es
+ausgefeilte Regeln für die Konfliktauflösung braucht. Allerdings ist das in Java auf
+Verhalten beschränkt, d.h. Attribute (Zustand) ist in Java-Interfaces (noch) nicht
+erlaubt.
 :::
 
 # Wrap-Up
@@ -505,8 +508,8 @@ delete p;
 
 -   Welche Formen der (einfachen) Vererbung gibt es in C++ neben der `public`-Form
     noch? Was bewirken diese Formen?
--   Warum wird in C++ die `public`-Form der Vererbung vorgezogen (zumindest, wenn man
-    dynamische Polymorphie nutzen will)?
+-   Warum wird in C++ die `public`-Form der Vererbung vorgezogen (zumindest, wenn
+    man dynamische Polymorphie nutzen will)?
 -   Wie müssen Konstruktoren/Destruktoren richtig verkettet werden?
 -   Arbeiten Sie das Beispiel auf S. 274 im @Breymann2011: "Der C++ Programmierer"
     durch.

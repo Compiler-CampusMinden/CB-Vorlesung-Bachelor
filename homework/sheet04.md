@@ -8,8 +8,8 @@ title: "Blatt 04: Semantische Analyse"
 # Zusammenfassung
 
 Ziel dieses Aufgabenblattes ist die Erstellung einer Symboltabelle und eines
-einfachen Type-Checkers für eine fiktive statisch typisierte Sprache mit Expressions,
-Kontrollstrukturen und Funktionen.
+einfachen Type-Checkers für eine fiktive statisch typisierte Sprache mit
+Expressions, Kontrollstrukturen und Funktionen.
 
 # Methodik
 
@@ -56,10 +56,10 @@ Anweisung.
 Code-Blöcke werden in geschweifte Klammern eingeschlossen und enthalten eine
 beliebige Anzahl von Anweisungen.
 
-Jeder Code-Block bildet einen eigenen Scope - alle Deklarationen/Definition in diesem
-Scope sind im äußeren Scope nicht sichtbar. Im Scope kann auf die Symbole des/der
-umgebenden Scopes zugegriffen werden. Symbole in einem Scope können gleichnamige
-Symbole im äußeren Scope verdecken.
+Jeder Code-Block bildet einen eigenen Scope - alle Deklarationen/Definition in
+diesem Scope sind im äußeren Scope nicht sichtbar. Im Scope kann auf die Symbole
+des/der umgebenden Scopes zugegriffen werden. Symbole in einem Scope können
+gleichnamige Symbole im äußeren Scope verdecken.
 
 ``` python
 # globaler Scope
@@ -89,9 +89,9 @@ Operationen gebildet, dabei sind die Operanden jeweils auch wieder Ausdrücke.
 
 Ein Ausdruck hat immer einen Wert und einen Typ.
 
-Die Operatoren besitzen eine Rangfolge, um verschachtelte Operationen aufzulösen. Sie
-dürfen daher nicht einfach von links nach rechts aufgelöst werden. Die Rangfolge der
-Operatoren entspricht der üblichen Semantik (vgl. Java, C, Python).
+Die Operatoren besitzen eine Rangfolge, um verschachtelte Operationen aufzulösen.
+Sie dürfen daher nicht einfach von links nach rechts aufgelöst werden. Die Rangfolge
+der Operatoren entspricht der üblichen Semantik (vgl. Java, C, Python).
 
 Es gibt in unserer Sprache folgende Operationen mit der üblichen Semantik:
 
@@ -205,8 +205,8 @@ while (a > 0) {
 Eine bedingte Anweisung besteht immer aus genau einer `if`-Anweisung, und einer oder
 keiner `else`-Anweisung.
 
-Eine `if`-Anweisung wird mit dem Schlüsselwort `if` eingeleitet und besteht aus einer
-Bedingung in runden Klammern und einem in geschweiften Klammern formulierten
+Eine `if`-Anweisung wird mit dem Schlüsselwort `if` eingeleitet und besteht aus
+einer Bedingung in runden Klammern und einem in geschweiften Klammern formulierten
 Code-Block.
 
 Die Bedingung besteht aus einem Vergleichsausdruck.
@@ -357,8 +357,8 @@ als Ausgangspunkt nutzen und diese anpassen und vervollständigen.
 Definieren Sie einen AST für die Zielsprache. Welche Informationen aus dem
 Eingabeprogramm müssen repräsentiert werden?
 
-Programmieren Sie eine Traversierung des Parse-Trees, die den AST erzeugt. Testen Sie
-dies mit den obigen Beispielprogrammen und definieren Sie sich selbst weitere
+Programmieren Sie eine Traversierung des Parse-Trees, die den AST erzeugt. Testen
+Sie dies mit den obigen Beispielprogrammen und definieren Sie sich selbst weitere
 Programme unterschiedlicher Komplexität für diesen Zweck.
 
 ## A4.2: Aufbau der Symboltabelle (2P)
@@ -378,7 +378,7 @@ Sie erkannte Fehler auf der Konsole aus.
 ## A4.4: Symboltabelle: Typprüfungen (5P)
 
 Implementieren Sie einen dritten Lauf. Führen Sie die Typprüfung durch: Haben die
-Operanden in Ausdrücken die richtigen Typen, passen die Typen der Funktionsargumente,
-passen die Typen bei einer Zuweisung, ... Geben Sie erkannte Fehler auf der Konsole
-aus. *Hinweis*: Sie brauchen hier nur die Typprüfung durchführen. Eine Typinferenz
-oder Typerweiterung o.ä. ist nicht notwendig.
+Operanden in Ausdrücken die richtigen Typen, passen die Typen der
+Funktionsargumente, passen die Typen bei einer Zuweisung, ... Geben Sie erkannte
+Fehler auf der Konsole aus. *Hinweis*: Sie brauchen hier nur die Typprüfung
+durchführen. Eine Typinferenz oder Typerweiterung o.ä. ist nicht notwendig.

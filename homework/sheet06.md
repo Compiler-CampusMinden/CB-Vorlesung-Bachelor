@@ -18,13 +18,13 @@ kennen.
 
 Sie werden auf diesem Blatt vier einfache Klassen in C++ implementieren.
 
-Es empfiehlt sich, zunächst die Beispiele gründlich zu analysieren, um die gewünschte
-Funktionsweise der einzelnen Klassen vorab präzise zu verstehen. Sie werden zu
-einigen Dingen in der C++-Literatur recherchieren müssen.
+Es empfiehlt sich, zunächst die Beispiele gründlich zu analysieren, um die
+gewünschte Funktionsweise der einzelnen Klassen vorab präzise zu verstehen. Sie
+werden zu einigen Dingen in der C++-Literatur recherchieren müssen.
 
-Implementieren Sie immer eine Klasse vollständig und testen Sie Ihren Code sowohl mit
-den vorgegebenen Beispielen als auch mit eigenen Beispielen, bevor Sie sich an die
-nächste Aufgabe/Klasse setzen.
+Implementieren Sie immer eine Klasse vollständig und testen Sie Ihren Code sowohl
+mit den vorgegebenen Beispielen als auch mit eigenen Beispielen, bevor Sie sich an
+die nächste Aufgabe/Klasse setzen.
 
 # Speicherverwaltung in C/C++
 
@@ -32,16 +32,17 @@ C und C++ erlauben als hardwarenahe Programmiersprachen den direkten Umgang mit 
 Programmspeicher (Heap). Ein Programm kann dynamisch zu jeder Zeit weiteren Speicher
 anfordern und so beispielsweise mitwachsende Datenstrukturen realisieren.
 
-Da der Heap-Speicher endlich ist, muss man nicht mehr benötigten Speicher auch wieder
-freigeben. Anderenfalls ist irgendwann der komplette Heap belegt und das Programm
-kann nicht mehr ordnungsgemäß arbeiten. Für die Freigabe ist man als Programmierer:in
-selbst zuständig.
+Da der Heap-Speicher endlich ist, muss man nicht mehr benötigten Speicher auch
+wieder freigeben. Anderenfalls ist irgendwann der komplette Heap belegt und das
+Programm kann nicht mehr ordnungsgemäß arbeiten. Für die Freigabe ist man als
+Programmierer:in selbst zuständig.
 
 ## Beispiel für eine Tokenizer-Funktion
 
 Im folgenden Programmschnipsel soll eine Funktion `next_token()` das nächste Token
-berechnen. So eine Funktion findet sich typischerweise im Lexer. Für die Rückgabe des
-Tokens hat man in C++ drei Möglichkeiten: als Kopie, als Referenz oder als Pointer.
+berechnen. So eine Funktion findet sich typischerweise im Lexer. Für die Rückgabe
+des Tokens hat man in C++ drei Möglichkeiten: als Kopie, als Referenz oder als
+Pointer.
 
 ``` cpp
 // Return as copy
@@ -86,13 +87,13 @@ int main() {
 }
 ```
 
-Die Rückgabe per Kopie (Standardfall in C/C++) würde ein lokales Objekt auf dem Stack
-(im Beispiel wäre das `wuppie`) als Kopie zurückgeben.
+Die Rückgabe per Kopie (Standardfall in C/C++) würde ein lokales Objekt auf dem
+Stack (im Beispiel wäre das `wuppie`) als Kopie zurückgeben.
 
--   Vorteil: Der Compiler kümmert sich um die Freigabe der lokalen Variable `wuppie`,
-    d.h. nach Beendigung des Funktionsaufrufs wird das Objekt automatisch vom Stack
-    entfernt. Da hierbei einfach der Stackpointer zurückgesetzt wird, ist diese
-    "Freigabe" eine sehr preiswerte Operation.[^1]
+-   Vorteil: Der Compiler kümmert sich um die Freigabe der lokalen Variable
+    `wuppie`, d.h. nach Beendigung des Funktionsaufrufs wird das Objekt automatisch
+    vom Stack entfernt. Da hierbei einfach der Stackpointer zurückgesetzt wird, ist
+    diese "Freigabe" eine sehr preiswerte Operation.[^1]
 -   Nachteil: Der Aufrufer darf nicht einfach auf das Objekt auf dem Stack zugreifen
     (dieses ist ja nach Beendigung der Funktion nicht mehr gültig). Deshalb muss das
     Objekt bei der Rückgabe kopiert werden (Copy-Konstruktor). Zusätzlich erfolgt
@@ -100,43 +101,45 @@ Die Rückgabe per Kopie (Standardfall in C/C++) würde ein lokales Objekt auf de
     vermutlich erneut kopiert werden. Dies kann (je nach Aufbau der Objekte) sehr
     teuer sein!
 
-Die Rückgabe per Pointer erfordert ein Objekt, welches innerhalb der Funktion erzeugt
-wird und dessen Lebensdauer über das Funktionsende hinausreicht. Das Objekt muss in
-diesem Fall also auf dem Heap angelegt werden.
+Die Rückgabe per Pointer erfordert ein Objekt, welches innerhalb der Funktion
+erzeugt wird und dessen Lebensdauer über das Funktionsende hinausreicht. Das Objekt
+muss in diesem Fall also auf dem Heap angelegt werden.
 
--   Vorteil: Die Rückgabe erfordert lediglich die Kopie der Adresse des Objekts (also
-    des Pointers). Hier handelt es sich vereinfacht betrachtet um einen Integer, d.h.
-    diese Operation ist relativ preiswert.
--   Nachteil: Das Objekt muss vom Aufrufer wieder freigegeben werden, sobald es nicht
-    mehr benötigt wird. Dies muss man explizit programmieren!
+-   Vorteil: Die Rückgabe erfordert lediglich die Kopie der Adresse des Objekts
+    (also des Pointers). Hier handelt es sich vereinfacht betrachtet um einen
+    Integer, d.h. diese Operation ist relativ preiswert.
+-   Nachteil: Das Objekt muss vom Aufrufer wieder freigegeben werden, sobald es
+    nicht mehr benötigt wird. Dies muss man explizit programmieren!
 
 Die Rückgabe per C++-Referenz erfordert ebenfalls ein Objekt, welches innerhalb der
-Funktion erzeugt wird und dessen Lebensdauer über das Funktionsende hinausreicht. Das
-Objekt muss in diesem Fall also wieder auf dem Heap angelegt werden.
+Funktion erzeugt wird und dessen Lebensdauer über das Funktionsende hinausreicht.
+Das Objekt muss in diesem Fall also wieder auf dem Heap angelegt werden.
 
--   Vorteil: Die Rückgabe erfordert keinerlei Kopien, da sich die Referenz `x` an das
-    Objekt `foo` bindet und lediglich einen neuen Alias für dieses Objekt darstellt.
--   Nachteil: Das Objekt muss vom Aufrufer wieder freigegeben werden, sobald es nicht
-    mehr benötigt wird. Dies muss man explizit programmieren!
+-   Vorteil: Die Rückgabe erfordert keinerlei Kopien, da sich die Referenz `x` an
+    das Objekt `foo` bindet und lediglich einen neuen Alias für dieses Objekt
+    darstellt.
+-   Nachteil: Das Objekt muss vom Aufrufer wieder freigegeben werden, sobald es
+    nicht mehr benötigt wird. Dies muss man explizit programmieren!
 
-Es hat sich gezeigt, dass der Umgang mit den Heap-Ressourcen sehr fehleranfällig ist.
-Ein Aspekt dabei ist, dass man häufig die Freigabe der Objekte vergisst oder dass die
-Programmpfade so unübersichtlich sind, dass man nicht genau weiss, ob und wann man
-Objekte freigeben soll (denken Sie an Exceptions).
+Es hat sich gezeigt, dass der Umgang mit den Heap-Ressourcen sehr fehleranfällig
+ist. Ein Aspekt dabei ist, dass man häufig die Freigabe der Objekte vergisst oder
+dass die Programmpfade so unübersichtlich sind, dass man nicht genau weiss, ob und
+wann man Objekte freigeben soll (denken Sie an Exceptions).
 
 ## Smartpointer als Lösung
 
 Während man in Sprachen wie Java die Speicherverwaltung komplett dem Compiler
 überlässt oder wie in Rust mit strikten Ownership-Modellen arbeitet, hat man in C++
-die sogenannten [Smartpointer](https://en.cppreference.com/book/intro/smart_pointers)
-erdacht. Diese ersetzen den direkten Umgang mit den einfachen Pointern (auch als *raw
-pointer* bezeichnet) und lösen das Problem der Freigabe der verwalteten
-Ressourcen.[^2] Es gibt verschiedene Modelle, insbesondere gibt es die Variante
-*unique pointer*, bei der immer nur genau ein Smartpointer gleichzeitig eine
-bestimmte Ressource besitzen darf, und die *shared pointer*, bei der mehrere
-Smartpointer gleichzeitig die selbe Ressource verwalten können. Sobald die
-Lebensdauer des *unique pointer* oder des letzten *shared pointer* endet, wird die
-verwaltete Ressource automatisch vom Smartpointer freigegeben.
+die sogenannten
+[Smartpointer](https://en.cppreference.com/book/intro/smart_pointers) erdacht. Diese
+ersetzen den direkten Umgang mit den einfachen Pointern (auch als *raw pointer*
+bezeichnet) und lösen das Problem der Freigabe der verwalteten Ressourcen.[^2] Es
+gibt verschiedene Modelle, insbesondere gibt es die Variante *unique pointer*, bei
+der immer nur genau ein Smartpointer gleichzeitig eine bestimmte Ressource besitzen
+darf, und die *shared pointer*, bei der mehrere Smartpointer gleichzeitig die selbe
+Ressource verwalten können. Sobald die Lebensdauer des *unique pointer* oder des
+letzten *shared pointer* endet, wird die verwaltete Ressource automatisch vom
+Smartpointer freigegeben.
 
 Das folgende Beispiel arbeitet mit einer selbst implementierten Variante der *shared
 pointers*. Dabei ist die Klasse `SmartToken` ein Smartpointer für Objekte vom Typ
@@ -178,15 +181,15 @@ In der Kontrollstruktur werden weitere Smartpointer angelegt. Die ersten beiden
 
 Mit der Kontrollstruktur endet auch die Lebensdauer der lokalen Variablen `fluppie`,
 `fluppie2` und `foo`, sie werden automatisch vom Stack entfernt. Da `foo` der letzte
-Smartpointer ist, der das Token "foo" verwaltet, wird hier die Ressource freigegeben.
-Bei `fluppie` und `fluppie2` werden nur die Smartpointer auf dem Stack entfernt, die
-verwaltete Ressource (Token "wuppie") bleibt erhalten, da die noch von einem anderen
-Smartpointer verwaltet wird.
+Smartpointer ist, der das Token "foo" verwaltet, wird hier die Ressource
+freigegeben. Bei `fluppie` und `fluppie2` werden nur die Smartpointer auf dem Stack
+entfernt, die verwaltete Ressource (Token "wuppie") bleibt erhalten, da die noch von
+einem anderen Smartpointer verwaltet wird.
 
 Mit dem Ende der Funktion endet auch die Lebensdauer des Smartpointers `wuppie`. Er
 wird automatisch vom Stack entfernt, und da er im Beispiel der letzte Smartpointer
-ist, der das Token "wuppie" verwaltet, wird dabei automatisch der Pointer zu "wuppie"
-wieder freigegeben.
+ist, der das Token "wuppie" verwaltet, wird dabei automatisch der Pointer zu
+"wuppie" wieder freigegeben.
 
 Ein Smartpointer soll entsprechend folgende Eigenschaften haben:
 
@@ -209,7 +212,8 @@ ignorieren[^4]:
 
 -   Smartpointer sollen für beliebige Klassen nutzbar sein (Template-Klasse)
 -   Dereferenzierung von nicht existierenden Objekten (d.h. der Smartpointer zeigt
-    intern auf `nullptr`) führt nicht zum Programmabsturz, sondern zu einer Exception
+    intern auf `nullptr`) führt nicht zum Programmabsturz, sondern zu einer
+    Exception
 
 ## Reference Counting
 
@@ -313,8 +317,8 @@ private:
 (*Anmerkung*: Dies ist ein Vorgriff auf die Lektion "Operatoren". Betrachten und
 implementieren Sie die vorgegebenen Operatoren einfach wie normale Methoden.)
 
-Pointer lassen sich dereferenzieren, d.h. man greift direkt auf das verwiesene Objekt
-zu. Dies lässt sich auch für Smartpointer erreichen, indem die beiden
+Pointer lassen sich dereferenzieren, d.h. man greift direkt auf das verwiesene
+Objekt zu. Dies lässt sich auch für Smartpointer erreichen, indem die beiden
 Dereferenzierungsoperatoren überladen werden.
 
 ``` cpp
@@ -589,13 +593,13 @@ beteiligten Smartpointer. Welche Sonderfälle können Sie identifizieren?
     vollständig ist. Es kann und wird aber im weiteren Verlauf des Programms
     überschrieben.
 
-[^2]: Dereferenzierung von Null-Pointern oder nicht initialisierten Pointern, Nutzung
-    von `delete` für Pointer, die nicht mit `new` erstellt wurden, mehrfaches
-    `delete`, Speicherlöcher durch Vergessen von `delete`, Dangling Pointer,
-    verwitwete Objekte, ...
+[^2]: Dereferenzierung von Null-Pointern oder nicht initialisierten Pointern,
+    Nutzung von `delete` für Pointer, die nicht mit `new` erstellt wurden,
+    mehrfaches `delete`, Speicherlöcher durch Vergessen von `delete`, Dangling
+    Pointer, verwitwete Objekte, ...
 
-[^3]: Sie müssen für `nullptr` den g++ auf C++11 oder höher umstellen (`--std=c++11`)
-    und den Header `<cstddef>` includen.
+[^3]: Sie müssen für `nullptr` den g++ auf C++11 oder höher umstellen
+    (`--std=c++11`) und den Header `<cstddef>` includen.
 
 [^4]: Templates haben wir hier noch nicht behandelt, Exceptions werden wir gar nicht
     betrachten

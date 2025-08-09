@@ -9,12 +9,13 @@ title: "IFM 3.1: Compilerbau (Winter 2025/26)"
 # Kursbeschreibung
 
 Der Compiler ist das wichtigste Werkzeug in der Informatik. In der Königsdisziplin
-der Informatik schließt sich der Kreis, hier kommen die unterschiedlichen Algorithmen
-und Datenstrukturen und Programmiersprachenkonzepte zur Anwendung.
+der Informatik schließt sich der Kreis, hier kommen die unterschiedlichen
+Algorithmen und Datenstrukturen und Programmiersprachenkonzepte zur Anwendung.
 
-In diesem Modul geht es um ein grundlegendes Verständnis für die wichtigsten Konzepte
-im Compilerbau. Wir schauen uns dazu relevante aktuelle Tools und Frameworks an und
-setzen diese bei der Erstellung eines kleinen Compiler-Frontends für C++ ein.
+In diesem Modul geht es um ein grundlegendes Verständnis für die wichtigsten
+Konzepte im Compilerbau. Wir schauen uns dazu relevante aktuelle Tools und
+Frameworks an und setzen diese bei der Erstellung eines kleinen Compiler-Frontends
+für C++ ein.
 
 # Überblick Modulinhalte
 
@@ -131,8 +132,8 @@ Vorstellung der Lösung im jeweiligen Praktikum in der Abgabewoche.
 
 1.  ["**Compilers: Principles, Techniques, and
     Tools**"](https://learning.oreilly.com/library/view/compilers-principles-techniques/9789357054881/).
-    Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D. and Bansal, S., Pearson
-    India, 2023. ISBN
+    Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D. and Bansal, S.,
+    Pearson India, 2023. ISBN
     [978-9-3570-5488-1](https://fhb-bielefeld.digibib.net/openurl?isbn=978-9-3570-5488-1).
     [Online](https://learning.oreilly.com/library/view/compilers-principles-techniques/9789357054881/)
     über die [O'Reilly-Lernplattform](https://www.oreilly.com/library-access/).
@@ -169,7 +170,7 @@ Wir freuen uns, auch in diesem Semester wieder drei gemeinsame Sitzungen für be
 Hochschulen anbieten zu können. (Diese Termine werden in englischer Sprache
 durchgeführt.)
 
--------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
 
 # LICENSE
 

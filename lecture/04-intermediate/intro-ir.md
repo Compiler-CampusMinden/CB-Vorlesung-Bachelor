@@ -6,10 +6,10 @@ title: Überblick Zwischencode
 ::: tldr
 Für den Zwischencode (**IR**) gibt es kein allgemein definiertes Format. In der
 Praxis trifft man auf eine große Bandbreite an Formaten, wobei teilweise bereits der
-AST selbst als "Zwischencode" betrachtet/benutzt wird. Typische Vertreter für IR sind
-beispielsweise der **LLVM IR**, diverse Arten von Bytecode (nebst passender
-virtueller Maschine) und schließlich als Vorstufe für die Erzeugung von Maschinencode
-der sogenannte "Drei-Adressen-Code" und Assemblercode.
+AST selbst als "Zwischencode" betrachtet/benutzt wird. Typische Vertreter für IR
+sind beispielsweise der **LLVM IR**, diverse Arten von Bytecode (nebst passender
+virtueller Maschine) und schließlich als Vorstufe für die Erzeugung von
+Maschinencode der sogenannte "Drei-Adressen-Code" und Assemblercode.
 :::
 
 ::: youtube
@@ -21,8 +21,8 @@ der sogenannte "Drei-Adressen-Code" und Assemblercode.
 ![](images/architektur_cb.png)
 
 ::: notes
-Die Schritte in der letzten Phase der Compiler-Pipeline können *sehr* unterschiedlich
-ausfallen.
+Die Schritte in der letzten Phase der Compiler-Pipeline können *sehr*
+unterschiedlich ausfallen.
 
 Beispielsweise könnte direkt aus dem AST der Ziel-Machine-Code erzeugt werden. Auf
 der anderen Seite könnte aus dem AST ein **Zwischenformat** erzeugt werden, darauf
@@ -87,7 +87,8 @@ unterschiedliche Textformate parsen und in einen AST überführen.
 Auf diesem kann man mit [Filtern](https://pandoc.org/filters.html) Transformationen
 vornehmen.
 
-Anschließend können diverse *Writer* den AST in das gewünschte Zielformat überführen.
+Anschließend können diverse *Writer* den AST in das gewünschte Zielformat
+überführen.
 :::
 
 [Konsole: pandoc hello.md -s -t native]{.ex
@@ -272,8 +273,8 @@ sind gleich lang, ein Index bezieht sich jeweils auf das selbe Symbol. Werte wer
 (Die Opcodes sind oben der besseren Lesbarkeit halber als Text ausgegeben,
 `LOAD_CONST` hat beispielsweise den Wert `100`.)
 
-Nach dem Laden des Programms ist `x` in `co_names[0]`, `y` in `co_names[1]`. Der Wert
-`7` steht in `co_const[0]`, die `35` in `co_const[1]`.
+Nach dem Laden des Programms ist `x` in `co_names[0]`, `y` in `co_names[1]`. Der
+Wert `7` steht in `co_const[0]`, die `35` in `co_const[1]`.
 
 Das `LOAD_CONST 0` (`co_code[0]`) lädt den Inhalt von `co_consts[0]` auf den Stack
 (`push()`), d.h. der Wert `7` wird auf den Stack gepusht. Mit `STORE_NAME 0`
@@ -281,11 +282,11 @@ Das `LOAD_CONST 0` (`co_code[0]`) lädt den Inhalt von `co_consts[0]` auf den St
 geschrieben und der Eintrag vom Stack entfernt (`pop()`). Dies entspricht Zeile 1 im
 Quellcode: `x = 7`.
 
-`LOAD_NAME 0` pusht `co_values[0]` auf den Stack (Wert von `x`), gefolgt von der `35`
-per `LOAD_CONST 1` (`co_const[1]`). Das `BINARY_ADD` entfernt die beiden obersten
-Einträge, addiert die Werte und pusht das Ergebnis wieder auf den Stack. Mit
-`STORE_NAME 1` wird der Wert in `co_values[1]` geschrieben, d.h. `y` bekommt den Wert
-zugewiesen.
+`LOAD_NAME 0` pusht `co_values[0]` auf den Stack (Wert von `x`), gefolgt von der
+`35` per `LOAD_CONST 1` (`co_const[1]`). Das `BINARY_ADD` entfernt die beiden
+obersten Einträge, addiert die Werte und pusht das Ergebnis wieder auf den Stack.
+Mit `STORE_NAME 1` wird der Wert in `co_values[1]` geschrieben, d.h. `y` bekommt den
+Wert zugewiesen.
 :::
 
 # Bytecode (Beispiel Java)

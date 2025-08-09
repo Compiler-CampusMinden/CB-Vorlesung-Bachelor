@@ -15,8 +15,8 @@ zugreifen. Bei der Überladung außerhalb der Klasse hat der Operator zwei Param
 und darf nicht auf die Attribute der Klasse zugreifen.
 
 Man kann Funktionen, Methoden/Operatoren und Klassen als `friend` einer Klasse
-deklarieren. Damit bricht man die Kapselung auf und erlaubt den Freunden den direkten
-Zugriff auf die internen Attribute einer Klasse.
+deklarieren. Damit bricht man die Kapselung auf und erlaubt den Freunden den
+direkten Zugriff auf die internen Attribute einer Klasse.
 
 Um bei der Implementierung von Post- und Präfix-Operatoren die Variante für den
 Compiler unterscheidbar zu machen, hat die Signatur der Postfix-Variante einen
@@ -154,8 +154,8 @@ class Dummy {
 ::: notes
 -   Alle normalen arithmetischen Operatoren
 -   Zuweisung, Vergleich, Ein-/Ausgabe
--   Index-Operator `[]`, Pointer-Dereferenzierung `*` und `->`, sowie `()`, `new` und
-    `delete` (auch in `[]`-Form)
+-   Index-Operator `[]`, Pointer-Dereferenzierung `*` und `->`, sowie `()`, `new`
+    und `delete` (auch in `[]`-Form)
 :::
 
 \smallskip

@@ -47,9 +47,10 @@ beschreiben, die unendlich viele Werte annehmen können.
 
 ## Einordnung: Erweiterung der Automatenklasse DFA, um komplexere Sprachen als die regulären akzeptieren zu können
 
-Wir spendieren den DFAs einen möglichst einfachen, aber beliebig großen, Speicher, um
-zählen und matchen zu können. Wir suchen dabei konzeptionell die "kleinstmögliche"
-Erweiterung, die die akzeptierte Sprachklasse gegenüber DFAs vergrößert.
+Wir spendieren den DFAs einen möglichst einfachen, aber beliebig großen, Speicher,
+um zählen und matchen zu können. Wir suchen dabei konzeptionell die
+"kleinstmögliche" Erweiterung, die die akzeptierte Sprachklasse gegenüber DFAs
+vergrößert.
 
 -   Der konzeptionell einfachste Speicher ist ein Stack. Wir haben keinen wahlfreien
     Zugriff auf die gespeicherten Werte.
@@ -77,8 +78,8 @@ Bei jedem Zustandsübergang wird ein Zeichen (oder $\epsilon$) aus der Eingabe
 gelesen, ein Symbol von Keller genommen. Diese und das Eingabezeichen bestimmen den
 Folgezustand und eine Zeichenfolge, die auf den Stack gepackt wird. Dabei wird ein
 Symbol, (z. B. eines, das später mit einem Eingabesymbol zu matchen ist,) auf den
-Stack gepackt. Soll das automatisch vom Stack genommene Symbol auf dem Stack bleiben,
-muss es wieder gepusht werden.
+Stack gepackt. Soll das automatisch vom Stack genommene Symbol auf dem Stack
+bleiben, muss es wieder gepusht werden.
 
 ## Beispiel
 
@@ -91,8 +92,8 @@ Ein PDA für $L=\lbrace ww^{R}\mid w\in \lbrace a,b\rbrace^{\ast}\rbrace$:
 **Def.** Ein PDA $P = (Q, \Sigma, \Gamma, \delta, q_0, \perp, F)$ ist
 *deterministisch* $: \Leftrightarrow$
 
--   $\delta(q, a, X)$ hat höchstens ein Element für jedes $q \in Q, a \in\Sigma$ oder
-    $(a = \epsilon$ und $X \in \Gamma)$.
+-   $\delta(q, a, X)$ hat höchstens ein Element für jedes $q \in Q, a \in\Sigma$
+    oder $(a = \epsilon$ und $X \in \Gamma)$.
 
 -   Wenn $\delta (q, a, x)$ nicht leer ist für ein $a \in \Sigma$, dann muss
     $\delta (q, \epsilon, x)$ leer sein.
@@ -104,7 +105,8 @@ Deterministische PDAs werden auch *DPDAs* genannt.
 **Satz:** Die von DPDAs akzeptierten Sprachen sind eine echte Teilmenge der von PDAs
 akzeptierten Sprachen.
 
-Die regulären Sprachen sind eine echte Teilmenge der von DPDAs akzeptierten Sprachen.
+Die regulären Sprachen sind eine echte Teilmenge der von DPDAs akzeptierten
+Sprachen.
 
 # Kontextfreie Grammatiken und Sprachen
 
@@ -116,8 +118,8 @@ Produktionen der Form:
 
 $X \rightarrow Y$ mit $X \in N, Y \in {(N \cup T)}^{\ast}$.
 
-$\Rightarrow, \overset{\ast}{\Rightarrow}$ sind definiert wie bei regulären Sprachen.
-Bei cf-Grammatiken nennt man die Ableitungsbäume oft *Parse trees*.
+$\Rightarrow, \overset{\ast}{\Rightarrow}$ sind definiert wie bei regulären
+Sprachen. Bei cf-Grammatiken nennt man die Ableitungsbäume oft *Parse trees*.
 
 ## Beispiel
 
@@ -182,8 +184,8 @@ Dabei wird der Ableitungsbaum von oben nach unten aufgebaut.
 -   aussagekräftige Fehlermeldungen, wenn ein Eingabeprogramm syntaktisch nicht
     korrekt ist
 
--   Erstellung des AST (abstrakter Syntaxbaum): Der Parse Tree ohne Symbole, die nach
-    der Syntaxanalyse inhaltlich irrelevant sind (z. B. Semikolons, manche
+-   Erstellung des AST (abstrakter Syntaxbaum): Der Parse Tree ohne Symbole, die
+    nach der Syntaxanalyse inhaltlich irrelevant sind (z. B. Semikolons, manche
     Schlüsselwörter)
 
 -   die Symboltablelle(n) mit Informationen bzgl. Bezeichner (Variable, Funktionen
@@ -299,8 +301,8 @@ werden mit dem Input gematcht.
 
 ## Algorithmus: Tabellengesteuertes LL-Parsen mit einem PDA {#algorithmus-tabellengesteuertes-ll-parsen-mit-einem-pda .fragile}
 
-**Eingabe:** Eine Grammatik $G = (N, T, P, S)$, eine Parsertabelle $P$ mit "$w\perp$"
-als initialem Kellerinhalt
+**Eingabe:** Eine Grammatik $G = (N, T, P, S)$, eine Parsertabelle $P$ mit
+"$w\perp$" als initialem Kellerinhalt
 
 **Ausgabe:** Wenn $w \in L(G)$, eine Linksableitung von $w$, Fehler sonst
 
@@ -333,11 +335,12 @@ Hier entsteht ein Tafelbild.
     PDAs.
 -   Kontextfreie Grammatiken (CFGs) erweitern die regulären Grammatiken.
 -   Deterministisch parsebare Sprachen haben eine eindeutige kontextfreie Grammatik.
--   Es ist nicht entscheidbar, ob eine gegebene kontextfreie Grammatik eindeutig ist.
+-   Es ist nicht entscheidbar, ob eine gegebene kontextfreie Grammatik eindeutig
+    ist.
 -   Syntaxanalyse wird mit deterministisch kontextfreien Grammatiken durchgeführt.
 -   Eine Teilmenge der dazu gehörigen Sprachen lässt sich top-down parsen.
--   Ein effizienter LL(k)-Parser realisiert einen DPDA und kann automatisch aus einer
-    LL(k)-Grammatik generiert werden.
+-   Ein effizienter LL(k)-Parser realisiert einen DPDA und kann automatisch aus
+    einer LL(k)-Grammatik generiert werden.
 -   Der Parser liefert in der Regel einen abstrakten Syntaxbaum.
 
 <!-- ADD
