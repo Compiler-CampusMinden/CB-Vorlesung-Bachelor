@@ -520,7 +520,7 @@ Lexer mit ANTLR generieren: Lexer-Regeln werden mit **Großbuchstaben** geschrie
 -   Aktionen beim Matchen
 
 ::: readings
--   @@Parr2014
+-   @Parr2014
 :::
 
 ::: outcomes
