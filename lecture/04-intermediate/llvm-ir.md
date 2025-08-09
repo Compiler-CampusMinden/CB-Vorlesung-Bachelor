@@ -83,7 +83,7 @@ statt *n x m* Compiler zu schreiben.
 
     IBM   Intel   Mozilla   Nvidia   Qualcomm
 
-Samsung ...
+    Samsung ...
 
 ## Externe LLVM-Projekte
 
