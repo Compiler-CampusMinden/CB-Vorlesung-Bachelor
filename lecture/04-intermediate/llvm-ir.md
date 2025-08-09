@@ -92,7 +92,7 @@ Für folgende Sprachen gibt es Compiler oder Anbindungen an LLVM (neben Clang):
 
     Crack   Go   Haskell   Java   Julia   Kotlin
 
-Lua Numba Python Ruby Rust Swift ...
+    Lua   Numba   Python   Ruby   Rust   Swift   ...
 
 \bigskip
 
