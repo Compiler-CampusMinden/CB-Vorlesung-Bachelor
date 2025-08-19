@@ -308,11 +308,13 @@ Sprachklasse sind identisch und heißen **reguläre Sprachen**.
 :::
 
 ::: outcomes
--   k1: DFAs
--   k1: Reguläre Ausdrücke
--   k1: Reguläre Grammatiken
--   k2: Zusammenhänge und Gesetzmäßigkeiten bzgl. der oben genannten Konstrukte
--   k3: DFAs, reguläre Ausdrücke, reguläre Grammatiken entwickeln
--   k3: Einen DFA entwickeln, der alle Schlüsselwörter, Namen und weitere Symbole
-    einer Programmiersprache akzeptiert
+-   k1: Ich kenne DFAs
+-   k1: Ich kenne reguläre Ausdrücke
+-   k1: Ich kenne reguläre Grammatiken
+-   k2: Ich kann die Zusammenhänge und Gesetzmäßigkeiten bzgl. der oben genannten
+    Konstrukte an einem Beispiel erklären
+-   k3: Ich kann für eine Fragestellung DFAs, reguläre Ausdrücke, reguläre
+    Grammatiken entwickeln
+-   k3: Ich kann einen DFA entwickeln, der alle Schlüsselwörter, Namen und weitere
+    Symbole einer Programmiersprache akzeptiert
 :::
