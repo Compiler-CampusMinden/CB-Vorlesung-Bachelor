@@ -46,9 +46,8 @@ Sprache und zeigen Sie die Ableitungsbäume dazu.
 Recherchieren Sie zunächst den Aufbau von Gleitkommazahlen in Python und Java.
 
 Erstellen Sie für jede der beiden Programmiersprachen reguläre Ausdrücke, DFAs und
-reguläre Grammatiken wie in Aufgabe 1. Verifizieren Sie Ihre Lösungen wie in Aufgabe
-
-1.  
+reguläre Grammatiken wie in Aufgabe A1.2. Verifizieren Sie Ihre Lösungen wie in Aufgabe
+A1.2.
 
 # A1.4: Mailadressen? (1P)
 
