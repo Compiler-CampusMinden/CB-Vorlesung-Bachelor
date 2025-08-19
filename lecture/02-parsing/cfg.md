@@ -354,11 +354,12 @@ ADD -->
 :::
 
 ::: outcomes
--   k1: PDAs
--   k1: Deterministische PDAs
--   k1: Kontextfreie Grammatiken
--   k1: Deterministisch kontextfreie Grammatiken
--   k1: Top-Down-Analyse
--   k1: LL-Parser
--   k2: Zusammenhang zwischen PDAs und kontextfreien Grammatiken
+-   k1: Ich kenne PDAs
+-   k1: Ich kenne deterministische PDAs
+-   k1: Ich kenne kontextfreie Grammatiken
+-   k1: Ich kenne deterministisch kontextfreie Grammatiken
+-   k2: Ich kann den Zusammenhang zwischen PDAs und kontextfreien Grammatiken an
+    einem Beispiel erklären
+-   k1: Ich kenne die Top-Down-Analyse
+-   k1: Ich kenne die Arbeitsweise von LL-Parsern
 :::
