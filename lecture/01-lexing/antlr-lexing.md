@@ -524,9 +524,10 @@ Lexer mit ANTLR generieren: Lexer-Regeln werden mit **Großbuchstaben** geschrie
 :::
 
 ::: outcomes
--   k3: Lexer-Regeln in ANTLR formulieren und einsetzen
--   k2: Verhalten des Lexers: längste Matches, Reihenfolge
--   k3: Nutzung von Lexer-Aktionen
+-   k3: Ich kann Lexer-Regeln in ANTLR formulieren und einsetzen
+-   k2: Ich kann das Verhalten des Lexers erklären, insbesondere längste Matches und
+    der Einfluss der Reihenfolge der Regeln
+-   k3: Ich kann Lexer-Aktionen einsetzen
 :::
 
 ::: challenges
