@@ -187,8 +187,8 @@ als initialem Kellerinhalt
 :::
 
 ::: outcomes
--   k1: Top-Down-Analyse
--   k1: LL-Parser
--   k2: Schreiben von LL-Parsern
--   k3: Top-Down Analyse programmieren
+-   k1: Ich kenne die Top-Down-Analyse
+-   k1: Ich kenne LL-Parser
+-   k2: Ich kann den algorithmischen Ablauf von LL-Parsern an einem Beispiel
+    erklären
 :::
