@@ -414,5 +414,6 @@ expr : ID '(' ')'
 :::
 
 ::: outcomes
--   k2: Struktur eines Compilers: Phasen und deren Aufgaben
+-   k2: Ich kann die Struktur eines Compilers und die verschiedenen Phasen und deren
+    Aufgaben erklären
 :::
