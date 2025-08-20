@@ -278,7 +278,7 @@ S-attributierte SDD sind eine Teilmenge von L-attributierten SDD.
 
 \normalsize
 
-![AST](images/ast.png){width="25%"}
+![AST](images/ast.png){width="30%" web_width="20%"}
 
 ## Beispiel: L-Attributgrammatik, berechnete u. geerbte Attribute, ohne Links-Rekursion
 
@@ -309,7 +309,7 @@ umformuliert ohne Links-Rekursion und mit berechneten und geerbten Attributen:
 
 ::: {.column width="45%"}
 ![Annotierter Parse-Tree mit berechneten und geerbten Attributen (nur
-Multiplikation)](images/annotatedparsetree2.png)
+Multiplikation)](images/annotatedparsetree2.png){web_width="40%"}
 :::
 :::::
 ::::::
