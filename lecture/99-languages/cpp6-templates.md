@@ -726,14 +726,15 @@ void Array<T,n>::copy_from(const C &c) { ... }
 :::
 
 ::: outcomes
--   k2: Unterschied zu Java bei der Nutzung von Templates
--   k3: Erstellen und spezialisieren von Funktions-Templates
--   k3: Unterschied zwischen überladenen Funktionen und Funktions-Templates
--   k3: Aufruf (Nutzung) von Funktions-Templates
--   k2: Unterschied zu Java bei der Nutzung von Templates
--   k3: Erstellen und spezialisieren von Klassen-Templates
--   k3: Nutzung von Methoden-Templates innerhalb von Klassen-Templates
--   k3: Aufruf (Nutzung) von Klassen-Templates
+-   k2: Ich kann den Unterschied zw. C++ und Java bzgl. der generischen
+    Programmierung erklären (Templates vs. Generics)
+-   k3: Ich kann Funktions-Templates erstellen und spezialisieren
+-   k2: Ich kenne den Unterschied zwischen überladenen Funktionen und
+    Funktions-Templates und kann zur Erläuterung ein Beispiel angeben
+-   k3: Ich kann Funktions-Templates aufrufen
+-   k3: Ich kann Klassen-Templates erstellen und spezialisieren
+-   k3: Ich kann Methoden-Templates innerhalb von Klassen-Templates einsetzen
+-   k3: Ich kann Klassen-Templates aufrufen
 :::
 
 ::: challenges
