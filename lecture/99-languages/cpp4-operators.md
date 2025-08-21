@@ -285,10 +285,13 @@ s != "123";     // ???
 :::
 
 ::: outcomes
--   k2: Implizite Typkonvertierungen bei Operatoren
--   k3: Überladen von Operatoren (innerhalb bzw. außerhalb einer Klasse)
--   k3: Anwendung der Deklaration als friend
--   k3: Implementierung von Post- und Präfix-Operatoren
+-   k2: Ich kann implizite Typkonvertierungen bei Operatoren an einem Beispiel
+    erklären
+-   k3: Ich kann in meinem Programm Operatoren überladen (innerhalb bzw. außerhalb
+    einer Klasse)
+-   k3: Ich kann die Deklaration als `friend` gezielt anwenden
+-   k3: Ich kann Post- und Präfix-Operatoren implementieren und kenne die
+    Unterschiede in der Signatur
 :::
 
 ::: challenges
