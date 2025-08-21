@@ -167,7 +167,7 @@ GPU-Architekturen
 **Clang**: schneller C/C++/Objective-C - Compiler auf Basis von LLVM mit
 aussagekräftigen Fehlermeldungen und Warnungen
 
-![](./images/opt_chain.png)
+![](./images/opt_chain.png){width="80%"}
 
 ## Die Sanitizer in der Compiler-Runtime-Bibliothek
 
