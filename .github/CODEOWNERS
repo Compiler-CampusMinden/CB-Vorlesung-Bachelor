@@ -3,5 +3,4 @@
 /lecture/01-lexing/regular.md @bcg7 @cagix
 /lecture/02-parsing/cfg.md @bcg7 @cagix
 /lecture/02-parsing/ll-parser.md @bcg7 @cagix
-/lecture/03-semantics/attribgrammars.md @bcg7 @cagix
 /lecture/07-codegen/minipython-builder.md @bcg7 @cagix
