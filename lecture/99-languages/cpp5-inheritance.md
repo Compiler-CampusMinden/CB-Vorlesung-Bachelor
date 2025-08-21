@@ -480,16 +480,15 @@ erlaubt.
 :::
 
 ::: outcomes
--   k2: Unterschied zwischen public- und private-Vererbung
--   k2: Unterschied Überladen und Überschreiben
--   k2: Slicing in C++
--   k2: Probleme bei Mehrfachvererbung und Einsatz virtueller Basisklassen
--   k3: public-Vererbung in C++
--   k3: Verkettung von Operatoren und \*struktoren
--   k3: Statische und dynamische Polymorphie in C++
--   k3: Abstrakte Klassen in C++
--   k2: Probleme bei Mehrfachvererbung und Einsatz virtueller Basisklassen
--   k3: Praktischer Umgang mit Mehrfachvererbung
+-   k2: Ich kann den Unterschied zw. Überladen und Überschreiben an einem Beispiel
+    erklären
+-   k2: Ich kann das "Slicing" in C++ erklären
+-   k2: Ich kann typische Probleme bei Mehrfachvererbung erklären
+-   k2: Ich kann den Einsatz und die Wirkung virtueller Basisklassen erklären
+-   k3: Ich kann `public`-Vererbung in C++ in eigenen Programmen nutzen
+-   k3: Ich kann Operatoren und \*struktoren verketten und kenne die Defaultregeln
+-   k3: Ich kann statische und dynamische Polymorphie in C++ einsetzen
+-   k3: Ich kann abstrakte Klassen in C++ definieren
 :::
 
 ::: challenges
