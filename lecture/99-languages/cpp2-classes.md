@@ -372,11 +372,13 @@ Delegierende Konstruktoren gibt es ab C++11:
 :::
 
 ::: outcomes
--   k2: Attribute von C++-Klassen sind Speicherplatz im Objekt
--   k2: Explizite Konstruktoren
--   k2: Problematik mit Defaultkonstruktoren/-operatoren (Pointer)
--   k3: Konstruktoren (eigene, Default)
--   k3: Unterschied Initialisierungslisten vs. Initialisierung im Body
+-   k2: Ich kann den Aufbau von C++-Klassen im Speicher an einem Beispiel erklären
+-   k2: Ich kann die Problematik expliziter Konstruktoren erklären
+-   k2: Ich kann die Problematik mit Defaultkonstruktoren/-operatoren im
+    Zusammenhang mit Pointern erklären und ein Beispiel angeben
+-   k3: Ich kann Konstruktoren definieren und einsetzen (eigene, Default)
+-   k3: Ich kenne den Unterschied zw. Initialisierungslisten vs. Initialisierung im
+    Body und kann das in eigenen Programmen einsetzen
 :::
 
 ::: challenges
