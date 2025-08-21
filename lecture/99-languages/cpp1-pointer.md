@@ -1031,13 +1031,13 @@ sollten Sie sich für `bar foo(wuppie&,  bar)` entscheiden.
 ::: notes
 # Vergleich Pointer mit Referenzen
 
-| Referenzen | Pointer |
-|:--------------------------------|:--------------------------------------------------|
-| Alias-Name für Objekte/Variablen, kein eigener Speicherplatz | "Echte" Variablen mit eigenem Speicherplatz (für den Wert des Pointers) |
-| Können nicht auf andere Objekte "umgebogen" werden | Können auf andere Objekte zeigen (falls nicht const) |
-| Operationen agieren direkt auf dem referenzierten Objekt | Operationen auf referenzierten Objekt als auch auf dem Pointer selbst |
-| Nur in C++ | In C und in C++ |
-|  | Mit Pointern ist dynamische Speicherverwaltung möglich: Manipulation von Speicherbereichen im Heap |
+| Referenzen                                                   | Pointer                                                                                            |
+|:-------------------------------------------------------------|:---------------------------------------------------------------------------------------------------|
+| Alias-Name für Objekte/Variablen, kein eigener Speicherplatz | "Echte" Variablen mit eigenem Speicherplatz (für den Wert des Pointers)                            |
+| Können nicht auf andere Objekte "umgebogen" werden           | Können auf andere Objekte zeigen (falls nicht const)                                               |
+| Operationen agieren direkt auf dem referenzierten Objekt     | Operationen auf referenzierten Objekt als auch auf dem Pointer selbst                              |
+| Nur in C++                                                   | In C und in C++                                                                                    |
+|                                                              | Mit Pointern ist dynamische Speicherverwaltung möglich: Manipulation von Speicherbereichen im Heap |
 :::
 
 # Wrap-Up
@@ -1072,19 +1072,24 @@ sollten Sie sich für `bar foo(wuppie&,  bar)` entscheiden.
 :::
 
 ::: outcomes
--   k1: Virtueller Speicher, Segmente: Text, Data, Stack
--   k2: Pointer sind Variablen, Wert wird als Adresse interpretiert
--   k2: Pointer als spezielle Variablen: Wert des Pointers als Adresse
-    interpretieren
--   k2: Initialisierung und Scopes bei Pointern
--   k3: Zuweisen einer Adresse an einen Pointer
--   k3: Dereferenzierung eines Pointers und Zugriff auf das referenzierte Element
--   k3: Pointer als Funktionsparameter: Call-by-Reference mit Hilfe von Pointern
--   k2: Memory Leaks und Stale Pointer und deren Vermeidung
--   k3: C++-Operatoren new und delete, Unterschied zu malloc(), free()
--   k3: Referenzen in C++ (Deklaration, Initialisierung, Nutzung)
--   k3: Zusammenhang und Unterschied Pointer und Arrays
--   k3: Rechnen mit Pointern, Berücksichtigung des Typs
+-   k1: Ich kenne das Konzept des virtuellen Speichers und die Aufteilung in die
+    Segmente: Text, Data, Stack
+-   k2: Ich kann an einem Beispiel erklären, dass Pointer Variablen sind, deren
+    Wert wird als Adresse interpretiert wird
+-   k2: Ich kann die Initialisierung und Scopes bei Pointern erklären
+-   k3: Ich kann in meinem Programm eine Adresse an einen Pointer zuweisen
+-   k3: Ich kann in meinem Programm Pointer dereferenzieren und auf das
+    referenzierte Element zugreifen
+-   k3: Ich kann Pointer als Funktionsparameter nutzen und so Call-by-Reference
+    realisieren
+-   k2: Ich kann die Problematik der Memory Leaks und Stale Pointer erklären und
+    weiss, wie ich diese vermeide
+-   k3: Ich kann die C++-Operatoren `new` und `delete` praktisch einsetzen und ich
+    kann den Unterschied zu `malloc()` und `free()` erklären
+-   k3: Ich kann Referenzen in C++ einsetzen (Deklaration, Initialisierung, Nutzung)
+-   k2: Ich kann den Zusammenhang und den Unterschied zwischen Pointer und Arrays
+    erklären
+-   k3: Ich kann mit Pointern rechnen und dabei den Typ berücksichtigen
 :::
 
 ::: challenges
