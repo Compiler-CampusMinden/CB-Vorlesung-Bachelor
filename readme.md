@@ -26,14 +26,11 @@ für C++ ein.
     -   Kontextfreie Grammatiken (CFG)
     -   LL-Parser (Top-Down-Parser)
     -   Generierung mit ANTLR
-3.  Semantische Analyse: Attributierte Grammatiken und Symboltabellen
+3.  Semantische Analyse: Symboltabellen
     -   Namen und Scopes
     -   Typen, Klassen, Polymorphie
-4.  Zwischencode: Intermediate Representation (IR), LLVM-IR
-5.  Backend:
-    -   LLVM
-    -   Interpreter: AST-Traversierung
-6.  C++ als zu verarbeitende Programmiersprache
+4.  Interpreter: AST-Traversierung
+5.  C++ als zu verarbeitende Programmiersprache
 
 # Team
 
