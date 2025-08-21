@@ -456,6 +456,7 @@ builder.addStatement(new Call(printRef, List.of(callGetX)));
 :::
 
 ::: outcomes
--   k1: Zwischencode
--   k2: CBuilder
+-   k1: Ich kenne verschiedene Arten von Zwischencode
+-   k2: Ich die Arbeitsweise des CBuilders erklären
+-   k3: Ich kann den CBuilder in meinem Programm einsetzen
 :::
