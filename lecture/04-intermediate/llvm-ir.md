@@ -201,7 +201,6 @@ Die wichtigsten Bestandteile:
 :::
 
 ::: outcomes
--   k1: Konzept von LLVM
--   k1: Module von LLVM
--   k1: SSA
+-   k1: Ich kenne das Konzept von LLVM
+-   k1: Ich kenne wichtige Module von LLVM
 :::
