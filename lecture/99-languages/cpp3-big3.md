@@ -382,9 +382,11 @@ href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master
 :::
 
 ::: outcomes
--   k2: Problematik mit Defaultkonstruktoren/-operatoren (Pointer)
--   k2: Problematik konstanter Funktionen, wann werden diese aufgerufen
--   k3: 'Big Three': Destruktor, Copy-Konstruktor, Zuweisungsoperator
+-   k2: Ich kann die Problematik mit Defaultkonstruktoren/-operatoren bei der
+    Verwendung von Pointern an einem Beispiel erklären
+-   k2: Ich kann die Problematik konstanter Funktionen erklären und weiss, wann
+    diese aufgerufen werden
+-   k3: Ich kann die 'Big Three' in eigenen Programmen definieren und aufrufen
 :::
 
 ::: challenges
