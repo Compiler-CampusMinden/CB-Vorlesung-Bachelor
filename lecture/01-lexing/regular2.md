@@ -1,7 +1,7 @@
 ---
 author: BC George (HSBI)
 slide_numbering: fraction
-title: Reguläre Sprachen, Ausdrucksstärke
+title: Reguläre Sprachen, Ausdrucksstärke (Teil 2)
 ---
 
 ::: attachments

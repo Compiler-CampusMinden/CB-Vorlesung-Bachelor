@@ -1,6 +1,7 @@
 * @cagix
 /homework/ @bcg7 @cagix
-/lecture/01-lexing/regular.md @bcg7 @cagix
+/lecture/01-lexing/regular1.md @bcg7 @cagix
+/lecture/01-lexing/regular2.md @bcg7 @cagix
 /lecture/02-parsing/cfg.md @bcg7 @cagix
 /lecture/02-parsing/ll-parser.md @bcg7 @cagix
 /lecture/07-codegen/minipython-builder.md @bcg7 @cagix
