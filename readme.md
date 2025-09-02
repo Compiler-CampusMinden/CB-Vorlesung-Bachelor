@@ -90,7 +90,7 @@ Vorstellung der Lösung im jeweiligen Praktikum in der Abgabewoche.
 
     1.  Aktive Teilnahme an mind. zwei der drei Edmonton/Minden-Termine
     2.  Mind. vier der sieben Übungsblätter B01..B07 erfolgreich bearbeitet[^1]
-    3.  Mini-Projekt (B08) erfolgreich bearbeitet[^1]
+    3.  Mini-Projekt (B08) erfolgreich bearbeitet
     4.  Vortrag über Mini-Projekt (B08) am Semesterende (W14), pro Team 15 Minuten
 
     Je Kriterium: Abgabe eines Post Mortem[^2] im ILIAS (**jede Person
