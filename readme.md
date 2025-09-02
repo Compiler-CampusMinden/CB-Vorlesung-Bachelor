@@ -98,8 +98,8 @@ Vorstellung der Lösung im jeweiligen Praktikum in der Abgabewoche.
 
 -   **Gesamtnote**: (Digitale) Klausur im B40 (90 Minuten)
 
-[^1]: ("erfolgreich bearbeitet": Bearbeitung in 3er Teams, alle Aufgaben/Punkte
-    bearbeitet, fristgerechte Abgabe des Post Mortem im ILIAS)
+[^1]: "erfolgreich bearbeitet": Bearbeitung in 3er Teams, alle Aufgaben/Punkte
+    bearbeitet, fristgerechte Abgabe des Post Mortem im ILIAS
 
 [^2]: **Post Mortem**: Jede Person beschreibt in der ILIAS-Abgabe individuell(!) die
     Bearbeitung des jeweiligen Kriteriums bzw. die Teilnahme am
