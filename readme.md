@@ -63,60 +63,66 @@ Abgabe der Übungsblätter jeweils **Montag bis 09:00 Uhr** im
 [ILIAS](https://www.hsbi.de/elearning/goto.php?target=exc_1420724&client_id=FH-Bielefeld).
 Vorstellung der Lösung im jeweiligen Praktikum in der Abgabewoche.
 
-| Woche      | Vorlesung: Selbststudium (Vorbereitung)                                                                                                                       | Vorlesung: Gemeinsame Sitzung                                                                                                                                                                                                      | Praktikum                                      |                                                                                                          |
-|:-----------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------|:---------------------------------------------------------------------------------------------------------|
-| W01 / KW41 |                                                                                                                                                               | [Orga](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor-W25) (*Zoom*) \|\| [Überblick](lecture/00-intro/overview.md) \| [Sprachen](lecture/00-intro/languages.md) \| [Anwendungen](lecture/00-intro/applications.md) |                                                |                                                                                                          |
-| W02 / KW42 |                                                                                                                                                               | [Reguläre Sprachen I](lecture/01-lexing/regular1.md)                                                                                                                                                                               |                                                |                                                                                                          |
-| W03 / KW43 |                                                                                                                                                               | [Reguläre Sprachen II](lecture/01-lexing/regular2.md) \|\| [CFG](lecture/02-parsing/cfg.md)                                                                                                                                        | [B01](homework/sheet01.md) Reguläre Sprachen   |                                                                                                          |
-| W04 / KW44 | [Lexer mit ANTLR](lecture/01-lexing/antlr-lexing.md)                                                                                                          | [Parser mit ANTLR](lecture/02-parsing/antlr-parsing.md)                                                                                                                                                                            | [B02](homework/sheet02.md) CFG                 |                                                                                                          |
-| W05 / KW45 |                                                                                                                                                               |                                                                                                                                                                                                                                    | [B03](homework/sheet03.md) ANTLR               | **Mo, 03.11., 18:00 - 19:00 Uhr (online): Edmonton/Minden: ANTLR + Live-Coding**                         |
-| W06 / KW46 |                                                                                                                                                               | [LL-Parser](lecture/02-parsing/ll-parser.md)                                                                                                                                                                                       |                                                | **Parcours I**                                                                                           |
-| W07 / KW47 | [Lexer (Impl)](lecture/01-lexing/recursive.md)                                                                                                                | [LL-Parser (Impl)](lecture/02-parsing/ll-parser-impl.md)                                                                                                                                                                           |                                                |                                                                                                          |
-| W08 / KW48 | [Überblick Symboltabellen](lecture/03-semantics/symbtab0-intro.md) \| [Symboltabellen: Scopes](lecture/03-semantics/symbtab1-scopes.md)                       | [Symboltabellen: Funktionen](lecture/03-semantics/symbtab2-functions.md) \| [Symboltabellen: Klassen](lecture/03-semantics/symbtab3-classes.md)                                                                                    | [B04](homework/sheet04.md) LL hand coded       |                                                                                                          |
-| W09 / KW49 | [AST-basierte Interpreter 1](lecture/06-interpretation/astdriven-part1.md)                                                                                    | [AST-basierte Interpreter 2](lecture/06-interpretation/astdriven-part2.md)                                                                                                                                                         | [B05](homework/sheet05.md) Semantische Analyse | **Mo, 01.12., 18:00 - 19:00 Uhr (online): Edmonton/Minden: Minden Presentations**                        |
-| W10 / KW50 | C++ I: [Basics](lecture/99-languages/cpp0-basics.md)                                                                                                          | [Pointer & Referenzen](lecture/99-languages/cpp1-pointer.md)                                                                                                                                                                       |                                                | **Parcours II** \|\| **Mo, 08.12., 18:00 - 19:00 Uhr (online): Edmonton/Minden: Edmonton Presentations** |
-| W11 / KW51 | C++ II: [Klassen](lecture/99-languages/cpp2-classes.md) \| [Big 3](lecture/99-languages/cpp3-big3.md) \| [Operatoren](lecture/99-languages/cpp4-operators.md) | [Vererbung & Polymorphie](lecture/99-languages/cpp5-inheritance.md)                                                                                                                                                                | [B06](homework/sheet06.md) Interpreter         |                                                                                                          |
-| W12 / KW02 |                                                                                                                                                               | *Sprechstunde/Freies Arbeiten*                                                                                                                                                                                                     | [B07](homework/sheet07.md) C++                 | **Parcours III**                                                                                         |
-| W13 / KW03 |                                                                                                                                                               | *Sprechstunde/Freies Arbeiten*                                                                                                                                                                                                     |                                                |                                                                                                          |
-| W14 / KW04 |                                                                                                                                                               | Rückblick (*Zoom*) \| [Prüfungsvorbereitung](admin/exams.md)                                                                                                                                                                       | [B08](homework/sheet08.md) Mini-Projekt        |                                                                                                          |
+| Woche      | Vorlesung: Selbststudium (Vorbereitung)                                                                                                                       | Vorlesung: Gemeinsame Sitzung                                                                                                                                                                                                      | Praktikum                                      |                                                                                     |
+|:-----------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------|:------------------------------------------------------------------------------------|
+| W01 / KW41 |                                                                                                                                                               | [Orga](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor-W25) (*Zoom*) \|\| [Überblick](lecture/00-intro/overview.md) \| [Sprachen](lecture/00-intro/languages.md) \| [Anwendungen](lecture/00-intro/applications.md) |                                                |                                                                                     |
+| W02 / KW42 |                                                                                                                                                               | [Reguläre Sprachen I](lecture/01-lexing/regular1.md)                                                                                                                                                                               |                                                |                                                                                     |
+| W03 / KW43 |                                                                                                                                                               | [Reguläre Sprachen II](lecture/01-lexing/regular2.md) \|\| [CFG](lecture/02-parsing/cfg.md)                                                                                                                                        | [B01](homework/sheet01.md) Reguläre Sprachen   |                                                                                     |
+| W04 / KW44 | [Lexer mit ANTLR](lecture/01-lexing/antlr-lexing.md)                                                                                                          | [Parser mit ANTLR](lecture/02-parsing/antlr-parsing.md)                                                                                                                                                                            | [B02](homework/sheet02.md) CFG                 |                                                                                     |
+| W05 / KW45 |                                                                                                                                                               |                                                                                                                                                                                                                                    | [B03](homework/sheet03.md) ANTLR               | **Mo, 03.11., 18:00 - 19:00 Uhr (online): Edmonton/Minden: ANTLR + Live-Coding**    |
+| W06 / KW46 |                                                                                                                                                               | [LL-Parser](lecture/02-parsing/ll-parser.md)                                                                                                                                                                                       |                                                |                                                                                     |
+| W07 / KW47 | [Lexer (Impl)](lecture/01-lexing/recursive.md)                                                                                                                | [LL-Parser (Impl)](lecture/02-parsing/ll-parser-impl.md)                                                                                                                                                                           |                                                |                                                                                     |
+| W08 / KW48 | [Überblick Symboltabellen](lecture/03-semantics/symbtab0-intro.md) \| [Symboltabellen: Scopes](lecture/03-semantics/symbtab1-scopes.md)                       | [Symboltabellen: Funktionen](lecture/03-semantics/symbtab2-functions.md) \| [Symboltabellen: Klassen](lecture/03-semantics/symbtab3-classes.md)                                                                                    | [B04](homework/sheet04.md) LL hand coded       |                                                                                     |
+| W09 / KW49 | [AST-basierte Interpreter 1](lecture/06-interpretation/astdriven-part1.md)                                                                                    | [AST-basierte Interpreter 2](lecture/06-interpretation/astdriven-part2.md)                                                                                                                                                         | [B05](homework/sheet05.md) Semantische Analyse | **Mo, 01.12., 18:00 - 19:00 Uhr (online): Edmonton/Minden: Minden Presentations**   |
+| W10 / KW50 | C++ I: [Basics](lecture/99-languages/cpp0-basics.md)                                                                                                          | [Pointer & Referenzen](lecture/99-languages/cpp1-pointer.md)                                                                                                                                                                       |                                                | **Mo, 08.12., 18:00 - 19:00 Uhr (online): Edmonton/Minden: Edmonton Presentations** |
+| W11 / KW51 | C++ II: [Klassen](lecture/99-languages/cpp2-classes.md) \| [Big 3](lecture/99-languages/cpp3-big3.md) \| [Operatoren](lecture/99-languages/cpp4-operators.md) | [Vererbung & Polymorphie](lecture/99-languages/cpp5-inheritance.md)                                                                                                                                                                | [B06](homework/sheet06.md) Interpreter         |                                                                                     |
+| W12 / KW02 |                                                                                                                                                               | *Sprechstunde/Freies Arbeiten*                                                                                                                                                                                                     | [B07](homework/sheet07.md) C++                 |                                                                                     |
+| W13 / KW03 |                                                                                                                                                               | *Sprechstunde/Freies Arbeiten*                                                                                                                                                                                                     |                                                |                                                                                     |
+| W14 / KW04 |                                                                                                                                                               | Rückblick (*Zoom*) \| [Prüfungsvorbereitung](admin/exams.md)                                                                                                                                                                       | [B08](homework/sheet08.md) Mini-Projekt        |                                                                                     |
 
 # Prüfungsform, Note und Credits
 
-**Parcoursprüfung plus Testat**, 5 ECTS
+**(Digitale) Klausur plus Studienleistung**, 5 ECTS
 
--   **Testat**: Vergabe der Credit-Points
-    1.  Mindestens 4 der Übungsblätter [B01](homework/sheet01.md),
-        [B02](homework/sheet02.md), [B03](homework/sheet03.md),
-        [B04](homework/sheet04.md), [B05](homework/sheet05.md) und
-        [B06](homework/sheet06.md) erfolgreich bearbeitet, **und**
-    2.  **aktive** Teilnahme an allen 3 Edmonton-Terminen.
+-   **Studienleistung**: "Portfolio"
 
-    ("erfolgreich bearbeitet": Bearbeitung in 3er Teams, je mindestens 60%
-    bearbeitet, fristgerechte Abgabe der Lösungen im ILIAS, Vorstellung der Lösungen
-    im Praktikum)
+    Kriterien je Team (3 Personen):
 
-## Prüfung im ersten Zeitraum
+    1.  Aktive Teilnahme an mind. zwei der drei Edmonton/Minden-Termine
+    2.  Mind. vier der sieben Übungsblätter B01..B07 erfolgreich bearbeitet[^1]
+    3.  Mini-Projekt (B08) erfolgreich bearbeitet[^1]
+    4.  Vortrag über Mini-Projekt (B08) am Semesterende (W14), pro Team 15 Minuten
 
--   **Stationen**:
+    Je Kriterium: Abgabe eines Post Mortem[^2] im ILIAS (**jede Person
+    individuell**)
 
-    1.  ILIAS-Test (einzeln, 20.11.)
-    2.  Vorstellung Mini-Projekt [B07](homework/sheet07.md) (3er Teams, letzte
-        VL-Woche)
+-   **Gesamtnote**: (Digitale) Klausur im B40 (90 Minuten)
 
-    Note für das Modul: Beide Stationen ergeben zu **je 50%** *oder* in der
-    Gewichtung **30 Punkte (Station I) und 50 Punkte (Station II)** die Gesamtnote
-    (individuelle Günstigerprüfung).
+[^1]: ("erfolgreich bearbeitet": Bearbeitung in 3er Teams, alle Aufgaben/Punkte
+    bearbeitet, fristgerechte Abgabe des Post Mortem im ILIAS)
 
-    Für Station I werden 3 Punkte Überhang gewährt: Von den 33 maximal erreichbaren
-    Punkten werden 30 Punkte als 100% gewertet, darüber hinausgehende Punkte bleiben
-    als Bonuspunkte erhalten.
+[^2]: **Post Mortem**: Jede Person beschreibt in der ILIAS-Abgabe individuell(!) die
+    Bearbeitung des jeweiligen Kriteriums bzw. die Teilnahme am
+    Edmonton/Minden-Meeting zurückblickend mit mind. 200 bis max. 400 Wörtern
+    (Nutzlast; Überschriften und Links zählen nicht mit). Gehen Sie dabei
+    aussagekräftig und nachvollziehbar auf folgende Punkte ein:
 
-## Prüfung im zweiten Zeitraum
+    1.  Zusammenfassung: Was wurde gemacht bzw. was wurde auf dem Meeting
+        besprochen?
+    2.  Details: Kurze Beschreibung besonders interessanter Aspekte der Umsetzung
+        bzw. des Meetings.
+    3.  Reflexion: Was war der schwierigste Teil bei der Bearbeitung? Wie haben Sie
+        dieses Problem gelöst?
+    4.  Reflexion: Was haben Sie gelernt oder (besser) verstanden?
+    5.  Team: Mit wem haben Sie zusammengearbeitet?
+    6.  Link zu Ihrem Repo mit den relevanten Artefakten (Lösung, Slides für den
+        Vortrag, ...).
 
--   **Stationen**:
-    1.  Mündliche Prüfung (individuell, ca. 45 Minuten, zweiter Prüfungszeitraum)
+    Für die Edmonton/Minden-Meetings passen Sie bitte die Punkte (1) bis (4)
+    entsprechend inhaltlich an, (5) und (6) entfallen.
 
-    Die Note der mündlichen Prüfung ergibt die Gesamtnote.
+    Siehe auch
+    https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor-W25/discussions/3.
 
 # Materialien
 
