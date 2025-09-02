@@ -44,10 +44,10 @@ für C++ ein.
 
 | Vorlesung (2 SWS)            | Praktikum (2 SWS)                        |
 |:-----------------------------|:-----------------------------------------|
-| Mo, 09:00 - 10:30 Uhr (Zoom) | G1: Fr, 09:45 - 11:15 Uhr (Zoom)         |
-|                              | G2: Fr, 11:30 - 13:00 Uhr (Zoom)         |
-|                              | G3: Fr, 09:45 - 11:15 Uhr (Präsenz J101) |
-|                              | G4: Fr, 11:30 - 13:00 Uhr (Präsenz J101) |
+| Do, 15:45 - 17:15 Uhr (Zoom) | G1: Mi, 09:45 - 11:15 Uhr (Zoom)         |
+|                              | G2: Mi, 11:30 - 13:00 Uhr (Zoom)         |
+|                              | G3: Mi, 09:45 - 11:15 Uhr (Präsenz J101) |
+|                              | G4: Mi, 11:30 - 13:00 Uhr (Präsenz J101) |
 
 Durchführung der Vorlesung als *Flipped Classroom* (Carsten) bzw. als *reguläre
 Vorlesung* (BC). Zugangsdaten Zoom siehe
