@@ -14,9 +14,9 @@ Expressions, Kontrollstrukturen und Funktionen.
 # Methodik
 
 Sie finden im [Sample
-Project](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/tree/master/homework/src/sample_project)
+Project](https://github.com/Compiler-CampusMinden/student-support-code-template)
 eine
-[Grammatik](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/homework/src/sample_project/src/main/antlr/MiniC.g4),
+[Grammatik](https://github.com/Compiler-CampusMinden/student-support-code-template/blob/master/src/main/antlr/MiniC.g4),
 die (teilweise) zu der Zielsprache auf diesem Blatt passt. Analysieren Sie diese
 Grammatik und vervollständigen Sie diese bzw. passen Sie diese an.
 
@@ -349,9 +349,9 @@ f95(n);
 ## A5.1: Grammatik und AST (2P)
 
 Erstellen Sie eine ANTLR-Grammatik für die Zielsprache. Sie können dabei die
-[Grammatik](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/homework/src/sample_project/src/main/antlr/MiniC.g4)
+[Grammatik](https://github.com/Compiler-CampusMinden/student-support-code-template/blob/master/src/main/antlr/MiniC.g4)
 im [Sample
-Project](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/tree/master/homework/src/sample_project)
+Project](https://github.com/Compiler-CampusMinden/student-support-code-template)
 als Ausgangspunkt nutzen und diese anpassen und vervollständigen.
 
 Definieren Sie einen AST für die Zielsprache. Welche Informationen aus dem

@@ -13,10 +13,10 @@ ANTLR für eine Lisp-artige Sprache.
 # Methodik
 
 Sie finden im [Sample
-Project](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/tree/master/homework/src/sample_project)
+Project](https://github.com/Compiler-CampusMinden/student-support-code-template)
 zwei Grammatiken
-([MiniLispA](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/homework/src/sample_project/src/main/antlr/MiniLispA.g4),
-[MiniLispB](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/homework/src/sample_project/src/main/antlr/MiniLispB.g4)),
+([MiniLispA](https://github.com/Compiler-CampusMinden/student-support-code-template/blob/master/src/main/antlr/MiniLispA.g4),
+[MiniLispB](https://github.com/Compiler-CampusMinden/student-support-code-template/blob/master/src/main/antlr/MiniLispB.g4)),
 die (teilweise) zu der Zielsprache auf diesem Blatt passen. Analysieren Sie beide
 Grammatiken und entscheiden Sie sich für eine der beiden Varianten. Vervollständigen
 Sie diese bzw. passen Sie diese an.
@@ -271,11 +271,11 @@ einer Liste bzw. die restliche Liste ohne das erste Element zurückliefern:
 
 2.  Definieren Sie für die obige Sprache eine geeignete ANTLR-Grammatik. Sie können
     dabei die Grammatik
-    [MiniLispA](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/homework/src/sample_project/src/main/antlr/MiniLispA.g4)
+    [MiniLispA](https://github.com/Compiler-CampusMinden/student-support-code-template/blob/master/src/main/antlr/MiniLispA.g4)
     oder
-    [MiniLispB](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/homework/src/sample_project/src/main/antlr/MiniLispB.g4)
+    [MiniLispB](https://github.com/Compiler-CampusMinden/student-support-code-template/blob/master/src/main/antlr/MiniLispB.g4)
     im [Sample
-    Project](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/tree/master/homework/src/sample_project)
+    Project](https://github.com/Compiler-CampusMinden/student-support-code-template)
     als Ausgangspunkt nutzen und diese anpassen und vervollständigen. Erzeugen Sie
     mithilfe der Grammatik und ANTLR einen Lexer und Parser.
 
@@ -304,8 +304,8 @@ Testen Sie Ihren Interpreter mit Ihren Beispielprogrammen.
 ## A6.3: Auswirkungen der Grammatik auf den Interpreter (2P)
 
 Sie haben sich vermutlich für eine der beiden Grammatiken
-([MiniLispA](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/homework/src/sample_project/src/main/antlr/MiniLispA.g4),
-[MiniLispB](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/homework/src/sample_project/src/main/antlr/MiniLispB.g4))
+([MiniLispA](https://github.com/Compiler-CampusMinden/student-support-code-template/blob/master/src/main/antlr/MiniLispA.g4),
+[MiniLispB](https://github.com/Compiler-CampusMinden/student-support-code-template/blob/master/src/main/antlr/MiniLispB.g4))
 entschieden und auf der Basis Ihren Interpreter erstellt.
 
 Welche Auswirkungen hat die Grammatik auf den Interpreter? Machen Sie ein

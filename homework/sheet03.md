@@ -28,7 +28,7 @@ als formatierten Code auf der Konsole ausgeben.
 # Methodik
 
 Nutzen Sie das
-[Starter-Projekt](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/tree/master/homework/src/sample_project)
+[Starter-Projekt](https://github.com/Compiler-CampusMinden/student-support-code-template)
 in der Vorgabe.
 
 Laden Sie sich das Projekt herunter, binden Sie es in Ihre IDE ein und vergewissern
