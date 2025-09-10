@@ -51,7 +51,7 @@ für C++ ein.
 
 Durchführung der Vorlesung als *Flipped Classroom* (Carsten) bzw. als *reguläre
 Vorlesung* (BC). Zugangsdaten Zoom siehe
-[ILIAS](https://www.hsbi.de/elearning/goto.php?target=crs_1400597&client_id=FH-Bielefeld).
+[ILIAS](https://www.hsbi.de/elearning/goto.php/crs/1555855).
 
 # Fahrplan
 
@@ -60,7 +60,7 @@ Kalender](https://calendar.google.com/calendar/ical/07021c87022fe3f132fa2e2e799b
 mit allen Terminen der Veranstaltung zum Einbinden in Ihre Kalender-App.
 
 Abgabe der Post Mortems jeweils **Mittwoch bis 09:00 Uhr** im
-[ILIAS](https://www.hsbi.de/elearning/goto.php?target=exc_1420724&client_id=FH-Bielefeld).
+[ILIAS](https://www.hsbi.de/elearning/goto.php/exc/1582799).
 Vorstellung der Lösung im jeweiligen Praktikum in der Abgabewoche.
 
 | Woche      | Vorlesung: Selbststudium (Vorbereitung)                                                                                                                           | Vorlesung: Gemeinsame Sitzung                                                                                   | Praktikum                                      | Edmonton/Minden-Meetings                                                            |
