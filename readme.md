@@ -97,7 +97,7 @@ Vorstellung der Lösung im jeweiligen Praktikum in der Abgabewoche.
 
 -   **Gesamtnote**: (Digitale) Klausur im B40 (90 Minuten)
 
-*Hinweise*:
+::: {.details title="Hinweise"}
 
 -   Die Bearbeitung der Leistungen erfolgt im Team.
 -   Ein Team umfasst 3 Personen.
@@ -132,6 +132,8 @@ Vorstellung der Lösung im jeweiligen Praktikum in der Abgabewoche.
 
     Siehe auch
     https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor-W25/discussions/3.
+
+:::
 
 # Materialien
 
