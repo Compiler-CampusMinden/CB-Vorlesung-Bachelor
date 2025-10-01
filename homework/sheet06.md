@@ -5,6 +5,11 @@ points: 10 Punkte
 title: "Blatt 06: Interpreter"
 ---
 
+::: center
+**Wir arbeiten gerade an dieser Seite ...**
+:::
+
+<!--
 # Zusammenfassung
 
 Ziel dieses Aufgabenblattes ist die Erstellung eines Tree-Walking-Interpreter mit
@@ -317,3 +322,4 @@ müssten, wenn Sie die jeweils andere Grammatik-Variante nutzen würden.
 Bauen Sie eine *REPL* ein, d.h. geben Sie nach dem Start des Interpreters einen
 Prompt aus und verarbeiten Sie die Eingaben interaktiv. Wie müssen Sie hier mit der
 Symboltabelle umgehen?
+-->

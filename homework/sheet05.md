@@ -5,6 +5,11 @@ points: 10 Punkte
 title: "Blatt 05: Semantische Analyse"
 ---
 
+::: center
+**Wir arbeiten gerade an dieser Seite ...**
+:::
+
+<!--
 # Zusammenfassung
 
 Ziel dieses Aufgabenblattes ist die Erstellung einer Symboltabelle und eines
@@ -382,3 +387,4 @@ Operanden in Ausdrücken die richtigen Typen, passen die Typen der
 Funktionsargumente, passen die Typen bei einer Zuweisung, ... Geben Sie erkannte
 Fehler auf der Konsole aus. *Hinweis*: Sie brauchen hier nur die Typprüfung
 durchführen. Eine Typinferenz oder Typerweiterung o.ä. ist nicht notwendig.
+-->
