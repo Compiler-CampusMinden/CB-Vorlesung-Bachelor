@@ -7,28 +7,29 @@ title: "Blatt 05: Semantische Analyse"
 
 # Zusammenfassung
 
-Ziel dieses Aufgabenblattes ist die Erstellung einer Symboltabelle und eines
-einfachen Type-Checkers für eine fiktive statisch typisierte Sprache mit
-Expressions, Kontrollstrukturen und Funktionen.
+Ziel dieses Aufgabenblattes ist die Erstellung einer Symboltabelle und einer
+einfachen Typ-Prüfung für eine fiktive statisch typisierte Sprache mit Expressions,
+Kontrollstrukturen und Funktionen.
 
 # Methodik
 
 Sie finden im [Sample
-Project](https://github.com/Compiler-CampusMinden/student-support-code-template)
-eine
-[Grammatik](https://github.com/Compiler-CampusMinden/student-support-code-template/blob/master/src/main/antlr/MiniC.g4),
+Project](https://github.com/Compiler-CampusMinden/student-support-code-template) die
+Grammatik
+[MiniC.g4)](https://github.com/Compiler-CampusMinden/student-support-code-template/blob/master/src/main/antlr/MiniC.g4),
 die (teilweise) zu der Zielsprache auf diesem Blatt passt. Analysieren Sie diese
 Grammatik und vervollständigen Sie diese bzw. passen Sie diese an.
 
 Erstellen Sie mit dieser Grammatik und ANTLR wieder einen Lexer und Parser.
 Definieren Sie einen AST und konvertieren Sie Ihren Parse-Tree in einen AST.
 
-Es ist empfehlenswert, den Type-Checker dreiphasig zu realisieren:
+Es ist empfehlenswert, die semantische Analyse mindestens zweiphasig zu realisieren:
 
 1.  Aufbauen der Symboltabelle und Prüfen von z.B. Deklaration/Definition
-    vs. Benutzung (Variablen) usw.
-2.  Prüfen bei Funktionsaufrufen auf vorhandene/sichtbare Funktionsdefinitionen
-3.  Prüfen der verwendeten Typen
+    (Variablen, Funktionen).
+2.  Prüfen von Aufrufen und Referenzierungen:
+    -   bei Funktionsaufrufen auf vorhandene/sichtbare Funktionsdefinitionen
+    -   bei Variablen auf vorherige Deklaration/Definition im Sichtbarkeitsbereich
 
 # Sprachdefinition
 
@@ -346,7 +347,7 @@ f95(n);
 
 # Aufgaben
 
-## A5.1: Grammatik und AST (3P)
+## A5.1: Grammatik und AST (2P)
 
 Erstellen Sie eine ANTLR-Grammatik für die Zielsprache. Sie können dabei die
 [Grammatik](https://github.com/Compiler-CampusMinden/student-support-code-template/blob/master/src/main/antlr/MiniC.g4)
@@ -361,7 +362,7 @@ Programmieren Sie eine Traversierung des Parse-Trees, die den AST erzeugt. Teste
 Sie dies mit den obigen Beispielprogrammen und definieren Sie sich selbst weitere
 Programme unterschiedlicher Komplexität für diesen Zweck.
 
-## A5.2: Aufbau der Symboltabelle (4P)
+## A5.2: Aufbau der Symboltabelle (5P)
 
 Bauen Sie für den AST eine Symboltabelle auf. Achten Sie darauf, dass Sie eine
 Querverbindung zwischen den Symboltabelleneinträgen und den AST-Knoten benötigen.
