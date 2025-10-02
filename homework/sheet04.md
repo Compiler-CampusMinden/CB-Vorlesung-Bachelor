@@ -7,27 +7,26 @@ title: "Blatt 04: Lexer und Parser selbst implementiert"
 
 # Zusammenfassung
 
-Ziel dieses Aufgabenblattes ist die Erstellung eines Tree-Walking-Interpreter mit
-ANTLR für eine Lisp-artige Sprache.
+Ziel dieses Aufgabenblattes ist die Erstellung einer Grammatik sowie daraus
+ableitend die manuelle Implementierung eines Lexers und Parsers mit *recursive
+descent* für eine Lisp-artige Sprache.
 
 # Methodik
 
-Sie finden im [Sample
-Project](https://github.com/Compiler-CampusMinden/student-support-code-template)
-zwei Grammatiken
-([MiniLispA](https://github.com/Compiler-CampusMinden/student-support-code-template/blob/master/src/main/antlr/MiniLispA.g4),
-[MiniLispB](https://github.com/Compiler-CampusMinden/student-support-code-template/blob/master/src/main/antlr/MiniLispB.g4)),
-die (teilweise) zu der Zielsprache auf diesem Blatt passen. Analysieren Sie beide
-Grammatiken und entscheiden Sie sich für eine der beiden Varianten. Vervollständigen
-Sie diese bzw. passen Sie diese an.
+Sie finden nachfolgend eine Beschreibung der Zielsprache für dieses Blatt.
 
-Erstellen Sie mit dieser Grammatik und ANTLR wieder einen Lexer und Parser.
+Erstellen Sie zunächst eine Grammatik für diese Sprache. Implementieren Sie dann
+basierend auf dieser Grammatik einen Lexer und einen *recursive descent* Parser.
+Überlegen Sie sich, welche Strukturen ein AST für diese Sprache haben sollte und
+implementieren Sie diese Strukturen in Java und schreiben Sie eine Transformation
+des Parse-Trees in diesen AST.
 
-Es ist empfehlenswert, den Interpreter dreistufig zu realisieren:
+Es ist empfehlenswert, die Implementierung mehrstufig zu realisieren:
 
-1.  Einlesen aus einer Datei mit Lisp-Code und Parsen der Inhalte
-2.  Aufbauen der Symboltabelle und Durchführung der semantischen Analyse
-3.  Ablaufen des Parse-Tree/AST und Auswerten der Ausdrücke (Interpretation)
+1.  Einlesen aus einer Datei mit Lisp-artigem Code
+2.  Lexen des eingelesenen Code
+3.  Parsen des Tokenstroms
+4.  Erzeugen und Ausgeben des AST
 
 # Sprachdefinition
 
@@ -259,37 +258,67 @@ einer Liste bzw. die restliche Liste ohne das erste Element zurückliefern:
 
 # Aufgaben
 
-## A4.1: Grammatik und ANTLR (3P)
+## A4.1: Grammatik (2P)
 
 1.  Erstellen Sie zunächst einige Programme in der Zielsprache. Diese sollten von
     einfachsten Ausdrücken bis hin zu komplexeren Programmen reichen. Definieren Sie
     beispielsweise eine Funktion, die rekursiv die Länge einer Liste berechnet.
 
-    Definieren Sie neben gültigen Programmen auch solche, die in der semantischen
+    Definieren Sie neben gültigen Programmen auch solche, die in der syntaktischen
     Analyse zurückgewiesen werden sollten. Welche Fehlerkategorien könnte es hier
     geben?
 
-2.  Definieren Sie für die obige Sprache eine geeignete ANTLR-Grammatik. Sie können
-    dabei die Grammatik
-    [MiniLispA](https://github.com/Compiler-CampusMinden/student-support-code-template/blob/master/src/main/antlr/MiniLispA.g4)
-    oder
-    [MiniLispB](https://github.com/Compiler-CampusMinden/student-support-code-template/blob/master/src/main/antlr/MiniLispB.g4)
-    im [Sample
-    Project](https://github.com/Compiler-CampusMinden/student-support-code-template)
-    als Ausgangspunkt nutzen und diese anpassen und vervollständigen. Erzeugen Sie
-    mithilfe der Grammatik und ANTLR einen Lexer und Parser.
+2.  Definieren Sie nun für die obige Sprache eine geeignete Grammatik.
 
-3.  Führen Sie die semantische Analyse durch: Sind alle Symbole bekannt, passen die
-    Scopes?
+## A4.2: Lexer (2P)
 
+1.  Definieren Sie in Java Strukturen, die Sie für die Repräsentation der Token
+    entsprechend Ihrer Grammatik benötigen.
 
-## A4.2: AST (2P)
+2.  Implementieren Sie dann analog zum Vorgehen in der Vorlesung einen Lexer, der
+    den entsprechenden Teil Ihrer Grammatik abbildet. Diesen Lexer sollen Sie selbst
+    in Java implementieren, Sie dürfen also nicht ANTLR oder andere Generatoren
+    benutzen.
 
-Sie haben sich vermutlich für eine der beiden Grammatiken
-([MiniLispA](https://github.com/Compiler-CampusMinden/student-support-code-template/blob/master/src/main/antlr/MiniLispA.g4),
-[MiniLispB](https://github.com/Compiler-CampusMinden/student-support-code-template/blob/master/src/main/antlr/MiniLispB.g4))
-entschieden und auf der Basis Ihren Interpreter erstellt.
+Implementieren Sie dabei das Verarbeiten des Lisp-artigen Codes aus einem
+übergebenen String.
 
-Welche Auswirkungen hat die Grammatik auf den Interpreter? Machen Sie ein
-Gedankenexperiment: Überlegen Sie, was Sie alles in Ihrer Implementierung ändern
-müssten, wenn Sie die jeweils andere Grammatik-Variante nutzen würden.
+Sie können wie in der Vorlesung demonstriert auf Anforderung das nächste Token
+berechnen. Sie können aber auch den Eingabecode vollständig verarbeiten und dann
+einen Tokenstrom geeignet zurückgeben.
+
+Ihr Lexer soll eine rudimentäre Fehlerbehandlung aufweisen und bei Problemen die
+Abweichung vom erwarteten Zeichen zum tatsächlich eingelesenen Zeichen ausgeben.
+Darüber hinaus braucht der Lexer keinen Recovery-Modus haben o.ä., d.h. nach der
+Fehlermeldung darf Ihr Lexer "aussteigen".
+
+## A4.3: Parser mit *recursive descent* (3P)
+
+Implementieren Sie analog zum Vorgehen in der Vorlesung einen Parser mit *recursive
+descent*, der den entsprechenden Teil Ihrer Grammatik abbildet. Diesen Parser sollen
+Sie manuell in Java implementieren, Sie dürfen also nicht ANTLR oder andere
+Generatoren benutzen.
+
+Implementieren Sie dabei das Verarbeiten des Lisp-artigen Codes aus einem
+übergebenen String.
+
+Ihr Parser soll eine rudimentäre Fehlerbehandlung aufweisen und bei Problemen die
+Abweichung vom erwarteten Token zum tatsächlich eingelesenen Token ausgeben. Darüber
+hinaus braucht der Parser keinen Recovery-Modus haben o.ä., d.h. nach der
+Fehlermeldung darf Ihr Parser "aussteigen".
+
+## A4.4: AST (2P)
+
+Definieren Sie einen AST für die Zielsprache. Welche Informationen aus dem
+Eingabeprogramm müssen repräsentiert werden?
+
+Programmieren Sie die entsprechenden Datenstrukturen in Java.
+
+Programmieren Sie außerdem eine Traversierung des Parse-Trees, die den AST erzeugt.
+Testen Sie dies mit Ihren in der ersten Aufgabe entwickelten Beispielprogrammen.
+
+## A4.5: Recherche und Diskussion (1P)
+
+Recherchieren Sie, welche Open-Source-Projekte auf handgeschriebene *recursive
+descent* Parser setzen (oder umgestiegen sind) und welche Gründe es dafür in diesen
+Projekten gibt. Was spricht aus Ihrer persönlichen Sicht für und gegen ANTLR?
