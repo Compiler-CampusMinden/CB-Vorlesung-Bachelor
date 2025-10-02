@@ -21,7 +21,7 @@ basierend auf dieser Grammatik einen Lexer und einen *recursive descent* Parser.
 implementieren Sie diese Strukturen in Java und schreiben Sie eine Transformation
 des Parse-Trees in diesen AST.
 
-Es ist empfehlenswert, die Implementierung mehrstufig zu realisieren:
+Es ist empfehlenswert, die Implementierung in Java mehrstufig zu realisieren:
 
 1.  Einlesen aus einer Datei mit Lisp-artigem Code
 2.  Lexen des eingelesenen Code
@@ -276,9 +276,9 @@ einer Liste bzw. die restliche Liste ohne das erste Element zurückliefern:
     entsprechend Ihrer Grammatik benötigen.
 
 2.  Implementieren Sie dann analog zum Vorgehen in der Vorlesung einen Lexer, der
-    den entsprechenden Teil Ihrer Grammatik abbildet. Diesen Lexer sollen Sie selbst
-    in Java implementieren, Sie dürfen also nicht ANTLR oder andere Generatoren
-    benutzen.
+    den entsprechenden Teil Ihrer Grammatik abbildet. Diesen Lexer sollen Sie
+    manuell in Java implementieren, Sie dürfen also nicht ANTLR oder andere
+    Generatoren benutzen.
 
 Implementieren Sie dabei das Verarbeiten des Lisp-artigen Codes aus einem
 übergebenen String.
