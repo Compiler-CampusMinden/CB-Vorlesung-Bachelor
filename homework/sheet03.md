@@ -5,11 +5,6 @@ points: 10 Punkte
 title: "Blatt 03: ANTLR"
 ---
 
-::: center
-**Wir arbeiten gerade an dieser Seite ...**
-:::
-
-<!--
 # Zusammenfassung
 
 Ziel dieses Aufgabenblattes ist die Erstellung eines einfachen *Pretty Printers* für
@@ -307,4 +302,3 @@ können auch einen zweiten Pretty-Printer für den AST implementieren.)
 [^1]: Um den Text lesbar zu halten, wird hier oft nur von "Parser" gesprochen -
     gemeint ist aber die gesamte auf diesem Blatt zu erstellende Toolchain: Lexer -
     Parser - AST - Ausgabe.
--->
