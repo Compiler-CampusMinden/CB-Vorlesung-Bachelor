@@ -5,11 +5,6 @@ points: 10 Punkte
 title: "Blatt 01: Reguläre Sprachen"
 ---
 
-::: center
-**Wir arbeiten gerade an dieser Seite ...**
-:::
-
-<!--
 # A1.1: Sprachen von regulären Ausdrücken (1P)
 
 Welche Sprache wird von dem folgenden regulären Ausdruck beschrieben?
@@ -84,4 +79,3 @@ A &\rightarrow& d B \ | \ b A \ | \ c A  \nonumber \\
 B &\rightarrow& a c \ | \ b C \ | \ c A  \nonumber \\
 C &\rightarrow& \epsilon                 \nonumber
 \end{eqnarray}$$
--->
