@@ -346,13 +346,13 @@ f95(n);
 
 # Aufgaben
 
-## A5.1: Grammatik und AST (2P)
+## A5.1: Grammatik und AST (3P)
 
 Erstellen Sie eine ANTLR-Grammatik für die Zielsprache. Sie können dabei die
 [Grammatik](https://github.com/Compiler-CampusMinden/student-support-code-template/blob/master/src/main/antlr/MiniC.g4)
 im [Sample
-Project](https://github.com/Compiler-CampusMinden/student-support-code-template)
-als Ausgangspunkt nutzen und diese anpassen und vervollständigen.
+Project](https://github.com/Compiler-CampusMinden/student-support-code-template) als
+Ausgangspunkt nutzen und diese anpassen und vervollständigen.
 
 Definieren Sie einen AST für die Zielsprache. Welche Informationen aus dem
 Eingabeprogramm müssen repräsentiert werden?
@@ -361,24 +361,20 @@ Programmieren Sie eine Traversierung des Parse-Trees, die den AST erzeugt. Teste
 Sie dies mit den obigen Beispielprogrammen und definieren Sie sich selbst weitere
 Programme unterschiedlicher Komplexität für diesen Zweck.
 
-## A5.2: Aufbau der Symboltabelle (2P)
+## A5.2: Aufbau der Symboltabelle (4P)
 
-Bauen Sie für den AST eine Symboltabelle auf. Führen Sie dabei die im ersten Lauf
-möglichen Prüfungen durch, beispielsweise ob referenzierte Variablen tatsächlich
-bereits definiert und sichtbar sind oder ob eine Variable oder Funktion in einem
-Scope mehrfach definiert wird oder ob Variablen als Funktion genutzt werden. Geben
-Sie erkannte Fehler auf der Konsole aus.
+Bauen Sie für den AST eine Symboltabelle auf. Achten Sie darauf, dass Sie eine
+Querverbindung zwischen den Symboltabelleneinträgen und den AST-Knoten benötigen.
 
-## A5.3: Symboltabelle: Funktionsaufrufe (1P)
+Führen Sie die im ersten Lauf möglichen Prüfungen durch, beispielsweise ob eine
+Variable oder Funktion in einem Scope mehrfach definiert wird oder ob Variablen als
+Funktion genutzt werden. Geben Sie erkannte Fehler auf der Konsole aus.
 
-Implementieren Sie einen zweiten Lauf. Dabei soll für Funktionsaufrufe geprüft
-werden, ob diese Funktionen bereits definiert sind und im Scope sichtbar sind. Geben
-Sie erkannte Fehler auf der Konsole aus.
+## A5.3: Symboltabelle: Referenzierungen und Funktionsaufrufe (3P)
 
-## A5.4: Symboltabelle: Typprüfungen (5P)
+Implementieren Sie einen zweiten Lauf.
 
-Implementieren Sie einen dritten Lauf. Führen Sie die Typprüfung durch: Haben die
-Operanden in Ausdrücken die richtigen Typen, passen die Typen der
-Funktionsargumente, passen die Typen bei einer Zuweisung, ... Geben Sie erkannte
-Fehler auf der Konsole aus. *Hinweis*: Sie brauchen hier nur die Typprüfung
-durchführen. Eine Typinferenz oder Typerweiterung o.ä. ist nicht notwendig.
+Dabei soll für referenzierte Variablen geprüft werden, ob sie tatsächlich bereits
+definiert und sichtbar sind. Für Funktionsaufrufe soll geprüft werden, ob diese
+Funktionen bereits definiert sind und im Scope sichtbar sind. Geben Sie erkannte
+Fehler auf der Konsole aus.
