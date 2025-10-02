@@ -5,11 +5,6 @@ points: 10 Punkte
 title: "Blatt 02: CFG"
 ---
 
-::: center
-**Wir arbeiten gerade an dieser Seite ...**
-:::
-
-<!--
 # A2.1: PDA (2P)
 
 Erstellen Sie einen deterministischen PDA, der die Sprache
@@ -90,4 +85,3 @@ Zeigen Sie, dass die Grammatik LL(1) ist.
 
 Konstruieren Sie die LL-Parsertabelle für die Grammatik und simulieren Sie das
 Parsen des Wortes *1233*.
--->
