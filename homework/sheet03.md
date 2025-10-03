@@ -5,11 +5,6 @@ points: 10 Punkte
 title: "Blatt 03: ANTLR"
 ---
 
-::: center
-**Wir arbeiten gerade an dieser Seite ...**
-:::
-
-<!--
 # Zusammenfassung
 
 Ziel dieses Aufgabenblattes ist die Erstellung eines einfachen *Pretty Printers* für
@@ -299,7 +294,7 @@ wirklich benötigen - das ist Ihr Abstract-Syntex-Tree (*AST*).
 
 Programmieren Sie eine Transformation des Parse-Tree in die von Ihnen hier
 formulierten AST-Strukturen. Dies können Sie beispielsweise mit einer passenden
-Traversierung (Visitor-Pattern) erreichen.
+Traversierung (Visitor-Pattern oder über Pattern-Matching in Java 25) erreichen.
 
 Passen Sie den Pretty-Printer so an, dass er auch den AST ausgeben kann. (Alternativ
 können auch einen zweiten Pretty-Printer für den AST implementieren.)
@@ -307,4 +302,3 @@ können auch einen zweiten Pretty-Printer für den AST implementieren.)
 [^1]: Um den Text lesbar zu halten, wird hier oft nur von "Parser" gesprochen -
     gemeint ist aber die gesamte auf diesem Blatt zu erstellende Toolchain: Lexer -
     Parser - AST - Ausgabe.
--->
