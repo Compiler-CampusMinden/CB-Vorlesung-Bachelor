@@ -258,7 +258,26 @@ einer Liste bzw. die restliche Liste ohne das erste Element zurückliefern:
 
 # Aufgaben
 
-## A4.1: Grammatik (2P)
+## A4.1: Kontextfreie Grammatik (1P)
+
+Betrachten sie die folgende Grammatik:
+
+$$G = (\lbrace S, A \rbrace, \lbrace 1, 2, 3 \rbrace, P, S)$$
+
+mit
+
+$$\begin{eqnarray}
+P = \lbrace &&                        \nonumber \\
+&S& \rightarrow 1AS \; | \; 3         \nonumber \\
+&A& \rightarrow 2AS \; | \; \epsilon  \nonumber \\
+\rbrace                               \nonumber
+\end{eqnarray}$$
+
+Berechnen die die *First-* und *Follow-Mengen* der Grammatik.
+
+Zeigen Sie, dass die Grammatik LL(1) ist.
+
+## A4.2: Grammatik (2P)
 
 1.  Erstellen Sie zunächst einige Programme in der Zielsprache. Diese sollten von
     einfachsten Ausdrücken bis hin zu komplexeren Programmen reichen. Definieren Sie
@@ -270,7 +289,7 @@ einer Liste bzw. die restliche Liste ohne das erste Element zurückliefern:
 
 2.  Definieren Sie nun für die obige Sprache eine geeignete Grammatik.
 
-## A4.2: Lexer (2P)
+## A4.3: Lexer (2P)
 
 1.  Definieren Sie in Java Strukturen, die Sie für die Repräsentation der Token
     entsprechend Ihrer Grammatik benötigen.
@@ -292,7 +311,7 @@ Abweichung vom erwarteten Zeichen zum tatsächlich eingelesenen Zeichen ausgeben
 Darüber hinaus braucht der Lexer keinen Recovery-Modus haben o.ä., d.h. nach der
 Fehlermeldung darf Ihr Lexer "aussteigen".
 
-## A4.3: Parser mit *recursive descent* (3P)
+## A4.4: Parser mit *recursive descent* (3P)
 
 Implementieren Sie analog zum Vorgehen in der Vorlesung einen Parser mit *recursive
 descent*, der den entsprechenden Teil Ihrer Grammatik abbildet. Diesen Parser sollen
@@ -307,7 +326,7 @@ Abweichung vom erwarteten Token zum tatsächlich eingelesenen Token ausgeben. Da
 hinaus braucht der Parser keinen Recovery-Modus haben o.ä., d.h. nach der
 Fehlermeldung darf Ihr Parser "aussteigen".
 
-## A4.4: AST (2P)
+## A4.5: AST (1P)
 
 Definieren Sie einen AST für die Zielsprache. Welche Informationen aus dem
 Eingabeprogramm müssen repräsentiert werden?
@@ -317,7 +336,7 @@ Programmieren Sie die entsprechenden Datenstrukturen in Java.
 Programmieren Sie außerdem eine Traversierung des Parse-Trees, die den AST erzeugt.
 Testen Sie dies mit Ihren in der ersten Aufgabe entwickelten Beispielprogrammen.
 
-## A4.5: Recherche und Diskussion (1P)
+## A4.6: Recherche und Diskussion (1P)
 
 Recherchieren Sie, welche Open-Source-Projekte auf handgeschriebene *recursive
 descent* Parser setzen (oder umgestiegen sind) und welche Gründe es dafür in diesen
