@@ -5,16 +5,11 @@ points: 10 Punkte
 title: "Blatt 07: C++"
 ---
 
-::: center
-**Wir arbeiten gerade an dieser Seite ...**
-:::
-
-<!--
 # Zusammenfassung
 
 Ziel dieses Aufgabenblattes ist die praktische Anwendung Ihrer C++-Kenntnisse,
 insbesondere werden Sie Pointer, Referenzen und Klassen anwenden und vertiefen. Als
-Anwendungsbeispiel werden Sie bestimmte in der C++-Welt wohlbekannte Smartpointer
+Anwendungsbeispiel werden Sie bestimmte in der C++-Welt wohlbekannte Smart-Pointer
 modellieren sowie einen einfachen Ringpuffer programmieren. Sie lernen mit dem
 *Reference Counting* nebenbei eine verbreitete Technik der *Garbage Collection*
 kennen.
@@ -131,23 +126,23 @@ ist. Ein Aspekt dabei ist, dass man häufig die Freigabe der Objekte vergisst od
 dass die Programmpfade so unübersichtlich sind, dass man nicht genau weiss, ob und
 wann man Objekte freigeben soll (denken Sie an Exceptions).
 
-## Smartpointer als Lösung
+## Smart-Pointer als Lösung
 
 Während man in Sprachen wie Java die Speicherverwaltung komplett dem Compiler
 überlässt oder wie in Rust mit strikten Ownership-Modellen arbeitet, hat man in C++
 die sogenannten
-[Smartpointer](https://en.cppreference.com/book/intro/smart_pointers) erdacht. Diese
-ersetzen den direkten Umgang mit den einfachen Pointern (auch als *raw pointer*
-bezeichnet) und lösen das Problem der Freigabe der verwalteten Ressourcen.[^2] Es
-gibt verschiedene Modelle, insbesondere gibt es die Variante *unique pointer*, bei
-der immer nur genau ein Smartpointer gleichzeitig eine bestimmte Ressource besitzen
-darf, und die *shared pointer*, bei der mehrere Smartpointer gleichzeitig die selbe
-Ressource verwalten können. Sobald die Lebensdauer des *unique pointer* oder des
-letzten *shared pointer* endet, wird die verwaltete Ressource automatisch vom
-Smartpointer freigegeben.
+[Smart-Pointer](https://en.cppreference.com/book/intro/smart_pointers) erdacht.
+Diese ersetzen den direkten Umgang mit den einfachen Pointern (auch als *raw
+pointer* bezeichnet) und lösen das Problem der Freigabe der verwalteten
+Ressourcen.[^2] Es gibt verschiedene Modelle, insbesondere gibt es die Variante
+*unique pointer*, bei der immer nur genau ein Smart-Pointer gleichzeitig eine
+bestimmte Ressource besitzen darf, und die *shared pointer*, bei der mehrere
+Smart-Pointer gleichzeitig die selbe Ressource verwalten können. Sobald die
+Lebensdauer des *unique pointer* oder des letzten *shared pointer* endet, wird die
+verwaltete Ressource automatisch vom Smart-Pointer freigegeben.
 
 Das folgende Beispiel arbeitet mit einer selbst implementierten Variante der *shared
-pointers*. Dabei ist die Klasse `SmartToken` ein Smartpointer für Objekte vom Typ
+pointers*. Dabei ist die Klasse `SmartToken` ein Smart-Pointer für Objekte vom Typ
 `Token`:
 
 ``` cpp
@@ -174,63 +169,64 @@ void fluppie() {
 ```
 
 Im Beispiel wird mit `new Token("wuppie", 1, 4)` ein neues Token-Objekt auf dem Heap
-angelegt. Der Smartpointer `wuppie` übernimmt die Ressource im Konstruktor und
+angelegt. Der Smart-Pointer `wuppie` übernimmt die Ressource im Konstruktor und
 verwaltet den Pointer. Wichtig ist zu beobachten: Das Token wird auf dem Heap
-angelegt, während der Smartpointer `wuppie` eine normale lokale ("automatische")
+angelegt, während der Smart-Pointer `wuppie` eine normale lokale ("automatische")
 Variable ist und auf dem Stack liegt.
 
-In der Kontrollstruktur werden weitere Smartpointer angelegt. Die ersten beiden
+In der Kontrollstruktur werden weitere Smart-Pointer angelegt. Die ersten beiden
 (`fluppie`, `fluppie2`) teilen sich die Ressource (den Pointer auf das Token) mit
-`wuppie`. Es wird kein neues Token angelegt oder kopiert. Der dritte Smartpointer
+`wuppie`. Es wird kein neues Token angelegt oder kopiert. Der dritte Smart-Pointer
 `foo` verwaltet ein weiteres Token.
 
 Mit der Kontrollstruktur endet auch die Lebensdauer der lokalen Variablen `fluppie`,
 `fluppie2` und `foo`, sie werden automatisch vom Stack entfernt. Da `foo` der letzte
-Smartpointer ist, der das Token "foo" verwaltet, wird hier die Ressource
-freigegeben. Bei `fluppie` und `fluppie2` werden nur die Smartpointer auf dem Stack
+Smart-Pointer ist, der das Token "foo" verwaltet, wird hier die Ressource
+freigegeben. Bei `fluppie` und `fluppie2` werden nur die Smart-Pointer auf dem Stack
 entfernt, die verwaltete Ressource (Token "wuppie") bleibt erhalten, da die noch von
-einem anderen Smartpointer verwaltet wird.
+einem anderen Smart-Pointer verwaltet wird.
 
-Mit dem Ende der Funktion endet auch die Lebensdauer des Smartpointers `wuppie`. Er
-wird automatisch vom Stack entfernt, und da er im Beispiel der letzte Smartpointer
+Mit dem Ende der Funktion endet auch die Lebensdauer des Smart-Pointers `wuppie`. Er
+wird automatisch vom Stack entfernt, und da er im Beispiel der letzte Smart-Pointer
 ist, der das Token "wuppie" verwaltet, wird dabei automatisch der Pointer zu
 "wuppie" wieder freigegeben.
 
-Ein Smartpointer soll entsprechend folgende Eigenschaften haben:
+Ein Smart-Pointer soll entsprechend folgende Eigenschaften haben:
 
 -   Verwendung soll analog zu normalen Pointern sein (Operatoren `*` und `->`
     überladen)
--   Smartpointer haben niemals einen undefinierten Wert: entweder sie zeigen auf ein
-    Objekt oder auf `nullptr`[^3]
--   Kopieren von (*shared*) Smartpointern führt dazu, dass sich mehrere Smartpointer
-    das verwiesene Objekt *teilen*
--   Smartpointer löschen sich selbst (und das verwiesene Objekt, falls kein anderer
-    Smartpointer mehr darauf zeigt), wenn die Smartpointer ungültig werden (bei
+-   Smart-Pointer haben niemals einen undefinierten Wert: entweder sie zeigen auf
+    ein Objekt oder auf `nullptr`[^3]
+-   Kopieren von (*shared*) Smart-Pointern führt dazu, dass sich mehrere
+    Smart-Pointer das verwiesene Objekt *teilen*
+-   Smart-Pointer löschen sich selbst (und das verwiesene Objekt, falls kein anderer
+    Smart-Pointer mehr darauf zeigt), wenn die Smart-Pointer ungültig werden (bei
     Verlassen des Scopes bzw. bei explizitem Aufruf von `delete` auf einen Pointer
-    auf einen Smartpointer)
--   Es gibt keine verwitweten Objekte mehr: Wenn mehrere Smartpointer auf das selbe
-    Objekt zeigen, darf erst der letzte Smartpointer das Objekt aus dem Heap löschen
--   Smartpointer funktionieren nur für mit `new` erzeugte Objekte
+    auf einen Smart-Pointer)
+-   Es gibt keine verwitweten Objekte mehr: Wenn mehrere Smart-Pointer auf das selbe
+    Objekt zeigen, darf erst der letzte Smart-Pointer das Objekt aus dem Heap
+    löschen
+-   Smart-Pointer funktionieren nur für mit `new` erzeugte Objekte
 
 Weitere übliche Eigenschaften, die wir auf diesem Blatt aber vereinfachend
 ignorieren[^4]:
 
--   Smartpointer sollen für beliebige Klassen nutzbar sein (Template-Klasse)
--   Dereferenzierung von nicht existierenden Objekten (d.h. der Smartpointer zeigt
+-   Smart-Pointer sollen für beliebige Klassen nutzbar sein (Template-Klasse)
+-   Dereferenzierung von nicht existierenden Objekten (d.h. der Smart-Pointer zeigt
     intern auf `nullptr`) führt nicht zum Programmabsturz, sondern zu einer
     Exception
 
 ## Reference Counting
 
-Smartpointer werden erzeugt, indem sie entweder einen Pointer auf die zu verwaltende
-Ressource bekommen (Konstruktor) oder eine Referenz auf ein anderes
-Smartpointer-Objekt (Copy-Konstruktor).
+Smart-Pointer werden erzeugt, indem sie entweder einen Pointer auf die zu
+verwaltende Ressource bekommen (Konstruktor) oder eine Referenz auf ein anderes
+Smart-Pointer-Objekt (Copy-Konstruktor).
 
-Im Smartpointer wird entsprechend der Pointer auf die zu verwaltende Ressource
+Im Smart-Pointer wird entsprechend der Pointer auf die zu verwaltende Ressource
 gespeichert.
 
-Für die Bestimmung, wie viele Smartpointer sich eine Ressource teilen, muss ein
-Zähler implementiert werden. Sobald sich ein weiterer Smartpointer die selbe
+Für die Bestimmung, wie viele Smart-Pointer sich eine Ressource teilen, muss ein
+Zähler implementiert werden. Sobald sich ein weiterer Smart-Pointer die selbe
 Ressource teilt, muss dort auch der Zähler (per Pointer!) übernommen werden und
 entsprechend inkrementiert werden. Im Destruktor muss der Zähler dekrementiert
 werden. Falls dabei der Zähler den Wert 0 erreicht, werden die Pointer auf die
@@ -317,13 +313,13 @@ private:
 };
 ```
 
-## Dereferenzierung von Smartpointern
+## Dereferenzierung von Smart-Pointern
 
 (*Anmerkung*: Dies ist ein Vorgriff auf die Lektion "Operatoren". Betrachten und
 implementieren Sie die vorgegebenen Operatoren einfach wie normale Methoden.)
 
 Pointer lassen sich dereferenzieren, d.h. man greift direkt auf das verwiesene
-Objekt zu. Dies lässt sich auch für Smartpointer erreichen, indem die beiden
+Objekt zu. Dies lässt sich auch für Smart-Pointer erreichen, indem die beiden
 Dereferenzierungsoperatoren überladen werden.
 
 ``` cpp
@@ -346,7 +342,7 @@ public:
 ```
 
 Damit lässt sich das folgende Verhalten realisieren (Vergleich *raw* Pointer
-vs. Smartpointer):
+vs. Smart-Pointer):
 
 ``` cpp
 Token* foo = new Token("foo", 9, 35);                       // raw pointer foo
@@ -423,9 +419,9 @@ hier können Sie bei Bedarf zusätzliche Attribute und Methoden hinzufügen.
 
 Testen Sie Ihre `RefCounter`-Klasse an selbst gewählten Beispielen.
 
-## A7.4: Smartpointer (3P)
+## A7.4: Smart-Pointer (3P)
 
-Implementieren Sie nun die Smartpointer für `Token`-Objekte mit folgender Signatur
+Implementieren Sie nun die Smart-Pointer für `Token`-Objekte mit folgender Signatur
 (wie oben, leicht erweitert):
 
 ``` cpp
@@ -518,10 +514,10 @@ Attribut `head` merkt man sich stattdessen, wo das nächste zu lesende Element l
 gewordenen Platz im internen Array `elems` eingefügt.
 
 Unser Ringpuffer ist auf Elemente vom Typ `SmartToken` festgelegt. Es wird davon
-ausgegangen, dass diese Elemente Smartpointer mit der *shared pointer*-Semantik
+ausgegangen, dass diese Elemente Smart-Pointer mit der *shared pointer*-Semantik
 sind.[^5] Da die `SmartToken` selbst (zum Teil) eine Pointersemantik implementiert
-haben (man kann die Smartpointer dereferenzieren), vermeiden wir Pointer auf die
-Smartpointer in der Schnittstelle und arbeiten stattdessen mit C++-Referenzen bzw.
+haben (man kann die Smart-Pointer dereferenzieren), vermeiden wir Pointer auf die
+Smart-Pointer in der Schnittstelle und arbeiten stattdessen mit C++-Referenzen bzw.
 Kopien: Bei `writeBuffer()` wird ein `SmartToken` per konstanter C++-Referenz
 übergeben, und bei `readBuffer()` wird eine Kopie des gelesenen `SmartToken`
 zurückgeliefert.
@@ -590,8 +586,8 @@ Bei Bedarf können Sie zusätzliche Attribute und Methoden hinzufügen.
 
 Testen Sie Ihre `RingBuffer`-Klasse an selbst gewählten Beispielen. Überzeugen Sie
 sich insbesondere vom korrekten Zugriff auf die Ringstruktur und prüfen Sie, ob die
-Smartpointer wie gewünscht arbeiten. Prüfen Sie hierzu auch die `RefCounter` der
-beteiligten Smartpointer. Welche Sonderfälle können Sie identifizieren?
+Smart-Pointer wie gewünscht arbeiten. Prüfen Sie hierzu auch die `RefCounter` der
+beteiligten Smart-Pointer. Welche Sonderfälle können Sie identifizieren?
 
 [^1]: Anmerkung: Man spricht trotzdem von "Freigabe" des Objekts, obwohl lediglich
     der Stackpointer zurückgesetzt wird und das Objekt zunächst auf dem Stack noch
@@ -611,4 +607,3 @@ beteiligten Smartpointer. Welche Sonderfälle können Sie identifizieren?
 
 [^5]: Wenn Sie die obigen Aufgaben richtig gelöst haben, haben Sie genau diese
     Semantik vorliegen.
--->
