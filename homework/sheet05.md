@@ -350,7 +350,8 @@ f95(n);
 ## A5.1: Grammatik und AST (2P)
 
 Erstellen Sie eine ANTLR-Grammatik für die Zielsprache. Sie können dabei die
-[Grammatik](https://github.com/Compiler-CampusMinden/student-support-code-template/blob/master/src/main/antlr/MiniC.g4)
+Grammatik
+[MiniC.g4](https://github.com/Compiler-CampusMinden/student-support-code-template/blob/master/src/main/antlr/MiniC.g4)
 im [Sample
 Project](https://github.com/Compiler-CampusMinden/student-support-code-template) als
 Ausgangspunkt nutzen und diese anpassen und vervollständigen.
