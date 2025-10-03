@@ -16,7 +16,7 @@ Kontrollstrukturen und Funktionen.
 Sie finden im [Sample
 Project](https://github.com/Compiler-CampusMinden/student-support-code-template) die
 Grammatik
-[MiniC.g4)](https://github.com/Compiler-CampusMinden/student-support-code-template/blob/master/src/main/antlr/MiniC.g4),
+[MiniC.g4](https://github.com/Compiler-CampusMinden/student-support-code-template/blob/master/src/main/antlr/MiniC.g4),
 die (teilweise) zu der Zielsprache auf diesem Blatt passt. Analysieren Sie diese
 Grammatik und vervollständigen Sie diese bzw. passen Sie diese an.
 
