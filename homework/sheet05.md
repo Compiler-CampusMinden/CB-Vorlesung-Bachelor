@@ -5,35 +5,31 @@ points: 10 Punkte
 title: "Blatt 05: Semantische Analyse"
 ---
 
-::: center
-**Wir arbeiten gerade an dieser Seite ...**
-:::
-
-<!--
 # Zusammenfassung
 
-Ziel dieses Aufgabenblattes ist die Erstellung einer Symboltabelle und eines
-einfachen Type-Checkers für eine fiktive statisch typisierte Sprache mit
-Expressions, Kontrollstrukturen und Funktionen.
+Ziel dieses Aufgabenblattes ist die Erstellung einer Symboltabelle und einer
+einfachen Typ-Prüfung für eine fiktive statisch typisierte Sprache mit Expressions,
+Kontrollstrukturen und Funktionen.
 
 # Methodik
 
 Sie finden im [Sample
-Project](https://github.com/Compiler-CampusMinden/student-support-code-template)
-eine
-[Grammatik](https://github.com/Compiler-CampusMinden/student-support-code-template/blob/master/src/main/antlr/MiniC.g4),
+Project](https://github.com/Compiler-CampusMinden/student-support-code-template) die
+Grammatik
+[MiniC.g4](https://github.com/Compiler-CampusMinden/student-support-code-template/blob/master/src/main/antlr/MiniC.g4),
 die (teilweise) zu der Zielsprache auf diesem Blatt passt. Analysieren Sie diese
 Grammatik und vervollständigen Sie diese bzw. passen Sie diese an.
 
 Erstellen Sie mit dieser Grammatik und ANTLR wieder einen Lexer und Parser.
 Definieren Sie einen AST und konvertieren Sie Ihren Parse-Tree in einen AST.
 
-Es ist empfehlenswert, den Type-Checker dreiphasig zu realisieren:
+Es ist empfehlenswert, die semantische Analyse mindestens zweiphasig zu realisieren:
 
 1.  Aufbauen der Symboltabelle und Prüfen von z.B. Deklaration/Definition
-    vs. Benutzung (Variablen) usw.
-2.  Prüfen bei Funktionsaufrufen auf vorhandene/sichtbare Funktionsdefinitionen
-3.  Prüfen der verwendeten Typen
+    (Variablen, Funktionen).
+2.  Prüfen von Aufrufen und Referenzierungen:
+    -   bei Funktionsaufrufen auf vorhandene/sichtbare Funktionsdefinitionen
+    -   bei Variablen auf vorherige Deklaration/Definition im Sichtbarkeitsbereich
 
 # Sprachdefinition
 
@@ -354,10 +350,11 @@ f95(n);
 ## A5.1: Grammatik und AST (2P)
 
 Erstellen Sie eine ANTLR-Grammatik für die Zielsprache. Sie können dabei die
-[Grammatik](https://github.com/Compiler-CampusMinden/student-support-code-template/blob/master/src/main/antlr/MiniC.g4)
+Grammatik
+[MiniC.g4](https://github.com/Compiler-CampusMinden/student-support-code-template/blob/master/src/main/antlr/MiniC.g4)
 im [Sample
-Project](https://github.com/Compiler-CampusMinden/student-support-code-template)
-als Ausgangspunkt nutzen und diese anpassen und vervollständigen.
+Project](https://github.com/Compiler-CampusMinden/student-support-code-template) als
+Ausgangspunkt nutzen und diese anpassen und vervollständigen.
 
 Definieren Sie einen AST für die Zielsprache. Welche Informationen aus dem
 Eingabeprogramm müssen repräsentiert werden?
@@ -366,25 +363,20 @@ Programmieren Sie eine Traversierung des Parse-Trees, die den AST erzeugt. Teste
 Sie dies mit den obigen Beispielprogrammen und definieren Sie sich selbst weitere
 Programme unterschiedlicher Komplexität für diesen Zweck.
 
-## A5.2: Aufbau der Symboltabelle (2P)
+## A5.2: Aufbau der Symboltabelle (5P)
 
-Bauen Sie für den AST eine Symboltabelle auf. Führen Sie dabei die im ersten Lauf
-möglichen Prüfungen durch, beispielsweise ob referenzierte Variablen tatsächlich
-bereits definiert und sichtbar sind oder ob eine Variable oder Funktion in einem
-Scope mehrfach definiert wird oder ob Variablen als Funktion genutzt werden. Geben
-Sie erkannte Fehler auf der Konsole aus.
+Bauen Sie für den AST eine Symboltabelle auf. Achten Sie darauf, dass Sie eine
+Querverbindung zwischen den Symboltabelleneinträgen und den AST-Knoten benötigen.
 
-## A5.3: Symboltabelle: Funktionsaufrufe (1P)
+Führen Sie die im ersten Lauf möglichen Prüfungen durch, beispielsweise ob eine
+Variable oder Funktion in einem Scope mehrfach definiert wird oder ob Variablen als
+Funktion genutzt werden. Geben Sie erkannte Fehler auf der Konsole aus.
 
-Implementieren Sie einen zweiten Lauf. Dabei soll für Funktionsaufrufe geprüft
-werden, ob diese Funktionen bereits definiert sind und im Scope sichtbar sind. Geben
-Sie erkannte Fehler auf der Konsole aus.
+## A5.3: Symboltabelle: Referenzierungen und Funktionsaufrufe (3P)
 
-## A5.4: Symboltabelle: Typprüfungen (5P)
+Implementieren Sie einen zweiten Lauf.
 
-Implementieren Sie einen dritten Lauf. Führen Sie die Typprüfung durch: Haben die
-Operanden in Ausdrücken die richtigen Typen, passen die Typen der
-Funktionsargumente, passen die Typen bei einer Zuweisung, ... Geben Sie erkannte
-Fehler auf der Konsole aus. *Hinweis*: Sie brauchen hier nur die Typprüfung
-durchführen. Eine Typinferenz oder Typerweiterung o.ä. ist nicht notwendig.
--->
+Dabei soll für referenzierte Variablen geprüft werden, ob sie tatsächlich bereits
+definiert und sichtbar sind. Für Funktionsaufrufe soll geprüft werden, ob diese
+Funktionen bereits definiert sind und im Scope sichtbar sind. Geben Sie erkannte
+Fehler auf der Konsole aus.
