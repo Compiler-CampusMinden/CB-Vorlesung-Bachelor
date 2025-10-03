@@ -294,7 +294,7 @@ wirklich benötigen - das ist Ihr Abstract-Syntex-Tree (*AST*).
 
 Programmieren Sie eine Transformation des Parse-Tree in die von Ihnen hier
 formulierten AST-Strukturen. Dies können Sie beispielsweise mit einer passenden
-Traversierung (Visitor-Pattern) erreichen.
+Traversierung (Visitor-Pattern oder über Pattern-Matching in Java 25) erreichen.
 
 Passen Sie den Pretty-Printer so an, dass er auch den AST ausgeben kann. (Alternativ
 können auch einen zweiten Pretty-Printer für den AST implementieren.)
