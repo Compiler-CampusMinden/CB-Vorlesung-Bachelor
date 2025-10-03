@@ -9,21 +9,26 @@ title: "Blatt 08: Mini-Projekt C++"
 Entwickeln Sie in Ihrem 3er-Team gemeinsam einen Interpreter *oder* einen Compiler
 für C++.
 
-Nutzen Sie als Implementierungssprache Java.[^1] Sie sollen ANTLR zur Erstellung
-Ihres Lexers und Parsers einsetzen (Lernziel).
+Nutzen Sie als Implementierungssprache Java.[^1] Sie können ANTLR zur Erstellung
+Ihres Lexers und Parsers einsetzen, Sie können aber auch gern einen selbst
+implementierten LL-Parser mit *recursive descent* einsetzen.
 
-Entwickeln Sie verschiedene Eingabebeispiele in unterschiedlicher Komplexität, mit
-denen Sie Ihren Interpreter bzw. Compiler testen können.
+Entwickeln Sie in Ergänzung zu den Vorgaben weitere verschiedene Eingabebeispiele in
+unterschiedlicher Komplexität, mit denen Sie Ihren Interpreter bzw. Compiler testen
+können.
 
 ## Variante A: Interpreter
 
-Der Interpreter muss den zu interpretierenden C++-Code aus einer Datei einlesen
-können.
+Der Interpreter muss den zu interpretierenden C++-Code zumindest beim Start aus
+einer Datei einlesen können.
 
-Sie brauchen keine interaktive Interpretation implementieren, d.h. eine REPL ist
-nicht notwendig. Der Interpreter muss bei Bedarf an relevanten Stellen einen
-Log-Output erzeugen, um die Arbeitsweise des Programms nachvollziehen zu können. Das
-Arbeitsergebnis soll auf der Konsole ausgegeben werden.
+Danach soll dem User eine REPL angeboten werden, die einen Prompt in der Konsole
+ausgibt und in der weitere C++-Statements eingegeben werden können, die dann im
+Kontext des bisher verarbeiteten Codes interpretiert werden. Nach der Interpretation
+soll es eine Ausgabe des letzten Ergebnisses (oder Fehlers) auf der Konsole geben,
+und dann soll ein neuer Prompt ausgegeben und auf die nächste User-Eingabe gewartet
+werden. Implementieren Sie eine spezielle Eingabe, mit der die REPL beendet werden
+kann.
 
 ## Variante B: Compiler
 
@@ -110,8 +115,8 @@ Compilers elektronisch über ILIAS ein.
 
 Gesamtbewertung: 50 Punkte
 
-[^1]: Nach **Absprache** können Sie auch eine andere Implementierungssprache
-    verwenden.
+[^1]: Nach vorheriger **Absprache** können Sie auch eine andere
+    Implementierungssprache verwenden.
 
 [^2]: Leider werden Initialisierungslisten für den Aufruf der
     Basisklassenkonstruktoren benötigt, sofern der Defaultkonstruktor der
