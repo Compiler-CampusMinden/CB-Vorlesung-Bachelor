@@ -5,11 +5,6 @@ points: 10 Punkte
 title: "Blatt 07: C++"
 ---
 
-::: center
-**Wir arbeiten gerade an dieser Seite ...**
-:::
-
-<!--
 # Zusammenfassung
 
 Ziel dieses Aufgabenblattes ist die praktische Anwendung Ihrer C++-Kenntnisse,
@@ -611,4 +606,3 @@ beteiligten Smartpointer. Welche Sonderfälle können Sie identifizieren?
 
 [^5]: Wenn Sie die obigen Aufgaben richtig gelöst haben, haben Sie genau diese
     Semantik vorliegen.
--->
