@@ -16,10 +16,10 @@ descent* für eine Lisp-artige Sprache.
 Sie finden nachfolgend eine Beschreibung der Zielsprache für dieses Blatt.
 
 Erstellen Sie zunächst eine Grammatik für diese Sprache. Implementieren Sie dann
-basierend auf dieser Grammatik einen Lexer und einen *recursive descent* Parser.
-Überlegen Sie sich, welche Strukturen ein AST für diese Sprache haben sollte und
-implementieren Sie diese Strukturen in Java und schreiben Sie eine Transformation
-des Parse-Trees in diesen AST.
+basierend auf dieser Grammatik einen Lexer und einen *recursive descent* Parser
+(manuelle Implementierung, kein ANTLR). Überlegen Sie sich, welche Strukturen ein
+AST für diese Sprache haben sollte und implementieren Sie diese Strukturen in Java
+und schreiben Sie eine Transformation des Parse-Trees in diesen AST.
 
 Es ist empfehlenswert, die Implementierung in Java mehrstufig zu realisieren:
 
