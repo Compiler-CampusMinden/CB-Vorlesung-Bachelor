@@ -4,11 +4,6 @@ no_beamer: true
 title: "Blatt 08: Mini-Projekt C++"
 ---
 
-::: center
-**Wir arbeiten gerade an dieser Seite ...**
-:::
-
-<!--
 # Aufgabe
 
 Entwickeln Sie in Ihrem 3er-Team gemeinsam einen Interpreter *oder* einen Compiler
@@ -121,4 +116,3 @@ Gesamtbewertung: 50 Punkte
 [^2]: Leider werden Initialisierungslisten für den Aufruf der
     Basisklassenkonstruktoren benötigt, sofern der Defaultkonstruktor der
     Basisklasse nicht ausreicht.
--->
