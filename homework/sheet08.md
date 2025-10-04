@@ -33,6 +33,11 @@ gewartet werden.
 
 Implementieren Sie eine spezielle Eingabe, mit der die REPL beendet werden kann.
 
+*Hinweis*: Das Konzept einer speziellen Funktion ("`main()`") als Einstieg in die
+Ausführung des interpretierten C++-Programms funktioniert im Zusammenhang mit der
+REPL nicht wirklich. Interpretieren Sie die eingegebenen Statements entsprechend
+fortlaufend.
+
 ## Tests
 
 Entwickeln Sie in Ergänzung zu den Vorgaben im
