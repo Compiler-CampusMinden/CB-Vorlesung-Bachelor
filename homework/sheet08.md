@@ -53,7 +53,7 @@ bei Klassen (Trennung .h und .cpp) oder Initialisierungslisten[^2] brauchen Sie
 nicht umsetzen.
 
 Sie finden im
-[CB-Repo](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/tree/master/homework/src/cpp)
+[Starter-Projekt](https://github.com/Compiler-CampusMinden/student-support-code-template/tree/master/src/main/resources/cpp)
 einige Beispiele, die mindestens umgesetzt werden sollten und die Sie zum Testen
 Ihres Interpreters nutzen können. Beachten Sie, dass diese Sammlung
 nicht vollständig ist.
