@@ -96,5 +96,5 @@ Geben Sie wie bei den anderen Blättern auch pro Person ein individuelles Post M
 im ILIAS ab. Geben Sie dabei im Post Mortem unbedingt die URL zu Ihrem Team-Repo an.
 Denken Sie daran, dass dieses Repo öffentlich einsehbar sein muss.
 
-[^1]: Nach vorheriger **Absprache** können Sie auch eine andere
+[^1]: Nach **vorheriger Absprache** können Sie auch eine andere
     Implementierungssprache verwenden.
