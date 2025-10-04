@@ -6,18 +6,11 @@ title: "Blatt 08: Mini-Projekt C++"
 
 # Aufgabe
 
-Entwickeln Sie in Ihrem 3er-Team gemeinsam einen Interpreter *oder* einen Compiler
-für C++.
+Entwickeln Sie in Ihrem 3er-Team gemeinsam einen Interpreter für C++.
 
 Nutzen Sie als Implementierungssprache Java.[^1] Sie können ANTLR zur Erstellung
 Ihres Lexers und Parsers einsetzen, Sie können aber auch gern einen selbst
 implementierten LL-Parser mit *recursive descent* einsetzen.
-
-Entwickeln Sie in Ergänzung zu den Vorgaben weitere verschiedene Eingabebeispiele in
-unterschiedlicher Komplexität, mit denen Sie Ihren Interpreter bzw. Compiler testen
-können.
-
-## Variante A: Interpreter
 
 Der Interpreter muss den zu interpretierenden C++-Code zumindest beim Start aus
 einer Datei einlesen können.
@@ -30,14 +23,9 @@ und dann soll ein neuer Prompt ausgegeben und auf die nächste User-Eingabe gewa
 werden. Implementieren Sie eine spezielle Eingabe, mit der die REPL beendet werden
 kann.
 
-## Variante B: Compiler
-
-Der Compiler muss den zu kompilierenden C++-Code aus einer Datei einlesen können.
-
-Der Compiler soll aus dem eingegebenen C++-Code passenden gültigen Java-Code
-erzeugen und in eine Datei speichern. Definieren Sie ggf. nötige Hilfsbibliotheken,
-so dass man den generierten Code zusammen mit den Hilfsbibliotheken mit Java
-übersetzen und ausführen kann.
+Entwickeln Sie in Ergänzung zu den Vorgaben weitere verschiedene Eingabebeispiele in
+unterschiedlicher Komplexität, mit denen Sie Ihren Interpreter testen
+können.
 
 ## Sprachumfang
 
@@ -67,7 +55,7 @@ nicht umsetzen.
 Sie finden im
 [CB-Repo](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/tree/master/homework/src/cpp)
 einige Beispiele, die mindestens umgesetzt werden sollten und die Sie zum Testen
-Ihres Interpreters bzw. Compilers nutzen können. Beachten Sie, dass diese Sammlung
+Ihres Interpreters nutzen können. Beachten Sie, dass diese Sammlung
 nicht vollständig ist.
 
 ## Projektvorstellung: Walk-Through statt Präsentation
@@ -83,7 +71,7 @@ mindestens aber:
 -   Grammatik
 -   AST
 -   Semantische Analyse
--   Interpreter bzw. Compiler
+-   Interpreter
 
 Demonstrieren Sie die Funktionsfähigkeit mit Ihren C++-Codebeispielen.
 
