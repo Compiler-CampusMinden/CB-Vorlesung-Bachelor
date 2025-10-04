@@ -82,25 +82,5 @@ erfolgen.**
 
 Geben Sie im Post Mortem die URL zu Ihrem Repo an. Denken Sie daran, dass das Repo öffentlich einsehbar sein muss.
 
-# Bewertungskriterien
-
-1.  **Inhalt (80 Punkte)**
-
-    -   **Aufgabenstellung (60 Punkte)**: Wurden alle Aspekte der Zielsprache
-        sinnvoll umgesetzt?
-    -   **Argumentation und Nachvollziehbarkeit (20 Punkte)**: Sind die Konzepte
-        logisch und schlüssig dargestellt? Werden die Aussagen durch relevante
-        Code-Stellen gestützt?
-
-2.  **Verschiedenes (20 Punkte)**
-
-    -   **Roter Faden (10 Punkte)**: Wird der rote Faden während des gesamten
-        Walk-Through beibehalten? Ist der Zusammenhang zwischen den einzelnen
-        Punkten nachvollziehbar?
-    -   **Zeitmanagement (10 Punkte)**: Wurde der Zeitrahmen (15 Minuten pro Vortrag)
-        eingehalten?
-
-Gesamtbewertung: 100 Punkte
-
 [^1]: Nach vorheriger **Absprache** können Sie auch eine andere
     Implementierungssprache verwenden.
