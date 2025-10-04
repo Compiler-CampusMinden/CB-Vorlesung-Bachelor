@@ -1,43 +1,56 @@
 ---
 author: Carsten Gips, BC George (HSBI)
 no_beamer: true
-title: "Blatt 08: Mini-Projekt C++"
+title: "Blatt 08: Mini-Projekt C++-Interpreter"
 ---
 
-::: center
-**Wir arbeiten gerade an dieser Seite ...**
-:::
-
-<!--
 # Aufgabe
 
-Entwickeln Sie in Ihrem 3er-Team gemeinsam einen Interpreter *oder* einen Compiler
-für C++.
+Entwickeln Sie in Ihrem 3er-Team gemeinsam einen Interpreter für C++.
 
-Nutzen Sie als Implementierungssprache Java.[^1] Sie sollen ANTLR zur Erstellung
-Ihres Lexers und Parsers einsetzen (Lernziel).
+Nutzen Sie als Implementierungssprache Java.[^1] Sie *können* ANTLR zur Erstellung
+Ihres Lexers und Parsers einsetzen, Sie können aber auch gern einen selbst
+implementierten LL-Parser mit *recursive descent* einsetzen.
 
-Entwickeln Sie verschiedene Eingabebeispiele in unterschiedlicher Komplexität, mit
-denen Sie Ihren Interpreter bzw. Compiler testen können.
+Definieren Sie zunächst eine passende Grammatik und den AST, bevor Sie Lexer und
+Parser umsetzen. Achten Sie auf eine angemessene semantische Analyse, achten Sie
+dabei auf die in der Vorlesung besprochene C++-Semantik. Der Interpreter selbst soll
+ein einfacher Tree-walking Interpreter wie in der Vorlesung besprochen sein.
 
-## Variante A: Interpreter
+## Initialisierung
 
-Der Interpreter muss den zu interpretierenden C++-Code aus einer Datei einlesen
-können.
+Der Interpreter soll beim Start eine optional angegebene Datei mit C++-Code einlesen
+und verarbeiten können.
 
-Sie brauchen keine interaktive Interpretation implementieren, d.h. eine REPL ist
-nicht notwendig. Der Interpreter muss bei Bedarf an relevanten Stellen einen
-Log-Output erzeugen, um die Arbeitsweise des Programms nachvollziehen zu können. Das
-Arbeitsergebnis soll auf der Konsole ausgegeben werden.
+## REPL
 
-## Variante B: Compiler
+Danach soll dem User eine REPL angeboten werden, die einen Prompt in der Konsole
+ausgibt und in der weitere C++-Statements eingegeben werden können, die dann im
+Kontext des bisher verarbeiteten Codes interpretiert werden. Nach der Interpretation
+soll es jeweils eine Ausgabe des letzten Ergebnisses (oder Fehlers) auf der Konsole
+geben, und dann soll ein neuer Prompt ausgegeben und auf die nächste User-Eingabe
+gewartet werden.
 
-Der Compiler muss den zu kompilierenden C++-Code aus einer Datei einlesen können.
+Implementieren Sie eine spezielle Eingabe, mit der die REPL beendet werden kann.
 
-Der Compiler soll aus dem eingegebenen C++-Code passenden gültigen Java-Code
-erzeugen und in eine Datei speichern. Definieren Sie ggf. nötige Hilfsbibliotheken,
-so dass man den generierten Code zusammen mit den Hilfsbibliotheken mit Java
-übersetzen und ausführen kann.
+*Hinweis*: Das Konzept einer speziellen Funktion ("`main()`") als Einstieg in die
+Ausführung des interpretierten C++-Programms funktioniert im Zusammenhang mit der
+REPL nicht wirklich. Interpretieren Sie die eingegebenen Statements entsprechend
+fortlaufend.
+
+*Hinweis*: Achten Sie darauf, dass Ihr Interpreter die Eingabe nicht zu früh beendet
+und zu früh mit der Interpretation beginnt! Oft ist ein Zeilenumbruch das korrekte
+Signal zum Start der Verarbeitung. Es gibt aber auch Situationen (z.B.
+Funktionsdefinition o.ä.), wo ein Zeilenumbruch noch nicht eine vollständige Eingabe
+anzeigt. Hier soll nach einem Zeilenumbruch ein Hilfsprompt ausgegeben werden, damit
+der User weiss, dass die aktuelle Eingabe noch läuft.
+
+## Tests
+
+Entwickeln Sie in Ergänzung zu den Vorgaben im
+[Starter-Projekt](https://github.com/Compiler-CampusMinden/student-support-code-template/tree/master/src/main/resources/cpp)
+weitere verschiedene Eingabebeispiele in unterschiedlicher Komplexität, mit denen
+Sie Ihren Interpreter testen können.
 
 ## Sprachumfang
 
@@ -50,7 +63,7 @@ Sie sollen mindestens folgende C++-Konzepte unterstützen:
 -   Zuweisungen und Expressions
 -   Kontrollfluss: `if`-`then`-`else`, `while`-Schleifen
 -   Funktionen (Definition, Deklaration, Aufrufe)
--   Klassen (mit Attributen und Methoden)
+-   Klassen (mit Attributen und Methoden), Initialisierungslisten
 -   Einfach-Vererbung
 -   Polymorphie (dynamisch, statisch)
 -   Eingebaute Funktionen: `print_bool`, `print_int`, `print_char` (Ausgabe eines
@@ -61,21 +74,20 @@ als in Java.
 
 Andere mit C++ verbundene Konzepte wie beispielsweise Präprozessor, Header-Files,
 Pointer, Templates, Sichtbarkeiten in Klassen, Trennung Deklaration/Implementierung
-bei Klassen (Trennung .h und .cpp) oder Initialisierungslisten[^2] brauchen Sie
-nicht umsetzen.
+bei Klassen (Trennung .h und .cpp) brauchen Sie nicht umsetzen.
 
 Sie finden im
-[CB-Repo](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/tree/master/homework/src/cpp)
+[Starter-Projekt](https://github.com/Compiler-CampusMinden/student-support-code-template/tree/master/src/main/resources/cpp)
 einige Beispiele, die mindestens umgesetzt werden sollten und die Sie zum Testen
-Ihres Interpreters bzw. Compilers nutzen können. Beachten Sie, dass diese Sammlung
-nicht vollständig ist.
+Ihres Interpreters nutzen können. Beachten Sie, dass diese Sammlung nicht
+vollständig ist, und dass Sie selbst weitere Testbeispiele definieren sollen.
 
-## Projektvorstellung: Walk-Through statt Präsentation
+# Projektvorstellung: Walk-Through statt Präsentation
 
 Stellen Sie Ihr Projekt am Semesterende vor (Termine siehe Fahrplan und
 Ankündigung).
 
-Jedes Team hat dafür 20 Minuten Zeit.
+Jedes Team hat dafür **15 Minuten** Zeit.
 
 Gehen Sie dabei am Code durch Ihr Projekt und diskutieren Sie relevante Teile,
 mindestens aber:
@@ -83,7 +95,7 @@ mindestens aber:
 -   Grammatik
 -   AST
 -   Semantische Analyse
--   Interpreter bzw. Compiler
+-   Interpreter
 
 Demonstrieren Sie die Funktionsfähigkeit mit Ihren C++-Codebeispielen.
 
@@ -92,33 +104,9 @@ erfolgen.**
 
 # Abgabeformat
 
-Reichen Sie den als ZIP-Datei zusammengepackten Quellcode des Interpreters bzw.
-Compilers elektronisch über ILIAS ein.
+Geben Sie wie bei den anderen Blättern auch pro Person ein individuelles Post Mortem
+im ILIAS ab. Geben Sie dabei im Post Mortem unbedingt die URL zu Ihrem Team-Repo an.
+Denken Sie daran, dass dieses Repo öffentlich einsehbar sein muss.
 
-# Bewertungskriterien
-
-1.  **Inhalt (40 Punkte)**
-
-    -   **Aufgabenstellung (30 Punkte)**: Wurden alle Aspekte der Zielsprache
-        sinnvoll umgesetzt?
-    -   **Argumentation und Nachvollziehbarkeit (10 Punkte)**: Sind die Konzepte
-        logisch und schlüssig dargestellt? Werden die Aussagen durch relevante
-        Code-Stellen gestützt?
-
-2.  **Verschiedenes (10 Punkte)**
-
-    -   **Roter Faden (5 Punkte)**: Wird der rote Faden während des gesamten
-        Walk-Through beibehalten? Ist der Zusammenhang zwischen den einzelnen
-        Punkten nachvollziehbar?
-    -   **Zeitmanagement (5 Punkte)**: Wurde der Zeitrahmen (20 Minuten pro Vortrag)
-        eingehalten?
-
-Gesamtbewertung: 50 Punkte
-
-[^1]: Nach **Absprache** können Sie auch eine andere Implementierungssprache
-    verwenden.
-
-[^2]: Leider werden Initialisierungslisten für den Aufruf der
-    Basisklassenkonstruktoren benötigt, sofern der Defaultkonstruktor der
-    Basisklasse nicht ausreicht.
--->
+[^1]: Nach **vorheriger Absprache** können Sie auch eine andere
+    Implementierungssprache verwenden.
