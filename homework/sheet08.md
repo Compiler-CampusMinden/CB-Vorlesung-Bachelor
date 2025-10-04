@@ -38,6 +38,13 @@ Ausführung des interpretierten C++-Programms funktioniert im Zusammenhang mit d
 REPL nicht wirklich. Interpretieren Sie die eingegebenen Statements entsprechend
 fortlaufend.
 
+*Hinweis*: Achten Sie darauf, dass Ihr Interpreter die Eingabe nicht zu früh beendet
+und zu früh mit der Interpretation beginnt! Oft ist ein Zeilenumbruch das korrekte
+Signal zum Start der Verarbeitung. Es gibt aber auch Situationen (z.B.
+Funktionsdefinition o.ä.), wo ein Zeilenumbruch noch nicht eine vollständige Eingabe
+anzeigt. Hier soll nach einem Zeilenumbruch ein Hilfsprompt ausgegeben werden, damit
+der User weiss, dass die aktuelle Eingabe noch läuft.
+
 ## Tests
 
 Entwickeln Sie in Ergänzung zu den Vorgaben im
