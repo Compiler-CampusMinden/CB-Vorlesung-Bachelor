@@ -1,7 +1,7 @@
 ---
 author: Carsten Gips, BC George (HSBI)
 no_beamer: true
-title: "Blatt 08: Mini-Projekt C++"
+title: "Blatt 08: Mini-Projekt C++-Interpreter"
 ---
 
 # Aufgabe
