@@ -38,7 +38,7 @@ Sie sollen mindestens folgende C++-Konzepte unterstützen:
 -   Zuweisungen und Expressions
 -   Kontrollfluss: `if`-`then`-`else`, `while`-Schleifen
 -   Funktionen (Definition, Deklaration, Aufrufe)
--   Klassen (mit Attributen und Methoden)
+-   Klassen (mit Attributen und Methoden), Initialisierungslisten
 -   Einfach-Vererbung
 -   Polymorphie (dynamisch, statisch)
 -   Eingebaute Funktionen: `print_bool`, `print_int`, `print_char` (Ausgabe eines
@@ -49,7 +49,7 @@ als in Java.
 
 Andere mit C++ verbundene Konzepte wie beispielsweise Präprozessor, Header-Files,
 Pointer, Templates, Sichtbarkeiten in Klassen, Trennung Deklaration/Implementierung
-bei Klassen (Trennung .h und .cpp) oder Initialisierungslisten[^2] brauchen Sie
+bei Klassen (Trennung .h und .cpp) brauchen Sie
 nicht umsetzen.
 
 Sie finden im
@@ -63,7 +63,7 @@ nicht vollständig ist.
 Stellen Sie Ihr Projekt am Semesterende vor (Termine siehe Fahrplan und
 Ankündigung).
 
-Jedes Team hat dafür 20 Minuten Zeit.
+Jedes Team hat dafür 15 Minuten Zeit.
 
 Gehen Sie dabei am Code durch Ihr Projekt und diskutieren Sie relevante Teile,
 mindestens aber:
@@ -80,32 +80,27 @@ erfolgen.**
 
 # Abgabeformat
 
-Reichen Sie den als ZIP-Datei zusammengepackten Quellcode des Interpreters bzw.
-Compilers elektronisch über ILIAS ein.
+Geben Sie im Post Mortem die URL zu Ihrem Repo an. Denken Sie daran, dass das Repo öffentlich einsehbar sein muss.
 
 # Bewertungskriterien
 
-1.  **Inhalt (40 Punkte)**
+1.  **Inhalt (80 Punkte)**
 
-    -   **Aufgabenstellung (30 Punkte)**: Wurden alle Aspekte der Zielsprache
+    -   **Aufgabenstellung (60 Punkte)**: Wurden alle Aspekte der Zielsprache
         sinnvoll umgesetzt?
-    -   **Argumentation und Nachvollziehbarkeit (10 Punkte)**: Sind die Konzepte
+    -   **Argumentation und Nachvollziehbarkeit (20 Punkte)**: Sind die Konzepte
         logisch und schlüssig dargestellt? Werden die Aussagen durch relevante
         Code-Stellen gestützt?
 
-2.  **Verschiedenes (10 Punkte)**
+2.  **Verschiedenes (20 Punkte)**
 
-    -   **Roter Faden (5 Punkte)**: Wird der rote Faden während des gesamten
+    -   **Roter Faden (10 Punkte)**: Wird der rote Faden während des gesamten
         Walk-Through beibehalten? Ist der Zusammenhang zwischen den einzelnen
         Punkten nachvollziehbar?
-    -   **Zeitmanagement (5 Punkte)**: Wurde der Zeitrahmen (20 Minuten pro Vortrag)
+    -   **Zeitmanagement (10 Punkte)**: Wurde der Zeitrahmen (15 Minuten pro Vortrag)
         eingehalten?
 
-Gesamtbewertung: 50 Punkte
+Gesamtbewertung: 100 Punkte
 
 [^1]: Nach vorheriger **Absprache** können Sie auch eine andere
     Implementierungssprache verwenden.
-
-[^2]: Leider werden Initialisierungslisten für den Aufruf der
-    Basisklassenkonstruktoren benötigt, sofern der Defaultkonstruktor der
-    Basisklasse nicht ausreicht.
