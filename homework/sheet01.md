@@ -47,7 +47,7 @@ Recherchieren Sie zunächst den Aufbau von Gleitkommazahlen in Python und Java.
 
 Erstellen Sie für jede der beiden Programmiersprachen reguläre Ausdrücke, DFAs und
 reguläre Grammatiken wie in Aufgabe A1.2. Verifizieren Sie Ihre Lösungen wie in Aufgabe
-A1.2.
+A1.2. Vorgaben, die sich auf Längen oder Werte von Teilen der Zahlen beziehen, ignorieren Sie bitte.
 
 # A1.4: Mailadressen? (1P)
 
@@ -76,6 +76,8 @@ Welche Sprache generiert die folgende Grammatik?
 $$\begin{eqnarray}
 S &\rightarrow& a A                      \nonumber \\
 A &\rightarrow& d B \ | \ b A \ | \ c A  \nonumber \\
-B &\rightarrow& a c \ | \ b C \ | \ c A  \nonumber \\
+B &\rightarrow& a C \ | \ b C \ | \ c A  \nonumber \\
 C &\rightarrow& \epsilon                 \nonumber
 \end{eqnarray}$$
+
+Können Sie einen regulären Ausdruck oder einen DFA dafür angeben?
