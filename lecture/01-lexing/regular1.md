@@ -11,18 +11,17 @@ title: Reguläre Sprachen, Ausdrucksstärke (Teil 1)
 
 # Motivation
 
-
 ## Was muss ein Compiler wohl als erstes tun?
 
 ::: notes
 Hier entsteht ein Tafelbild.
 :::
+
 ## Themen für heute
 
 -   Lexer
 -   Endliche Automaten
 -   Reguläre Sprachen
-
 
 # Endliche Automaten
 
@@ -40,13 +39,11 @@ $\vert w \vert$ eines Wortes $w$ ist die Anzahl von Buchstaben, die es enthält
 Wörtern über diesem Alphabet. Sprachen können endlich oder unendlich viele Wörter
 enthalten.
 
-
 ## State machine
 
 ::: notes
 Hier entsteht ein Tafelbild.
 :::
-
 
 ## Deterministische endliche Automaten
 
@@ -80,13 +77,11 @@ $A = (Q, \Sigma, \delta, q_0, F)$ mit
 
 -   $F \subseteq Q$ : die Menge der **Endzustände**
 
-
 ## Beispiel
 
 ::: notes
 Hier entsteht ein Tafelbild.
 :::
-
 
 ## Eingabewörter statt Buchstaben
 
@@ -263,7 +258,7 @@ den folgenden Einschränkungen:
 Hier entsteht ein Tafelbild.
 :::
 
-## Reguläre Sprachen 
+## Reguläre Sprachen
 
 **Satz:** Die von endlichen Automaten akzeptiert Sprachklasse, die von regulären
 Ausdrücken beschriebene Sprachklasse und die von regulären Grammatiken erzeugte
@@ -296,5 +291,3 @@ Sprachklasse sind identisch und heißen **reguläre Sprachen**.
 -   k3: Ich kann einen DFA entwickeln, der alle Schlüsselwörter, Namen und weitere
     Symbole einer Programmiersprache akzeptiert
 :::
-
-

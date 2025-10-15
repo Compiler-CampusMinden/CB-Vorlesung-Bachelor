@@ -18,8 +18,6 @@ title: Reguläre Sprachen, Ausdrucksstärke (Teil 2)
 -   Was sind formale und reguläre Grammatiken?
 -   In welchem Zusammenhang stehen all diese Begriffe?
 
-
-
 # Motivation
 
 ## Was haben reguläre Sprachen mit Compilern zu tun?
@@ -36,12 +34,12 @@ Hier entsteht ein Tafelbild.
 
 ## Wozu reguläre Sprachen im Compilerbau?
 
--   Reguläre Ausdrücke
+Reguläre Ausdrücke
 
-    -   definieren Schlüsselwörter und alle weiteren Symbole einer
-        Programmiersprache, z. B. den Aufbau von Gleitkommazahlen
-    -   werden (oft von einem Generator) in DFAs umgewandelt
-    -   sind die Basis des *Scanners* oder *Lexers*
+-   definieren Schlüsselwörter und alle weiteren Symbole einer
+    Programmiersprache, z. B. den Aufbau von Gleitkommazahlen
+-   werden (oft von einem Generator) in DFAs umgewandelt
+-   sind die Basis des *Scanners* oder *Lexers*
 
 # Lexer
 
@@ -52,16 +50,15 @@ Ein **Lexer**
 -   kann aus regulären Ausdrücken automatisch generiert werden
 
 -   wandelt mittels DFAs aus regulären Ausdrücken die Folge von Zeichen der
-        Quelldatei in eine Folge von sog. Token um
+    Quelldatei in eine Folge von sog. Token um
 
 -   bekommt als Input eine Liste von Paaren aus regulären Ausdrücken und
-        Tokennamen, z. B. ("while", WHILE)
+    Tokennamen, z. B. ("while", WHILE)
 
 -   Kommentare und Strings müssen richtig erkannt werden. (Schachtelungen)
 
 -   liefert Paare von Token und deren Werte, sofern benötigt, z. B. (WHILE, \_),
-        oder (IDENTIFIER, "radius") oder (INTEGERZAHL, "334")
-
+    oder (IDENTIFIER, "radius") oder (INTEGERZAHL, "334")
 
 ## Wofür reichen reguläre Sprachen nicht?
 
@@ -77,19 +74,17 @@ beschreiben, die unendlich viele Werte annehmen können.
 -   Wo finden sich die oben genannten Variablen bei einem DFA wieder?
 -   Warum ist die erste Sprache oben nicht regulär, die zweite aber?
 
-
 ## Wie geht es weiter?
 
 Ein **Parser**
 
 -   führt mit Hilfe des Tokenstreams vom Lexer die Syntaxanalyse durch
 
--   basiert auf einer sog. kontextfreien Grammatik, deren Terminale die Token
-        sind
+-   basiert auf einer sog. kontextfreien Grammatik, deren Terminale die Token sind
 
 -   liefert die syntaktische Struktur in Form eines Ableitungsbaums (**syntax
-        tree**, **parse tree**), bzw. einen **AST** (abstract syntax tree) ohne
-        redundante Informationen im Ableitungsbaum (z. B. Semikolons)
+    tree**, **parse tree**), bzw. einen **AST** (abstract syntax tree) ohne
+    redundante Informationen im Ableitungsbaum (z. B. Semikolons)
 
 -   liefert evtl. Fehlermeldungen
 
@@ -109,7 +104,8 @@ Ein **Parser**
 
 ::: outcomes
 -   k1: Ich kenne die Aufgaben eines Lexers
--   k1: Ich kenne die Zusammenhänge zwischen DFAs, regulären Ausdrücken, regulären Grammatiken und Lexern
--   k2: Ich kann für eine Beispielsprache begründen, warum sie nicht mit einem der oben genannten
-    Mechanismen beschrieben werden kann
+-   k1: Ich kenne die Zusammenhänge zwischen DFAs, regulären Ausdrücken, regulären
+    Grammatiken und Lexern
+-   k2: Ich kann für eine Beispielsprache begründen, warum sie nicht mit einem der
+    oben genannten Mechanismen beschrieben werden kann
 :::
