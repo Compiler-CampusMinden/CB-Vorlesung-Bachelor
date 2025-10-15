@@ -17,7 +17,6 @@ title: Reguläre Sprachen, Ausdrucksstärke (Teil 1)
 ::: notes
 Hier entsteht ein Tafelbild.
 :::
-\newpage
 ## Themen für heute
 
 -   Lexer
