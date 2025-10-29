@@ -372,7 +372,15 @@ Die Empfehlung ist, non-greedy Lexer-Regeln nur sparsam einzusetzen (vgl.
 [github.com/antlr/antlr4/blob/master/doc/wildcard.md](https://github.com/antlr/antlr4/blob/master/doc/wildcard.md)).
 :::
 
+::: slides
 # Verhalten des Lexers: 1. Längster Match
+:::
+
+::: notes
+# Verhalten des Lexers
+
+## 1. Längster Match
+:::
 
 Primäres Ziel: Erkennen der längsten Zeichenkette
 
@@ -389,7 +397,13 @@ Die Regel, die den längsten Match für die aktuelle Eingabesequenz produziert,
 Im Beispiel würde ein "foo42" als `FOO` erkannt und nicht als `CHARS DIGITS`.
 :::
 
+::: slides
 # Verhalten des Lexers: 2. Reihenfolge
+:::
+
+::: notes
+## 2. Reihenfolge
+:::
 
 Reihenfolge in Grammatik definiert Priorität
 
@@ -406,7 +420,13 @@ Im Beispiel würden für die Eingabe "foo42bar" beide Regeln den selben längste
 liefern - die Regel `FOO` ist in der Grammatik früher definiert und "gewinnt".
 :::
 
+::: slides
 # Verhalten des Lexers: 3. Non-greedy Regeln
+:::
+
+::: notes
+## 3. Non-greedy Regeln
+:::
 
 Non-greedy Regeln versuchen *so wenig* Zeichen wie möglich zu matchen
 
