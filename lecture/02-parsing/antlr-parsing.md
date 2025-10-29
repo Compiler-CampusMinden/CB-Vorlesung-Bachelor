@@ -649,7 +649,7 @@ geschrieben
     Kontextobjekte
 
 ::: readings
--   @@Parr2014
+-   @Parr2014
 :::
 
 ::: outcomes
