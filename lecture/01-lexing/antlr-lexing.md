@@ -175,7 +175,7 @@ bevorzugt. Wenn es mehrere gleich lange Alternativen gibt, muss man mit
 Vorrangregeln bzgl. der Token arbeiten.
 :::
 
-# Hello World
+# "Hello World" mit ANTLR (Lexer)
 
 ``` antlr
 grammar Hello;
@@ -199,17 +199,39 @@ href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master
 
 ## ANTLR einrichten
 
--   Aktuelle Version herunterladen:
-    [antlr.org](https://www.antlr.org/download.html), für Java als Zielsprache:
-    ["Complete ANTLR 4.x Java binaries
-    jar"](https://www.antlr.org/download/antlr-4.11.1-complete.jar)
--   CLASSPATH setzen:
-    `export CLASSPATH=".:/<pathToJar>/antlr-4.11.1-complete.jar:$CLASSPATH"`
--   Aliase einrichten (`.bashrc`):
-    -   `alias antlr='java org.antlr.v4.Tool'`
-    -   `alias grun='java org.antlr.v4.gui.TestRig'`
--   Alternativ über den Python-Installer: `pip install antlr4-tools`
--   Im Web ohne lokale Installation: [ANTLR Lab](http://lab.antlr.org/)
+-   Lokal für die Nutzung in der Konsole:
+
+    -   Aktuelle Version herunterladen:
+        [antlr.org](https://www.antlr.org/download.html), für Java als Zielsprache:
+        ["Complete ANTLR 4.x Java binaries
+        jar"](https://www.antlr.org/download/antlr-4.13.2-complete.jar)
+    -   CLASSPATH setzen:
+        `export CLASSPATH=".:/<pathToJar>/antlr-4.13.2-complete.jar:$CLASSPATH"`
+    -   Aliase einrichten (`.bashrc`):
+        -   `alias antlr='java org.antlr.v4.Tool'`
+        -   `alias grun='java org.antlr.v4.gui.TestRig'`
+
+-   Alternativ für Java-Projekte mit Gradle (empfehlenswert):
+
+        plugins {
+            id 'java'
+            id 'antlr'
+        }
+
+        repositories {
+            mavenCentral()
+        }
+
+        dependencies {
+            antlr 'org.antlr:antlr4:4.13.2'
+        }
+
+-   Alternativ das [ANTLR tool
+    (JAR)](https://www.antlr.org/download/antlr-4.13.2-complete.jar) herunterladen
+    und in der IDE als Library hinzufügen (bitte nur als Ausweichlösung - der Weg
+    über das Build-Tool ist deutlich besser)
+
+-   Im Web ohne lokale Installation: [ANTLR Lab](http://lab.antlr.org/) (nur HTTP)
 
 (vgl.
 [github.com/antlr/antlr4/blob/master/doc/getting-started.md](https://github.com/antlr/antlr4/blob/master/doc/getting-started.md))
