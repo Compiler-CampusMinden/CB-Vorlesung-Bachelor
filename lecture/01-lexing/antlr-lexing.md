@@ -236,6 +236,26 @@ href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master
 (vgl.
 [github.com/antlr/antlr4/blob/master/doc/getting-started.md](https://github.com/antlr/antlr4/blob/master/doc/getting-started.md))
 
+**Hinweis**: Im Beispiel-Projekt
+[student-support-code-template](https://github.com/Compiler-CampusMinden/student-support-code-template)
+finden Sie ein fertig eingerichtetes Java-Projekt mit Gradle und ANTLR. Sie können
+dieses Projekt als Template nutzen und in Ihrer IDE importieren, d.h. Sie brauchen
+nur ein installiertes JDK (Version 25 ist die aktuelle LTS) und eine Java-IDE, der
+Rest (Gradle, ANTLR) kommt über die Einstellungen im Beispiel-Projekt. Durch die
+Gradle-Settings sollten anschließend alle nötigen Einstellungen und Abhängigkeiten
+automatisch in der IDE korrekt gesetzt bzw. aufgelöst werden. Im `Main.main()`
+finden Sie eine kurze Demo, wie man einen generierten Lexer/Parser mit einbindet und
+aufruft. Grammatiken können unter `src/main/antlr/` abgelegt werden, wo sie
+automatisch vom ANTLR-Gradle-Plugin beim Build-Prozess (`./gradlew build`) gefunden
+und bearbeitet werden. Die daraus generierten ANTLR-Lexer und -Parser werden im
+Build-Ordner `build/generated-src/antlr/main/` abgelegt und stehen in der IDE damit
+automatisch zur Verfügung, ohne dass die generierten Dateien im versionierten
+Source-Tree auftauchen und diesen "verschmutzen". *Wichtig*: So lange wie die
+generierten Dateien nicht erzeugt wurden, zeigen die IDE für diese Klassen und
+Interfaces entsprechend Fehler an. Ein Übersetzen des Projekts oder ein explizites
+`./gradlew generateGrammarSource` generiert die fehlenden Dateien und die
+Fehlermeldungen sollten verschwinden.
+
 ## "Hello World" übersetzen und ausführen
 
 1.  Grammatik übersetzen und Code generieren: `antlr Hello.g4`
