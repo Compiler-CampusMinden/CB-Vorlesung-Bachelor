@@ -118,7 +118,7 @@ Vorstellung der Lösung im jeweiligen Praktikum in der Abgabewoche.
 
 -   **Post Mortem**: Jede Person beschreibt individuell(!) die Bearbeitung des
     jeweiligen Kriteriums bzw. die Teilnahme an den Edmonton/Minden-Meetings
-    zurückblickend mit mind. 200 bis max. 400 Wörtern (Nutzlast; Überschriften und
+    zurückblickend mit mind. 150 bis max. 400 Wörtern (Nutzlast; Überschriften und
     Links zählen nicht mit). Gehen Sie dabei aussagekräftig und nachvollziehbar auf
     folgende Punkte ein:
 
