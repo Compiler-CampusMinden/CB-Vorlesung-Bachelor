@@ -43,12 +43,12 @@ für C++ ein.
 
 # Kursformat
 
-| Vorlesung (2 SWS)            | Praktikum (2 SWS)                       |
-|:-----------------------------|:----------------------------------------|
-| Do, 15:30 - 17:00 Uhr (Zoom) | G1: Mi, 09:45 - 11:15 Uhr (Zoom)        |
-|                              | G2: Mi, 11:30 - 13:00 Uhr (Zoom)        |
-|                              | G3: Mi, 09:45 - 11:15 Uhr (Präsenz B40) |
-|                              | G4: Mi, 11:30 - 13:00 Uhr (Präsenz B40) |
+| Vorlesung (2 SWS)            | Praktikum (2 SWS)                        |
+|:-----------------------------|:-----------------------------------------|
+| Do, 15:30 - 17:00 Uhr (Zoom) | G1: Mi, 09:45 - 11:15 Uhr (Zoom)         |
+|                              | G2: Mi, 11:30 - 13:00 Uhr (Zoom)         |
+|                              | G3: Mi, 09:45 - 11:15 Uhr (Präsenz D320) |
+|                              | G4: Mi, 11:30 - 13:00 Uhr (Präsenz D320) |
 
 **Achtung**: Ab dem 23.10. fangen wir die Vorlesung eine Viertelstunde früher an als
 im Stundenplan eingetragen, um allen die Chance zu geben, den letzten Uni-Bus um
