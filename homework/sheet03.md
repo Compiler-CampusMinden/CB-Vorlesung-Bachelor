@@ -252,6 +252,14 @@ a     := 0
 a    :=     42      # Kommentar wird ignoriert
 else do
         a :=      7
+if 1>0do
+    while c do
+    if 8 do
+c:=b
+end
+    b:=9
+    end
+                end
     end
 ```
 
