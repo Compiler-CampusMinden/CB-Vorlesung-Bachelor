@@ -163,7 +163,7 @@ Interpunktions-Token) kann man sich das Attribut auch sparen, da das Lexem durch
 Tokennamen eindeutig rekonstruierbar ist.
 
 | Token     | Beschreibung                                         | Beispiel-Lexeme      |
-|:----------|:-----------------------------------------------------|:---------------------|
+|:-----------|:--------------------------------------------------|:---------------------|
 | `if`      | Zeichen `i` und `f`                                  | `if`                 |
 | `relop`   | `<` oder `>` oder `<=` oder `>=` oder `==` oder `!=` | `<`, `<=`            |
 | `id`      | Buchstabe, gefolgt von Buchstaben oder Ziffern       | `pi`, `count`, `x3`  |
@@ -189,7 +189,7 @@ WHITESPACE  : [ \t\n]+ -> skip ;
 [Konsole: Hello (Classpath, Aliase, grun, Main, Dateien, Ausgabe)]{.ex
 href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/lecture/01-lexing/src/Hello.g4"}
 
-::: notes
+:::: notes
 ## Hinweis zur Grammatik (Regeln)
 
 -   `start` ist eine Parser-Regel =\> Eine Parser-Regel pro Grammatik wird benötigt,
@@ -244,7 +244,8 @@ href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master
 [ANTLR-Plugin](https://plugins.jetbrains.com/plugin/7358-antlr-v4). Dieses erlaubt
 das interaktive Experimentieren mit ANTLR-Grammatiken, ohne dass man ANTLR selbst
 installiert haben muss oder Code geschrieben haben muss. Für die Arbeit mit
-Grammatiken ist dieses Plugin unbedingt empfehlenswert!
+Grammatiken ist dieses Plugin unbedingt empfehlenswert! (Für das normale Arbeiten
+sollten Sie aber die Gradle-Konfiguration nutzen!)
 
 **Hinweis**: Im Beispiel-Projekt
 [student-support-code-template](https://github.com/Compiler-CampusMinden/student-support-code-template)
@@ -260,11 +261,42 @@ automatisch vom ANTLR-Gradle-Plugin beim Build-Prozess (`./gradlew build`) gefun
 und bearbeitet werden. Die daraus generierten ANTLR-Lexer und -Parser werden im
 Build-Ordner `build/generated-src/antlr/main/` abgelegt und stehen in der IDE damit
 automatisch zur Verfügung, ohne dass die generierten Dateien im versionierten
-Source-Tree auftauchen und diesen "verschmutzen". *Wichtig*: So lange wie die
+Source-Tree auftauchen und diesen "verschmutzen". **Wichtig**: So lange wie die
 generierten Dateien nicht erzeugt wurden, zeigen die IDE für diese Klassen und
 Interfaces entsprechend Fehler an. Ein Übersetzen des Projekts oder ein explizites
 `./gradlew generateGrammarSource` generiert die fehlenden Dateien und die
 Fehlermeldungen sollten verschwinden.
+
+::: important
+**Hinweis**: Sorgen Sie dafür, dass Ihre IDE tatsächlich auch die
+**Projekteinstellungen von Gradle übernommen** hat und auch **mit Gradle baut**!
+
+1.  Check, ob die **Projekteinstellungen** in IntelliJ passen:
+
+    1.  Menü `File > Project Structure > Project Settings > Project` sollte für Ihr
+        Projekt als SDK ein "Java 25" zeigen:
+
+        ![](images/ij-projectsettings-sdk.png)
+
+    2.  Menü `File > Project Structure > Project Settings > Libraries` sollte für
+        Ihr Projekt Jar-Files für ANTLR4 zeigen:
+
+        ![](images/ij-projectsettings-libs.png)
+
+2.  Check, ob **IntelliJ mit Gradle baut**:
+
+    Menü `File > Settings > Build, Execution, Deployment > Build Tools > Gradle`
+    sollte auf Gradle umgestellt sein:
+
+    ![](images/ij-setting-gradlebuild.png)
+
+    Unter **"Build & Run" sollte "Gradle"** ausgewählt sein, die **"Distribution"
+    sollte auf "Wrapper"** stehen, und als **"Gradle JVM"** sollte die für das
+    Projekt verwendete JVM eingestellt sein, d.h. aktuell Java 25.
+
+Siehe auch
+[Compiler-CampusMinden/student-support-code-template](https://github.com/Compiler-CampusMinden/student-support-code-template/blob/master/README.md).
+:::
 
 ## "Hello World" übersetzen und ausführen
 
@@ -423,7 +455,7 @@ Lexers u.U. schwer vorhersehbar machen!
 
 Die Empfehlung ist, non-greedy Lexer-Regeln nur sparsam einzusetzen (vgl.
 [github.com/antlr/antlr4/blob/master/doc/wildcard.md](https://github.com/antlr/antlr4/blob/master/doc/wildcard.md)).
-:::
+::::
 
 ::: slides
 # Verhalten des Lexers: 1. Längster Match
