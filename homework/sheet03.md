@@ -305,7 +305,7 @@ Ihrer Grammatik widerspiegelt. Die einzelnen Zweige sind damit in der Regel aber
 auch viel zu tief verschachtelt.
 
 Überlegen Sie sich, welche Informationen/Knoten Sie für die formatierte Ausgabe
-wirklich benötigen - das ist Ihr Abstract-Syntex-Tree (*AST*).
+wirklich benötigen - das ist Ihr Abstract-Syntex-Tree (*AST*) für diesen Task.[^2]
 
 Programmieren Sie eine Transformation des Parse-Tree in die von Ihnen hier
 formulierten AST-Strukturen. Dies können Sie beispielsweise mit einer passenden
@@ -317,3 +317,9 @@ können auch einen zweiten Pretty-Printer für den AST implementieren.)
 [^1]: Um den Text lesbar zu halten, wird hier oft nur von "Parser" gesprochen -
     gemeint ist aber die gesamte auf diesem Blatt zu erstellende Toolchain: Lexer -
     Parser - AST - Ausgabe.
+
+[^2]: In dieser Teilaufgabe geht es lediglich um das Pretty-Printing, nicht um das
+    semantische Prüfen oder sogar Interpretieren der Programme. Die Aufgabe lautet
+    also: Welche Strukturen benötigen Sie, um das Pretty-Printing des erfolgreich
+    geparsten Programms erledigen zu können? Alle anderen Strukturen sind hier
+    unnötiger Ballast ...
