@@ -255,9 +255,10 @@ else do
 if 1>0do
     while c do
     if 8 do
-c:=b
+c:=b+    "foo  ."
 end
     b:=9+   4*3 -7
+            c:=b+    "bar  ."
     end
              end
   end
@@ -274,9 +275,10 @@ else do
    if 1 > 0 do
       while c do
          if 8 do
-            c := b
+            c := b + "foo  ."
          end
          b := 9 + 4 * 3 - 7
+         c := b + "bar  ."
       end
    end
 end
