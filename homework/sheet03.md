@@ -257,10 +257,10 @@ if 1>0do
     if 8 do
 c:=b
 end
-    b:=9
+    b:=9+   4*3 -7
     end
-                end
-    end
+             end
+  end
 ```
 
 soll
@@ -268,9 +268,17 @@ soll
 ``` python
 a := 0
 if 10 < 1 do
-    a := 42
+   a := 42
 else do
-    a := 7
+   a := 7
+   if 1 > 0 do
+      while c do
+         if 8 do
+            c := b
+         end
+         b := 9 + 4 * 3 - 7
+      end
+   end
 end
 ```
 
