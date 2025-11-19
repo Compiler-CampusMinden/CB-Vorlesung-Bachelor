@@ -13,9 +13,8 @@ eine Lisp-artige Sprache.
 # Methodik
 
 Sie haben in [Blatt 04](sheet04.md) eine Grammatik für die Lisp-artige Sprache
-definiert und darauf aufbauend einen Lexer und Parser implementiert, d.h. Sie
-können für eine Eingabe eines Programms mit S-Expressions den entsprechenden AST
-erzeugen.
+definiert und darauf aufbauend einen Lexer und Parser implementiert, d.h. Sie können
+für eine Eingabe eines Programms mit S-Expressions den entsprechenden AST erzeugen.
 
 Korrigieren Sie die Codebasis von Blatt 04, falls notwendig. Ergänzen Sie sodann
 einen Tree-Walking-Interpreter und eine REPL für die Lisp-artige Sprache.
@@ -72,10 +71,86 @@ Symboltabelle umgehen?
 
 ## A6.4: Auswirkungen der Grammatik auf den Interpreter (2P)
 
-Vergleichen Sie ihre eigene Grammatik mit den beiden Grammatiken
-([MiniLispA](https://github.com/Compiler-CampusMinden/student-support-code-template/blob/master/src/main/antlr/MiniLispA.g4),
-[MiniLispB](https://github.com/Compiler-CampusMinden/student-support-code-template/blob/master/src/main/antlr/MiniLispB.g4)).
+Vergleichen Sie ihre eigene Grammatik mit den folgenden beiden Grammatiken:
 
-Welche Auswirkungen hat die Grammatik auf den Interpreter? Machen Sie ein
-Gedankenexperiment: Überlegen Sie, was Sie alles in Ihrer Implementierung ändern
-müssten, wenn Sie die jeweils andere Grammatik-Variante nutzen würden.
+::: {.details title="Grammatik A"}
+``` antlr
+grammar MiniLispA;
+
+
+// Parser
+program :  expr+ EOF ;
+
+expr    :  NUMBER
+        |  STRING
+        |  TRUE
+        |  FALSE
+        |  ID
+        |  '(' (ID | OP)* expr* ')'
+        ;
+
+
+// Lexer
+TRUE    :  'true' ;
+FALSE   :  'false' ;
+ID      :  [a-z][a-zA-Z0-9]* ;
+NUMBER  :  [0-9]+ ;
+OP      :  '+' | '-' | '*' | '/' | '=' | '>' | '<' ;
+STRING  :  '"' (~[\n\r"])* '"' ;
+
+COMMENT :  ';;' ~[\n\r]* -> skip ;
+WS      :  [ ,\t\n\r]+ -> skip ;
+```
+:::
+
+::: {.details title="Grammatik B"}
+``` antlr
+grammar MiniLispB;
+
+
+// Parser
+program :  expr+ EOF ;
+
+expr    :  literal
+        |  symbol
+        |  list
+        |  def
+        |  fn
+        |  fcall
+        |  let
+        ;
+
+literal :  NUMBER
+        |  STRING
+        |  TRUE
+        |  FALSE
+        ;
+
+symbol  :  ID ;
+
+list    :  '(' 'list' expr* ')' ;
+def     :  '(' 'def' symbol expr ')' ;
+
+fn      :  '(' 'defn' symbol '(' symbol* ')' expr* ')' ;
+fcall   :  '(' (ID | OP) expr* ')' ;
+
+let     :  '(' 'let' '(' binding* ')' expr ')' ;
+binding :  symbol expr ;
+
+
+// Lexer
+TRUE    :  'true' ;
+FALSE   :  'false' ;
+ID      :  [a-z][a-zA-Z0-9]* ;
+NUMBER  :  [0-9]+ ;
+OP      :  '+' | '-' | '*' | '/' | '=' | '>' | '<' ;
+STRING  :  '"' (~[\n\r"])* '"' ;
+
+COMMENT :  ';;' ~[\n\r]* -> skip ;
+WS      :  [ ,\t\n\r]+ -> skip ;
+```
+:::
+
+Welche Auswirkungen hat die Grammatik auf den Interpreter? Machen Sie ein kleines
+**Gedankenexperiment**: Überlegen Sie, was Sie alles in Ihrer Implementierung ändern
+müssten, wenn Sie die jeweils andere Grammatik-Variante (A bzw. B) nutzen würden.
