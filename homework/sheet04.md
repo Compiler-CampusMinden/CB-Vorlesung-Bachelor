@@ -18,10 +18,10 @@ Sie finden nachfolgend eine Beschreibung der Zielsprache für dieses Blatt.
 Erstellen Sie zunächst eine Grammatik für diese Sprache. Implementieren Sie dann
 basierend auf dieser Grammatik einen Lexer und einen *recursive descent* Parser
 (manuelle Implementierung, kein ANTLR). Überlegen Sie sich, welche Strukturen ein
-AST für diese Sprache haben sollte und implementieren Sie diese Strukturen in Java
-und schreiben Sie eine Transformation des Parse-Trees in diesen AST.
+AST für diese Sprache haben sollte und implementieren Sie diese Strukturen und
+schreiben Sie eine Transformation des Parse-Trees in diesen AST.
 
-Es ist empfehlenswert, die Implementierung in Java mehrstufig zu realisieren:
+Es ist empfehlenswert, die Implementierung mehrstufig zu realisieren:
 
 1.  Einlesen aus einer Datei mit Lisp-artigem Code
 2.  Lexen des eingelesenen Code
@@ -310,13 +310,13 @@ Zeigen Sie, dass die Grammatik LL(1) ist.
 
 ## A4.3: Lexer (2P)
 
-1.  Definieren Sie in Java Strukturen, die Sie für die Repräsentation der Token
-    entsprechend Ihrer Grammatik benötigen.
+1.  Definieren Sie Strukturen, die Sie für die Repräsentation der Token entsprechend
+    Ihrer Grammatik benötigen.
 
 2.  Implementieren Sie dann analog zum Vorgehen in der Vorlesung einen Lexer, der
     den entsprechenden Teil Ihrer Grammatik abbildet. Diesen Lexer sollen Sie
-    manuell in Java implementieren, Sie dürfen also nicht ANTLR oder andere
-    Generatoren benutzen.
+    manuell implementieren, Sie dürfen also nicht ANTLR oder andere Generatoren
+    benutzen.
 
 Implementieren Sie dabei das Verarbeiten des Lisp-artigen Codes aus einem
 übergebenen String.
@@ -334,8 +334,8 @@ Fehlermeldung darf Ihr Lexer "aussteigen".
 
 Implementieren Sie analog zum Vorgehen in der Vorlesung einen Parser mit *recursive
 descent*, der den entsprechenden Teil Ihrer Grammatik abbildet. Diesen Parser sollen
-Sie manuell in Java implementieren, Sie dürfen also nicht ANTLR oder andere
-Generatoren benutzen.
+Sie manuell implementieren, Sie dürfen also nicht ANTLR oder andere Generatoren
+benutzen.
 
 Implementieren Sie dabei das Verarbeiten des Lisp-artigen Codes aus einem
 übergebenen String.

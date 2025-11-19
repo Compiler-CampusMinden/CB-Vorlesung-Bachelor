@@ -163,7 +163,7 @@ Interpunktions-Token) kann man sich das Attribut auch sparen, da das Lexem durch
 Tokennamen eindeutig rekonstruierbar ist.
 
 | Token     | Beschreibung                                         | Beispiel-Lexeme      |
-|:-----------|:--------------------------------------------------|:---------------------|
+|:----------|:-----------------------------------------------------|:---------------------|
 | `if`      | Zeichen `i` und `f`                                  | `if`                 |
 | `relop`   | `<` oder `>` oder `<=` oder `>=` oder `==` oder `!=` | `<`, `<=`            |
 | `id`      | Buchstabe, gefolgt von Buchstaben oder Ziffern       | `pi`, `count`, `x3`  |
@@ -201,6 +201,8 @@ href="https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master
 
 -   Lokal für die Nutzung in der Konsole:
 
+    -   Es wird ein JDK benötigt. Installieren Sie am besten die aktuelle
+        LTS-Version.
     -   Aktuelle Version herunterladen:
         [antlr.org](https://www.antlr.org/download.html), für Java als Zielsprache:
         ["Complete ANTLR 4.x Java binaries

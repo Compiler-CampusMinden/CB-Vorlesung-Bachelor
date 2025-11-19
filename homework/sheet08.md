@@ -8,9 +8,9 @@ title: "Blatt 08: Mini-Projekt C++-Interpreter"
 
 Entwickeln Sie in Ihrem 3er-Team gemeinsam einen Interpreter für C++.
 
-Nutzen Sie als Implementierungssprache Java.[^1] Sie *können* ANTLR zur Erstellung
-Ihres Lexers und Parsers einsetzen, Sie können aber auch gern einen selbst
-implementierten LL-Parser mit *recursive descent* einsetzen.
+Sie *können* ANTLR zur Erstellung Ihres Lexers und Parsers einsetzen, Sie können
+aber auch gern einen selbst implementierten LL-Parser mit *recursive descent*
+einsetzen.
 
 Definieren Sie zunächst eine passende Grammatik und den AST, bevor Sie Lexer und
 Parser umsetzen. Achten Sie auf eine angemessene semantische Analyse, achten Sie
@@ -107,6 +107,3 @@ erfolgen.**
 Geben Sie wie bei den anderen Blättern auch pro Person ein individuelles Post Mortem
 im ILIAS ab. Geben Sie dabei im Post Mortem unbedingt die URL zu Ihrem Team-Repo an.
 Denken Sie daran, dass dieses Repo öffentlich einsehbar sein muss.
-
-[^1]: Nach **vorheriger Absprache** können Sie auch eine andere
-    Implementierungssprache verwenden.
