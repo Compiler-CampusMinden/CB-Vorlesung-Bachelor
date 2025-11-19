@@ -348,12 +348,15 @@ Fehlermeldung darf Ihr Parser "aussteigen".
 ## A4.5: AST (1P)
 
 Definieren Sie einen AST für die Zielsprache. Welche Informationen aus dem
-Eingabeprogramm müssen repräsentiert werden?
+Eingabeprogramm müssen für ein Pretty-Printing des eingelesenen Programms
+repräsentiert werden?
 
-Programmieren Sie die entsprechenden Datenstrukturen in Java.
+Implementieren Sie die entsprechenden Datenstrukturen. Programmieren Sie außerdem
+eine Traversierung des Parse-Trees, die den AST erzeugt.
 
-Programmieren Sie außerdem eine Traversierung des Parse-Trees, die den AST erzeugt.
-Testen Sie dies mit Ihren in der ersten Aufgabe entwickelten Beispielprogrammen.
+Geben Sie den AST auf der Konsole aus ("Pretty Printing" für den AST). Testen Sie
+dies mit Ihren in der ersten Aufgabe entwickelten (syntaktisch korrekten)
+Beispielprogrammen.
 
 ## A4.6: Recherche und Diskussion (1P)
 
