@@ -244,7 +244,7 @@ können dafür folgende Transformationen nutzen:
       • Tokens wie Klammern, Kommas, Semikolons, Schlüsselwörter erscheinen nicht im AST.
       • Präzedenz/Assoziativität kommt aus der Parse-Struktur; der AST ist normalisiert zu Binary(left, op, right).
 
-Testen Sie ihre Transformation mit ihren in der vorigen Aufgabe erstellten
+Testen Sie Ihre Transformation mit Ihren in der vorigen Aufgabe erstellten
 Beispielprogrammen.
 
 ## A5.2: Aufbau der Symboltabelle (5P)
