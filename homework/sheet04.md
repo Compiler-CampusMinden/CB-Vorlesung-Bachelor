@@ -287,14 +287,26 @@ Zeigen Sie, dass die Grammatik LL(1) ist.
 ## A4.2: Grammatik (2P)
 
 1.  Erstellen Sie zunächst einige Programme in der Zielsprache. Diese sollten von
-    einfachsten Ausdrücken bis hin zu komplexeren Programmen reichen. Definieren Sie
-    beispielsweise eine Funktion, die rekursiv die Länge einer Liste berechnet.
+    einfachsten Ausdrücken bis hin zu komplexeren Programmen reichen. Versuchen Sie
+    beispielsweise eine Funktion zu definieren, die rekursiv die Länge einer Liste
+    berechnet.
 
     Definieren Sie neben gültigen Programmen auch solche, die in der syntaktischen
     Analyse zurückgewiesen werden sollten. Welche Fehlerkategorien könnte es hier
     geben?
 
-2.  Definieren Sie nun für die obige Sprache eine geeignete Grammatik.
+2.  Überlegen Sie:
+
+    -   Was sind die grundsätzlichen syntaktischen Konstrukte der obigen Sprache?
+    -   Was muss man in Lexer/Parser prüfen und was kann man später (semantische
+        Analyse oder Interpreter) auch noch gut tun?
+    -   Wie viel Semantik muss im Parser schon realisiert werden?
+    -   Was brauchen Sie an Sprachumfang, um die Aufgaben auf diesem Blatt zu lösen?
+
+    (Da wir noch nicht über die späteren Phasen im Compiler gesprochen haben:
+    Spekulieren Sie.)
+
+3.  Definieren Sie nun für die obige Sprache eine geeignete Grammatik.
 
 ## A4.3: Lexer (2P)
 
