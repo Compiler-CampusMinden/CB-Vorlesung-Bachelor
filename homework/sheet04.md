@@ -34,8 +34,15 @@ Ein Programm besteht aus einem oder mehreren Ausdrücken (*Expressions*). Die
 Ausdrücke haben eine spezielle Form: Sie sind sogenannte
 [S-Expressions](https://en.wikipedia.org/wiki/S-expression). Dies sind entweder
 Literale der Form `x` oder einfache listenartige Gebilde der Form `(. x y)`, wobei
-der `.` eine Operation (oder Funktion) darstellt und `x` und `y` selbst wieder
-S-Expressions sind.
+der `.` eine Operation (oder Funktion oder ein Keyword) darstellt und `x` und `y`
+selbst wieder S-Expressions sind.
+
+::: tip
+**Anmerkung**: Die Anzahl der S-Expressions in einem Klammer-Ausdruck ist nicht
+näher definiert - `x` und `y` sind nur Beispiele. Es könnten auch mehr oder weniger
+S-Expressions nach der Operation/Funktion/Keyword auftauchen (vgl. nachfolgende
+Sprachdefinition).
+:::
 
 Die einfachste Form sind dabei Literale mit konkreten Werten der drei Datentypen
 `Integer`, `String` und `Boolean`:
