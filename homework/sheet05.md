@@ -263,4 +263,18 @@ Geben Sie erkannte Fehler auf der Konsole aus.
 Implementieren Sie einen zweiten Lauf. Hier soll für Funktionsaufrufe geprüft
 werden, ob diese Funktionen bereits definiert und im Scope sichtbar sind.
 
+Damit wird so etwas möglich:[^1]
+
+``` c
+// einfacher Funktionsaufruf, ohne Vorwärtsdeklaration
+bar();
+
+void bar() {
+    print_char('b');
+}
+```
+
 Geben Sie erkannte Fehler auf der Konsole aus.
+
+[^1]: Anmerkung: Das ist kein gültiges C, sondern dient nur dazu, um das Vorgehen
+    bei mehreren Passes über die Symboltabelle zu erkennen und zu üben.
