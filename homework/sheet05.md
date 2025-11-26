@@ -193,17 +193,9 @@ können dafür folgende Transformationen nutzen:
       • return: 'return' expr ';'
         → ReturnStmt(exprAST)
 
-    params: type ID (',' type ID)*
-      → paramsList = [ Param(PrimType(type_i), ID_i.text) ] in Quellreihenfolge
-
-    fncall: ID '(' args? ')'
-      → Call(ID.text, argsList)
-    args: expr (',' expr)*
-      → argsList = [ exprAST_i ] in Quellreihenfolge
-
     expr
-      • fncall
-        → Call wie oben
+      • fncall: ID '(' args? ')'
+        → Call(ID.text, argsList)
 
       • expr ('*' | '/') expr
         → Binary(leftAST, op=MUL|DIV, rightAST)
@@ -236,6 +228,12 @@ können dafür folgende Transformationen nutzen:
       • 'int'    → PrimType.INT
       • 'string' → PrimType.STRING
       • 'bool'   → PrimType.BOOL
+
+    params: type ID (',' type ID)*
+      → paramsList = [ Param(PrimType(type_i), ID_i.text) ] in Quellreihenfolge
+
+    args: expr (',' expr)*
+      → argsList = [ exprAST_i ] in Quellreihenfolge
 
     Operator-Zuordnung
       '*' → MUL, '/' → DIV, '+' → PLUS, '-' → MINUS, '>' → GT, '<' → LT, '==' → EQ, '!=' → NEQ
