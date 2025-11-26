@@ -116,7 +116,7 @@ bekannt. Funktionen können in einem Scope nicht mehrfach definiert werden. Eine
 aufgerufene Funktion muss im aktuellen Scope sichtbar sein, der Funktionsaufruf muss
 zur Definition passen. Die aufgerufene Funktion muss (im Gegensatz zum Zugriff auf
 Variablen) nicht vor dem ersten Aufruf definiert sein. Sie kann also später im
-selben Scope definiert werden.
+selben Scope definiert werden. Einer Funktion kann nichts zugewiesen werden.
 
 # Aufgaben
 
@@ -254,7 +254,8 @@ AST-Knoten benötigen.
 Führen Sie die im ersten Lauf möglichen Prüfungen durch, beispielsweise ob eine
 Variable oder Funktion in einem Scope mehrfach definiert wird oder ob Variablen als
 Funktion genutzt (aufgerufen) werden. Für referenzierte Variablen muss geprüft
-werden, ob sie tatsächlich bereits definiert und im Scope sichtbar sind.
+werden, ob sie tatsächlich bereits definiert und im Scope sichtbar sind. Zuweisungen
+dürfen nur an Variablen erfolgen.
 
 Geben Sie erkannte Fehler auf der Konsole aus.
 
