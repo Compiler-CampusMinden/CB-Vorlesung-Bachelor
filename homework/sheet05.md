@@ -162,6 +162,7 @@ Definieren Sie einen AST für die Zielsprache. Sie können folgende Definition n
 Programmieren Sie eine Traversierung des Parse-Trees, die den AST erzeugt. Sie
 können dafür folgende Transformationen nutzen:
 
+::: {.details title="Transformationen"}
     program: stmt+ EOF
       → Liste[Stmt] in Quellreihenfolge (kein eigener Program-Knoten)
 
@@ -241,6 +242,7 @@ können dafür folgende Transformationen nutzen:
     Allgemein
       • Tokens wie Klammern, Kommas, Semikolons, Schlüsselwörter erscheinen nicht im AST.
       • Präzedenz/Assoziativität kommt aus der Parse-Struktur; der AST ist normalisiert zu Binary(left, op, right).
+:::
 
 Testen Sie Ihre Transformation mit Ihren in der vorigen Aufgabe erstellten
 Beispielprogrammen.
@@ -277,5 +279,5 @@ void bar() {
 
 Geben Sie erkannte Fehler auf der Konsole aus.
 
-[^1]: Anmerkung: Das ist kein gültiges C, sondern dient nur dazu, um das Vorgehen
-    bei mehreren Passes über die Symboltabelle zu erkennen und zu üben.
+[^1]: Anmerkung: Das ist kein gültiges C, sondern dient nur dazu, das Vorgehen bei
+    mehreren Passes über die Symboltabelle zu erkennen und zu üben.
