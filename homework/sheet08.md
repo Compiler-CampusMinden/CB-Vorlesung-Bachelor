@@ -38,7 +38,7 @@ Unterstützen Sie mindestens folgende C++-Konzepte:
     -   Deklaration `T x;` und Initialisierung `T x = expr;`
     -   Einfache Zuweisung `=`
 -   Arrays (eindimensional, minimal):
-    -   Nur `T[]` für primitive Typen
+    -   Nur `T x[INT]` für primitive Typen und Klassen
     -   Operationen: Deklaration, Index‑Zugriff/‑Zuweisung
 -   Ausdrücke:
     -   Arithmetik: `+`, `-`, `*`, `/`, `%` (nur für `int`)
