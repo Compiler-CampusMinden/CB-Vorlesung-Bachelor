@@ -126,6 +126,20 @@ Darunter fallen auch (nicht vollständig):
 -   Mehrdimensionale Arrays
 -   Kein `break/continue` in Schleifen
 
+### Hinweis "*most vexing parse*"
+
+In C++ entsteht durch die üblichen Syntax-Regeln das ["*most vexing
+parse*"-Problem](https://en.wikipedia.org/wiki/Most_vexing_parse), wo nach dem
+Muster `T ID ( ... ) ;` sowohl ein Funktionsprototyp als auch eine
+Variablendeklaration mit Konstruktor‑Syntax möglich wäre.
+
+Versuchen Sie, dieses Problem durch geschickte Definitionen in der Grammatik
+einzuschränken. Beispielsweise wurde oben bereits einschränkend definiert, dass eine
+Variablendeklaration entweder die Form `T x;` haben soll oder mit Initialisierung
+`T x = expr;`. Die in C++ ebenfalls übliche Form `T x(expr);` braucht nicht
+unterstützt werden. Für Konstruktoren erlauben Sie am besten nur `T x;` und
+`T x = T(arg);`.
+
 ## REPL-Modell
 
 ### Initialisierung
