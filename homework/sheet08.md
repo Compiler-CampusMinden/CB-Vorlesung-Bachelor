@@ -64,11 +64,11 @@ Unterstützen Sie mindestens folgende C++-Konzepte:
     -   `class A { public: /* Felder + Methoden */ }` mit Attributen und Methoden
     -   Konstruktoren; aber keine Destruktoren und keine Initialisierungslisten
     -   Methoden können als `virtual` deklariert werden
-    -   Variablen vom Klassentyp sind Werte (feldweise Kopie)
+    -   Variablen vom Klassentyp sind Werte (feldweise Kopie bei Rückgabe/Zuweisung)
     -   `class D : public B { public: /* Felder + Methoden */ }`: Vererbung mit nur
         einer Basisklasse
-    -   Zuweisung `Base b = d;` (mit `class D : public B { ... }` und `D d;`) führt
-        zum Slicing
+    -   Zuweisung `Base b; b = d;` (mit `class D : public B { ... }` und `D d;`)
+        führt zum Slicing
     -   Polymorphe Nutzung erfolgt ausschließlich über Referenzen:
         `B& b = d; b.m();` ruft die überschriebene Methode in `D` auf (wenn `D::m()`
         als `virtual` deklariert ist)
@@ -104,7 +104,9 @@ Wertkopie, dynamischer Dispatch über Referenzen), nicht Java‑Semantik.
     -   Keine Neubindung
     -   Keine Referenzen als Felder/Globals oder Arrays
     -   Keine `ref`‑Rückgaben (Rückgabe nur als Kopie)
--   Klassen/Methoden: Nicht‑virtuelle Methoden binden statisch; virtuelle dynamisch
+-   Klassen/Methoden:
+    -   Nicht‑virtuelle Methoden binden statisch; virtuelle dynamisch bei Verwendung
+        von Referenzen
 -   Fehlerbehandlung:
     -   Lexer-, Parser-, Typ-Fehler beenden die Analyse mit klarer Meldung
     -   Laufzeitfehler (z.B. Division durch 0, Zugriff auf nicht initialisierte
