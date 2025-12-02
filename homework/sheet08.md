@@ -141,7 +141,7 @@ einzuschränken. Beispielsweise wurde oben bereits einschränkend definiert, das
 Variablendeklaration entweder die Form `T x;` haben soll oder mit Initialisierung
 `T x = expr;`. Die in C++ ebenfalls übliche Form `T x(expr);` braucht nicht
 unterstützt werden. Für Konstruktoren erlauben Sie am besten nur `T x;` und
-`T x = T(arg);`.
+`T x = T(arg);`. Dann kann `T ID ( ... ) ;` nur noch ein Funktionsprototyp sein ...
 
 ## REPL-Modell
 
