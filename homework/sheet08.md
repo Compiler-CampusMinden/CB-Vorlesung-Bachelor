@@ -89,7 +89,10 @@ Wertkopie, dynamischer Dispatch über Referenzen), nicht Java‑Semantik.
     als LValue)
 -   Rückgaberegel: In non‑`void`‑Funktionen existiert auf allen Pfaden mindestens
     ein `return`
--   Keine impliziten Typkonversionen, keine Casts
+-   Keine impliziten Typkonversionen außer im booleschen Kontext (in
+    `if`/`while`‑Bedingungen werden `int`/`char` wie in C++ implizit in `bool`
+    konvertiert, d.h. `0` wird als `false` und alles ungleich `0` als `true`
+    behandelt); keine Casts
 -   Overload‑Auflösung: exakter Match Name und Arität und identische Typen inkl.
     `ref`‑Markierung; bei Mehrdeutigkeit Fehler
 -   Funktionen/Methoden: Argumentanzahl muss zur Parameterliste passen
