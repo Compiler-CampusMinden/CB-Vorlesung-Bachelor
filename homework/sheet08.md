@@ -93,21 +93,23 @@ Wertkopie, dynamischer Dispatch über Referenzen), nicht Java‑Semantik.
         sichtbar sein
     -   Funktionen, Methoden, Klassen: "define-after-use" - mehrere Passes notwendig
         (nur beim Start des Interpreters)
+-   LValues: benannte Variablen `a` bzw. Feldzugriffe `obj.f`; alles andere sind
+    RValues
 -   Variablen sind nicht aufrufbar; Funktionen sind nicht zuweisbar (keine Funktion
     als LValue)
 -   Keine impliziten Typkonversionen außer im booleschen Kontext (in
     `if`/`while`‑Bedingungen werden `int`/`char`/`string` wie in C++ implizit in
     `bool` konvertiert, d.h. `0` bzw. der leere String werden als `false` und alles
     andere als `true` behandelt)
--   Ausdrücke: Bei binären Operatoren müssen beide Seiten den selben Typ haben
+-   Ausdrücke:
+    -   Bei binären Operatoren müssen beide Seiten den selben Typ haben
+    -   Die linke Seite des Zuweisungsoperators muss ein LValue sein
 -   Funktionen/Methoden:
     -   Argumentanzahl muss zur Parameterliste passen
     -   Overload‑Auflösung: exakter Match Name und Arität und identische Typen inkl.
         `&`‑Markierung; bei Mehrdeutigkeit Fehler
     -   Rückgaberegel: In non‑`void`‑Funktionen/-Methoden existiert auf allen Pfaden
-        mindestens ein `return`
--   LValues: benannte Variablen `a` bzw. Feldzugriffe `obj.f`; alles andere sind
-    RValues
+        mindestens ein `return`, `void`‑Funktionen/-Methoden haben kein `return`
 -   Referenzen
     -   Parameter und lokale Referenzvariablen können nur mit LValues initialisiert
         werden
