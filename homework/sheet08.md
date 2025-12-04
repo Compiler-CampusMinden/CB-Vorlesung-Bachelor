@@ -156,8 +156,10 @@ Darunter fallen auch (Aufzählung nicht vollständig):
     `->`/`new`/`delete`, Speicherverwaltung
 -   Casts, Inkrement/Decrement, Compound‑Assignments, Mehrfachvererbung, Templates,
     `static`, `const`, `friend`, Namespaces
+-   `sizeof`, `typedef`, `using`
+-   Unterscheidung signed und unsigned Datentypen
 -   Sichtbarkeiten (außer `public`)
--   `this`, dadurch auch kein Shadowing von Membernamen durch lokale Variablen bzw.
+-   `this`, dadurch auch kein Shadowing von Member-Namen durch lokale Variablen bzw.
     Parameter
 -   Arrays (eindimensional, mehrdimensional)
 -   Kein `break/continue` in Schleifen
