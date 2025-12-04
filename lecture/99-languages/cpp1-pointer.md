@@ -771,8 +771,8 @@ int i=2;
 int j=9;
 
 int &r=i;    // Referenz: neuer Name fuer i
-r=10;        // aendert i: i==10
-r=j;         // aendert i: i==9
+r=10;        // aendert i: i=10
+r=j;         // aendert i: i=9
 
 int &s=r;    // aequivalent zu int &s = i;
 ```
