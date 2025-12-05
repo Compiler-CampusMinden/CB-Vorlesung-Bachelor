@@ -15,7 +15,7 @@ Einfach‑Vererbung und dem Unterschied zwischen statischem und dynamischem Disp
 (nicht‑virtual vs. virtual) - ohne Pointer/Heap und ohne Casts. Die Sprache ist eine
 echte Teilmenge von C++ und soll (abgesehen von den REPL‑Erweiterungen) mit einem
 C++‑Compiler kompilierbar sein. Präprozessor‑Zeilen (`#include ...`) dürfen in
-Dateien vorkommen; Ihr Interpreter soll sie ignorieren bzw. als Kommentare
+Dateien vorkommen; Ihr Interpreter soll sie ignorieren bzw. wie Kommentare
 behandeln.
 
 Sie *können* ANTLR zur Erstellung Ihres Lexers und Parsers einsetzen, Sie können
@@ -39,6 +39,7 @@ Unterstützen Sie mindestens folgende C++-Konzepte:
         `string` (Zeichenkette in doppelten Anführungsstrichen, etwa `"foo"`)
     -   `void` für Funktionen ohne Rückgabewert
     -   Zusätzlich Klassentypen (s.u.)
+    -   Escapes in Literalen mit `\`, beispielsweise `'\0'` als einzelnes `char`
 -   Variablen und Zuweisungen:
     -   Deklaration `T x;` und Initialisierung `T x = expr;`
     -   Einfache Zuweisung `=`
@@ -67,14 +68,25 @@ Unterstützen Sie mindestens folgende C++-Konzepte:
     -   `class A { public: /* Felder + Methoden */ }` mit Feldern und Methoden
         (alles "public" sichtbar)
     -   Felder können vom Typ her Basistypen oder Klassen sein
-    -   Konstruktoren sollen möglich sein; aber keine Destruktoren und keine
-        Initialisierungslisten
+    -   Parameterloser Konstruktor und weitere Konstruktoren (jeweils ohne
+        Initialisierungslisten), Verwendung nur als `T x;` (ruft `T()` auf) oder
+        `T x = T(args);` (kein direkter Aufruf `T x(args);`!)
     -   Methoden können als `virtual` deklariert werden
     -   `class D : public B { public: /* Felder + Methoden */ }`: Vererbung mit
         genau einer Basisklasse, keine Zyklen
 -   Eingebaute Funktionen (Runtime/Standardbibliothek): `print_bool`, `print_int`,
     `print_char`, `print_string` (Ausgabe eines Werts des jeweiligen Typs)
--   Programmorganisation: ein einzelnes Source‑File, keine Includes/Präprozessor
+-   Kommentare:
+    -   Zeilenweise Kommentare: `//` bis zum Zeilenende
+    -   Block-Kommentare: `/*` bis zum `*/` (kann über mehrere Zeilen gehen)
+    -   Präprozessor-Direktiven: `#` bis zum Zeilenende (soll als Kommentar
+        behandelt werden)
+-   Programmorganisation:
+    -   Ein einzelnes Source‑File mit einer optionalen `main()`-Funktion
+    -   Präprozessor-Anweisungen sollen Sie wie Kommentare ignorieren (behandeln Sie
+        `#include` wie einen zeilenweisen Kommentar, d.h. ab einem `#` wird der
+        Input bis zum nächsten Zeilenumbruch ignoriert)
+    -   Main-Funktion: zulässig sind die Formen `int main()` und `void main()`
 
 *Hinweis*: Polymorphie in dieser Sprache folgt C++‑Prinzipien (Slicing bei
 Wertkopie, dynamischer Dispatch über Referenzen), nicht Java‑Semantik.
@@ -82,7 +94,7 @@ Wertkopie, dynamischer Dispatch über Referenzen), nicht Java‑Semantik.
 ### Reservierte Schlüsselwörter
 
 `int`, `bool`, `char`, `string`, `true`, `false`, `if`, `else`, `while`, `return`,
-`class`, `void`, `public`
+`class`, `void`, `public`, `virtual`
 
 ### Semantik‑/Typregeln
 
@@ -103,38 +115,47 @@ Wertkopie, dynamischer Dispatch über Referenzen), nicht Java‑Semantik.
     andere als `true` behandelt)
 -   Ausdrücke:
     -   Bei binären Operatoren müssen beide Seiten den selben Typ haben
-    -   Die linke Seite des Zuweisungsoperators muss ein LValue sein
+    -   Zuweisung ist ein Ausdruck; die linke Seite des Zuweisungsoperators muss ein
+        LValue sein
+    -   Das Ergebnis der Zuweisung ist Wert/Typ der rechten Seite
+    -   Operatorpräzedenz und Assoziativität: wie in C++ üblich (Reihenfolge: unär,
+        multiplicative, additive, relational, equality, &&, \|\|, assignment;
+        assignment rechtsassoziativ)
 -   Funktionen/Methoden:
     -   Argumentanzahl muss zur Parameterliste passen
     -   Overload‑Auflösung: exakter Match Name und Arität und identische Typen inkl.
         `&`‑Markierung; bei Mehrdeutigkeit Fehler
-    -   Rückgaberegel: In non‑`void`‑Funktionen/-Methoden existiert auf allen Pfaden
-        mindestens ein `return`, `void`‑Funktionen/-Methoden haben kein `return`
 -   Referenzen
-    -   Parameter und lokale Referenzvariablen können nur mit LValues initialisiert
+    -   Referenz‑Parameter und ‑Variablen können nur mit LValues initialisiert
         werden
-    -   Keine Neubindung: Zuweisung an eine `&`‑Variable schreibt in das
+    -   Keine Neubindung: Zuweisung an eine Referenz‑Variable schreibt in das
         referenzierte Ziel
     -   Keine Referenzen als Felder/globale Variablen
     -   Keine `&`‑Rückgaben (Rückgabe nur als Kopie)
 -   Klassen/Methoden:
-    -   Ohne eigenen parameterlosen Konstruktor: Interpreter definiert einen
-        impliziten parameterlosen Default-Konstruktor (Felder werden mit ihren
-        Defaultwerten initialisiert)
-    -   Unqualifizierte Namen in Methoden binden an Parameter/lokale Variablen vor
-        eigene Members vor geerbte Members vor globale Funktionen/Klassen.
+    -   Parameterloser Default‑Konstruktor wird synthetisiert, wenn keiner definiert
+        wurde
+    -   Initialisierung von Feldern über impliziten (generierten) parameterlosen
+        Default-Konstruktor: `bool`: `false`, `int`: `0`, `char`: `'\0'`, `string`:
+        `""`, Felder von Klassentyp werden per Default‑Konstruktor initialisiert
+    -   Bei Vererbung wird von Konstruktoren bei abgeleiteten Klassen jeweils der
+        parameterlose Basiskonstruktor implizit vor dem Body aufgerufen
+    -   Kein `this`. Unqualifizierte Namen in Methoden binden an lokale
+        Variablen/Parameter vor eigene Members vor geerbte Members vor globale
+        Scope.
     -   Variablen vom Klassentyp sind Werte (feldweise Kopie bei Rückgabe/Zuweisung)
-    -   Bei abgeleiteten Klassen wird beim Konstruktoraufruf implizit der
+    -   Bei abgeleiteten Klassen wird beim Konstruktoraufruf implizit zunächst der
         parameterlose Default-Konstruktor der Basisklasse aufgerufen
     -   Abgeleitete Klassen erben alle Felder und Methoden der Basisklasse
     -   Zuweisung `Base b; b = d;` (mit `class D : public B { ... }` und `D d;`)
         führt zum Slicing (einzige Ausnahme der Regel für selbe Typen auf beiden
         Seiten der Zuweisung)
     -   Polymorphe Nutzung erfolgt ausschließlich über Referenzen:
-        `B& b = d; b.m();` ruft die überschriebene Methode in `D` auf (wenn `D::m()`
+        `B& b = d; b.m();` ruft die überschriebene Methode in `D` auf (wenn `B::m()`
         zusätzlich als `virtual` deklariert ist)
-    -   Nicht‑virtuelle Methoden binden statisch; virtuelle dynamisch bei Verwendung
-        von Referenzen
+    -   Virtuelle Bindung wie in C++: Ist die Methode im statischen Typ `virtual`,
+        erfolgt dynamischer Dispatch bei Aufruf über Referenzen; Overrides in
+        abgeleiteten Klassen sind auch ohne erneutes `virtual` virtuell
 -   Fehlerbehandlung:
     -   Lexer-, Parser-, Typ-Fehler beenden die Analyse mit klarer Meldung
     -   Laufzeitfehler (z.B. Division durch 0) sind sauber zu melden
@@ -145,10 +166,10 @@ Wertkopie, dynamischer Dispatch über Referenzen), nicht Java‑Semantik.
 
 ### Nicht Teil des Umfangs
 
-Weitere mit C++ verbundene Konzepte wie beispielsweise Präprozessor, Header-Files,
-Pointer, Arrays, Templates, Sichtbarkeiten in Klassen, Trennung
-Deklaration/Implementierung bei Klassen (Trennung .h und .cpp) brauchen Sie nicht
-umsetzen.
+Weitere, bisher nicht benannte mit C++ verbundene Konzepte wie beispielsweise
+Präprozessor, Header-Files, Pointer, Arrays, Templates, Sichtbarkeiten in Klassen,
+Trennung Deklaration/Implementierung bei Klassen (Trennung .h und .cpp) brauchen Sie
+nicht umsetzen.
 
 Darunter fallen auch (Aufzählung nicht vollständig):
 
@@ -166,7 +187,7 @@ Darunter fallen auch (Aufzählung nicht vollständig):
 -   Globale Variablen
 -   Referenzen als Rückgabetyp, Referenzen als Feld in Klassen
 -   Reine Funktionsdeklarationen (auch mit namenlosen Parametern)
--   Konstruktoren, Initialisierungslisten, Destruktoren
+-   Initialisierungslisten, delegierende Konstruktoren, Destruktoren
 -   Shadowing: In Methoden sollen Parameter und lokale Variablen nicht den selben
     Namen haben wie die Felder der Klasse
 
@@ -177,15 +198,14 @@ parse*"-Problem](https://en.wikipedia.org/wiki/Most_vexing_parse), wo nach dem
 Muster `T ID ( ... ) ;` sowohl ein Funktionsprototyp als auch eine
 Variablendeklaration mit Konstruktor‑Syntax möglich wäre.
 
-Versuchen Sie, dieses Problem durch geschickte Definitionen in der Grammatik
-einzuschränken. Beispielsweise wurde oben bereits einschränkend definiert, dass eine
-Variablendeklaration entweder die Form `T x;` haben soll bzw. mit Initialisierung
-`T x = expr;`. Die in C++ ebenfalls übliche Form `T x(expr);` für die
-Initialisierung von Variablen braucht nicht unterstützt werden. Für Konstruktoren
-erlauben Sie am besten nur `T x;` und `T x = T(arg);`, d.h. erlauben Sie nicht das
-normalerweise übliche `T x(arg);` zum Aufruf eines Konstruktors. Da Sie auch keine
-Funktionsprototypen unterstützen brauchen (reine Funktionsdeklarationen), sollte das
-*most vexing parse* in Ihrem Projekt gar nicht erst auftreten.
+Da mit den oben definierten Regeln Funktionsprototypen in diesem Projekt nicht
+erlaubt sind und für Funktionsdefinitionen immer ein anschließender Block auftaucht
+(`T ID ( ... ) { ... }`), Variablen für Basistypen entweder über die Form `T x;`
+oder mit Initialisierung als `T x = expr;` deklariert werden, und Variablen für
+Klassentypen in der Form `T x;` (Aufruf parameterloser Konstruktor) bzw. der Form
+`T x = T(arg);` (Erzeugung eines temporären Objekts mit dem passenden Konstruktor
+und elementweises Kopieren) deklariert werden, tritt das klassische *most vexing
+parse* in diesem Projekt nicht auf.
 
 ## REPL-Modell
 
@@ -193,10 +213,10 @@ Funktionsprototypen unterstützen brauchen (reine Funktionsdeklarationen), sollt
 
 Der Interpreter soll beim Start eine optional angegebene Datei mit C++-Code einlesen
 und verarbeiten können. Für die semantische Prüfung des eingelesenen Codes soll eine
-Mehrpass-Prüfung realisiert werden (Funktionen und Klassen: "define-after-use").
-Eine optional enthaltene main()\`-Funktion im eingelesenen Code soll in einem
-"Sitzungs-Scope" ausgeführt werden, welcher vom globalen Scope "abzweigt". Der
-Sitzungs-Scope wird offen gehalten.
+Mehrpass-Prüfung realisiert werden (Funktionen und Klassen: "define-after-use"
+erlaubt). Eine optional enthaltene `main()`-Funktion soll in einem "Sitzungs-Scope"
+ausgeführt werden, welcher vom globalen Scope "abzweigt". Der Sitzungs-Scope wird
+offen gehalten.
 
 ### REPL
 
@@ -211,15 +231,15 @@ In der REPL können zusätzlich auch neue Klassen und Funktionen und Variablen
 definiert und genutzt werden. Klassen und Funktionen erweitern dabei den globalen
 Scope und haben keinen Zugriff auf Sitzungsvariablen; neue Variablen landen dagegen
 im Sitzungs-Scope. Im Unterschied zur Initialisierungsphase gilt in der REPL stets
-"define-before-use", d.h. benutzte Namen müssen vorher bereits definiert worden
-sein.
+"define-before-use", d.h. alle benutzten Namen müssen vorher bereits definiert
+worden sein.
 
-Nach der Interpretation soll es jeweils eine Ausgabe des letzten Ergebnisses (oder
-Fehlers) auf der Konsole geben, und dann soll ein neuer Prompt ausgegeben und auf
-die nächste User-Eingabe gewartet werden.
+In der REPL wird nur das Ergebnis von Expression‑Statements automatisch ausgegeben;
+alle anderen Statements erzeugen keine Ausgabe. Für explizite Ausgaben nutzen Sie
+`print_*()`. Fehler (Lexer, Parser, semantische Analyse, Interpreter/Laufzeit)
+sollen ebenfalls auf der Konsole ausgegeben werden.
 
-Implementieren Sie eine spezielle Eingabe, mit der die laufende `main()`-Funktion
-und damit die REPL beendet werden kann.
+Implementieren Sie eine spezielle Eingabe, mit der die REPL beendet werden kann.
 
 *Hinweis*: Achten Sie darauf, dass Ihr Interpreter die Eingabe nicht zu früh beendet
 und zu früh mit der Interpretation beginnt! Oft ist ein Zeilenumbruch das korrekte
@@ -235,7 +255,7 @@ Im
 finden Sie einige Positiv- und Negativ-Tests. Für die Positivtests ist die erwartete
 Antwort des Interpreters angegeben, bei der Interpretation der Negativtests sollte
 es eine entsprechende Fehlermeldung (Lexer, Parser, semantische Analyse,
-Interpreter) geben.
+Interpreter/Laufzeit) geben.
 
 Betrachten Sie die Testfälle als ausführbare Ergänzung der obigen Spezifikation.
 
