@@ -27,6 +27,11 @@ dabei auf die in der Vorlesung besprochene sowie auf diesem Blatt skizzierte und
 über die Tests gegebene C++-Semantik. Der Interpreter selbst soll ein einfacher
 Tree-walking Interpreter wie in der Vorlesung besprochen sein.
 
+**Wichtig**: Wir haben die meisten benötigten Techniken besprochen und geübt. An
+einigen wenigen Stellen müssen Sie selbst kreativ werden, etwas beim Handling von
+überladenen Funktionen bzw. Vererbung und überschriebenen Methoden. Recherchieren
+Sie eigenständig zu den Themen.
+
 ## Betrachtete Sprache: Sub-Dialekt von C++
 
 ### Sprachkern
