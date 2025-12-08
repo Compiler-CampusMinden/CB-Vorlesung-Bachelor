@@ -36,6 +36,14 @@ zusammen mit der aktuellen Eingabe der semantischen Analyse unterwerfen. Da dies
 recht frickelig werden kann, realisieren wir auf diesem Blatt eine vereinfachte
 semantische Analyse "*on-the-fly*" auf den Environments im Interpreter.
 
+**Hinweis**: Wenn Sie Blatt 04 nicht oder nicht erfolgreich bearbeitet haben
+sollten, können Sie dieses Blatt trotzdem bearbeiten. Erstellen Sie sich zunächst
+eine Grammatik für die beschriebene Sprache (oder nehmen eine der beiden unten
+angegebenen Grammatiken). Treten Sie dabei mental einen Schritt zurück und
+betrachten Sie das ganze Bild: Was wird *syntaktisch* wirklich an Strukturen
+benötigt? Danach lassen Sie sich mit ANTLR einen Lexer und Parser generieren und
+steigen ganz normal in die Bearbeitung dieses Blattes ein.
+
 # Sprachdefinition
 
 Siehe [Blatt 04](sheet04.md).
