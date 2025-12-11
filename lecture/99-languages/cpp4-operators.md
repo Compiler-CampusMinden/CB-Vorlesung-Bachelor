@@ -347,7 +347,7 @@ int main() {
 <!--
 *   Nur Compilieren:
 
-    ```cpp
+    ``` cpp
     Studi();
     Studi operator+(const Studi&);
     friend ostream &operator<<(ostream&, const Studi&);
@@ -355,11 +355,10 @@ int main() {
 
 *   Zusätzlich sinnvoll wg. Pointer:
 
-    ```cpp
+    ``` cpp
     Studi(const Studi&);
     Studi &operator=(const Studi&);
     ```
-:::
 -->
 
 **Schreiben Sie Code, damit folgender Code kompiliert:**
@@ -368,4 +367,13 @@ int main() {
 test wuppie;
 bool fluppie = wuppie(3);
 ```
+
+<!--
+``` cpp
+class test {
+public:
+    bool operator()(int x) {return x==3;}
+};
+```
+-->
 :::
