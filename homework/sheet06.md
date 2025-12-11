@@ -109,7 +109,7 @@ expr    :  NUMBER
         |  TRUE
         |  FALSE
         |  ID
-        |  '(' (ID | OP)* expr* ')'
+        |  '(' (ID | OP) expr* ')'
         ;
 
 
