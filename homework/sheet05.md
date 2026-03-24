@@ -164,84 +164,84 @@ können dafür folgende Transformationen nutzen:
 
 ::: {.details title="Transformationen"}
     program: stmt+ EOF
-      → Liste[Stmt] in Quellreihenfolge (kein eigener Program-Knoten)
+      -> Liste[Stmt] in Quellreihenfolge (kein eigener Program-Knoten)
 
     stmt
-      • vardecl: type ID ('=' expr)? ';'
-        → VarDecl(PrimType(type), ID.text, initializer?)
+      * vardecl: type ID ('=' expr)? ';'
+        -> VarDecl(PrimType(type), ID.text, initializer?)
            initializer? = Some(exprAST) falls vorhanden, sonst None
 
-      • assign: ID '=' expr ';'
-        → Assign(ID.text, exprAST)
+      * assign: ID '=' expr ';'
+        -> Assign(ID.text, exprAST)
 
-      • fndecl: type ID '(' params? ')' block
-        → FnDecl(PrimType(type), ID.text, paramsList, blockAST)
+      * fndecl: type ID '(' params? ')' block
+        -> FnDecl(PrimType(type), ID.text, paramsList, blockAST)
 
-      • expr ';'
-        → ExprStmt(exprAST)
+      * expr ';'
+        -> ExprStmt(exprAST)
 
-      • block: '{' stmt* '}'
-        → Block([AST(stmt1), AST(stmt2), ...])
+      * block: '{' stmt* '}'
+        -> Block([AST(stmt1), AST(stmt2), ...])
 
-      • while: 'while' '(' expr ')' block
-        → WhileStmt(exprAST, blockAST)
+      * while: 'while' '(' expr ')' block
+        -> WhileStmt(exprAST, blockAST)
 
-      • cond: 'if' '(' expr ')' block ('else' block)?
-        → IfStmt(exprAST, thenBlockAST, elseBlockOrEmpty)
+      * cond: 'if' '(' expr ')' block ('else' block)?
+        -> IfStmt(exprAST, thenBlockAST, elseBlockOrEmpty)
            elseBlockOrEmpty = elseBlockAST, falls vorhanden;
                               sonst Block([])
 
-      • return: 'return' expr ';'
-        → ReturnStmt(exprAST)
+      * return: 'return' expr ';'
+        -> ReturnStmt(exprAST)
 
     expr
-      • fncall: ID '(' args? ')'
-        → Call(ID.text, argsList)
+      * fncall: ID '(' args? ')'
+        -> Call(ID.text, argsList)
 
-      • expr ('*' | '/') expr
-        → Binary(leftAST, op=MUL|DIV, rightAST)
+      * expr ('*' | '/') expr
+        -> Binary(leftAST, op=MUL|DIV, rightAST)
 
-      • expr ('+' | '-') expr
-        → Binary(leftAST, op=PLUS|MINUS, rightAST)
+      * expr ('+' | '-') expr
+        -> Binary(leftAST, op=PLUS|MINUS, rightAST)
 
-      • expr ('>' | '<') expr
-        → Binary(leftAST, op=GT|LT, rightAST)
+      * expr ('>' | '<') expr
+        -> Binary(leftAST, op=GT|LT, rightAST)
 
-      • expr ('==' | '!=') expr
-        → Binary(leftAST, op=EQ|NEQ, rightAST)
+      * expr ('==' | '!=') expr
+        -> Binary(leftAST, op=EQ|NEQ, rightAST)
 
-      • ID
-        → Variable(ID.text)
+      * ID
+        -> Variable(ID.text)
 
-      • NUMBER
-        → IntLiteral(parseInt(NUMBER.text))
+      * NUMBER
+        -> IntLiteral(parseInt(NUMBER.text))
 
-      • STRING
-        → StringLiteral(unquote(STRING.text))
+      * STRING
+        -> StringLiteral(unquote(STRING.text))
 
-      • 'T' → BoolLiteral(true)
-      • 'F' → BoolLiteral(false)
+      * 'T' -> BoolLiteral(true)
+      * 'F' -> BoolLiteral(false)
 
-      • '(' expr ')'
-        → exprAST (Klammern sind rein syntaktisch)
+      * '(' expr ')'
+        -> exprAST (Klammern sind rein syntaktisch)
 
     type
-      • 'int'    → PrimType.INT
-      • 'string' → PrimType.STRING
-      • 'bool'   → PrimType.BOOL
+      * 'int'    -> PrimType.INT
+      * 'string' -> PrimType.STRING
+      * 'bool'   -> PrimType.BOOL
 
     params: type ID (',' type ID)*
-      → paramsList = [ Param(PrimType(type_i), ID_i.text) ] in Quellreihenfolge
+      -> paramsList = [ Param(PrimType(type_i), ID_i.text) ] in Quellreihenfolge
 
     args: expr (',' expr)*
-      → argsList = [ exprAST_i ] in Quellreihenfolge
+      -> argsList = [ exprAST_i ] in Quellreihenfolge
 
     Operator-Zuordnung
-      '*' → MUL, '/' → DIV, '+' → PLUS, '-' → MINUS, '>' → GT, '<' → LT, '==' → EQ, '!=' → NEQ
+      '*' -> MUL, '/' -> DIV, '+' -> PLUS, '-' -> MINUS, '>' -> GT, '<' -> LT, '==' -> EQ, '!=' -> NEQ
 
     Allgemein
-      • Tokens wie Klammern, Kommas, Semikolons, Schlüsselwörter erscheinen nicht im AST.
-      • Präzedenz/Assoziativität kommt aus der Parse-Struktur; der AST ist normalisiert zu Binary(left, op, right).
+      * Tokens wie Klammern, Kommas, Semikolons, Schlüsselwörter erscheinen nicht im AST.
+      * Präzedenz/Assoziativität kommt aus der Parse-Struktur; der AST ist normalisiert zu Binary(left, op, right).
 :::
 
 Testen Sie Ihre Transformation mit Ihren in der vorigen Aufgabe erstellten
