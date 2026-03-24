@@ -197,4 +197,4 @@ George](https://github.com/bcg7), [Carsten Gips](https://github.com/cagix) and
 [contributors](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/graphs/contributors)
 is licensed under [CC BY-SA
 4.0](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/LICENSE.md).
-See the [credits](CREDITS.md) for a detailed list of contributing projects.
+See the [credits](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/CREDITS.md) for a detailed list of contributing projects.
