@@ -4,9 +4,11 @@ no_beamer: true
 title: "IFM 3.1: Compilerbau (Winter 2025/26)"
 ---
 
+# Syllabus
+
 ![](admin/images/architektur_cb.png){width="80%"}
 
-# Kursbeschreibung
+## Kursbeschreibung
 
 Der Compiler ist das wichtigste Werkzeug in der Informatik. In der Königsdisziplin
 der Informatik schließt sich der Kreis, hier kommen die unterschiedlichen
@@ -17,7 +19,7 @@ Konzepte im Compilerbau. Wir schauen uns dazu relevante aktuelle Tools und
 Frameworks an und setzen diese bei der Erstellung eines kleinen Compiler-Frontends
 für C++ ein.
 
-# Überblick Modulinhalte
+## Überblick Modulinhalte
 
 1.  Lexikalische Analyse: Scanner/Lexer
     -   Reguläre Sprachen
@@ -32,7 +34,7 @@ für C++ ein.
 4.  Interpreter: AST-Traversierung
 5.  C++ als zu verarbeitende Programmiersprache
 
-# Team
+## Team
 
 -   [BC
     George](https://www.hsbi.de/minden/ueber-uns/personenverzeichnis/birgit-christina-george)
@@ -41,7 +43,7 @@ für C++ ein.
     (Sprechstunde nach Vereinbarung)
 -   Alesia Herbertz (Tutorin)
 
-# Kursformat
+## Kursformat
 
 | Vorlesung (2 SWS)            | Praktikum (2 SWS)                        |
 |:-----------------------------|:-----------------------------------------|
@@ -58,7 +60,7 @@ Durchführung der Vorlesung als *Flipped Classroom* (Carsten) bzw. als *regulär
 Vorlesung* (BC). Zugangsdaten Zoom siehe
 [ILIAS](https://www.hsbi.de/elearning/goto.php/crs/1555855).
 
-# Fahrplan
+## Fahrplan
 
 Hier finden Sie einen abonnierbaren [Google
 Kalender](https://calendar.google.com/calendar/ical/07021c87022fe3f132fa2e2e799b230b5ab9c7088c85d152f2beab8f1b5218af%40group.calendar.google.com/public/basic.ics)
@@ -87,7 +89,7 @@ Vorstellung der Lösung im jeweiligen Praktikum in der Abgabewoche.
 | 12. - 16.01.      |                                                                                                                                                                   | *Sprechstunde*                                                                                                  | *Freies Arbeiten ([B08](homework/sheet08.md))* |                                                                                     |
 | 19. - 23.01.      | [Prüfungsvorbereitung](admin/exams.md)                                                                                                                            | Rückblick (*Zoom*)                                                                                              | [B08](homework/sheet08.md) Mini-Projekt        |                                                                                     |
 
-# Prüfungsform, Note und Credits
+## Prüfungsform, Note und Credits
 
 **(Digitale) Klausur plus Studienleistung (Portfolio)**, 5 ECTS
 
@@ -143,7 +145,7 @@ Vorstellung der Lösung im jeweiligen Praktikum in der Abgabewoche.
 
 :::
 
-# Materialien
+## Materialien
 
 1.  ["**Compilers: Principles, Techniques, and
     Tools**"](https://learning.oreilly.com/library/view/compilers-principles-techniques/9789357054881/).
@@ -170,9 +172,9 @@ Vorstellung der Lösung im jeweiligen Praktikum in der Abgabewoche.
     [Online](https://learning.oreilly.com/library/view/writing-a-c/9781098182229/)
     über die [O'Reilly-Lernplattform](https://www.oreilly.com/library-access/).
 
-# Förderungen und Kooperationen
+## Förderungen und Kooperationen
 
-## Kooperation mit University of Alberta, Edmonton (Kanada)
+### Kooperation mit University of Alberta, Edmonton (Kanada)
 
 Über das Projekt ["We CAN
 virtuOWL"](https://www.uni-bielefeld.de/international/profil/netzwerk/alberta-owl/we-can-virtuowl/)
@@ -187,7 +189,7 @@ durchgeführt.)
 
 ------------------------------------------------------------------------------------
 
-# LICENSE
+## LICENSE
 
 ![](https://licensebuttons.net/l/by-sa/4.0/88x31.png)
 
