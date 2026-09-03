@@ -1,7 +1,6 @@
 ---
 author: Carsten Gips, BC George (HSBI)
 no_beamer: true
-points: 10 Punkte
 title: "Blatt 07: C++"
 ---
 
