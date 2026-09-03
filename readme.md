@@ -41,7 +41,7 @@ für C++ ein.
 -   [Carsten
     Gips](https://www.hsbi.de/minden/ueber-uns/personenverzeichnis/carsten-gips)
     (Sprechstunde nach Vereinbarung)
--   Alesia Herbertz (Tutorin)
+-   Alesia Herbertz, Vivien Traue, Jonathan Hauer (Tutor:innen)
 
 ## Kursformat
 
