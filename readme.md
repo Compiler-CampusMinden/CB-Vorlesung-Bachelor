@@ -59,27 +59,27 @@ Vorlesung* (BC). Zugangsdaten Zoom siehe
 ## Fahrplan
 
 Abgabe der Post Mortems jeweils **Mittwoch bis 09:00 Uhr** im
-[ILIAS](https://www.hsbi.de/elearning/goto.php/exc/1582799).
-Vorstellung der Lösung im jeweiligen Praktikum in der Abgabewoche.
+[ILIAS](https://www.hsbi.de/elearning/goto.php/exc/1582799). Vorstellung der Lösung
+im jeweiligen Praktikum in der Abgabewoche.
 
-| Woche             | Vorlesung: Selbststudium (Vorbereitung)                                                                                                                           | Vorlesung: Gemeinsame Sitzung                                                                                   | Praktikum                                      | Edmonton/Minden-Meetings                                                            |
-|:------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------|:-----------------------------------------------|:------------------------------------------------------------------------------------|
-| 06. - 10.10.      | [Überblick](lecture/00-intro/overview.md) \| [Sprachen](lecture/00-intro/languages.md) \| [Anwendungen](lecture/00-intro/applications.md)                         | [Orga](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor-W25) (*Zoom*)                             |                                                |                                                                                     |
-| 13. - 17.10.      |                                                                                                                                                                   | [Reguläre Sprachen 1](lecture/01-lexing/regular1.md)                                                            |                                                |                                                                                     |
-| 20. - 24.10.      |                                                                                                                                                                   | [Reguläre Sprachen 2](lecture/01-lexing/regular2.md) \|\| [CFG](lecture/02-parsing/cfg.md)                      | [B01](homework/sheet01.md) Reguläre Sprachen   |                                                                                     |
-| 27. - 31.10.      | [Lexer mit ANTLR](lecture/01-lexing/antlr-lexing.md)                                                                                                              | [Parser mit ANTLR](lecture/02-parsing/antlr-parsing.md)                                                         | [B02](homework/sheet02.md) CFG                 |                                                                                     |
-| 03. - 07.11.      |                                                                                                                                                                   | [LL-Parser (Theorie)](lecture/02-parsing/ll-parser.md)                                                          | [B03](homework/sheet03.md) ANTLR               | **Mi, 05.11., 18:00 - 19:00 Uhr (online): Edmonton/Minden: ANTLR + Live-Coding**    |
-| 10. - 14.11.      | [Lexer (Implementierung)](lecture/01-lexing/recursive.md)                                                                                                         | [LL-Parser (Implementierung)](lecture/02-parsing/ll-parser-impl.md)                                             |                                                |                                                                                     |
-| 17. - 21.11.      | Symboltabellen: [Überblick](lecture/03-semantics/symbtab0-intro.md) \| [Scopes](lecture/03-semantics/symbtab1-scopes.md)                                          | [Funktionen](lecture/03-semantics/symbtab2-functions.md) \| [Klassen](lecture/03-semantics/symbtab3-classes.md) | [B04](homework/sheet04.md) LL hand coded       |                                                                                     |
-| 24. - 28.11.      | [AST-basierte Interpreter 1](lecture/06-interpretation/astdriven-part1.md)                                                                                        | [AST-basierte Interpreter 2](lecture/06-interpretation/astdriven-part2.md)                                      | [B05](homework/sheet05.md) Semantische Analyse |                                                                                     |
-| 01. - 05.12.      | C++ I: [Basics](lecture/99-languages/cpp0-basics.md)                                                                                                              | [Pointer & Referenzen](lecture/99-languages/cpp1-pointer.md)                                                    |                                                | **Mo, 01.12., 18:00 - 19:00 Uhr (online): Edmonton/Minden: Minden Presentations**   |
-| 08. - 12.12.      | C++ II: [Klassen](lecture/99-languages/cpp2-classes.md) \| [Big Three](lecture/99-languages/cpp3-big3.md) \| [Operatoren](lecture/99-languages/cpp4-operators.md) | [Vererbung & Polymorphie](lecture/99-languages/cpp5-inheritance.md)                                             | [B06](homework/sheet06.md) Interpreter         | **Mo, 08.12., 18:00 - 19:00 Uhr (online): Edmonton/Minden: Edmonton Presentations** |
-| 15. - 19.12.      |                                                                                                                                                                   | ~~Sprechstunde~~ *Mathe-3-Irgendwas*                                                                            | [B07](homework/sheet07.md) C++                 |                                                                                     |
-| *22. - 26.12.*    |                                                                                                                                                                   | *Weihnachtspause*                                                                                               |                                                |                                                                                     |
-| *29.12. - 02.01.* |                                                                                                                                                                   | *Weihnachtspause*                                                                                               |                                                |                                                                                     |
-| 05. - 09.01.      |                                                                                                                                                                   | *Sprechstunde*                                                                                                  | *Freies Arbeiten ([B08](homework/sheet08.md))* |                                                                                     |
-| 12. - 16.01.      |                                                                                                                                                                   | *Sprechstunde*                                                                                                  | *Freies Arbeiten ([B08](homework/sheet08.md))* |                                                                                     |
-| 19. - 23.01.      | [Prüfungsvorbereitung](admin/exams.md)                                                                                                                            | Rückblick (*Zoom*)                                                                                              | [B08](homework/sheet08.md) Mini-Projekt        |                                                                                     |
+| Woche | Vorlesung (Mo) | Praktikum (Mi) | Edmonton/Minden-Meetings |
+|:----|:---------------------------------------------------|:---------|:----------------|
+| 06\. - 10.10. | [Orga](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor-W25) (*Zoom*) \|\| [Überblick](lecture/00-intro/overview.md) \| [Sprachen](lecture/00-intro/languages.md) \| [Anwendungen](lecture/00-intro/applications.md) |  |  |
+| 13\. - 17.10. | [Reguläre Sprachen 1](lecture/01-lexing/regular1.md) |  |  |
+| 20\. - 24.10. | [Reguläre Sprachen 2](lecture/01-lexing/regular2.md) \|\| [CFG](lecture/02-parsing/cfg.md) | [B01](homework/sheet01.md) Reguläre Sprachen |  |
+| 27\. - 31.10. | [Lexer mit ANTLR](lecture/01-lexing/antlr-lexing.md) \| [Parser mit ANTLR](lecture/02-parsing/antlr-parsing.md) | [B02](homework/sheet02.md) CFG |  |
+| 03\. - 07.11. | [LL-Parser (Theorie)](lecture/02-parsing/ll-parser.md) | [B03](homework/sheet03.md) ANTLR | **Mi, 05.11., 18:00 - 19:00 Uhr (online): Edmonton/Minden: ANTLR + Live-Coding** |
+| 10\. - 14.11. | [Lexer (Implementierung)](lecture/01-lexing/recursive.md) \| [LL-Parser (Implementierung)](lecture/02-parsing/ll-parser-impl.md) |  |  |
+| 17\. - 21.11. | Symboltabellen: [Überblick](lecture/03-semantics/symbtab0-intro.md) \| [Scopes](lecture/03-semantics/symbtab1-scopes.md) \| [Funktionen](lecture/03-semantics/symbtab2-functions.md) \| [Klassen](lecture/03-semantics/symbtab3-classes.md) | [B04](homework/sheet04.md) LL hand coded |  |
+| 24\. - 28.11. | [AST-basierte Interpreter 1](lecture/06-interpretation/astdriven-part1.md) \| [AST-basierte Interpreter 2](lecture/06-interpretation/astdriven-part2.md) | [B05](homework/sheet05.md) Semantische Analyse |  |
+| 01\. - 05.12. | C++ I: [Basics](lecture/99-languages/cpp0-basics.md) \| [Pointer & Referenzen](lecture/99-languages/cpp1-pointer.md) |  | **Mo, 01.12., 18:00 - 19:00 Uhr (online): Edmonton/Minden: Minden Presentations** |
+| 08\. - 12.12. | C++ II: [Klassen](lecture/99-languages/cpp2-classes.md) \| [Big Three](lecture/99-languages/cpp3-big3.md) \| [Operatoren](lecture/99-languages/cpp4-operators.md) \| [Vererbung & Polymorphie](lecture/99-languages/cpp5-inheritance.md) | [B06](homework/sheet06.md) Interpreter | **Mo, 08.12., 18:00 - 19:00 Uhr (online): Edmonton/Minden: Edmonton Presentations** |
+| 15\. - 19.12. | ~~Sprechstunde~~ *Mathe-3-Irgendwas* | [B07](homework/sheet07.md) C++ |  |
+| *22. - 26.12.* | *Weihnachtspause* |  |  |
+| *29.12. - 02.01.* | *Weihnachtspause* |  |  |
+| 05\. - 09.01. | *Sprechstunde* | *Freies Arbeiten ([B08](homework/sheet08.md))* |  |
+| 12\. - 16.01. | *Sprechstunde* | *Freies Arbeiten ([B08](homework/sheet08.md))* |  |
+| 19\. - 23.01. | Rückblick (*Zoom*) | [B08](homework/sheet08.md) Mini-Projekt |  |
 
 ## Prüfungsform, Note und Credits
 
@@ -97,7 +97,6 @@ Vorstellung der Lösung im jeweiligen Praktikum in der Abgabewoche.
 -   **Gesamtnote**: (Digitale) Klausur im B40 (90 Minuten)
 
 ::: {.details title="Hinweise"}
-
 -   Die Bearbeitung der Leistungen erfolgt im Team.
 -   Ein Team umfasst 3 Personen.
 -   Die Post Mortems sind individuell zu erstellen und abzugeben.
@@ -134,7 +133,6 @@ Vorstellung der Lösung im jeweiligen Praktikum in der Abgabewoche.
 
     Siehe auch
     https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor-W25/discussions/3.
-
 :::
 
 ## Materialien
@@ -191,4 +189,6 @@ George](https://github.com/bcg7), [Carsten Gips](https://github.com/cagix) and
 [contributors](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/graphs/contributors)
 is licensed under [CC BY-SA
 4.0](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/LICENSE.md).
-See the [credits](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/CREDITS.md) for a detailed list of contributing projects.
+See the
+[credits](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor/blob/master/CREDITS.md)
+for a detailed list of contributing projects.
