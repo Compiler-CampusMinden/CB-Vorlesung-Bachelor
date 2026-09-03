@@ -63,7 +63,7 @@ Abgabe der Post Mortems jeweils **Mittwoch bis 09:00 Uhr** im
 im jeweiligen Praktikum in der Abgabewoche.
 
 | Woche | Vorlesung (Mo) | Praktikum (Mi) | Edmonton/Minden-Meetings |
-|:----|:---------------------------------------------------|:---------|:----------------|
+|:------|:------------------------------------------------|:-----------|:----------------|
 | 06\. - 10.10. | [Orga](https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor-W25) (*Zoom*) \|\| [Überblick](lecture/00-intro/overview.md) \| [Sprachen](lecture/00-intro/languages.md) \| [Anwendungen](lecture/00-intro/applications.md) |  |  |
 | 13\. - 17.10. | [Reguläre Sprachen 1](lecture/01-lexing/regular1.md) |  |  |
 | 20\. - 24.10. | [Reguläre Sprachen 2](lecture/01-lexing/regular2.md) \|\| [CFG](lecture/02-parsing/cfg.md) | [B01](homework/sheet01.md) Reguläre Sprachen |  |

@@ -219,7 +219,7 @@ Symboltabelle enthält dann statt der Namen Verweise in diese (Hash-) Tabelle.
 
 # Einfache Verwaltung von Variablen primitiven Typs
 
-::::::: columns
+::::: columns
 ::: {.column width="40%"}
 \vspace{4mm}
 
@@ -233,10 +233,10 @@ for (i=0; i<10; i++) {
 ```
 :::
 
-::::: {.column width="20%"}
+::: {.column width="20%"}
 ![](images/simpletable.png){width="80%" web_width="10%"}
+:::
 :::::
-:::::::
 
 ::: notes
 **Bsp.:** Die zu übersetzende Sprache hat nur einen (den globalen) Scope und kennt

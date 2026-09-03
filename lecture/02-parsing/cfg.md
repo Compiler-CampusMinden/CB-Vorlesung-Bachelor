@@ -21,7 +21,6 @@ title: CFG
 
 ## Was brauchen wir jetzt?
 
-
 ## Themen für heute
 
 -   PDAs: mächtiger als DFAs, NFAs
@@ -30,7 +29,6 @@ title: CFG
 -   DPDAs und deterministisch kontextfreie Grammatiken: die Grundlage der
     Syntaxanalyse im Compilerbau
 -   Syntaxanalyse
-
 
 ## Einordnung: Erweiterung der Automatenklasse DFA, um komplexere Sprachen als die regulären akzeptieren zu können
 
@@ -151,8 +149,8 @@ werden, sind dieselbe Sprachklasse.
 
 **Satz:** Eine von einem DPDA akzeptierte Sprache hat eine eindeutige Grammatik.
 
-Vorgehensweise im Compilerbau: Eine (cf) Grammatik für die gewünschte Sprache definieren
-und schauen, ob sich daraus ein DPDA generieren lässt (automatisch).
+Vorgehensweise im Compilerbau: Eine (cf) Grammatik für die gewünschte Sprache
+definieren und schauen, ob sich daraus ein DPDA generieren lässt (automatisch).
 
 # Syntaxanalyse
 
@@ -160,7 +158,6 @@ und schauen, ob sich daraus ein DPDA generieren lässt (automatisch).
 
 Wir verstehen unter Syntax eine Menge von Regeln, die die Struktur von Daten (z. B.
 Programmen) bestimmen.
-
 
 ## Ziele der Syntaxanalyse
 
@@ -177,15 +174,12 @@ Programmen) bestimmen.
     und Methoden, Klassen, benutzerdefinierte Typen, Parameter, ...), aber auch die
     Gültigkeitsbereiche
 
-
 ## Was brauchen wir für die Syntaxanalyse von Programmen?
 
 -   einen Grammatiktypen, aus dem sich manuell oder automatisiert ein Programm zur
     deterministischen Syntaxanalyse (= Parser) erstellen lässt
 
 -   einen Algorithmus zum Parsen von Programmen mit Hilfe einer solchen Grammatik
-
-
 
 # Wrap-Up
 
@@ -197,10 +191,13 @@ Programmen) bestimmen.
     PDAs.
 -   Kontextfreie Grammatiken (CFGs) erweitern die regulären Grammatiken.
 -   PDAs akzeptieren kontextfreie Sprachen.
--   Deterministisch parsbare Sprachen haben eine eindeutige kontextfreie Grammatik, aber nicht für jede eindeutige kontextfreie Grammatik lässt sich ein deterministischer PDA finden.
+-   Deterministisch parsbare Sprachen haben eine eindeutige kontextfreie Grammatik,
+    aber nicht für jede eindeutige kontextfreie Grammatik lässt sich ein
+    deterministischer PDA finden.
 -   Es ist nicht entscheidbar, ob eine gegebene kontextfreie Grammatik eindeutig
     ist.
--   Syntaxanalyse wird mit (möglichst deterministisch) kontextfreien Grammatiken durchgeführt.
+-   Syntaxanalyse wird mit (möglichst deterministisch) kontextfreien Grammatiken
+    durchgeführt.
 -   In der Praxis werden aus kontextfreien Grammatiken Parser automatisch generiert.
 
 <!-- ADD

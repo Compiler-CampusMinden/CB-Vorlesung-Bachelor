@@ -27,7 +27,7 @@ Linksrekursion auch nicht umgehen.)
 
 Eine gute Darstellung, die sich am zeichen- bzw. tokenweisen Einlesen orientiert,
 finden Sie in [@Parr2010] (Kapitel 2). Eine weitere sehr gut lesbare Darstellung ist
-in [Nystrom2021] (Kapitel 4, 5 und 6) zu finden. Dort wird die Eingabe komplett
+in \[Nystrom2021\] (Kapitel 4, 5 und 6) zu finden. Dort wird die Eingabe komplett
 eingelesen und daraus eine Liste aller Token erzeugt, auf der der Parser operiert.
 Der Beispiel-Code in dieser Vorlesung orientiert sich an der zeichenweisen bzw.
 tokenweisen Verarbeitung.
@@ -406,7 +406,7 @@ nolist="true"}
 ::: readings
 -   @Nystrom2021: Kapitel 5 und 6
 -   @Parr2010: Kapitel 2 ("Pattern 3: LL(1) Recursive-Decent Parser")
-::::
+:::
 
 ::: outcomes
 -   k2: Ich kann den prinzipiellen Aufbau von LL-Parsern am Beispiel erklären

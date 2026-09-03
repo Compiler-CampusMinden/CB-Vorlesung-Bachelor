@@ -331,7 +331,7 @@ implementieren: Die Multiplikation hat Vorrang von der Addition, und diese hat
 wiederum Vorrang von einer einfachen `ID`.
 :::
 
-:::: notes
+::::: notes
 ## Direkte vs. indirekte Links-Rekursion
 
 ANTLR kann nur *direkte* Links-Rekursion auflösen. Regeln wie `r : r T U | V ;`
@@ -496,7 +496,7 @@ Das funktioniert, hier wird den Alternativen implizt ein Vorrang zugeordnet. Abe
 jetzt bekommt die Multiplikation Vorrang vor der Division, und auch die Addition
 bekommt Vorrang vor der Subtraktion. Ist das wirklich so gewollt?
 :::
-::::
+:::::
 
 # Kontext-Objekte für Parser-Regeln
 

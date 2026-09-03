@@ -297,8 +297,8 @@ int* murks() {
 ## Hotelzimmer-Analogie
 
 -   Wenn Sie in ein Hotel einchecken, bekommen Sie den Schlüssel zu **Ihrem** Zimmer
-    -   *Pointer* == Schlüssel
-    -   *Variable auf die Pointer zeigt* == Zimmer
+    -   *Pointer* \== Schlüssel
+    -   *Variable auf die Pointer zeigt* \== Zimmer
 -   Wenn Sie auschecken, geben Sie normalerweise Ihr Zimmer auf und den Schlüssel ab
     -   Pointer wird ungültig
     -   Variable wird ungültig
@@ -686,8 +686,8 @@ for (int k=0; k<10; k++)
 wirkt auf `pa` (und nicht auf `*pa`), aber zunächst wird für die Ausgabe `*pa`
 ausgewertet ...
 
-`*a++` ist nicht erlaubt, weil dadurch der Name des Arrays (== Adresse des ersten
-Array-Elements == konstanter Zeiger auf den Anfang des Arrays) verändert würde.
+`*a++` ist nicht erlaubt, weil dadurch der Name des Arrays (\== Adresse des ersten
+Array-Elements \== konstanter Zeiger auf den Anfang des Arrays) verändert würde.
 
 ## Array-Namen sind wie konstante Pointer
 
@@ -1031,13 +1031,13 @@ sollten Sie sich für `bar foo(wuppie&,  bar)` entscheiden.
 ::: notes
 # Vergleich Pointer mit Referenzen
 
-| Referenzen                                                   | Pointer                                                                                            |
-|:-------------------------------------------------------------|:---------------------------------------------------------------------------------------------------|
-| Alias-Name für Objekte/Variablen, kein eigener Speicherplatz | "Echte" Variablen mit eigenem Speicherplatz (für den Wert des Pointers)                            |
-| Können nicht auf andere Objekte "umgebogen" werden           | Können auf andere Objekte zeigen (falls nicht const)                                               |
-| Operationen agieren direkt auf dem referenzierten Objekt     | Operationen auf referenzierten Objekt als auch auf dem Pointer selbst                              |
-| Nur in C++                                                   | In C und in C++                                                                                    |
-|                                                              | Mit Pointern ist dynamische Speicherverwaltung möglich: Manipulation von Speicherbereichen im Heap |
+| Referenzen | Pointer |
+|:--------------------------------|:--------------------------------------------------|
+| Alias-Name für Objekte/Variablen, kein eigener Speicherplatz | "Echte" Variablen mit eigenem Speicherplatz (für den Wert des Pointers) |
+| Können nicht auf andere Objekte "umgebogen" werden | Können auf andere Objekte zeigen (falls nicht const) |
+| Operationen agieren direkt auf dem referenzierten Objekt | Operationen auf referenzierten Objekt als auch auf dem Pointer selbst |
+| Nur in C++ | In C und in C++ |
+|  | Mit Pointern ist dynamische Speicherverwaltung möglich: Manipulation von Speicherbereichen im Heap |
 :::
 
 # Wrap-Up
@@ -1074,8 +1074,8 @@ sollten Sie sich für `bar foo(wuppie&,  bar)` entscheiden.
 ::: outcomes
 -   k1: Ich kenne das Konzept des virtuellen Speichers und die Aufteilung in die
     Segmente: Text, Data, Stack
--   k2: Ich kann an einem Beispiel erklären, dass Pointer Variablen sind, deren
-    Wert wird als Adresse interpretiert wird
+-   k2: Ich kann an einem Beispiel erklären, dass Pointer Variablen sind, deren Wert
+    wird als Adresse interpretiert wird
 -   k2: Ich kann die Initialisierung und Scopes bei Pointern erklären
 -   k3: Ich kann in meinem Programm eine Adresse an einen Pointer zuweisen
 -   k3: Ich kann in meinem Programm Pointer dereferenzieren und auf das
