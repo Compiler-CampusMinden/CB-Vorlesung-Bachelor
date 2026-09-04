@@ -62,24 +62,24 @@ Abgabe der Post Mortems jeweils **Mittwoch bis 09:00 Uhr** im
 [ILIAS](https://www.hsbi.de/elearning/goto.php/exc/1582799). Vorstellung der Lösung
 im jeweiligen Praktikum in der Abgabewoche.
 
-| Monat | Woche | Vorlesung (Mo) | Praktikum (Mi) | Edmonton/Minden-Meetings |
-|:--------|:----------|:-----------------------------------|:------------|:---------------|
-| Oktober | 12\. - 16.10. | [Orga](readme.md) \|\| [Überblick](lecture/00-intro/overview.md) \| [Sprachen](lecture/00-intro/languages.md) \| [Anwendungen](lecture/00-intro/applications.md) |  |  |
-|  | 19\. - 23.10. | [Reguläre Sprachen 1](lecture/01-lexing/regular1.md) | [B01](homework/sheet01.md) |  |
-|  | 26\. - 30.10. | [Reguläre Sprachen 2](lecture/01-lexing/regular2.md) \|\| [CFG](lecture/02-parsing/cfg.md) | [B02](homework/sheet02.md) |  |
-| November | 02\. - 06.11. | [LL-Parser (Theorie)](lecture/02-parsing/ll-parser.md) |  | **Di, 03.11., 17:00 - 18:00 Uhr (online): ANTLR + Live-Coding** |
-|  | 09\. - 13.11. | [L-Int (Teil 1)](lecture/02-lint/readme.md) | **Station 1** |  |
-|  | 16\. - 20.11. | [L-Int (Teil 2)](lecture/02-lint/readme.md) | C-Int |  |
-|  | 23\. - 27.11. | [L-Expr](lecture/03-lexpr/readme.md) | C-Expr |  |
-| Dezember | 30.11. - 04.12. | [L-Var](lecture/04-lvar/readme.md) | **Station 2** | **Mo, 30.11., 17:00 - 18:00 Uhr (online): Minden Presentations** |
-|  | 07\. - 11.12. | [L-If](lecture/05-lif/readme.md) | C-Var, C-If | **Mo, 07.12., 17:00 - 18:00 Uhr (online): Edmonton Presentations** |
-|  | 14\. - 18.12. | [L-Fun](lecture/06-lfun/readme.md) | C-Fun |  |
-|  | *21. - 25.12.* | **Weihnachtspause** |  |  |
-|  | *28.12. - 01.01.* | **Weihnachtspause** |  |  |
-| Januar | 04\. - 08.01. | [L-Class](lecture/07-lclass/readme.md) | **Station 3** |  |
-|  | 11\. - 15.01. | [L-Inherit](lecture/08-linherit/readme.md) | C-Class, C-Inherit |  |
-|  | 18\. - 22.01. | [L-Self](lecture/09-lself/readme.md) | C-Self, Snake |  |
-|  | 25\. - 29.01. | Rückblick | Projektvorstellung (Video) |  |
+| Monat | Woche vom | Vorlesung (Mo) | Praktikum (Mi) | Edmonton/Minden-Meetings |
+|:-----------|:------------|:-------------------------------|:------------|:---------------|
+| Oktober | 12\. ... | [Orga](readme.md) \|\| [Überblick](lecture/00-intro/readme.md) |  |  |
+|  | 19\. ... | [Reguläre Sprachen 1](lecture/01-lexing/regular1.md) | [B01](homework/sheet01.md) |  |
+|  | 26\. ... | [Reguläre Sprachen 2](lecture/01-lexing/regular2.md) \|\| [CFG](lecture/02-parsing/cfg.md) | [B02](homework/sheet02.md) |  |
+| November | 02\. ... | [LL-Parser (Theorie)](lecture/02-parsing/ll-parser.md) |  | **Di, 03.11., 17:00 - 18:00 Uhr (online): ANTLR + Live-Coding** |
+|  | 09\. ... | [L-Int (Teil 1)](lecture/02-lint/readme.md) | **Station 1** |  |
+|  | 16\. ... | [L-Int (Teil 2)](lecture/02-lint/readme.md) | C-Int |  |
+|  | 23\. ... | [L-Expr](lecture/03-lexpr/readme.md) | C-Expr |  |
+| Dezember | 30.11. ... | [L-Var](lecture/04-lvar/readme.md) | **Station 2** | **Mo, 30.11., 17:00 - 18:00 Uhr (online): Minden Presentations** |
+|  | 07\. ... | [L-If](lecture/05-lif/readme.md) | C-Var, C-If | **Mo, 07.12., 17:00 - 18:00 Uhr (online): Edmonton Presentations** |
+|  | 14\. ... | [L-Fun](lecture/06-lfun/readme.md) | C-Fun |  |
+|  | *21. ...* | **Weihnachtspause** |  |  |
+|  | *28. ...* | **Weihnachtspause** |  |  |
+| Januar | 04\. ... | [L-Class](lecture/07-lclass/readme.md) | **Station 3** |  |
+|  | 11\. ... | [L-Inherit](lecture/08-linherit/readme.md) | C-Class, C-Inherit |  |
+|  | 18\. ... | [L-Self](lecture/09-lself/readme.md) | C-Self, Snake |  |
+|  | 25\. ... | Rückblick | Projektvorstellung (Video) |  |
 
 ## Prüfungsform, Note und Credits
 
