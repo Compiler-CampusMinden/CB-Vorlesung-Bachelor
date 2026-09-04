@@ -1,7 +1,7 @@
 ---
 has_license: true
 no_beamer: true
-title: "IFM 3.1: Compilerbau (Winter 2025/26)"
+title: "IFM 3.1: Compilerbau (Winter 2026/27)"
 ---
 
 # Syllabus
