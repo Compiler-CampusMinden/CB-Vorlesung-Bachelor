@@ -58,7 +58,7 @@ Vorlesung* (BC). Zugangsdaten Zoom siehe
 
 ## Fahrplan
 
-Abgabe der Post Mortems jeweils **Mittwoch bis 09:00 Uhr** im
+Abgabe der Post Mortems jeweils **Montag bis 09:00 Uhr** im
 [ILIAS](https://www.hsbi.de/elearning/goto.php/exc/1582799). Vorstellung der Lösung
 im jeweiligen Praktikum in der Abgabewoche.
 
