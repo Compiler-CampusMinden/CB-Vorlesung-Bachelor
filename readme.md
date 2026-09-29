@@ -26,9 +26,9 @@ für C++ ein.
     -   Generierung mit ANTLR
 2.  Syntaxanalyse: Parser
     -   Kontextfreie Grammatiken (CFG)
-    -   LL-Parser (Top-Down-Parser)
+    -   LL-Parser (Recursive-Descent-Parser)
     -   Generierung mit ANTLR
-3.  Semantische Analyse: Symboltabellen
+3.  Semantische Analyse: Symboltabellen, Name-Resolving, Type-Checking
     -   Namen und Scopes
     -   Typen, Klassen, Polymorphie
 4.  Interpreter: AST-Traversierung
