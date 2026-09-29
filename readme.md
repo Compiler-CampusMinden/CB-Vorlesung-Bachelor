@@ -54,7 +54,7 @@ für C++ ein.
 
 Durchführung der Vorlesung als *Flipped Classroom* (Carsten) bzw. als *reguläre
 Vorlesung* (BC). **Zugangsdaten Zoom siehe
-[ILIAS](https://www.hsbi.de/elearning/goto.php/crs/1555855)**.
+[ILIAS](https://www.hsbi.de/elearning/goto.php/crs/1702066)**.
 
 ## Fahrplan
 
@@ -90,7 +90,7 @@ Vorlesung* (BC). **Zugangsdaten Zoom siehe
     -   Termin 3: Montag, 07.12., 17:00 - 18:00 Uhr (online)
     -   Abgabe der Post Mortems zu den Edmonton-Meetings jeweils bis Montag 09:00
         Uhr in der Folgewoche im
-        [ILIAS](https://www.hsbi.de/elearning/goto.php/exc/1582799)
+        [ILIAS](https://www.hsbi.de/elearning/goto.php/exc/1737956)
 2.  Abschluss-Video-Vortrag zum erfolgreich bearbeiteten Snake-Mini-Projekt am
     Semesterende
     -   Termin: Mittwoch, 27.01., in Praktikumszeit (*Slots werden noch bekannt
@@ -100,7 +100,7 @@ Vorlesung* (BC). **Zugangsdaten Zoom siehe
     -   Vorführung des Videos und die Q&A findet pro Team statt, Anwesenheit
         erforderlich
     -   Abgabe des Videos zum Snake-Mini-Projekt bis Montag, 25.01., 09:00 Uhr im
-        [ILIAS](https://www.hsbi.de/elearning/goto.php/exc/1582799).
+        [ILIAS](https://www.hsbi.de/elearning/goto.php/exc/1737956).
 
 ### **Gesamtnote**: Parcoursprüfung
 
@@ -145,7 +145,7 @@ und in sich geschlossen (kein Übertrag):
     4.  **Reflexion**: Was haben Sie gelernt oder (besser) verstanden?
 
     Die Post Mortems geben Sie bitte pro Person bis spätestens zur jeweiligen
-    Deadline im [ILIAS](https://www.hsbi.de/elearning/goto.php/exc/1582799) ab.
+    Deadline im [ILIAS](https://www.hsbi.de/elearning/goto.php/exc/1737956) ab.
 
 ## Materialien
 
