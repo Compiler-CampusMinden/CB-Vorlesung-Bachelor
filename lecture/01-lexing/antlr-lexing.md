@@ -425,7 +425,7 @@ Entsprechend bekommt man mit
     Rekursive Lexer-Regeln sind erlaubt. **Achtung**: Es dürfen keine
     *links-rekursiven* Regeln genutzt werden, etwa wie `ID : ID '*' ID ;` ... (Eine
     genauere Definition und die Transformation in nicht-linksrekursive Regeln siehe
-    [CFG](../01-theorie/cfg.md)).
+    [CFG](../01-theory/cfg.md)).
 
 -   Alle Literale werden in *einfache* Anführungszeichen eingeschlossen (es erfolgt
     keine Unterscheidung zwischen einzelnen Zeichen und Strings wie in anderen
