@@ -137,30 +137,15 @@ im jeweiligen Praktikum in der Abgabewoche.
 
 ## Materialien
 
-1.  ["**Compilers: Principles, Techniques, and
-    Tools**"](https://learning.oreilly.com/library/view/compilers-principles-techniques/9789357054881/).
-    Aho, A. V. und Lam, M. S. und Sethi, R. und Ullman, J. D. and Bansal, S.,
-    Pearson India, 2023. ISBN
-    [978-9-3570-5488-1](https://fhb-bielefeld.digibib.net/openurl?isbn=978-9-3570-5488-1).
-    [Online](https://learning.oreilly.com/library/view/compilers-principles-techniques/9789357054881/)
-    über die [O'Reilly-Lernplattform](https://www.oreilly.com/library-access/).
-2.  ["**Crafting
+1.  ["**Crafting
     Interpreters**"](https://github.com/munificent/craftinginterpreters). Nystrom,
     R., Genever Benning, 2021. ISBN
     [978-0-9905829-3-9](https://fhb-bielefeld.digibib.net/openurl?isbn=978-0-9905829-3-9).
     [Online](https://www.craftinginterpreters.com/).
-3.  ["**The Definitive ANTLR 4
-    Reference**"](https://learning.oreilly.com/library/view/the-definitive-antlr/9781941222621/).
-    Parr, T., Pragmatic Bookshelf, 2014. ISBN
-    [978-1-9343-5699-9](https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-9343-5699-9).
-    [Online](https://learning.oreilly.com/library/view/the-definitive-antlr/9781941222621/)
-    über die [O'Reilly-Lernplattform](https://www.oreilly.com/library-access/).
-4.  ["Writing a C
-    Compiler"](https://learning.oreilly.com/library/view/writing-a-c/9781098182229/).
-    Sandler, N., No Starch Press, 2024. ISBN
-    [978-1-0981-8222-9](https://fhb-bielefeld.digibib.net/openurl?isbn=978-1-0981-8222-9).
-    [Online](https://learning.oreilly.com/library/view/writing-a-c/9781098182229/)
-    über die [O'Reilly-Lernplattform](https://www.oreilly.com/library-access/).
+2.  ["**Introduction to Compiler
+    Design**"](https://doi.org/10.1007/978-3-031-46460-7). Mogensen, T.A., Springer
+    International, 2024. ISBN
+    [978-3-031-46460-7](https://fhb-bielefeld.digibib.net/openurl?isbn=978-3-031-46460-7).
 
 ## Förderungen und Kooperationen
 
