@@ -1,7 +1,8 @@
 ---
 no_beamer: true
 no_pdf: true
-title: "Reguläre Sprachen, kontextfreie Grammatiken und Sprachen, lexikalische und syntaktische Analyse"
+title: Reguläre Sprachen, kontextfreie Grammatiken und Sprachen, lexikalische und
+  syntaktische Analyse
 ---
 
 In der lexikalischen Analyse soll ein Lexer (auch "Scanner") den Zeichenstrom in

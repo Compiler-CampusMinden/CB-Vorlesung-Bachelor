@@ -58,10 +58,6 @@ Vorlesung* (BC). **Zugangsdaten Zoom siehe
 
 ## Fahrplan
 
-Abgabe der Post Mortems jeweils **Montag bis 09:00 Uhr** im
-[ILIAS](https://www.hsbi.de/elearning/goto.php/exc/1582799). Vorstellung der Lösung
-im jeweiligen Praktikum in der Abgabewoche.
-
 | Monat    | Woche vom | Vorlesung (Mo)                                                                                                                                                   | Praktikum (Mi)                 | Edmonton/Minden-Meetings                                           |
 |:---------|:----------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------|:-------------------------------------------------------------------|
 | Oktober  | 12.10     | [Orga](readme.md) \|\| [Überblick](lecture/00-intro/overview.md) \| [Sprachen](lecture/00-intro/languages.md) \| [Anwendungen](lecture/00-intro/applications.md) | \-                             |                                                                    |
@@ -83,57 +79,73 @@ im jeweiligen Praktikum in der Abgabewoche.
 
 ## Prüfungsform, Note und Credits
 
-**(Digitale) Klausur plus Studienleistung (Portfolio)**, 5 ECTS
+**Parcoursprüfung plus Studienleistung (Portfolio)**, 5 ECTS
 
--   **Studienleistung**: "Portfolio" - Kriterien je Person:
+### **Studienleistung**: "Portfolio" - Kriterien je Person:
 
-    1.  Teilnahme an mind. zwei Edmonton/Minden-Terminen mit aktiver Beteiligung
-    2.  Mind. vier der Übungsblätter B01..B07 erfolgreich bearbeitet
-    3.  Abschlussvortrag zum erfolgreich bearbeiteten Mini-Projekt (B08) am
-        Semesterende (21.01.) a 15 Minuten (pro Team)
+1.  Teilnahme an mind. zwei Edmonton/Minden-Terminen mit aktiver Beteiligung und
+    Abgabe eines ausreichenden Post Mortems (pro Meeting, je Person)
+    -   Termin 1: Dienstag, 03.11., 17:00 - 18:00 Uhr (online)
+    -   Termin 2: Montag, 30.11., 17:00 - 18:00 Uhr (online)
+    -   Termin 3: Montag, 07.12., 17:00 - 18:00 Uhr (online)
+    -   Abgabe der Post Mortems zu den Edmonton-Meetings jeweils bis Montag 09:00
+        Uhr in der Folgewoche im
+        [ILIAS](https://www.hsbi.de/elearning/goto.php/exc/1582799)
+2.  Abschluss-Video-Vortrag zum erfolgreich bearbeiteten Snake-Mini-Projekt am
+    Semesterende
+    -   Termin: Mittwoch, 27.01., in Praktikumszeit (*Slots werden noch bekannt
+        gegeben*)
+    -   Video: 10 Minuten Dauer (pro Team)
+    -   Anschließend kurzes Q&A (Fragen zum Snake-Mini-Projekt, pro Team)
+    -   Vorführung des Videos und die Q&A findet pro Team statt, Anwesenheit
+        erforderlich
+    -   Abgabe des Videos zum Snake-Mini-Projekt bis Montag, 25.01., 09:00 Uhr im
+        [ILIAS](https://www.hsbi.de/elearning/goto.php/exc/1582799).
 
-    Je Kriterium: Abgabe eines Post Mortem im ILIAS (**jede Person individuell**)
+### **Gesamtnote**: Parcoursprüfung
 
--   **Gesamtnote**: (Digitale) Klausur im B40 (90 Minuten)
+Sie können die Prüfung in der ersten oder in der zweiten Prüfungsphase ablegen. Die
+Stationen der Parcoursprüfung sind je nach Prüfungsphase unterschiedlich gestaltet
+und in sich geschlossen (kein Übertrag):
 
-::: {.details title="Hinweise"}
--   Die Bearbeitung der Leistungen erfolgt im Team.
--   Ein Team umfasst 3 Personen.
--   Die Post Mortems sind individuell zu erstellen und abzugeben.
+-   **Prüfungsphase I**: Vier Stationen (digitale E-Assessments im B40 mit je 30
+    Minuten Dauer), beste drei Ergebnisse ergeben die Note
+    -   Station 1: Mittwoch, 11.11., in Praktikumszeit (*Slots werden noch bekannt
+        gegeben*)
+    -   Station 2: Mittwoch, 02.12., in Praktikumszeit (*Slots werden noch bekannt
+        gegeben*)
+    -   Station 3: Mittwoch, 06.01., in Praktikumszeit (*Slots werden noch bekannt
+        gegeben*)
+    -   Station 4: Im ersten Prüfungszeitraum, Termin wird vom Prüfungsamt
+        bekanntgegeben
+-   **Prüfungsphase II**: Digitale Klausur im B40, Dauer 120 Minuten, Termin wird
+    vom Prüfungsamt bekanntgegeben
+
+### Hinweise
+
+-   Die Bearbeitung der Aufgaben erfolgt im Team
+-   Ein Team umfasst 3 Personen
+-   Die Post Mortems sind individuell zu erstellen und abzugeben
+-   Das Video zum Projekt ist pro Team zu erstellen und einmal abzugeben unter
+    Angabe der Teammitglieder
 -   "Aktive Beteiligung" umfasst Anwesenheit und sachbezogene Beiträge;
-    Anwesenheit/Beteiligung werden dokumentiert.
--   "Erfolgreiche Bearbeitung" eines Blattes umfasst Bearbeitung im Team,
-    Bearbeitung aller Aufgaben des Blattes, fristgerechte Abgabe des ausreichenden
-    Post Mortems im ILIAS. Die intensive Beschäftigung mit den Aufgaben muss
-    erkennbar sein.
+    Anwesenheit/Beteiligung werden dokumentiert
 
 \smallskip
 
--   **Post Mortem**: Jede Person beschreibt individuell(!) die Bearbeitung des
-    jeweiligen Kriteriums bzw. die Teilnahme an den Edmonton/Minden-Meetings
-    zurückblickend mit mind. 150 bis max. 400 Wörtern (Nutzlast; Überschriften und
-    Links zählen nicht mit). Gehen Sie dabei aussagekräftig und nachvollziehbar auf
-    folgende Punkte ein:
+-   **Post Mortem**: Jede Person beschreibt individuell(!) die Teilnahme an den
+    Edmonton/Minden-Meetings zurückblickend mit mind. 150 bis max. 400 Wörtern
+    (Nutzlast! Überschriften und Links zählen nicht mit). Gehen Sie dabei
+    aussagekräftig und nachvollziehbar auf folgende Punkte ein:
 
-    1.  Zusammenfassung: Was wurde gemacht bzw. was wurde auf dem Meeting
-        besprochen?
-    2.  Details: Kurze Beschreibung besonders interessanter Aspekte.
-    3.  Reflexion: Was war der schwierigste Teil? Wie haben Sie dieses Problem
+    1.  **Zusammenfassung**: Was wurde auf dem Meeting besprochen?
+    2.  **Details**: Kurze Beschreibung besonders interessanter Aspekte.
+    3.  **Reflexion**: Was war der schwierigste Teil? Wie haben Sie dieses Problem
         gelöst?
-    4.  Reflexion: Was haben Sie gelernt oder (besser) verstanden?
-    5.  Team: Mit wem haben Sie zusammengearbeitet?
-    6.  Link zu Ihrem Repo mit den relevanten Artefakten (Lösung, Slides für den
-        Vortrag, ...).
-
-    Für die Edmonton/Minden-Meetings passen Sie bitte die Punkte (1) bis (4)
-    entsprechend inhaltlich an, (5) und (6) entfallen.
+    4.  **Reflexion**: Was haben Sie gelernt oder (besser) verstanden?
 
     Die Post Mortems geben Sie bitte pro Person bis spätestens zur jeweiligen
     Deadline im [ILIAS](https://www.hsbi.de/elearning/goto.php/exc/1582799) ab.
-
-    Siehe auch
-    https://github.com/Compiler-CampusMinden/CB-Vorlesung-Bachelor-W25/discussions/3.
-:::
 
 ## Materialien
 
