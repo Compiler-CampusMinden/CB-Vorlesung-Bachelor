@@ -53,8 +53,8 @@ für C++ ein.
 |                              | G4: Mi, 14:00 - 15:30 Uhr (Präsenz B40) |
 
 Durchführung der Vorlesung als *Flipped Classroom* (Carsten) bzw. als *reguläre
-Vorlesung* (BC). Zugangsdaten Zoom siehe
-[ILIAS](https://www.hsbi.de/elearning/goto.php/crs/1555855).
+Vorlesung* (BC). **Zugangsdaten Zoom siehe
+[ILIAS](https://www.hsbi.de/elearning/goto.php/crs/1555855)**.
 
 ## Fahrplan
 
