@@ -4,10 +4,12 @@ slide_numbering: fraction
 title: Reguläre Sprachen, Ausdrucksstärke (Teil 2)
 ---
 
+<!--
 ::: attachments
 -   [Annotierte Folien: Reguläre Sprachen,
     Ausdrucksstärke](https://github.com/Compiler-CampusMinden/AnnotatedSlides/blob/master/lexing_regular2.ann.ba.pdf)
 :::
+-->
 
 # Wiederholung
 

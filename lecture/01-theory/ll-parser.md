@@ -4,10 +4,12 @@ slide_numbering: fraction
 title: LL-Parser
 ---
 
+<!--
 ::: attachments
 -   [Annotierte Folien:
     LL-Parser](https://github.com/Compiler-CampusMinden/AnnotatedSlides/blob/master/ll-parser.ann.ba.pdf)
 :::
+-->
 
 # Wiederholung
 
