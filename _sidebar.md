@@ -1,0 +1,22 @@
+- [**Syllabus**](readme.md)
+- **Vorlesungsunterlagen**
+  - **Überblick**
+    - [Struktur eines Compilers](lecture/00-intro/overview.md)
+    - [Bandbreite der Programmiersprachen](lecture/00-intro/languages.md)
+    - [Anwendungen](lecture/00-intro/applications.md)
+  - **Reguläre Sprachen, kontextfreie Grammatiken und Sprachen, lexikalische und syntaktische Analyse**
+    - [Reguläre Sprachen, Ausdrucksstärke (Teil 1)](lecture/01-theory/regular1.md)
+    - [Reguläre Sprachen, Ausdrucksstärke (Teil 2)](lecture/01-theory/regular2.md)
+    - [CFG](lecture/01-theory/cfg.md)
+    - [LL-Parser](lecture/01-theory/ll-parser.md)
+  - **Sprache L-Int: Integer, Addition, Subtraktion**
+  - **Sprache L-Expr: erweiterte Ausdrücke, Vorrangregeln**
+  - **Sprache L-Var: Variablen, Statments, nested Scopes**
+  - **Sprache L-If: Datentyp Boolean, Vergleiche, Kontrollstrukturen (if/else, while)**
+  - **Sprache L-Fun: Funktionen (Definition, Aufruf)**
+  - **Sprache L-Class: Klassen (Felder, Methoden, Objekte)**
+  - **Sprache L-Inherit: Einfachvererbung und dynamischer Dispatch**
+  - **Sprache L-Self: native Klassen (inkl. Vererbung)**
+- **Praktikum**
+  - [Blatt 01: Reguläre Sprachen](homework/sheet01.md)
+  - [Blatt 02: CFG](homework/sheet02.md)
