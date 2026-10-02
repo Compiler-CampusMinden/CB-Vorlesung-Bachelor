@@ -86,24 +86,26 @@ Vorlesung* (BC). **Zugangsdaten Zoom siehe
 Die Studienleistung ist eine unbenotete Leistung und setzt sich aus mehreren
 Komponenten zusammen:
 
-1.  Teilnahme an **mind. zwei Edmonton/Minden-Terminen** mit aktiver Beteiligung und
-    Abgabe eines ausreichenden **Post Mortems** (pro Meeting, je Person)
+1.  Pro Person: Teilnahme an **mind. zwei Edmonton/Minden-Terminen** mit aktiver
+    Beteiligung und Abgabe eines ausreichenden **Post Mortems** (pro Meeting, je
+    Person)
     -   Termin 1: Dienstag, 03.11., 17:00 - 18:00 Uhr (online)
     -   Termin 2: Montag, 30.11., 17:00 - 18:00 Uhr (online)
     -   Termin 3: Montag, 07.12., 17:00 - 18:00 Uhr (online)
-    -   Abgabe der Post Mortems zu den Edmonton-Meetings jeweils bis Montag 09:00
-        Uhr in der Folgewoche im
+    -   Abgabe der Post Mortems (s.u.) zu den Edmonton-Meetings jeweils bis Montag
+        09:00 Uhr in der Folgewoche im
         [ILIAS](https://www.hsbi.de/elearning/goto.php/exc/1737956)
-2.  **Abschluss-Video-Vortrag** zum erfolgreich bearbeiteten Snake-Mini-Projekt am
-    Semesterende
+2.  Pro Team: **Abschluss-Video-Vortrag** zum erfolgreich bearbeiteten
+    **Snake-Mini-Projekt** (letztes Blatt) am Semesterende
     -   Termin: Mittwoch, 27.01., in Praktikumszeit (*Slots werden noch bekannt
         gegeben*)
     -   Video: 10 Minuten Dauer (pro Team)
     -   Anschließend kurzes Q&A (Fragen zum Snake-Mini-Projekt, pro Team)
     -   Vorführung des Videos und die Q&A findet pro Team statt, Anwesenheit
         erforderlich
-    -   Abgabe des Videos zum Snake-Mini-Projekt bis Montag, 25.01., 09:00 Uhr im
-        [ILIAS](https://www.hsbi.de/elearning/goto.php/exc/1737956).
+    -   Abgabe des Videos und der Lösung zum Snake-Mini-Projekt bis Montag, 25.01.,
+        09:00 Uhr im [ILIAS](https://www.hsbi.de/elearning/goto.php/exc/1737956)
+    -   Teilleistung jeder Person im Team muss erkennbar sein
 
 ### **Gesamtnote**: Parcoursprüfung
 
@@ -136,6 +138,9 @@ und in sich geschlossen (kein Übertrag):
     Mini-C++-Dialekt auf. Sie benötigen diese schrittweise erarbeiteten Bausteine
     für das erfolgreiche Bearbeiten des Snake-Mini-Projekts (letztes Blatt) und
     damit das Bestehen der Studienleistung.
+-   "Erfolgreiche Bearbeitung" umfasst die Bearbeitung aller Aufgaben im
+    Zusammenhang des Snake-Mini-Projekts. Die intensive Beschäftigung mit den
+    Aufgaben muss erkennbar sein.
 -   Die Teilnahme am Praktikum ist freiwillig, wird aber deutlich empfohlen.
 -   Eine Bewertung einzelner Übungsblätter findet nicht statt.
 -   Die Post Mortems sind pro Edmonton-Meeting und individuell zu erstellen und
