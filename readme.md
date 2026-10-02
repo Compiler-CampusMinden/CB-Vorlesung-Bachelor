@@ -126,13 +126,24 @@ und in sich geschlossen (kein Übertrag):
 
 ### Hinweise
 
--   Die Bearbeitung der Aufgaben erfolgt im Team
--   Ein Team umfasst 3 Personen
--   Die Post Mortems sind pro Meeting und individuell zu erstellen und abzugeben
--   Das Video zum Projekt ist pro Team zu erstellen und einmal abzugeben unter
-    Angabe der Teammitglieder
+-   Die Bearbeitung der Aufgaben erfolgt im Team.
+-   Ein Team umfasst 3 Personen.
+-   Im Praktikum beginnen wir gemeinsam mit der Bearbeitung der Übungsblätter,
+    diskutieren über Lösungsansätze und erarbeiten Abnahmekriterien. Die Lösung soll
+    anschließend teamweise fertiggestellt werden und kann auf Wunsch im nächsten
+    Praktikum von Ihnen vorgestellt werden.
+-   Wir bauen schrittweise über die Übungsblätter hinweg einen Interpreter für einen
+    Mini-C++-Dialekt auf. Sie benötigen diese schrittweise erarbeiteten Bausteine
+    für das erfolgreiche Bearbeiten des Snake-Mini-Projekts (letztes Blatt) und
+    damit das Bestehen der Studienleistung.
+-   Die Teilnahme am Praktikum ist freiwillig, wird aber deutlich empfohlen.
+-   Eine Bewertung einzelner Übungsblätter findet nicht statt.
+-   Die Post Mortems sind pro Edmonton-Meeting und individuell zu erstellen und
+    abzugeben.
+-   Das Video zum Snake-Mini-Projekt ist pro Team zu erstellen und einmal abzugeben
+    unter Angabe der Teammitglieder.
 -   "Aktive Beteiligung" umfasst Anwesenheit und sachbezogene Beiträge;
-    Anwesenheit/Beteiligung werden dokumentiert
+    Anwesenheit/Beteiligung werden dokumentiert.
 
 \smallskip
 
