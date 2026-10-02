@@ -81,7 +81,10 @@ Vorlesung* (BC). **Zugangsdaten Zoom siehe
 
 **Parcoursprüfung plus Studienleistung (Portfolio)**, 5 ECTS
 
-### **Studienleistung**: "Portfolio" - Kriterien je Person:
+### **Studienleistung**: "Portfolio":
+
+Die Studienleistung ist eine unbenotete Leistung und setzt sich aus mehreren
+Komponenten zusammen:
 
 1.  Teilnahme an **mind. zwei Edmonton/Minden-Terminen** mit aktiver Beteiligung und
     Abgabe eines ausreichenden **Post Mortems** (pro Meeting, je Person)
