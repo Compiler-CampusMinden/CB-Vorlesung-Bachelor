@@ -81,7 +81,7 @@ Vorlesung* (BC). **Zugangsdaten Zoom siehe
 
 **Parcoursprüfung plus Studienleistung (Portfolio)**, 5 ECTS
 
-### **Studienleistung**: "Portfolio":
+### **Studienleistung**: "Portfolio"
 
 Die Studienleistung ist eine unbenotete Leistung und setzt sich aus mehreren
 Komponenten zusammen:
@@ -109,6 +109,8 @@ Komponenten zusammen:
 
 ### **Gesamtnote**: Parcoursprüfung
 
+Die Modul-Note ergibt sich aus der Leistung in der Parcoursprüfung.
+
 Sie können die Prüfung in der ersten oder in der zweiten Prüfungsphase ablegen. Die
 Stationen der Parcoursprüfung sind je nach Prüfungsphase unterschiedlich gestaltet
 und in sich geschlossen (kein Übertrag):
@@ -124,7 +126,7 @@ und in sich geschlossen (kein Übertrag):
     -   Station 4: Im ersten Prüfungszeitraum (*Termin wird vom Prüfungsamt
         bekanntgegeben*)
 -   **Prüfungsphase II**: **Digitale Klausur** im B40, Dauer 120 Minuten (*Termin
-    wird vom Prüfungsamt bekanntgegeben*)
+    wird vom Prüfungsamt bekanntgegeben*), **Klausurergebnis bestimmt die Note**
 
 ### Hinweise
 
