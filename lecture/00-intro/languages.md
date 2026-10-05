@@ -14,7 +14,8 @@ dass Compiler teilweise sehr unterschiedliche Konzepte "verstehen" müssen.
 :::
 
 ::: youtube
--   [VL Programmiersprachen](https://youtu.be/prsc8cf4cJ8)
+Vorlesung \[[YT](https://youtu.be/cluS9modzDk)\],
+\[[HSBI](https://www.hsbi.de/medienportal/album/video/cb-bandbreite-der-programmiersprachen/b355504c34965b385cd2348611418e55/253)\]
 :::
 
 # 99 Bottles of Beer
