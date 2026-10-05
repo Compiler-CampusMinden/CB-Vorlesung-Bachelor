@@ -16,7 +16,8 @@ genutzte Varianten sind dabei:
 :::
 
 ::: youtube
--   [VL Anwendungen](https://youtu.be/gt9ROh-qRIU)
+Vorlesung \[[YT](https://youtu.be/JJ2H3fZnbTc)\],
+\[[HSBI](https://www.hsbi.de/medienportal/album/video/cb-anwendungen-compiler/d4e98c05a03cb5cfbbe5e1fadf6c67cc/253)\]
 :::
 
 # Anwendung: Compiler
