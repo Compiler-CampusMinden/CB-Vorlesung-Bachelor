@@ -29,25 +29,10 @@ Es ist empfehlenswert, die Implementierung mehrstufig zu realisieren:
 
 # Sprachdefinition
 
-Ein Programm besteht aus einem oder mehreren Ausdrücken (*Expressions*). Die
-Ausdrücke haben eine spezielle Form: Sie sind sogenannte
-[S-Expressions](https://en.wikipedia.org/wiki/S-expression). Dies sind entweder
-Literale der Form `x` oder einfache listenartige Gebilde der Form `(. x y)`, wobei
-der `.` eine Operation (oder Funktion oder ein Keyword) darstellt und `x` und `y`
-selbst wieder S-Expressions sind.
-
-::: tip
-**Anmerkung**: Die Anzahl der S-Expressions in einem Klammer-Ausdruck ist nicht
-näher definiert - `x` und `y` sind nur Beispiele. Es könnten auch mehr oder weniger
-S-Expressions nach der Operation/Funktion/Keyword auftauchen (vgl. nachfolgende
-Sprachdefinition).
-:::
-
 Die einfachste Form sind dabei Literale mit konkreten Werten der drei Datentypen
 `Integer`, `String` und `Boolean`:
 
 ``` clojure
-42          ;; Integer
 "hello"     ;; String
 true        ;; Boolean
 false       ;; Boolean
@@ -59,26 +44,13 @@ Für eine Variable `foo` wäre das Folgende ebenfalls eine S-Expression:
 foo         ;; Variable foo
 ```
 
-(Über `;;` wird ein Kommentar eingeleitet, der bis zum Ende der Zeile geht.)
-
 Komplexere Ausdrücke werden über die Listenform gebildet:
 
 ``` clojure
-(+ 1 1)               ;; 1 + 1
 (/ 10 3)              ;; 10 / 3
-(+ 1 2 3 4)           ;; 1 + 2 + 3 + 4
-(+ (+ (+ 1 2) 3) 4)   ;; (((1 + 2) + 3) + 4)
 (/ (+ 10 2) (+ 2 4))  ;; ((10 + 2) / (2 + 4))
 ```
 
-In der listenartigen Form ist der erste Eintrag der Liste immer eine Operation (oder
-ein Funktionsname), danach kommen je nach Operation/Funktion (die Arität muss
-passen!) entsprechende Einträge, die als Parameter für die Operation oder Funktion
-zu verstehen sind.
-
-Die Ausdrücke sind implizit von links nach rechts geklammert, d.h. der Ausdruck
-`(+ 1 2 3 4)` ist [*syntactic sugar*](https://en.wikipedia.org/wiki/Syntactic_sugar)
-für `(+ (+ (+ 1 2) 3) 4)`.
 
 ## Eingebaute Funktionen
 
