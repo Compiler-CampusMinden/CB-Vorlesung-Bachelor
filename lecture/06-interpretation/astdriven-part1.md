@@ -4,17 +4,7 @@ title: "AST-basierte Interpreter: Basics"
 ---
 
 ::: tldr
-Ein AST-basierter Interpreter besteht oft aus einem "Visitor-Dispatcher": Man
-traversiert mit einer `eval()`-Funktion den AST und ruft je nach Knotentyp die
-passende Funktion auf. Dabei werden bei Ausdrücken (*Expressions*) Werte berechnet
-und zurückgegeben, d.h. hier hat man einen Rückgabewert und ein entsprechendes
-`return` im `switch`/`case`, während man bei Anweisungen (*Statements*) keinen
-Rückgabewert hat.
 
-Der Wert von Literalen ergibt sich direkt durch die Übersetzung des jeweiligen Werts
-in den passenden Typ der Implementierungssprache. Bei Ausdrücken interpretiert
-zunächst die Teilausdrücke durch den Aufruf von `eval()` für die jeweiligen
-AST-Kindknoten und berechnet daraus das gewünschte Ergebnis.
 
 Für Blöcke und Variablen muss man analog zum Aufbau von Symboltabellen wieder Scopes
 berücksichtigen, d.h. man benötigt Strukturen ähnlich zu den Symboltabellen (hier
@@ -93,126 +83,15 @@ def eval(self, AST t):
     return None;
 ```
 
-[[Hinweis "Read-Eval-Print-Loop" (REPL)]{.ex}]{.slides}
 
 :::: notes
-Nach dem Aufbau des AST durch Scanner und Parser und der semantischen Analyse anhand
-der Symboltabellen müssen die Ausdrücke (*expressions*) und Anweisungen
-(*statements*) durch den Interpreter ausgewertet werden. Eine Möglichkeit dazu ist
-das Traversieren des AST mit dem Visitor-Pattern. Basierend auf dem Typ des aktuell
-betrachteten AST-Knotens wird entschieden, wie damit umgegangen werden soll. Dies
-erinnert an den Aufbau der Symboltabellen ...
-
-::: tip
-**Exkurs Expressions (Ausdrücke) vs. Statements (Anweisungen)**
-
-In Programmiersprachen unterscheiden wir häufig **Expressions** (*Ausdrücke*) und
-**Statements** (*Anweisungen*).
-
-Expressions sind dabei syntaktische Konstrukte einer Programmiersprache, die (in
-einem gegebenen Kontext) zu einem Wert **evaluiert** werden können. Typische
-Expressions sind beispielsweise Ausdrücke wie `2*3` oder `foo(42);`... In manchen
-Sprachen sind beispielsweise auch Zuweisungen Expressions: `v = 42 + 7;` würde in C
-der Variablen `v` den Wert 49 zuweisen, dies ist gleichzeitig auch der Wert des
-gesamten Ausdrucks. Man könnte in C also Dinge formulieren wie `if (v = 42 + 7) ...`
-(wobei das Interpretieren eines Integers in einem bool'schen Kontext nochmal ein
-anderes Problem ist).
-
-Statements sind syntaktische Konstrukte in Programmiersprachen, die **ausgeführt**
-werden können und dabei in der Regel einen Zustand im Programm verändern, also einen
-Seiteneffekt haben. Die Ausführung eines Statements hat normalerweise keinen Wert an
-sich. Typische Beispiele sind Zuweisungen `v = 7`, Kontrollfluss
-`if (...) then {...} else {...}`, Schleifen `for x in foo: ...`,
-`switch/case`-Statements. (Es gibt aber auch Programmiersprachen, wo ein
-`if/then/else`-Konstrukt eine Expression ist, also bei der Ausführung einen Wert
-ergibt.) In den meisten Programmiersprachen können Expressions Teile von Statements
-bilden: In `v = 42 + 7` ist die gesamte Zuweisung eine Anweisung (Seiteneffekt: die
-Variable `v` hat danach einen anderen Zustand), und der Teil `42 + 7` ist ein
-Ausdruck, der ausgewertet werden kann und üblicherweise den Wert 49 ergibt (außer
-man beauftragt ein LLM mit der Auswertung). In C-ähnlichen Sprachen kann durch
-Hinzufügen eines Semikolons aus dem Ausdruck `42 +7` eine Anweisung gemacht
-werden...
-
-Vergleiche auch @Nystrom2021, Kapitel 6 "Parsing Expressions", Kapitel 7 "Evaluating
-Expressions" und Kapitel 8 "Statements and State", aber auch [Wikipedia:
-Expression](https://en.wikipedia.org/wiki/Expression_(computer_science)) und
-[Wikipedia: Statement](https://en.wikipedia.org/wiki/Statement_(computer_science)).
-:::
-
-Die `eval()`-Methode bildet das Kernstück des (AST-traversierenden) Interpreters.
-Hier wird passend zum aktuellen AST-Knoten die passende Methode des Interpreters
-aufgerufen.
 
 **Hinweis**: Im obigen Beispiel wird nicht zwischen der Auswertung von Ausdrücken
 und Anweisungen unterschieden, es wird die selbe Methode `eval()` genutzt.
 Allerdings liefern Ausdrücke einen Wert zurück (erkennbar am `return` im jeweiligen
 `switch/case`-Zweig), während Anweisungen keinen Wert liefern.
-
-In den folgenden Beispielen wird davon ausgegangen, dass ein komplettes Programm
-eingelesen, geparst, vorverarbeitet und dann interpretiert wird.
-
-Für einen interaktiven Interpreter würde man in einer Schleife die Eingaben lesen,
-parsen und vorverarbeiten und dann interpretieren. Dabei würde jeweils der AST und
-die Symboltabelle *ergänzt*, damit die neuen Eingaben auf frühere verarbeitete
-Eingaben zurückgreifen können. Durch die Form der Schleife "Einlesen -- Verarbeiten
--- Auswerten" hat sich auch der Name "*Read-Eval-Loop*" bzw.
-"*Read-Eval-Print-Loop*" (**REPL**) eingebürgert.
 ::::
 
-# Auswertung von Literalen und Ausdrücken
-
--   Typen mappen: Zielsprache =\> Implementierungssprache
-
-    ::: notes
-    Die in der Zielsprache verwendeten (primitiven) Typen müssen auf passende Typen
-    der Sprache, in der der Interpreter selbst implementiert ist, abgebildet werden.
-
-    Beispielsweise könnte man den Typ `nil` der Zielsprache auf den Typ `null` des
-    in Java implementierten Interpreters abbilden, oder den Typ `number` der
-    Zielsprache auf den Typ `Double` in Java mappen.
-    :::
-
-\smallskip
-
--   Literale auswerten:
-
-    ``` antlr
-    INT: [0-9]+ ;
-    ```
-
-    ``` python
-    elif t.type == Parser.INT : return Integer.parseInt(t.getText())
-    ```
-
-    ::: notes
-    Das ist der einfachste Teil ... Die primitiven Typen der Zielsprache, für die es
-    meist ein eigenes Token gibt, müssen als Datentyp der
-    Interpreter-Programmiersprache ausgewertet werden.
-    :::
-
-\smallskip
-
--   Ausdrücke auswerten:
-
-    ``` antlr
-    add: e1=expr "+" e2=expr ;
-    ```
-
-    ``` python
-    def add(self, AST t):
-        lhs = eval(t.e1())
-        rhs = eval(t.e2())
-        return (double)lhs + (double)rhs  # Semantik!
-    ```
-
-    ::: notes
-    Die meisten möglichen Fehlerzustände sind bereits durch den Parser und bei der
-    semantischen Analyse abgefangen worden. Falls zur Laufzeit die Auswertung der
-    beiden Summanden keine Zahl ergibt, würde eine Java-Exception geworfen, die man
-    an geeigneter Stelle fangen und behandeln muss. Der Interpreter soll sich ja
-    nicht mit einem Stack-Trace verabschieden, sondern soll eine Fehlermeldung
-    präsentieren und danach normal weiter machen ...
-    :::
 
 # Kontrollstrukturen
 
@@ -420,7 +299,6 @@ muss am Ende die ursprüngliche Umgebung wieder hergestellt werden (`finally`-Bl
 
 \smallskip
 
--   Traversierung des AST: `eval(AST t)` als Visitor-Dispatcher
 -   Scopes mit `Environment` (analog zu Symboltabellen)
 -   Interpretation von Blöcken und Variablen (Deklaration, Zuweisung)
 
@@ -431,8 +309,7 @@ muss am Ende die ursprüngliche Umgebung wieder hergestellt werden (`finally`-Bl
 :::
 
 ::: outcomes
--   k3: Ich kann die Traversierung von Parse-Trees implementieren und dabei mit
-    Hilfe des Visitor-Patterns Aktionen ausführen
+
 -   k3: Ich kann Environment-Strukturen analog zu den Symboltabellen aufbauen, um
     Namen und Werte dynamisch zu speichern
 -   k3: Ich kann eine Read-Eval-Schleife implementieren und dabei durch
