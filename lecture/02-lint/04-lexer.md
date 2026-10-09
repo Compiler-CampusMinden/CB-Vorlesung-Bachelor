@@ -1,6 +1,6 @@
 ---
 author: Carsten Gips (HSBI)
-title: "L-Int - Lexer: Handcodierte Implementierung"
+title: "L-Int: Lexer - Handcodierte Implementierung"
 ---
 
 ::: tldr
