@@ -139,7 +139,7 @@ public class InterpreterLint {
 [[Hinweis "Read-Eval-Print-Loop" (REPL)]{.ex}]{.slides}
 
 :::::: notes
-Hier siehst Du die konkrete Implementierung unseres L-Int-Interpreters.
+Hier sehen wir die konkrete Implementierung unseres L-Int-Interpreters.
 
 Die `eval()`-Methode bildet das Kernstück des (AST-traversierenden) Interpreters für
 Ausdrücke. Hier wird passend zum aktuellen AST-Knoten die passende Methode des

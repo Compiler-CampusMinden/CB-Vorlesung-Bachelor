@@ -234,9 +234,9 @@ bearbeitet haben.
 In der Hauptschleife `nextToken()` müssen wir auf das aktuelle Zeichen schauen. Auch
 hier bietet es sich an, dies nicht immer wieder manuell über
 `source.charAt(current)` zu tun, sondern dies über eine Hilfsmethode `peek()` zu
-tun. Im obigen Beispiel siehst Du auch gleich eine Implementierung für ein `peek()`
-mit Lookahead - wir werden später auch das nächste und übernächste Zeichen nach dem
-aktuellen Zeichen benötigen.
+tun. Im obigen Beispiel ist auch gleich eine Implementierung für ein `peek()` mit
+Lookahead gezeigt - wir werden später auch das nächste und übernächste Zeichen nach
+dem  aktuellen Zeichen benötigen.
 
 Für das Weiterschalten gibt es die Methode `advance()`. Diese gibt das aktuelle
 Zeichen zurück und schaltet auf das nächste Zeichen, d.h. ein nachfolgendes `peek()`
@@ -507,7 +507,7 @@ Optionen:
 -   Typische Fehler beim Scannen
 
 ::: notes
-Heute haben wir den Einstieg in das "Frontend" einer Sprache gemacht. Du hast
+Heute haben wir den Einstieg in das "Frontend" einer Sprache gemacht. Wir haben
 gesehen, wie ANTLR aus einer konkreten Grammatik Lexer und Parser generiert und wie
 wir aus dem Parse Tree unseren AST gewinnen. Parallel dazu haben wir einen eigenen
 Lexer und einen Recursive-Descent-Parser implementiert. Beide Ansätze führen zum

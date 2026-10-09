@@ -43,8 +43,8 @@ passend überschreiben mit dem neuen Verhalten und mit `super.xyz()` die
 Vorgängerversion "aufrufen" für die bisherige Funktionalität. Wir orientieren uns
 damit grob an dem inkrementellen Vorgehen in [@Siek2023python].
 Konzeptionell/didaktisch lassen wir uns bei der Modellierung der Bausteine in vielen
-Fällen ungefähr von der Darstellung in [@Nystrom2021] inspirieren. Du wirst also
-immer wieder den Hinweis auf diese beiden Werke als Vertiefung finden.
+Fällen ungefähr von der Darstellung in [@Nystrom2021] inspirieren. Es werden sich
+also immer wieder Hinweise auf diese beiden Werke als Vertiefung finden.
 :::
 ::::
 
@@ -73,7 +73,7 @@ Sprachdefinition).
 In der *Vorlesung* werden wir für unsere aufeinander aufbauenden Sprachfamilien
 **S-Expressions** nutzen in Anlehnung an Clojure und Lisp. Das vereinfacht das
 Parsing deutlich und lässt die Konzepte im Skript und den Folien deutlicher
-hervortreten. Im Praktikum wirst Du diese Konzepte auf einen Subdialekt von C++
+hervortreten. Im Praktikum werden wir diese Konzepte auf einen Subdialekt von C++
 anwenden und über das Semester hinweg in modernem Java einen Interpreter für C++
 schreiben.
 
