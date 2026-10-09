@@ -4,8 +4,6 @@ title: "AST-basierte Interpreter: Basics"
 ---
 
 ::: tldr
-
-
 Für Blöcke und Variablen muss man analog zum Aufbau von Symboltabellen wieder Scopes
 berücksichtigen, d.h. man benötigt Strukturen ähnlich zu den Symboltabellen (hier
 "Umgebung" (*Environment*) genannt). Es gibt eine globale Umgebung, und mit dem
@@ -83,15 +81,12 @@ def eval(self, AST t):
     return None;
 ```
 
-
-:::: notes
-
+::: notes
 **Hinweis**: Im obigen Beispiel wird nicht zwischen der Auswertung von Ausdrücken
 und Anweisungen unterschieden, es wird die selbe Methode `eval()` genutzt.
 Allerdings liefern Ausdrücke einen Wert zurück (erkennbar am `return` im jeweiligen
 `switch/case`-Zweig), während Anweisungen keinen Wert liefern.
-::::
-
+:::
 
 # Kontrollstrukturen
 
@@ -309,7 +304,6 @@ muss am Ende die ursprüngliche Umgebung wieder hergestellt werden (`finally`-Bl
 :::
 
 ::: outcomes
-
 -   k3: Ich kann Environment-Strukturen analog zu den Symboltabellen aufbauen, um
     Namen und Werte dynamisch zu speichern
 -   k3: Ich kann eine Read-Eval-Schleife implementieren und dabei durch

@@ -442,8 +442,8 @@ Es gibt nur Statements und Expressions:
 
 **Aufgaben**:
 
-In den Challenges von [LL Lexer](../01-lexing/recursive.md) haben Sie eine Grammatik
-definiert und einen Lexer implementiert.
+In den Challenges von haben Sie eine Grammatik definiert und einen Lexer
+implementiert.
 
 -   Geben Sie nun geeignete Datenstrukturen für den AST an.
 -   Implementieren Sie analog zum Vorgehen in der Vorlesung einen Parser mit
