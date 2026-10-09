@@ -1,6 +1,6 @@
 ---
 author: Carsten Gips (HSBI)
-title: L-Int -- Von Ausdrücken zum Interpreter (Sitzung 1)
+title: "L-Int: Die Sprache Lispy"
 ---
 
 ::: tldr
