@@ -244,13 +244,11 @@ public class LispyParserLint extends BaseParser {
         if (check(LPAREN)) {
             return switch (peek(1).kind()) {
                 case PLUS -> parseAddExpr();
-                default -> parseOtherEForm(); // hook: we need to parse funcalls here
+                default -> throw new RuntimeException("expected expression, got: " + peek());
             };
         }
         return parseAtomExpr();
     }
-
-  protected Expr parseOtherEForm() { throw new RuntimeException("expected expression, got: " + peek()); }
 }
 ```
 
@@ -289,16 +287,28 @@ starten mit `(`). Ansonsten muss es sich um die letzte Alternative `INT` handeln
     auslösen.
 
 ::: tip
-Den Fehler, wenn wir zwar eine `(` gesehen haben, danach aber kein `+` oder `-`
-kommt, habe ich im Beispiel in eine Hilfsmethode `parseOtherEForm()` ausgelagert.
-Natürlich könnte man in L-Int einfach direkt eine Exception werfen ...
+## Exkurs Linksfaktorisierung
 
-Später in L-Fun werden wir Funktionsaufrufe parsen. Damit wir dann nicht die
-komplette Methode `parseEForm()` und insbesondere (das dann deutlich angewachsene)
-`switch`/`case` neu schreiben müssen, habe ich das Werfen der Exception in die
-Hilfsmethode ausgelagert - diese werden wir in L-Fun dann überschreiben und können
-dadurch das komplexere `switch`/`case` in der `parseEForm()`-Methode für L-Fun
-einfach erben.
+Wir haben in `parseEForm()` implizit **Linksfaktorisierung** angewendet: Wenn
+mehrere Alternativen einer Regel den gleichen Anfang haben, kann man diesen "heraus
+klammern":
+
+``` ebnf
+ruleA ::= a b1 | ... | a bm
+```
+
+Hier könnte man den gemeinsamen Start "ausklammern":
+
+``` ebnf
+ruleA  ::= a ruleAA
+ruleAA ::= b1 | ... | bm
+```
+
+Bei uns im Beispiel war der gemeinsame Start für mehrere Alternativen die Klammer
+`(`. Statt die Grammatik umzubauen, haben wir das hier über das `if` und das
+Look-Ahead `peek(1)` gelöst. Mit der Umformung hätten wir eine weitere Hilfsfunktion
+im Parser, würden dann aber wieder mit `peek()` und damit einem Token Look-Ahead
+auskommen (statt jetzt zwei).
 :::
 ::::
 
@@ -355,10 +365,12 @@ wir über die Liste der geparsten Operanden und reduzieren den Stream. Dabei wü
 `(+ 1 2 3)` von links nach rechts geklammert: `(+ (+ 1 2) 3)`.
 
 ::: tip
-**Desugaring**: Diese Auflösung ist ein einfaches Beispiel für *desugaring* - hier
-wird aus einer komplexeren Operation mit potentiell beliebig vielen Operanden eine
-Folge von einfacheren binären Operationen gemacht. Wir werden noch komplexere
-Beispiele sehen, wenn wir in L-If über Kontrollstrukturen sprechen.
+## Exkurs Desugaring
+
+Diese Auflösung ist ein einfaches Beispiel für ***Desugaring*** - hier wird aus
+einer komplexeren Operation mit potentiell beliebig vielen Operanden eine Folge von
+einfacheren binären Operationen gemacht. Wir werden noch komplexere Beispiele sehen,
+wenn wir in L-If über Kontrollstrukturen sprechen.
 :::
 ::::
 
@@ -460,8 +472,8 @@ expr ::= expr '+' INT | INT
 ```
 
 ::: notes
-Hier erzwingen wir die Klammerung von links her: `1 + 2 + 3` kann nur noch als
-`(1 + 2) + 3` geparst werden.
+Hier erzwingen wir die Klammerung von links her (**linksassoziativ**): `1 + 2 + 3`
+kann nur noch als `(1 + 2) + 3` geparst werden.
 :::
 
 \bigskip
