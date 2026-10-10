@@ -176,13 +176,16 @@ Die Ausdrücke sind implizit von links nach rechts geklammert, d.h. der Ausdruck
 für `(+ (+ (+ 1 2) 3) 4)`.
 
 ::: tip
+## Statements vs. Expressions
+
 In vielen Sprachen unterscheidet man zwischen **Statements** und **Expressions**
 (Anweisungen und Ausdrücke). Dabei haben Statements üblicherweise keinen (Rückgabe-)
 Wert und verändern den Zustand des laufenden Programms (*state*), während
-Expressions immer einen Wert ergeben. In unserem L-Int ist zunächst alles eine
-Expression, d.h. Ausdrücke ergeben bei der Auswertung immer einen Wert. In späteren
-Sprachstufen werden wir komplexere Ausdrücke und auch Statements über die Listenform
-bilden.
+Expressions immer einen Wert ergeben.
+
+In unserem L-Int ist zunächst alles eine Expression, d.h. Ausdrücke ergeben bei der
+Auswertung immer einen Wert. In späteren Sprachstufen werden wir komplexere
+Ausdrücke und auch Statements über die Listenform bilden.
 :::
 
 Über `;;` wird ein Kommentar eingeleitet, der bis zum Ende der Zeile geht.
