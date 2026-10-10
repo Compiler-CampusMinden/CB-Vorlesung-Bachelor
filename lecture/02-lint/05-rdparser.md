@@ -423,23 +423,153 @@ und liefert einen Boolean zurück, während `match()` im Fall des Zutreffens das
 aktuelle Token "konsumiert" und anderefalls einen Fehler wirft.
 :::
 
-# Auflösen von rekursiven Grammatiken
+# Auflösen von (links-) rekursiven Grammatiken
 
-TODO
+::: notes
+Wir wollen die folgenden Ausdrucksvarianten erlauben:
+:::
 
-Wir haben mit unserer Grammatik ein Problem:
+`1`, `1 + 2`, `1 + 2 + 3`, ...
 
-``` antlrv4
+::: notes
+Die dazu formulierte Grammatik hat zwei Probleme:
+:::
+
+``` ebnf
+expr ::= expr '+' expr | INT
 ```
 
-Die Regel `expr` ist (links-) rekursiv. Wenn man das in eine Funktion überträgt,
-würde diese Funktion als erste Aktion sich selbst aufrufen - eine Endlosrekursion!
-Wir müssen die Grammatik also so umbauen, dass sie nicht mehr links-rekursiv ist.
+\smallskip
+\pause
 
-Dazu nutzen wir die Regel: ...
+::: notes
+## Problem 1: Mehrdeutigkeit
 
-``` antlrv4
+Diese Grammatik ist mehrdeutig!
+
+`1 + 2 + 3` kann sowohl als `(1 + 2) + 3` oder als `1 + (2 + 3)` geparst werden. So
+etwas wollen wir im Compiler generell vermeiden, auch wenn das hier konkret keine
+Probleme verursachen würde.
+
+Die folgende umgeformte Grammatik akzeptiert die gleiche Sprache und ist nicht mehr
+mehrdeutig:
+:::
+
+``` ebnf
+expr ::= expr '+' INT | INT
 ```
+
+::: notes
+Hier erzwingen wir die Klammerung von links her: `1 + 2 + 3` kann nur noch als
+`(1 + 2) + 3` geparst werden.
+:::
+
+\bigskip
+\pause
+
+::: notes
+## Problem 2: Linksrekursion
+
+Die umgeformte Grammatik ist immer noch **linksrekursiv**: Zu Beginn einer Regel
+rufen wir die Regel selbst wieder auf und gelangen so in eine Endlosrekursion, da
+kein Token konsumiert wird.
+
+``` java
+Expr parseExpr() {
+    int start = position();
+
+    try {
+        // first alternative: expr ::= expr '+' INT
+        Expr left = parseExpr(); // Waily waily!!!
+        match(PLUS);
+        Expr right = parseInt();
+        return new AddExpr(left, right);
+
+    } catch (ParseException e) {
+        // second alternative: expr ::= INT
+        position(start); // roll back token stream
+        return parseInt();
+    }
+}
+
+Expr parseInt() {
+    Token t = match(INT);
+    return new IntLiteral(t.lexeme());
+}
+```
+
+Man kann zwischen **direkter** und **indirekter** Linksrekursion unterscheiden:
+
+-   Wenn die Regel sofort beim Start einer Alternative aufgerufen wird, handelt es
+    sich um direkte Linksrekursion (wie im Beispiel).
+-   Indirekte Linksrekursion hätte man, wenn das erste Symbol einer Regel eine
+    andere Regel ist, die wiederum die erste Regel aufruft: `ruleA ::= ruleB ...`
+    und `ruleB ::= ruleA ...`.
+
+Wenn man eine *direkt* linksrekursive Regel der Form hat:
+:::
+
+``` ebnf
+ruleA ::= ruleA a1 | ... | ruleA am | b1 | ... | bn |
+```
+
+::: notes
+(Dabei dürfen die `bi` nicht mit `ruleA` beginnen.)
+
+Dann kann *direkte* Linksrekursion mit folgender Regel behoben werden:
+:::
+
+``` ebnf
+ruleA  ::= b1 ruleAA | ... | bn ruleAA
+ruleAA ::= a1 ruleAA | ... | am ruleAA | eps
+```
+
+\bigskip
+\pause
+
+::: notes
+Damit können wir unsere Grammatik umschreiben:
+:::
+
+``` ebnf
+expr  ::= INT expr'
+expr' ::= '+' INT expr' | eps
+```
+
+::: notes
+Dies können wir hier noch abkürzen zu:
+:::
+
+``` ebnf
+expr  ::= INT ('+' INT)*
+```
+
+::: notes
+Mit dieser umgeformten Regel können wir jetzt unseren RD-Parser wie gewohnt
+aufbauen. Es gibt keine direkte Linksrekursion mehr, mit der der Parser in eine
+Endlosschleife geraten könnte. (Die indirekte Linksrekursion ist immer noch
+vorhanden, aber die stört im RD-Parser nicht).
+
+``` java
+Expr parseExpr() {
+    Expr e = parseInt();
+    while (peek(PLUS)) {
+        advance();
+        e = new AddExpr(e, parseInt());
+    }
+    return e;
+}
+
+Expr parseInt() {
+    Token t = match(INT);
+    return new IntLiteral(t.lexeme());
+}
+```
+
+*Anmerkung*: Normalerweise würden wir für ein Nichtterminal direkt `match()`
+aufrufen - damit der Code lesbarer bleibt, wurde das `match(INT)` und das Erzeugen
+des neuen `IntLiteral` in eine Hilfsmethode ausgelagert.
+:::
 
 # Lispy-Pipeline komplett
 
