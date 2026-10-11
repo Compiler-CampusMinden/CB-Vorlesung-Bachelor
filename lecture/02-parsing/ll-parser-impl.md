@@ -8,7 +8,6 @@ Zur Beachtung der Vorrang- und Assoziativitätsregeln muss die Grammatik entspre
 umgebaut werden.
 :::
 
-
 # Vorrangregeln
 
     1+2*3 == 1+(2*3) != (1+2)*3
@@ -118,11 +117,6 @@ Angabe `<assoc=right>` immer für die jeweilige Alternative und muss seit Versio
 an den Alternativen-Operator `|` geschrieben werden. In der Übergangsphase sei die
 Annotation an Tokenreferenzen noch zulässig, würde aber ignoriert?!
 :::
-
-
-
-
-
 
 ::: outcomes
 -   k3: Ich kann Vorrang und Assoziativität bei der Implementierung korrekt umsetzen

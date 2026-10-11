@@ -517,8 +517,8 @@ Optionen:
 
 -   Implementierungsansatz: Zeichenweise Iteration durch die Eingabe
     -   Entscheidung für ein Token am aktuellen Zeichen [(plus ggf. weitere folgende
-        Zeichen ("Look-Ahead"))]{.notes}
-    -   Ggf. Look-Ahead notwendig, z.B. bei "\==" vs. "="
+        Zeichen ("Lookahead"))]{.notes}
+    -   Ggf. Lookahead notwendig, z.B. bei "\==" vs. "="
     -   Bevorzugung des längsten Matches
     -   Ende der Eingabe: Künstliches `EOF`-Token
 

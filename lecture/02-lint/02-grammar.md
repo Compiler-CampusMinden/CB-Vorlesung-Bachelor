@@ -413,6 +413,9 @@ entkoppeln, dienen uns genau solche manuell erstellten AST als direkte Eingabe.
 -   Zwei Sichtweisen auf L-Int:
     -   Konkrete Grammatik: Syntax der Eingabe-Strings
     -   Abstrakte Grammatik: AST-Struktur
+
+\smallskip
+
 -   Konkrete Grammatik:
     -   Regeln und Terminale
     -   Akzeptiert eine Eingabe
