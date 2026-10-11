@@ -439,3 +439,52 @@ Grammatik und AST in Kapitel 5 "Representing Code" nachlesen.
     beziehungsweise AST skizzieren.
 -   k3: Ich kann einen L-Int-AST mit den passenden Java-Records konstruieren.
 :::
+
+::: challenges
+**Was ist ein gültiger L-Int-Ausdruck?**
+
+Ordnen Sie die folgenden Eingaben in zwei Gruppen: nach der konkreten Grammatik
+gültig und nicht gültig. Begründen Sie Ihre Entscheidung jeweils mit Bezug auf die
+Grammatik.
+
+``` clojure
+(+ 1 2)
+(+ 1)
+(- 1 2 3)
+(+ 1 (- 2 3))
+(+ 1 2) 3
+```
+
+Zusatzfrage: Welche Rolle spielt `EOF` bei der Entscheidung?
+
+**Vom Parse-Tree zum AST**
+
+Betrachten Sie den Ausdruck:
+
+``` clojure
+(- (+ 1 2 3) 4)
+```
+
+1.  Skizzieren Sie den **Parse-Tree**. Achten Sie darauf, welche Klammern,
+    Operatoren und `eform`-Knoten in der konkreten Grammatik vorkommen.
+2.  Erzeugen Sie den **AST** mit der in der Vorlesung gewählten
+    links-nach-rechts-Klammerung für mehr als zwei Operanden.
+3.  Markieren Sie, welche Teile der konkreten Syntax im AST nicht als eigene Knoten
+    auftauchen.
+
+**Mehrere Operanden, binärer AST**
+
+Die konkrete Grammatik erlaubt den Ausdruck:
+
+``` clojure
+(- 10 3 2)
+```
+
+Der AST kann `SubExpr` aber nur mit zwei Operanden darstellen.
+
+1.  Schreiben Sie die Klammerung auf, die sich aus der links-nach-rechts-Konvention
+    ergibt.
+2.  Erstellen Sie den passenden AST mit den Java-Records.
+3.  Vergleichen Sie ihn mit der alternativen Klammerung von rechts nach links. Sind
+    die beiden ASTs strukturell gleich?
+:::
