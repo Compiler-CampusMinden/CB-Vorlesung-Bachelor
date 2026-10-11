@@ -185,6 +185,9 @@ unserer einfachen L-Int-Grammatik und der kleinen Eingabe bereits relativ komple
 -   Die Grammatik legt fest:
     -   Welche Eingabe-Strings gültige Programme sind
     -   Struktur des **Parse-Trees**
+
+\bigskip
+
 -   Aber:
     -   Enthält "technische" Details:
         -   Klammern, `EOF`, ...
@@ -209,6 +212,9 @@ das eingegebene Programm zu haben.
 -   **Konkrete Grammatik**:
     -   Wie der Code "auf dem Papier" aussieht
     -   Enthält Syntaxdetails (Klammern, Keywords, Vorrangregeln)
+
+\bigskip
+
 -   **Abstrakte Grammatik**:
     -   Wie wir den Code **im Programm** modellieren
     -   Fokus auf Bedeutungsträger (z.B. `AddExpr`, `SubExpr`, `IntLiteral`)
@@ -376,7 +382,7 @@ nur noch halb nützlich (schützt nur noch vor unbeabsichtigten Ableitungen).
 
 Text: `(- (+ 1 2) 3)`
 
-\bigskip
+\smallskip
 
 AST:
 

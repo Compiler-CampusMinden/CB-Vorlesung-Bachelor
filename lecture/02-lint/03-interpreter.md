@@ -22,9 +22,15 @@ AST-Kindknoten und berechnet daraus das gewünschte Ergebnis.
 
 -   Gegeben: Lexer/Parser haben einen AST aufgebaut
 -   Gesucht: `eval(expr)` berechnet einen **Wert**
+
+\bigskip
+
 -   Beispiele:
     -   `eval( IntLiteral(1) )` $\to$ `1`
     -   `eval( AddExpr(IntLiteral(1), IntLiteral(2)) )` $\to$ `3`
+
+\bigskip
+
 -   Frage:
     -   Wie repräsentieren wir solche Werte sauber im Code?
 

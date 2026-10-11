@@ -39,7 +39,7 @@ Linksrekursion muss zunächst beseitigt werden.
     Expr parse(List<Token> tokens);
     ```
 
-\smallskip
+\bigskip
 
 -   Basis konkrete Syntax (Grammatik):
 
@@ -241,7 +241,7 @@ public class LispyParserLint extends BaseParser {
     public Expr parseLint(List<Token> tokens) {
         initParser(tokens);
         Expr expr = parseEForm();
-        if(!isAtEnd()) throw new RuntimeException("unexpected token after end of expression: " + peek());
+        if(!isAtEnd()) throw new RuntimeException("unexpected token");
         return expr;
     }
 
@@ -249,7 +249,7 @@ public class LispyParserLint extends BaseParser {
         if (check(LPAREN)) {
             return switch (peek(1).kind()) {
                 case PLUS -> parseAddExpr();
-                default -> throw new RuntimeException("expected expression, got: " + peek());
+                default -> throw new RuntimeException("expected expression");
             };
         }
         return parseAtomExpr();
@@ -451,9 +451,9 @@ aktuelle Token "konsumiert" und anderenfalls einen Fehler wirft.
 
 ::: notes
 Wir wollen die folgenden Ausdrucksvarianten erlauben:
-:::
 
 `1`, `1 + 2`, `1 + 2 + 3`, ...
+:::
 
 ::: notes
 Die dazu formulierte Grammatik hat zwei Probleme:
@@ -463,7 +463,6 @@ Die dazu formulierte Grammatik hat zwei Probleme:
 expr ::= expr '+' expr | INT
 ```
 
-\smallskip
 \pause
 
 ::: notes

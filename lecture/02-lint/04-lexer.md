@@ -108,7 +108,6 @@ public abstract class BaseLexer {
             while (skipIrrelevant()) {}
             if (!isAtEnd()) tokens.add(nextToken());
         }
-
         tokens.add(new Token(EOF, "<EOF>"));
         return tokens;
     }
@@ -298,6 +297,9 @@ vorausschauen: Wenn nach dem ersten "`=`" noch ein zweites "`=`" kommt, ist es
 
 Erinnerung: Die Funktion `advance()` liefert das aktuelle Zeichen aus der Eingabe
 zurück und schaltet zum nächsten Zeichen.
+
+**Hinweis**: In der `if`-Abfrage im `case '='` könnte man auch `peek(1)` einsetzen,
+dann müsste man nur die Reihenfolge der `advance()` anpassen.
 :::
 
 # Hilfsfunktionen im Lexer II: Lese solange ...
