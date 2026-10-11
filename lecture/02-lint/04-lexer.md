@@ -571,26 +571,61 @@ Zum Thema Lexing findet sich eine schöne Darstellung in [@Nystrom2021] in Kapit
     äußern kann.
     -->
 
-**Manuell implementierter Lexer**
+**Token-Strom vorhersagen: Wo endet das Lexem?**
 
-Betrachten Sie die folgende einfache Sprache:
+Bestimmen Sie für jede Eingabe den Token-Strom, den der Lexer erzeugen sollte. Geben
+Sie jeweils Tokenart und Lexem an; das synthetische EOF-Token können Sie
+dazuschreiben.
 
-TODO
+``` clojure
+(+ 12 345)
+(- 7 8)
+(+12 3)
+(+ 12a 3)
+```
 
-    a = 10 - 5     # Zuweisung des Ausdruckes 10-5 (Integer-Wert 5) an Variable a
-    b = a + 2 * 3  # Zuweisung von 16 an Variable b
-    c = a != b     # Zuweisung eines boolschen Werts an c
+Diskussionsfragen:
 
-Es gibt nur Statements und Expressions:
+-   Gehört ein Vorzeichen zum Integer-Literal oder ist es ein eigenes Token?
+    Begründen Sie Ihre Entscheidung anhand der Tokenregeln für L-Int.
+-   Was passiert bei der letzten Eingabe: Erkennt der Lexer "12a" als ein
+    fehlerhaftes Integer-Literal, oder liest er zunächst "12" als INT?
 
--   Statement: Zuweisung; jedes Statement endet mit einem NL
--   Expression: Zahl, Variable, Addition, Subtraktion, Multiplikation (mit üblichem
-    Vorrang), Vergleich
+**nextToken() für L-Int vervollständigen**
 
-**Aufgaben**:
+Die Beispielimplementierung erkennt `(`, `+` und Integer-Literale. Ergänzen Sie sie
+so, dass sie auch `-` und `)` als Token erkennt.
 
--   Geben Sie eine ANTLR-Grammatik für diese Sprache an.
--   Implementieren Sie analog zum Vorgehen in der Vorlesung einen Lexer für diese
-    Sprache. (Nur den Lexer, den Parser besprechen wir in einer anderen
-    [Sitzung](../02-parsing/ll-parser-impl.md).)
+Skizzieren Sie Ihren Code. Prüfen Sie anschließend gemeinsam, ob Ihr Lexer bei
+dieser Eingabe alle Zeichen genau einmal verarbeitet:
+
+``` clojure
+(- 12 (+ 3 45))
+```
+
+Diskussionsfragen:
+
+-   Welche Aufgabe übernimmt `advance()` in den einzelnen Fällen?
+-   Warum wird bei einem Integer-Literal nicht nur ein Zeichen gelesen?
+
+**Fehlerfall mit einer klaren Regel behandeln**
+
+Der gezeigte Lexer bricht bei einem unbekannten Zeichen mit einer Exception ab.
+Überlegen Sie sich für L-Int eine einfache alternative Strategie: Der Lexer soll
+beim ersten unbekannten Zeichen eine verständliche Fehlermeldung erzeugen und
+anschließend entweder abbrechen oder weiter nach dem nächsten erkennbaren Token
+suchen.
+
+Verwenden Sie beispielsweise diese Eingabe:
+
+``` clojure
+(+ 12 @ 3)
+```
+
+Legen Sie fest, wie sich der Lexer verhalten soll, und beschreiben Sie die
+resultierenden Token beziehungsweise die Fehlermeldung.
+
+**Wichtig**: Falls Ihr Lexer nach einem Fehler weiterläuft: Formulieren Sie eine
+Regel, die sicherstellt, dass er dabei nicht an derselben Eingabeposition hängen
+bleibt.
 :::
