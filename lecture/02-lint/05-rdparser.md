@@ -685,31 +685,48 @@ protected Expr parseAddExpr() {
 2.  Wird damit der Teil der Regel `eform ::= '(' '+' eform eform+ ')'` korrekt
     umgesetzt? Warum (nicht)?
 
-**Manuell implementierter Parser**
+**Parser-Ablauf nachvollziehen**
 
-TODO
+Verfolgen Sie den Aufruf von parseEForm() für die Eingabe:
 
-Betrachten Sie erneut die folgende einfache Sprache:
+``` clojure
+(+ 1 (+ 2 3))
+```
 
-    a = 10 - 5     # Zuweisung des Ausdrucks 10-5 (Integer-Wert 5) an Variable a
-    b = a + 2 * 3  # Zuweisung von 16 an Variable b
-    c = a != b     # Zuweisung eines booleschen Werts an c
+Erstellen Sie dazu eine mit diesen Spalten: Schritt, Aufgerufene Methode, Aktuelles
+Token, Aktion. Tragen Sie insbesondere ein, wann `parseEForm()` rekursiv aufgerufen
+wird und welche Methode die einzelnen Tokens konsumiert. Sie müssen noch nicht den
+vollständigen AST ausrechnen.
 
-Es gibt nur Statements und Expressions:
+**Subtraktion ergänzen**
 
--   Statement: Zuweisung; jedes Statement endet mit einem NL
--   Expression: Zahl, Variable, Addition, Subtraktion, Multiplikation (mit üblichem
-    Vorrang), Vergleich
+Ergänzen Sie den im Skript gezeigten Parser so, dass auch Subtraktionen geparst
+werden. Skizzieren Sie die nötigen Änderungen in `parseEForm()` und eine passende
+Methode `parseSubExpr()`.
 
-**Aufgaben**:
+Prüfen Sie Ihren Entwurf gedanklich an diesen Eingaben:
 
-In früheren Challenges haben Sie eine Grammatik definiert und einen Lexer
-implementiert.
+``` clojure
+(- 8 3)
+(- 8 (+ 2 1) 1)
+```
 
--   Geben Sie nun geeignete Datenstrukturen für den AST an.
--   Implementieren Sie analog zum Vorgehen in der Vorlesung einen Parser mit
-    *recursive descent* für diese Sprache.
--   Was müssten Sie anpassen bzw. ergänzen, wenn Sie beispielsweise weitere
-    Statements wie eine `if`-Abfrage oder eine `while`-Schleife mit einbauen
-    wollten?
+Welche AST-Knoten sollten jeweils entstehen?
+
+**Den gemeinsamen Anfang ausklammern**
+
+Die Alternativen für Addition und Subtraktion beginnen beide mit `(`. Formulieren
+Sie die Grammatik mit einer zusätzlichen Regel für den Operator so um, dass die
+Auswahl zwischen den äußeren Alternativen von `eform` nur **ein** Lookahead-Token
+benötigt.
+
+Skizzieren Sie anschließend, wie die Parsermethoden zu dieser umgeformten Grammatik
+aussehen könnten. Die akzeptierte Sprache und die AST-Knoten sollen gleich bleiben.
+
+<!--
+```ebnf
+eform ::= '(' op eform eform+ ')' | INT
+op    ::= '+' | '-'
+```
+-->
 :::
