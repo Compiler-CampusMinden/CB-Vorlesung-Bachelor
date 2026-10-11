@@ -4,25 +4,31 @@ title: "L-Int: LL-Parser mit Recursive Descent"
 ---
 
 ::: tldr
-LL-Parser können über einen "rekursiven Abstieg" direkt aus einer Grammatik
-implementiert werden:
+Ein LL-Parser mit rekursivem Abstieg (*recursive descent*, auch *RD-Parser*)
+verarbeitet den Tokenstrom von links nach rechts und wählt Alternativen anhand eines
+begrenzten Lookaheads:
+
+-   Für Nichtterminale werden Parsermethoden aufgerufen; Terminale werden mit
+    `match()` geprüft und "konsumiert".
+-   Alternativen werden anhand ihrer möglichen Anfangstokens ausgewählt. Optionale
+    Teile und Wiederholungen werden typischerweise mit `if` und `while` umgesetzt.
+-   Die Grammatik muss eine eindeutige Vorhersage erlauben; bei leeren Alternativen
+    sind dafür auch FOLLOW-Mengen relevant.
+
+Zur Implementierung eines RD-Parsers kann man so vorgehen:
 
 -   Zu jeder Produktionsregel erstellt man eine gleichnamige Funktion.
 -   Wenn in der Produktionsregel andere Regeln "aufgerufen" werden, erfolgt in der
     Funktion an dieser Stelle der entsprechende Funktionsaufruf.
--   Bei Terminalsymbolen wird das erwartete Token geprüft.
+-   Bei Terminalsymbolen wird das erwartete Token mit `match()` geprüft.
 
 Dabei findet man wie bereits im Lexer die Funktionen `match()` und `advance()`, die
 sich hier aber auf den Tokenstrom beziehen. LL(1)-Parser schauen dabei immer nur das
-nächste Token an, LL(k) haben ein entsprechendes Look-Ahead von bis zu $k$ Token.
+nächste Token an, LL(k) haben ein entsprechendes Lookahead von bis zu $k$ Token.
 
-LL-Parser haben ein Problem mit Linksrekursion in der Grammatik, da hier rekursiv
+RD-Parser haben ein Problem mit Linksrekursion in der Grammatik, da hier rekursiv
 Methoden aufgerufen werden und keine Token entfernt werden; eventuell auftretende
 Linksrekursion muss zunächst beseitigt werden.
-:::
-
-::: youtube
-TODO
 :::
 
 # Recursive-Descent-Parser: Ziel
@@ -38,14 +44,14 @@ TODO
 -   Basis konkrete Syntax (Grammatik):
 
     ``` ebnf
-    eform   ::= '(' '+' eform eform+ ')' | '(' '-' eform eform+ ')' | INT
-    INT     ::= [0-9]+
+    eform ::= '(' '+' eform eform+ ')' | '(' '-' eform eform+ ')' | INT
+    INT   ::= [0-9]+
     ```
 
 -   Zielformat AST (abstrakte Syntax):
 
     ``` ebnf
-    expr    ::= IntLiteral(int) | AddExpr(expr, expr) | SubExpr(expr, expr)
+    Expr  = IntLiteral(Int) | AddExpr(Expr, Expr) | SubExpr(Expr, Expr)
     ```
 
 ::: notes
@@ -104,7 +110,7 @@ Alternativen in einer Regel:
 
 ::: notes
 Auflösen durch Unterscheidung am aktuellen Token (und falls nötig weiterem
-Look-Ahead):
+Lookahead):
 :::
 
 \bigskip
@@ -123,17 +129,16 @@ return switch (peek()) {
 Anhand des aktuellen Tokens (`peek()`) wird entschieden, welche Alternative vorliegt
 und welche der `parseXYZ()`-Methoden entsprechend aufgerufen werden soll.
 
-Das Prädikat `PredictingA` soll andeuten, dass man mit dem aktuellen Token eine
-Vorhersage für die Regel `a` versucht (hier kommen die FIRST- und FOLLOW-Mengen ins
-Spiel ...). Wenn das der Fall ist, springt man entsprechend in die Funktion bzw.
-Methode `a()`. Formal berechnet man die Lookahead-Mengen mit `FIRST` und `FOLLOW`,
-um eine Entscheidung für die nächste Regel zu treffen. Praktisch betrachtet kann man
-sich fragen, welche(s) Token eine Phrase in der aktuellen Alternative starten
-können.
+`PredictingA` soll andeuten, dass man mit dem aktuellen Token eine Vorhersage für
+die Regel `a` versucht (hier kommen die FIRST- und FOLLOW-Mengen ins Spiel ...).
+Wenn das der Fall ist, springt man entsprechend in die Funktion bzw. Methode `a()`.
+Formal berechnet man die Lookahead-Mengen mit `FIRST` und `FOLLOW`, um eine
+Entscheidung für die nächste Regel zu treffen. Praktisch betrachtet kann man sich
+fragen, welche(s) Token eine Phrase in der aktuellen Alternative starten können.
 
 Für LL(1)-Parser betrachtet man immer das **aktuelle** Token (**genau *EIN*
-Lookahead-Token**), um eine Entscheidung zu treffen. Bei LL(k) muss man einen
-zusätzlichen Look-Ahead von bis zu $k$ Token benutzen.
+Lookahead-Token**), um eine Entscheidung zu treffen. Bei LL(k) nutzt man einen
+Lookahead von insgesamt bis zu $k$ Token.
 
 ::: tip
 ## Exkurs LL(k)
@@ -163,7 +168,7 @@ public abstract class BaseParser {
     protected int current;
 
     protected void initParser(List<Token> tokenList) {
-        current = 0;  tokens = tokenList;
+        tokens = tokenList;  current = 0;
         throwIf(tokenList.getLast().kind() != EOF, "last token must be EOF!");
     }
 
@@ -187,20 +192,20 @@ Intern werden wir Hilfsmethoden wie `peek()`, `advance()` und `match()` verwende
 um die Tokens bequemer zu handhaben.
 :::
 
-# Beispiel: Einstieg und `eform`-Regel
+# Beispielimplementierung Parser für L-Int: Einstieg und `eform`-Regel
 
 ::: notes
 Wir betrachten folgende konkrete Syntax in L-Int:
 
 ``` ebnf
-lint    ::= eform EOF
+eform ::= '(' '+' eform eform+ ')' | '(' '-' eform eform+ ')' | INT
+INT   ::= [0-9]+
 
-eform   ::= '(' '+' eform eform+ ')' | '(' '-' eform eform+ ')' | INT
-INT     ::= [0-9]+
+L_int ::= eform EOF
 ```
 
-Der Einstieg ist also die Regel `lint`, die eine `eform` erwartet und ein
-anschließendes `EOF`-Token. Mehr ist in der Sprachstufe L-Int nicht erlaubt.
+Der Einstieg ist die Regel `L_int`, die eine `eform` erwartet und ein anschließendes
+`EOF`-Token. Mehr ist in der Sprachstufe L-Int nicht erlaubt.
 
 Eine `eform` kann entweder eine Addition, eine Subtraktion oder einfach nur ein
 Integer-Literal sein. Letzteres ist ein Terminal, d.h. hier können wir einfach mit
@@ -211,12 +216,12 @@ rekursiv auf.
 
 Der Parser muss entlang dieser Regeln aufgebaut werden und die Token der Reihe nach
 über diese Regeln ableiten ("erklären"). Nur wenn dies vollständig gelingt, haben
-wir eine syntaktisch korrekte Eingabe. Dabei wird ein Parse-Tree (oder auch
-*Abstract Syntax Tree* (AST)) erzeugt. Das Format wird über die abstrakte Syntax
-vorgegeben:
+wir eine syntaktisch korrekte Eingabe. Ein Parser kann einen Parse-Tree oder - wie
+in unserem Beispiel - direkt einen AST erzeugen. Der gezeigte Code erzeugt den AST
+gemäß der folgenden abstrakten Syntax:
 
 ``` ebnf
-expr    ::= IntLiteral(int) | AddExpr(expr, expr) | SubExpr(expr, expr)
+Expr  = IntLiteral(Int) | AddExpr(Expr, Expr) | SubExpr(Expr, Expr)
 ```
 
 Wir haben hier also konkret eine Daten-Klasse `IntLiteral` für die Repräsentation
@@ -253,15 +258,15 @@ public class LispyParserLint extends BaseParser {
 ```
 
 :::: notes
-Für die Regeln `lint` und `eform` werden die beiden Methoden `parseLint()` und
+Für die Regeln `L_int` und `eform` werden die beiden Methoden `parseLint()` und
 `parseEForm()` angelegt, die direkt den beiden Grammatikregeln entsprechen.
 
-Die Sichtbarkeit ist `public` für die Einsprungsmethode `parseLint()` - diese
-Methode soll später zum Starten des Parsers genutzt werden. Die anderen (internen)
-Methoden bekommen die Sichtbarkeit `protected`, damit wir sie bei Bedarf in
-ableitenden Parser-Klassen überschreiben können. Wenn wir uns ganz sicher sind, dass
-wir eine interne Methode nie überschreiben wollen, können wir natürlich auch wie
-immer auf `private` gehen.
+Die Sichtbarkeit ist `public` für die Einstiegsmethode `parseLint()` - diese Methode
+soll später zum Starten des Parsers genutzt werden. Die anderen (internen) Methoden
+bekommen die Sichtbarkeit `protected`, damit wir sie bei Bedarf in ableitenden
+Parser-Klassen überschreiben können. Wenn wir uns ganz sicher sind, dass wir eine
+interne Methode nie überschreiben wollen, können wir natürlich auch wie immer auf
+`private` gehen.
 
 Wir unterscheiden in `parseEForm()` anhand des aktuellen Tokens, ob es sich um die
 Alternativen für Addition (und Subtraktion, nicht gezeigt) handeln könnte (beide
@@ -278,7 +283,7 @@ starten mit `(`). Ansonsten muss es sich um die letzte Alternative `INT` handeln
     -   Anderenfalls melden wir einen Fehler, weil wir `LPAREN` gesehen haben, aber
         nichts, was laut unserer Grammatik darauf folgen müsste.
 
--   Liegt *kein* `LPAREN` vor, kann es sich nur die letzte Alternative `INT`
+-   Liegt *kein* `LPAREN` vor, kann es sich nur um die letzte Alternative `INT`
     handeln.
 
     Hier handelt es sich um ein Terminal-Symbol, welches wir in `parseAtomExpr()`
@@ -286,10 +291,15 @@ starten mit `(`). Ansonsten muss es sich um die letzte Alternative `INT` handeln
     das aktuelle Token dabei nicht `INT` ist, würde `match(INT)` einen Fehler
     auslösen.
 
+**Wichtig**: Die Subtraktion fehlt hier und dient als kleine Übung.
+
+**Wichtig**: Wir haben damit in `parseEForm()` effektiv **zwei Tokens Lookahead**
+verwendet! Vgl. auch die nachfolgende Diskussion zur Linksfaktorisierung.
+
 ::: tip
 ## Exkurs Linksfaktorisierung
 
-Wir haben in `parseEForm()` implizit **Linksfaktorisierung** angewendet: Wenn
+Wir haben in `parseEForm()` *implizit* **Linksfaktorisierung** angewendet: Wenn
 mehrere Alternativen einer Regel den gleichen Anfang haben, kann man diesen "heraus
 klammern":
 
@@ -306,13 +316,13 @@ ruleAA ::= b1 | ... | bm
 
 Bei uns im Beispiel war der gemeinsame Start für mehrere Alternativen die Klammer
 `(`. Statt die Grammatik umzubauen, haben wir das hier über das `if` und das
-Look-Ahead `peek(1)` gelöst. Mit der Umformung hätten wir eine weitere Hilfsfunktion
-im Parser, würden dann aber wieder mit `peek()` und damit einem Token Look-Ahead
+Lookahead `peek(1)` gelöst. Mit der Umformung hätten wir eine weitere Hilfsfunktion
+im Parser, würden dann aber wieder mit `peek()` und damit einem Token Lookahead
 auskommen (statt jetzt zwei).
 :::
 ::::
 
-# Beispiel: `parseAddExpr()` und `parseAtomExpr()`
+# Details Parser für L-Int: `parseAddExpr()` und `parseAtomExpr()`
 
 ``` java
 protected Expr parseAtomExpr() {
@@ -364,6 +374,8 @@ Nun müssen wir aber noch den Baum mit binären `AddExpr`-Knoten bauen. Dazu lau
 wir über die Liste der geparsten Operanden und reduzieren den Stream. Dabei würde
 `(+ 1 2 3)` von links nach rechts geklammert: `(+ (+ 1 2) 3)`.
 
+**Wichtig**: Challenge (s.u.) beachten!
+
 ::: tip
 ## Exkurs Desugaring
 
@@ -401,7 +413,7 @@ symmetrisch zu den Pendants im Lexer implementiert werden - allerdings arbeitet 
 hier im Parser mit Token statt mit Zeichen.
 
 Der auffälligste Unterschied zum Lexer: Wir verlassen uns nicht auf die Länge der
-Tokenliste, sondern behandeln das `EOF`-Token als Sentinel. Sobald wird dieses Token
+Tokenliste, sondern behandeln das `EOF`-Token als Sentinel. Sobald wir dieses Token
 erreicht haben, brechen wir den weiteren Fortschritt mit `advance()` o.ä. ab.
 Deshalb gibt es in der `initParser()`-Methode des Basis-Parsers sicherheitshalber
 den expliziten Check, ob das letzte Token in der Liste ein `EOF`-Token ist.
@@ -432,7 +444,7 @@ realisiert sind: Hier kann man einfach ein oder mehrere Tokentypen übergeben, o
 die Funktionen umständlich überladen zu müssen oder vorher Listen bilden zu müssen.
 `check()` prüft dabei nur, ob das aktuelle Token vom Typ her in der `expected` ist
 und liefert einen Boolean zurück, während `match()` im Fall des Zutreffens das
-aktuelle Token "konsumiert" und anderefalls einen Fehler wirft.
+aktuelle Token "konsumiert" und anderenfalls einen Fehler wirft.
 :::
 
 # Auflösen von (links-) rekursiven Grammatiken
@@ -485,6 +497,12 @@ kann nur noch als `(1 + 2) + 3` geparst werden.
 Die umgeformte Grammatik ist immer noch **linksrekursiv**: Zu Beginn einer Regel
 rufen wir die Regel selbst wieder auf und gelangen so in eine Endlosrekursion, da
 kein Token konsumiert wird.
+
+Das folgende Beispiel versucht die Umsetzung der Grammatik mit Hilfe von
+Backtracking (teste die erste Alternative, wenn das nicht klappt - einen Fehler
+wirft - versuche die zweite Alternative). `position()` soll den aktuellen Index
+holen bzw. wieder zurücksetzen. Dieses Beispiel soll nur das Problem bzgl. der
+Endlosrekursion verdeutlichen - es funktioniert nicht!
 
 ``` java
 Expr parseExpr() {
@@ -559,8 +577,7 @@ expr  ::= INT ('+' INT)*
 ::: notes
 Mit dieser umgeformten Regel können wir jetzt unseren RD-Parser wie gewohnt
 aufbauen. Es gibt keine direkte Linksrekursion mehr, mit der der Parser in eine
-Endlosschleife geraten könnte. (Die indirekte Linksrekursion ist immer noch
-vorhanden, aber die stört im RD-Parser nicht).
+Endlosschleife geraten könnte.
 
 ``` java
 Expr parseExpr() {
@@ -597,15 +614,16 @@ Value result = new InterpreterLint().interpret(ast);
 
 # Wrap-up
 
--   LL(1) und LL(k) mit festem Lookahead
--   Implementierung von Vorrang- und Assoziativitätsregeln
+Implementierung als RD-Parser:
+
+-   Regeln (Nichtterminale) werden zu Parsermethoden
+-   Token (Terminals) mit `match()` prüfen (und "konsumieren")
+-   Auswahl Alternativen über nächste(s) Token(s) (Lookahead)
 -   Beachtung und Auflösung von Linksrekursion
 
 ::: readings
-TODO
-
--   @Nystrom2021: Kapitel 4: A Tree-Walk Interpreter, insb. 8. Statements and State
--   @Mogensen2017: Kapitel 4
+Zum Thema Lexing findet sich eine schöne Darstellung in [@Nystrom2021] in Kapitel 6
+"Parsing Expressions".
 :::
 
 ::: outcomes
@@ -665,7 +683,7 @@ protected Expr parseAddExpr() {
 -   Ist `(+)` erlaubt? Falls ja, was produziert der Parser?
 
 2.  Wird damit der Teil der Regel `eform ::= '(' '+' eform eform+ ')'` korrekt
-    umgesetzt? Warum?
+    umgesetzt? Warum (nicht)?
 
 **Manuell implementierter Parser**
 
@@ -673,9 +691,9 @@ TODO
 
 Betrachten Sie erneut die folgende einfache Sprache:
 
-    a = 10 - 5     # Zuweisung des Ausdruckes 10-5 (Integer-Wert 5) an Variable a
+    a = 10 - 5     # Zuweisung des Ausdrucks 10-5 (Integer-Wert 5) an Variable a
     b = a + 2 * 3  # Zuweisung von 16 an Variable b
-    c = a != b     # Zuweisung eines boolschen Werts an c
+    c = a != b     # Zuweisung eines booleschen Werts an c
 
 Es gibt nur Statements und Expressions:
 
