@@ -21,10 +21,6 @@ festgelegt werden, wie Ausdrücke mit mehr als zwei Operanden in binäre Knoten
 übersetzt werden.
 :::
 
-::: youtube
-TODO
-:::
-
 # Erinnerung Lispy in der Sprachstufe L-Int
 
 ``` clojure
@@ -41,7 +37,8 @@ Lispy wird aus S-Expressions aufgebaut, die die folgende Form haben:
 -   ein Atom der Form `x`, oder
 -   ein Ausdruck der Form `(. x y)` (mit `x` u. `y` S-Expressions, `.` eine
     Operation oder Funktion oder ein Keyword; dabei dürfen beliebig viele
-    S-Expressions vorkommen - hier im Beispiel sind nur zwei angedeutet).
+    S-Expressions als Operanden vorkommen - hier im Beispiel sind nur zwei
+    angedeutet).
 
 In der Sprachstufe L-Int haben wir als Atom nur Integer-Literale, und als Operatoren
 kennen wir nur `+` und `-`.
@@ -135,9 +132,10 @@ wird. Die "impliziten" Token wie `(` werden direkt mit der angebenenen Zeichenfo
 (hier "(") erkannt.
 
 Whitespace (Leerzeichen, Tabs, Zeilenumbrüche) werden vom Lexer ignoriert.
-Kommentare `;; ...` werden ebenfalls vom Lexer ignoriert. Die muss man für Tools wie
-ANTLR explizit formulieren; in der Darstellung der konkreten Syntax in den
-Vorlesungsunterlagen sparen wir uns dies zugunsten einer besseren Lesbarkeit.
+Kommentare `;; ...` (bis zum Zeilenende) werden ebenfalls vom Lexer ignoriert. Dies
+muss man für Tools wie ANTLR explizit formulieren; in der Darstellung der konkreten
+Syntax in den Vorlesungsunterlagen sparen wir uns dies zugunsten einer besseren
+Lesbarkeit.
 
 `EOF` ist kein Zeichen in der Eingabe, es markiert lediglich das Ende der Eingabe
 und wird vom Lexer als End-of-Input-Token produziert.
@@ -159,15 +157,14 @@ Parse-Tree:
                                   L_int
                                  /     \
                              eform      EOF
-                        _____/ | \ \_____
-                       /       |  \      \
-                     "("      "-"  eform eform ")"
-                                   /       |
-                                  /        |
-                             eform         INT
-                            / | | \ \       |
-                          "(" "+" ... ")"  "3"
-                               ...
+                        _____/ | \ \______________
+                       /       |  \      \        \
+                     "("      "-"  eform  eform   ")"
+                                   /         |
+                            / | | \ \        |
+                          "(" "+" ... ")"   INT
+                               ...           |
+                                            "3"
 
 ::: notes
 Wir starten mit der Startregel `L_int`. Diese fordert ein `eform` und ein `EOF`,
@@ -241,7 +238,7 @@ L_int = Expr
 \bigskip
 
 -   Keine `eform`-Regel mehr
--   Klammern werden **nicht** als Knoten repräsentiert
+-   Klammern, `EOF`, ... werden **nicht** als Knoten repräsentiert
 
 :::: notes
 Hier ist die abstrakte Grammatik von L-Int. Sie ist sehr kompakt: Ein Ausdruck ist
@@ -259,8 +256,8 @@ Mit der abstrakten Grammatik beschreiben wir den *abstract syntax tree* (**AST**
 ## Schreibweise abstrakte Grammatik
 
 Die abstrakte Grammatik entspricht der Definition von algebraischen Datentypen
-(ADT). Da wir das in die Implementierungssprache Java übertragen, nutzen wir hier
-die Konventionen aus Java und schreiben alle Datentypen (spätere Interfaces und
+(**ADT**). Da wir das in die Implementierungssprache Java übertragen, nutzen wir
+hier die Konventionen aus Java und schreiben alle Datentypen (spätere Interfaces und
 Records/Klassen) in UpperCamelCase.
 
 Mit `Int` ist ein Integer-Datentyp gemeint, d.h. wir könnten das in Java entweder
@@ -300,8 +297,8 @@ Wir starten mit einer Subtraktion (`SubExpr`). Der linke Operand ist eine Additi
 
 Wir haben für den AST nur *binäre* Knoten modelliert, während der Parse-Tree
 variadisch ist und mehr als zwei Operanden beispielsweise in der Addition erlaubt.
-Dies muss man an einer geeigneten Stelle, etwa im Parser oder in einem
-nachgelagerten Pass über den AST, geeignet umformen.
+Dies muss man an einer geeigneten Stelle entsprechend umformen, etwa im Parser oder
+in einem nachgelagerten Pass über den AST.
 
 Beispiel: Wenn wir den Ausdruck `(+ 1 2 3)` betrachten, würde der Parse-Tree hier
 einen `eform`-Knoten mit drei Operanden beinhalten. Dies können wir nicht direkt im
@@ -310,7 +307,8 @@ klammern (typisch wäre hier eine Klammerung von links nach rechts): `(+ (+ 1 2)
 und dazu den AST erzeugen:
 `AddExpr(AddExpr(IntLiteral(1), IntLiteral(2)), IntLiteral(3))`.
 
-Dies ist eine besonders einfache Form des "Desugaring".
+`(+ 1 2 3)` ist also nur "**syntaktischer Zucker**" für `(+ (+ 1 2) 3)`. Die
+gezeigte Vereinfachung ist eine besonders einfache Form des "**Desugaring**".
 :::
 ::::
 
@@ -425,10 +423,9 @@ entkoppeln, dienen uns genau solche manuell erstellten AST als direkte Eingabe.
     -   Umsetzung in Java: Interfaces und Klassen/Records
 
 ::: readings
-TODO
-
--   @Nystrom2021: Kapitel 4: A Tree-Walk Interpreter, insb. 8. Statements and State
--   @Mogensen2017: Kapitel 4
+Zum Thema konkrete vs. abstrakte Syntax findet sich eine schöne Darstellung in
+[@Siek2023python]: Kapitel 1 "Preliminaries". In [@Nystrom2021] kann man zum Thema
+Grammatik und AST in Kapitel 5 "Representing Code" nachlesen.
 :::
 
 ::: outcomes
