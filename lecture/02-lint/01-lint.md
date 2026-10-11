@@ -161,7 +161,7 @@ Sprachinkremente darauf aufbauen.
 
 In L-Int haben wir:
 
--   Positive Ganzzahlen (z.B. `0`, `42`, `1337`)
+-   Nichtnegative Ganzzahlen (z.B. `0`, `42`, `1337`)
 -   Binäre Operatoren: `+`, `-`
 -   Klammern: `(`, `)`
 -   Zeilen-Kommentar: `;;`
@@ -242,4 +242,70 @@ Einen schönen Überblick über das, was uns in diesem Semester erwartet, gibt
     Auswertungsregeln auswerten.
 -   k3: Ich kann einen mehrstelligen Additionsausdruck in eine äquivalente Folge
     binärer Ausdrücke umformen.
+:::
+
+::: challenges
+**Form und Bedeutung**
+
+Betrachten Sie den Ausdruck:
+
+``` clojure
+(- 10 (+ 3 5))
+```
+
+1.  Beschreiben Sie seine Struktur in eigenen Worten: Welche Operation steht außen,
+    und welche Operanden hat sie?
+2.  Berechnen Sie den Wert.
+3.  Erklären Sie, welche Ihrer Aussagen zur Syntax und welche zur Semantik gehören.
+
+<!--
+Äußerlich ist der Ausdruck eine Subtraktion mit den Operanden 10 und (+ 3 5).
+Der innere Ausdruck ist eine Addition und ergibt 8; der gesamte Ausdruck ergibt 10 - 8 = 2.
+Die Beschreibung der Form gehört zur Syntax, die Berechnung des Werts zur Semantik.
+-->
+
+**Mehrstellige Subtraktion als syntaktischer Zucker**
+
+Der Ausdruck
+
+``` clojure
+(- 20 5 3)
+```
+
+wird laut Skript von links nach rechts geklammert.
+
+1.  Schreiben Sie ihn als verschachtelten Ausdruck mit jeweils zwei Operanden um.
+2.  Berechnen Sie den Wert.
+3.  Berechnen Sie zum Vergleich auch die rechts geklammerte Variante. Sind die
+    Ergebnisse gleich?
+
+<!--
+Die festgelegte Links-Klammerung ergibt:
+`(- (- 20 5) 3)`
+und damit den Wert 12. Die rechts geklammerte Variante wäre:
+`(- 20 (- 5 3))`
+Sie ergibt 18. Die Klammerung ist bei Subtraktion also entscheidend; die Regel im Skript legt fest, welche Bedeutung die mehrstellige Schreibweise hat.
+-->
+
+**Negative Zahl: Literal oder Ergebnis**
+
+Vergleichen Sie diese Schreibweisen:
+
+``` clojure
+-3
+(- 0 3)
+(+ 0 (- 5 8))
+```
+
+Welche davon sind nach der Beschreibung von L-Int als Eingabeausdrücke vorgesehen?
+Welche Werte ergeben die Ausdrücke, die Sie auswerten können? Erklären Sie den
+Unterschied zwischen einem **Integer-Literal** und einem **Auswertungsergebnis**.
+
+<!--
+Als Literal sind laut Beschreibung nichtnegative Ganzzahlen vorgesehen;
+`-3` ist daher keine vorgesehene Literal-Schreibweise.
+`(- 0 3)` ist ein L-Int-Ausdruck und ergibt -3.
+`(+ 0 (- 5 8))` ist ebenfalls ein L-Int-Ausdruck und ergibt -3.
+Damit lässt sich herausarbeiten: Auch wenn negative Zahlen nicht als Literale notiert werden, können sie als Ergebnisse entstehen.
+-->
 :::
