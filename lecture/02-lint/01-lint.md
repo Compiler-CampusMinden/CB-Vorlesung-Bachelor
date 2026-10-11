@@ -4,11 +4,23 @@ title: "L-Int: Die Sprache Lispy"
 ---
 
 ::: tldr
-TODO
-:::
+Lispy ist eine für diese Lehrveranstaltung frei erfundene Lisp-ähnliche
+Programmiersprache. Ihre Ausdrücke werden als S-Expressions in einer Klammer- und
+Präfixnotation geschrieben.
 
-::: youtube
-TODO
+L-Int ist dabei die Grundstufe von Lipsy, die lediglich Integer-Literale sowie
+Addition und Subtraktion umfasst. Ein Integer-Literal ist selbst ein Ausdruck,
+während eine Liste wie `(+ 1 2)` einen Operator und seine Operanden enthält.
+
+Die Syntax legt fest, welche Ausdrücke gültig sind; die Semantik legt fest, welchen
+Wert ein gültiger Ausdruck ergibt.
+
+Mehrere Operanden können bei der Addition oder Subtraktion als "syntaktischer
+Zucker" für verschachtelte binäre Ausdrücke behandelt werden.
+
+Kommentare beginnen mit `;;` und reichen bis zum Ende der Zeile. L-Int bildet die
+Grundlage, um schrittweise Grammatik, Lexer, Parser, Syntaxbaum, AST und Interpreter
+zu entwickeln.
 :::
 
 # Problem: Wie verstehen wir `1 + 2 - 3`?
@@ -29,19 +41,23 @@ Das wird uns durch die gesamte Vorlesung begleiten: **Vom Text (Eingabe) über
 Struktur (Syntax) hin zur Bedeutung (Semantik)**.
 
 ::: important
-**Lehrkonzept**
+## Lehrkonzept
 
 Wir werden im Laufe der Veranstaltung **inkrementell** vorgehen und mit einer
 minimalen Sprache L-Int (nur Integer, Addition und Subtraktion) starten. Für diese
 Sprache werden wir die Syntax in Form von Grammatiken festlegen, Lexer und Parser
-bauen und aus einer Eingabe einen Syntax-Tree (Parse-Tree) und einen abstrakten
-Syntax-Tree (AST) erzeugen und diesen schließlich mit einem Interpreter evaluieren.
-In den Folgewochen werden wir darauf aufbauen und aufbauend auf L-Int weitere
-Sprachen definieren, die zusätzliche Fähigkeiten und Konzepte mitbringen. Auf
-Java-Ebene werden wir die Bausteine der jeweiligen Vorgängerversion erben und
-passend überschreiben mit dem neuen Verhalten und mit `super.xyz()` die
-Vorgängerversion "aufrufen" für die bisherige Funktionalität. Wir orientieren uns
-damit grob an dem inkrementellen Vorgehen in [@Siek2023python].
+bauen und aus einer Eingabe einen Syntax-Tree (Parse-Tree) und daraus einen
+abstrakten Syntax-Tree (AST) erzeugen und diesen schließlich mit einem Interpreter
+evaluieren. (Ein konkreter Syntaxbaum beziehungsweise Parse-Tree bildet die Struktur
+der konkreten Grammatik ab; der AST lässt syntaktische Details weg, die für die
+weitere Verarbeitung nicht benötigt werden.) In den Folgewochen erweitern wir L-Int
+schrittweise um weitere Konzepte. Wir leiten die Java-Implementierung einer
+Sprachstufe von der vorherigen ab und überschreiben die Methoden, deren Verhalten
+sich ändert. Mit `super.xyz()` rufen wir die Implementierung der Oberklasse auf,
+d.h. rufen so das Verhalten der Vorgängerversion ab ohne es erneut zu
+implementieren.
+
+Wir orientieren uns damit grob an dem inkrementellen Vorgehen in [@Siek2023python].
 Konzeptionell/didaktisch lassen wir uns bei der Modellierung der Bausteine in vielen
 Fällen ungefähr von der Darstellung in [@Nystrom2021] inspirieren. Es werden sich
 also immer wieder Hinweise auf diese beiden Werke als Vertiefung finden.
@@ -59,15 +75,26 @@ Eine S-Expression ist:
 :::
 
 -   ein Atom der Form `x`, oder
--   ein Ausdruck der Form `(. x y)` [(mit `x` u. `y` S-Expression, `.` eine
+-   ein Ausdruck der Form `(. x y)` [(mit `x` u. `y` S-Expressions, `.` eine
     Operation oder Funktion oder ein Keyword)]{.notes}.
 
-:::: notes
+::::: notes
 ::: tip
-**Anmerkung**: Die Anzahl der S-Expressions in einem Klammer-Ausdruck ist nicht
-näher definiert - `x` und `y` sind nur Beispiele. Es könnten auch mehr oder weniger
-S-Expressions nach der Operation/Funktion/Keyword auftauchen (vgl. nachfolgende
-Sprachdefinition).
+## Variadische S-Expressions
+
+Die Anzahl der S-Expressions in einem Klammer-Ausdruck ist nicht näher definiert -
+`x` und `y` sind nur Beispiele. Es könnten auch mehr oder weniger S-Expressions nach
+der Operation/Funktion/Keyword auftauchen (vgl. nachfolgende Sprachdefinition).
+:::
+
+::: important
+## Syntax vs. Semantik
+
+Die Syntax legt fest, welche Ausdrücke gültig sind; die Semantik legt fest, welchen
+Wert ein gültiger Ausdruck ergibt.
+
+Wir werden zur Beschreibung der Syntax verschiedene Grammatiken entwickeln. Die
+Auswertung wird über eine semantische Analyse und einen Interpreter erfolgen.
 :::
 
 In der *Vorlesung* werden wir für unsere aufeinander aufbauenden Sprachfamilien
@@ -77,10 +104,10 @@ hervortreten. Im Praktikum werden wir diese Konzepte auf einen Subdialekt von C+
 anwenden und über das Semester hinweg in modernem Java einen Interpreter für C++
 schreiben.
 
-Lisp ist eine alte Sprache (Sprachfamilie), die aus dem KI-Umfeld stammt, und ist
-eine Abkürzung für "*list processing*". In Lisp wird fast alles über Listen
-dargestellt, dabei werden sowohl für Programme wie auch für Daten dieselbe Form
-([S-Expressions](https://en.wikipedia.org/wiki/S-expression)) genutzt
+Lisp ist eine alte Sprachfamilie, die aus dem KI-Umfeld stammt, und ist eine
+Abkürzung für "*list processing*". In vielen Lisp-Dialekten werden Programme und
+viele Daten in einer gemeinsamen listenartigen Form
+([S-Expressions](https://en.wikipedia.org/wiki/S-expression)) dargestellt
 ("Homoikonizität", "*code as data*") - einfach zu merken und gleichzeitig sehr
 mächtig.
 
@@ -91,8 +118,8 @@ wurden). ([[Hickey, Rich (2009-01-05). "meaning and pronunciation of
 Clojure"](https://groups.google.com/g/clojure/c/4uDxeOS8pwY/m/UHiYp7p1a3YJ)]{.credits
 nolist="true"})
 
-Clojure und Lisp nutzen die "*prefix notation*": `(. x y)`
-::::
+Clojure und Lisp nutzen die "*prefix notation*": `(. x y z)`
+:::::
 
 \bigskip
 \bigskip
@@ -121,7 +148,7 @@ S-Expressions werden in Clojure und Lisp oft auch "*form*" genannt.
 
 ::: tip
 Wir ignorieren die Aspekte "Liste" und "Funktion" vorerst und stellen das für später
-zurück. Ein `(+ 1 2)` ist einfach eine andere Schreibweise für `1 + 2`.
+zurück. Ein `(+ 1 2)` ist für uns einfach eine andere Schreibweise für `1 + 2`.
 :::
 ::::
 
@@ -134,7 +161,7 @@ Sprachinkremente darauf aufbauen.
 
 In L-Int haben wir:
 
--   Ganzzahlen (z.B. `0`, `42`, `1337`)
+-   Positive Ganzzahlen (z.B. `0`, `42`, `1337`)
 -   Binäre Operatoren: `+`, `-`
 -   Klammern: `(`, `)`
 -   Zeilen-Kommentar: `;;`
@@ -150,15 +177,14 @@ Beispiele:
 (- (+ 1 2) (- 3 4))     ;; (1 + 2) - (3 + 4)
 ```
 
-:::: notes
+::::: notes
 L-Int ist unsere minimalistische Basissprache für die folgenden Sitzungen. Sie
 enthält nur das Nötigste: Integer-Literale, Addition und Subtraktion, sowie
 Klammern. Das ist bewusst klein gehalten, damit wir uns auf die Architektur
 konzentrieren können: Grammatik, AST, Interpreter. Alles, was wir hier aufbauen,
 lässt sich (und wird) später systematisch erweitern.
 
-Die einfachste Form sind dabei Literale mit konkreten Werten des Datentypen
-`Integer`.
+Die einfachste Form sind Integer-Literale mit konkreten Werten.
 
 In der listenartigen Form ist der erste Eintrag der Liste immer eine Operation (oder
 ein Funktionsname), danach kommen je nach Operation/Funktion (die Arität muss
@@ -167,13 +193,19 @@ zu verstehen sind.
 
 Der Ausdruck `(+ 1 1)` ist eine S-Expression, gebildet aus den atomaren Ausdrücken
 `+` und `1`. Bei der Evaluierung wird das `+`-Symbol zu einer Additionsfunktion
-evaluiert, und die `1` steht für sich, also für eine Integerzahl mit dem Wert $1$.
-Bei der Evaluierung der Liste wird die Additionsfunktion mit den beiden Integerzahl
-als Argument aufrufen.
+evaluiert, und die `1` steht für sich, also für eine Integerzahl mit dem Wert 1. Bei
+der Evaluierung der Liste wird die Additionsfunktion mit den beiden Integerzahlen
+als Argumente aufrufen.
+
+Über `;;` wird ein Kommentar eingeleitet, der bis zum Ende der Zeile geht.
+
+::: tip
+## Syntactic Sugar
 
 Die Ausdrücke sind implizit von links nach rechts geklammert, d.h. der Ausdruck
 `(+ 1 2 3 4)` ist [*syntactic sugar*](https://en.wikipedia.org/wiki/Syntactic_sugar)
 für `(+ (+ (+ 1 2) 3) 4)`.
+:::
 
 ::: tip
 ## Statements vs. Expressions
@@ -187,24 +219,27 @@ In unserem L-Int ist zunächst alles eine Expression, d.h. Ausdrücke ergeben be
 Auswertung immer einen Wert. In späteren Sprachstufen werden wir komplexere
 Ausdrücke und auch Statements über die Listenform bilden.
 :::
-
-Über `;;` wird ein Kommentar eingeleitet, der bis zum Ende der Zeile geht.
-::::
+:::::
 
 # Wrap-up
 
 -   L-Int besteht aus S-Expressions
 -   Formen:
     -   Integer-Literal als Atom
-    -   S-Expression mit `+` und `-` als Operatoren
+    -   S-Expressions mit `+` und `-` als Operatoren
 
 ::: readings
-TODO
-
--   @Nystrom2021: Kapitel 4: A Tree-Walk Interpreter, insb. 8. Statements and State
--   @Mogensen2017: Kapitel 4
+Einen schönen Überblick über das, was uns in diesem Semester erwartet, gibt
+@Nystrom2021 in Kapitel 2 "A Map of the Territory".
 :::
 
 ::: outcomes
--   k3: Ich kann TODO
+-   k2: Ich kann den Unterschied zwischen Syntax und Semantik an einem
+    L-Int-Ausdruck erklären.
+-   k2: Ich kann erklären, wie Integer-Literale und Operatorlisten als S-Expressions
+    dargestellt werden.
+-   k3: Ich kann einfache L-Int-Ausdrücke entsprechend der festgelegten
+    Auswertungsregeln auswerten.
+-   k3: Ich kann einen mehrstelligen Additionsausdruck in eine äquivalente Folge
+    binärer Ausdrücke umformen.
 :::
