@@ -4,12 +4,13 @@ title: "L-Int: Von Ausdrücken zum Interpreter"
 ---
 
 ::: tldr
-Ein AST-basierter Interpreter besteht oft aus einem "Visitor-Dispatcher": Man
-traversiert mit einer `eval()`-Funktion den AST und ruft je nach Knotentyp die
-passende Funktion auf. Dabei werden bei Ausdrücken (*Expressions*) Werte berechnet
-und zurückgegeben, d.h. hier hat man einen Rückgabewert und ein entsprechendes
-`return` im `switch`/`case`, während man bei Anweisungen (*Statements*) keinen
-Rückgabewert hat.
+Ein AST-basierter Interpreter besteht oft aus einem "Dispatch": Man traversiert mit
+einer `eval()`-Funktion den AST und ruft je nach Knotentyp die passende Funktion
+auf. Dabei werden bei Ausdrücken (*Expressions*) Werte berechnet und zurückgegeben,
+d.h. hier hat man einen Rückgabewert und ein entsprechendes `return` im
+`switch`/`case`, während man bei Anweisungen (*Statements*) keinen Rückgabewert hat.
+Dieser Dispatch kann wahlweise per Visitor-Pattern oder manueller Traversierung mit
+`switch`/`case` erfolgen.
 
 Der Wert von Literalen ergibt sich direkt durch die Übersetzung des jeweiligen Werts
 in den passenden Typ der Implementierungssprache. Bei Ausdrücken interpretiert man
@@ -17,17 +18,13 @@ zunächst die Teilausdrücke durch den Aufruf von `eval()` für die jeweiligen
 AST-Kindknoten und berechnet daraus das gewünschte Ergebnis.
 :::
 
-::: youtube
-TODO
-:::
-
 # Von AST zu Werten: Idee
 
 -   Gegeben: Lexer/Parser haben einen AST aufgebaut
 -   Gesucht: `eval(expr)` berechnet einen **Wert**
 -   Beispiele:
-    -   `eval(IntLiteral(1))` $\to$ `1`
-    -   `eval(AddExpr(IntLiteral(1), IntLiteral(2)))` $\to$ `3`
+    -   `eval( IntLiteral(1) )` $\to$ `1`
+    -   `eval( AddExpr(IntLiteral(1), IntLiteral(2)) )` $\to$ `3`
 -   Frage:
     -   Wie repräsentieren wir solche Werte sauber im Code?
 
@@ -41,14 +38,22 @@ abstrahieren wir Werte ebenfalls in einer kleinen Hierarchie.
 
 # Value-Hierarchie: Motivation
 
--   Heute: TODO abstrakte Syntax wiederholen
-    -   Nur ganze Zahlen
+``` ebnf
+Expr  = IntLiteral(Int) | AddExpr(Expr, Expr) | SubExpr(Expr, Expr)
+L_int = Expr
+```
+
+\bigskip
+
+-   L-Int: Nur ganze Zahlen
 -   Später:
     -   Booleans
     -   Funktionen
     -   Objekte
--   Deshalb:
-    -   `Value` als gemeinsamer Basistyp für Laufzeitwerte
+
+\bigskip
+
+$\to$ `Value` als gemeinsamer Basistyp für Laufzeitwerte
 
 ::: notes
 Aktuell könnten wir streng genommen einfach `int` als Rückgabetyp verwenden. Aber
@@ -94,8 +99,7 @@ hilft uns später auch bei Typprüfung und Fehlerbehandlung.
 
 # Tree-Walking-Interpreter: Grundidee
 
--   Funktion:
-    -   `Value eval(Expr expr)`
+-   Funktion: `Value eval(Expr expr)`
 
 \bigskip
 
@@ -158,7 +162,7 @@ als Datentyp der Interpreter-Programmiersprache Java ausgewertet werden.
 In der abstrakten Grammatik hatten wir definiert:
 
 ``` ebnf
-expr    ::= IntLiteral(int)
+Expr  = IntLiteral(Int)
 ```
 
 Im AST werden also Knoten vom Typ `IntLiteral` angelegt, um die Integer-Literale zu
@@ -171,7 +175,7 @@ Für jedes `IntLiteral` erzeugen wir nun im L-Int-Interpreter ein `IntVal`.
 Für Ausdrücke hatten wir in der abstrakten Grammatik für L-Int definiert:
 
 ``` ebnf
-expr    ::= AddExpr(expr, expr) | SubExpr(expr, expr)
+Expr  = AddExpr(Expr, Expr) | SubExpr(Expr, Expr)
 ```
 
 Wir bekommen im AST also Knoten vom Typ `AddExpr` für eine Addition bzw. vom Typ
@@ -208,9 +212,10 @@ eingelesen, geparst, vorverarbeitet und dann interpretiert wird.
 Für einen interaktiven Interpreter würde man in einer Schleife die Eingaben lesen,
 parsen und vorverarbeiten und dann interpretieren. Dabei würde jeweils der AST und
 die Symboltabelle *ergänzt*, damit die neuen Eingaben auf frühere verarbeitete
-Eingaben zurückgreifen können. Durch die Form der Schleife "Einlesen -- Verarbeiten
--- Auswerten" hat sich auch der Name "*Read-Eval-Loop*" bzw.
-"*Read-Eval-Print-Loop*" (**REPL**) eingebürgert.
+Eingaben zurückgreifen können. Durch die Form der Schleife "Einlesen - Verarbeiten
+
+-   Auswerten" hat sich auch der Name "*Read-Eval-Loop*" bzw.
+    "*Read-Eval-Print-Loop*" (**REPL**) eingebürgert.
 :::
 
 ::: tip
@@ -221,7 +226,7 @@ In Programmiersprachen unterscheiden wir häufig **Expressions** (*Ausdrücke*) 
 
 Expressions sind dabei syntaktische Konstrukte einer Programmiersprache, die (in
 einem gegebenen Kontext) zu einem Wert **evaluiert** werden können. Typische
-Expressions sind beispielsweise Ausdrücke wie `(* 2 3)` oder `(foo 42)`... In
+Expressions sind beispielsweise Ausdrücke wie `(+ 2 3)` oder `(foo 42)`... In
 manchen Sprachen sind beispielsweise auch Zuweisungen Expressions: `v = 42 + 7;`
 würde in C der Variablen `v` den Wert 49 zuweisen, dies ist gleichzeitig auch der
 Wert des gesamten Ausdrucks. Man könnte in C also Dinge formulieren wie
@@ -247,12 +252,15 @@ Vergleiche auch @Nystrom2021, Kapitel 6 "Parsing Expressions", Kapitel 7 "Evalua
 Expressions" und Kapitel 8 "Statements and State", aber auch [Wikipedia:
 Expression](https://en.wikipedia.org/wiki/Expression_(computer_science)) und
 [Wikipedia: Statement](https://en.wikipedia.org/wiki/Statement_(computer_science)).
+Wir werden uns an späterer Stelle noch darum kümmern.
 :::
 ::::::
 
 # Interpreter in Aktion
 
+::: notes
 Beispiel:
+:::
 
 ``` java
 // (- (+ 1 2) 3)
@@ -279,21 +287,6 @@ Interpreter gelangt und ausgewertet wird.
 
 # Wrap-up
 
--   Wir haben L-Int definiert:
-    -   Konkrete Grammatik (Syntax der Strings)
-    -   Abstrakte Grammatik (AST-Struktur)
--   Wir haben:
-    -   AST-Typen in Java implementiert
-    -   Eine Value-Hierarchie eingeführt
-    -   Einen Tree-Walking-Interpreter gebaut
--   Nächste Schritte:
-    -   Text → AST automatisieren:
-        -   Lexer
-        -   Parser (ANTLR + handgeschrieben)
--   Value-Hierarchie zur Modellierung von Laufzeitwerten
-
-\smallskip
-
 -   Interpreter simulieren die Programmausführung
     -   Code ausführen: Read-Eval-Loop
 -   Tree-Walking-Interpreter traversieren den AST
@@ -308,10 +301,9 @@ Recursive-Descent-Parser.
 :::
 
 ::: readings
-TODO
-
--   @Nystrom2021: Kapitel 4: A Tree-Walk Interpreter, insb. 8. Statements and State
--   @Mogensen2017: Kapitel 4
+Zum Thema Auswertung von Ausdrücken im AST findet sich eine schöne Darstellung in
+[@Nystrom2021] in Kapitel 7 "Evaluating Expressions". @Siek2023python beschäftigt
+sich mit der Interpretation von einfachen Ausdrücken in Kapitel 1 "Preliminaries".
 :::
 
 ::: outcomes
