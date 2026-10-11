@@ -312,3 +312,73 @@ sich mit der Interpretation von einfachen Ausdrücken in Kapitel 1 "Preliminarie
 -   k3: Ich kann bei der Traversierung des AST die dort abgelegten Ausdrücke
     auswerten
 :::
+
+::: challenges
+**Den Interpreter beim Arbeiten beobachten**
+
+Gegeben ist folgender AST:
+
+``` java
+Expr expr =
+    new SubExpr(
+        new AddExpr(new IntLiteral(4), new IntLiteral(2)),
+        new AddExpr(new IntLiteral(1), new IntLiteral(3))
+    );
+```
+
+Verfolgen Sie den Aufruf von `eval(expr)` Schritt für Schritt:
+
+1.  In welcher Reihenfolge werden die AST-Knoten ausgewertet?
+2.  Welcher Wert wird jeweils zurückgegeben?
+3.  Welchen endgültigen Wert liefert der Interpreter?
+
+Notieren Sie das Ergebnis beispielsweise als **Tabelle** mit den Spalten **Knoten**,
+**ausgewertete Kinder** und **Rückgabewert**.
+
+**Den fehlenden Fall ergänzen**
+
+Die im Skript gezeigte `eval()`-Methode behandelt `IntLiteral` und `AddExpr`, aber
+noch nicht `SubExpr`.
+
+Ergänzen Sie den passenden `case`-Zweig. Entwickeln Sie anschließend zwei kleine
+Tests, die zeigen, dass Ihre Implementierung korrekt ist. Einer der Tests soll
+insbesondere aufdecken, ob versehentlich die Operanden vertauscht wurden.
+
+<!--
+```java
+case SubExpr(var l, var r) -> {
+    int a = Value.asInt(eval(l));
+    int b = Value.asInt(eval(r));
+    yield new IntVal(a - b);
+}
+```
+
+Mögliche Tests:
+
+*   7 - 2 ergibt 5.
+*   2 - 7 ergibt -5.
+-->
+
+**Woher kann ein Laufzeitfehler kommen?**
+
+In den arithmetischen Fällen wird `Value.asInt(...)` aufgerufen. Diese Methode wirft
+eine `Exception`, wenn der übergebene Wert kein `IntVal` ist.
+
+Diskutieren Sie:
+
+-   Kann`Value.asInt(...)` bei einem AST, der nur aus den aktuell definierten
+    L-Int-Knoten besteht, tatsächlich fehlschlagen?
+-   Warum könnte die Methode trotzdem einen Laufzeitfehler prüfen und nicht einfach
+    einen Cast verwenden?
+-   Was ist der Unterschied zwischen einem `Expr`-Knoten und einem `Value`?
+
+<!--
+Bei den aktuell behandelten AST-Knoten liefert eval() nur IntVal zurück. Unter dieser Annahme kann Value.asInt(...) nicht
+fehlschlagen. Die Prüfung macht die erwartete Wertart dennoch explizit und verhindert einen unkontrollierten Cast-Fehler,
+falls ein anderer Wert ankommt.
+
+Expr beschreibt die Syntax des Programms; Value beschreibt das Ergebnis seiner Auswertung.
+
+Ziel: Die Trennung von Syntax und Laufzeitwerten festigen und die Rolle der Typprüfung in Value.asInt verstehen.
+-->
+:::
