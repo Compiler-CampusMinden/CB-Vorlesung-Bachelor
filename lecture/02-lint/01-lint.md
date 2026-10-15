@@ -8,9 +8,10 @@ Lispy ist eine für diese Lehrveranstaltung frei erfundene Lisp-ähnliche
 Programmiersprache. Ihre Ausdrücke werden als S-Expressions in einer Klammer- und
 Präfixnotation geschrieben.
 
-L-Int ist dabei die Grundstufe von Lipsy, die lediglich Integer-Literale sowie
-Addition und Subtraktion umfasst. Ein Integer-Literal ist selbst ein Ausdruck,
-während eine Liste wie `(+ 1 2)` einen Operator und seine Operanden enthält.
+L-Int ist dabei die Grundstufe von Lipsy und umfasst lediglich Integer-Literale
+sowie Addition und Subtraktion. Ein Integer-Literal ist bereits ein minimaler
+Ausdruck, während eine Liste wie `(+ 1 2)` einen Operator und seine Operanden
+enthält.
 
 Die Syntax legt fest, welche Ausdrücke gültig sind; die Semantik legt fest, welchen
 Wert ein gültiger Ausdruck ergibt.
@@ -37,7 +38,7 @@ wir tun jetzt so, als wüssten wir noch nicht, wie ein Rechner das versteht. Die
 beiden Kernfragen sind: Wie sieht die Struktur dieses Ausdrucks aus? Und wie können
 wir die Bedeutung so modellieren, dass wir sie programmatisch auswerten können?
 
-Das wird uns durch die gesamte Vorlesung begleiten: **Vom Text (Eingabe) über
+Das wird uns durch die gesamte Veranstaltung begleiten: **Vom Text (Eingabe) über
 Struktur (Syntax) hin zur Bedeutung (Semantik)**.
 
 ::: important
@@ -67,8 +68,8 @@ also immer wieder Hinweise auf diese beiden Werke als Vertiefung finden.
 # S-Expressions als syntaktische Grundform
 
 ::: notes
-Ein Programm in L-Int besteht aus einem Ausdruck (*Expression*). Die Ausdrücke haben
-eine spezielle Form: Sie sind sogenannte
+Ein Programm in L-Int besteht aus einem **Ausdruck** (*Expression*). Die Ausdrücke
+haben eine spezielle Form: Sie sind sogenannte
 [**S-Expressions**](https://en.wikipedia.org/wiki/S-expression).
 
 Eine S-Expression ist:
@@ -101,8 +102,8 @@ In der *Vorlesung* werden wir für unsere aufeinander aufbauenden Sprachfamilien
 **S-Expressions** nutzen in Anlehnung an Clojure und Lisp. Das vereinfacht das
 Parsing deutlich und lässt die Konzepte im Skript und den Folien deutlicher
 hervortreten. Im Praktikum werden wir diese Konzepte auf einen Subdialekt von C++
-anwenden und über das Semester hinweg in modernem Java einen Interpreter für C++
-schreiben.
+anwenden und über das Semester hinweg in modernem Java einen Interpreter für dieses
+Mini-C++ schreiben.
 
 Lisp ist eine alte Sprachfamilie, die aus dem KI-Umfeld stammt, und ist eine
 Abkürzung für "*list processing*". In vielen Lisp-Dialekten werden Programme und
@@ -260,8 +261,9 @@ Betrachten Sie den Ausdruck:
 
 <!--
 Äußerlich ist der Ausdruck eine Subtraktion mit den Operanden 10 und (+ 3 5).
-Der innere Ausdruck ist eine Addition und ergibt 8; der gesamte Ausdruck ergibt 10 - 8 = 2.
-Die Beschreibung der Form gehört zur Syntax, die Berechnung des Werts zur Semantik.
+Der innere Ausdruck ist eine Addition und ergibt 8; der gesamte Ausdruck ergibt 10 -
+8 = 2. Die Beschreibung der Form gehört zur Syntax, die Berechnung des Werts zur
+Semantik.
 -->
 
 **Mehrstellige Subtraktion als syntaktischer Zucker**
@@ -280,11 +282,11 @@ wird laut Skript von links nach rechts geklammert.
     Ergebnisse gleich?
 
 <!--
-Die festgelegte Links-Klammerung ergibt:
-`(- (- 20 5) 3)`
-und damit den Wert 12. Die rechts geklammerte Variante wäre:
-`(- 20 (- 5 3))`
-Sie ergibt 18. Die Klammerung ist bei Subtraktion also entscheidend; die Regel im Skript legt fest, welche Bedeutung die mehrstellige Schreibweise hat.
+Die festgelegte Links-Klammerung ergibt: `(- (- 20 5) 3)` und damit den Wert 12.
+
+Die rechts geklammerte Variante wäre: `(- 20 (- 5 3))` Sie ergibt 18. Die Klammerung
+ist bei Subtraktion also entscheidend; die Regel im Skript legt fest, welche
+Bedeutung die mehrstellige Schreibweise hat.
 -->
 
 **Negative Zahl: Literal oder Ergebnis**
@@ -302,10 +304,10 @@ Welche Werte ergeben die Ausdrücke, die Sie auswerten können? Erklären Sie de
 Unterschied zwischen einem **Integer-Literal** und einem **Auswertungsergebnis**.
 
 <!--
-Als Literal sind laut Beschreibung nichtnegative Ganzzahlen vorgesehen;
-`-3` ist daher keine vorgesehene Literal-Schreibweise.
-`(- 0 3)` ist ein L-Int-Ausdruck und ergibt -3.
-`(+ 0 (- 5 8))` ist ebenfalls ein L-Int-Ausdruck und ergibt -3.
-Damit lässt sich herausarbeiten: Auch wenn negative Zahlen nicht als Literale notiert werden, können sie als Ergebnisse entstehen.
+Als Literal sind laut Beschreibung nichtnegative Ganzzahlen vorgesehen; `-3`
+ist daher keine vorgesehene Literal-Schreibweise. `(- 0 3)` ist ein L-Int-Ausdruck
+und ergibt -3. `(+ 0 (- 5 8))` ist ebenfalls ein L-Int-Ausdruck und ergibt -3. Damit
+lässt sich herausarbeiten: Auch wenn negative Zahlen nicht als Literale notiert
+werden, können sie als Ergebnisse entstehen.
 -->
 :::
