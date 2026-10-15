@@ -6,16 +6,19 @@ title: "L-Int: Von Ausdrücken zum Interpreter"
 ::: tldr
 Ein AST-basierter Interpreter besteht oft aus einem "Dispatch": Man traversiert mit
 einer `eval()`-Funktion den AST und ruft je nach Knotentyp die passende Funktion
-auf. Dabei werden bei Ausdrücken (*Expressions*) Werte berechnet und zurückgegeben,
-d.h. hier hat man einen Rückgabewert und ein entsprechendes `return` im
-`switch`/`case`, während man bei Anweisungen (*Statements*) keinen Rückgabewert hat.
-Dieser Dispatch kann wahlweise per Visitor-Pattern oder manueller Traversierung mit
-`switch`/`case` erfolgen.
+auf. Dabei werden bei Ausdrücken (*Expressions*) Werte berechnet und zurückgegeben
+("eval" von "evaluieren" - "auswerten"), d.h. hier hat man einen Rückgabewert und
+ein entsprechendes `return` im `switch`/`case`, während man bei Anweisungen
+(*Statements*) keinen Rückgabewert hat.
+
+Der Dispatch (Aufruf der zum Knotentyp passenden Funktion) kann wahlweise per
+Visitor-Pattern oder manueller Traversierung mit `switch`/`case` erfolgen.
 
 Der Wert von Literalen ergibt sich direkt durch die Übersetzung des jeweiligen Werts
-in den passenden Typ der Implementierungssprache. Bei Ausdrücken interpretiert man
-zunächst die Teilausdrücke durch den Aufruf von `eval()` für die jeweiligen
-AST-Kindknoten und berechnet daraus das gewünschte Ergebnis.
+in den passenden Typ der Implementierungssprache. Bei komplexeren Ausdrücken
+interpretiert man zunächst die Teilausdrücke durch den rekursiven Aufruf von
+`eval()` für die jeweiligen AST-Kindknoten und berechnet daraus das gewünschte
+Ergebnis.
 :::
 
 # Von AST zu Werten: Idee
@@ -74,7 +77,7 @@ Value-Hierarchie einfach erweitern.
 ``` java
 public interface Value {
     static int asInt(Value v) {
-        if (v instanceof IntVal(var val)) return val;
+        if (v instanceof IntVal(int val)) return val;
         throw new RuntimeException("number expected");
     }
 }
@@ -98,8 +101,8 @@ Werte ableiten werden. Aktuell betrachten wir nur Integer, die wir über den Sub
 
 ::: important
 **Wichtig**: `Expr` beschreibt die abstrakte Syntax, also die Struktur des
-Programms, und `Value` beschreibt die Ergebnisse der Auswertung. Diese Trennung
-hilft uns später auch bei Typprüfung und Fehlerbehandlung.
+Programms, und `Value` beschreibt die Ergebnisse der Auswertung zur Laufzeit. Diese
+Trennung hilft uns später auch bei Typprüfung und Fehlerbehandlung.
 :::
 ::::
 
@@ -149,7 +152,7 @@ public class InterpreterLint {
 [[Hinweis "Read-Eval-Print-Loop" (REPL)]{.ex}]{.slides}
 
 :::::: notes
-Hier sehen wir die konkrete Implementierung unseres L-Int-Interpreters.
+Hier sehen wir die (teilweise) Implementierung unseres L-Int-Interpreters.
 
 Die `eval()`-Methode bildet das Kernstück des (AST-traversierenden) Interpreters für
 Ausdrücke. Hier wird passend zum aktuellen AST-Knoten die passende Methode des
@@ -192,14 +195,18 @@ Für `AddExpr` und `SubExpr` werten wir zunächst die beiden Operanden rekursiv 
 und kombinieren die Ergebnisse passend. Das entspricht genau der mathematischen
 Intuition von Addition und Subtraktion, nur eben explizit im Code ausgedrückt.
 
+**Wichtig**: Die Subtraktion (Auswertung von `SubExpr`) fehlt hier und dient als
+kleine Übung.
+
 ::: important
-**Wichtig**: Die meisten möglichen Fehlerzustände sind bereits durch den Lexer und
-Parser (und in späteren Sprachstufen während der semantischen Analyse) abgefangen
-worden. Falls zur Laufzeit die Auswertung der beiden Summanden keine Zahl ergibt,
-würde eine Java-Exception geworfen, die der Aufrufer an geeigneter Stelle fangen und
-behandeln muss. Der Interpreter soll sich ja nicht mit einem Stack-Trace
-verabschieden, sondern soll eine Fehlermeldung präsentieren und danach normal weiter
-machen ...
+## Fehlerbehandlung und Fehlermeldungen
+
+Die meisten möglichen Fehlerzustände sind bereits durch den Lexer und Parser (und in
+späteren Sprachstufen während der semantischen Analyse) abgefangen worden. Falls zur
+Laufzeit die Auswertung der beiden Summanden keine Zahl ergibt, würde eine
+Java-Exception geworfen, die der Aufrufer an geeigneter Stelle fangen und behandeln
+muss. Der Interpreter soll sich ja nicht mit einem Stack-Trace verabschieden,
+sondern soll eine Fehlermeldung präsentieren und danach normal weiter machen ...
 
 Die hier gezeigte Fehlerbehandlung ist nur sehr rudimentär, um nicht zu sehr von den
 Kernkonzepten für unsere Veranstaltung abzulenken. In der Praxis würde man hier
@@ -212,16 +219,15 @@ beispielsweise von Rust.
 ::: tip
 ## REPL: Read-Eval-Print-Loop
 
-In den folgenden Beispielen wird davon ausgegangen, dass ein komplettes Programm
-eingelesen, geparst, vorverarbeitet und dann interpretiert wird.
+In den Beispielen in dieser Veranstaltung wird immer davon ausgegangen, dass ein
+komplettes Programm eingelesen, geparst, vorverarbeitet und dann interpretiert wird.
 
 Für einen interaktiven Interpreter würde man in einer Schleife die Eingaben lesen,
-parsen und vorverarbeiten und dann interpretieren. Dabei würde jeweils der AST und
-die Symboltabelle *ergänzt*, damit die neuen Eingaben auf frühere verarbeitete
-Eingaben zurückgreifen können. Durch die Form der Schleife "Einlesen - Verarbeiten
-
--   Auswerten" hat sich auch der Name "*Read-Eval-Loop*" bzw.
-    "*Read-Eval-Print-Loop*" (**REPL**) eingebürgert.
+parsen und vorverarbeiten und dann interpretieren. Dabei würden jeweils der AST und
+die Symboltabelle und das Environment *ergänzt*, damit die neuen Eingaben auf
+frühere verarbeitete Eingaben zurückgreifen können. Durch die Form der Schleife
+"Einlesen - Verarbeiten - Auswerten" hat sich auch der Name "*Read-Eval-Loop*" bzw.
+"*Read-Eval-Print-Loop*" (**REPL**) eingebürgert.
 :::
 
 ::: tip
@@ -232,7 +238,7 @@ In Programmiersprachen unterscheiden wir häufig **Expressions** (*Ausdrücke*) 
 
 Expressions sind dabei syntaktische Konstrukte einer Programmiersprache, die (in
 einem gegebenen Kontext) zu einem Wert **evaluiert** werden können. Typische
-Expressions sind beispielsweise Ausdrücke wie `(+ 2 3)` oder `(foo 42)`... In
+Expressions sind beispielsweise Ausdrücke wie `(+ 2 3)` oder `(foo 42)` ... In
 manchen Sprachen sind beispielsweise auch Zuweisungen Expressions: `v = 42 + 7;`
 würde in C der Variablen `v` den Wert 49 zuweisen, dies ist gleichzeitig auch der
 Wert des gesamten Ausdrucks. Man könnte in C also Dinge formulieren wie
@@ -254,8 +260,8 @@ man beauftragt ein LLM mit der Auswertung). In C-ähnlichen Sprachen kann durch
 Hinzufügen eines Semikolons aus dem Ausdruck `42 +7` eine Anweisung gemacht werden
 ...
 
-Vergleiche auch @Nystrom2021, Kapitel 6 "Parsing Expressions", Kapitel 7 "Evaluating
-Expressions" und Kapitel 8 "Statements and State", aber auch [Wikipedia:
+Vergleiche auch [@Nystrom2021], Kapitel 6 "Parsing Expressions", Kapitel 7
+"Evaluating Expressions" und Kapitel 8 "Statements and State", aber auch [Wikipedia:
 Expression](https://en.wikipedia.org/wiki/Expression_(computer_science)) und
 [Wikipedia: Statement](https://en.wikipedia.org/wiki/Statement_(computer_science)).
 Wir werden uns an späterer Stelle noch darum kümmern.
@@ -372,19 +378,22 @@ eine `Exception`, wenn der übergebene Wert kein `IntVal` ist.
 
 Diskutieren Sie:
 
--   Kann`Value.asInt(...)` bei einem AST, der nur aus den aktuell definierten
+-   Kann `Value.asInt(...)` bei einem AST, der nur aus den aktuell definierten
     L-Int-Knoten besteht, tatsächlich fehlschlagen?
 -   Warum könnte die Methode trotzdem einen Laufzeitfehler prüfen und nicht einfach
     einen Cast verwenden?
 -   Was ist der Unterschied zwischen einem `Expr`-Knoten und einem `Value`?
 
 <!--
-Bei den aktuell behandelten AST-Knoten liefert eval() nur IntVal zurück. Unter dieser Annahme kann Value.asInt(...) nicht
-fehlschlagen. Die Prüfung macht die erwartete Wertart dennoch explizit und verhindert einen unkontrollierten Cast-Fehler,
-falls ein anderer Wert ankommt.
+Bei den aktuell behandelten AST-Knoten liefert eval() nur IntVal zurück. Unter
+dieser Annahme kann Value.asInt(...) nicht fehlschlagen. Die Prüfung macht die
+erwartete Wertart dennoch explizit und verhindert einen unkontrollierten
+Cast-Fehler, falls ein anderer Wert ankommt.
 
-Expr beschreibt die Syntax des Programms; Value beschreibt das Ergebnis seiner Auswertung.
+Expr beschreibt die Syntax des Programms; Value beschreibt das Ergebnis seiner
+Auswertung.
 
-Ziel: Die Trennung von Syntax und Laufzeitwerten festigen und die Rolle der Typprüfung in Value.asInt verstehen.
+Ziel: Die Trennung von Syntax und Laufzeitwerten festigen und die Rolle der
+Typprüfung in Value.asInt verstehen.
 -->
 :::
