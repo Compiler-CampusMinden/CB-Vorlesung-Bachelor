@@ -152,22 +152,18 @@ möglicherweise schlechtere Fehlermeldungen.
 ``` java
 protected Token nextToken() {
     skipIrrelevant();
-
     if (!isAtEnd()) {
         char c = advance();
-
         if (Character.isDigit(c)) {
             String lexeme = c + readWhile(Character::isDigit);
             return Token.from(INT, lexeme);
         }
-
         return switch (c) {
             case '(' -> Token.from(LPAREN);
             case '+' -> Token.from(PLUS);
             default -> throw error("unexpected character: '" + c + "'");
         };
     }
-
     return Token.from(EOF);
 }
 ```
@@ -217,8 +213,7 @@ protected final char peek(int la) {
 }
 
 protected final char advance() {
-    if (isAtEnd()) return '\0';
-    return source.charAt(current++);
+    if (isAtEnd()) return '\0';  return source.charAt(current++);
 }
 
 protected final boolean skipIrrelevant() {}  // Homework
@@ -493,7 +488,7 @@ Optionen:
 
 \smallskip
 
--   Fehler-Regeln: Matche typische Typos
+-   Fehler-Regeln: Matche typische Typos (Fehler-Token)
 
     ::: notes
     Gelegentlich findet man in den Grammatiken für den Lexer extra Regeln, die
