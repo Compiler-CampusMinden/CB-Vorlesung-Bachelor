@@ -58,6 +58,21 @@ Abnahmekriterien:
 * Die Tests decken die genannten Fälle ab.
 
 
+# (\*) Interpreter für L-Int mit Visitor-Pattern
+
+In der Vorlesung wurde die `eval()`-Funktion im Interpreter für L-Int mit Pattern Matching und `switch`-Expressions aufgebaut.
+
+Wie sieht das Äquivalent unter Benutzung des Visitor-Patterns aus? Diskutieren Sie die Strukturen und nötigen Änderungen/Erweiterungen
+und implementieren Sie dieses in Java. Geben Sie ein Beispiel an, wie Sie den neuen Visitor aufrufen würden.
+
+<!--
+- Interface `ExprVisitor` mit `visit()`-Methode pro AST-Knoten, Rückgabe `Value`: `return e.lhs.accept(this) + e.rhs.accept(this)`
+- AST ergänzen: `accept(ExprVisitor v)`-Methoden mit `v.visit(this)`
+- `eval(Expr e)` mit `e.accept(v)`
+
+vgl. https://github.com/Programmiermethoden-CampusMinden/Prog2-Lecture/blob/master/lecture/pattern/visitor.md
+-->
+
 
 # (\*) C++ ausprobieren: Compiler und ein erstes Programm
 

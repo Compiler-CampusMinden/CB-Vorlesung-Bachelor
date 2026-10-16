@@ -33,6 +33,7 @@ Ergebnis.
     -   `eval( AddExpr(IntLiteral(1), IntLiteral(2)) )` $\to$ `3`
 
 \bigskip
+\smallskip
 
 -   Frage:
     -   Wie repräsentieren wir solche Werte sauber im Code?
@@ -46,6 +47,10 @@ abstrahieren wir Werte ebenfalls in einer kleinen Hierarchie.
 :::
 
 # Value-Hierarchie: Motivation
+
+::: notes
+Erinnerung: Unsere konkrete Syntax für L-Int sah so aus:
+:::
 
 ``` ebnf
 Expr  = IntLiteral(Int) | AddExpr(Expr, Expr) | SubExpr(Expr, Expr)
@@ -76,11 +81,13 @@ Value-Hierarchie einfach erweitern.
 
 ``` java
 public interface Value {
+
     static int asInt(Value v) {
         if (v instanceof IntVal(int val)) return val;
         throw new RuntimeException("number expected");
     }
 }
+
 
 public record IntVal(int v) implements Value {}
 ```
@@ -128,7 +135,7 @@ unserer Sprache: Wir sagen dem Rechner Schritt für Schritt, wie die Auswertung
 funktioniert.
 :::
 
-# Interpreter für Expressions in Java (Pattern Matching)
+# Interpreter für L-Int-Expressions in Java (Pattern Matching)
 
 ``` java
 public class InterpreterLint {
