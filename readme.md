@@ -130,6 +130,11 @@ und in sich geschlossen (kein Übertrag):
 
 ### Hinweise
 
+-   Die Parcoursprüfung und die Studienleistung sind zwei unabhängige
+    Prüfungsleistungen und werden separat im CAT angemeldet. Die Studienleistung
+    schaltet die Credits für das Modul frei, die Parcoursprüfung ergibt die
+    Modulnote. Die Studienleistung ist **keine** Vorleistung für die
+    Parcoursprüfung.
 -   Die Bearbeitung der Aufgaben erfolgt im Team.
 -   Ein Team umfasst 3 Personen.
 -   Im Praktikum beginnen wir gemeinsam mit der Bearbeitung der Übungsblätter,
