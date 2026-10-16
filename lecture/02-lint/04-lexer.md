@@ -95,7 +95,7 @@ Lexem.
 :::
 :::::
 
-# Grundstruktur eines Lexers für L-Int
+# Grundstruktur eines Lexers
 
 ``` java
 public class LispyLexerLint {
@@ -147,13 +147,15 @@ möglicherweise schlechtere Fehlermeldungen.
 :::
 ::::
 
-# Beispielimplementierung Lexer für L-Int
+# Partielle Beispielimplementierung Lexer für L-Int
 
 ``` java
 protected Token nextToken() {
     skipIrrelevant();
+
     if (!isAtEnd()) {
         char c = advance();
+
         if (Character.isDigit(c)) {
             String lexeme = c + readWhile(Character::isDigit);
             return Token.from(INT, lexeme);
@@ -192,12 +194,12 @@ und dienen als kleine Übung.
 Das hat häufig Performancegründe ...
 
 ::: tip
-## Nützliche Hilfsmethoden
+## Nützliche Hilfsmethoden für Token
 
 Um beim Erzeugen der Token nicht immer wieder `new` schreiben zu müssen, und um
 nicht bei Token mit festem Lexem dieses immer wieder extra angeben zu müssen, kann
-man sich einige statische Hilfsmethoden im Enum `Token` definieren (im Beispiel die
-Methode `from()`), die aus dem Tokentyp das passende Token erzeugen.
+man sich einige statische `from()`-Hilfsmethoden im Enum `Token` definieren, die aus
+dem Tokentyp das passende Token erzeugen (vgl. Challenge).
 :::
 ::::
 
@@ -380,35 +382,6 @@ dann müsste man nur die Reihenfolge der `advance()` anpassen.
     :::
 
 :::: notes
-## Anmerkung: Hilfsfunktionen für Token
-
-Jedes Token hat üblicherweise ein Attribut, in dem das Lexem gespeichert wird. Bei
-eindeutigen Token (etwa bei eigenen Token je Schlüsselwort oder bei den
-Interpunktions-Token) kann man sich das Attribut auch sparen, da das Lexem durch die
-Tokenart eindeutig rekonstruierbar ist. Bei unserer Implementierung in Java müsste
-man dann entweder zwei verschiedene Klassen zur Modellierung der Token nutzen (was
-eher umständlich ist), oder man spendiert der `Token`-Klasse Hilfsfunktionen, die
-ein Token bauen: einmal vollständig (mit Token-Typ und Lexem) und einmal nur mit dem
-Token-Typ:
-
-``` java
-public record Token(TokenKind kind, String lexeme) {
-
-  public static Token from(TokenKind kind) {
-    return from(kind, kind.toString());
-  }
-
-  public static Token from(TokenKind kind, char lexeme) {
-    return from(kind, String.valueOf(lexeme));
-  }
-
-  public static Token from(TokenKind kind, String lexeme) {
-    return new Token(kind, lexeme);
-  }
-
-}
-```
-
 ::: tip
 ## Anmerkung: Längster Match
 
@@ -597,6 +570,75 @@ Diskussionsfragen:
 
 -   Welche Aufgabe übernimmt `advance()` in den einzelnen Fällen?
 -   Warum wird bei einem Integer-Literal nicht nur ein Zeichen gelesen?
+
+**Hilfsfunktionen für Token**
+
+Jedes Token hat üblicherweise ein Attribut, in dem das Lexem gespeichert wird. Bei
+eindeutigen Token (etwa bei eigenen Token je Schlüsselwort oder bei den
+Interpunktions-Token) kann man sich das Attribut auch sparen, da das Lexem durch die
+Tokenart eindeutig rekonstruierbar ist.
+
+Bei unserer Implementierung in Java müsste man dann entweder zwei verschiedene
+Klassen zur Modellierung der Token nutzen (was eher umständlich ist), oder man
+spendiert der `Token`-Klasse statische **Hilfsfunktionen**, die ein Token bauen:
+einmal vollständig (mit Token-Typ und Lexem) und einmal nur mit dem Token-Typ und
+daraus abgeleitetem festen Lexem.
+
+Wir haben oben zwei Verwendungsmöglichkeiten gesehen:
+
+``` java
+Token.from(INT, lexeme)
+Token.from(LPAREN)
+```
+
+Implementieren Sie diese Hilfsmethoden. Wie sehen die Signaturen aus? Was wird in
+`TokenKind` zusätzlich noch benötigt, damit das funktioniert?
+
+<!--
+``` java
+public enum TokenKind {
+    PLUS("+"),
+    MINUS("-"),
+    LPAREN("("),
+    RPAREN(")"),
+    SEMI(";"),
+    INT,  // [0-9]+
+    EOF("<EOF>");
+
+    private final String description;
+
+    TokenKind() {
+        this("");
+    }
+
+    TokenKind(String descr) {
+        description = descr;
+    }
+
+    @Override
+    public String toString() {
+        return description;
+    }
+}
+
+
+public record Token(TokenKind kind, String lexeme) {
+
+  public static Token from(TokenKind kind) {
+    return from(kind, kind.toString());
+  }
+
+  public static Token from(TokenKind kind, char lexeme) {
+    return from(kind, String.valueOf(lexeme));
+  }
+
+  public static Token from(TokenKind kind, String lexeme) {
+    return new Token(kind, lexeme);
+  }
+
+}
+```
+-->
 
 **Fehlerfall mit einer klaren Regel behandeln**
 
