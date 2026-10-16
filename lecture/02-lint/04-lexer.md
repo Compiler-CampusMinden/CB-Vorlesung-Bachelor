@@ -292,39 +292,6 @@ umständliche Fehlerbehandlung nach sich ...
 :::
 ::::
 
-# Exkurs Read-Ahead: Unterscheiden von "=" und "\=="
-
-``` java
-protected Token nextToken() {
-    ...
-    return switch (peek()) {
-
-        case '=' -> {
-            advance();  // consume first '='
-            if (peek() == '=') {
-                advance();  // consume second '='
-                yield Token.from(EQEQ);
-            }
-            else yield Token.from(EQUAL);
-        }
-
-        ...
-    };
-}
-```
-
-::: notes
-Um die Token `'='` und `'=='` unterscheiden zu können, müssen wir ein zusätzliches
-Zeichen vorausschauen: Wenn nach dem ersten "=" noch ein zweites "=" kommt, ist es
-`'=='` (`EQEQ`), sonst `'='` (`EQUAL`).
-
-Erinnerung: Die Funktion `advance()` liefert das aktuelle Zeichen aus der Eingabe
-zurück und schaltet zum nächsten Zeichen.
-
-**Hinweis**: In der `if`-Abfrage im `case '='` könnte man auch `peek(1)` einsetzen,
-dann müsste man nur die Reihenfolge der `advance()` anpassen.
-:::
-
 # Typische Muster für Erstellung von Token
 
 1.  Schlüsselwörter
@@ -499,7 +466,7 @@ Zum Thema Lexing findet sich eine schöne Darstellung in [@Nystrom2021] in Kapit
 :::
 
 ::: challenges
-**Design-Diskussion**:
+**Design-Diskussion**
 
 1.  Modellierung Token
 
@@ -554,7 +521,7 @@ Diskussionsfragen:
 -   Was passiert bei der letzten Eingabe: Erkennt der Lexer "12a" als ein
     fehlerhaftes Integer-Literal, oder liest er zunächst "12" als `INT`?
 
-**nextToken() für L-Int vervollständigen**
+**`nextToken()` für L-Int vervollständigen**
 
 Die Beispielimplementierung erkennt `(`, `+` und Integer-Literale. Ergänzen Sie sie
 so, dass sie auch `-` und `)` als Token erkennt.
@@ -636,6 +603,33 @@ public record Token(TokenKind kind, String lexeme) {
     return new Token(kind, lexeme);
   }
 
+}
+```
+-->
+
+**Read-Ahead: Unterscheiden von "=" und "\=="**
+
+Angenommen, wir müssen die Token `EQEQ` (Lexem "\==") und `EQUAL` (Lexem "=")
+erkennen und voneinander unterscheiden. Beide fangen mit "=" an. Wie könnte man das
+in der `switch`-Expression in `nextToken()` formulieren?
+
+<!--
+``` java
+protected Token nextToken() {
+    ...
+    return switch (peek()) {
+
+        case '=' -> {
+            advance();  // consume first '='
+            if (peek() == '=') {
+                advance();  // consume second '='
+                yield Token.from(EQEQ);
+            }
+            else yield Token.from(EQUAL);
+        }
+
+        ...
+    };
 }
 ```
 -->
