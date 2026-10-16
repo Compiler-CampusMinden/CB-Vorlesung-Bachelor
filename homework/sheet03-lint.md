@@ -74,6 +74,21 @@ vgl. https://github.com/Programmiermethoden-CampusMinden/Prog2-Lecture/blob/mast
 -->
 
 
+
+# (\*) Lexer: Funktion `skipIrrelevant()`
+
+Wir haben in der Vorlesung die Funktion `skipIrrelevant()` gesehen, mit der nicht benötigte Zeichen wie Whitespace und Kommentare
+übersprungen werden sollen und die immer zu Beginn von `nextToken()` aufgerufen wird:
+
+```java
+protected final boolean skipIrrelevant() {}  // Homework
+```
+
+Wie könnte diese Methode aussehen? Geben Sie eine Implementierung in Java an. Testen Sie Ihre Implementierung mit einigen
+relevanten Fällen.
+
+
+
 # (\*) C++ ausprobieren: Compiler und ein erstes Programm
 
 Wir werden in dieser Veranstaltung gemeinsam schrittweise C++ lernen und einen Interpreter in Java für (einen stark eingeschränkten Teil von) C++ schreiben.
