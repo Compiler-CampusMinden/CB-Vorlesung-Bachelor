@@ -8,10 +8,10 @@ Der Lexer (auch "Scanner") soll den Zeichenstrom in eine Folge von Token zerlege
 Zur Spezifikation der Token werden reguläre Ausdrücke verwendet.
 
 Von Hand implementierte Lexer arbeiten üblicherweise iterativ und durchlaufen die
-Eingabe schrittweise von links nach rechts. Dabei verarbeiten immer das aktuelle
-Zeichen im Eingabestrom. Die Arbeitsweise erinnert an LL-Parser.
+Eingabe schrittweise von links nach rechts. Dabei verarbeiten wir immer das aktuelle
+Zeichen im Eingabestrom.
 
-Lexer sollten sehr effizient sein, da sie noch direkt auf der niedrigsten
+Lexer sollten möglichst effizient sein, da sie noch direkt auf der niedrigsten
 Abstraktionsstufe arbeiten und u.U. oft durchlaufen werden.
 
 Die Palette an Fehlerbehandlungsstrategien im Lexer reicht von "aufgeben" über den
@@ -87,7 +87,7 @@ unnötigerweise nochmal explizit mit speichern.
 ## Weitere Token und Eigenschaften
 
 Token enthalten oft auch Positionen oder Quelltextbereiche (Zeile, Spalte, Start-
-und Endindex). Das erleichtert Fehlermeldungen erheblich.
+und Endindex). Das erleichtert anständige Fehlermeldungen erheblich.
 
 `EOF` ist ein synthetisches Token und hat kein Lexem aus dem Quelltext. Das hier
 verwendete "`<EOF>`" ist eine mögliche Debug-Darstellung, aber kein tatsächliches
@@ -171,7 +171,7 @@ protected Token nextToken() {
 ```
 
 :::: notes
-Hier ist eine mögliche Implementierung von `nextToken()`.
+Hier wird eine typische Implementierung von `nextToken()` gezeigt.
 
 Irrelevante Zeichen wie Whitespace und Kommentare werden zu Beginn entfernt
 (übersprungen). Falls wir danach nicht am Ende der Eingabe sind, können wir das
@@ -258,7 +258,8 @@ benötigten Zeichen wie Whitespace und Kommentare und stoppt, sobald ein benöti
 Zeichen auftaucht. Dabei muss die Funktion selbst prüfen, ob überhaupt noch gelesen
 werden darf, oder ob bereits das Ende des Inputs erreicht ist. Falls Zeichen
 entfernt wurden, wird `true` zurückgegeben. (In unserer Implementierung springt der
-Index `current` weiter, es werden keine Zeichen physisch entfernt.)
+Index `current` weiter, es werden keine Zeichen physisch entfernt.) **Wichtig**: Die
+Implementierung von `skipIrrelevant()` dient als kleine Hausaufgabe (Übungsblatt).
 
 Die Funktion `readWhile()` bekommt einen Test `pred` als Argument und liest so
 lange, wie das aktuelle Zeichen diesen Test erfüllt und das Ende der Eingabe nicht
@@ -273,7 +274,7 @@ lediglich den Index `current`. "Zeichen werden aus der Eingabe entfernt" bedeute
 hier also, dass der Index `current` inkrementiert wird.
 
 ::: tip
-## Design-Diskussion: Index-Handling
+## Design-Diskussion: Index-Handling und Robustheit
 
 Das Hantieren mit dem Index und dem Weiterschalten muss gut aufeinander abgestimmt
 sein - der Lexer sollte hier nicht in einen ungültigen Zustand geraten können.
@@ -521,23 +522,6 @@ Diskussionsfragen:
 -   Was passiert bei der letzten Eingabe: Erkennt der Lexer "12a" als ein
     fehlerhaftes Integer-Literal, oder liest er zunächst "12" als `INT`?
 
-**`nextToken()` für L-Int vervollständigen**
-
-Die Beispielimplementierung erkennt `(`, `+` und Integer-Literale. Ergänzen Sie sie
-so, dass sie auch `-` und `)` als Token erkennt.
-
-Skizzieren Sie Ihren Code. Prüfen Sie anschließend gemeinsam, ob Ihr Lexer bei
-dieser Eingabe alle Zeichen genau einmal verarbeitet:
-
-``` clojure
-(- 12 (+ 3 45))
-```
-
-Diskussionsfragen:
-
--   Welche Aufgabe übernimmt `advance()` in den einzelnen Fällen?
--   Warum wird bei einem Integer-Literal nicht nur ein Zeichen gelesen?
-
 **Hilfsfunktionen für Token**
 
 Jedes Token hat üblicherweise ein Attribut, in dem das Lexem gespeichert wird. Bei
@@ -606,6 +590,23 @@ public record Token(TokenKind kind, String lexeme) {
 }
 ```
 -->
+
+**`nextToken()` für L-Int vervollständigen**
+
+Die Beispielimplementierung erkennt "(", "+" und Integer-Literale. Ergänzen Sie sie
+so, dass sie auch "-" und ")" als Token erkennt.
+
+Skizzieren Sie Ihren Code. Prüfen Sie anschließend gemeinsam, ob Ihr Lexer bei
+dieser Eingabe alle Zeichen genau einmal verarbeitet:
+
+``` clojure
+(- 12 (+ 3 45))
+```
+
+Diskussionsfragen:
+
+-   Welche Aufgabe übernimmt `advance()` in den einzelnen Fällen?
+-   Warum wird bei einem Integer-Literal nicht nur ein Zeichen gelesen?
 
 **Read-Ahead: Unterscheiden von "=" und "\=="**
 
