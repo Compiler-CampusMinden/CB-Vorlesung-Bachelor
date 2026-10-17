@@ -94,7 +94,7 @@ Expr parseR() {
     -   `match(T)` "konsumiert" das aktuelle Token, falls dieses mit `T`
         übereinstimmt
     -   Anderenfalls löst `match()` eine Exception aus
--   Referenzen auf Nicht-Terminale (Regeln) `s` werden durch Methodenaufrufe `s()`
+-   Referenzen auf Nichtterminale (Regeln) `s` werden durch Methodenaufrufe `s()`
     aufgelöst
 :::
 
@@ -121,7 +121,7 @@ return switch (peek()) {
     case PredictingA -> parseA();
     case PredictingB -> parseB();
     case PredictingC -> parseC();
-    default -> throw new RuntimeException("expected expression, got: " + peek());
+    default -> throw new RuntimeException("expected expression");
 };
 ```
 
@@ -151,8 +151,9 @@ sich).
 expr ::= ID '++' | ID '--'
 ```
 
-Entweder benötigt man zwei Lookahead-Tokens, also einen LL(2)-Parser, oder man muss
-die Regel in eine äquivalente LL(1)-Grammatik umschreiben:
+Hier benötigt man entweder **zwei Lookahead-Tokens**, also einen LL(2)-Parser, oder
+man muss die Regel in eine äquivalente LL(1)-Grammatik umschreiben ($\to$
+**Linksfaktorisierung**, s.u.):
 
 ``` ebnf
 expr ::= ID ('++' | '--')
@@ -160,21 +161,24 @@ expr ::= ID ('++' | '--')
 :::
 ::::
 
-# RD-Parser: Grundgerüst
+# Grundstruktur eines RD-Parsers
 
 ``` java
-public abstract class BaseParser {
+public class LispyParserLint {
     protected List<Token> tokens;
     protected int current;
 
-    protected void initParser(List<Token> tokenList) {
+    public Expr parse(List<Token> tokenList) {
         tokens = tokenList;  current = 0;
-        throwIf(tokenList.getLast().kind() != EOF, "last token must be EOF!");
+
+        Expr expr = parseEform();
+        if (!isAtEnd()) throw new RuntimeException("unexpected token after end of expression");
+
+        return expr;
     }
 
-    // konkrete Parser: Expr parse(List<Token> tokens)
-
-    // Hilfsmethoden: isAtEnd(), peek(), advance(), match(), check() ...
+    // Arbeitsmethoden: parseEform(), parseAtom(), parseAddExpr(), parseSubExpr()
+    // Hilfsmethoden:   isAtEnd(), peek(), advance(), match(), check() ...
 }
 ```
 
@@ -182,17 +186,19 @@ public abstract class BaseParser {
 Der Parser sieht strukturell dem Lexer ähnlich: Er hat eine Eingabefolge - hier die
 Token-Liste `tokens` - und einen Positionszeiger (aktueller Index `current`).
 
-Der Einstieg in den Parser wird später eine Methode `parse()`, die den gesamten
-Eingabestrom gemäß der Grammatik verarbeitet. Da wir im Laufe der Zeit einen anderen
-Rückgabetyp benötigen, können wir diese Methode nicht bereits im Basis-Parser
-anlegen (oder wir müssten unterschiedlich benannte Methoden definieren und später
-immer nur eine ableiten, was auch unschön ist).
+Den Einstieg in den Parser bildet die Methode `parse()`, die den gesamten
+Eingabestrom gemäß der Grammatik verarbeitet. Diese Methode bildet die Startregel
+`L_int ::= eform EOF` der konkreten Grammatik ab.
+
+Die einzelnen Regeln der (von direkter Linksrekursion befreiten) konkreten Grammatik
+bilden wir auf die Arbeitsmethoden `parseEform()`, `parseAtom()`, `parseAddExpr()`,
+`parseSubExpr()` ab.
 
 Intern werden wir Hilfsmethoden wie `peek()`, `advance()` und `match()` verwenden,
 um die Tokens bequemer zu handhaben.
 :::
 
-# Beispielimplementierung Parser für L-Int: Einstieg und `eform`-Regel
+# Partielle Beispielimplementierung RD-Parser für L-Int
 
 ::: notes
 Wir betrachten folgende konkrete Syntax in L-Int:
@@ -205,7 +211,8 @@ L_int ::= eform EOF
 ```
 
 Der Einstieg ist die Regel `L_int`, die eine `eform` erwartet und ein anschließendes
-`EOF`-Token. Mehr ist in der Sprachstufe L-Int nicht erlaubt.
+`EOF`-Token. Mehr ist in der Sprachstufe L-Int nicht erlaubt und wurde bereits in
+der Einstiegsmethode `parse()` umgesetzt.
 
 Eine `eform` kann entweder eine Addition, eine Subtraktion oder einfach nur ein
 Integer-Literal sein. Letzteres ist ein Terminal, d.h. hier können wir einfach mit
@@ -236,70 +243,78 @@ Erzeugen des AST die Zielstruktur berücksichtigen.
 :::
 
 ``` java
-public class LispyParserLint extends BaseParser {
-
-    public Expr parseLint(List<Token> tokens) {
-        initParser(tokens);
-        Expr expr = parseEForm();
-        if(!isAtEnd()) throw new RuntimeException("unexpected token");
-        return expr;
+protected Expr parseEform() {
+    if (check(LPAREN)) {
+        return switch (peek(1).kind()) {
+            case PLUS -> parseAddExpr();
+            default -> throw new RuntimeException("unexpected token");
+        };
     }
 
-    protected Expr parseEForm() {
-        if (check(LPAREN)) {
-            return switch (peek(1).kind()) {
-                case PLUS -> parseAddExpr();
-                default -> throw new RuntimeException("expected expression");
-            };
-        }
-        return parseAtomExpr();
-    }
+    return parseAtom();
+}
+
+protected Expr parseAtom() {
+    Token t = match(INT);
+    return new IntLiteral(Integer.parseInt(t.lexeme()));
 }
 ```
 
-:::: notes
-Für die Regeln `L_int` und `eform` werden die beiden Methoden `parseLint()` und
-`parseEForm()` angelegt, die direkt den beiden Grammatikregeln entsprechen.
+::::: notes
+Für die Regel `eform` wird eine `parseEform()` angelegt, die direkt der
+Grammatikregel entspricht.
 
-Die Sichtbarkeit ist `public` für die Einstiegsmethode `parseLint()` - diese Methode
+::: tip
+Die Sichtbarkeit ist `public` für die Einstiegsmethode `parse()` - diese Methode
 soll später zum Starten des Parsers genutzt werden. Die anderen (internen) Methoden
 bekommen die Sichtbarkeit `protected`, damit wir sie bei Bedarf in ableitenden
 Parser-Klassen überschreiben können. Wenn wir uns ganz sicher sind, dass wir eine
 interne Methode nie überschreiben wollen, können wir natürlich auch wie immer auf
 `private` gehen.
+:::
 
-Wir unterscheiden in `parseEForm()` anhand des aktuellen Tokens, ob es sich um die
+Wir unterscheiden in `parseEform()` anhand des aktuellen Tokens, ob es sich um die
 Alternativen für Addition (und Subtraktion, nicht gezeigt) handeln könnte (beide
-starten mit `(`). Ansonsten muss es sich um die letzte Alternative `INT` handeln:
+starten mit `'('`). Ansonsten muss es sich um die letzte Alternative `INT` handeln:
 
 -   Liegt ein `LPAREN` vor, entfällt die letzte Alternative. Es kann sich nur noch
     um eine Addition oder Subtraktion handeln.
 
-    Da diese Alternativen beide mit `(` beginnen, schauen wir nun auf das nächste
+    Da diese Alternativen beide mit `'('` beginnen, schauen wir nun auf das nächste
     Token:
 
     -   Finden wir ein `ADD`- oder `SUB`-Token, rufen wir entsprechend die Regeln
-        `parseAddExpr()` bzw. `parseSubExpr()` auf.
+        `parseAddExpr()` bzw. `parseSubExpr()` (nicht gezeigt) auf.
     -   Anderenfalls melden wir einen Fehler, weil wir `LPAREN` gesehen haben, aber
         nichts, was laut unserer Grammatik darauf folgen müsste.
 
 -   Liegt *kein* `LPAREN` vor, kann es sich nur um die letzte Alternative `INT`
     handeln.
 
-    Hier handelt es sich um ein Terminal-Symbol, welches wir in `parseAtomExpr()`
-    mit `match(INT)` überprüfen und gleichzeitig aus dem Tokenstrom entfernen. Wenn
+    Hier handelt es sich um ein Terminal-Symbol, welches wir in `parseAtom()` mit
+    `match(INT)` überprüfen und gleichzeitig aus dem Tokenstrom "entfernen". Wenn
     das aktuelle Token dabei nicht `INT` ist, würde `match(INT)` einen Fehler
     auslösen.
 
 **Wichtig**: Die Subtraktion fehlt hier und dient als kleine Übung.
 
-**Wichtig**: Wir haben damit in `parseEForm()` effektiv **zwei Tokens Lookahead**
+**Wichtig**: Wir haben damit in `parseEform()` effektiv ***zwei* Tokens Lookahead**
 verwendet! Vgl. auch die nachfolgende Diskussion zur Linksfaktorisierung.
+
+Die Methode `parseAtom()` entspricht genau dem weiter oben gezeigten Muster. Wir
+erwarten ein `INT`-Token, also rufen wir die Hilfsmethode `match()` mit diesem
+Parameter auf. `match()` prüft, ob das aktuelle Token wirklich diesen Typ hat und
+"entfernt" es aus dem Tokenstrom (inkrementiert den `current`-Index) und liefert es
+zurück. Anderenfalls würde `match()` eine entsprechende Exception werfen.
+
+Das Lexem nutzen wir und konvertieren es in einen Java-Integer und erzeugen einen
+neuen AST-Knoten vom Typ `IntLiteral` - da dieser Typ vom Interface `Expr` ableitet,
+haben wir hier also den einfachsten möglichen AST gebildet.
 
 ::: tip
 ## Exkurs Linksfaktorisierung
 
-Wir haben in `parseEForm()` *implizit* **Linksfaktorisierung** angewendet: Wenn
+Wir haben in `parseEform()` *implizit* **Linksfaktorisierung** angewendet: Wenn
 mehrere Alternativen einer Regel den gleichen Anfang haben, kann man diesen "heraus
 klammern":
 
@@ -307,7 +322,7 @@ klammern":
 ruleA ::= a b1 | ... | a bm
 ```
 
-Hier könnte man den gemeinsamen Start "ausklammern":
+Hier könnte man den gemeinsamen Start `a` "ausklammern":
 
 ``` ebnf
 ruleA  ::= a ruleAA
@@ -315,38 +330,14 @@ ruleAA ::= b1 | ... | bm
 ```
 
 Bei uns im Beispiel war der gemeinsame Start für mehrere Alternativen die Klammer
-`(`. Statt die Grammatik umzubauen, haben wir das hier über das `if` und das
-Lookahead `peek(1)` gelöst. Mit der Umformung hätten wir eine weitere Hilfsfunktion
-im Parser, würden dann aber wieder mit `peek()` und damit einem Token Lookahead
-auskommen (statt jetzt zwei).
+`'('`. Statt die Grammatik umzubauen, hatten wir das über das `if` und das
+nachfolgende extra Lookahead `peek(1)` gelöst. Mit der Umformung hätten wir eine
+weitere Hilfsfunktion im Parser, würden dann aber wieder mit `peek()` bzw. `peek(0)`
+und damit einem Token Lookahead auskommen (statt jetzt zwei).
 :::
-::::
+:::::
 
-# Details Parser für L-Int: `parseAddExpr()` und `parseAtomExpr()`
-
-``` java
-protected Expr parseAtomExpr() {
-    Token t = match(INT);
-    return new IntLiteral(Integer.parseInt(t.lexeme()));
-}
-```
-
-::: notes
-Diese Methode entspricht genau dem weiter oben gezeigten Muster. Wir erwarten ein
-`INT`-Token, also rufen wir die Hilfsmethode `match()` mit diesem Parameter auf.
-`match()` prüft, ob das aktuelle Token wirklich diesen Typ hat und entfernt es aus
-dem Tokenstrom (inkrementiert den `current`-Index) und liefert es zurück.
-Anderenfalls würde `match()` eine entsprechende Exception werfen.
-
-Das Lexem nutzen wir und konvertieren es in einen Java-Integer und erzeugen einen
-neuen AST-Knoten vom Typ `IntLiteral` - da dieser Typ vom Interface `Expr` ableitet,
-haben wir hier also den einfachsten möglichen AST gebildet.
-
-Wir werden später diese Regel erweitern um andere atomare Ausdrücke (beispielsweise
-Variablen) und für die alten Fälle immer `super.parseAtomExpr()` aufrufen.
-:::
-
-\bigskip
+# Details Parser für L-Int: `parseAddExpr()`
 
 ``` java
 protected Expr parseAddExpr() {
@@ -354,8 +345,9 @@ protected Expr parseAddExpr() {
     match(PLUS);
 
     List<Expr> ops = new ArrayList<>();
-    ops.add(parseEForm());
-    while (!check(RPAREN)) ops.add(parseEForm());
+    ops.add(parseEform());
+    while (!check(RPAREN)) ops.add(parseEform());
+
     match(RPAREN);
 
     return ops.stream().reduce(AddExpr::new).orElseThrow();
@@ -363,10 +355,10 @@ protected Expr parseAddExpr() {
 ```
 
 :::: notes
-Auch hier haben wir das eingangs skizzierte Muster: Für jedes Terminal wird
+Auch hier sehen wir wieder das eingangs skizzierte Muster: Für jedes Terminal wird
 `match()` mit dem gesuchten Token-Typ aufgerufen. Danach müssen wir die Operanden
-parsen: Solange nicht ein `)`-Token auftaucht, rufen wir rekursiv die Regel
-`parseEForm()` auf. Jeder Operand muss ja selbst eine `eform` sein. Anschließend
+parsen: Solange nicht ein `')'`-Token auftaucht, rufen wir rekursiv die Regel
+`parseEform()` auf. Jeder Operand muss ja selbst eine `eform` sein. Anschließend
 matchen wir noch die schließende rechte Klammer, und die Addition ist im Prinzip
 fertig geparst.
 
@@ -386,23 +378,28 @@ wenn wir in L-If über Kontrollstrukturen sprechen.
 :::
 ::::
 
-# Hilfsfunktionen im Parser I: Tokenhandling
+# Hilfsfunktionen im Parser: Tokenhandling
 
 ``` java
-public abstract class BaseParser {
+protected final boolean isAtEnd() { return peek().kind() == EOF; }
 
-    protected final boolean isAtEnd() { return peek().kind() == EOF; }
+protected final Token peek() { return peek(0); }
+protected final Token peek(int la) {
+    if (la < 0 || current + la >= tokens.size()) return tokens.getLast();  // EOF
+    return tokens.get(current + la);
+}
 
-    protected final Token peek() { return peek(0); }
-    protected final Token peek(int la) {
-        if (la < 0 || current + la >= tokens.size()) return tokens.getLast(); // EOF
-        return tokens.get(current + la);
-    }
+protected final Token advance() {
+    if (isAtEnd()) return tokens.getLast();  // EOF
+    return tokens.get(current++);
+}
 
-    protected final Token advance() {
-        if (isAtEnd()) return tokens.getLast(); // EOF
-        return tokens.get(current++);
-    }
+protected final boolean check(TokenKind... expected) {
+    return Arrays.stream(expected).anyMatch(e -> e == peek().kind());
+}
+protected final Token match(TokenKind... expected) {
+    if (check(expected)) return advance();
+    throw new RuntimeException("unexpected token: " + peek());
 }
 ```
 
@@ -415,28 +412,8 @@ hier im Parser mit Token statt mit Zeichen.
 Der auffälligste Unterschied zum Lexer: Wir verlassen uns nicht auf die Länge der
 Tokenliste, sondern behandeln das `EOF`-Token als Sentinel. Sobald wir dieses Token
 erreicht haben, brechen wir den weiteren Fortschritt mit `advance()` o.ä. ab.
-Deshalb gibt es in der `initParser()`-Methode des Basis-Parsers sicherheitshalber
-den expliziten Check, ob das letzte Token in der Liste ein `EOF`-Token ist.
-:::
 
-# Hilfsfunktionen im Parser II: *match()* und *check()*
-
-``` java
-public abstract class BaseParser {
-
-    protected final boolean check(TokenKind... expected) {
-        return Arrays.stream(expected).anyMatch(e -> e == peek().kind());
-    }
-
-    protected final Token match(TokenKind... expected) {
-        if (check(expected)) return advance();
-        throw error("unexpected token: " + peek());
-    }
-}
-```
-
-::: notes
-Zusätzlich zu `isAtEnd()`, `peek()` und `advance()` haben wir noch weitere
+Zusätzlich zu `isAtEnd()`, `peek()` und `advance()` haben wir noch zwei weitere
 Hilfsmethoden, die `peek()` und `advance()` unterschiedlich kombinieren. Wir werden
 in Zukunft häufig wissen wollen, ob das aktuelle Token in einer Menge von erlaubten
 Token vorkommt, weshalb `check()` und `match()` mit variadischen Parametern
@@ -456,23 +433,29 @@ Wir wollen die folgenden Ausdrucksvarianten erlauben:
 :::
 
 ::: notes
-Die dazu formulierte Grammatik hat zwei Probleme:
+Nun definieren wir eine einfache Grammatik, die diese Ausdrücke akzeptiert:
 :::
 
 ``` ebnf
 expr ::= expr '+' expr | INT
 ```
 
+::: notes
+Diese intuitiv erscheinende Grammatik erlaubt zwar die gewünschten Ausdrücke, hat
+aber zwei Probleme!
+:::
+
 \pause
 
 ::: notes
 ## Problem 1: Mehrdeutigkeit
 
-Diese Grammatik ist mehrdeutig!
+**Diese Grammatik ist mehrdeutig!**
 
-`1 + 2 + 3` kann sowohl als `(1 + 2) + 3` oder als `1 + (2 + 3)` geparst werden. So
-etwas wollen wir im Compiler generell vermeiden, auch wenn das hier konkret keine
-Probleme verursachen würde.
+`1 + 2 + 3` kann mit der Grammatik sowohl als `(1 + 2) + 3` (*linksassoziativ*) als
+auch als `1 + (2 + 3)` (*rechtsassoziativ*) geparst werden. So etwas wollen wir im
+Compiler generell vermeiden, auch wenn das hier konkret keine Probleme verursachen
+würde.
 
 Die folgende umgeformte Grammatik akzeptiert die gleiche Sprache und ist nicht mehr
 mehrdeutig:
@@ -483,8 +466,8 @@ expr ::= expr '+' INT | INT
 ```
 
 ::: notes
-Hier erzwingen wir die Klammerung von links her (**linksassoziativ**): `1 + 2 + 3`
-kann nur noch als `(1 + 2) + 3` geparst werden.
+Hier erzwingen wir die übliche **Klammerung von links** her (**linksassoziativ**):
+`1 + 2 + 3` kann nur noch als `(1 + 2) + 3` geparst werden.
 :::
 
 \bigskip
@@ -509,14 +492,14 @@ Expr parseExpr() {
 
     try {
         // first alternative: expr ::= expr '+' INT
-        Expr left = parseExpr(); // Waily waily!!!
+        Expr left = parseExpr();  // Waily waily!!!
         match(PLUS);
         Expr right = parseInt();
         return new AddExpr(left, right);
 
     } catch (ParseException e) {
         // second alternative: expr ::= INT
-        position(start); // roll back token stream
+        position(start);  // roll back token stream
         return parseInt();
     }
 }
@@ -557,6 +540,8 @@ ruleAA ::= a1 ruleAA | ... | am ruleAA | eps
 \pause
 
 ::: notes
+(Mit `eps` als das leere Wort $\epsilon$.)
+
 Damit können wir unsere Grammatik umschreiben:
 :::
 
@@ -566,7 +551,7 @@ expr' ::= '+' INT expr' | eps
 ```
 
 ::: notes
-Dies können wir hier noch abkürzen zu:
+Dies können wir hier noch weiter abkürzen zu:
 :::
 
 ``` ebnf
@@ -581,7 +566,7 @@ Endlosschleife geraten könnte.
 ``` java
 Expr parseExpr() {
     Expr e = parseInt();
-    while (peek(PLUS)) {
+    while (check(PLUS)) {
         advance();
         e = new AddExpr(e, parseInt());
     }
@@ -605,9 +590,9 @@ des neuen `IntLiteral` in eine Hilfsmethode ausgelagert.
 String source = "(- (+ 1 2) 3)";
 
 List<Token> tokens = new LispyLexerLint().scan(source);
-Expr ast = new LispyParserLint().parseLint(tokens);
+Expr ast = new LispyParserLint().parse(tokens);
 
-Value result = new InterpreterLint().interpret(ast);
+Value result = new InterpreterLint().eval(ast);
 // result: IntVal(0)
 ```
 
@@ -668,8 +653,9 @@ protected Expr parseAddExpr() {
     match(PLUS);
 
     List<Expr> ops = new ArrayList<>();
-    ops.add(parseEForm());
-    while (!check(RPAREN)) ops.add(parseEForm());
+    ops.add(parseEform());
+    while (!check(RPAREN)) ops.add(parseEform());
+
     match(RPAREN);
 
     return ops.stream().reduce(AddExpr::new).orElseThrow();
@@ -678,29 +664,29 @@ protected Expr parseAddExpr() {
 
 1.  Was passiert in den Randfällen?
 
--   Ist `(+ 1)` erlaubt? Falls ja, was produziert der Parser?
--   Ist `(+)` erlaubt? Falls ja, was produziert der Parser?
+    -   Ist `(+ 1)` erlaubt? Falls ja, was produziert der Parser?
+    -   Ist `(+)` erlaubt? Falls ja, was produziert der Parser?
 
 2.  Wird damit der Teil der Regel `eform ::= '(' '+' eform eform+ ')'` korrekt
-    umgesetzt? Warum (nicht)?
+    umgesetzt? Warum (nicht)? Falls "nein", wie müsste der Code korrigiert werden?
 
 **Parser-Ablauf nachvollziehen**
 
-Verfolgen Sie den Aufruf von parseEForm() für die Eingabe:
+Verfolgen Sie den Aufruf von `parseEform()` für die Eingabe:
 
 ``` clojure
 (+ 1 (+ 2 3))
 ```
 
-Erstellen Sie dazu eine mit diesen Spalten: Schritt, Aufgerufene Methode, Aktuelles
-Token, Aktion. Tragen Sie insbesondere ein, wann `parseEForm()` rekursiv aufgerufen
-wird und welche Methode die einzelnen Tokens konsumiert. Sie müssen noch nicht den
-vollständigen AST ausrechnen.
+Erstellen Sie dazu eine Tabelle/Liste mit diesen Spalten: Schritt, Aufgerufene
+Methode, Aktuelles Token, Aktion. Tragen Sie insbesondere ein, wann `parseEform()`
+rekursiv aufgerufen wird und welche Methode die einzelnen Tokens konsumiert. Sie
+müssen noch nicht den vollständigen AST ausrechnen.
 
 **Subtraktion ergänzen**
 
 Ergänzen Sie den im Skript gezeigten Parser so, dass auch Subtraktionen geparst
-werden. Skizzieren Sie die nötigen Änderungen in `parseEForm()` und eine passende
+werden. Skizzieren Sie die nötigen Änderungen in `parseEform()` und eine passende
 Methode `parseSubExpr()`.
 
 Prüfen Sie Ihren Entwurf gedanklich an diesen Eingaben:
@@ -714,7 +700,7 @@ Welche AST-Knoten sollten jeweils entstehen?
 
 **Den gemeinsamen Anfang ausklammern**
 
-Die Alternativen für Addition und Subtraktion beginnen beide mit `(`. Formulieren
+Die Alternativen für Addition und Subtraktion beginnen beide mit `'('`. Formulieren
 Sie die Grammatik mit einer zusätzlichen Regel für den Operator so um, dass die
 Auswahl zwischen den äußeren Alternativen von `eform` nur **ein** Lookahead-Token
 benötigt.
