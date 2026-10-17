@@ -163,7 +163,7 @@ protected Token nextToken() {
         return switch (c) {
             case '(' -> Token.from(LPAREN);
             case '+' -> Token.from(PLUS);
-            default -> throw error("unexpected character: '" + c + "'");
+            default -> throw new RuntimeException("unexpected character");
         };
     }
     return Token.from(EOF);
