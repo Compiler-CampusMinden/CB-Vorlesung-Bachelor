@@ -7,47 +7,50 @@ title: "Blatt 03: C-Int"
 ::: important
 Für die erfolgreiche Bearbeitung dieses Übungsblattes müssen mindestens alle mit `*`
 und `**` markierten Aufgaben gelöst werden.
+
+Die Aufgaben mit `***` sind als Vertiefung gedacht.
 :::
 
 # (\*) Java-Projekt für L-Int einrichten
 
-Legen Sie sich ein Java-Projekt für L-Int an. Nutzen Sie am besten Maven oder Gradle
-für die Konfiguration. Dieses Projekt werden Sie im Laufe des Semesters immer wieder
-erweitern.
+Legen Sie ein Java-Projekt für **L-Int** an. Nutzen Sie dafür Maven oder Gradle. Das
+Projekt wird im Laufe des Semesters Schritt für Schritt erweitert.
 
-Wenn Sie möchten, können Sie dazu eines der folgenden Templates als Basis benutzen:
+Falls gewünscht, können Sie eines der folgenden Templates als Ausgangspunkt nutzen:
 
 -   Gradle: https://github.com/Compiler-CampusMinden/student-support-code-template
 -   Maven:
     https://github.com/Compiler-CampusMinden/student-support-code-template-maven
 
-Legen Sie die in der Vorlesung gezeigten Bausteine für L-Int in Ihrem Projekt an,
-übernehmen Sie die gezeigte Funktionalität und machen Sie das Projekt kompilierbar.
-Fehlende Funktionalität wird in den folgenden Aufgaben nachgereicht.
+Rekonstruieren Sie die in der Vorlesung gezeigten Bausteine für L-Int in Ihrem
+Projekt (Pakete, Klassen, Interfaces) und übernehmen Sie die gezeigte Funktionalität
+so, dass Ihr Projekt kompilierbar ist. Fehlende Funktionalität ergänzen Sie in den
+folgenden Aufgaben.
 
 # (\*\*) L-Int Lexer: Funktion `skipIrrelevant()`
 
-Wir haben in der Vorlesung die Funktion `skipIrrelevant()` gesehen, mit der nicht
-benötigte Zeichen wie Whitespace und Kommentare übersprungen werden sollen und die
-immer zu Beginn von `nextToken()` aufgerufen wird:
+In der Vorlesung wurde die Funktion `skipIrrelevant()` eingeführt, mit der nicht
+benötigte Zeichen wie Whitespace und Kommentare übersprungen werden. Sie wird immer
+zu Beginn von `nextToken()` aufgerufen:
 
 ``` java
 protected boolean skipIrrelevant() {}  // Homework
 ```
 
 1.  Wie könnte diese Methode aussehen? Geben Sie eine Implementierung in Java an.
-2.  Diskutieren Sie in der Gruppe, mit welchen Fällen Sie Ihre Implementierung
-    testen könnten und notieren Sie diese für später.
+2.  Sammeln Sie in der Übung gemeinsam sinnvolle Testfälle und notieren Sie diese
+    für später (s.u.).
 
-# (\*) Subtraktion für L-Int
+# (\*) Subtraktion für L-Int ergänzen
 
-In der Vorlesung haben Sie L-Int als kleine Lisp-artige Sprache mit
-Integer-Literalen, Addition und Subtraktion kennengelernt. Demonstriert wurde aber
-nur die Verarbeitung von Integern und Addition.
+L-Int unterstützt Integer-Literale, Addition und Subtraktion. In der Vorlesung wurde
+die Implementierung nur für Integer und Addition im Detail gezeigt.
 
-1.  Klären Sie gemeinsam in der Übung:
+1.  Sprache verstehen
 
-    -   Welche Eingaben sind gültige L-Int-Ausdrücke?
+    Klärung in der Übung (gemeinsam):
+
+    -   Welche Eingaben sind **gültige** L-Int-Ausdrücke?
 
     -   Wie werden mehrere Operanden einer Addition oder Subtraktion gruppiert?
 
@@ -60,14 +63,19 @@ nur die Verarbeitung von Integern und Addition.
         (- 10 (+ 3 5))
         ```
 
-2.  Notieren Sie außerdem mindestens zwei ungültige Eingaben. Mindestens eine davon
+2.  Ungültige Eingaben
+
+    Notieren Sie mindestens zwei **ungültige** L-Int-Eingaben. Mindestens eine davon
     soll eine Operation mit weniger als zwei Operanden sein.
 
-3.  Ergänzen Sie nun die in der Vorlesung gezeigte Pipeline um die Subtraktion.
+3.  Pipeline um Subtraktion erweitern
+
+    Ergänzen Sie Ihre L-Int-Pipeline vollständig um die Subtraktion (Lexer,
+    RD-Parser, Interpreter).
 
 # (\*\*) Tests für L-Int
 
-Schreiben Sie JUnit-Tests für L-Int. Prüfen Sie dabei mindestens:
+Schreiben Sie JUnit-Tests für Ihre L-Int-Implementierung. Testen Sie mindestens:
 
 -   ein Integer-Literal,
 -   eine (zweistellige) Addition,
@@ -87,36 +95,34 @@ besser voneinander unterscheiden.
 
 # (\*) C++ ausprobieren: Compiler und ein erstes Programm
 
-Wir werden in dieser Veranstaltung gemeinsam schrittweise C++ lernen und einen
-Interpreter in Java für (einen stark eingeschränkten Teil von) C++ schreiben.
+Wir werden in dieser Veranstaltung Schritt für Schritt C++ kennenlernen und einen
+Interpreter in Java für einen kleinen C++-Ausschnitt entwickeln.
 
-In dieser Aufgabe schreiben und übersetzen Sie zunächst kleine C++-Programme mit
-einem "echten" Compiler. Hier geht es zunächst nicht um einen selbst geschriebenen
-Interpreter, sondern darum, ein C++-Programm mit einem Compiler zu übersetzen und
-das Ergebnis nativ auszuführen. Auf diese Weise haben Sie später eine Referenz für
-die Ergebnisse aus Ihrem eigenen Interpreter ...
+In dieser Aufgabe geht es zunächst darum,
+
+-   einen C++-Compiler einzurichten,
+-   ein kleines Programm zu schreiben,
+-   dieses mit clang++ oder g++ zu übersetzen und auszuführen.
 
 ## Schritt 1: Compiler überprüfen und installieren
 
-Prüfen Sie in einem Terminal, ob ein C++-Compiler auf Ihrem System verfügbar ist:
+Prüfen Sie in einem Terminal, ob ein C++-Compiler verfügbar ist:
 
     clang++ --version
     g++ --version
 
 Falls kein Compiler gefunden wird:
 
--   Unter macOS können Sie clang++ üblicherweise über die Xcode Command Line Tools
-    installieren.
--   Unter Linux können Sie clang++ oder g++ über die Paketverwaltung Ihrer
-    Distribution installieren.
--   Unter Windows verwenden Sie zum Beispiel WSL oder eine anderweitig installierte
+-   Unter **macOS**: Installation der Xcode Command Line Tools.
+-   Unter **Linux**: Installation von clang++ oder g++ über die Paketverwaltung.
+-   Unter **Windows**: z.B. WSL mit Ubuntu und dort clang++/g++ oder eine andere
     C++-Toolchain.
 
 ::: tip
-*Anmerkung*: Für C++ verwenden wir clang++ beziehungsweise g++, nicht clang
-beziehungsweise gcc. D.h. "gcc" meint in diesem Kontext "g++", "clang" meint
-tatsächlich "clang++". Normalerweise sind bei der Installation von gcc und clang
-automatisch beide Versionen (C und C++) dabei.
+Für C++ verwenden wir **clang++** beziehungsweise **g++**, nicht clang
+beziehungsweise gcc. Umgangssprachlich meint "gcc" in diesem Kontext "g++", und
+"clang" meint tatsächlich "clang++". Bei der Installation von clang/gcc sind i.d.R.
+beide Varianten (C und C++) dabei.
 :::
 
 ## Schritt 2: Erstes Programm übersetzen und ausführen
@@ -139,106 +145,125 @@ int main() {
     clang++ hello.cpp -o hello
     ./hello
 
-Oder verwenden Sie g++:
+Oder mit g++:
 
     g++ hello.cpp -o hello
     ./hello
 
-Unter Windows kann die ausführbare Datei `hello.exe` heißen. In PowerShell starten
-Sie sie beispielsweise mit:
+Unter Windows heißt die ausführbare Datei meist `hello.exe`, Start in PowerShell:
 
     .\hello.exe
 
-Ändern Sie den arithmetischen Ausdruck in `result` und überprüfen Sie die Ausgabe
+Variieren Sie den arithmetischen Ausdruck in `result` und überprüfen Sie die Ausgabe
 für mindestens drei Beispiele.
 
 ::: tip
-## Erklärung des Programms
+## Mini-Waschzettel: `hello.cpp` im Vergleich zu L-Int / C-Int / Java
 
-Für dieses Blatt benötigen Sie zunächst nur wenige C++-Konstrukte:
+Zum Verständnis von `hello.cpp` benötigen Sie hier nur wenige Konstrukte:
 
-| Zweck | C++-Schreibweise | Java-Schreibweise | L-Int | C-Int |
-|:------------------|:----------------------|:----------------|-------------|-------------|
-| Integer-Variable anlegen | `int result = 42;` | `int result = 42;` | n.a. | n.a. |
-| Addition | `1 + 2` | `1 + 2` | `(+ 1 2)` | `1 + 2` |
-| Subtraktion | `7 - 2` | `7 - 2` | `(- 7 2)` | `7 - 2` |
-| Klammerung | `(1 + 2)` | `(1 + 2)` | `(+ 1 2)` | `(1 + 2)` |
-| Ausgabe einer Variablen | `std::cout << result << '\n';` | `IO.println(result)` | n.a. | n.a. |
-| Zeilenkommentar | `// Kommentar` | `// Kommentar` | `;; Kommentar` | `// Kommentar` |
-| Import Bibliotheken | `#include <iostream>` | `import ...;` | n.a. | n.a. |
+| Zweck                    | C++                            | Java                 | L-Int          | C-Int          |
+|:-------------------------|:-------------------------------|:---------------------|:---------------|:---------------|
+| Integer-Variable anlegen | `int result = 42;`             | `int result = 42;`   | n.a.           | n.a.           |
+| Addition                 | `1 + 2`                        | `1 + 2`              | `(+ 1 2)`      | `1 + 2`        |
+| Subtraktion              | `7 - 2`                        | `7 - 2`              | `(- 7 2)`      | `7 - 2`        |
+| Klammerung               | `(1 + 2)`                      | `(1 + 2)`            | `(+ 1 2)`      | `(1 + 2)`      |
+| Ausgabe einer Variablen  | `std::cout << result << '\n';` | `IO.println(result)` | n.a.           | n.a.           |
+| Zeilenkommentar          | `// Kommentar`                 | `// Kommentar`       | `;; Kommentar` | `// Kommentar` |
+| Import von Bibliotheken  | `#include <iostream>`          | `import ...;`        | n.a.           | n.a.           |
 :::
 
 # (\*\*) C-Int: Addition und Subtraktion für Integer in C++
 
-Wir legen in dieser Aufgabe die Basis für den Mini-C++-Interpreter, den wir
-schrittweise über das Semester hinweg aufbauen.
+Wir legen nun mit **C-Int** die Basis für den Mini-C++-Interpreter, den wir über das
+Semester hinweg erweitern.
+
+C-Int soll analog zu L-Int **Ausdrücke mit Integer-Literalen, Addition und
+Subtraktion** erlauben, aber in C++-üblicher Infix-Notation.
 
 ::: important
 ## Waschzettel: In C++ sieht es so aus ...
 
-Unsere Basisstufe **C-Int** soll analog zu L-Int **Ausdrücke mit Integer-Literalen,
-Addition und Subtraktion** erlauben. Dabei nutzen wir in C-Int die in C++ übliche
-*infix* Notation:
+| Sprachelement   | L-Int                    | C-Int                    |
+|:----------------|:-------------------------|:-------------------------|
+| Integer-Literal | `42`                     | `42`                     |
+| Addition        | `(+ 1 2)`, `(+ 1 2 3 4)` | `1 + 2`, `1 + 2 + 3 + 4` |
+| Subtraktion     | `(- 7 2)`, `(- 7 2 1)`   | `7 - 2`, `7 - 2 - 1`     |
+| Klammerung      | `(+ 1 2)`                | `(1 + 2)`                |
+| Zeilenkommentar | `;; Kommentar`           | `// Kommentar`           |
+
+Beispiele (mit Ergebnis im Kommentar):
 
     2          // => 2
 
     1+2        // => 3
     (1+2)      // => 3
 
+    7-2        // => 5
+    7-2-1      // => 4
+
     1+2+3      // => 6
     (1+2)+3    // => 6
     ((1+2)+3)  // => 6
 
-Ein L-Int-Ausdruck wie `(- (+ 1 2) 3)` lässt sich in C++- bzw. C-Int-Schreibweise
-beispielsweise so darstellen:
+Ein L-Int-Ausdruck wie (- (+ 1 2) 3) entspricht in C-Int etwa:
 
     ((1 + 2) - 3)
     (1 + 2) - 3
     1 + 2 - 3
 
-In C++ bilden diese Ausdrücke allerdings noch kein vollständiges Programm. Man
-benötigt eine `main()`-Funktion als Rahmen und Einsprungspunkt für das Programm und
-muss Ausdrücke in ein Statement wie beispielsweise eine Zuweisung an eine Variable
-oder eine Ausgabe verpacken.
+Addition und Subtraktion sind *linksassoziativ*, d.h. es wird von links nach rechts
+geklammert (sofern keine expliziten Klammern vorhanden sind).
+
+**Wichtig**: Für die Übersetzung mit einem C++-Compiler müssen diese Ausdrücke noch
+in einen Rahmen eingefügt werden, beispielsweise in eine `main()`-Funktion und in
+passende Statements (Zuweisung, Ausgabe, ...).
+
+Syntaktisch und semantisch betrachten wir im Laufe des Semesters folgende Abstufung:
+
+    C++ <: C-Self <: C-Inherit <: C-Class <: C-Fun <: C-If <: C-Expr <: C-Int
+
+In diesem Semester enden wir (voraussichtlich) bei C-Self.
 :::
 
-## Schritt 1: Java-Projekt einrichten
+## Schritt 1: Java-Projekt für C-Int einrichten
 
-Legen Sie sich ein neues Java-Projekt für Ihren C-Int-Interpreter an (vgl. erste
-Aufgabe "Java-Projekt für L-Int). Auch dieses Projekt werden Sie das Semester über
-immer wieder erweitern und ergänzen.
+Legen Sie ein neues Java-Projekt für Ihren C-Int-Interpreter an (analog zur ersten
+Aufgabe für L-Int). Nutzen Sie ein eigenes Package, z.B. `cint`.
 
 ## Schritt 2: Konkrete Syntax für C-Int
 
-Definieren Sie analog zur Vorlesung die **konkrete Syntax für C-Int**. Damit
-definieren Sie, welche Programme von Ihrem Lexer und Parser akzeptiert werden.
+Definieren Sie analog zur Vorlesung die **konkrete Syntax für C-Int**. Sie legen
+damit fest, welche Programme von Ihrem Lexer und Parser akzeptiert werden.
 
-Whitespace darf zwischen den Bestandteilen eines Ausdrucks stehen und soll
-übersprungen werden. Zusätzlich sollen Sie C++-Zeilenkommentare der Form `// ...`
-bis zum Zeilenende unterstützen und überspringen. Addition und Subtraktion haben
-immer zwei Integer-Operanden (`1-2`), dabei können mehrere Operationen verkettet
-werden (`1+2+3+4`). Ausdrücke dürfen geklammert sein; nicht geklammerte Ausdrücke
-sind in C-Int implizit von links nach rechts geklammert.
+Rahmenbedingungen:
 
-Besprechen Sie gemeinsam in der Übung:
+-   Whitespace darf zwischen den Bestandteilen eines Ausdrucks stehen und wird
+    übersprungen.
+-   Zeilenkommentare `// ...` bis zum Zeilenende werden unterstützt und
+    übersprungen.
+-   Addition und Subtraktion haben immer zwei Integer-Operanden: `1-2`.
+-   Mehrfach verkettete Ausdrücke wie `1+2+3+4` sind erlaubt.
+-   Ausdrücke dürfen geklammert sein.
+-   Nicht geklammerte Ausdrücke werden implizit **von links nach rechts** gruppiert.
+
+Diskutieren Sie in der Übung:
 
 -   Welche konkreten Eingaben soll die Grammatik zulassen, welche nicht?
--   Welche Teile gehören zur konkreten Syntax?
+-   Welche Teile gehören zur **konkreten** Syntax (Token, Schlüsselwörter, Symbole)?
 
 ## Schritt 3: Abstrakte Syntax für C-Int
 
-Definieren Sie analog zur Vorlesung die **abstrakte Syntax für C-Int**. Damit legen
-Sie das Format für den AST von C-Int fest.
+Definieren Sie analog zur Vorlesung die **abstrakte Syntax** (AST) für **C-Int**.
 
-Diskutieren Sie gemeinsam in der Übung:
+Diskussionspunkte:
 
 -   Welche Informationen aus dem Parse-Tree müssen im AST erhalten bleiben?
--   Warum müssen Klammern im AST nicht unbedingt als eigene Knoten vorkommen?
+-   Warum müssen Klammern im AST nicht als eigene Knoten vorkommen?
 
 ## Schritt 4: Interpreter-Pipeline für C-Int
 
-Erstellen Sie nun analog zur Vorlesung für C-Int passend zu Ihrer konkreten und
-abstrakten Grammatik:
+Erstellen Sie analog zur L-Int-Pipeline für C-Int:
 
 -   eine Tokendefinition,
 -   AST-Klassen und -Interfaces,
@@ -246,14 +271,12 @@ abstrakten Grammatik:
 -   einen RD-Parser,
 -   einen Interpreter.
 
-Nutzen Sie am besten ein gemeinsames Package `cint` für diese Klassen.
-
-Verwenden Sie für den Parser auf diesem Blatt keinen generierten ANTLR-Parser.
-Implementieren Sie ihn wie in der Vorlesung von Hand.
+Verwenden Sie hierfür **keinen** generierten ANTLR-Parser, sondern eine
+handgeschriebene Java-Implementierung wie in der Vorlesung.
 
 ## Schritt 5: Tests für C-Int
 
-Schreiben Sie JUnit-Tests für die C-Int-Pipeline. Prüfen Sie mindestens:
+Schreiben Sie JUnit-Tests für Ihre C-Int-Pipeline. Testen Sie mindestens:
 
 -   ein Integer-Literal,
 -   eine Addition,
@@ -264,13 +287,12 @@ Schreiben Sie JUnit-Tests für die C-Int-Pipeline. Prüfen Sie mindestens:
 -   eine fehlende schließende Klammer,
 -   einen ungültigen Operator oder ein unerwartetes Zeichen.
 
-Testen Sie nach Möglichkeit nicht nur die Auswertung, sondern auch die erzeugten
-Token und ASTs. Dadurch können Sie Fehler in den einzelnen Phasen der Pipeline
-besser voneinander unterscheiden.
+Testen Sie, wenn möglich, wieder getrennt Token-Liste, AST und Auswertung
+(Interpreter).
 
 ## Schritt 6: C-Int-Ergebnisse mit nativem C++ vergleichen
 
-Schreiben Sie für die folgenden Ausdrücke jeweils ein vollständiges C++-Programm mit
+Schreiben Sie zu den folgenden Ausdrücken jeweils ein vollständiges C++-Programm mit
 `main()`, das den Ausdruck berechnet und das Ergebnis ausgibt:
 
     42
@@ -278,21 +300,24 @@ Schreiben Sie für die folgenden Ausdrücke jeweils ein vollständiges C++-Progr
     ((1 + 2) - 3)
     (10 - (3 + 5))
 
-Übersetzen und starten Sie Ihre Programme mit clang++ oder g++. Vergleichen Sie die
-Ausgaben mit den Ergebnissen Ihres C-Int-Interpreters. Notieren Sie anschließend:
+Übersetzen und starten Sie Ihre Programme mit clang++ oder g++.
 
-1.  Zwei Gemeinsamkeiten zwischen der Auswertung im nativen C++-Programm und der
+Vergleichen Sie die Ausgaben mit den Ergebnissen Ihres C-Int-Interpreters und
+notieren Sie kurz:
+
+-   Zwei Gemeinsamkeiten zwischen der Auswertung im nativen C++-Programm und der
     Auswertung durch Ihren Interpreter.
-2.  Zwei Unterschiede zwischen den beiden Verarbeitungswegen.
+-   Zwei Unterschiede zwischen den beiden Verarbeitungswegen (z.B. Laufzeit,
+    Fehlermeldungen, Komfort).
 
-# (\*\*\*) Interpreter für L-Int mit Visitor-Pattern
+# (\*\*\*) Vertiefung: Interpreter für L-Int mit Visitor-Pattern
 
-In der Vorlesung wurde die `eval()`-Funktion im Interpreter für L-Int mit Pattern
-Matching und `switch`-Expressions aufgebaut.
+In der Vorlesung wurde die `eval()`-Funktion im L-Int-Interpreter mit Pattern
+Matching und `switch`-Expressions implementiert.
 
-Wie sieht das Äquivalent unter Benutzung des Visitor-Patterns aus? Diskutieren Sie
-die Strukturen und nötigen Änderungen/Erweiterungen und implementieren Sie dieses in
-Java. Geben Sie ein Beispiel an, wie Sie den neuen Visitor aufrufen würden.
+1.  Übertragen Sie dies auf das Visitor-Pattern.
+2.  Skizzieren Sie Vor- und Nachteile des Visitor-Patterns im Vergleich zur
+    `switch`-Variante aus der Vorlesung.
 
 <!--
 - Interface `ExprVisitor` mit `visit()`-Methode pro AST-Knoten, Rückgabe `Value`: `return e.lhs.accept(this) + e.rhs.accept(this)`
