@@ -172,7 +172,7 @@ public class LispyParserLint {
         tokens = tokenList;  current = 0;
 
         Expr expr = parseEform();
-        if (!isAtEnd()) throw new RuntimeException("unexpected token after end of expression");
+        if (!isAtEnd()) throw new RuntimeException("unexpected token");
 
         return expr;
     }
@@ -253,6 +253,7 @@ protected Expr parseEform() {
 
     return parseAtom();
 }
+
 
 protected Expr parseAtom() {
     Token t = match(INT);
@@ -381,23 +382,22 @@ wenn wir in L-If über Kontrollstrukturen sprechen.
 # Hilfsfunktionen im Parser: Tokenhandling
 
 ``` java
-protected final boolean isAtEnd() { return peek().kind() == EOF; }
+protected boolean isAtEnd() { return peek().kind() == EOF; }
 
-protected final Token peek() { return peek(0); }
-protected final Token peek(int la) {
+protected Token peek() { return peek(0); }
+protected Token peek(int la) {
     if (la < 0 || current + la >= tokens.size()) return tokens.getLast();  // EOF
     return tokens.get(current + la);
 }
 
-protected final Token advance() {
-    if (isAtEnd()) return tokens.getLast();  // EOF
-    return tokens.get(current++);
+protected Token advance() {
+    return isAtEnd() ? tokens.getLast() : tokens.get(current++);
 }
 
-protected final boolean check(TokenKind... expected) {
+protected boolean check(TokenKind... expected) {
     return Arrays.stream(expected).anyMatch(e -> e == peek().kind());
 }
-protected final Token match(TokenKind... expected) {
+protected Token match(TokenKind... expected) {
     if (check(expected)) return advance();
     throw new RuntimeException("unexpected token: " + peek());
 }

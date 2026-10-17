@@ -206,21 +206,19 @@ dem Tokentyp das passende Token erzeugen (vgl. Challenge).
 # Hilfsfunktionen im Lexer: Zeichenhandling
 
 ``` java
-protected final boolean isAtEnd() { return current >= source.length(); }
+protected boolean isAtEnd() { return current >= source.length(); }
 
-protected final char peek() { return peek(0); }
-protected final char peek(int la) {
+protected char peek() { return peek(0); }
+protected char peek(int la) {
     if (la < 0 || current + la >= source.length()) return '\0';
     return source.charAt(current + la);
 }
 
-protected final char advance() {
-    if (isAtEnd()) return '\0';  return source.charAt(current++);
-}
+protected char advance() { return isAtEnd() ? '\0' : source.charAt(current++); }
 
-protected final boolean skipIrrelevant() {}  // Homework
+protected boolean skipIrrelevant() {}  // Homework
 
-protected final String readWhile(Predicate<Character> pred) {
+protected String readWhile(Predicate<Character> pred) {
     StringBuilder sb = new StringBuilder();
     while (!isAtEnd() && pred.test(peek())) sb.append(advance());
     return sb.toString();
@@ -556,7 +554,7 @@ public enum TokenKind {
     INT,  // [0-9]+
     EOF("<EOF>");
 
-    private final String description;
+    private String description;
 
     TokenKind() {
         this("");

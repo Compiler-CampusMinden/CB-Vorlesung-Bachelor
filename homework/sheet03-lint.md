@@ -81,7 +81,7 @@ Wir haben in der Vorlesung die Funktion `skipIrrelevant()` gesehen, mit der nich
 übersprungen werden sollen und die immer zu Beginn von `nextToken()` aufgerufen wird:
 
 ```java
-protected final boolean skipIrrelevant() {}  // Homework
+protected boolean skipIrrelevant() {}  // Homework
 ```
 
 Wie könnte diese Methode aussehen? Geben Sie eine Implementierung in Java an. Testen Sie Ihre Implementierung mit einigen
