@@ -157,6 +157,7 @@ Schauen wir uns an, wie der Ausdruck `(- (+ 1 2) 3)` als Parse-Tree aussieht.
 Text: `(- (+ 1 2) 3)`
 
 \bigskip
+\smallskip
 
 Parse-Tree:
 
@@ -292,6 +293,7 @@ Schauen wir uns an, wie der Ausdruck `(- (+ 1 2) 3)` als AST aussieht.
 Text: `(- (+ 1 2) 3)`
 
 \bigskip
+\smallskip
 
 AST:
 
@@ -401,8 +403,6 @@ nur noch halb so nützlich (schützt nur noch vor unbeabsichtigten Ableitungen).
 # AST in Java: Beispielkonstruktion
 
 Text: `(- (+ 1 2) 3)`
-
-\smallskip
 
 AST:
 
