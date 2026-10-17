@@ -1,7 +1,7 @@
 ---
 author: Carsten Gips (HSBI)
 no_beamer: true
-title: "Blatt 03: C-int"
+title: "Blatt 03: C-Int"
 ---
 
 ::: important
