@@ -5,11 +5,13 @@ title: "Blatt 01: Reguläre Sprachen"
 ---
 
 # A1.1: Sprachen von regulären Ausdrücken
+
 Welche Sprache wird von dem folgenden regulären Ausdruck beschrieben?
 
 $a\ +\ a\ (a\ +\ b)^*\ a$
 
 # A1.2: Bezeichner in Programmiersprachen
+
 Die Referenz einer Programmiersprache beschreibt zugelassene Bezeichner (= Namen für
 Variablen, Funktionen, Klassen, Methoden, ...) folgendendermaßen:
 
@@ -23,7 +25,8 @@ Variablen, Funktionen, Klassen, Methoden, ...) folgendendermaßen:
 -   Bezeichner dürfen nicht mit einem Unterstrich enden
 -   Alle Bezeichner müssen aus mindestens zwei Zeichen bestehen
 
-Entwickeln Sie **einen** regulären Ausdruck, der den Aufbau aller Bezeichner beschreibt.
+Entwickeln Sie **einen** regulären Ausdruck, der den Aufbau aller Bezeichner
+beschreibt.
 
 Beachten Sie, dass Ihr regex alle zulässigen Bezeichner beschreiben muss, aber
 keinen einzigen unzulässigen beschreiben darf. Wählen Sie zwei Bezeichner aus der
@@ -34,8 +37,8 @@ DFA alle zulässigen Bezeichner akzeptieren muss, aber keinen einzigen unzuläss
 akzeptieren darf. Wählen Sie zwei Bezeichner aus der Sprache und zeigen Sie, wie sie
 vom Automaten zeichenweise gelesen und akzeptiert werden.
 
-Bitte beachten Sie, dass die Schreibweise a-z nicht unserer Definition von DFAs genügt.
-Eigentlich müsste jedes Zeichen aufgeführt werden.
+Bitte beachten Sie, dass die Schreibweise a-z nicht unserer Definition von DFAs
+genügt. Eigentlich müsste jedes Zeichen aufgeführt werden.
 
 Anmerkung: Diese Darstellung wird ab jetzt akzeptiert.
 
@@ -59,7 +62,6 @@ Warum ist der folgende regex ungeeignet für die Verarbeitung von Mailadressen?
 
 $(a-z)^+@(a-z).(a-z)$
 
-
 Verbessern Sie den gegebenen regulären Ausdruck.
 
 # A1.5: Der zweitletzte Buchstabe
@@ -74,7 +76,7 @@ Welche Sprache generiert die folgende Grammatik?
 $$\begin{eqnarray}
 S &\rightarrow& a A \ | \ b B            \nonumber \\
 A &\rightarrow& b S \ | \ c              \nonumber \\
-B &\rightarrow& a S \ | \ b              \nonumber \\
+B &\rightarrow& a S \ | \ b              \nonumber
 \end{eqnarray}$$
 
 Können Sie einen regulären Ausdruck oder einen DFA dafür angeben?
