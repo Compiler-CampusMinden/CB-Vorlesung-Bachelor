@@ -4,12 +4,10 @@ slide_numbering: fraction
 title: CFG
 ---
 
-<!--
 ::: attachments
 -   [Annotierte Folien: CFG,
     LL-Parser](https://github.com/Compiler-CampusMinden/AnnotatedSlides/blob/master/frontend_parsing_cfg.ann.ba.pdf)
 :::
--->
 
 # Wiederholung
 
