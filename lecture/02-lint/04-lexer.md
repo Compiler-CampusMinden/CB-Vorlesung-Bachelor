@@ -52,7 +52,7 @@ Zeichen mit einbeziehen.
 ::: important
 ## Definition wichtiger Begriffe
 
--   **Token**: Tupel (Tokenname, optional: Wert)
+-   **Token**: Tupel `(Tokenname, optional: Wert)`
 
     Der Tokenname ist ein abstraktes Symbol, welches eine lexikalische Einheit
     repräsentiert (Kategorie). Die Tokennamen sind die Eingabesymbole für den
@@ -75,6 +75,15 @@ Zeichen mit einbeziehen.
     Bei Schlüsselwörtern oder Klammern etc. sind dies die Schlüsselwörter oder
     Klammern selbst. Bei Zahlen oder Bezeichnern (Namen) werden i.d.R. reguläre
     Ausdrücke zur Beschreibung der Form des Lexems formuliert.
+
+-   **Lexer**: zerteilt Zeichenstrom (Eingabe) in eine Folge von Wörtern (Token)
+
+-   **Parse Tree**: repräsentiert die Struktur der Sätze, wobei jeder Knoten dem
+    Namen einer Regel der Grammatik entspricht. Die Blätter bestehen aus den Token
+    samt ihren Werten.
+
+-   **Grammatik**: Regeln für den Aufbau der betrachteten Sprache (formale
+    Beschreibung der Wörter und Sätze)
 :::
 ::::
 
