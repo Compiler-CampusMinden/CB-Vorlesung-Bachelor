@@ -36,7 +36,7 @@ besonders häufige Typos abfangen.
 
     <LPAREN, "(">   <PLUS, "+">   <INT, "1">   <INT, "222">   <RPAREN, ")">
 
-::: notes
+:::: notes
 Wir wollen den Eingabetext (Zeichenstrom) in *abstraktere Einheiten* aufsplitten:
 die **Token**.
 
@@ -48,7 +48,35 @@ in der Eingabe vorkommen. In der Regel geht man zeichenweise von links nach rech
 durch die Eingabe und versucht anhand des aktuellen Zeichens zu erkennen, welches
 Token hier beginnt. Bei Mehrdeutigkeiten muss man entsprechend noch weitere folgende
 Zeichen mit einbeziehen.
+
+::: important
+## Definition wichtiger Begriffe
+
+-   **Token**: Tupel (Tokenname, optional: Wert)
+
+    Der Tokenname ist ein abstraktes Symbol, welches eine lexikalische Einheit
+    repräsentiert (Kategorie). Die Tokennamen sind die Eingabesymbole für den
+    Parser.
+
+    Token werden i.d.R. einfach über ihren Namen referenziert. Token werden häufig
+    zur Unterscheidung von anderen Symbolen in der Grammatik in Fettschrift oder mit
+    großen Anfangsbuchstaben geschrieben.
+
+    Ein Token kann einen Wert haben, etwa eine Zahl oder einen Bezeichner, der auf
+    das zum Token gehörende Pattern gematcht hatte (also das Lexem). Wenn der Wert
+    des Tokens eindeutig über den Namen bestimmt ist (im Beispiel oben beim Komma
+    oder den Klammern), dann wird häufig auf den Wert verzichtet.
+
+-   **Lexeme**: Sequenz von Zeichen im Eingabestrom, die auf ein Tokenpattern matcht
+    und vom Lexer als Instanz dieses Tokens identifiziert wird.
+
+-   **Pattern**: Beschreibung der Form eines Lexems
+
+    Bei Schlüsselwörtern oder Klammern etc. sind dies die Schlüsselwörter oder
+    Klammern selbst. Bei Zahlen oder Bezeichnern (Namen) werden i.d.R. reguläre
+    Ausdrücke zur Beschreibung der Form des Lexems formuliert.
 :::
+::::
 
 # Modellierung der Token
 
