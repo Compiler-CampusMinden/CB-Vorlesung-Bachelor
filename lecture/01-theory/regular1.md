@@ -210,8 +210,8 @@ $X \in (N \cup T)^{\ast} N  (N \cup T)^{\ast}, Y \in (N \cup T)^{\ast}$
 ## Ableitungen
 
 **Def.:** Sei $G = (N, T, P, S)$ eine Grammatik, sei $\alpha A \beta$ eine
-Zeichenkette über $(N \cup T)^{\ast}$ und sei $A \rightarrow \gamma$ eine
-Produktion von $G$.
+Zeichenkette über $(N \cup T)^{\ast}$ und sei $A \rightarrow \gamma$ eine Produktion
+von $G$.
 
 Wir schreiben: $\alpha A \beta \Rightarrow \alpha \gamma \beta$ ($\alpha A \beta$
 leitet $\alpha \gamma \beta$ ab).
