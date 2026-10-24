@@ -65,57 +65,24 @@ und auf Ihre L-Int-Pipeline übertragen und so Ihre L-Expr-Pipeline aufbauen.
     L-Expr anlegen und die nötigen Klassen und Ergänzungen **auf Basis Ihrer
     L-Int-Lösung** definieren:
 
-    -   Lexer: neue Token für `*` und `/`
-    -   Parser (RD-Parser für L-Expr): zusätzliche Alternativen in den passenden
+    -   **Lexer**: neue Token für `*` und `/`
+    -   Parser (**RD-Parser** für L-Expr): zusätzliche Alternativen in den passenden
         Grammatikregeln
-    -   AST: neue Knotenklassen `MulExpr` und `DivExpr`
-    -   Interpreter: Auswertung von `MulExpr` und `DivExpr` (linksassoziativ,
-        Java-Integer-Division)
+    -   **AST**: neue Knotenklassen `MulExpr` und `DivExpr`
+    -   **Interpreter** `InterpreterLexpr`: Auswertung von `MulExpr` und `DivExpr`
+        (linksassoziativ, Java-Integer-Division)
 
-    Ergänzen Sie das Token-Typ-Enum. Schreiben Sie neue Klassen für den L-Expr-Lexer
-    und -RD-Parser (ausnahmsweise **nicht** von L-Int ableiten - warum?!). Ergänzen
-    Sie die neuen AST-Klassen. Definieren Sie eine neue Klasse `InterpreterLexpr`
-    für den L-Expr-Interpreter mit `class InterpreterLexpr extends InterpreterLint`.
-    Schreiben Sie eine neue JUnit-Testklasse `InterpreterLexprTest`, die von der
-    L-Int-Testklasse ableitet:
+    Ergänzen Sie Ihr Token-Typ-Enum. Ergänzen Sie die neuen AST-Klassen. Schreiben
+    Sie neue Klassen für den L-Expr-Lexer und -RD-Parser (ausnahmsweise **nicht**
+    von L-Int ableiten - warum?!).
+
+    Definieren Sie eine neue Klasse `InterpreterLexpr` für den L-Expr-Interpreter
+    mit `class InterpreterLexpr extends InterpreterLint`.
+
+    Implementieren Sie die obigen Testausdrücke in einer neuen JUnit-Testklasse
+    `InterpreterLexprTest`, die von der L-Int-Testklasse ableitet:
     `class InterpreterLexprTest extends InterpreterLintTest`. Wichtig: Damit das
     funktioniert, müssen alle Testmethoden mindestens auf `protected` stehen.
-
-# (\*\*) L-Expr: Unäres Minus als syntaktischer Zucker
-
-Wir wollen in L-Expr unäres Minus (`(- e)`) zulassen, ohne einen eigenen AST-Knoten
-dafür einzuführen.
-
-1.  **Konkrete Syntax für unäres Minus**
-
-    Erweitern Sie Ihre konkrete Lispy-Syntax so, dass auch Ausdrücke der Form
-
-    ``` clojure
-     (- 3)
-     (- (+ 1 2))
-     (- (* 2 3))
-    ```
-
-    syntaktisch erlaubt sind und als "unäres Minus" interpretiert werden.
-
-    Wie unterscheiden Sie "klassische" mehrstellige Subtraktion von unärem Minus?
-
-2.  **Desugaring-Idee**
-
-    Formulieren Sie, wie unäres Minus in "normale" Subtraktions-Ausdrücke
-    umgeschrieben werden kann.
-
-    Geben Sie dies zunächst rein **informell in Worten** an.
-
-3.  **AST-Seite**
-
-    Beschreiben Sie, wie Sie Ihre AST-Konstruktion anpassen würden. Welche Varianten
-    können Sie identifizieren, und welche Vor- und Nachteile hätten diese jeweils?
-
-4.  **Implementierung**
-
-    Entscheiden Sie sich für **eine der Varianten** und bauen Sie den
-    Desugaring-Schritt in Ihre **L-Expr-Pipeline** ein.
 
 # (\*) C-Expr ausprobieren: Vorrang und unäres Minus live testen
 
@@ -148,6 +115,7 @@ jeweils das Ergebnis über `std::cout` ausgibt:
     7 - (2 - 1)
     -3 * 4
     -(3 * 4)
+    -(1 + 2) * 3
 
 Übersetzen Sie es mit g++/clang und prüfen Sie, ob jeweils das Ergebnis Ihren
 Erwartungen entspricht.
@@ -189,23 +157,11 @@ Multiplikation, Division, unäres Minus und geklammerte Ausdrücke erweitern.
     Zeichnen Sie jeweils den Parse-Tree. Entspricht das dem Verhalten von C++ aus
     der vorigen Aufgabe?
 
-# (\*\*) ANTLR-Grammatik für C-Expr
+# (\*\*) ANTLR-Grammatiken für C-Expr
 
-Wir wollen nun ANTLR-Grammatiken für C-Expr erstellen.
-
-1.  **ANTLR-Grammatik definieren**
-
-    Definieren Sie zwei **ANTLR-Grammatiken** für **C-Expr**: einmal mit **gestuften
-    Regeln** und einmal mit **linksrekursiven Alternativen**. Berücksichtigen Sie
-    dabei die für C-Expr formulierten Operatoren und Vorrangregeln und
-    Assoziativitäten.
-
-2.  **Testfälle überlegen**
-
-    Notieren Sie mindestens fünf unterschiedlich komplexe Testausdrücke, die Sie mit
-    der Grammatik parsen möchten.
-
-    Überlegen Sie, wie die Parse-Bäume jeweils aussehen sollten (Skizze).
+Definieren Sie zwei **ANTLR-Grammatiken** für **C-Expr**: einmal mit **gestuften
+Regeln** und einmal mit **linksrekursiven Alternativen**. Berücksichtigen Sie dabei
+die für C-Expr formulierten Operatoren und Vorrangregeln und Assoziativitäten.
 
 # (\*) Abstrakte Syntax für C-Expr
 
@@ -217,35 +173,35 @@ Diskutieren Sie: Welche neuen AST-Knoten sind notwendig und warum?
 # (\*\*) Parsen von C-Expr und bauen des AST
 
 1.  Implementieren Sie für Ihre konkrete Grammatik (mit den gestuften Regeln) für
-    C-Expr einen Lexer. Erweitern Sie dazu die Tokendefinitionen passend.
-2.  Implementieren Sie einen RD-Parser für C-Expr, der als Ausgabe einen AST
+    **C-Expr einen Lexer**. Erweitern Sie dazu die Tokendefinitionen passend.
+2.  Implementieren Sie einen **RD-Parser für C-Expr**, der als Ausgabe einen AST
     erzeugt. Ergänzen Sie dazu die AST-Klassen entsprechend Ihrer abstrakten Syntax.
-3.  Lassen Sie sich von ANTLR für die beiden Grammatiken aus der vorigen Aufgabe je
-    einen Lexer, Parser und Visitor generieren.
-4.  Erstellen Sie zwei AST-Builder, die aus den beiden unterschiedlichen
+3.  Lassen Sie sich von **ANTLR** für die beiden Grammatiken aus der vorigen Aufgabe
+    je einen **Lexer, Parser und Visitor generieren**.
+4.  Erstellen Sie **zwei AST-Builder**, die aus den beiden unterschiedlichen
     ANTLR-Parse-Trees je einen AST entsprechend Ihrer abstrakten Syntax erzeugen.
-    Nutzen Sie das Visitor-Pattern. Diskutieren Sie:
+    Nutzen Sie das **Visitor-Pattern**. Diskutieren Sie:
     -   Welchen generischen Typ brauchen Sie für das Ableiten des generierten
-        `BaseVisitor`?
+        `XyzBaseVisitor`?
     -   Welche der `visitXYZ()`-Methoden sollten Sie überschreiben, welche nicht?
         Begründen Sie Ihre Aussage.
-5.  Implementieren Sie Ihre Testfälle in JUnit und führen Sie diese auf **allen drei
-    Varianten** aus (RD-Parser, ANTLR mit gestuften Regeln, ANTLR mit linkrekursiven
-    Alternativen). Was beobachten Sie?
+5.  Implementieren Sie die **obigen Testfälle in JUnit** und führen Sie diese auf
+    **allen drei Varianten** aus (RD-Parser, ANTLR mit gestuften Regeln, ANTLR mit
+    linkrekursiven Alternativen). Was beobachten Sie?
 
 # (\*\*) Interpreter für C-Expr
 
-Implementieren Sie nun den Interpreter für C-Expr in einer Klasse
+Implementieren Sie nun den **Interpreter für C-Expr** in einer Klasse
 `InterpreterCexpr`. Dabei soll gelten
 `class InterpreterCexpr extends InterpreterCint`.
 
 Ergänzen Sie die neuen Fälle für C-Expr durch Überschreiben von `eval()`. Rufen Sie
 für die bisherigen C-Int-Fälle `super.eval(expr)` auf.
 
-Testen Sie Ihren Interpreter mit JUnit. Dabei soll wie bei L-Expr gelten:
-`class InterpreterCexprTest extends InterpreterCintTest`. Spielt es eine Rolle, ob
-Sie dafür den handgeschriebenen Lexer/RD-Parser oder einen der beiden ANTLR-Parser
-plus den passenden AST-Builder einsetzen?
+Testen Sie Ihren Interpreter mit JUnit mit den obigen Testfällen. Dabei soll wie bei
+L-Expr gelten: `class InterpreterCexprTest extends InterpreterCintTest`. Spielt es
+eine Rolle, ob Sie dafür den handgeschriebenen Lexer/RD-Parser oder einen der beiden
+ANTLR-Parser plus den passenden AST-Builder einsetzen?
 
 Vergleichen Sie die Resultate der Testfälle von `InterpreterCexpr` mit dem g++/clang
 übersetzen nativen C++-Code. Gibt es Unterschiede? Woran liegt das?
