@@ -11,33 +11,41 @@ und `**` markierten Aufgaben gelöst werden.
 Die Aufgaben mit `***` sind als Vertiefung gedacht.
 :::
 
+Dieses Blatt knüpft an folgende Vorlesungseinheiten an:
+
+-   L-Expr: Multiplikation/Division und unäres Minus
+-   L-Expr: Vorrang und Assoziativität
+-   L-Expr: ANTLR-Grammatik und Vorrangregeln
+-   L-Expr: ANTLR-Visitoren und Rückgabewerte
+
 # (\*) L-Expr: Multiplikation und Division ergänzen
 
-Sie haben in der Vorlesung L-Int kennengelernt (Integer-Literale, Addition,
-Subtraktion in Lispy-Notation) und L-Expr als Erweiterung um Multiplikation und
-Division gesehen.
+Sie haben in der Vorlesung zunächst L-Int (Integer-Literale, Addition, Subtraktion
+in Lispy-Notation) und anschließend L-Expr als Erweiterung von L-Int um
+Multiplikation und Division kennengelernt.
+
+In dieser Aufgabe sollen Sie die in der Vorlesung gezeigten Ideen vervollständigen
+und auf Ihre L-Int-Pipeline übertragen und so Ihre L-Expr-Pipeline aufbauen.
 
 1.  **Konkrete Syntax verstehen**
 
     Klären Sie in der Übung gemeinsam:
 
     -   Welche Ausdrücke sind **gültige** L-Expr-Ausdrücke?
+
     -   Wie werden mehrstellige Multiplikationen und Divisionen gruppiert
         (Assoziativität)?
+
     -   Welche Werte ergeben die folgenden Ausdrücke?
 
-``` clojure
-```
-
-          (* 2 3)
-          (/ 8 2)
-          (* 2 3 4)
-          (/ 12 3 2)
-          (* (+ 1 2) 3)
-          (/ 12 (* 2 2))
-
-Nutzen Sie dabei die Semantik der ganzzahligen Division wie in Java (Abrunden
-Richtung 0).
+        ``` clojure
+        (* 2 3)
+        (/ 8 2)
+        (* 2 3 4)
+        (/ 12 3 2)
+        (* (+ 1 2) 3)
+        (/ 12 (* 2 2))
+        ```
 
 2.  **Ungültige Eingaben**
 
@@ -47,155 +55,127 @@ Richtung 0).
     -   falsche Klammerung,
     -   unerwartete Token.
 
-3.  **Pipeline um Multiplikation/Division erweitern**
+    Beschreiben Sie jeweils kurz, **warum** die Eingabe ungültig ist und an welcher
+    Stelle Ihre Pipeline (Lexer, Parser, AST-Bau, Interpreter) sinnvollerweise einen
+    Fehler melden würde.
 
-    Ergänzen Sie Ihre L-Int-Pipeline vollständig um Multiplikation und Division:
+3.  **L-Expr-Pipeline bauen: L-Int-Pipeline um Multiplikation/Division erweitern**
 
-    -   Lexer: neue Token für `*` und `/`.
-    -   Parser (RD-Parser für Lispy): zusätzliche Alternativen in den passenden
-        Grammatikregeln.
-    -   AST: neue Knotenklassen `Mul` und `Div`.
-    -   Interpreter: Auswertung von `Mul` und `Div` (linksassoziativ, Java-Integer-
-        Division).
+    Erstellen Sie nun Ihre **Pipeline für L-Expr**, indem Sie ein neues Package für
+    L-Expr anlegen und die nötigen Klassen und Ergänzungen **auf Basis Ihrer
+    L-Int-Lösung** definieren:
+
+    -   Lexer: neue Token für `*` und `/`
+    -   Parser (RD-Parser für L-Expr): zusätzliche Alternativen in den passenden
+        Grammatikregeln
+    -   AST: neue Knotenklassen `MulExpr` und `DivExpr`
+    -   Interpreter: Auswertung von `MulExpr` und `DivExpr` (linksassoziativ,
+        Java-Integer-Division)
+
+    Ergänzen Sie das Token-Typ-Enum. Schreiben Sie neue Klassen für den L-Expr-Lexer
+    und -RD-Parser (ausnahmsweise **nicht** von L-Int ableiten - warum?!). Ergänzen
+    Sie die neuen AST-Klassen. Definieren Sie eine neue Klasse `InterpreterLexpr`
+    für den L-Expr-Interpreter mit `class InterpreterLexpr extends InterpreterLint`.
+    Schreiben Sie eine neue JUnit-Testklasse `InterpreterLexprTest`, die von der
+    L-Int-Testklasse ableitet:
+    `class InterpreterLexprTest extends InterpreterLintTest`. Wichtig: Damit das
+    funktioniert, müssen alle Testmethoden mindestens auf `protected` stehen.
 
 # (\*\*) L-Expr: Unäres Minus als syntaktischer Zucker
 
-Wir wollen in L-Expr unäres Minus (`-x`) zulassen, ohne einen eigenen AST-Knoten
+Wir wollen in L-Expr unäres Minus (`(- e)`) zulassen, ohne einen eigenen AST-Knoten
 dafür einzuführen.
 
 1.  **Konkrete Syntax für unäres Minus**
 
     Erweitern Sie Ihre konkrete Lispy-Syntax so, dass auch Ausdrücke der Form
 
-``` clojure
-```
+    ``` clojure
+     (- 3)
+     (- (+ 1 2))
+     (- (* 2 3))
+    ```
 
-         (- 3)
-         (- (+ 1 2))
-         (- (* 2 3))
+    syntaktisch erlaubt sind und als "unäres Minus" interpretiert werden.
 
-syntaktisch erlaubt sind und als "unäres Minus" interpretiert werden.
-
-Diskutieren Sie:
-
-    - Sollen auch mehrere Argumente bei `-` erlaubt bleiben (wie bisher bei L-Int)?
-    - Wie unterscheiden Sie "klassische" mehrstellige Subtraktion von unärem Minus?
+    Wie unterscheiden Sie "klassische" mehrstellige Subtraktion von unärem Minus?
 
 2.  **Desugaring-Idee**
 
     Formulieren Sie, wie unäres Minus in "normale" Subtraktions-Ausdrücke
-    umgeschrieben werden kann, z.B.:
-
-    -   `(- x)` $\to$ `(- 0 x)`
-    -   `(- (+ 1 2))` $\to$ `(- 0 (+ 1 2))`
+    umgeschrieben werden kann.
 
     Geben Sie dies zunächst rein **informell in Worten** an.
 
 3.  **AST-Seite**
 
-    Beschreiben Sie, wie Sie Ihre AST-Konstruktion anpassen würden:
+    Beschreiben Sie, wie Sie Ihre AST-Konstruktion anpassen würden. Welche Varianten
+    können Sie identifizieren, und welche Vor- und Nachteile hätten diese jeweils?
 
-    -   Variante A: Parser erzeugt zunächst einen temporären `UnaryMinus`-Knoten und
-        ein nachgelagerter Schritt wandelt in `Sub(IntLit(0), expr)` um.
-    -   Variante B: Parser erkennt unäres Minus und baut **direkt** einen `Sub`-
-        Knoten mit linker Konstante `0`.
+4.  **Implementierung**
 
-    Entscheiden Sie sich für eine der Varianten und skizzieren Sie, wo der
-    Desugaring-Schritt in Ihre Pipeline passt.
+    Entscheiden Sie sich für **eine der Varianten** und bauen Sie den
+    Desugaring-Schritt in Ihre **L-Expr-Pipeline** ein.
 
-# (\*) C++ ausprobieren: Vorrang und unäres Minus live testen
+# (\*) C-Expr ausprobieren: Vorrang und unäres Minus live testen
 
-Wir wollen die Vorrangregeln und unäres Minus **direkt in C++** ausprobieren.
+Wir wollen zunächst die Vorrangregeln und unäres Minus **direkt in C++**
+ausprobieren.
 
 ::: important
 ## Waschzettel: In C++ sieht es so aus ...
 
-| Zweck           | L-Expr (Lispy)  | C++ (Infix)    |
-|:----------------|:----------------|:---------------|
-| Multiplikation  | `(* 2 3)`       | `2 * 3`        |
-| Division        | `(/ 8 3)`       | `8 / 3`        |
-| Addition        | `(+ 1 2 3)`     | `1 + 2 + 3`    |
-| Subtraktion     | `(- 7 2 1)`     | `7 - 2 - 1`    |
-| Unäres Minus    | `(- 3)`         | `-3`           |
-| Klammerung      | `(* (+ 1 2) 3)` | `(1 + 2) * 3`  |
-| Zeilenkommentar | `;; Kommentar`  | `// Kommentar` |
+| Zweck          | L-Expr (Lispy)  | C-Expr (Mini-C++) |
+|:---------------|:----------------|:------------------|
+| Multiplikation | `(* 2 3)`       | `2 * 3`           |
+| Division       | `(/ 8 3)`       | `8 / 3`           |
+| Unäres Minus   | `(- 3)`         | `-3`              |
+| Klammerung     | `(* (+ 1 2) 3)` | `(1 + 2) * 3`     |
+
+Während in Lispy (L-Int, L-Expr) die Operatoren für `+`, `-`, `*`, `/` mehrstellig
+sein können, sind sie in C++ (C-Int, C-Expr) **binär** (bzw. `-` zusätzlich unär).
 :::
 
-2.  **C++-Programm: Vorrang und Assoziativität**
+Schreiben Sie ein C++-Programm `expr.cpp`, das folgende Ausdrücke auswertet und
+jeweils das Ergebnis über `std::cout` ausgibt:
 
-    Schreiben Sie ein C++-Programm `expr.cpp`, das folgende Ausdrücke auswertet und
-    jeweils das Ergebnis ausgibt (Sie dürfen mehrere `std::cout`-Zeilen verwenden):
+    1 + 2 * 3
+    (1 + 2) * 3
+    8 / 4 / 2
+    (8 / 4) / 2
+    8 / (4 / 2)
+    7 - 2 - 1
+    7 - (2 - 1)
+    -3 * 4
+    -(3 * 4)
 
-          1 + 2 * 3
-          (1 + 2) * 3
-          8 / 4 / 2
-          (8 / 4) / 2
-          8 / (4 / 2)
-          7 - 2 - 1
-          7 - (2 - 1)
-          -3 * 4
-          -(3 * 4)
+Übersetzen Sie es mit g++/clang und prüfen Sie, ob jeweils das Ergebnis Ihren
+Erwartungen entspricht.
 
-    Vorschlag für das Grundgerüst:
+# (\*\*) C-Expr: Vorrangregeln in einer gestuften Grammatik
 
-        #include <iostream>
-
-        int main() {
-            std::cout << (1 + 2 * 3) << '\n';
-            // ...
-            return 0;
-        }
-
-    Übersetzen und starten Sie das Programm mit `clang++` oder `g++`:
-
-        clang++ expr.cpp -o expr
-        ./expr
-
-    oder
-
-        g++ expr.cpp -o expr
-        ./expr
-
-3.  **Vergleich mit Ihrer Grammatik und Java-Division**
-
-    Vergleichen Sie die beobachteten C++-Ergebnisse mit
-
-    -   Ihrer gestuften Grammatik (Vorrang, Assoziativität),
-    -   und der ganzzahligen Java-Division.
-
-    Zusatz: Überlegen Sie, welchen Wert die folgenden Ausdrücke in Ihrer
-    Java-Implementierung und in C++ liefern (bei ganzzahliger Division):
-
-        7 / 3
-        -7 / 3
-        7 / -3
-        -7 / -3
-
-    Begründen Sie kurz, dass (oder ob) das mit Ihrer Interpreter-Semantik
-    übereinstimmt.
-
-# (\*\*) C-Expr: Vorrangregeln in einer gestuften Grammatik (Infix-Variante)
-
-Wir betrachten eine C++-artige Infix-Syntax, die nur Integer-Literale sowie
-Addition, Subtraktion, Multiplikation, Division und unäres Minus erlaubt.
+Wir erstellen nun **C-Expr**, indem wir **C-Int vom letzten Blatt** um
+Multiplikation, Division, unäres Minus und geklammerte Ausdrücke erweitern.
 
 1.  **Konkrete Grammatik (Gestufte Variante)**
 
-    Definieren Sie eine konkrete Grammatik (z.B. in EBNF), die folgende
+    Definieren Sie eine konkrete Grammatik für C-Expr (in EBNF), die folgende
     Anforderungen erfüllt:
 
     -   Zulässige Ausdrücke enthalten:
-        -   Integer-Literale,
-        -   binäre Operatoren `+`, `-`, `*`, `/`,
-        -   **unäres Minus** (`-x`),
-        -   Klammern `(` und `)`.
-    -   Multiplikation/Division haben **höheren Vorrang** als Addition/Subtraktion.
-    -   Alle vier Operatoren sind **linksassoziativ**.
-    -   Whitespace darf an beliebigen sinnvollen Stellen stehen und wird ignoriert.
+        -   Integer-Literale
+        -   binäre Operatoren `+`, `-`, `*`, `/`
+        -   unäres Minus (`-x`)
+        -   Klammern `(` und `)`
+    -   Vorrang:
+        -   `*` und `/` **binden stärker** als `+` und `-`
+        -   Unäres Minus und geklammerte Ausdrücke haben höchsten Vorrang
+    -   Alle vier Operatoren sind **linksassoziativ**
+    -   Whitespace darf an beliebigen sinnvollen Stellen stehen und wird ignoriert
+    -   Zeilenkommentare werden ab dem `//` bis zum Zeilenende ignoriert
 
-    Skizzieren Sie Ihre Grammatik ausdrücklich mit gestuften Regeln, z.B.
-    `expr`/`term`/`factor`, inklusive einer sinnvollen Stelle für unäres Minus
-    (typischerweise innerhalb von `factor`).
+    Skizzieren Sie Ihre Grammatik ausdrücklich mit **gestuften Regeln**, z.B. mit
+    den Ebenen `expr`/`term`/`atom`.
 
 2.  **Beispiele überprüfen**
 
@@ -206,196 +186,73 @@ Addition, Subtraktion, Multiplikation, Division und unäres Minus erlaubt.
     -   Wie wird `-3 * 4` geparst und ausgewertet?
     -   Wie werden Klammern berücksichtigt, z.B. `(1 + 2) * 3`, `-(1 + 2) * 3`?
 
-    Zeichnen Sie **mindestens einen** Parse-Tree für einen Ausdruck ohne Klammern
-    und **einen** Parse-Tree mit Klammern und unärem Minus.
+    Zeichnen Sie jeweils den Parse-Tree. Entspricht das dem Verhalten von C++ aus
+    der vorigen Aufgabe?
 
-# (\*\*) ANTLR-Grammatik für C-Expr (Infix-Variante)
+# (\*\*) ANTLR-Grammatik für C-Expr
 
-Wir wollen nun eine ANTLR-Grammatik für eine einfache Infix-Variante von C-Expr
-bauen. Nutzen Sie entweder die gestufte Variante oder die linksrekursive Variante
-mit Vorrang über Alternativen und unärem Minus.
+Wir wollen nun ANTLR-Grammatiken für C-Expr erstellen.
 
 1.  **ANTLR-Grammatik definieren**
 
-    Definieren Sie eine ANTLR-Grammatik `CExpr.g4`, die folgendes akzeptiert:
-
-    -   Integer-Literale (`INT`).
-    -   Binäre Operatoren `+`, `-`, `*`, `/` mit C++-üblichem Vorrang
-        (Multiplikation/Division binden stärker).
-    -   Unäres Minus (`-x`).
-    -   Klammern `(` und `)`.
-    -   Whitespace wird ignoriert.
-
-    Nutzen Sie eine der beiden Varianten:
-
-    -   **Gestuft** (`expr`/`term`/`factor` mit unärem Minus in `factor`), oder
-    -   **Linksrekursiv** mit geordneter Alternativliste und `<assoc=left>`, plus
-        zusätzlicher Alternative für `UnaryMinus`.
+    Definieren Sie zwei **ANTLR-Grammatiken** für **C-Expr**: einmal mit **gestuften
+    Regeln** und einmal mit **linksrekursiven Alternativen**. Berücksichtigen Sie
+    dabei die für C-Expr formulierten Operatoren und Vorrangregeln und
+    Assoziativitäten.
 
 2.  **Testfälle überlegen**
 
-    Notieren Sie mindestens fünf Testausdrücke, die Sie mit der Grammatik parsen
-    möchten, z.B.:
+    Notieren Sie mindestens fünf unterschiedlich komplexe Testausdrücke, die Sie mit
+    der Grammatik parsen möchten.
 
-        42
-        1+2*3
-        (1+2)*3
-        -3*4
-        8/4/2
-        7-2-1
-        -(1+2)*3
+    Überlegen Sie, wie die Parse-Bäume jeweils aussehen sollten (Skizze).
 
-    Überlegen Sie, wie die Parse-Bäume ungefähr aussehen sollten (Skizze).
+# (\*) Abstrakte Syntax für C-Expr
 
-# (\*\*) ANTLR-Visitor: Auswertung von C-Expr
+Definieren Sie nun die **abstrakte Syntax für C-Expr**. Orientieren Sie sich an der
+Vorlesung und bauen Sie auf Ihrer abstrakten Syntax von C-Int auf.
 
-Nutzen Sie Ihre ANTLR-Grammatik aus der vorherigen Aufgabe und lassen Sie ANTLR den
-Parser und Visitor generieren.
+Diskutieren Sie: Welche neuen AST-Knoten sind notwendig und warum?
 
-1.  **Evaluations-Visitor implementieren**
+# (\*\*) Parsen von C-Expr und bauen des AST
 
-    Implementieren Sie einen Evaluations-Visitor, der einen `Integer` zurückliefert
-    und C-Expr-Ausdrücke vollständig auswertet (die vier Operatoren, unäres Minus
-    und Klammern).
+1.  Implementieren Sie für Ihre konkrete Grammatik (mit den gestuften Regeln) für
+    C-Expr einen Lexer. Erweitern Sie dazu die Tokendefinitionen passend.
+2.  Implementieren Sie einen RD-Parser für C-Expr, der als Ausgabe einen AST
+    erzeugt. Ergänzen Sie dazu die AST-Klassen entsprechend Ihrer abstrakten Syntax.
+3.  Lassen Sie sich von ANTLR für die beiden Grammatiken aus der vorigen Aufgabe je
+    einen Lexer, Parser und Visitor generieren.
+4.  Erstellen Sie zwei AST-Builder, die aus den beiden unterschiedlichen
+    ANTLR-Parse-Trees je einen AST entsprechend Ihrer abstrakten Syntax erzeugen.
+    Nutzen Sie das Visitor-Pattern. Diskutieren Sie:
+    -   Welchen generischen Typ brauchen Sie für das Ableiten des generierten
+        `BaseVisitor`?
+    -   Welche der `visitXYZ()`-Methoden sollten Sie überschreiben, welche nicht?
+        Begründen Sie Ihre Aussage.
+5.  Implementieren Sie Ihre Testfälle in JUnit und führen Sie diese auf **allen drei
+    Varianten** aus (RD-Parser, ANTLR mit gestuften Regeln, ANTLR mit linkrekursiven
+    Alternativen). Was beobachten Sie?
 
-    -   Wählen Sie den generischen Typ angemessen, z.B. `CExprBaseVisitor<Integer>`.
-    -   Überschreiben Sie alle `visitXYZ()`-Methoden, für die Sie eine eigene
-        Semantik benötigen (mindestens die Operatorregeln, Int-Literal-Regel, unäres
-        Minus).
-    -   Verwenden Sie Java-Integer-Division.
+# (\*\*) Interpreter für C-Expr
 
-2.  **Testen des Visitors**
+Implementieren Sie nun den Interpreter für C-Expr in einer Klasse
+`InterpreterCexpr`. Dabei soll gelten
+`class InterpreterCexpr extends InterpreterCint`.
 
-    Schreiben Sie eine kleine `main()`-Methode in Java, die:
+Ergänzen Sie die neuen Fälle für C-Expr durch Überschreiben von `eval()`. Rufen Sie
+für die bisherigen C-Int-Fälle `super.eval(expr)` auf.
 
-    -   einen Ausdruck als String entgegennimmt (z.B. fest im Code oder über
-        Kommandozeilenargumente),
-    -   Lexer und Parser von ANTLR aufruft (`CExprLexer`, `CExprParser`),
-    -   den Parse-Baum für die oberste Regel (`expr`) holt,
-    -   Ihren `EvalVisitor` darauf anwendet und das Ergebnis ausgibt.
+Testen Sie Ihren Interpreter mit JUnit. Dabei soll wie bei L-Expr gelten:
+`class InterpreterCexprTest extends InterpreterCintTest`. Spielt es eine Rolle, ob
+Sie dafür den handgeschriebenen Lexer/RD-Parser oder einen der beiden ANTLR-Parser
+plus den passenden AST-Builder einsetzen?
 
-3.  **Reflexion: Default-Visitor vs. Überschreiben**
+Vergleichen Sie die Resultate der Testfälle von `InterpreterCexpr` mit dem g++/clang
+übersetzen nativen C++-Code. Gibt es Unterschiede? Woran liegt das?
 
-    Beantworten Sie schriftlich:
+# (\*\*\*) Vertiefung: ANTLR und Stolperfallen
 
-    -   Für welche Regeln Ihrer Grammatik reicht die Default-Implementierung
-        `visitChildren()` aus? Begründen Sie.
-    -   Für welche Regeln ist eine explizite `visitXYZ()`-Methode notwendig? Geben
-        Sie kurz an, was dort ungefähr passieren muss (z.B. unäres Minus: `0 - x`).
-
-# (\*\*\*) Vertiefung: AST-Bau statt direkter Auswertung
-
-Bisher wertet Ihr Visitor die Ausdrücke direkt aus. Alternativ könnten Sie einen
-Visitor schreiben, der einen **AST** für C-Expr aufbaut (ähnlich Ihrer Lispy-ASTs).
-
-1.  **AST-Klassen für C-Expr**
-
-    Definieren Sie AST-Klassen (z.B. `IntLit`, `Add`, `Sub`, `Mul`, `Div`) für
-    C-Expr. Unäres Minus soll auch hier nicht als eigener Knoten vorkommen, sondern
-    als `Sub(IntLit(0), expr)` modelliert werden.
-
-2.  **AST-Builder-Visitor**
-
-    Implementieren Sie einen ANTLR-Visitor, der statt eines `Integer` einen
-    `Expr`-AST-Knoten zurückliefert. Vergleichen Sie Aufbau und Code mit Ihrem
-    Evaluations-Visitor.
-
-3.  **Diskussionsfrage**
-
-    Skizzieren Sie Vor- und Nachteile der beiden Ansätze:
-
-    -   Direkte Auswertung im ANTLR-Visitor.
-    -   Erst AST-Bau im ANTLR-Visitor und spätere Auswertung in einem getrennten
-        Interpreter.
-
-    Gehen Sie dabei auch kurz darauf ein, wie gut sich unäres Minus jeweils
-    integrieren lässt.
-
-
----
-
-
-
-::: tip
-## Exkurs: Non-greedy Lexer-Regeln
-
-Die regulären Ausdrücke `(...)?`, `(...)*` und `(...)+` sind *greedy* und versuchen
-soviel Input wie möglich zu matchen.
-
-Falls dies nicht sinnvoll sein sollte, kann man mit einem weiteren `?` das Verhalten
-auf *non-greedy* umschalten. Allerdings können non-greedy Regeln das Verhalten des
-Lexers u.U. schwer vorhersehbar machen!
-
-
-Non-greedy Regeln versuchen *so wenig* Zeichen wie möglich zu matchen
-
-``` antlr
-FOO     : 'foo' .*? 'bar' ;
-BAR     : 'bar' ;
-```
-
-Hier würde ein "foo42barbar" zu `FOO` gefolgt von `BAR` erkannt werden.
-
-Achtung: Nach [dem Abarbeiten]{.notes} einer non-greedy Sub-Regel [in einer
-Lexer-Regel]{.notes} gilt "*first match wins*"
-
-`.*? ('4' | '42')`
-
-=\> [Der Teil]{.notes} `'42'` [auf der rechten Seite]{.notes} ist "toter Code"
-(wegen der non-greedy Sub-Regel `.*?`)!
-
-Die Eingabe "x4" würde korrekt erkannt, währende "x42" nur als "x4" erkannt wird und
-für die verbleibende "2" würde ein *token recognition error* geworfen.
-
-Die Empfehlung ist, non-greedy Lexer-Regeln nur sparsam einzusetzen (vgl.
-[github.com/antlr/antlr4/blob/master/doc/wildcard.md](https://github.com/antlr/antlr4/blob/master/doc/wildcard.md)).
-:::
-
-::: tip
-## Exkurs: Konflikte in Regeln und implizite Token
-
-Wenn mehrere Alternativen einer Regel anwendbar sind, entscheidet sich ANTLR für die
-erste Alternative.
-
-Wenn sich mehrere Tokenregeln überlappen, "gewinnt" auch hier die zuerst definierte
-Regel.
-
-``` antlr
-def : 'func' ID '(' ')' block ;
-
-FOR : 'for' ;
-ID  : [a-z][a-zA-Z]* ;
-```
-
-Hier werden ein implizites Token `'func'` sowie die expliziten Token `FOR` und `ID`
-definiert. Dabei sind die Lexeme für `'func'` und `FOR` auch in `ID` enthalten.
-Dennoch werden `'func'` und `FOR` erkannt und nicht über `ID` gematcht, weil sie
-*vor* der Regel `ID` definiert sind.
-
-Tatsächlich sortiert ANTLR die Regeln intern um, so dass alle Parser-Regeln *vor*
-den Lexer-Regeln definiert sind. Die impliziten Token werden dabei noch *vor* den
-expliziten Token-Regeln angeordnet. Im obigen Beispiel hat also `'func'` eine höhere
-Priorität als `FOR`, und `FOR` hat eine höhere Priorität als `ID`. Aus diesem Grund
-gibt es die Konvention, die Parser-Regeln in der Grammatik vor den Lexer-Regeln zu
-definieren - dies entspricht quasi der Anordnung, die ANTLR bei der Verarbeitung
-sowieso erzeugen würde.
-
-Aus diesem Grund würde auch eine Umsortierung der obigen Grammatik funktionieren:
-
-``` antlr
-FOR : 'for' ;
-ID  : [a-z][a-zA-Z]* ;
-
-def : 'func' ID '(' ')' block ;
-```
-
-Intern würde ANTLR die Parser-Regel `def` wieder vor den beiden Lexer-Regeln
-anordnen, und zwischen den Parser-Regeln und den Lexer-Regeln die impliziten Token
-(hier `'func'`).
-
-## Exkurs: Lustige Probleme mit überlappenden Token (typische Stolperfalle)
-
-Die folgende Grammatik sieht harmlos aus:
+Betrachten Sie die folgende ANTLR-Grammatik:
 
 ``` antlr
 foo  :  (ID '(' ')' '=' '0' | ID | NUM) EOF ;
@@ -408,6 +265,9 @@ WS      : [ \t\n]+ -> skip ;
 Was passiert bei der Eingabe von `10` und `01` und `a() = 0`, wie sieht der
 Parse-Tree aus? Was passiert bei der Eingabe von `0`?
 
+Erklären Sie die Resultate.
+
+<!--
 Antwort: `10` wird als `foo -> NUM(10)` erkannt, `01` als `foo -> NUM(01)`, und
 `a() = 0` wird zu einem `foo -> ID(a), (, ), =, 0`. Dagegen ist die Eingabe `0` ein
 Fehler!
@@ -420,26 +280,4 @@ aufbauen), fällt die Eingabe "0" an das implizite Token `0` und nicht an `NUM`.
 es keine Regel gibt, wo eine einzelne "0" erlaubt ist, bekommen wir einen Fehler.
 Sobald die Eingabe länger wird, greift wieder die Regel des längsten Matches und
 `NUM` "gewinnt".
-
-:::
-:::
-
-
-
-## Vorrang und Assoziativität
-
-Betrachten Sie erneut die Grammatik aus der Vorlesung
-
-
-```ebnf
-expr  ::= term ('+' term)*
-term  ::= atom ('*' atom)*
-atom  ::= '-' atom
-        | INT
-```
-
-Bauen Sie noch die Subtraktion und die Division mit ein.
-
-Außerdem sollen geklammerte
-Ausdrücke erlaubt werden, z.B. `1*(2+3)`. Wo muss die Regel ergänzt werden, um
-die korrekte Präzedenz zu erhalten?
+-->
