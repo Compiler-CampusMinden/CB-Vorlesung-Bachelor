@@ -11,6 +11,14 @@ und `**` markierten Aufgaben gelöst werden.
 Die Aufgaben mit `***` sind als Vertiefung gedacht.
 :::
 
+Dieses Blatt knüpft an folgende Vorlesungseinheiten an:
+
+-   L-Int: Die Sprache Lispy
+-   L-Int: Konkrete und abstrakte Syntax
+-   L-Int: Lexer - Handcodierte Implementierung
+-   L-Int: LL-Parser mit Recursive Descent
+-   L-Int: Von Ausdrücken zum Interpreter
+
 # (\*) Java-Projekt für L-Int einrichten
 
 Legen Sie ein Java-Projekt für **L-Int** an. Nutzen Sie dafür Maven oder Gradle. Das
@@ -184,7 +192,7 @@ Subtraktion** erlauben, aber in C++-üblicher Infix-Notation.
 ::: important
 ## Waschzettel: In C++ sieht es so aus ...
 
-| Sprachelement   | L-Int                    | C-Int                    |
+| Sprachelement   | L-Int (Lispy)            | C-Int (Mini-C++)         |
 |:----------------|:-------------------------|:-------------------------|
 | Integer-Literal | `42`                     | `42`                     |
 | Addition        | `(+ 1 2)`, `(+ 1 2 3 4)` | `1 + 2`, `1 + 2 + 3 + 4` |
@@ -269,7 +277,7 @@ Erstellen Sie analog zur L-Int-Pipeline für C-Int:
 -   AST-Klassen und -Interfaces,
 -   einen Lexer,
 -   einen RD-Parser,
--   einen Interpreter.
+-   einen Interpreter `InterpreterCint`.
 
 Verwenden Sie hierfür **keinen** generierten ANTLR-Parser, sondern eine
 handgeschriebene Java-Implementierung wie in der Vorlesung.
