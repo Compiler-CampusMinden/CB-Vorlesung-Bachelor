@@ -30,7 +30,6 @@ ganzzahlige Division von `int`-Werten, bei der der Rest verworfen wird.
     ``` ebnf
     eform ::= '(' '+' eform eform+ ')' | '(' '-' eform eform+ ')' | INT
     INT   ::= [0-9]+
-
     L_int ::= eform EOF
     ```
 
@@ -38,7 +37,6 @@ ganzzahlige Division von `int`-Werten, bei der der Rest verworfen wird.
 
     ``` ebnf
     Expr  = IntLiteral(Int) | AddExpr(Expr, Expr) | SubExpr(Expr, Expr)
-
     L_int = Expr
     ```
 
@@ -46,7 +44,6 @@ ganzzahlige Division von `int`-Werten, bei der der Rest verworfen wird.
 
     ``` java
     public interface Expr {}
-
     public record AddExpr(Expr left, Expr right) implements Expr {}
     public record SubExpr(Expr left, Expr right) implements Expr {}
     public record IntLiteral(int value) implements Expr {}
@@ -65,7 +62,7 @@ hinzu.
 
 \bigskip
 
--   **Neue konkrete Syntax in Lispy**:
+-   **Neue konkrete Syntax in Lispy (Stufe L-Expr)**:
 
     ``` ebnf
     eform  ::= '(' '+' eform eform+ ')' | '(' '-' eform eform+ ')' | INT
@@ -130,6 +127,7 @@ L_expr = Expr
 ```
 
 \bigskip
+\smallskip
 
 ``` java
 public interface Expr {}
@@ -302,8 +300,7 @@ L-Expr-Übungsblattes und ist hier nicht gezeigt.
 -   Konkrete Syntax: neue Lispy-Formen `(* e1 e2 ...)`, `(/ e1 e2 ...)`, `(- e)`
 -   Abstrakte Syntax: neue AST-Knoten `MulExpr` und `DivExpr` [für binäre
     Operationen]{.notes}
--   Unäres Minus wird beim AST-Bau auf vorhandene Knoten desugart (z.B. `(- e)` →
-    `SubExpr(IntLiteral(0), e)`)
+-   Unäres Minus wird beim AST-Bau auf vorhandene Knoten desugart
 
 \bigskip
 
@@ -313,7 +310,7 @@ L-Expr-Übungsblattes und ist hier nicht gezeigt.
         `super.XYZ()` [für bestehendes Verhalten]{.notes}
 
 ::: readings
-Im [@Nystrom2021] kann man in Kapitel 6 "Parsing Expressions" und Kapitel 7
+In [@Nystrom2021] kann man in Kapitel 6 "Parsing Expressions" und Kapitel 7
 "Evaluation Expressions" nachlesen.
 :::
 
