@@ -56,7 +56,7 @@ Ergebnis: ein **Parse-Tree**, noch kein AST
 # ANTLR: Generierte Klassen
 
 -   Grammatik: `Lispy.g4`
-    -   mit Regel `eform : '(' '+' eform eform+ ')' ;`
+    -   mit Regel `eform : '(' '+' eform eform+ ')'   #addExpr ;`
 
 \bigskip
 
@@ -112,7 +112,9 @@ public class LispyAstBuilderLexpr extends LispyBaseVisitor<Object> {
 
     @Override
     public Expr visitAddExpr(AddExprContext ctx) {
-        List<Expr> ops = ctx.eform().stream().map(this::visit).map(this::asExpr).toList();
+        List<Expr> ops = ctx.eform().stream()
+                            .map(this::visit)
+                            .map(this::asExpr).toList();
         return ops.stream().reduce(AddExpr::new).orElseThrow();
     }
 }
@@ -264,18 +266,17 @@ T visitAddExpr(AddExprContext ctx) { return visitChildren(ctx); }
 ```
 
 ::: notes
-**Hinweis**: Eigener Code, der die ursprüngliche Methode `visitChildren()` in ANTLR
-in der Wirkung zusammenfasst. (Der gezeigte Code ist stark vereinfacht, die
-tatsächliche ANTLR-Implementierung ist generischer und arbeitet mit
-`defaultResult()`/`aggregateResult()`.)
+**Hinweis**: Eigener Code, der die in ANTLR enthaltene/generierte Methode
+`visitChildren()` in der Wirkung zusammenfasst. (Der gezeigte Code ist stark
+vereinfacht, die tatsächliche ANTLR-Implementierung ist generischer und arbeitet
+u.a. mit `defaultResult()`/`aggregateResult()`.)
 :::
 
 ``` java
 public T visitChildren(RuleNode node) {
     return node.childs().stream()
             .map(c -> c.accept(this))
-            .reduce((left, right) -> right)
-            .orElse(null);
+            .reduce((left, right) -> right).orElse(null);
 }
 ```
 
@@ -297,11 +298,24 @@ Gesamtergebnis für den jeweiligen Knoten.
 Konsequenz:
 :::
 
--   Überschreiben, wenn:
+::: slides
+-   **Überschreiben**, wenn:
+    -   Semantik / Auswertung benötigt: Beispiel `visitAddExpr()`
+    -   Standardlogik falsch: `parens : '(' expr ')' ;`
+-   **Defaultverhalten** reicht, wenn
+    -   die Regel nur "durchgereicht" werden soll
+
+        ``` antlr
+        expr    : addExpr ;
+        addExpr : multExpr (('+' | '-') multExpr)* ;
+        ```
+:::
+
+::: notes
+-   **Überschreiben**, wenn:
 
     -   Semantik / Auswertung benötigt: Beispiel `visitAddExpr()`
 
-        ::: notes
         ``` java
         @Override
         public Expr visitAddExpr(AddExprContext ctx) {
@@ -309,22 +323,17 @@ Konsequenz:
             return ops.stream().reduce(AddExpr::new).orElseThrow();
         }
         ```
-        :::
 
     -   Standardlogik falsch: `parens : '(' expr ')' ;`
 
-        ::: notes
         ``` java
         @Override
         public T visitParens(ParensContext ctx) {
             return visit(ctx.expr());  // ignore parenthesis
         }
         ```
-        :::
 
-\bigskip
-
--   Defaultverhalten reicht, wenn
+-   **Defaultverhalten** reicht, wenn
 
     -   die Regel nur "durchgereicht" werden soll
 
@@ -333,7 +342,6 @@ Konsequenz:
         addExpr : multExpr (('+' | '-') multExpr)* ;
         ```
 
-        ::: notes
         Wenn wir hier `visitMultExpr()` und `visitAddExpr()` implementiert haben,
         reicht für `visitExpr()` das Defaultverhalten.
 
@@ -341,7 +349,7 @@ Konsequenz:
         auflistet: `expr : foo | bar | wuppie | fluppie ;` und wir im Visitor
         einfach nur die passende Sub-Regel besuchen wollen, ohne für `expr` noch
         zusätzliche Verarbeitung zu benötigen.
-        :::
+:::
 
 # Wrap-up
 
@@ -355,9 +363,9 @@ Konsequenz:
 \smallskip
 
 -   Faustregel:
-    -   Für **semantisch relevante** Regeln `visitXYZ()` überschreiben (Operatoren,
-        Kontrollstrukturen, unäres Minus, ...).
-    -   Für reine **Durchleitungs-/Klammer-Regeln** kann der Default genügen.
+    -   Für **semantisch relevante** Regeln `visitXYZ()` überschreiben [(Operatoren,
+        Kontrollstrukturen, unäres Minus, ...)]{.notes}
+    -   Für reine **Durchleitungs-/Klammer-Regeln** kann der Default genügen
 
 ::: readings
 Sie finden auf der [ANTLR-Homepage](https://www.antlr.org) Links zur Dokumentation
