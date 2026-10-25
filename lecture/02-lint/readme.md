@@ -6,10 +6,10 @@ title: "Sprache L-Int: Integer, Addition, Subtraktion"
 
 ## Teil 1:
 
+-   Einführung Lispy (Sprachstufe L-Int)
 -   konkrete Syntax (Grammatik), abstrakte Syntax (AST)
--   AST, InterpreterLInt
+-   AST, Values, InterpreterLint
 
 ## Teil 2:
 
--   Wiederholung ANTLR, Visitor mit Rückgabe (zustandslos), ANTLR-Grammatik
 -   Handgeschriebener Lexer, RD-Parser
