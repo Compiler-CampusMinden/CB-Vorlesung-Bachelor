@@ -342,7 +342,9 @@ href="http://lab.antlr.org/"}
 
 # Verhalten des Lexers
 
-1.  **Längster Match**
+\bigskip
+
+1.  **Längster Match** [`\hfill `{=tex}(Test: Eingabe "foo42")]{.slides}
 
     ::: notes
     Primäres Ziel: Erkennen der längsten Zeichenkette
@@ -353,28 +355,34 @@ href="http://lab.antlr.org/"}
     ID   : [a-zA-Z][a-zA-Z0-9]* ;
     ```
 
+    ::: notes
     Eingabe "foo42": Token `ID` (nicht `ID`, `INT`)
 
-    ::: notes
     Die Regel, die den längsten Match für die aktuelle Eingabesequenz produziert,
     "gewinnt".
     :::
 
-2.  **Reihenfolge** in Grammatik definiert Priorität
+\bigskip
+
+2.  **Reihenfolge** in Grammatik definiert Priorität [`\hfill `{=tex}(Test: Eingabe
+    "for")]{.slides}
 
     ``` antlr
     FOR : 'for' ;
     ID  : [a-z][a-zA-Z]* ;
     ```
 
+    ::: notes
     Eingabe "for": Token `FOR`
 
-    ::: notes
     Falls mehr als eine Lexer-Regel die selbe Inputsequenz matcht, dann hat die in
     der Grammatik zuerst genannte Regel Priorität.
     :::
 
-3.  **Implizite Token**: haben höchste Priorität
+\bigskip
+
+3.  **Implizite Token**: haben höchste Priorität [`\hfill `{=tex}(Test: Eingabe
+    "0")]{.slides}
 
     ``` antlr
     foo  : '0' | NUM EOF ;
@@ -383,9 +391,9 @@ href="http://lab.antlr.org/"}
     WS   : [ \t\r\n]+ -> skip ;
     ```
 
+    ::: notes
     Eingabe "0": Token `'0'` (nicht `NUM`)
 
-    ::: notes
     Implizite Tokens (`'...'`) werden intern **vor** expliziten Lexer‑Regeln
     einsortiert und bekommen dadurch eine noch höhere Priorität.
     :::
@@ -426,7 +434,7 @@ Die gewünschte Linksassoziativität für die Operatoren `+`und `*` wird durch d
 Formulierung `(...)*` berücksichtigt.
 :::
 
-# Direkte Linksrekursion und ANTLR - automatische Präzedenz
+# Direkte Linksrekursion und ANTLR4 - automatische Präzedenz
 
 ::: notes
 ANTLR4 kann **direkte Linksrekursion** automatisch auflösen. Die Regel
