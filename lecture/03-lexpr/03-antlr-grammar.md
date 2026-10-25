@@ -344,7 +344,7 @@ href="http://lab.antlr.org/"}
 
 \bigskip
 
-1.  **Längster Match** [`\hfill `{=tex}(Test: Eingabe "foo42")]{.slides}
+1.  **Längster Match** [`\hfill`{=tex} (Test: Eingabe "foo42")]{.slides}
 
     ::: notes
     Primäres Ziel: Erkennen der längsten Zeichenkette
@@ -364,7 +364,7 @@ href="http://lab.antlr.org/"}
 
 \bigskip
 
-2.  **Reihenfolge** in Grammatik definiert Priorität [`\hfill `{=tex}(Test: Eingabe
+2.  **Reihenfolge** in Grammatik definiert Priorität [`\hfill`{=tex} (Test: Eingabe
     "for")]{.slides}
 
     ``` antlr
@@ -381,7 +381,7 @@ href="http://lab.antlr.org/"}
 
 \bigskip
 
-3.  **Implizite Token**: haben höchste Priorität [`\hfill `{=tex}(Test: Eingabe
+3.  **Implizite Token**: haben höchste Priorität [`\hfill`{=tex} (Test: Eingabe
     "0")]{.slides}
 
     ``` antlr
