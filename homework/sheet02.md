@@ -4,8 +4,6 @@ no_beamer: true
 title: "Blatt 02: CFG"
 ---
 
-
-
 # A2.1: Akzeptierte Sprache
 
 Ist der folgenden PDA deterministisch? Warum (nicht)?
