@@ -6,7 +6,7 @@ title: "Sprache L-Expr: erweiterte Ausdrücke, Vorrangregeln"
 
 ## Inhalte
 
--   Lispy: Sprachstufe L-Expr <: L-Int
+-   Lispy: Sprachstufe L-Expr \<: L-Int
 -   konkrete Syntax (Grammatik), abstrakte Syntax (AST)
 -   InterpreterLexpr
 -   Vorrangregeln und Assoziativität für Infix-Notation
