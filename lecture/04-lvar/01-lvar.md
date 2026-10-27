@@ -49,7 +49,7 @@ TODO
 (let ((a : int 2)
       (b : int 3))
   (+ a b)
-  (+ x b))
+  (let x (+ x b)))
 ```
 
 -   Verschachtelung und Shadowing werden wichtig.
@@ -59,14 +59,10 @@ TODO
 Wir bauen auf L-Int und L-Expr auf und ergänzen L-Var:
 
 ``` ebnf
-eform  ::= '(' '+' eform eform+ ')'
-         | '(' '-' eform eform+ ')'
-         | INT
+eform  ::= '(' '+' eform eform+ ')' | '(' '-' eform eform+ ')' | INT
 INT    ::= [0-9]+
 ---
-eform  ::= '(' '*' eform eform+ ')'
-         | '(' '/' eform eform+ ')'
-         | '(' '-' eform ')'
+eform  ::= '(' '*' eform eform+ ')' | '(' '/' eform eform+ ')' | '(' '-' eform ')'
 ---
 
 eform ::= ID
@@ -81,7 +77,7 @@ ID    ::= [a-zA-Z][a-zA-Z_0-9]*
 L_var ::= sform* EOF
 ```
 
--   `sform` sind jetzt **Statements** (und Expressions als Statements).
+-   `sform` sind **Statements** (und Expressions als Statements).
 -   `L_var`-Programme sind Listen von `sform`: also *Sequenzen von Statements*.
 
 # L-Var - ANTLR-Grammatik (Ausschnitt)
@@ -115,11 +111,8 @@ atom
 
 exprStmt    : eform ;
 
-// (def x : int 0)
 varDecl     : '(' 'def' ID ':' type eform? ')' ;
 
-// (let x expr)
-// (let ((a : int 1) (b : int 2)) body...)
 letStmt
             : '(' 'let' ID eform ')'                        #letVar
             | '(' 'let' letBindings sform+ ')'              #letScope
@@ -128,9 +121,7 @@ letStmt
 letBindings : '(' letBinding+ ')' ;
 letBinding  : '(' ID ':' type eform ')' ;
 
-type
-            : 'int'
-            ;
+type        : 'int' ;
 
 INT         : [0-9]+ ;
 ID          : [a-zA-Z_][a-zA-Z0-9_]* ;
@@ -156,10 +147,9 @@ Expr  = MulExpr(Expr, Expr) | DivExpr(Expr, Expr)
 ---
 
 Expr  = VarExpr(String)
-
 Stmt  = ExprStmt(Expr)
-      | VarDecl(String, Type, Expr)    // name, type, init
-      | AssignStmt(Expr, Expr)         // target, expr
+      | VarDecl(String, String, Expr)
+      | AssignStmt(Expr, Expr)
       | BlockStmt([Stmt])
 
 L_var = Stmt*

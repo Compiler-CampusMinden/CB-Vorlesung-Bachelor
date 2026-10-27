@@ -81,18 +81,10 @@ public record Scope(Scope parent, HashMap symbols) {
 
 ``` java
 public class SemaInfo {
-    public Map symbols = new IdentityHashMap<>();
-    public Map types = new IdentityHashMap<>();
-    public Map depths = new IdentityHashMap<>();
-    public Map staticTargets = new IdentityHashMap<>();
+    public Map<Stmt, Scope> symbols = new IdentityHashMap<>();
+    public Map<VarExpr, Integer> depths = new IdentityHashMap<>();
     public Scope globalScope = new Scope();
     public Env globalEnv = new Env();
-
-    public SemaInfo preload(Prelude prelude) {
-        prelude.bindSymbols(globalScope);
-        prelude.bindRuntime(globalEnv);
-        return this;
-    }
 }
 ```
 
@@ -185,8 +177,7 @@ Ausschnitt aus `resolve(Expr)`:
 protected void resolve(Expr expr) {
     switch (expr) {
         // === L_Int ===
-        case IntLiteral _ -> {
-        } // nothing to do
+        case IntLiteral _ -> {} // nothing to do
         case AddExpr(var l, var r) -> List.of(l, r).forEach(this::resolve);
         case SubExpr(var l, var r) -> List.of(l, r).forEach(this::resolve);
 

@@ -32,21 +32,19 @@ TODO
 Skizze im Code:
 
 ``` java
-LispyParser parser = ...;
-LispyParser.LvarContext tree = parser.lvar();
+var input = CharStreams.fromString(source);
+var lexer = new LispyLexer(input);
+var tokens = new CommonTokenStream(lexer);
+var parser = new LispyParser(tokens);
+var tree = parser.lvar();
 
-AstBuilderLvar builder = new AstBuilderLvar();
-List stmts = builder.build(tree);
+var astBuilder = new LispyAstBuilderLvar();
+var ast = astBuilder.visitLvar(tree);
 
-SemaInfo sema = new SemaInfo().preload(prelude);
-new
+SemaInfo sema = new SemaInfo();
+new NameResolverLvar().resolve(ast, sema);
 
-NameResolverLvar().
-
-resolve(stmts, sema);
-
-InterpreterLvar interp = new InterpreterLvar();
-Value result = interp.interpret(stmts, sema);
+Value result = new InterpreterLvar().interpret(ast, sema);
 ```
 
 # InterpreterLvar - Rolle von `interpret(...)`
