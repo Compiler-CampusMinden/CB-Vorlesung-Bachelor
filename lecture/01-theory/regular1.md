@@ -5,8 +5,8 @@ title: Reguläre Sprachen, Ausdrucksstärke (Teil 1)
 ---
 
 ::: attachments
--   [Annotierte Folien: Reguläre Sprachen,
-    Ausdrucksstärke](https://github.com/Compiler-CampusMinden/AnnotatedSlides/blob/master/lexing_regular1.ann.ba.pdf)
+-   [Annotierte Folien: Reguläre Sprachen, Ausdrucksstärke (Teil
+    1)](https://github.com/Compiler-CampusMinden/AnnotatedSlides/blob/master/lexing_regular1.ann.ba.pdf)
 :::
 
 # Motivation
