@@ -1,7 +1,7 @@
 ---
 author: Carsten Gips (HSBI)
 no_beamer: true
-title: "Blatt 03: C-Int"
+title: "Blatt 03: L-Int und C-Int (Integer, Addition, Subtraktion)"
 ---
 
 ::: important
@@ -19,7 +19,7 @@ Dieses Blatt knüpft an folgende Vorlesungseinheiten an:
 -   L-Int: LL-Parser mit Recursive Descent
 -   L-Int: Von Ausdrücken zum Interpreter
 
-# (\*) Java-Projekt für L-Int einrichten
+# (\*) L-Int: Java-Projekt für L-Int einrichten
 
 Legen Sie ein Java-Projekt für **L-Int** an. Nutzen Sie dafür Maven oder Gradle. Das
 Projekt wird im Laufe des Semesters Schritt für Schritt erweitert.
@@ -35,7 +35,7 @@ Projekt (Pakete, Klassen, Interfaces) und übernehmen Sie die gezeigte Funktiona
 so, dass Ihr Projekt kompilierbar ist. Fehlende Funktionalität ergänzen Sie in den
 folgenden Aufgaben.
 
-# (\*\*) L-Int Lexer: Funktion `skipIrrelevant()`
+# (\*\*) L-Int: Funktion `skipIrrelevant()` im Lexer ergänzen
 
 In der Vorlesung wurde die Funktion `skipIrrelevant()` eingeführt, mit der nicht
 benötigte Zeichen wie Whitespace und Kommentare übersprungen werden. Sie wird immer
@@ -49,7 +49,7 @@ protected boolean skipIrrelevant() {}  // Homework
 2.  Sammeln Sie in der Übung gemeinsam sinnvolle Testfälle und notieren Sie diese
     für später (s.u.).
 
-# (\*) Subtraktion für L-Int ergänzen
+# (\*) L-Int: Subtraktion für L-Int ergänzen
 
 L-Int unterstützt Integer-Literale, Addition und Subtraktion. In der Vorlesung wurde
 die Implementierung nur für Integer und Addition im Detail gezeigt.
@@ -81,7 +81,7 @@ die Implementierung nur für Integer und Addition im Detail gezeigt.
     Ergänzen Sie Ihre L-Int-Pipeline vollständig um die Subtraktion (Lexer,
     RD-Parser, Interpreter).
 
-# (\*\*) Tests für L-Int
+# (\*\*) L-Int: Tests für L-Int
 
 Schreiben Sie JUnit-Tests für Ihre L-Int-Implementierung. Testen Sie mindestens:
 
