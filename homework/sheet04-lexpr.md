@@ -1,7 +1,7 @@
 ---
 author: Carsten Gips (HSBI)
 no_beamer: true
-title: "Blatt 04: L-Expr und C-Expr (Vorrang, unäres Minus und ANTLR)"
+title: "Blatt 04: L-Expr und C-Expr (Multiplikation/Division, Vorrang und ANTLR)"
 ---
 
 ::: important
@@ -84,10 +84,14 @@ und auf Ihre L-Int-Pipeline übertragen und so Ihre L-Expr-Pipeline aufbauen.
     `class InterpreterLexprTest extends InterpreterLintTest`. Wichtig: Damit das
     funktioniert, müssen alle Testmethoden mindestens auf `protected` stehen.
 
-# (\*) C-Expr ausprobieren: Vorrang und unäres Minus live testen
+# (\*\*) C-Expr: Vorrangregeln in einer gestuften Grammatik
 
-Wir wollen zunächst die Vorrangregeln und unäres Minus **direkt in C++**
-ausprobieren.
+Wir erstellen nun **C-Expr**, indem wir **C-Int vom letzten Blatt** um
+Multiplikation, Division, unäres Minus und geklammerte Ausdrücke erweitern.
+
+C-Expr soll analog zu L-Expr **Multiplikation und Division und unäres Minus und
+geklammerte Ausdrücke** erlauben, aber in C++-üblicher Infix-Notation und unter
+Beachtung der üblichen Vorrang- und Assoziativitätsregeln.
 
 ::: important
 ## Waschzettel: In C++ sieht es so aus ...
@@ -102,6 +106,11 @@ ausprobieren.
 Während in Lispy (L-Int, L-Expr) die Operatoren für `+`, `-`, `*`, `/` mehrstellig
 sein können, sind sie in C++ (C-Int, C-Expr) **binär** (bzw. `-` zusätzlich unär).
 :::
+
+## Schritt 1: C-Expr ausprobieren: Vorrang und unäres Minus live testen
+
+Wir wollen zunächst die Vorrangregeln und unäres Minus **direkt in C++**
+ausprobieren.
 
 Schreiben Sie ein C++-Programm `expr.cpp`, das folgende Ausdrücke auswertet und
 jeweils das Ergebnis über `std::cout` ausgibt:
@@ -120,57 +129,54 @@ jeweils das Ergebnis über `std::cout` ausgibt:
 Übersetzen Sie es mit g++/clang und prüfen Sie, ob jeweils das Ergebnis Ihren
 Erwartungen entspricht.
 
-# (\*\*) C-Expr: Vorrangregeln in einer gestuften Grammatik
+## Schritt 2: Konkrete Syntax für C-Expr (gestufte Variante)
 
-Wir erstellen nun **C-Expr**, indem wir **C-Int vom letzten Blatt** um
-Multiplikation, Division, unäres Minus und geklammerte Ausdrücke erweitern.
+Definieren Sie eine **konkrete Grammatik für C-Expr** (in EBNF), die folgende
+Anforderungen erfüllt:
 
-1.  **Konkrete Grammatik (Gestufte Variante)**
+-   Zulässige Ausdrücke enthalten:
+    -   Integer-Literale
+    -   binäre Operatoren `+`, `-`, `*`, `/`
+    -   unäres Minus: `-x`
+    -   Klammern `(` und `)`
+-   Vorrang:
+    -   `*` und `/` **binden stärker** als `+` und `-`
+    -   Unäres Minus und geklammerte Ausdrücke haben höchsten Vorrang
+-   Alle vier Operatoren sind **linksassoziativ**
+-   Whitespace darf an beliebigen sinnvollen Stellen stehen und wird ignoriert
+-   Zeilenkommentare werden ab dem `//` bis zum Zeilenende ignoriert
 
-    Definieren Sie eine konkrete Grammatik für C-Expr (in EBNF), die folgende
-    Anforderungen erfüllt:
+Skizzieren Sie Ihre Grammatik ausdrücklich mit **gestuften Regeln**, z.B. mit den
+Ebenen `expr`/`term`/`atom`.
 
-    -   Zulässige Ausdrücke enthalten:
-        -   Integer-Literale
-        -   binäre Operatoren `+`, `-`, `*`, `/`
-        -   unäres Minus (`-x`)
-        -   Klammern `(` und `)`
-    -   Vorrang:
-        -   `*` und `/` **binden stärker** als `+` und `-`
-        -   Unäres Minus und geklammerte Ausdrücke haben höchsten Vorrang
-    -   Alle vier Operatoren sind **linksassoziativ**
-    -   Whitespace darf an beliebigen sinnvollen Stellen stehen und wird ignoriert
-    -   Zeilenkommentare werden ab dem `//` bis zum Zeilenende ignoriert
+Überprüfen Sie mit Ihrer Grammatik:
 
-    Skizzieren Sie Ihre Grammatik ausdrücklich mit **gestuften Regeln**, z.B. mit
-    den Ebenen `expr`/`term`/`atom`.
+-   Wie wird `1 + 2 * 3` geparst und ausgewertet?
+-   Wie wird `8 / 4 / 2` geparst und ausgewertet?
+-   Wie wird `-3 * 4` geparst und ausgewertet?
+-   Wie werden Klammern berücksichtigt, z.B. `(1 + 2) * 3`, `-(1 + 2) * 3`?
 
-2.  **Beispiele überprüfen**
+Zeichnen Sie jeweils den Parse-Tree. Entspricht das dem Verhalten von C++ aus der
+vorigen Aufgabe?
 
-    Überprüfen Sie mit Ihrer Grammatik:
+## Schritt 3: ANTLR-Grammatiken für C-Expr
 
-    -   Wie wird `1 + 2 * 3` geparst und ausgewertet?
-    -   Wie wird `8 / 4 / 2` geparst und ausgewertet?
-    -   Wie wird `-3 * 4` geparst und ausgewertet?
-    -   Wie werden Klammern berücksichtigt, z.B. `(1 + 2) * 3`, `-(1 + 2) * 3`?
+Definieren Sie zwei **ANTLR-Grammatiken** für **C-Expr**:
 
-    Zeichnen Sie jeweils den Parse-Tree. Entspricht das dem Verhalten von C++ aus
-    der vorigen Aufgabe?
+-   einmal mit **gestuften Regeln**, und
+-   einmal mit **linksrekursiven Alternativen**.
 
-# (\*\*) ANTLR-Grammatiken für C-Expr
+Berücksichtigen Sie dabei die für C-Expr formulierten Operatoren und Vorrangregeln
+und Assoziativitäten.
 
-Definieren Sie zwei **ANTLR-Grammatiken** für **C-Expr**: einmal mit **gestuften
-Regeln** und einmal mit **linksrekursiven Alternativen**. Berücksichtigen Sie dabei
-die für C-Expr formulierten Operatoren und Vorrangregeln und Assoziativitäten.
-
-# (\*) Abstrakte Syntax für C-Expr
+## Schritt 4: Abstrakte Syntax für C-Expr
 
 Definieren Sie nun die **abstrakte Syntax für C-Expr**. Orientieren Sie sich an der
 Vorlesung und bauen Sie auf Ihrer abstrakten Syntax von C-Int auf.
 
 Diskutieren Sie: Welche neuen AST-Knoten sind notwendig und warum?
 
-# (\*\*) Parsen von C-Expr und bauen des AST
+## Schritt 5: Parsen von C-Expr und bauen des AST
 
 1.  Implementieren Sie für Ihre konkrete Grammatik (mit den gestuften Regeln) für
     **C-Expr einen Lexer**. Erweitern Sie dazu die Tokendefinitionen passend.
@@ -189,10 +195,18 @@ Diskutieren Sie: Welche neuen AST-Knoten sind notwendig und warum?
     **allen drei Varianten** aus (RD-Parser, ANTLR mit gestuften Regeln, ANTLR mit
     linkrekursiven Alternativen). Was beobachten Sie?
 
-# (\*\*) Interpreter für C-Expr
+::: tip
+**Hinweis**: Sie können die Funktionalität aus dem Lexer und RD-Parser für C-Int als
+Basis per Copy&Paste übernehmen und für C-Expr ergänzen/umbauen. Die gestuften
+Regeln vertragen sich nicht gut mit dem sonst in diesem Kurs praktizierten Ableiten
+`class RdParserCexpr extends RdParserCint`, weshalb wir hier an dieser Stelle darauf
+verzichten.
+:::
+
+## Schritt 6: Interpreter-Pipeline für C-Expr
 
 Implementieren Sie nun den **Interpreter für C-Expr** in einer Klasse
-`InterpreterCexpr`. Dabei soll gelten
+`InterpreterCexpr`. Dabei soll wie üblich in diesem Kurs gelten
 `class InterpreterCexpr extends InterpreterCint`.
 
 Ergänzen Sie die neuen Fälle für C-Expr durch Überschreiben von `eval()`. Rufen Sie
@@ -203,8 +217,8 @@ L-Expr gelten: `class InterpreterCexprTest extends InterpreterCintTest`. Spielt 
 eine Rolle, ob Sie dafür den handgeschriebenen Lexer/RD-Parser oder einen der beiden
 ANTLR-Parser plus den passenden AST-Builder einsetzen?
 
-Vergleichen Sie die Resultate der Testfälle von `InterpreterCexpr` mit dem g++/clang
-übersetzen nativen C++-Code. Gibt es Unterschiede? Woran liegt das?
+Vergleichen Sie die Resultate der Testfälle von `InterpreterCexpr` mit dem mit
+g++/clang übersetzten nativen C++-Code. Gibt es Unterschiede? Woran liegt das?
 
 # (\*\*\*) Vertiefung: ANTLR und Stolperfallen
 
