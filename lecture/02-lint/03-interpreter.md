@@ -54,7 +54,7 @@ Erinnerung: Unsere konkrete Syntax für L-Int sah so aus:
 
 ``` ebnf
 Expr  = IntLiteral(Int) | AddExpr(Expr, Expr) | SubExpr(Expr, Expr)
-L_int = Expr
+Lint  = Expr
 ```
 
 \bigskip

@@ -54,7 +54,7 @@ eform ::= '(' '+' eform eform+ ')'
         | INT
 INT   ::= [0-9]+
 
-L_int ::= eform EOF
+Lint  ::= eform EOF
 ```
 
 ::::::: notes
@@ -108,7 +108,7 @@ Wir orientieren uns an einer Mischung aus ANTLR-Grammatik und der Notation in
     Zeichenketten (implizite Token), etwa `'+'` oder `'('` - für diese gibt es
     ebenfalls Token im Lexer (`PLUS`, `LPAREN`)
 -   UpperCamelCase: kommt in der konkreten Syntax ausschließlich für die
-    Einstiegsregel vor: `L_int`
+    Einstiegsregel vor: `Lint`
 -   Wiederholungsoperatoren: beziehen sich auf den Ausdruck davor (ggf. klammern!)
     -   `?`: "ein- oder keinmal"
     -   `*`: "kein- oder mehrfach"
@@ -161,8 +161,8 @@ Text: `(- (+ 1 2) 3)`
 
 Parse-Tree:
 
-                                  L_int
-                                 /     \
+                                   Lint
+                                  /    \
                              eform      EOF
                         _____/ | \ \______________
                        /       |  \      \        \
@@ -174,7 +174,7 @@ Parse-Tree:
                                             "3"
 
 :::: notes
-Wir starten mit der Startregel `L_int`. Diese fordert ein `eform` und ein `EOF`,
+Wir starten mit der Startregel `Lint`. Diese fordert ein `eform` und ein `EOF`,
 beide bilden die zweite Ebene. Das "(" gefolgt von einem "-" passt zur zweiten
 Alternative in der Regel `eform`, die beiden Token werden als Kinder des
 `eform`-Knotens eingetragen. Dann erwarten wir eine `eform eform+` und die
@@ -248,7 +248,7 @@ Expr  = IntLiteral(Int)
       | AddExpr(Expr, Expr)
       | SubExpr(Expr, Expr)
 
-L_int = Expr
+Lint  = Expr
 ```
 
 \bigskip
@@ -370,7 +370,7 @@ schreiben.)
 Diese Struktur bildet unseren AST in L-Int und wird in späteren Sprachstufen
 erweitert.
 
-Die Startregel `L_int = Expr` soll vor allem ausdrücken, dass alle L-Int-Programme
+Die Startregel `Lint = Expr` soll vor allem ausdrücken, dass alle L-Int-Programme
 aus *einem* `Expr`-Ausdruck bestehen. Diese wird deshalb nicht in den AST-Typen
 umgesetzt, sondern findet später im Parser und Interpreter Beachtung.
 

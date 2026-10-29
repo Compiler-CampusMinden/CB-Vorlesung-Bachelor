@@ -188,7 +188,7 @@ Token-Liste `tokens` - und einen Positionszeiger (aktueller Index `current`).
 
 Den Einstieg in den Parser bildet die Methode `parse()`, die den gesamten
 Eingabestrom gemäß der Grammatik verarbeitet. Diese Methode bildet die Startregel
-`L_int ::= eform EOF` der konkreten Grammatik ab.
+`Lint ::= eform EOF` der konkreten Grammatik ab.
 
 Die einzelnen Regeln der (von direkter Linksrekursion befreiten) konkreten Grammatik
 bilden wir auf die Arbeitsmethoden `parseEform()`, `parseAtom()`, `parseAddExpr()`,
@@ -207,10 +207,10 @@ Wir betrachten folgende konkrete Syntax in L-Int:
 eform ::= '(' '+' eform eform+ ')' | '(' '-' eform eform+ ')' | INT
 INT   ::= [0-9]+
 
-L_int ::= eform EOF
+Lint  ::= eform EOF
 ```
 
-Der Einstieg ist die Regel `L_int`, die eine `eform` erwartet und ein anschließendes
+Der Einstieg ist die Regel `Lint`, die eine `eform` erwartet und ein anschließendes
 `EOF`-Token. Mehr ist in der Sprachstufe L-Int nicht erlaubt und wurde bereits in
 der Einstiegsmethode `parse()` umgesetzt.
 
