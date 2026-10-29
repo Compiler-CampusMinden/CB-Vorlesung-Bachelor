@@ -60,13 +60,13 @@ Jetzt wollen wir auf die ANTLR-Grammatik schauen.
 # Erinnerung: Konkrete Syntax für L-Expr
 
 ``` ebnf
-eform  ::= '(' '+' eform eform+ ')' | '(' '-' eform eform+ ')' | INT
-INT    ::= [0-9]+
+eform ::= '(' '+' eform eform+ ')' | '(' '-' eform eform+ ')' | INT
+INT   ::= [0-9]+
 ---
 
-eform  ::= '(' '*' eform eform+ ')' | '(' '/' eform eform+ ')' | '(' '-' eform ')'
+eform ::= '(' '*' eform eform+ ')' | '(' '/' eform eform+ ')' | '(' '-' eform ')'
 
-Lexpr  ::= eform EOF
+lexpr ::= eform EOF
 ```
 
 ::: notes

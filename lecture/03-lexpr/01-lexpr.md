@@ -65,15 +65,15 @@ hinzu.
 -   **Neue konkrete Syntax in Lispy (Stufe L-Expr)**:
 
     ``` ebnf
-    eform  ::= '(' '+' eform eform+ ')' | '(' '-' eform eform+ ')' | INT
-    INT    ::= [0-9]+
+    eform ::= '(' '+' eform eform+ ')' | '(' '-' eform eform+ ')' | INT
+    INT   ::= [0-9]+
     ---
 
-    eform  ::= '(' '*' eform eform+ ')'
-             | '(' '/' eform eform+ ')'
-             | '(' '-' eform ')'
+    eform ::= '(' '*' eform eform+ ')'
+            | '(' '/' eform eform+ ')'
+            | '(' '-' eform ')'
 
-    Lexpr  ::= eform EOF
+    lexpr ::= eform EOF
     ```
 
 :::: notes
@@ -95,16 +95,16 @@ nicht erlaubt. Man muss also die beiden `eform`-Regeln (eine aus L-Int, eine neu
 L-Expr) **gedanklich mergen**:
 
 ``` ebnf
-eform  ::= '(' '+' eform eform+ ')'
-         | '(' '-' eform eform+ ')'
-         | '(' '*' eform eform+ ')'
-         | '(' '/' eform eform+ ')'
-         | '(' '-' eform ')'
-         | INT
+eform ::= '(' '+' eform eform+ ')'
+        | '(' '-' eform eform+ ')'
+        | '(' '*' eform eform+ ')'
+        | '(' '/' eform eform+ ')'
+        | '(' '-' eform ')'
+        | INT
 
-INT    ::= [0-9]+
+INT   ::= [0-9]+
 
-Lexpr  ::= eform EOF
+lexpr ::= eform EOF
 ```
 
 **Dieses Prinzip werden wir ab L-Expr für die konkreten und abstrakten Grammatiken
@@ -118,12 +118,12 @@ Regeln erneut über den `---` aufzuschreiben.
 # Abstrakte Syntax für L-Expr
 
 ``` ebnf
-Expr   = IntLiteral(Int) | AddExpr(Expr, Expr) | SubExpr(Expr, Expr)
+Expr  = IntLiteral(Int) | AddExpr(Expr, Expr) | SubExpr(Expr, Expr)
 ---
 
-Expr   = MulExpr(Expr, Expr) | DivExpr(Expr, Expr)
+Expr  = MulExpr(Expr, Expr) | DivExpr(Expr, Expr)
 
-Lexpr  = Expr
+Lexpr = Expr
 ```
 
 \bigskip
