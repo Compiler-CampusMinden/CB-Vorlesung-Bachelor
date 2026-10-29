@@ -224,6 +224,8 @@ als Statements behandeln.**
 :::
 :::::
 
+\bigskip
+
 ::: slides
 Neue Idee: Verschachtelung und Shadowing werden wichtig
 :::
@@ -323,7 +325,13 @@ Diese Definition wird uns zur Laufzeit im Interpreter noch etwas Kopfzerbrechen
 bereiten: Was genau liefert ein Programm zurück?
 :::
 
+::: notes
 # L-Var: Abstrakte Syntax (AST)
+:::
+
+::: slides
+# L-Var: Abstrakte Syntax (AST, Teil 1/2)
+:::
 
 ::: notes
 Im Stil von [@Siek2023python] sind über den Trennern `---` die bisherigen Regeln für
@@ -357,6 +365,10 @@ Scopes sowie der "Cast" einer Expression in ein Statement.
 
 Das lässt sich wie bereits bei L-Int und L-Expr in die entsprechenden AST-Klassen
 übersetzen:
+:::
+
+::: slides
+# L-Var: Abstrakte Syntax (AST, Teil 2/2)
 :::
 
 ``` java
