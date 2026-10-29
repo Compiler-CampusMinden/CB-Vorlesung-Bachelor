@@ -273,40 +273,9 @@ a = 42;
 In vielen Sprachen muss überprüft werden, ob es ein definierendes Vorkommen des
 Bezeichners oder ein angewandtes Vorkommen ist.
 
-## Definitionen und Deklarationen von Bezeichnern
 
-**Def.:** Die *Definition* eines (bisher nicht existenten) Bezeichners in einem
-Programm generiert einen neuen Bezeichner und legt für ihn seinem Typ entsprechend
-Speicherplatz an.
-
-**Def.:** Unter der *Deklaration* eines (bereits existierenden) Bezeichners
-verstehen wir seine Bekanntmachung, damit er benutzt werden kann. Er ist oft in
-einem anderen Scope definiert und bekommt dort Speicherplatz zugeteilt.
-
-Insbesondere werden auch Typen deklariert. Hier gibt es in der Regel gar keine
-Speicherplatzzuweisung.
-
-Ein Bezeichner kann beliebig oft deklariert werden, während er in einem Programm nur
-einmal definiert werden kann. Oft wird bei der Deklarationen eines Elements sein
-Namensraum mit angegeben.
-
-**Vorsicht**: Die Begriffe werden auch anders verwendet. Z.B. findet sich in der
-Java-Literatur der Begriff *Deklaration* anstelle von *Definition*.
-
-**Anmerkung**: Deklarationen beziehen sich auf Definitionen, die woanders in einer
-Symboltabelle stehen, evtl. in einer anderen Datei, also in diesem Compilerlauf
-nicht zugänglich sind und erst von Linker aufgelöst werden können. Beim Auftreten
-einer Deklaration muss die dazugehörige Definition gesucht werden,und wenn
-vorhanden, im Symboltabelleneintrag für den deklarierten Bezeichner festgehalten
-werden. Hier ist evtl. ein zweiter Baumdurchlauf nötig, um alle offenen
-Deklarationen, die sich auf Definitionen in derselben Datei beziehen, aufzulösen.
-
-Wird bei objektorientierten Sprachen ein Objekt definiert, dessen Klassendefinition
-in einer anderen Datei liegt, kann man die Definition des Objekts gleichzeitig als
-Deklaration der Klasse auffassen (Java).
 :::
 
-[[Definition vs. Deklaration]{.ex}]{.slides}
 
 # Wo werden Verweise in Symboltabellen gebraucht?
 
