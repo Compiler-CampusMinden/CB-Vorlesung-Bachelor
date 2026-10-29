@@ -66,7 +66,7 @@ INT    ::= [0-9]+
 
 eform  ::= '(' '*' eform eform+ ')' | '(' '/' eform eform+ ')' | '(' '-' eform ')'
 
-L_expr ::= eform EOF
+Lexpr  ::= eform EOF
 ```
 
 ::: notes

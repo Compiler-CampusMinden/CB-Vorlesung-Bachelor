@@ -73,7 +73,7 @@ hinzu.
              | '(' '/' eform eform+ ')'
              | '(' '-' eform ')'
 
-    L_expr ::= eform EOF
+    Lexpr  ::= eform EOF
     ```
 
 :::: notes
@@ -104,7 +104,7 @@ eform  ::= '(' '+' eform eform+ ')'
 
 INT    ::= [0-9]+
 
-L_expr ::= eform EOF
+Lexpr  ::= eform EOF
 ```
 
 **Dieses Prinzip werden wir ab L-Expr für die konkreten und abstrakten Grammatiken
@@ -123,7 +123,7 @@ Expr   = IntLiteral(Int) | AddExpr(Expr, Expr) | SubExpr(Expr, Expr)
 
 Expr   = MulExpr(Expr, Expr) | DivExpr(Expr, Expr)
 
-L_expr = Expr
+Lexpr  = Expr
 ```
 
 \bigskip
