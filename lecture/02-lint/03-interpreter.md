@@ -53,8 +53,8 @@ Erinnerung: Unsere konkrete Syntax für L-Int sah so aus:
 :::
 
 ``` ebnf
-Expr  = IntLiteral(Int) | AddExpr(Expr, Expr) | SubExpr(Expr, Expr)
-Lint  = Expr
+Expr = IntLiteral(Int) | AddExpr(Expr, Expr) | SubExpr(Expr, Expr)
+Lint = Expr
 ```
 
 \bigskip

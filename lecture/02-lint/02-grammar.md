@@ -54,7 +54,7 @@ eform ::= '(' '+' eform eform+ ')'
         | INT
 INT   ::= [0-9]+
 
-Lint  ::= eform EOF
+lint  ::= eform EOF
 ```
 
 ::::::: notes
@@ -107,8 +107,6 @@ Wir orientieren uns an einer Mischung aus ANTLR-Grammatik und der Notation in
 -   in einfachen 'Anführungszeichen': unbenannte Terminale als konkrete
     Zeichenketten (implizite Token), etwa `'+'` oder `'('` - für diese gibt es
     ebenfalls Token im Lexer (`PLUS`, `LPAREN`)
--   UpperCamelCase: kommt in der konkreten Syntax ausschließlich für die
-    Einstiegsregel vor: `Lint`
 -   Wiederholungsoperatoren: beziehen sich auf den Ausdruck davor (ggf. klammern!)
     -   `?`: "ein- oder keinmal"
     -   `*`: "kein- oder mehrfach"
@@ -161,7 +159,7 @@ Text: `(- (+ 1 2) 3)`
 
 Parse-Tree:
 
-                                   Lint
+                                   lint
                                   /    \
                              eform      EOF
                         _____/ | \ \______________
@@ -174,7 +172,7 @@ Parse-Tree:
                                             "3"
 
 :::: notes
-Wir starten mit der Startregel `Lint`. Diese fordert ein `eform` und ein `EOF`,
+Wir starten mit der Startregel `lint`. Diese fordert ein `eform` und ein `EOF`,
 beide bilden die zweite Ebene. Das "(" gefolgt von einem "-" passt zur zweiten
 Alternative in der Regel `eform`, die beiden Token werden als Kinder des
 `eform`-Knotens eingetragen. Dann erwarten wir eine `eform eform+` und die
@@ -244,11 +242,11 @@ Bedeutung tragen.
 # Abstrakte Grammatik für L-Int
 
 ``` ebnf
-Expr  = IntLiteral(Int)
-      | AddExpr(Expr, Expr)
-      | SubExpr(Expr, Expr)
+Expr = IntLiteral(Int)
+     | AddExpr(Expr, Expr)
+     | SubExpr(Expr, Expr)
 
-Lint  = Expr
+Lint = Expr
 ```
 
 \bigskip

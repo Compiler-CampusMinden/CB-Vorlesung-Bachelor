@@ -30,14 +30,14 @@ ganzzahlige Division von `int`-Werten, bei der der Rest verworfen wird.
     ``` ebnf
     eform ::= '(' '+' eform eform+ ')' | '(' '-' eform eform+ ')' | INT
     INT   ::= [0-9]+
-    Lint  ::= eform EOF
+    lint  ::= eform EOF
     ```
 
 -   Abstrakte Syntax:
 
     ``` ebnf
-    Expr  = IntLiteral(Int) | AddExpr(Expr, Expr) | SubExpr(Expr, Expr)
-    Lint  = Expr
+    Expr = IntLiteral(Int) | AddExpr(Expr, Expr) | SubExpr(Expr, Expr)
+    Lint = Expr
     ```
 
 -   AST:
