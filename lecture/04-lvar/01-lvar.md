@@ -240,6 +240,26 @@ Die Namen im **lokalen Scope** sind vom umgebenden (hier globalen) Scope aus nic
 sichtbar. Andersherum sind die Namen aus dem umgebenden Scope im lokalen Scope
 sichtbar (rekursiv bis hoch zum globalen Scope).
 
+::: important
+## Scopes und Name Spaces
+
+**Def.:** Unter dem *Gültigkeitsbereich* (Sichtbarkeitsbereich, Scope) eines
+Bezeichners versteht man den Programmabschnitt, in dem der Bezeichner sichtbar und
+nutzbar ist. Das ist oft der kleinste umgebende Block, außer darin enthaltene
+Scopes, die ein eigenes Element dieses Namens benutzen.
+
+Scopes sind fast immer hierarchisch angeordnet.
+
+**Def.:** Unter einem *Namensraum* (name space) versteht man die Menge der zu einem
+Zeitpunkt sichtbaren Bezeichner.
+
+Es gibt Sprachen, in denen man eigene Namensräume explizit definieren kann (z.B.
+C++).
+
+Vorsicht: Diese Begriffe werden nicht immer gleich definiert und auch gerne
+verwechselt.
+:::
+
 Im Beispiel ist `x` eine **globale** Variable, die im gesamten Programm sichtbar
 ist. Dagegen sind `a` und `b` **lokale** Variablen, deren Gültigkeitsbereich sich
 auf den Körper der `let`-Form beschränkt. D.h. im Inneren der `let`-Form ist
