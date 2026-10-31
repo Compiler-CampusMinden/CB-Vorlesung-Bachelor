@@ -230,7 +230,7 @@ als Statements behandeln.**
 Neue Idee: Verschachtelung und Shadowing werden wichtig
 :::
 
-::: notes
+:::: notes
 Die `let`-Form gibt es in zwei Varianten: (1) als Zuweisung an eine bereits
 existierende Variable (s.o.) und (2) als `let`-mit-Scopes, das neue **lokale
 Variablen** einführt und einen **Block (Scope)** aufspannt. Scopes sind
@@ -297,7 +297,7 @@ haben, während im `let`-Block das lokale `x` mit `2` initialisiert wird und dan
 Zuweisung noch einmal im Wert auf `4` verändert wird.
 
 Scopes können nahezu beliebig ineinander verschachtelt werden.
-:::
+::::
 
 # L-Var: Konkrete Grammatik
 
