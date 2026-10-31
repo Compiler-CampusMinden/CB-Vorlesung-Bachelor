@@ -4,30 +4,30 @@ title: "L-Var: Scopes, Name-Resolver und Symboltabellen"
 ---
 
 ::: tldr
-Auf die lexikalische Analyse und die Syntaxanalyse folgt die **semantische Analyse**.
-Nach dem Parsen steht fest, dass ein Programm syntaktisch korrekt ist. Nun muss
-geprüft werden, ob es auch semantisch korrekt ist. Dies umfasst in der Regel die
-Identifikation und Sammlung von Bezeichnern und die Zuordnung zur richtigen Ebene
-(Scopes). Außerdem muss die Nutzung von Symbolen validiert werden: Je nach Sprache
-müssen beispielsweise Variablen und Funktionen vor ihrer Benutzung zumindest
-deklariert sein; Funktionen sollten sich nicht wie Variablen benutzen lassen, ...
+Auf die lexikalische Analyse und die Syntaxanalyse folgt die **semantische
+Analyse**. Nach dem Parsen steht fest, dass ein Programm *syntaktisch korrekt* ist.
+Nun muss geprüft werden, ob es auch *semantisch korrekt* ist. Dazu gehören
+insbesondere die Identifikation und Sammlung von Bezeichnern, die Zuordnung zu den
+richtigen **Sichtbarkeitsbereichen** (**Scopes**) und das Validieren der Nutzung
+dieser Bezeichner.
 
-Als Werkzeug werden (hierarchische) Tabellen eingesetzt (die sogenannten **Symboltabellen**),
-um die verschiedenen
-Symbole und Informationen darüber zu verwalten. Wenn es in der zu
-übersetzenden Sprache *Nested Scopes* gibt, spiegelt sich dies in den Symboltabellen
-wider: Auch hier wird eine entsprechende hierarchische Organisation notwendig. In
-der Regel nutzt man Tabellen, die untereinander verlinkt sind.
+Je nach Sprache müssen z.B. Variablen und Funktionen vor ihrer Benutzung deklariert
+sein; Mehrfachdefinitionen im selben Scope sind oft verboten und Funktionen dürfen
+nicht wie Variablen verwendet werden (und umgekehrt).
 
-Eine wichtige Aufgabe ist das Binden von Bezeichner gleichen Namens an ihren
-jeweiligen Scope =\> `bind()`. Zusätzlich müssen Symboltabellen auch das Abrufen von
-Bezeichnern aus dem aktuellen Scope oder den Elternscopes unterstützen =\>
-`resolve()`.
+Als Werkzeug verwendet man (hierarchische) Tabellen, sogenannte **Symboltabellen**,
+um alle Symbole und Zusatzinformationen über sie zu verwalten. Wenn die Sprache
+Nested Scopes kennt, spiegelt sich dies in den Symboltabellen wider: Sie sind
+entsprechend hierarchisch organisiert, typischerweise als verkettete
+Tabellenstruktur.
+
+Eine zentrale Aufgabe ist das **Binden** von Bezeichnern an den Scope, in dem sie
+definiert werden: `bind()`, sowie das spätere **Auflösen** von Bezeichnern aus dem
+aktuellen oder einem umgebenden Scope: `resolve()`.
+
+Diese **lexikalische Namensauflösung** ist die Grundlage für weitere semantische
+Prüfungen, Typprüfung und letztlich Interpretation oder Codegenerierung.
 :::
-
-
-
-
 
 # Was passiert nach der Syntaxanalyse?
 
@@ -44,27 +44,23 @@ Bezeichnern aus dem aktuellen Scope oder den Elternscopes unterstützen =\>
 :::
 
 ::: {.column width="60%"}
-```
-[Stmt]
-  |- VarDecl "x" : INT = IntLiteral(1)
-  |- VarDecl "a" : INT = IntLiteral(2)
-  \- BlockStmt
-     |- VarDecl "b" : INT = IntLiteral(3)
-     |- VarDecl "x" : INT = IntLiteral(42)
-     |- ExprStmt
-     |    \- AddExpr
-     |        |- VarExpr "a"
-     |        \- VarExpr "b"
-     \- AssignStmt
-          |- VarExpr "x"
-          \- AddExpr
+    [Stmt]
+      |- VarDecl "x" : INT = IntLiteral(1)
+      |- VarDecl "a" : INT = IntLiteral(2)
+      \- BlockStmt
+         |- VarDecl "b" : INT = IntLiteral(3)
+         |- VarDecl "x" : INT = IntLiteral(42)
+         |- ExprStmt
+         |    \- AddExpr
+         |        |- VarExpr "a"
+         |        \- VarExpr "b"
+         \- AssignStmt
               |- VarExpr "x"
-              \- VarExpr "a"
-```
+              \- AddExpr
+                  |- VarExpr "x"
+                  \- VarExpr "a"
 :::
-
 :::::
-
 
 ::: notes
 **Welches `x` sprechen wir an in `(let x (+ x a))`?**
@@ -77,11 +73,11 @@ Bezeichner**, z.B.
 -   Welchen Typ hat ein Bezeichner?
 
 Auf dem Weg zum Interpreter/Compiler müssen die Symbole im AST korrekt zugeordnet
-werden. Dies geschieht über Symboltabellen. Im Folgenden werden wir verschiedene
+werden. Dies geschieht über **Symboltabellen**. Im Folgenden werden wir verschiedene
 Aspekte von Symboltabellen betrachten und eine mögliche Implementierung erarbeiten,
-bevor wir uns in einer anderen Sitzung um die Auswertung (Interpretation) des AST kümmern können.
+bevor wir uns in einer anderen Sitzung um die Auswertung (Interpretation) des AST
+kümmern können.
 :::
-
 
 # Syntax und Semantik
 
@@ -94,20 +90,21 @@ bevor wir uns in einer anderen Sitzung um die Auswertung (Interpretation) des AS
 \bigskip
 \bigskip
 
-=\> Keine Codegenerierung/Interpretation für syntaktisch/semantisch inkorrekte Programme!
+=\> Keine Codegenerierung/Interpretation für syntaktisch/semantisch inkorrekte
+Programme!
 
 ::: notes
-Zur Erinnerung: Die **Syntaxregeln** einer Programmiersprache bestimmen den _formalen
-Aufbau_ eines zu übersetzenden Programms. Die **Semantik** gibt die _Bedeutung_ eines
-syntaktisch richtigen Programms an.
+Zur Erinnerung: Die **Syntaxregeln** einer Programmiersprache bestimmen den
+*formalen Aufbau* eines zu übersetzenden Programms. Die **Semantik** gibt die
+*Bedeutung* eines syntaktisch korrekten Programms an.
 
 Lexikalische und syntaktische Analyse können formalisiert mit regulären Ausdrücken
 und endlichen Automaten (umgesetzt als Lexer/Scanner), sowie mit CFG und Parsern
 durchgeführt werden.
 
 Die Durchführung der semantischen Analyse ist stark von den Eigenschaften der zu
-übersetzenden Sprache, sowie der Zielsprache abhängig und kann hier nur beispielhaft
-für einige Eigenschaften erklärt werden.
+übersetzenden Sprache (sowie der Zielsprache) abhängig und kann hier nur
+beispielhaft für einige Eigenschaften betrachtet werden.
 
 Es darf kein lauffähiges Programm erstellt werden können, das nicht syntaktisch und
 semantisch korrekt ist. Ein lauffähiges Programm muss syntaktisch und semantisch
@@ -121,7 +118,7 @@ korrekt sein!
 
 \smallskip
 
--   Typ-Inferenz
+-   Typinferenz
 -   Typkonsistenz (Ausdrücke, Funktionsaufrufe, ...)
 
 \smallskip
@@ -157,25 +154,25 @@ zugeordnet, ihre Eigenschaften gesammelt und geprüft und darauf zugegriffen wer
 Symboltabellen werden im Compiler fast überall gebraucht.
 
 Welche Informationen zu einem Bezeichner gespeichert und ermittelt werden, ist dann
-abhängig von der Klasse des Bezeichners.
+abhängig von der Art des Bezeichners.
 
 ## Validieren der Nutzung von Symbolen
 
-Hier sind viele Möglichkeiten denkbar. Dies reicht von den unten
-aufgeführten Basisprüfungen bis hin zum Prüfen der Typkompatibilität bei
-arithmetischen Operationen. Dabei müssen für alle Ausdrücke die Ergebnistypen
-berechnet werden und ggf. automatische Konvertierungen vorgenommen werden, etwa bei
-`3+4.1` ...
+Hier sind viele Möglichkeiten denkbar. Dies reicht von den unten aufgeführten
+Basisprüfungen bis hin zum Prüfen der Typkompatibilität bei arithmetischen
+Operationen. Dabei müssen für alle Ausdrücke die Ergebnistypen berechnet werden und
+ggf. automatische Konvertierungen vorgenommen werden, etwa bei `3+4.1` ...
 
 -   Zugriff auf Variablen: Müssen sichtbar sein (und definiert sein)
 -   Zugriff auf Funktionen: Vorwärtsreferenzen sind OK
 -   Variablen werden nicht als Funktionen genutzt
 -   Funktionen werden nicht als Variablen genutzt
 
-Vorgriff auf L-Fun: Da Funktionen oft bereits vor dem Bekanntmachen der Definition aufgerufen werden dürfen,
-bietet sich ein **zweimaliger Durchlauf** (*pass*) an: Beim ersten Traversieren des
-AST werden alle Definitionen in der Symboltabelle gesammelt. Beim zweiten Durchlauf
-werden dann die Referenzen aufgelöst.
+Vorgriff auf L-Fun: Da Funktionen oft bereits vor dem Bekanntmachen der Definition
+aufgerufen werden dürfen, bietet sich ein **zweimaliger Durchlauf** (zwei *passes*
+über den AST) an: Beim ersten Traversieren des AST werden alle Definitionen in der
+Symboltabelle gesammelt. Beim zweiten Durchlauf werden dann die Referenzen
+aufgelöst.
 
 ## Das Mittel der Wahl: Tabellen für die Symbole (= Bezeichner)
 
@@ -201,11 +198,7 @@ Manchmal werden die Namen selbst in eine (Hash-) Tabelle geschrieben. Die
 Symboltabelle enthält dann statt der Namen Verweise in diese (Hash-) Tabelle.
 :::
 
-
-
-
 # Symbole und (nested) Scopes
-
 
 ::::: columns
 ::: {.column width="35%"}
@@ -220,23 +213,19 @@ Symboltabelle enthält dann statt der Namen Verweise in diese (Hash-) Tabelle.
 :::
 
 ::: {.column width="50%"}
-
-```
-    +------------------------------+
-    |     GLOBAL SCOPE             |
-    +------------------------------+
-    | symbols = [x : int, a : int] |
-    +------------------------------+
-                   ^
-                   |
-    +------------------------------+
-    |     LOCAL SCOPE              |
-    +------------------------------+
-    | symbols = [b : int, x : int] |
-    +------------------------------+
-```
+        +------------------------------+
+        |     GLOBAL SCOPE             |
+        +------------------------------+
+        | symbols = [x : int, a : int] |
+        +------------------------------+
+                       ^
+                       |
+        +------------------------------+
+        |     LOCAL SCOPE              |
+        +------------------------------+
+        | symbols = [b : int, x : int] |
+        +------------------------------+
 :::
-
 :::::
 
 \bigskip
@@ -257,20 +246,20 @@ es in der Regel so, dass Scopes sich entweder vollständig überlappen oder gar 
 Wenn ein Bezeichner nicht im aktuellen Scope vorhanden ist, muss er in der Regel
 entlang der Verkettung nach "oben" zum "Elternscope" gesucht werden.
 
-Im Beispiel würden wir im innersten Scope für `(let x (+ x a))` die Namen `x` und `a`
-auflösen müssen. Das `x` finden wir direkt im aktuellen (innersten) Scope, während das
-`a` hier nicht zu finden ist. Deshalb muss hier auf der Suche nach diesem Namen zum umschließenden
-Elternscope gewechselt werden und dort gesucht werden. Dies wiederholt sich bei Bedarf rekursiv bis
-zur Wurzel, also bis zum globalen Scope. Wenn der Bezeichner dann immer noch nicht gefunden werden
-kann, ist dies ein Fehler (Zugriff auf ein nicht definiertes Symbol).
+Im Beispiel würden wir im innersten Scope für `(let x (+ x a))` die Namen `x` und
+`a` auflösen müssen. Das `x` finden wir direkt im aktuellen (innersten) Scope,
+während das `a` hier nicht zu finden ist. Deshalb muss hier auf der Suche nach
+diesem Namen zum umschließenden Elternscope gewechselt werden und dort gesucht
+werden. Dies wiederholt sich bei Bedarf rekursiv bis zur Wurzel, also bis zum
+globalen Scope. Wenn der Bezeichner dann immer noch nicht gefunden werden kann, ist
+dies ein Fehler (Zugriff auf ein nicht definiertes Symbol).
 
 Dieses Verhalten nennt man auch **lexikalische Namensauflösung**.
 :::
 
-
 # Symboltabelle für Nested Scopes
 
-```java
+``` java
 public record Scope(Scope parent, HashMap<String, Decl> symbols) {
 
     public void bind(String name, Decl symbol) {
@@ -291,42 +280,65 @@ public record Scope(Scope parent, HashMap<String, Decl> symbols) {
 }
 ```
 
-::: notes
+:::::::::: notes
 ## Implementierung mit hierarchischen (verketteten) Tabellen
 
 Pro Scope wird eine Symboltabelle `Scope` angelegt, dabei enthält jede Symboltabelle
 zusätzlich einen Verweis auf ihre Vorgängersymboltabelle für den umgebenden Scope.
-Die globale Symboltabelle hat keinen Vorgänger, hier kann man `null` als `parent` nutzen.
+Die globale Symboltabelle hat keinen Vorgänger, hier kann man `null` als `parent`
+nutzen.
 
 ::: tip
 Streng genommen ist die Klasse `Scope` eine Modellierung für den Scope, und das Feld
 `HashMap<String, Decl> symbols` ist die eigentliche Symboltabelle.
 
 "Scope" ist streng genommen ein logischer Sichtbarkeitsbereich für Namen, und eine
-Symboltabelle ist einem Scope zugeordnet und speichert Namen und die zugehörige Definition.
+Symboltabelle ist einem Scope zugeordnet und speichert Namen und die zugehörige
+Definition.
 
-Wir werden die beiden Begriffe "Scope" und "Symboltabelle" synonym verwenden, solange
-die Bedeutung eindeutig ist.
+Wir werden die beiden Begriffe "Scope" und "Symboltabelle" synonym verwenden,
+solange die Bedeutung eindeutig ist.
 :::
 
 ::: tip
 Es gibt Modellierungen wie beispielsweise [@Parr2010, p. 142], die für die zu
 speichernden Elemente mit einem Namen (Variablen, Funktionen, Klassen, ...) eine
 elaborierte Klassenstruktur vorsehen. Wir werden stattdessen ausgewählte AST-Knoten
-zu einem Namen speichern. Das wird bei Klassen etwas umständlicher, dafür müssen
-wir nicht wie bei [@Parr2010] eine ausgeprägte zusätzliche Klassenhierarchie pflegen.
+zu einem Namen speichern. Das wird bei Klassen etwas umständlicher, dafür müssen wir
+nicht wie bei [@Parr2010] eine ausgeprägte zusätzliche Klassenhierarchie pflegen.
+:::
+
+::: tip
+Die gezeigte Implementierung von `Scope` ist eine Record-Klasse in Java. Damit man
+beim Erzeugen eines neuen Objektes nicht immer alle Parameter mitgeben muss,
+empfiehlt es sich, noch zwei Hilfskonstruktoren zu definieren:
+
+``` java
+public record Scope(Scope parent, HashMap<String, Decl> symbols) {
+
+    public Scope() {
+        this(null);
+    }
+
+    public Scope(Scope enclosing) {
+        this(enclosing, new HashMap<>());
+    }
+
+    // ...
+}
+```
 :::
 
 ## Speichern von Symbolen
 
 **Welche AST-Knoten wollen/müssen wir speichern?**
 
-Es geht eigentlich nur darum, für jeden **Namen** denjenigen **Scope** festzuhalten, in dem dieser
-**Name definiert** wird. Entsprechend wollen wir gar nicht _alle_ AST-Knoten festhalten, sondern
-nur die `*Decl`-Klassen im AST. Um dies typsicher zu gestalten, fügen wir ein weiteres Interface
-`Decl` hinzu:
+Es geht eigentlich nur darum, für jeden **Namen** denjenigen **Scope** festzuhalten,
+in dem dieser **Name definiert** wird. Entsprechend wollen wir gar nicht *alle*
+AST-Knoten festhalten, sondern nur die `*Decl`-Klassen im AST. Um dies typsicher zu
+gestalten, fügen wir ein weiteres Interface `Decl` hinzu:
 
-```java
+``` java
 public interface Decl {
     String name();
 }
@@ -334,77 +346,91 @@ public interface Decl {
 
 und markieren die relevanten AST-Klassen damit:
 
-```java
+``` java
 public record VarDecl(String name, Type type, Expr init) implements Stmt, Decl {}
 ```
 
-In L-Var betrifft das nur die `VarDecl`! (Später werden wir in L-Fun für Funktionsdefinitionen
-und in L-Class für Klassendefinitionen analog arbeiten.)
+In L-Var betrifft das nur die `VarDecl`! (Später werden wir in L-Fun für
+Funktionsdefinitionen und in L-Class für Klassendefinitionen analog arbeiten.)
 
 ## Vorgehen bei der Namensauflösung
 
-Wir legen also für die Namensauflösung initial einen globalen Scope an, und starten die Traversierung des AST an dessen
-Wurzel. Sobald wir dabei
-einen neuen Scope betreten,
-legen wir einen neuen Kindscope an und setzen diesen Scope als den aktuellen (Arbeits-) Scope - wir haben also einen lokalen
-Scope betreten. Das kann in L-Var nur bei `let`-mit-Scopes passieren (also beim Betreten eines
-`BlockStmt`-AST-Knotens). Später werden wir noch andere Sprachfeatures kennenlernen, die einen neuen Scope öffnen.
+Wir legen also für die Namensauflösung initial einen globalen Scope an, und starten
+die Traversierung des AST an dessen Wurzel. Sobald wir dabei einen neuen Scope
+betreten, legen wir einen neuen Kindscope an und setzen diesen Scope als den
+aktuellen (Arbeits-) Scope - wir haben also einen lokalen Scope betreten. Das kann
+in L-Var nur bei `let`-mit-Scopes passieren (also beim Betreten eines
+`BlockStmt`-AST-Knotens). Später werden wir noch andere Sprachfeatures kennenlernen,
+die einen neuen Scope öffnen.
 
-Beim Verlassen eines `BlockStmt`-AST-Knotens nach oben im Baum (alle Kinder des `BlockStmt`-Knotens wurden also besucht)
-wird der aktuelle Scope auf den Elternscope des bisherigen aktuellen Scopes gesetzt - wir verlassen den lokalen Scope und
+Beim Verlassen eines `BlockStmt`-AST-Knotens nach oben im Baum (alle Kinder des
+`BlockStmt`-Knotens wurden also besucht) wird der aktuelle Scope auf den Elternscope
+des bisherigen aktuellen Scopes zurückgesetzt - wir verlassen den lokalen Scope und
 befinden uns wieder im umgebenden Elternscope.
 
-Wann immer beim Traversieren des AST ein `VarDecl`-Knoten besucht wird, tragen wir dessen Namen (also den Namen
-der Variablen) und den
-AST-Knoten (die Definition dieser Variablen, also ihre `VarDecl`) mit `bind()` in die aktuelle Symboltabelle (in den aktuellen Scope)
-ein.
+Wann immer beim Traversieren des AST ein `VarDecl`-Knoten besucht wird, tragen wir
+dessen Namen (also den Namen der Variablen) und den AST-Knoten (die Definition
+dieser Variablen, also ihre `VarDecl`) mit `bind()` in die aktuelle Symboltabelle
+(in den aktuellen Scope) ein.
 
 ::: tip
-Ein mehrfaches Eintragen im selben Scope bedeutet
-in Lispy einen semantischen Fehler. Es gibt andere Sprachen, die eine wiederholte Definition im selben Scope erlauben.
-TODO: Beispiel!
+Ein mehrfaches Eintragen im selben Scope bedeutet in Lispy einen semantischen
+Fehler. Es gibt andere Sprachen, die eine wiederholte Definition im selben Scope
+erlauben. Beispiele: JavaScript, Python, ...
 :::
 
-Wenn wir umgedreht einen Namen suchen, etwa beim Abarbeiten eines `VarExpr`-Knotens im AST, suchen wir diesen Namen
-mit `resolve()` im aktuellen Scope. Wenn wir den Namen hier finden, ist diese Variablen in diesem Scope definiert und wir
-können mit der Abarbeitung fortfahren. Anderenfalls versuchen wir den Namen rekursiv über die Elternscopes aufzulösen. Erst, wenn
-wir den Namen nicht finden können, liegt in Lispy ein Fehler vor.
+Wenn wir umgedreht einen Namen suchen, etwa beim Abarbeiten eines `VarExpr`-Knotens
+im AST, suchen wir diesen Namen mit `resolve()` im aktuellen Scope. Wenn wir den
+Namen hier finden, ist diese Variablen in diesem Scope definiert und wir können mit
+der Abarbeitung fortfahren. Anderenfalls versuchen wir den Namen rekursiv über die
+Elternscopes aufzulösen. Erst, wenn wir den Namen nicht finden können, liegt in
+Lispy ein Fehler vor.
 
 ::: tip
-Es gibt Sprachen wie Javascript, die Probleme beim Auflösen von Namen nicht als Fehler betrachten und dann on-the-fly diesen Namen
-einfach neu definieren.
+Es gibt Sprachen wie (klassisches) JavaScript, die Probleme beim Auflösen von Namen
+nicht als Fehler betrachten und dann on-the-fly diesen Namen einfach neu definieren.
 :::
 
 ::: important
-Wir haben die `resolve()`-Methode vorsorglich bereits überladen mit einer Variante `Resolution resolve(String name, int depth)`. Diese zählt
-mit, wie viele Schritte beim Auflösen nach "oben" gegangen wurde und liefert den gefundenen AST-Knoten und die Tiefe (Anzahl der Schritte)
-als Tupel `Resolution` zurück. Das spart uns später im Interpreter das erneute Suchen der Namen ...
-:::
+Wir haben die `resolve()`-Methode vorsorglich bereits überladen mit einer Variante
+`Resolution resolve(String name, int depth)`. Diese zählt mit, wie viele Schritte
+beim Auflösen nach "oben" gegangen wurde und liefert den gefundenen AST-Knoten und
+die Tiefe (Anzahl der Schritte) als Tupel `Resolution` zurück. Das spart uns später
+im Interpreter das erneute Suchen der Namen ...
 :::
 
+::: important
+Wir betrachten hier ausschließlich **lexikalische (statische) Namensauflösung**;
+dynamische Scopes (wie etwa in Lisp) behandeln wir nicht.
+:::
+::::::::::
 
 # Name-Resolver - lexikalische Auflösung von Namen
-
 
 ::: notes
 ## Aufgaben vom Name-Resolver
 
-Wir wollen mit dem `NameResolverLvar` prüfen, ob alle Namen (in L-Var nur Variablen) korrekt verwendet wurden.
+Wir wollen mit dem `NameResolverLvar` prüfen, ob alle Namen (in L-Var nur Variablen)
+korrekt verwendet wurden.
 
-Insbesondere dürfen in L-Var Variablen in einem Scope nicht mehrfach definiert werden (`VarDecl`). Eine Definition in einem
-lokalen Scope darf aber die Definition einer Variable in einem der Elternscopes überdecken (*shadowing*).
+Insbesondere dürfen in L-Var Variablen in einem Scope nicht mehrfach definiert
+werden (`VarDecl`). Eine Definition in einem lokalen Scope darf aber die Definition
+einer Variable in einem der Elternscopes überdecken (*shadowing*).
 
-Beim lesenden Zugriff auf eine Variable per `VarExpr` müssen wir sicherstellen, dass diese Variable von dem aktuellen
-Scope aus sichtbar ist. Sie kann also entweder im selben Scope definiert sein, oder in einem der von diesem Scope aus
-erreichbaren Elternscopes.
+Beim lesenden Zugriff auf eine Variable per `VarExpr` müssen wir sicherstellen, dass
+diese Variable von dem aktuellen Scope aus sichtbar ist. Sie kann also entweder im
+selben Scope definiert sein, oder in einem der von diesem Scope aus erreichbaren
+Elternscopes.
 
-Beim schreibenden Zugriff auf eine Variable in `AssignStmt` müssen wir ebenfalls prüfen, ob sie sichtbar ist.
+Beim schreibenden Zugriff auf eine Variable in `AssignStmt` müssen wir ebenfalls
+prüfen, ob sie sichtbar ist.
 
-Jeder Block (`BlockStmt`) öffnet einen neuen localen Scope, wobei der bisherige Scope der Elternscope wird. Am Ende
-des Blockes müssen wir unseren aktuellen Scope dann wieder zurücksetzen.
+Jeder Block (`BlockStmt`) öffnet einen neuen lokalen Scope, wobei der bisherige
+Scope der Elternscope wird. Am Ende des Blockes müssen wir unseren aktuellen Scope
+dann wieder zurücksetzen.
 :::
 
-```java
+``` java
 public class NameResolverLvar {
     public Scope scope = new Scope();  // global scope
     public Map<Stmt, Scope> symbols = new IdentityHashMap<>();
@@ -419,82 +445,101 @@ public class NameResolverLvar {
 }
 ```
 
-::: notes
+::::: notes
 ## Hilfsvariablen / Felder
 
-Der Name-Resolver braucht eine Hilfsvariable `Scope scope`, um sich bei der Traversierung den aktuellen Scope zu merken.
-Beim Start initialisieren wir diesen einmal, d.h. initial ist `scope` der globale Scope.
+Der Name-Resolver braucht eine Hilfsvariable `Scope scope`, um sich bei der
+Traversierung den aktuellen Scope zu merken. Beim Start initialisieren wir diesen
+einmal, d.h. initial ist `scope` der globale Scope.
 
-Beim Auflösen von Namen berechnen wir jeweils, wo wir diesen
-Namen in Bezug zum aktuellen Scope gefunden haben, d.h. wir berechnen die Anzahl der Schritte vom aktuellen Scope zu
-den Elternscopes hoch. Eine "0" bedeutet, dass wir den Namen im aktuellen Scope gefunden haben, "1" wäre dann der direkte
-Elternscope, usw. Diese Information wollen wir für den Interpreter speichern. Dazu legen wir das Feld
+Beim Auflösen von Namen berechnen wir jeweils, wo wir diesen Namen in Bezug zum
+aktuellen Scope gefunden haben, d.h. wir berechnen die Anzahl der Schritte vom
+aktuellen Scope zu den Elternscopes hoch. Eine "0" bedeutet, dass wir den Namen im
+aktuellen Scope gefunden haben, "1" wäre dann der direkte Elternscope, usw. Diese
+Information wollen wir für den Interpreter speichern. Dazu legen wir das Feld
 `Map<VarExpr, Integer> depths` an.
 
 ::: important
-Wir speichern in der `Map<VarExpr, Integer> depths` zu `VarExpr`-Objekten (also unseren Variablen) die Suchtiefe.
+Wir speichern in der `Map<VarExpr, Integer> depths` zu `VarExpr`-Objekten (also
+unseren Variablen) die Suchtiefe.
 
-Unsere Modellierung nutzt
-für  `VarExpr` die Record-Klassen aus Java, d.h. hier wird vom Compiler/Laufzeitsystem automatisch eine `equals()`- und
-`hashCode()`-Implementierung bereitgestellt. Wenn wir eine einfache `HashMap` nehmen würden, würden zwei unterschiedliche
-`VarExpr`-Objekte mit dem selben Inhalt als gleich betrachtet und entsprechend in der Map zusammenfallen.
+Unsere Modellierung nutzt für `VarExpr` die Record-Klassen aus Java, d.h. hier wird
+vom Compiler/Laufzeitsystem automatisch eine `equals()`- und
+`hashCode()`-Implementierung bereitgestellt. Wenn wir eine einfache `HashMap` nehmen
+würden, würden zwei unterschiedliche `VarExpr`-Objekte mit dem selben Inhalt als
+gleich betrachtet und entsprechend in der Map zusammenfallen.
 
-Wir können aber im AST in unterschiedlichen Scopes Referenzen auf die selbe Variable haben bzw. sogar mit dem selben Namen
-auf unterschiedliche Variablen in unterschiedlichen Scopes verweisen (*shadowing*).
-D.h. wir haben deshalb unterschiedliche `VarExpr`-Objekte im AST, die aber über die automatische `equals()`- und
-`hashCode()`-Implementierung für die Record-Klassen bei gleichem Variablennamen in einer normalen `HashMap` als gleich
-betrachtet würden. Damit wir diese Objekte in der Map unterscheiden können (wir wollen ja zu jeder konkreten Verwendung einer Variablen
-die entsprechend dort gültige Suchtiefe speichern), nutzen wir als Implementierung eine
-`IdentityHashMap`, die auf die Objekt-ID  schaut.
+Wir können aber im AST in unterschiedlichen Scopes Referenzen auf die selbe Variable
+haben bzw. sogar mit dem selben Namen auf unterschiedliche Variablen in
+unterschiedlichen Scopes verweisen (*shadowing*). D.h. wir haben deshalb
+unterschiedliche `VarExpr`-Objekte im AST, die aber über die automatische
+`equals()`- und `hashCode()`-Implementierung für die Record-Klassen bei gleichem
+Variablennamen in einer normalen `HashMap` als gleich betrachtet würden. Damit wir
+diese Objekte in der Map unterscheiden können (wir wollen ja zu jeder konkreten
+Verwendung einer Variablen die entsprechend dort gültige Suchtiefe speichern),
+nutzen wir als Implementierung eine `IdentityHashMap`, die auf die Objekt-ID schaut.
+
+Analog gilt für `Map<Stmt, Scope> symbols`: Wir wollen wirklich pro konkretem
+AST-Knoten (Identität) den Scope speichern, nicht pro semantisch gleichem Statement
+(Wertgleichheit). Das dürfte bei Statements zwar i.d.R. zusammenfallen,
+sicherheitshalber nutzen wir hier aber auch eine `IdentityHashMap` ...
 :::
 
-Wir bauen bei der Traversierung des AST die Symboltabellenstruktur auf. Jeder lokale Scope kennt seinen Elternscope,
-d.h. die Verzeigerung geht im Baum von unten nach oben. Sobald wir einen lokalen Scope nach oben verlassen, würden wir deshalb
-nicht mehr auf diesen Scope zugreifen können. Das ist im Name-Resolver nicht weiter relevant, aber wir werden später noch weitere
-Passes über den AST aufbauen, die den Zugriff auf den korrekten Scope bzw. die in einem Scope geltende Symboltabelle benötigen.
-Damit wir dann die Symboltabellenstruktur nicht erneut aufbauen müssen, speichern wir für jedes Statement einfach den
-Scope (bzw. die Symboltabelle), die zu dem Zeitpunkt des Besuchs dieses Statements galt. Dafür nutzen wir das Feld `Map<Stmt, Scope> symbols`.
+Wir bauen bei der Traversierung des AST die Symboltabellenstruktur auf. Jeder lokale
+Scope kennt seinen Elternscope, d.h. die Verzeigerung geht im Baum von unten nach
+oben. Sobald wir einen lokalen Scope nach oben verlassen, würden wir deshalb nicht
+mehr auf diesen Scope zugreifen können. Das ist im Name-Resolver nicht weiter
+relevant, aber wir werden später noch weitere Passes über den AST aufbauen, die den
+Zugriff auf den korrekten Scope bzw. die in einem Scope geltende Symboltabelle
+benötigen. Damit wir dann die Symboltabellenstruktur nicht erneut aufbauen müssen,
+speichern wir für jedes Statement einfach den Scope (bzw. die Symboltabelle), die zu
+dem Zeitpunkt des Besuchs dieses Statements galt. Dafür nutzen wir das Feld
+`Map<Stmt, Scope> symbols`.
 
 ::: tip
-Wer genau hinschaut, wundert sich über die Sichtbarkeit der Felder im `NameResolverLvar`: Diese steht auf `public`, was
-in der objektorientierten Programmierung unüblich ist. Der Hintergrund dafür ist, dass wir auf diese drei Felder später
-Zugriff brauchen - aber wir können in der Einstiegsmethode `resolve(List<Stmt> stmts)` leider nur ein Ergebnis zurückliefern
-und nicht alle drei ... Wir werden das Problem weiter unten über eine **Sidetable** lösen.
+Wer genau hinschaut, wundert sich über die Sichtbarkeit der Felder im
+`NameResolverLvar`: Diese steht auf `public`, was in der objektorientierten
+Programmierung unüblich ist. Der Hintergrund dafür ist, dass wir auf diese drei
+Felder später Zugriff brauchen - aber wir können in der Einstiegsmethode
+`resolve(List<Stmt> stmts)` leider nur ein Ergebnis zurückliefern und nicht alle
+drei ... Wir werden das Problem weiter unten über eine **Sidetable** lösen.
 :::
-
 
 ## Ablauf
 
-Wir starten mit dem globalen Scope und laufen den AST in Form der als Parameter übergebenen Liste der Statements ab.
-Für jedes Statement müssen wir den Auflösevorgang  anstoßen, d.h. für jedes `Stmt` im übergebenen AST wird `resolve(stmt)`
-aufgerufen.
+Wir starten mit dem globalen Scope und laufen den AST in Form der als Parameter
+übergebenen Liste der Statements ab. Für jedes Statement müssen wir den
+Auflösevorgang anstoßen, d.h. für jedes `Stmt` im übergebenen AST wird
+`resolve(stmt)` aufgerufen.
 
-Hier müssen wir die einzelnen Statemtent-Typen unterscheiden und entsprechend agieren (s.u.). Expressions tauchen nicht
-als eigenständiges Element in L-Var-Programmen auf, sondern nur als Teile von Statements. Beim Besuchen der Statements
-müssen wir entsprechend jeweils auch das Auflösen per `resolve(expr)` anstoßen (s.u.)
-:::
-
+Hier müssen wir die einzelnen Statemtent-Typen unterscheiden und entsprechend
+agieren (s.u.). Expressions tauchen nicht als eigenständiges Element in
+L-Var-Programmen auf, sondern nur als Teile von Statements. Beim Besuchen der
+Statements müssen wir entsprechend jeweils auch das Auflösen per `resolve(expr)`
+anstoßen (s.u.)
+:::::
 
 # Name-Resolver - Traversierung für Statements (Ausschnitt)
 
 ::: notes
-Der Name-Resolver iteriert in der Einstiegsmethode über alle übergebenen Statements und ruft für jedes Statement
-`resolve(stmt)` auf.
+Der Name-Resolver iteriert in der Einstiegsmethode über alle übergebenen Statements
+und ruft für jedes Statement `resolve(stmt)` auf.
 
-Nun müssen wir unterscheiden, um welchen `Stmt`-Knoten im AST es sich jeweils handelt und die weitere Traverierung
-anstoßen. Dies könnten wir über das Visitor-Pattern machen - da wir unseren AST mit Record-Klassen modelliert haben,
-können wir hier auch komfortabel die Traversierung über `switch`-Expressions und Pattern Matching erledigen.
+Nun müssen wir unterscheiden, um welchen `Stmt`-Knoten im AST es sich jeweils
+handelt und die weitere Traverierung anstoßen. Dies könnten wir über das
+Visitor-Pattern machen - da wir unseren AST mit Record-Klassen modelliert haben,
+können wir hier auch komfortabel die Traversierung über `switch`-Expressions und
+Pattern Matching erledigen.
 
-Erinnerung an die abstrakte Syntax in L-Var (nur der Teile der `Stmt`-Regel gezeigt):
+Erinnerung an die abstrakte Syntax in L-Var (nur der Teile der `Stmt`-Regel
+gezeigt):
 :::
 
-
-```ebnf
+``` ebnf
 Stmt = VarDecl(String, Type, Expr) | BlockStmt([Stmt]) | ...
 ```
 
-
-```java
+``` java
 protected void resolve(Stmt stmt) {
     symbols.put(stmt, scope);
 
@@ -513,88 +558,100 @@ protected void resolve(Stmt stmt) {
 }
 ```
 
-::: notes
-
-**Wichtig**: In der Skizze oben ist nur ein Ausschnitt gezeigt - die Verarbeitung von `ExprStmt` und `AssignStmt` bleiben als Challenge oder
-Hausaufgabe.
+::::: notes
+**Wichtig**: In der Skizze oben ist nur ein Ausschnitt gezeigt - die Verarbeitung
+von `ExprStmt` und `AssignStmt` bleiben als Challenge oder Hausaufgabe.
 
 ## Variablen-Definition
 
-Ein `VarDecl`-Statement besteht aus einem Variablennamen (Typ `String`), einem Typ in unserer Lispy-Sprache (Typ `Type`)
-und einer Expression für die Initialisierung (Typ `Expr`).
+Ein `VarDecl`-Statement besteht aus einem Variablennamen (Typ `String`), einem Typ
+in unserer Lispy-Sprache (Typ `Type`) und einer Expression für die Initialisierung
+(Typ `Expr`).
 
-Wir müssen im Name-Resolver prüfen, ob es diesen Typ wirklich gibt
-und dieser vom aktuellen Scope aus sichtbar ist, d.h. wir rufen `resolveType(type)` auf.
+Wir müssen im Name-Resolver prüfen, ob es diesen Typ wirklich gibt und dieser vom
+aktuellen Scope aus sichtbar ist, d.h. wir rufen `resolveType(type)` auf.
 
 ::: tip
-In L-Var gibt es zunächst nur den "eingebauten" Typ `int` in Lispy. Hier müssen wir nichts prüfen bei der Namensauflösung.
+In L-Var gibt es zunächst nur den "eingebauten" Typ `int` in Lispy. Hier müssen wir
+nichts prüfen bei der Namensauflösung:
 
-```java
+``` java
 protected void resolveType(Type type) {} // nothing to do here
 ```
 
-Wir werden aber später kennenlernen, wie man in Lispy Klassen definiert (Sprachstufe L-Class). Diese nutzerdefinierten
-Klassen sind eigene Typen, die dynamisch im AST auftauchen. Dann müssen wir entsprechend prüfen, ob der Typname in der `VarDecl`
-tatsächlich sichtbar ist und ein Klassentyp ist - deshalb legen wir uns hier vorausschauend eine **Hook-Methode** `resolveType(Type type)`
-an. Da  wir in L-Var nichts tun müssen, bleibt diese Hook-Methode erstmal leer - später in L-Class werden wir diese geeignet
-überschreiben.
+Wir werden aber später kennenlernen, wie man in Lispy Klassen definiert (Sprachstufe
+L-Class). Diese nutzerdefinierten Klassen sind eigene Typen, die dynamisch im AST
+auftauchen. Dann müssen wir entsprechend prüfen, ob der Typname in der `VarDecl`
+tatsächlich sichtbar ist und ein Klassentyp ist - deshalb legen wir uns hier
+vorausschauend eine **Hook-Methode** `resolveType(Type type)` an. Da wir in L-Var
+nichts tun müssen, bleibt diese Hook-Methode zunächst leer - später in L-Class
+werden wir diese geeignet überschreiben.
 :::
 
-Die Initialisierung der Variablen ist eine Expression, d.h. dort können Verweise auf andere Variablen vorkommen. Entsprechend
-rufen wir hier `resolve(init)` auf.
+Die Initialisierung der Variablen ist eine Expression, d.h. dort können Verweise auf
+andere Variablen vorkommen. Entsprechend rufen wir hier `resolve(init)` auf.
 
-Danach können wir dann die neue Variable "binden": Wir legen für den Variablennamen im aktuellen Scope eine Referenz auf den
-`VarDecl`-Knoten an. Das `bind()` prüft dabei, ob es für diesen Namen noch keinen Eintrag gibt. Damit wissen wir, dass die
-Variable korrekt definiert wurde: Sie wurde bisher noch nicht in diesem Scope definiert, und der angegebene Typ ist sichtbar
-(später, in L-Class) und in der Initialisierungs-Expression sind alle Variablennamen vom aktuellen Scope aus sichtbar. Wenn
-wir später auf diesen Variablennamen verweisen (etwa in einer `VarExpr), dann können wir ihn rekursiv über die Scopes hier im
-aktuellen Scope finden (sofern die Kette passt).
+Danach können wir dann die neue Variable "binden": Wir legen für den Variablennamen
+im aktuellen Scope eine Referenz auf den `VarDecl`-Knoten an. Das `bind()` prüft
+dabei, ob es für diesen Namen noch keinen Eintrag gibt. Damit wissen wir, dass die
+Variable korrekt definiert wurde: Sie wurde bisher noch nicht in diesem Scope
+definiert, und der angegebene Typ ist sichtbar (später, in L-Class) und in der
+Initialisierungs-Expression sind alle Variablennamen vom aktuellen Scope aus
+sichtbar. Wenn wir später auf diesen Variablennamen verweisen (etwa in einer
+`VarExpr`), dann können wir ihn rekursiv über die Scopes hier im aktuellen Scope
+finden (sofern die Kette passt).
 
 ::: important
-Es spielt eine große Rolle, in welcher Reihenfolge man den Initialisierungsausdruck und die neue Variable bearbeitet!
+Es spielt eine große Rolle, in welcher Reihenfolge man den Initialisierungsausdruck
+und die neue Variable bearbeitet!
 
-Was würde passieren, wenn man zuerst die Variable bindet und danach die Initialisierung auswertet? (siehe Challenge)
+Was würde passieren, wenn man zuerst die Variable bindet und danach die
+Initialisierung auswertet? (siehe Challenge)
 :::
-
 
 ## BlockStmt
 
-Ein `BlockStmt` wurde in L-Var für ein `let`-mit-Scope angelegt.
-Es öffnet einen neuen lokalen Scope, in dem die im `BlockStmt` gespeicherten Statements ausgewertet werden sollen.
+Ein `BlockStmt` wurde in L-Var für ein `let`-mit-Scope angelegt. Es öffnet einen
+neuen lokalen Scope, in dem die im `BlockStmt` gespeicherten Statements ausgewertet
+werden sollen.
 
-Entsprechend legen wir einen neuen Scope an und nutzen als Elternscope den aktuellen Scope. Der neue Scope wird der aktuelle
-Scope. Dann iterieren wir über die Statements des `BlockStmt` und führen hier die Namensauflösung durch. Am Ende setzen wir den
-aktuellen Scope wieder auf den vorigen Scope zurück.
+Entsprechend legen wir einen neuen Scope an und nutzen als Elternscope den aktuellen
+Scope. Der neue Scope wird der aktuelle Scope. Dann iterieren wir über die
+Statements des `BlockStmt` und führen hier die Namensauflösung durch. Am Ende setzen
+wir den aktuellen Scope wieder auf den vorigen Scope zurück.
 
 ## Besonderheiten
 
-Wir haben damit alle in L-Var bekannten AST-Knoten vom Typ `Stmt` besucht (`ExprStmt` und `AssignStmt` seien noch hinzugefügt).
-Wenn wir hier über einen anderen `Stmt`-Knoten laufen würden, wäre das ein Fehler - das wäre ein Statement aus einer späteren
-Sprachstufe!
+Wir haben damit alle in L-Var bekannten AST-Knoten vom Typ `Stmt` besucht
+(`ExprStmt` und `AssignStmt` seien noch hinzugefügt). Wenn wir hier über einen
+anderen `Stmt`-Knoten laufen würden, wäre das ein Fehler - das wäre ein Statement
+aus einer späteren Sprachstufe!
 
-Der Name-Resolver baut die Scope-Strukturen und damit die Symboltabellen während der AST-Traversierung auf und wieder ab.
-Wir werden später in L-If  einen Type-Checker hinzufügen, der als zweiter Pass nach dem Name-Resolver noch einmal über
-den AST läuft und  die Typen prüft. Hier brauchen  wir für jedes Statement erneut den Scope bzw. die Symboltabelle, die
-für dieses Statement relevant ist. Damit wir die Symboltabellen  dann nicht erneut aufbauen müssen, speichern wir einfach
-diese Information am Anfang von `resolve(stmt)` im Feld `symbols`.
-:::
-
+Der Name-Resolver baut die Scope-Strukturen und damit die Symboltabellen während der
+AST-Traversierung auf und wieder ab. Wir werden später in L-If einen Type-Checker
+hinzufügen, der als zweiter Pass nach dem Name-Resolver noch einmal über den AST
+läuft und die Typen prüft. Hier brauchen wir für jedes Statement erneut den Scope
+bzw. die Symboltabelle, die für dieses Statement relevant ist. Damit wir die
+Symboltabellen dann nicht erneut aufbauen müssen, speichern wir einfach diese
+Information am Anfang von `resolve(stmt)` im Feld `symbols`.
+:::::
 
 # Name-Resolver - Traversierung für Expressions (Ausschnitt)
 
 ::: notes
-In Lispy können Expressions als Teil von Statements vorkommen. In `resolve(stmt)` haben wir beispielsweise die `VarDecl`
-bearbeitet und für die Initialisierungs-Expression `resolve(expr)` aufgerufen.
+In Lispy können Expressions als Teil von Statements vorkommen. In `resolve(stmt)`
+haben wir beispielsweise die `VarDecl` bearbeitet und für die
+Initialisierungs-Expression `resolve(expr)` aufgerufen.
 
-Erinnerung an die abstrakte Syntax in L-Var (nur ein kleiner Teil der `Expr`-Hierarchie gezeigt):
+Erinnerung an die abstrakte Syntax in L-Var (nur ein kleiner Teil der
+`Expr`-Hierarchie gezeigt):
 :::
 
-```ebnf
-Expr = IntLiteral(Int) | AddExpr(Expr, Expr) | VarExpr(String)
+``` ebnf
+Expr = IntLiteral(Int) | AddExpr(Expr, Expr) | VarExpr(String) | ...
 ```
 
-
-```java
+``` java
 protected void resolve(Expr expr) {
     switch (expr) {
         case IntLiteral _ -> {} // nothing to do
@@ -612,75 +669,80 @@ protected void resolve(Expr expr) {
 ```
 
 ::: notes
-**Wichtig**: In der Skizze oben ist nur ein Ausschnitt gezeigt - die Verarbeitung von `SubExpr`, `MulExpr` und `DivExpr` bleiben als Challenge oder
-Hausaufgabe.
+**Wichtig**: In der Skizze oben ist nur ein Ausschnitt gezeigt - die Verarbeitung
+von `SubExpr`, `MulExpr` und `DivExpr` bleiben als Challenge oder Hausaufgabe.
 
 ## Integer-Literal
 
-In einem `IntLiteral` speichern wir nur einen Integerwert, keine weiteren Namen. Dieser Knoten stellt ein Blatt im AST dar.
-Deshalb brauchen wir hier nichts tun.
+In einem `IntLiteral` speichern wir nur einen Integerwert, keine weiteren Namen.
+Dieser Knoten stellt ein Blatt im AST dar. Deshalb brauchen wir hier nichts tun.
 
 ## Addition
 
-Ein `AddExpr`-Knoten hat zwei Kinder, die wiederum Expressions sind. Für beide Kinder stoßen wir die rekursive Namensauflösung
-an. Mehr ist hier nicht zu tun.
+Ein `AddExpr`-Knoten hat zwei Kinder, die wiederum Expressions sind. Für beide
+Kinder stoßen wir die rekursive Namensauflösung an. Mehr ist hier nicht zu tun.
 
 ## Lesender Variabenzugriff
 
-Eine `VarExpr` ist ein Verweis auf einen Variablennamen in einer Expression, beispielsweise `x` in `(+ x 2)`. Dies sind lesende
-Zugriffe, d.h. der Variablenname muss vom aktuellen Scope aus sichtbar sein.
+Eine `VarExpr` ist ein Verweis auf einen Variablennamen in einer Expression,
+beispielsweise `x` in `(+ x 2)`. Dies sind lesende Zugriffe, d.h. der Variablenname
+muss vom aktuellen Scope aus sichtbar sein.
 
-Wir rufen entsprechend auf dem aktuellen Scope ein `resolve()` für den Namen auf. Wenn die Variable in diesem Scope oder in einem
-der darüber erreichbaren Elternscopes gebunden wurde, bekommen wir als Ergebnis den definierenden AST-Knoten (eine `VarDecl`) sowie
-die Tiefe (Anzahl der Schritte vom aktuellen Scope aus) zurück - anderenfalls wirft `Scope#resolve()` einen Fehler. Die Tiefe
-speichern wir für den Interpreter in unserem Feld `depths`.
+Wir rufen entsprechend auf dem aktuellen Scope ein `resolve()` für den Namen auf.
+Wenn die Variable in diesem Scope oder in einem der darüber erreichbaren
+Elternscopes gebunden wurde, bekommen wir als Ergebnis den definierenden AST-Knoten
+(eine `VarDecl`) sowie die Tiefe (Anzahl der Schritte vom aktuellen Scope aus)
+zurück - anderenfalls wirft `Scope#resolve()` einen Fehler. Die Tiefe speichern wir
+für den Interpreter in unserem Feld `depths`.
 
 ## Besonderheiten
 
-Wie bei `resolve(stmt)` haben wir damit alle in L-Var bekannten AST-Knoten vom Typ `Expr` besucht (`SubExpr`, `MulExpr` und `DivExpr` seien noch hinzugefügt).
-Wenn wir hier über einen anderen `Expr`-Knoten laufen würden, wäre das ein Fehler - das wäre eine Expression aus einer späteren
-Sprachstufe!
+Wie bei `resolve(stmt)` haben wir damit alle in L-Var bekannten AST-Knoten vom Typ
+`Expr` besucht (`SubExpr`, `MulExpr` und `DivExpr` seien noch hinzugefügt). Wenn wir
+hier über einen anderen `Expr`-Knoten laufen würden, wäre das ein Fehler - das wäre
+eine Expression aus einer späteren Sprachstufe!
 :::
-
-
-
 
 # Implementierungsdetail: Sammeln der Daten in einer Sidetable
 
 ::: notes
 Wir haben im `NameResolverLvar` einige auf `public` gestellte Felder gesehen:
-`Scope scope`,  `Map<Stmt, Scope> symbols` und `Map<VarExpr, Integer> depths`. Hier werden bei der Traversierung
-des AST im Name-Resolver Daten gesammelt, die in späteren AST-Passes (Type-Checker, Interpreter) relevant sind.
+`Scope scope`, `Map<Stmt, Scope> symbols` und `Map<VarExpr, Integer> depths`. Hier
+werden bei der Traversierung des AST im Name-Resolver Daten gesammelt, die in
+späteren AST-Passes (Type-Checker, Interpreter) relevant sind.
 
-Wir werden in späteren Sprachstufen noch weitere Daten sammeln, beispielsweise Typ-Informationen oder Informationen
-für die statische Namensauflösung.
+Wir werden in späteren Sprachstufen noch weitere Daten sammeln, beispielsweise
+Typ-Informationen oder Informationen für die statische Namensauflösung.
 
-Im `NameResolverLvar` haben wir diese Felder selbst initialisiert. Dies ist einerseits aus SWE-Sicht ungünstig
-(schlechte Testbarkeit), andererseits werden wir später den Bedarf haben, "vordefinierte" Namen im globalen Scope anzulegen, bevor
+Im `NameResolverLvar` haben wir diese Felder selbst initialisiert. Dies ist
+einerseits aus SWE-Sicht ungünstig (schlechte Testbarkeit), andererseits werden wir
+später den Bedarf haben, "vordefinierte" Namen im globalen Scope anzulegen, bevor
 der Resolver oder irgendein anderer Pass die Arbeit aufnimmt.
 
-Deshalb bietet es sich an, diese Daten in ein gemeinsames Objekt zu kapseln, die sogenannte **Sidetable**. Dieses
-Objekt wird extern initialisiert und an jeden Pass als Input gegeben. Die Passes können die relevanten Informationen
-aus dem Sidetable benutzen und ergänzen und am Ende des Durchlaufs die aktualisierte Sidetable zurückgeben.
+Deshalb bietet es sich an, diese Daten in ein gemeinsames Objekt zu kapseln, die
+sogenannte **Sidetable**. Dieses Objekt wird extern initialisiert und an jeden Pass
+als Input gegeben. Die Passes können die relevanten Informationen aus dem Sidetable
+benutzen und ergänzen und am Ende des Durchlaufs die aktualisierte Sidetable
+zurückgeben.
 
-Wir definieren  als Sidetable hier die Klasse `SemaInfo`:
+Wir definieren als Sidetable hier die Klasse `SemaInfo`:
 :::
 
-```java
+``` java
 public class SemaInfo {
     public Scope globalScope = new Scope();
     public Map<Stmt, Scope> symbols = new IdentityHashMap<>();
     public Map<VarExpr, Integer> depths = new IdentityHashMap<>();
 }
-
 ```
 
 ::: notes
-`SemaInfo` sammelt alle derzeit relevanten Ergebnisse der semantischen Analyse. In späteren Sprachstufen werden
-wir noch weitere Felder hinzufügen.
+`SemaInfo` sammelt alle derzeit relevanten Ergebnisse der semantischen Analyse. In
+späteren Sprachstufen werden wir noch weitere Felder hinzufügen.
 
-Die `SemaInfo` ist eine reine "Datenklasse" - wir haben wir nur eine Aggregierung von Feldern und kein Verhalten,
-weshalb die Felder der Einfachheit alle `public` sind.
+Die `SemaInfo` ist eine reine "Datenklasse" - wir haben hier nur eine Aggregierung
+von Feldern und kein Verhalten, weshalb die Felder der Einfachheit alle `public`
+sind.
 
 Damit können wir unseren `NameResolverLvar` anpassen:
 :::
@@ -701,104 +763,149 @@ public class NameResolverLvar {
 ```
 
 ::: notes
-Wir behalten das lokale Feld `scope` - das ist der aktuelle Scope beim Traversieren, das hat nichts mit dem Sidetable
-zu tun. Die anderen beiden Felder `symbols` und `depth` wandern in den Sidetable, den wir als neues Feld
-`SemaInfo sema` festhalten.
+Wir behalten das lokale Feld `scope` - das ist der aktuelle Scope beim Traversieren,
+das hat nichts mit dem Sidetable zu tun. Die anderen beiden Felder `symbols` und
+`depth` wandern in den Sidetable, den wir als neues Feld `SemaInfo sema` festhalten.
 
-Entsprechend sind im obigen Code in den `resolve()`-Methoden noch zwei weitere Änderungen notwendig:
+Entsprechend sind im obigen Code in den `resolve()`-Methoden noch zwei weitere
+Änderungen notwendig:
 
-1. In `resolve(Stmt stmt)` würden wir dann entsprechend `sema.symbols.put(stmt, scope);` ausführen
-(statt wie oben `symbols.put(stmt, scope);`).
-2. Zusätzlich müssten wir in `resolve(Expr expr)` noch
-`sema.depths.put(e, res.depth());` (statt `depths.put(e, res.depth());`, in `case VarExpr e`) ändern.
-
+1.  In `resolve(Stmt stmt)` würden wir dann entsprechend
+    `sema.symbols.put(stmt, scope);` ausführen (statt wie oben
+    `symbols.put(stmt, scope);`).
+2.  Zusätzlich müssten wir in `resolve(Expr expr)` noch
+    `sema.depths.put(e, res.depth());` (statt `depths.put(e, res.depth());`, in
+    `case VarExpr e`) ändern.
 :::
-
 
 # Wrap-Up
 
--   **Semantische Analyse**: Traversierung des AST [(oft zwei Passes über den AST notwendig)]{.notes}
-    -   Identifikation und Sammlung der Bezeichner
+-   **Semantische Analyse**: Traversierung des AST [(oft zwei Passes über den AST
+    notwendig)]{.notes}
+    -   Identifikation und Sammlung der Bezeichner [(in L-Var Variablen, später
+        Funktionen/Klassen)]{.notes}
     -   Zuordnung zur richtigen Ebene (Scopes)
-    -   Validieren der Nutzung von Symbolen
-    -   Später:
-        -   Typ-Inferenz
+    -   Validieren der Nutzung von Symbolen [(Mehrfachdefinition, Nutzung
+        undefinierter Namen)]{.notes}
+    -   Später (L-If, ...):
         -   Typkonsistenz (Ausdrücke, Funktionsaufrufe, ...)
+        -   Typinferenz
 
 \smallskip
 
 -   **Symboltabellen**: Verwaltung von Symbolen und Typen [(Informationen über
     Bezeichner)]{.notes}
-    -   Blöcke: Nested Scopes =\> hierarchische Organisation
-    -   Binden von Bezeichner gleichen Namens an ihren jeweiligen Scope =\> `bind()`
+    -   Blöcke: Nested Scopes =\> hierarchische Organisation [(Scopes sind zu einer
+        Kette (bzw. einem Baum) verlinkt)]{.notes}
+    -   Binden von Bezeichnern an ihren jeweiligen Scope =\> `bind()`
     -   Abrufen von Bezeichnern aus dem aktuellen Scope oder den Elternscopes =\>
-       `resolve()`
-
-
-
-
+        `resolve()`
 
 ::: readings
-Zur Namensauflösung kann man in [@Nystrom2021] kann man in Kapitel 11 "Resolving and Binding" nachlesen.
-Dabei behandelt [@Nystrom2021] die Verbindung zwischen Name-Resolver und Interpreter technisch anders, aber
-das Grundprinzip der Namensauflösung ist ähnlich wie hier gezeigt.
+Zur Namensauflösung kann man in [@Nystrom2021] kann man in Kapitel 11 "Resolving and
+Binding" nachlesen. Dabei behandelt [@Nystrom2021] die Verbindung zwischen
+Name-Resolver und Interpreter technisch anders als wir, aber das Grundprinzip der
+Namensauflösung ist ähnlich wie hier gezeigt.
 
-Wir haben für unsere Symboltabellen die bereits vorhandenen AST-Knoten benutzt, um die Anzahl der Klassen möglichst
-übersichtlich zu halten. In [@Parr2010] (Kapitel 6, 7 und 8)
-wird eine "ordentliche" Symbols-Klassenstruktur entwickelt und für die Namensauflösung eingesetzt. Die Grundprinzipien
-sind wie in diesem Skript gezeigt, aber die separate Klassenstruktur bringt gewisse Vorteile mit sich.
+Wir haben für unsere Symboltabellen die bereits vorhandenen AST-Knoten benutzt, um
+die Anzahl der Klassen möglichst übersichtlich zu halten. In [@Parr2010] (Kapitel 6,
+7 und 8) wird eine "ordentliche" Symbols-Klassenstruktur entwickelt und für die
+Namensauflösung eingesetzt. Die Grundprinzipien sind wie in diesem Skript gezeigt,
+aber die separate Klassenstruktur bringt gewisse Vorteile mit sich.
 :::
 
 ::: outcomes
--   k2: Ich kann die Aufgaben der semantischen Analyse an einem Beispiel erklären
--   k2: Ich kann die Bedeutung von Symboltabellen erklären und die Aufgaben und
-    Verbindung zu den Compiler-Phasen verdeutlichen
--   k3: Ich kann Symboltabellen für Nested Scopes implementieren unter Nutzung von
-    passenden Strukturen/Klassen und einem Listener
--   k3: Ich kann Symbole über die Scopes auflösen
--   k3: Ich kann einfache statische Prüfungen anhand der Symboltabellen durchführen
+-   k2: Ich kann den Unterschied zwischen Syntaxanalyse und semantischer Analyse
+    erklären und typische Aufgaben der semantischen Analyse benennen.
+-   k2: Ich kann erklären, was Scopes und lexikalische Namensauflösung sind und wie
+    sie das Verhalten von Programmen beeinflussen.
+-   k3: Ich kann eine Symboltabellen-Struktur für Nested Scopes in Java
+    implementieren (inkl. `bind()` und `resolve()`) und auf einen gegebenen AST
+    anwenden.
+-   k3: Ich kann einen einfachen Name-Resolver entwerfen und implementieren, der
+    beim Traversieren des AST Scopes anlegt, Namen bindet und Referenzen auflöst.
+-   k3: Ich kann mit Hilfe einer Sidetable (z.B. `SemaInfo`) Informationen wie
+    Scopes und Suchtiefen zwischen verschiedenen Compiler-Pässen (Name-Resolver,
+    Interpreter) austauschen.
+-   k4: Ich kann an einem gegebenen L-Var-Programm begründen, ob die Namensauflösung
+    korrekt ist, und Fehlerfälle (z.B. Mehrfachdefinition, Zugriff auf undefinierte
+    Namen) analysieren.
 :::
 
 ::: challenges
-**Lexikalisches Auflösen von Namen**
+**Lexikalisches Auflösen von Namen und Shadowing**
 
 Betrachten Sie dieses L-Var-Programm:
 
 ``` clojure
-(def x : int 10)
-(def y : int 20)
-(let ((x : int 1))
-  (+ x y)
-(let ((y : int 2))
-  (+ x y))
+(def x : int 1)
+(def y : int 2)
+(let ((x : int 10))
+  (let ((y : int 20)
+        (z : int (+ x y)))
+    (+ x z)))
 ```
 
--   Zeichnen Sie den **Scope-Baum** (statisch).
--   Notieren Sie für jede `VarExpr` (`x` und `y`):
-    -   Auf welche `VarDecl` zeigt sie?
-    -   Welchen `depth`-Wert würde der Resolver berechnen?
--   Skizzieren Sie, wie `sema.depths` für diese Variable-Expressions aussehen
-    würde.
+-   Zeichnen Sie den Scope-Baum.
+-   Ordnen Sie jede `VarDecl` einem Scope zu.
+-   Ordnen Sie jede `VarExpr` (`x`, `y`, `z`) derjenigen `VarDecl` zu, die
+    tatsächlich verwendet wird.
+-   Notieren Sie für jede `VarExpr`, welchen `depth`-Wert der gezeigte
+    `Scope#resolve(name, depth)`-Mechanismus liefern würde.
 
-**resolve(stmt)**
+**Fehlerfälle der Namensauflösung klassifizieren**
 
-Wir haben oben einige Statements ausgelassen. Vervollständigen Sie `void resolve(Stmt stmt)` nun
-für  `ExprStmt` und `AssignStmt`.
+Sie sehen drei Varianten eines L-Var-Programms (hypothetische Beispiele):
 
-**resolve(expr)**
+``` clojure
+(def x : int 1)
+(def x : int 2)
+```
 
-Wir haben oben einige Expressions ausgelassen. Vervollständigen Sie `void resolve(Expr expr)` nun
-für  `SubExpr`, `MulExpr` und `DivExpr`.
+``` clojure
+(+ x 1)
+```
 
+``` clojure
+(let ((x : int (+ x 1)))
+  x)
+```
 
-**resolve(VarDecl)**
+Diskutieren Sie in der Gruppe:
 
-Es spielt eine große Rolle, in welcher Reihenfolge man beim Bearbeiten eines `VarDecl`-Knotens
-den Initialisierungsausdruck und die neue Variable bearbeitet!
+-   Welche dieser Programme sind **semantisch** fehlerhaft in Lispy/L-Var und warum?
+-   An welcher Stelle in Ihrem Name-Resolver würde der Fehler jeweils erkannt? (Beim
+    `bind()`? Beim `resolve()`? In welcher Traversierungsreihenfolge?)
+-   Wie würden Sie die Fehlermeldung formulieren, damit die Programmierer:innen den
+    Fehler möglichst schnell finden?
 
-Was würde passieren, wenn man zuerst die Variable bindet und danach die Initialisierung auswertet?
+**Reihenfolge bei `VarDecl` - zwei Varianten vergleichen**
 
+Betrachten Sie zwei alternative Implementierungen des `VarDecl`-Falls im
+Name-Resolver (Pseudocode):
 
+``` java
+case VarDecl(var name, var type, var init) -> {
+    resolve(init);
+    resolveType(type);
+    scope.bind(name, (VarDecl) stmt);
+}
+```
+
+``` java
+case VarDecl(var name, var type, var init) -> {
+    scope.bind(name, (VarDecl) stmt);
+    resolve(init);
+    resolveType(type);
+}
+```
+
+-   Überlegen Sie sich ein L-Var-Programm, bei dem sich die beiden Varianten
+    unterschiedlich verhalten.
+-   Beschreiben Sie, was jeweils passiert:
+    -   Wann wird ein Fehler geworfen?
+    -   Welcher Programmzustand (Scope-Inhalt) liegt zu diesem Zeitpunkt vor?
+-   Diskutieren Sie, welche Variante in Lispy gewünscht ist und warum.
 
 **Grenzen der semantischen Analyse**
 
@@ -816,5 +923,4 @@ Beispielsweise können Werte von Ausdrücken oft erst zur Laufzeit bestimmt werd
 Insbesondere kann die semantische Analyse in der Regel nicht feststellen, ob ein
 Null-Pointer übergeben wird und anschließend dereferenziert wird.
 -->
-
 :::
