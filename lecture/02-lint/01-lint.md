@@ -24,16 +24,16 @@ Grundlage, um schrittweise Grammatik, Lexer, Parser, Syntaxbaum, AST und Interpr
 zu entwickeln.
 :::
 
-# Problem: Wie verstehen wir `1 + 2 - 3`?
+# Problem: Wie verstehen wir `1 + 2 * 3`?
 
--   Eingabe: Text wie `1 + 2 - 3`
+-   Eingabe: Text wie `1 + 2 * 3`
 -   Ziel: Ergebnis berechnen
 -   Frage:
     -   Wie modellieren wir die Struktur solcher Ausdrücke?
     -   Wie bringen wir den Rechner dazu, "richtig" zu rechnen?
 
 :::: notes
-Starten wir mit einem bewusst einfachen Beispiel: `1 + 2 - 3`. Das kennen alle, aber
+Starten wir mit einem bewusst einfachen Beispiel: `1 + 2 * 3`. Das kennen alle, aber
 wir tun jetzt so, als wüssten wir noch nicht, wie ein Rechner das versteht. Die
 beiden Kernfragen sind: Wie sieht die Struktur dieses Ausdrucks aus? Und wie können
 wir die Bedeutung so modellieren, dass wir sie programmatisch auswerten können?
