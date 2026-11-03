@@ -125,7 +125,7 @@ Trennung hilft uns später auch bei Typprüfung und Fehlerbehandlung.
         -   Literal (Integer): Als Integer-Wert zurückgeben
         -   Ausdruck (Addition, Subtraktion): linke und rechte Seite zu
             Integer-Werten evaluieren, die Operation ausführen, Ergebnis als
-            Integerwert zurückgeben
+            Integer-Wert zurückgeben
 
 ::: notes
 Der Tree-Walking-Interpreter ist im Kern eine rekursive Funktion über dem AST. Für
@@ -307,9 +307,9 @@ Interpreter gelangt und ausgewertet wird.
 # Wrap-up
 
 -   Interpreter simulieren die Programmausführung
-    -   Code ausführen: Read-Eval-Loop
+    -   Code ausführen: Read-Eval-Loop (REPL)
 -   Tree-Walking-Interpreter traversieren den AST
--   Auswertung der Knoten mit `eval(Expr e)`
+-   Auswertung der [(Expression-)]{.notes} Knoten mit `eval(Expr e)`
 
 ::: notes
 Wir haben heute den semantischen Kern von L-Int gebaut. Wir haben eine
