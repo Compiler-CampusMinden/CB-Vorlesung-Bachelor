@@ -24,6 +24,11 @@ Grundlage, um schrittweise Grammatik, Lexer, Parser, Syntaxbaum, AST und Interpr
 zu entwickeln.
 :::
 
+::: youtube
+Vorlesung \[[YT](https://youtu.be/JoIQmSkYEtY)\],
+\[[HSBI](https://www.hsbi.de/medienportal/video/cb-l-int-die-sprache-lispy/89fc83ce0ac6e37fde393da526dd2f3a)\]
+:::
+
 # Problem: Wie verstehen wir `1 + 2 * 3`?
 
 -   Eingabe: Text wie `1 + 2 * 3`
