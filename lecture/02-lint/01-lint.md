@@ -127,7 +127,7 @@ Clojure und Lisp nutzen die "*prefix notation*": `(. x y z)`
 
 ::: center
 ![](https://clojure.org/images/content/guides/learn/syntax/structure-and-semantics.png){width="60%"
-web_width="85%"}
+web_width="50%"}
 
 [[Clojure.org: Learn
 Clojure](https://clojure.org/guides/learn/syntax#_structure_vs_semantics)]{.credits}
