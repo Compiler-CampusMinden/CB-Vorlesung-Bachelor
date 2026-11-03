@@ -156,10 +156,20 @@ und wird vom Lexer als End-of-Input-Token produziert.
 Schauen wir uns an, wie der Ausdruck `(- (+ 1 2) 3)` als Parse-Tree aussieht.
 :::
 
+::: columns
+::: {.column width="30%"}
 Text: `(- (+ 1 2) 3)`
-
-\bigskip
-\smallskip
+:::
+::: {.column width="70%"}
+::: slides
+``` ebnf
+eform ::= '(' '+' eform eform+ ')' | '(' '-' eform eform+ ')' | INT
+INT   ::= [0-9]+
+lint  ::= eform EOF
+```
+:::
+:::
+::::
 
 Parse-Tree:
 
