@@ -57,6 +57,10 @@ INT   ::= [0-9]+
 lint  ::= eform EOF
 ```
 
+::: slides
+[Hinweis: Pipeline, implizite Token, Whitespace]{.ex}
+:::
+
 ::::::: notes
 Diese konkrete Grammatik beschreibt die Struktur (Syntax) der Zeichenketten, die
 zulässige Ausdrücke in L-Int sind.
