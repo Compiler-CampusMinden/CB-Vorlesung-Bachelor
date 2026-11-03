@@ -353,6 +353,16 @@ gezeigte Vereinfachung ist eine besonders einfache Form der Vereinfachung/Umform
 
 # AST in Java: Definition
 
+::: slides
+``` ebnf
+Expr = IntLiteral(Int) | AddExpr(Expr, Expr) | SubExpr(Expr, Expr)
+Lint = Expr
+```
+
+\bigskip
+\smallskip
+:::
+
 ::: notes
 Die abstrakte Grammatik übersetzen wir jetzt direkt in Java-Klassen. Wir modellieren
 jedes Element der abstrakten Grammatik mit passenden Java-Typen:
