@@ -21,6 +21,11 @@ interpretiert man zunächst die Teilausdrücke durch den rekursiven Aufruf von
 Ergebnis.
 :::
 
+::: youtube
+Vorlesung \[[YT](https://youtu.be/aFEBQbNgTXs)\],
+\[[HSBI](https://www.hsbi.de/medienportal/video/cb-l-int-von-ausdrcken-zum-interpreter/e98d1ff213e01714a919f975dc8179e2)\]
+:::
+
 # Von AST zu Werten: Idee
 
 -   Gegeben: Lexer/Parser haben einen AST aufgebaut
