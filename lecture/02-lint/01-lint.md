@@ -153,7 +153,7 @@ zurück. Ein `(+ 1 2)` ist für uns einfach eine andere Schreibweise für `1 + 2
 :::
 ::::
 
-# L-Int: Erste Sprachstufe
+# Lispy: Erste Sprachstufe L-Int
 
 ::: notes
 Die Sprache L-Int ist bewusst sehr eingeschränkt, damit wir schnell die
