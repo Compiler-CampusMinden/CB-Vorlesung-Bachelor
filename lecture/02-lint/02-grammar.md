@@ -21,6 +21,11 @@ festgelegt werden, wie Ausdrücke mit mehr als zwei Operanden in binäre Knoten
 übersetzt werden - eine einfache Form von "Desugaring".
 :::
 
+::: youtube
+Vorlesung \[[YT](https://youtu.be/XvJVwqA4i7Y)\],
+\[[HSBI](https://www.hsbi.de/medienportal/video/cb-l-int-konkrete-und-abstrakte-syntax/521ec26e001d2f96fd2d1ec087036448)\]
+:::
+
 # Erinnerung Lispy in der Sprachstufe L-Int
 
 ``` clojure
