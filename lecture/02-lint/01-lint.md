@@ -75,9 +75,9 @@ haben eine spezielle Form: Sie sind sogenannte
 Eine S-Expression ist:
 :::
 
--   ein Atom der Form `x`, oder
+-   ein Atom der Form `x`[, oder]{.notes}
 -   ein Ausdruck der Form `(. x y)` [(mit `x` u. `y` S-Expressions, `.` eine
-    Operation oder Funktion oder ein Keyword)]{.notes}.
+    Operation oder Funktion oder ein Keyword).]{.notes}
 
 ::::: notes
 ::: tip
