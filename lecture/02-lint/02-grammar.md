@@ -232,13 +232,13 @@ auf das eingegebene Programm zu haben.
 # Konkrete vs. abstrakte Grammatik
 
 -   **Konkrete Grammatik**:
-    -   Wie der Code "auf dem Papier" aussieht
+    -   Wie der Code "auf dem Papier" [(in der Eingabe)]{.notes} aussieht
     -   Enthält Syntaxdetails (Klammern, Keywords, Vorrangregeln)
 
 \bigskip
 
 -   **Abstrakte Grammatik**:
-    -   Wie wir den Code **im Programm** modellieren
+    -   Wie wir den Code **im Compiler** modellieren
     -   Fokus auf Bedeutungsträger (z.B. `AddExpr`, `SubExpr`, `IntLiteral`)
 
 ::: notes
