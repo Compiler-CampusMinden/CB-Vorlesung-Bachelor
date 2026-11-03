@@ -179,7 +179,7 @@ Beispiele:
 ```
 
 ::: slides
-[Hinweis: Syntax Sugar, Statements vs. Expressions]{.ex}
+[Hinweis: Syntax Sugar, Statements vs. Expressions]{.ex}
 :::
 
 ::::: notes
