@@ -178,6 +178,10 @@ Beispiele:
 (- (+ 1 2) (- 3 4))     ;; (1 + 2) - (3 + 4)
 ```
 
+::: slides
+[Hinweis: Syntax Sugar, Statements vs. Expressions]{.ex}
+:::
+
 ::::: notes
 L-Int ist unsere minimalistische Basissprache für die folgenden Sitzungen. Sie
 enthält nur das Nötigste: Integer-Literale, Addition und Subtraktion, sowie
