@@ -163,7 +163,7 @@ Sprachinkremente darauf aufbauen.
 In L-Int haben wir:
 
 -   Nichtnegative Ganzzahlen (z.B. `0`, `42`, `1337`)
--   Binäre Operatoren: `+`, `-`
+-   Arithmetische Operatoren: `+`, `-`
 -   Klammern: `(`, `)`
 -   Zeilen-Kommentar: `;;`
 
