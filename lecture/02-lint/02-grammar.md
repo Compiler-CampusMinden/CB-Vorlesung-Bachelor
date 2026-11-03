@@ -153,7 +153,7 @@ und wird vom Lexer als End-of-Input-Token produziert.
 # Beispiel konkrete Syntax
 
 ::: notes
-Schauen wir uns an, wie der Ausdruck `(- (+ 1 2) 3)` als Parse-Tree aussieht.
+Schauen wir uns an, wie der Ausdruck `(- (+ 1 2) 3)` als **Parse-Tree** aussieht.
 :::
 
 ::: slides
@@ -304,7 +304,7 @@ Lint = Expr
 :::
 
 ::: notes
-Schauen wir uns an, wie der Ausdruck `(- (+ 1 2) 3)` als AST aussieht.
+Schauen wir uns nun an, wie der Ausdruck `(- (+ 1 2) 3)` als **AST** aussieht.
 :::
 
 **Text**: `(- (+ 1 2) 3)`
@@ -428,11 +428,11 @@ nur noch halb so nützlich (schützt nur noch vor unbeabsichtigten Ableitungen).
 
 ::::: columns
 ::: {.column width="25%"}
-Text: `(- (+ 1 2) 3)`
+**Text**: `(- (+ 1 2) 3)`
 :::
 
 ::: {.column width="75%"}
-AST:
+**AST**:
 
                                     SubExpr
                                    /       \
@@ -445,6 +445,10 @@ AST:
 :::::
 
 \bigskip
+
+::: notes
+**AST direkt in Java**:
+:::
 
 ``` java
 Expr e = new SubExpr(
