@@ -426,11 +426,12 @@ nur noch halb so nützlich (schützt nur noch vor unbeabsichtigten Ableitungen).
 
 # AST in Java: Beispielkonstruktion
 
-::: columns
+::::: columns
 ::: {.column width="25%"}
 Text: `(- (+ 1 2) 3)`
 :::
-::: {.column width="70%"}
+
+::: {.column width="75%"}
 AST:
 
                                     SubExpr
@@ -440,9 +441,8 @@ AST:
                        IntLiteral IntLiteral  3
                            |          |
                            1          2
-
 :::
-:::
+:::::
 
 \bigskip
 
