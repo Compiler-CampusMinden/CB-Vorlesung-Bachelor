@@ -293,16 +293,23 @@ würde eine Liste mit Integer-Werten bedeuten.
 
 # Beispiel abstrakte Syntax (AST)
 
+::: slides
+``` ebnf
+Expr = IntLiteral(Int) | AddExpr(Expr, Expr) | SubExpr(Expr, Expr)
+Lint = Expr
+```
+
+\bigskip
+\smallskip
+:::
+
 ::: notes
 Schauen wir uns an, wie der Ausdruck `(- (+ 1 2) 3)` als AST aussieht.
 :::
 
-Text: `(- (+ 1 2) 3)`
+**Text**: `(- (+ 1 2) 3)`
 
-\bigskip
-\smallskip
-
-AST:
+**AST**:
 
                                     SubExpr
                                    /       \
