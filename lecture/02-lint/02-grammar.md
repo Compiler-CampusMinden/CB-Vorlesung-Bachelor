@@ -204,16 +204,16 @@ komplex.
 
 # Konkrete Grammatik - Eigenschaften
 
--   Die Grammatik legt fest:
-    -   Welche Eingabe-Strings gültige Programme sind
+-   Die konkrete Grammatik legt fest:
+    -   Welche Eingabe-Strings **syntaktisch** gültige Programme sind
     -   Struktur des **Parse-Trees**
 
 \bigskip
 
 -   Aber:
-    -   Enthält "technische" Details:
+    -   Parse-Tree enthält **"technische" Details**:
         -   Klammern, `EOF`, ...
-        -   Hilfsnonterminale (`eform`)
+        -   Hilfs-Nonterminale (`eform`)
     -   Nicht optimal als interne Repräsentation für die Weiterverarbeitung
 
 ::: notes
