@@ -154,6 +154,10 @@ public class LispyLexerLint {
 }
 ```
 
+::: slides
+[Hinweis: Schnittstelle]{.ex}
+:::
+
 :::: notes
 Der Lexer läuft über den Eingabestring und erzeugt eine vollständige Liste mit
 Token. Irrelevante Zeichen wie Whitespace und Kommentare werden dabei immer wieder
