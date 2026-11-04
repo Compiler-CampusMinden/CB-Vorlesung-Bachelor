@@ -328,11 +328,11 @@ umständliche Fehlerbehandlung nach sich ...
 :::
 ::::
 
-# Typische Muster für Erstellung von Token
+# Typische Muster für die Definition von Token
 
 1.  Schlüsselwörter
 
-    -   Ein eigenes Token für jedes Schlüsselwort, oder
+    -   Ein eigenes Token (RE) für jedes Schlüsselwort, oder
     -   Erkennung als Name (`ID`) und nachträglich Vergleich mit Wörterbuch [sowie
         Korrektur des Tokentyps]{.notes}
 
@@ -383,6 +383,10 @@ umständliche Fehlerbehandlung nach sich ...
     beispielsweise in Python. Dann müssen diese Token wie normale Token an den
     Parser weitergereicht werden.
     :::
+
+::: slides
+[Hinweis: Längster Match]{.ex}
+:::
 
 :::: notes
 ::: tip
