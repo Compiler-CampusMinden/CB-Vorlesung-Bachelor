@@ -128,6 +128,8 @@ und in sich geschlossen (kein Übertrag):
 -   **Prüfungsphase II**: **Digitale Klausur** im B40, Dauer 120 Minuten (*Termin
     wird vom Prüfungsamt bekanntgegeben*), **Klausurergebnis bestimmt die Note**
 
+[**Fragetypen-Demo** im ILIAS](https://www.hsbi.de/elearning/goto.php/tst/1352273)
+
 ### Hinweise
 
 -   Die Parcoursprüfung und die Studienleistung sind zwei unabhängige
