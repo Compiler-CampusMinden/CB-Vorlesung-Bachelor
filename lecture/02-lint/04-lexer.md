@@ -20,6 +20,11 @@ Ein-Schritt-Transformationen bis hin zu speziellen Lexer-Regeln, die beispielswe
 besonders häufige Typos abfangen.
 :::
 
+::: youtube
+Vorlesung \[[YT](https://youtu.be/IuDKnPiWD94)\],
+\[[HSBI](https://www.hsbi.de/medienportal/video/cb-l-int-lexer-handcodierte-implementierung/9116abd700f5a4580cf929349c34f44a)\]
+:::
+
 # Lexer: Erzeugen eines Token-Stroms aus einem Zeichenstrom
 
 [Aus dem Eingabe(-quell-)text]{.notes}
