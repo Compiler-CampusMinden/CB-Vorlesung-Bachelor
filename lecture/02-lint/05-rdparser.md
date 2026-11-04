@@ -31,7 +31,7 @@ Methoden aufgerufen werden und keine Token entfernt werden; eventuell auftretend
 Linksrekursion muss zunächst beseitigt werden.
 :::
 
-# Recursive-Descent-Parser: Ziel
+# LL-Parser mit Recursive Descent: Ziel
 
 -   Aus Tokens einen AST bauen:
 
@@ -54,13 +54,51 @@ Linksrekursion muss zunächst beseitigt werden.
     Expr  = IntLiteral(Int) | AddExpr(Expr, Expr) | SubExpr(Expr, Expr)
     ```
 
-::: notes
+::: slides
+[Hinweis: Schnittstelle, AST vs. Parse-Tree]{.ex}
+:::
+
+::::: notes
 Mit dem Lexer können wir jetzt eine Tokenliste erzeugen. Der nächste Schritt ist der
 Parser, den wir als Recursive-Descent-Parser implementieren. Wir verwenden dafür
 eine leicht umgeformte Grammatik ohne Linksrekursion. Die Methode `parse()` wird
 unser Einstiegspunkt sein und am Ende einen `Expr`-AST liefern, den wir mit unserem
 Interpreter auswerten können.
+
+Wir haben in der Vorlesung LL-Parser kennengelernt, die den Parse-Tree von oben nach
+unten (*top-down*) aufbauen. Es gibt auch die Welt der LR-Parser, die den Baum von
+unten nach oben (*bottom-up*) aufbauen - diese betrachten wir hier nicht. Bei den
+LL-Parsern haben wir die Varianten "Recursive Descent" und "Tabellenbasiert"
+kennengelernt. Heute betrachten wir den Recursive-Descent-Parser (**RD-Parser**)
+genauer.
+
+::: tip
+In unserem RD-Parser übergeben wir die Liste aller Token. Das passt zu unserer
+Modellierung des Lexers und entkoppelt softwaretechnisch beide Bausteine. Der
+Nachteil ist, dass der Lexer zunächst die komplette Eingabe bearbeitet, auch wenn
+der Parser vielleicht gleich beim ersten Token einen Fehler finden würde. Außerdem
+sieht man erst (schrittweise) alle Lexerfehler, bevor man dann (schrittweise) alle
+Parserfehler findet.
+
+Die traditionelle Formulierung ist, dem RD-Parser einen Lexer zu übergeben. Der
+Parser muss dann selbst immer wieder `nextToken()` auf diesem Lexer aufrufen. Das
+sorgt einerseits für eine enge Kopplung zwischen den Bausteinen, hat aber
+andererseits potentiell leichte Effizienzvorteile und die Fehlermeldungen zwischen
+Lexer und Parser sind synchron.
 :::
+
+::: tip
+Ein Parser erzeugt zunächst prinzipiell einen **Parse-Tree**. Diesen transformiert
+man in einem weiteren Schritt in einen **AST** ("AST-Builder").
+
+Wenn man den Parser selbst schreibt, kann man diesen zweiten Schritt auch direkt mit
+dem Parsing zusammenfassen. Wir werden das tun und in unserem RD-Parser statt einem
+Parse-Tree direkt den AST ausgeben.
+
+Wenn wir später ANTLR betrachten, werden wir von ANTLR einen Parse-Tree bekommen und
+müssen diesen noch mit einem AST-Builder in einen AST transformieren.
+:::
+:::::
 
 # Grundidee LL-Parser mit Recursive Descent
 
@@ -76,27 +114,36 @@ r ::= X s
 \bigskip
 
 ::: notes
-Diese Regeln werden jeweils in eine dazu passende Funktion überführt:
+Diese Produktionen werden jeweils in eine dazu passende Funktion überführt:
 :::
 
 ``` java
 Expr parseR() {
     match(X);
-    return s();
+    return parseS();
 }
 ```
 
-::: notes
--   Für jede Regel in der Grammatik wird eine Methode/Funktion mit diesem Namen
-    definiert
+:::: notes
+-   Für jedes Nonterminal in der Grammatik wird eine Methode/Funktion mit diesem
+    Namen definiert
 -   Referenzen auf ein Terminal (Token) `T` werden durch den Aufruf der Methode
     `match(T)` aufgelöst
     -   `match(T)` "konsumiert" das aktuelle Token, falls dieses mit `T`
         übereinstimmt
     -   Anderenfalls löst `match()` eine Exception aus
--   Referenzen auf Nichtterminale (Regeln) `s` werden durch Methodenaufrufe `s()`
-    aufgelöst
+-   Referenzen auf Nichtterminale (Regeln) `s` werden durch Methodenaufrufe
+    `parseS()` aufgelöst
+
+::: tip
+Wenn die Parserfunktionen ohne Rückgabewert arbeiten, dann prüft der Parser nur, ob
+die Eingabestruktur passt. Es wird dann kein Parse-Tree o.ä. aufgebaut.
+
+In unserem Fall wollen wir einen Parse-Tree bzw. sogar einen AST erzeugen. Das ist
+oben noch ziemlich versteckt in dem `return parseS();`. Wir werden später sehen, wie
+wir den Baum aufbauen können.
 :::
+::::
 
 # Alternative Subregeln
 
@@ -326,8 +373,8 @@ ruleA ::= a b1 | ... | a bm
 Hier könnte man den gemeinsamen Start `a` "ausklammern":
 
 ``` ebnf
-ruleA  ::= a ruleAA
-ruleAA ::= b1 | ... | bm
+ruleA ::= a ruleB
+ruleB ::= b1 | ... | bm
 ```
 
 Bei uns im Beispiel war der gemeinsame Start für mehrere Alternativen die Klammer
@@ -339,6 +386,16 @@ und damit einem Token Lookahead auskommen (statt jetzt zwei).
 :::::
 
 # Details Parser für L-Int: `parseAddExpr()`
+
+::: notes
+Erinnerung an den Teil der Additionsregel in der konkreten Grammatik:
+:::
+
+``` ebnf
+'(' '+' eform eform+ ')'
+```
+
+\bigskip
 
 ``` java
 protected Expr parseAddExpr() {
@@ -354,6 +411,10 @@ protected Expr parseAddExpr() {
     return ops.stream().reduce(AddExpr::new).orElseThrow();
 }
 ```
+
+::: slides
+[Hinweis: Desugaring]{.ex}
+:::
 
 :::: notes
 Auch hier sehen wir wieder das eingangs skizzierte Muster: Für jedes Terminal wird
