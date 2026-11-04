@@ -31,6 +31,11 @@ Methoden aufgerufen werden und keine Token entfernt werden; eventuell auftretend
 Linksrekursion muss zunächst beseitigt werden.
 :::
 
+::: youtube
+Vorlesung \[[YT](https://youtu.be/Ih9jIdrbA24)\],
+\[[HSBI](https://www.hsbi.de/medienportal/video/cb-l-int-ll-parser-mit-recursive-descent/acd5bddb81eba4b7f90f7bfaa57d120a)\]
+:::
+
 # LL-Parser mit Recursive Descent: Ziel
 
 -   Aus Tokens einen AST bauen:
