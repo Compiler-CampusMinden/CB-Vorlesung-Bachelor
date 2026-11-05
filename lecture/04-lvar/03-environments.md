@@ -230,21 +230,24 @@ Eltern-Environment `Env parent` ist? (vgl. Challenges)
 :::
 
 ::: important
-## Unterscheidung Scopes und Environments
+## Unterscheidung Symboltabellen und Environments
 
-Beide Strukturen (`Scope` und `Env`) sind strukturell ähnlich aufgebaut. Beide haben
-einen Verweis auf den Eltern-Scope bzw. das Eltern-Environment. Beide speichern zu
-einem Namen eine Information. Beide haben eine Art Auflösemechanismus, um die
-Information zu einem Namen abzurufen. Beide dienen ähnlichen Zwecken: Ein
-`Scope`-Objekt spiegelt wie ein `Env`-Objekt einen Sichtbarkeitsbereich (Scope) in
-unserem zu verarbeitenden Programm.
+Beide Strukturen (`Scope` für die Symboltabellen und `Env` für die Environments)
+sind strukturell ähnlich aufgebaut. Beide haben einen Verweis auf den Eltern-Scope
+bzw. das Eltern-Environment. Beide speichern zu einem Namen eine Information. Beide
+haben eine Art Auflösemechanismus, um die Information zu einem Namen abzurufen.
+Beide dienen ähnlichen Zwecken: Ein `Scope`-Objekt spiegelt wie ein `Env`-Objekt
+einen Sichtbarkeitsbereich (Scope) in unserem zu verarbeitenden Programm.
 
 Der Unterschied liegt in der Benutzung:
 
--   `Scope` ist eine **statische** Sicht auf die Sichtbarkeitsbereiche.
+-   `Scope` ist eine **statische** Sicht auf die Sichtbarkeitsbereiche, d.h. sie
+    hängt nur von der Quelltextstruktur ab, nicht vom tatsächlichen Programmverlauf.
 
-    Wir bauen mit `Scope` die Symboltabellenstruktur während der semantischen
-    Analyse im Name-Resolver auf. Dabei betreten wir jeden Scope, beispielsweise das
+    In einem `Scope`-Objekt ordnen wir während der semantischen Analyse jedem im
+    Scope sichtbaren Namen genau seinen Deklarationsknoten (`Decl`) im AST zu. Wir
+    bauen mit `Scope` die Symboltabellenstruktur im Name-Resolver auf. Dabei
+    betreten wir jeden Scope im Quelltext (AST), beispielsweise das
     `let`-with-Scopes (oder später in L-Fun den Funktionskörper) und prüfen, ob wir
     semantischen Regeln der Sprache Lispy eingehalten wurden: Sind alle Namen
     sichtbar (ggf. über die Eltern-Beziehung bis zum globalen Scope hoch), werden
@@ -253,22 +256,42 @@ Der Unterschied liegt in der Benutzung:
     Information der Definition, also den `Decl`-Knoten des AST, der zu diesem Namen
     gehört. Wir werden später in L-Fun sehen, dass wir zwar die lokalen Variablen im
     Funktionskörper ganz normal auflösen, aber keine Funktionsaufrufe verfolgen! Wir
-    interpretieren keine Anweisungen oder Ausdrücke, sondern prüfen nur die
-    Sichtbarkeiten.
+    interpretieren in der semantischen Analyse keine Anweisungen oder Ausdrücke,
+    sondern prüfen nur die Sichtbarkeiten.
 
 -   `Env` ist die **dynamische** Sicht auf die Sichtbarkeitsbereiche.
 
-    Wir speichern zu jedem Namen den zugehörigen Wert in der `Env`. Wir
-    interpretieren nun die Ausdrücke und Anweisungen, d.h. wir berechnen Werte und
-    erzeugen Nebeneffekte. Jedes `Env`-Objekt entspricht einem Scope im
-    verarbeiteten Programm. Die Environment-Struktur baut sich dynamisch während der
-    Verarbeitung auf und ab, und im Unterschied zur semantischen Analyse verfolgen
-    wir später in L-Fun dann (natürlich) auch die Funktionsaufrufe - jeder
+    Wir speichern bei der Interpretation zu jedem Namen den zugehörigen Wert in der
+    `Env`. Wir interpretieren nun die Ausdrücke und Anweisungen, d.h. wir berechnen
+    Werte und erzeugen Nebeneffekte. Jedes Env-Objekt entspricht einem **konkreten
+    Aktivierungskontext eines Scopes** im Programm (z.B. einem Funktionsaufruf).
+    Derselbe Funktionskörper kann also zur Laufzeit viele verschiedene `Env`-Objekte
+    haben - eine`Env` pro Aufruf. Die Environment-Struktur baut sich dynamisch
+    während der Verarbeitung auf und ab, und im Unterschied zur semantischen Analyse
+    verfolgen wir später in L-Fun dann (natürlich) auch die Funktionsaufrufe - jeder
     Funktionsaufruf legt einen neuen "Scope" an, in dem die lokalen Variablen im
     Funktionskörper für diesen Aufruf definiert sind. Dies nennt man auch oft "Call
-    Frame" oder "Stack Frame" - und unsere `Env`-Objekte entsprechen exakt diesen
-    Call-Frames. (Oft würde man tatsächlich mit einem `Stack<Env>` auskommen, aber
-    manche Dinge gehen leider nur über die Struktur mit dem Eltern-Zeiger.)
+    Frame" oder "Stack Frame" - unsere `Env`-Objekte modellieren genau diese Call
+    Frames. In vielen Implementierungen wird dafür intern tatsächlich ein Stack von
+    Frames verwendet, aber manche Dinge gehen leider nur über die Struktur mit dem
+    Eltern-Zeiger - siehe Challenges. Unsere Eltern-Zeiger-Struktur bildet dasselbe
+    Konzept explizit im Heap nach. Wir führen hier im Gegensatz zur Namensauflösung
+    alle Schleifen und Funktionsaufrufe im verarbeiteten Programm aus und erzeugen
+    dabei die gewünschten Seiteneffekte. Wir haben jetzt Kontrollfluss und
+    interpretieren beispielsweise Fallunterscheidungen - je nachdem, wie die
+    Auswertung der Bedingung ausfällt, betrachten wir jetzt nur noch einen der
+    Branches ...
+
+**Merksatz**:
+
+-   `Scope` (semantische Analyse/Namensauflösung):
+    -   Name $\to$ Deklaration (`Decl`-Knoten im AST)
+    -   statisch, einmaliger Pass über den AST
+    -   kein Kontrollfluss, keine Ausführung
+-   `Env` (Interpreter):
+    -   Name $\to$ Wert zur Laufzeit
+    -   dynamisch, verändert sich während der Ausführung
+    -   führt Kontrollfluss, Schleifen, Funktionsaufrufe tatsächlich aus
 :::
 :::::::
 

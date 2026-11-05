@@ -402,6 +402,23 @@ im Interpreter das erneute Suchen der Namen ...
 ::: important
 Wir betrachten hier ausschließlich **lexikalische (statische) Namensauflösung**;
 dynamische Scopes (wie etwa in Lisp) behandeln wir nicht.
+
+Wir führen in der **Namensauflösung** keine Schleifen oder Funktionsaufrufe im
+verarbeiteten Programm durch - wir **prüfen lediglich für jeden Namen im AST, zu
+welcher Definition dieser gehört**. Es gibt **bei der Namensauflösung keine
+Seiteneffekte und keinen Kontrollfluss**: Wenn wir ein Statement anschauen, führen
+wir dieses nicht aus! Wenn wir eine Schleife im AST sehen, besuchen wir deren Körper
+genau einmal, um Namen darin aufzulösen - unabhängig davon, wie oft sie später zur
+Laufzeit ausgeführt wird. Bei einer `if`-Anweisung besuchen wir während der
+Namensauflösung immer beide Branches, weil wir rein strukturell prüfen, ob alle
+Namen auflösbar sind - unabhängig davon, ob der Branch zur Laufzeit überhaupt
+erreicht wird.
+
+Es lohnt sich diesen Prozess als eigenständigen Pass über den AST durchzuführen und
+vor dem Interpreter laufen zu lassen. Der Interpreter muss später die Schleifen
+durchlaufen und die Funktionsaufrufe ausführen - und wir müssten die Namensauflösung
+dann in jedem einzelnen Schleifendurchlauf oder Funktionsaufruf immer wieder
+durchführen!
 :::
 ::::::::::
 
