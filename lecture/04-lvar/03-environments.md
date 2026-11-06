@@ -200,9 +200,13 @@ Es lohnt sich, der Klasse `Env` zwei extra Hilfskonstruktoren mitzugeben:
 
 ``` java
 public record Env(Env parent, Map<String, Value> values) {
-    public Env() { this(null); }
+    public Env() {
+        this(null);
+    }
 
-    public Env(Env parent) { this(parent, new HashMap<>()); }
+    public Env(Env parent) {
+        this(parent, new HashMap<>());
+    }
 
     // ...
 }
