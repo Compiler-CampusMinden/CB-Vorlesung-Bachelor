@@ -64,7 +64,7 @@ Expressions, aber wir brauchen noch ein Konzept, wie wir mit dem Zustand umgehen
 # Zustände: Auswerten von Anweisungen
 
 ::::: columns
-::: column
+::: {.column width="35%"}
 ``` clojure
 (def x : int 1)
 (let ((a : int 2)
@@ -74,7 +74,10 @@ Expressions, aber wir brauchen noch ein Konzept, wie wir mit dem Zustand umgehen
 ```
 :::
 
-::: column
+::: {.column width="10%"}
+:::
+
+:::  {.column width="35%"}
     +-------------------+
     |    GLOBAL ENV     |
     +-------------------+
@@ -121,13 +124,11 @@ public record Env(Env parent, Map<String, Value> values) {
         Env env = envAtDepth(depth);
         return env.values.get(name);
     }
-
     public void assign(String name, Value value, int depth) {
         Env env = envAtDepth(depth);
         env.values.put(name, value);
     }
 
-    // === helper ===
     private Env envAtDepth(int depth) {
         Env env = this;
         for (int i = 0; i < depth && env != null; i++) env = env.parent();
@@ -412,18 +413,15 @@ Für diese Statements definieren wir nun die Methode `exec(stmt)` in
 protected void exec(Stmt stmt) {
     switch (stmt) {
         case ExprStmt(var expr) -> last = eval(expr);
-
         case VarDecl(var name, var type, var init) -> {
             Value i = eval(init);
             env.define(name, i);
         }
-
         case BlockStmt(var s) -> {
             env = new Env(env);
             s.forEach(this::exec);
             env = env.parent();
         }
-
         default -> throw error("unexpected statement: " + stmt);
     }
 }
@@ -550,14 +548,22 @@ Fehler hätten nämlich bereits in der semantischen Analyse auffallen müssen!
 # Wrap-up
 
 -   Laufzeitzustand: verkettete `Env`-Objekte (Name $\to$ Wert)
--   Block-Ausführung: beim `BlockStmt` neues `Env(env)` anlegen, nach dem Block
-    `env` auf `parent` zurücksetzen
--   `VarDecl`: Initialisierung per `eval()` berechnen, Name im aktuellen `Env` mit
-    `define(name, value)` eintragen
--   `VarExpr`: über vom Name-Resolver berechnete Tiefe das passende `Env` finden und
-    Wert mit `get(name, depth)` lesen
+
+\smallskip
+
 -   `exec(stmt)`: führt Statements aus; zuletzt ausgewertetes `ExprStmt` ist
     Rückgabewert des Interpreters
+
+\smallskip
+
+-   Block-Ausführung: beim `BlockStmt` neues `Env(env)` anlegen, nach dem Block
+    `env` auf `parent` zurücksetzen
+
+-   `VarDecl`: Initialisierung per `eval()` berechnen, Name im aktuellen `Env` mit
+    `define(name, value)` eintragen
+
+-   `VarExpr`: über vom Name-Resolver berechnete Tiefe das passende `Env` finden und
+    Wert mit `get(name, depth)` lesen
 
 ::: readings
 Zur Interpretation von Statements kann man in [@Nystrom2021] in Kapitel 8
