@@ -262,18 +262,18 @@ Dieses Verhalten nennt man auch **lexikalische Namensauflösung**.
 ``` java
 public record Scope(Scope parent, HashMap<String, Decl> symbols) {
 
+    public void bind(Decl symbol) { bind(symbol.name(), symbol); }
     public void bind(String name, Decl symbol) {
         if (symbols.containsKey(name))
-            throw new RuntimeException("name already defined: " + name);
+            throw new RuntimeException("name already defined");
         symbols.put(name, symbol);
     }
 
     public Decl resolve(String name) { return resolve(name, 0).decl; }
     public Resolution resolve(String name, int depth) {
-        Decl decl = symbols.get(name);
-        if (decl != null) return new Resolution(decl, depth);
+        if (symbols.containsKey(name)) return new Resolution(symbols.get(name), depth);
         if (parent != null) return parent.resolve(name, depth + 1);
-        throw new RuntimeException("undefined name: " + name);
+        throw new RuntimeException("undefined name");
     }
 
     public record Resolution(Decl decl, int depth) {}
@@ -563,7 +563,7 @@ protected void resolve(Stmt stmt) {
     switch (stmt) {
         case VarDecl(var name, var type, var init) -> {
             resolve(init);  resolveType(type);
-            scope.bind(name, (VarDecl) stmt);
+            scope.bind((VarDecl) stmt);
         }
         case BlockStmt(var s) -> {
             scope = new Scope(scope);
@@ -699,7 +699,7 @@ Dieser Knoten stellt ein Blatt im AST dar. Deshalb brauchen wir hier nichts tun.
 Ein `AddExpr`-Knoten hat zwei Kinder, die wiederum Expressions sind. Für beide
 Kinder stoßen wir die rekursive Namensauflösung an. Mehr ist hier nicht zu tun.
 
-## Lesender Variabenzugriff
+## Lesender Variablenzugriff
 
 Eine `VarExpr` ist ein Verweis auf einen Variablennamen in einer Expression,
 beispielsweise `x` in `(+ x 2)`. Dies sind lesende Zugriffe, d.h. der Variablenname
