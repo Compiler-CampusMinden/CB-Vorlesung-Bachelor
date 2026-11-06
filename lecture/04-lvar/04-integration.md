@@ -4,34 +4,65 @@ title: "L-Var: Integration & Pipeline-Gesamtbild"
 ---
 
 ::: tldr
-TODO
+In L-Var fügen wir zu Lispy Variablen, Zuweisungen und Blöcke mit eigenen Scopes
+hinzu. Ein L-Var-Programm durchläuft eine feste Pipeline: Quelltext $\to$
+Lexer/Parser (ANTLR) $\to$ Parse-Tree $\to$ AST-Builder $\to$ AST $\to$
+Name-Resolver $\to$ Interpreter.
 
--   Gesamtbild: Quelltext $\to$ Parser $\to$ AST $\to$ Resolver $\to$ Interpreter
--   Interpreter+Resolver-Interaktion als wiederverwendbares Muster
--   Ausblick auf spätere Sprachstufen
+Der AST-Builder für L-Var (`LispyAstBuilderLvar`) erweitert den AST-Builder aus
+L-Expr und übersetzt den Parse-Tree in unsere abstrakte Syntax (AST).
+
+Der Name-Resolver (`NameResolverLvar`) läuft als erster Pass über den AST, verwaltet
+Scopes, prüft die Gültigkeit von Namen und trägt in den Sidetable `SemaInfo` unter
+anderem die Symboltabellen als auch die Tiefeninformationen ein.
+
+Im Interpreter (`InterpreterLvar`) als letztem Pass über den AST evaluieren wir nun
+nicht nur Ausdrücke, sondern führen nun auch Statements aus und verwalten zur
+Laufzeit verschachtelte Environments (`Env`). Bei Variablenzugriffen und Zuweisungen
+nutzt der Interpreter die im Resolver berechneten Tiefeninformationen, um direkt das
+richtige Environment zu finden, statt zur Laufzeit rekursiv suchen zu müssen.
+
+Dieses Muster "AST $\to$ Resolver $\to$ Interpreter mit *side tables* (z.B. `depths`
+in `SemaInfo`)" wird sich in den späteren Sprachstufen (L-If, L-Fun, L-Class, ...)
+wiederholen. Alle Sprachstufen leiten ihre Grammatik, AST-Klassen, Resolver und
+Interpreter etc. jeweils von der vorherigen Stufe ab und erweitern diese nur um die
+neuen Sprachfeatures.
 :::
 
 # Pipeline-Gesamtbild für L-Var
 
+![](images/lvar-overview.png)
+
+::: notes
 1.  **Lexing & Parsing** (ANTLR):
-    -   Quelltext $\to$ Parse-Tree (`LispyParser.lvar()`).
+    -   Konkrete Grammatik $\to$ ANTLR-Grammatik
+    -   Quelltext $\to$ Parse-Tree: `LispyLexer` & `LispyParser` (generiert)
 2.  **AST-Builder**:
-    -   Parse-Tree $\to$ unsere AST-Klassen (`Expr`, `Stmt`, `VarDecl`, `BlockStmt`,
-        ...).
+    -   Abstrakte Grammatik $\to$ AST-Klassen
+    -   Parse-Tree $\to$ AST: `LispyAstBuilderLvar`
+        -   `class LispyAstBuilderLvar extends LispyAstBuilderLexpr`
+        -   Visitor-Pattern
 3.  **NameResolverLvar**:
-    -   AST $\to$ `SemaInfo`, gefüllt mit:
-        -   `symbols`: Statement $\to$ Scope
-        -   `depths`: VarExpr $\to$ Entfernungszahl
-        -   `globalScope`, `globalEnv` mit Prelude vorbelegt
+    -   `Scope`: statische Sicht (Namen $\to$ Deklarationen = Symboltabelle)
+    -   AST $\to$ `SemaInfo` (Sidetable), gefüllt mit:
+        -   `Map<Stmt, Scope> symbols`: Statement $\to$ Scope (Symboltabellen)
+        -   `Map<VarExpr, Integer> depths`: `VarExpr` $\to$ Tiefeninformation
+        -   `Scope globalScope`, `Env globalEnv`
+    -   `resolve(expr)`, `resolve(stmt)` mit `switch`-Expressions und Pattern
+        Matching
 4.  **InterpreterLvar**:
     -   AST + `SemaInfo` $\to$ Ausführung:
-        -   `Env env` für Werte zur Laufzeit
-        -   `eval(Expr)` und `exec(Stmt)` nutzen `depths` für direkte
-            Environment-Zugriffe.
+        -   `Env env`: dynamische Sicht (Namen $\to$ Laufzeitwerte)
+        -   `class InterpreterLvar extends InterpreterLexpr`
+        -   `eval(expr)` und `exec(stmt)` nutzen `depths` für direkte
+            Environment-Zugriffe
+:::
 
-Skizze im Code:
+# Gesamtbild im Code
 
 ``` java
+var source = "(def x : int 10)  (let x (+ x 1))  (+ x 5)";
+
 var input = CharStreams.fromString(source);
 var lexer = new LispyLexer(input);
 var tokens = new CommonTokenStream(lexer);
@@ -49,61 +80,94 @@ Value result = new InterpreterLvar().interpret(ast, sema);
 
 # InterpreterLvar - Rolle von `interpret(...)`
 
-Nochmal der Einstiegspunkt:
+::: notes
+Noch einmal der Einstiegspunkt des Interpreters ab jetzt:
+:::
 
 ``` java
-public Value interpret(List stmts, SemaInfo semaInfo) {
-    sema = semaInfo;
-    env = sema.globalEnv;
-    last = UNIT;
+public class InterpreterLvar extends InterpreterLexpr {
+    protected SemaInfo sema;
+    protected Env env;
+    protected Value last;
 
-    stmts.forEach(this::exec);
+    public Value interpret(List<Stmt> stmts, SemaInfo semaInfo) {
+        sema = semaInfo;  env = sema.globalEnv;  last = UNIT;
 
-    return last;
+        stmts.forEach(this::exec);
+
+        return last;
+    }
+
+    // protected void exec(Stmt stmt) ...
+    // protected Value eval(Expr expr) ...
 }
 ```
 
--   `sema.globalEnv` kann bereits Prelude-Funktionen/Variablen enthalten.
--   `exec(stmt)`:
-    -   Deklarationen binden Werte in `env`.
-    -   Blocks erzeugen neue `Env`-Instanzen.
-    -   `VarExpr`/`AssignStmt` nutzen `sema.depths` zur Navigation.
+::: notes
+-   `sema.globalEnv` kann bereits vordefinierte Funktionen/Variablen enthalten
+-   `exec(stmt)` & `eval(expr)`:
+    -   Deklarationen binden Werte in `env`
+    -   Blocks erzeugen neue `Env`-Instanzen
+    -   `VarExpr`/`AssignStmt` nutzen `sema.depths` zur Navigation
+:::
 
 # Reflexion: Muster für spätere Sprachstufen
 
+::: notes
 Das folgende Muster wird uns in L-If, L-Fun, L-Class usw. begleiten:
+:::
 
--   **Konkrete Syntax** erweitern (ANTLR).
--   **Abstrakte Syntax** (AST-Klassen) erweitern.
--   **Resolver**:
-    -   neue Scopes (z.B. Funktions-Scopes, Klassenscopes),
-    -   zusätzliche Einträge in `SemaInfo` (z.B. Funktions-Typen, Klasseninfos).
+-   **Konkrete Syntax** erweitern (ANTLR)
+-   **Abstrakte Syntax** erweitern (AST, AST-Builder)
+-   **Name-Resolver**:
+    -   erster AST-Pass, baut Symboltabellen auf
+    -   neue Prüfungen, neue Scopes (z.B. Funktions-Scopes, Klassenscopes)
+    -   zusätzliche Einträge in `SemaInfo` (z.B. Funktions-Typen, Klasseninfos)
+-   **Type-Checker**:
+    -   weiterer AST-Pass
+    -   Prüfung der Typen, statische vs. dynamische Polymorphie, ...
 -   **Interpreter**:
-    -   nutzt `SemaInfo`, um zur Laufzeit nicht mehr suchen zu müssen, sondern
-        direkt zu springen.
+    -   finaler AST-Pass
+    -   Behandlung der neuen Features
+    -   "vertraut" auf Ergebnisse von semantischer Analyse (im Sidetable)
 
-Beispiele:
+\bigskip
 
--   Funktionen:
-    -   Resolver merkt sich, in welchem Scope eine Funktion deklariert wurde.
-    -   Interpreter benutzt das für Closures und Environment-Capturing.
--   Klassen:
-    -   Resolver legt `staticTargets` für Memberzugriffe fest.
-    -   Interpreter ruft genau die richtige Methode / liest das richtige Feld.
+**Alle Bausteine leiten jeweils von den Bausteinen der Vorgängerstufe ab.**
 
 # Wrap-up
 
-TODO
+-   **Pipeline** L-Var:
+    -   Quelltext $\to$ Lexer/Parser (ANTLR) $\to$ Parse-Tree
+    -   Parse-Tree $\to$ AST (`LispyAstBuilderLvar`)
+    -   AST $\to$ `SemaInfo` (`NameResolverLvar`)
+    -   AST + `SemaInfo` $\to$ Ausführung (`InterpreterLvar`)
+-   **Resolver** (`NameResolverLvar`):
+    -   verwaltet Scopes (Symboltabellen) und prüft Namenssichtbarkeit
+    -   befüllt `SemaInfo.symbols` (Statements $\to$ `Scope`)
+    -   berechnet `SemaInfo.depths` für alle `VarExpr` (lexikalische Tiefe)
+-   **Interpreter** (`InterpreterLvar`):
+    -   führt Statements aus und evaluiert Expressions
+    -   nutzt `Env`-Kette zur Laufzeit für Variablenwerte
+    -   verwendet `depths` für direkten Zugriff auf richtiges Environment
 
-::: readings
-TODO
+\smallskip
 
-In [@Nystrom2021] kann man in Kapitel 6 "Parsing Expressions" und Kapitel 7
-"Evaluation Expressions" nachlesen.
-:::
+-   **Muster**: Jede neue Sprachstufe erweitert die Bausteine der Vorgängerstufe
 
 ::: outcomes
-TODO
+-   k2: Ich kann den Unterschied zwischen `Scope` (statische Sicht) und `Env`
+    (Laufzeitumgebung) erklären.
+-   k2: Ich kann beschreiben, welche Aufgaben der `NameResolverLvar` übernimmt und
+    welche der `InterpreterLvar`.
+-   k3: Ich kann für ein gegebenes L-Var-Programm die Scopes und Environments
+    skizzieren und erklären, wie `depths` berechnet werden.
+-   k3: Ich kann einen bestehenden Resolver/Interpreter um ein einfaches neues
+    Statement oder eine neue Ausdrucksform erweitern.
+-   k3: Ich kann den Datenfluss in der Pipeline (Quelltext $\to$ Parse-Tree $\to$
+    AST $\to$ SemaInfo $\to$ Ausführung) auf konkrete Beispiele anwenden.
+-   k4: Ich kann kritisch beurteilen, welche Prüfungen sinnvoll im Resolver und
+    welche im Interpreter oder Typechecker stattfinden sollten.
 :::
 
 ::: challenges
@@ -121,7 +185,63 @@ TODO
     -   Wo werden **Werte gespeichert**? (Interpreter, `Env.define`)
     -   Wo werden **depth-Werte benutzt**?
 3.  Diskutieren Sie:
-    -   Welche Teile würden Sie gerne testen, ohne den Rest?
-        -   z.B. nur Resolver testen, nur Interpreter mit vorbereiteten `SemaInfo`,
-            etc.
+    -   Welche Teile würden Sie gerne separiert vom Rest testen?
+
+**Scopes vs. Environments für ein L-Var-Beispiel**
+
+Gegeben sei das L-Var-Programm (vereinfacht, in Lispy-Notation):
+
+``` clojure
+(def x : int 1)
+(let
+  (def y : int 2)
+  (assign x (+ x y)))
+(+ x 10)
+```
+
+1.  Zeichnen Sie die statischen Scopes für dieses Programm (als Baum/Grafik) und
+    tragen Sie ein, wo `x` und `y` deklariert werden.
+2.  Skizzieren Sie die Environments zur Laufzeit:
+    -   direkt nach `(def x : int 1)`
+    -   innerhalb von `let` vor der Zuweisung
+    -   nach der Zuweisung an `x`
+3.  Überlegen Sie:
+    -   Welchen `depth`-Wert bekommt der Zugriff auf `x` innerhalb des `let`-Blocks?
+    -   Wie nutzt der Interpreter diesen `depth`-Wert, um das richtige `Env` zu
+        finden?
+
+**Welche Prüfung macht wer?**
+
+Betrachten Sie die folgenden (hypothetischen) Fehlerfälle in L-Var:
+
+-   Eine Variable wird gelesen, bevor sie deklariert wurde.
+-   Eine Variable wird zweimal im gleichen Scope deklariert.
+-   Eine Variable wird gelesen, ist aber in einem äußeren Scope deklariert.
+-   Eine Division durch 0 tritt zur Laufzeit auf.
+
+Diskutieren Sie in der Gruppe:
+
+-   Welche dieser Fälle soll der Resolver erkennen? Begründen Sie.
+-   Welche Fälle können nur zur Laufzeit im Interpreter erkannt werden?
+-   Markieren Sie die Stellen in der Pipeline (Resolver vs. Interpreter), an denen
+    Sie die jeweilige Prüfung implementieren würden.
+
+**Tiefenberechnung verstehen**
+
+Gegeben sei ein (vereinfachtes) L-Var-Programm:
+
+``` clojure
+(def x : int 1)
+(let
+  (def y : int 2)
+  (let
+    (def z : int 3)
+    (+ x (+ y z))))
+```
+
+1.  Zeichnen Sie den AST.
+2.  Überlegen Sie, welche `depth`-Werte der Resolver für die drei `VarExpr` (`x`,
+    `y`, `z`) einträgt.
+3.  Beschreiben Sie in 2--3 Sätzen, wie der Interpreter mit einem `depth`-Wert von
+    z.B. 2 das richtige `Env` findet (ausgehend vom aktuellen `Env`).
 :::
