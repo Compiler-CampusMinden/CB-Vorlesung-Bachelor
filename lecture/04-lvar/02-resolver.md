@@ -819,10 +819,10 @@ Entsprechend sind im obigen Code in den `resolve()`-Methoden noch zwei weitere
         `resolve()`
 
 ::: readings
-Zur Namensauflösung kann man in [@Nystrom2021] kann man in Kapitel 11 "Resolving and
-Binding" nachlesen. Dabei behandelt [@Nystrom2021] die Verbindung zwischen
-Name-Resolver und Interpreter technisch anders als wir, aber das Grundprinzip der
-Namensauflösung ist ähnlich wie hier gezeigt.
+Zur Namensauflösung kann man in [@Nystrom2021] in Kapitel 11 "Resolving and Binding"
+nachlesen. Dabei behandelt [@Nystrom2021] die Verbindung zwischen Name-Resolver und
+Interpreter technisch anders als wir, aber das Grundprinzip der Namensauflösung ist
+ähnlich wie hier gezeigt.
 
 Wir haben für unsere Symboltabellen die bereits vorhandenen AST-Knoten benutzt, um
 die Anzahl der Klassen möglichst übersichtlich zu halten. In [@Parr2010] (Kapitel 6,
