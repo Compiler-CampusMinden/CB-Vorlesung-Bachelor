@@ -181,6 +181,8 @@ public class InterpreterLint {
                 yield new IntVal(a + b);
             }
 
+            // TODO: SubExpr
+
             default -> throw new RuntimeException("unexpected expression: " + expr);
         };
     }
@@ -207,6 +209,8 @@ public class InterpreterLexpr extends InterpreterLint {
                 int b = Value.asInt(eval(r));
                 yield new IntVal(a * b);
             }
+
+            // TODO: DivExpr
 
             default -> super.eval(expr);
         };
@@ -246,7 +250,7 @@ Jede neue Sprachstufe "erbt" von der Vorgängersprachstufe:
 
 ## Unäres Minus
 
-Das unäre Minus taucht nicht im AST auf.
+Das unäre Minus taucht **nicht** im AST auf!
 
 Das ist eine Design-Entscheidung, um die Anzahl der AST-Typen möglichst klein und
 die notwendigen Transformationen möglichst einfach zu halten.

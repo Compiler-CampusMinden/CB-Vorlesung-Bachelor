@@ -155,6 +155,8 @@ public class InterpreterLint {
                 yield new IntVal(a + b);
             }
 
+            // TODO: SubExpr
+
             default -> throw new RuntimeException("unexpected expression: " + expr);
         };
     }
