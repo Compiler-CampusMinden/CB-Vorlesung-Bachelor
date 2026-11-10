@@ -62,11 +62,12 @@ erstellen Sie damit ein neues Java-Projekt:
 
 ::: details
 ``` java
+TODO
 ```
 
-\[CODE-RAHMEN: Token-Klasse, Token-Typen und relevante Ausschnitte der Lexer-Klasse
+CODE-RAHMEN: Token-Klasse, Token-Typen und relevante Ausschnitte der Lexer-Klasse
 einschließlich der Signatur von `skipIrrelevant()` und des Aufrufs aus
-`nextToken()`.\]
+`nextToken()`
 :::
 
 Implementieren Sie `skipIrrelevant()`. Die Methode soll Whitespace und die im Skript
@@ -148,15 +149,15 @@ für mindestens drei Beispiele.
 
 Zum Verständnis von `hello.cpp` benötigen Sie hier nur wenige Konstrukte:
 
-| Zweck | C++ | Java | L-Int | C-Int |
-|:-------------------|:-----------------------|:----------------|:------------|:------------|
-| Integer-Variable anlegen | `int result = 42;` | `int result = 42;` | n.a. | n.a. |
-| Addition | `1 + 2` | `1 + 2` | `(+ 1 2)` | `1 + 2` |
-| Subtraktion | `7 - 2` | `7 - 2` | `(- 7 2)` | `7 - 2` |
-| Klammerung | `(1 + 2)` | `(1 + 2)` | `(+ 1 2)` | `(1 + 2)` |
-| Ausgabe einer Variablen | `std::cout << result << '\n';` | `IO.println(result)` | n.a. | n.a. |
-| Zeilenkommentar | `// Kommentar` | `// Kommentar` | `;; Kommentar` | `// Kommentar` |
-| Import von Bibliotheken | `#include <iostream>` | `import ...;` | n.a. | n.a. |
+| Zweck                    | C++                            | Java                 | L-Int          | C-Int          |
+|:-------------------------|:-------------------------------|:---------------------|:---------------|:---------------|
+| Integer-Variable anlegen | `int result = 42;`             | `int result = 42;`   | n.a.           | n.a.           |
+| Addition                 | `1 + 2`                        | `1 + 2`              | `(+ 1 2)`      | `1 + 2`        |
+| Subtraktion              | `7 - 2`                        | `7 - 2`              | `(- 7 2)`      | `7 - 2`        |
+| Klammerung               | `(1 + 2)`                      | `(1 + 2)`            | `(+ 1 2)`      | `(1 + 2)`      |
+| Ausgabe einer Variablen  | `std::cout << result << '\n';` | `IO.println(result)` | n.a.           | n.a.           |
+| Zeilenkommentar          | `// Kommentar`                 | `// Kommentar`       | `;; Kommentar` | `// Kommentar` |
+| Import von Bibliotheken  | `#include <iostream>`          | `import ...;`        | n.a.           | n.a.           |
 :::
 
 # (\*\*) C-Int: Addition und Subtraktion für Integer in C++
@@ -320,6 +321,7 @@ Im Skript wurde die `eval()`-Funktion im L-Int-Interpreter mit Pattern Matching 
 `switch`-Expressions implementiert.
 
 ``` java
+TODO
 ```
 
 1.  Übertragen Sie dies auf das Visitor-Pattern.
