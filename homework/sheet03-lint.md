@@ -44,7 +44,7 @@ soll eine Operation mit weniger als zwei Operanden sein.
 
 ## 2. Auswertung der Subtraktion skizzieren
 
-Skizzieren Sie, wie die Auswertung einer `SubExpr` aussehen könnte. Geben Sie dabei
+Skizzieren Sie in Java, wie die Auswertung einer `SubExpr` aussehen könnte. Geben Sie dabei
 an, welche Teil-Ausdrücke ausgewertet und wie ihre Ergebnisse kombiniert werden.
 
 # (\*\*) L-Int: Funktion `skipIrrelevant()` im Lexer ergänzen
