@@ -223,8 +223,25 @@ erforderlich.
 | Nested Scopes                        | `(def x : int 10) (let ((a : int 2) (x : int 3)) (+ a x))` | `int x=10; { int a=2; int x=3; a+x; }` |
 
 Ein `let` kann in Lispy nicht nur eine Variable zuweisen, sondern auch einen neuen
-lokalen Scope öffnen mit lokalen Variablen. In C++ nutzen wir dafür die geschweiften
-Klammern.
+lokalen Scope öffnen mit lokalen Variablen.
+
+``` clojure
+(def x : int 10)
+(let ((a : int 2)
+      (x : int 3))
+  (+ a x))
+```
+
+In C++ nutzen wir dafür die geschweiften Klammern.
+
+``` cpp
+int x=10;
+{
+    int a=2;
+    int x=3;
+    a+x;
+}
+```
 
 Für C-Var gelten die folgenden Festlegungen:
 
