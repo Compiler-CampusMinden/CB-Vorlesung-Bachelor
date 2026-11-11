@@ -19,7 +19,7 @@ Dieses Blatt knüpft an folgende Vorlesungseinheiten an:
 -   L-Int: LL-Parser mit Recursive Descent
 -   L-Int: Von Ausdrücken zum Interpreter
 
-# (\*) L-Int: Subtraktion verstehen und ergänzen
+# A3.1: L-Int: Subtraktion verstehen und ergänzen (\*)
 
 L-Int unterstützt Integer-Literale, Addition und Subtraktion. Im Skript wurde die
 Implementierung nur für Integer und Addition im Detail gezeigt.
@@ -48,7 +48,7 @@ Skizzieren Sie in Java, wie die Auswertung einer `SubExpr` aussehen könnte. Geb
 Sie dabei an, welche Teil-Ausdrücke ausgewertet und wie ihre Ergebnisse kombiniert
 werden.
 
-# (\*\*) L-Int: Funktion `skipIrrelevant()` im Lexer ergänzen
+# A3.2: L-Int: Funktion `skipIrrelevant()` im Lexer ergänzen (\*\*)
 
 Im Skript wurde die Funktion `skipIrrelevant()` eingeführt. Sie überspringt nicht
 benötigte Zeichen wie Whitespace und Kommentare und wird zu Beginn von `nextToken()`
@@ -132,7 +132,7 @@ mindestens:
 -   eine Eingabe mit einem Kommentar;
 -   eine Eingabe, die nach Whitespace oder einem Kommentar das Dateiende erreicht.
 
-# (\*) C++ ausprobieren: Compiler und ein erstes Programm
+# A3.3: C++ ausprobieren: Compiler und ein erstes Programm (\*)
 
 Wir werden in dieser Veranstaltung Schritt für Schritt C++ kennenlernen und einen
 Interpreter in Java für einen kleinen C++-Ausschnitt ("Mini-C++") entwickeln.
@@ -210,7 +210,7 @@ Zum Verständnis von `hello.cpp` benötigen Sie hier nur wenige Konstrukte:
 | Import von Bibliotheken  | `#include <iostream>`          | `import ...;`        | n.a.           | n.a.           |
 :::
 
-# (\*\*) C-Int: Addition und Subtraktion für Integer in C++
+# A3.4: C-Int: Addition und Subtraktion für Integer in C++ (\*\*)
 
 Wir legen nun mit **C-Int** die Basis für den Mini-C++-Interpreter, den wir über das
 Semester hinweg erweitern.
@@ -365,7 +365,7 @@ notieren Sie kurz:
 -   Zwei Unterschiede zwischen den beiden Verarbeitungswegen (z.B. Laufzeit,
     Fehlermeldungen, Komfort).
 
-# (\*\*\*) Vertiefung: Interpreter für L-Int mit Visitor-Pattern
+# A3.5: Vertiefung: Interpreter für L-Int mit Visitor-Pattern (\*\*\*)
 
 Im Skript wurde die `eval()`-Funktion im L-Int-Interpreter mit Pattern Matching und
 `switch`-Expressions implementiert.
