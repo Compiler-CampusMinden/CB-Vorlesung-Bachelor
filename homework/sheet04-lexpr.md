@@ -21,10 +21,13 @@ Dieses Blatt knüpft an folgende Vorlesungseinheiten an:
 # A4.1: L-Expr: Division ergänzen (\*)
 
 Im Skript haben Sie L-Expr als Erweiterung von L-Int um Multiplikation und Division
-kennengelernt. In der Vorlesung wurde die Multiplikation im Detail behandelt. Wenden
-Sie das gezeigte Muster auf die Division an.
+kennengelernt. In der Vorlesung wurde die Multiplikation im Detail behandelt.
 
-Gegeben sei der folgende Code-Rahmen.
+Wenden Sie das gezeigte Muster auf die Division an und skizzieren Sie in Java, wie
+die Auswertung einer `DivExpr` aussehen könnte. Geben Sie dabei an, welche
+Teil-Ausdrücke ausgewertet und wie ihre Ergebnisse kombiniert werden.
+
+Gegeben sei dazu der folgende Code-Rahmen.
 
 ::: details
 ``` java
@@ -82,8 +85,7 @@ public class InterpreterLexpr extends InterpreterLint {
 ```
 :::
 
-Ergänzen Sie die Division an der markierten Stelle. Verwenden Sie dabei die
-Java-Integer-Division.
+Wie behandeln wir Vorrangregeln und die Assoziativität im Interpreter für L-Expr?
 
 Notieren Sie, wie der mehrstellige Ausdruck `(/ 12 3 2)` gruppiert wird und welches
 Ergebnis er nach dieser Gruppierung hat.
@@ -91,7 +93,7 @@ Ergebnis er nach dieser Gruppierung hat.
 Wie wird die Division durch null behandelt? Brauchen wir hier eine explizite
 Fehlerbehandlung im Interpreter?
 
-Ergänzen Sie außerdem mindestens zwei Tests:
+Erstellen Sie außerdem mindestens zwei Testfälle:
 
 -   einen Test, der die Java-Integer-Division sichtbar macht
 -   einen Test für eine verschachtelte Division
@@ -204,9 +206,10 @@ Diskutieren Sie: Welche neuen AST-Knoten sind notwendig und warum?
         `XyzBaseVisitor`?
     -   Welche der `visitXYZ()`-Methoden sollten Sie überschreiben, welche nicht?
         Begründen Sie Ihre Aussage.
-5.  Implementieren Sie die **obigen Testfälle in JUnit** und führen Sie diese auf
-    **allen drei Varianten** aus (RD-Parser, ANTLR mit gestuften Regeln, ANTLR mit
-    linkrekursiven Alternativen). Was beobachten Sie?
+5.  Testen Sie die neue C-Expr-Pipeline: Implementieren Sie die **obigen Beispiele
+    in JUnit** und führen Sie diese auf **allen drei Varianten** aus (RD-Parser,
+    ANTLR mit gestuften Regeln, ANTLR mit linkrekursiven Alternativen). Was
+    beobachten Sie?
 
 ::: tip
 **Hinweis**: Sie können die Funktionalität aus dem Lexer und RD-Parser für C-Int als
@@ -225,7 +228,7 @@ Implementieren Sie nun den **Interpreter für C-Expr** in einer Klasse
 Ergänzen Sie die neuen Fälle für C-Expr durch Überschreiben von `eval()`. Rufen Sie
 für die bisherigen C-Int-Fälle `super.eval(expr)` auf.
 
-Testen Sie Ihren Interpreter mit JUnit mit den obigen Testfällen. Dabei soll wie bei
+Testen Sie Ihren Interpreter mit JUnit mit den obigen Beispielen. Dabei soll wie bei
 L-Expr gelten: `class InterpreterCexprTest extends InterpreterCintTest`.
 
 ::: important
@@ -233,7 +236,7 @@ Der Interpreter bekommt als Eingabe den AST und ist damit unabhängig vom konkre
 Parser!
 
 Testen Sie Ihren Interpreter sowohl mit dem handgeschriebenen RD-Parser als auch mit
-dem ANTLR-Parser plus AST-Builder.
+den beiden ANTLR-Parsern plus AST-Buildern.
 :::
 
 Vergleichen Sie die Resultate der Testfälle von `InterpreterCexpr` mit dem mit
