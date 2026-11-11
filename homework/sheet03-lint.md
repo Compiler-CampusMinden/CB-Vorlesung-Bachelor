@@ -373,9 +373,9 @@ Im Skript wurde die `eval()`-Funktion im L-Int-Interpreter mit Pattern Matching 
 ::: details
 ``` java
 public interface Expr {}
+public record IntLiteral(int value) implements Expr {}
 public record AddExpr(Expr left, Expr right) implements Expr {}
 public record SubExpr(Expr left, Expr right) implements Expr {}
-public record IntLiteral(int value) implements Expr {}
 
 
 public interface Value {
