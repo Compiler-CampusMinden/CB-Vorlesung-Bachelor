@@ -44,8 +44,9 @@ soll eine Operation mit weniger als zwei Operanden sein.
 
 ## 2. Auswertung der Subtraktion skizzieren
 
-Skizzieren Sie in Java, wie die Auswertung einer `SubExpr` aussehen könnte. Geben Sie dabei
-an, welche Teil-Ausdrücke ausgewertet und wie ihre Ergebnisse kombiniert werden.
+Skizzieren Sie in Java, wie die Auswertung einer `SubExpr` aussehen könnte. Geben
+Sie dabei an, welche Teil-Ausdrücke ausgewertet und wie ihre Ergebnisse kombiniert
+werden.
 
 # (\*\*) L-Int: Funktion `skipIrrelevant()` im Lexer ergänzen
 
@@ -58,16 +59,65 @@ protected boolean skipIrrelevant() {}  // Homework
 ```
 
 **Gegeben:** Betrachten Sie den folgenden Code-Rahmen für diese Aufgabe und
-erstellen Sie damit ein neues Java-Projekt:
+erstellen Sie damit ein neues Java-Projekt.
 
 ::: details
 ``` java
-TODO
-```
+public enum TokenKind { PLUS, MINUS, LPAREN, RPAREN, SEMI, INT,  EOF }
+public record Token(TokenKind kind, String lexeme) {}
 
-CODE-RAHMEN: Token-Klasse, Token-Typen und relevante Ausschnitte der Lexer-Klasse
-einschließlich der Signatur von `skipIrrelevant()` und des Aufrufs aus
-`nextToken()`
+public class LispyLexerLint {
+    protected String source;
+    protected int current;
+
+    public List<Token> scan(String input) {
+        source = input;  current = 0;
+        List<Token> tokens = new ArrayList<>();
+
+        do tokens.add(nextToken());
+        while (tokens.getLast().kind() != EOF);
+
+        return tokens;
+    }
+
+    protected Token nextToken() {
+        skipIrrelevant();
+
+        if (!isAtEnd()) {
+            char c = advance();
+
+            if (Character.isDigit(c)) {
+                String lexeme = c + readWhile(Character::isDigit);
+                return Token.from(INT, lexeme);
+            }
+            return switch (c) {
+                case '(' -> Token.from(LPAREN);
+                case '+' -> Token.from(PLUS);
+                default -> throw new RuntimeException("unexpected character");
+            };
+        }
+        return Token.from(EOF);
+    }
+
+    protected boolean isAtEnd() { return current >= source.length(); }
+
+    protected char peek() { return peek(0); }
+    protected char peek(int la) {
+        if (la < 0 || current + la >= source.length()) return '\0';
+        return source.charAt(current + la);
+    }
+
+    protected char advance() { return isAtEnd() ? '\0' : source.charAt(current++); }
+
+    protected boolean skipIrrelevant() {}  // Homework
+
+    protected String readWhile(Predicate<Character> pred) {
+        StringBuilder sb = new StringBuilder();
+        while (!isAtEnd() && pred.test(peek())) sb.append(advance());
+        return sb.toString();
+    }
+}
+```
 :::
 
 Implementieren Sie `skipIrrelevant()`. Die Methode soll Whitespace und die im Skript
@@ -320,9 +370,42 @@ notieren Sie kurz:
 Im Skript wurde die `eval()`-Funktion im L-Int-Interpreter mit Pattern Matching und
 `switch`-Expressions implementiert.
 
+::: details
 ``` java
-TODO
+public interface Expr {}
+public record AddExpr(Expr left, Expr right) implements Expr {}
+public record SubExpr(Expr left, Expr right) implements Expr {}
+public record IntLiteral(int value) implements Expr {}
+
+
+public interface Value {
+    static int asInt(Value v) {
+        if (v instanceof IntVal(int val)) return val;
+        throw new RuntimeException("number expected");
+    }
+}
+public record IntVal(int v) implements Value {}
+
+
+public class InterpreterLint {
+    public Value eval(Expr expr) {
+        return switch (expr) {
+            case IntLiteral(var v) -> new IntVal(v);
+
+            case AddExpr(var l, var r) -> {
+                int a = Value.asInt(eval(l));
+                int b = Value.asInt(eval(r));
+                yield new IntVal(a + b);
+            }
+
+            // TODO: SubExpr
+
+            default -> throw new RuntimeException("unexpected expression: " + expr);
+        };
+    }
+}
 ```
+:::
 
 1.  Übertragen Sie dies auf das Visitor-Pattern.
 2.  Skizzieren Sie Vor- und Nachteile des Visitor-Patterns im Vergleich zur
