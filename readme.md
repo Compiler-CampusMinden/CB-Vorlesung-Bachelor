@@ -117,8 +117,8 @@ und in sich geschlossen (kein Übertrag):
 
 -   **Prüfungsphase I**: **Vier Stationen** (digitale E-Assessments im B40 mit je 30
     Minuten Dauer), **beste drei Ergebnisse ergeben die Note**
-    -   Station 1: Mittwoch, 11.11., in Praktikumszeit (*Slots werden noch bekannt
-        gegeben*)
+    -   Station 1: Mittwoch, 11.11., in Praktikumszeit (12:30-13:00, 13:15-13:45,
+        14:00-14:30)
     -   Station 2: Mittwoch, 02.12., in Praktikumszeit (*Slots werden noch bekannt
         gegeben*)
     -   Station 3: Mittwoch, 06.01., in Praktikumszeit (*Slots werden noch bekannt
