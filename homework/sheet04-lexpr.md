@@ -88,8 +88,8 @@ Java-Integer-Division.
 Notieren Sie, wie der mehrstellige Ausdruck `(/ 12 3 2)` gruppiert wird und welches
 Ergebnis er nach dieser Gruppierung hat.
 
-Geben Sie an, ob Ihre Implementierung die Division durch null behandelt. Eine
-zusätzliche Fehlerbehandlung dafür ist in dieser Aufgabe nicht erforderlich.
+Wie wird die Division durch null behandelt? Brauchen wir hier eine explizite
+Fehlerbehandlung im Interpreter?
 
 Ergänzen Sie außerdem mindestens zwei Tests:
 
