@@ -18,73 +18,85 @@ Dieses Blatt knüpft an folgende Vorlesungseinheiten an:
 -   L-Expr: ANTLR-Grammatik und Vorrangregeln
 -   L-Expr: ANTLR-Visitoren und Rückgabewerte
 
-# (\*) L-Expr: Multiplikation und Division ergänzen
+# A4.1: L-Expr: Division ergänzen (\*)
 
-Sie haben in der Vorlesung zunächst L-Int (Integer-Literale, Addition, Subtraktion
-in Lispy-Notation) und anschließend L-Expr als Erweiterung von L-Int um
-Multiplikation und Division kennengelernt.
+Im Skript haben Sie L-Expr als Erweiterung von L-Int um Multiplikation und Division
+kennengelernt. In der Vorlesung wurde die Multiplikation im Detail behandelt. Wenden
+Sie das gezeigte Muster auf die Division an.
 
-In dieser Aufgabe sollen Sie die in der Vorlesung gezeigten Ideen vervollständigen
-und auf Ihre L-Int-Pipeline übertragen und so Ihre L-Expr-Pipeline aufbauen.
+Gegeben sei der folgende Code-Rahmen.
 
-1.  **Konkrete Syntax verstehen**
+::: details
+``` java
+public interface Expr {}
+public record IntLiteral(int value) implements Expr {}
+public record AddExpr(Expr left, Expr right) implements Expr {}
+public record SubExpr(Expr left, Expr right) implements Expr {}
+public record MulExpr(Expr left, Expr right) implements Expr {}
+public record DivExpr(Expr left, Expr right) implements Expr {}
 
-    Klären Sie in der Übung gemeinsam:
+public interface Value {
+    static int asInt(Value v) {
+        if (v instanceof IntVal(int val)) return val;
+        throw new RuntimeException("number expected");
+    }
+}
+public record IntVal(int v) implements Value {}
 
-    -   Welche Ausdrücke sind **gültige** L-Expr-Ausdrücke?
+public class InterpreterLint {
+    public Value eval(Expr expr) {
+        return switch (expr) {
+            case IntLiteral(var v) -> new IntVal(v);
 
-    -   Wie werden mehrstellige Multiplikationen und Divisionen gruppiert
-        (Assoziativität)?
+            case AddExpr(var l, var r) -> {
+                int a = Value.asInt(eval(l));
+                int b = Value.asInt(eval(r));
+                yield new IntVal(a + b);
+            }
 
-    -   Welche Werte ergeben die folgenden Ausdrücke?
+            // TODO: SubExpr
 
-        ``` clojure
-        (* 2 3)
-        (/ 8 2)
-        (* 2 3 4)
-        (/ 12 3 2)
-        (* (+ 1 2) 3)
-        (/ 12 (* 2 2))
-        ```
+            default -> throw new RuntimeException("unexpected expression: " + expr);
+        };
+    }
+}
 
-2.  **Ungültige Eingaben**
 
-    Notieren Sie mindestens zwei **ungültige** L-Expr-Eingaben, z.B.:
+public class InterpreterLexpr extends InterpreterLint {
 
-    -   Operationen mit weniger als zwei Operanden,
-    -   falsche Klammerung,
-    -   unerwartete Token.
+    @Override
+    public Value eval(Expr expr) {
+        return switch (expr) {
+            case MulExpr(var l, var r) -> {
+                int a = Value.asInt(eval(l));
+                int b = Value.asInt(eval(r));
+                yield new IntVal(a * b);
+            }
 
-    Beschreiben Sie jeweils kurz, **warum** die Eingabe ungültig ist und an welcher
-    Stelle Ihre Pipeline (Lexer, Parser, AST-Bau, Interpreter) sinnvollerweise einen
-    Fehler melden würde.
+            // TODO: DivExpr
 
-3.  **L-Expr-Pipeline bauen: L-Int-Pipeline um Multiplikation/Division erweitern**
+            default -> super.eval(expr);
+        };
+    }
+}
+```
+:::
 
-    Erstellen Sie nun Ihre **Pipeline für L-Expr**, indem Sie ein neues Package für
-    L-Expr anlegen und die nötigen Klassen und Ergänzungen **auf Basis Ihrer
-    L-Int-Lösung** definieren:
+Ergänzen Sie die Division an der markierten Stelle. Verwenden Sie dabei die
+Java-Integer-Division.
 
-    -   **Lexer**: neue Token für `*` und `/`
-    -   Parser (**RD-Parser** für L-Expr): zusätzliche Alternativen in den passenden
-        Grammatikregeln
-    -   **AST**: neue Knotenklassen `MulExpr` und `DivExpr`
-    -   **Interpreter** `InterpreterLexpr`: Auswertung von `MulExpr` und `DivExpr`
-        (linksassoziativ, Java-Integer-Division)
+Notieren Sie, wie der mehrstellige Ausdruck `(/ 12 3 2)` gruppiert wird und welches
+Ergebnis er nach dieser Gruppierung hat.
 
-    Ergänzen Sie Ihr Token-Typ-Enum. Ergänzen Sie die neuen AST-Klassen. Schreiben
-    Sie neue Klassen für den L-Expr-Lexer und -RD-Parser (ausnahmsweise **nicht**
-    von L-Int ableiten - warum?!).
+Geben Sie an, ob Ihre Implementierung die Division durch null behandelt. Eine
+zusätzliche Fehlerbehandlung dafür ist in dieser Aufgabe nicht erforderlich.
 
-    Definieren Sie eine neue Klasse `InterpreterLexpr` für den L-Expr-Interpreter
-    mit `class InterpreterLexpr extends InterpreterLint`.
+Ergänzen Sie außerdem mindestens zwei Tests:
 
-    Implementieren Sie die obigen Testausdrücke in einer neuen JUnit-Testklasse
-    `InterpreterLexprTest`, die von der L-Int-Testklasse ableitet:
-    `class InterpreterLexprTest extends InterpreterLintTest`. Wichtig: Damit das
-    funktioniert, müssen alle Testmethoden mindestens auf `protected` stehen.
+-   einen Test, der die Java-Integer-Division sichtbar macht
+-   einen Test für eine verschachtelte Division
 
-# (\*\*) C-Expr: Vorrangregeln in einer gestuften Grammatik
+# A4.2: C-Expr: Vorrangregeln in einer gestuften Grammatik (\*\*)
 
 Wir erstellen nun **C-Expr**, indem wir **C-Int vom letzten Blatt** um
 Multiplikation, Division, unäres Minus und geklammerte Ausdrücke erweitern.
@@ -161,7 +173,8 @@ vorigen Aufgabe?
 
 ## Schritt 3: ANTLR-Grammatiken für C-Expr
 
-Definieren Sie zwei **ANTLR-Grammatiken** für **C-Expr**:
+Definieren Sie nun ausgehend von der konkrete Grammatik aus der vorigen Aufgabe zwei
+**ANTLR-Grammatiken** für **C-Expr**:
 
 -   einmal mit **gestuften Regeln**, und
 -   einmal mit **linksrekursiven Alternativen**.
@@ -213,14 +226,20 @@ Ergänzen Sie die neuen Fälle für C-Expr durch Überschreiben von `eval()`. Ru
 für die bisherigen C-Int-Fälle `super.eval(expr)` auf.
 
 Testen Sie Ihren Interpreter mit JUnit mit den obigen Testfällen. Dabei soll wie bei
-L-Expr gelten: `class InterpreterCexprTest extends InterpreterCintTest`. Spielt es
-eine Rolle, ob Sie dafür den handgeschriebenen Lexer/RD-Parser oder einen der beiden
-ANTLR-Parser plus den passenden AST-Builder einsetzen?
+L-Expr gelten: `class InterpreterCexprTest extends InterpreterCintTest`.
+
+::: important
+Der Interpreter bekommt als Eingabe den AST und ist damit unabhängig vom konkreten
+Parser!
+
+Testen Sie Ihren Interpreter sowohl mit dem handgeschriebenen RD-Parser als auch mit
+dem ANTLR-Parser plus AST-Builder.
+:::
 
 Vergleichen Sie die Resultate der Testfälle von `InterpreterCexpr` mit dem mit
 g++/clang übersetzten nativen C++-Code. Gibt es Unterschiede? Woran liegt das?
 
-# (\*\*\*) Vertiefung: ANTLR und Stolperfallen
+# A4.3: Vertiefung: ANTLR und Stolperfallen (\*\*\*)
 
 Betrachten Sie die folgende ANTLR-Grammatik:
 
