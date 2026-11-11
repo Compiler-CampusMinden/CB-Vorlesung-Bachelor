@@ -85,18 +85,17 @@ public class InterpreterLexpr extends InterpreterLint {
 ```
 :::
 
-Wie behandeln wir Vorrangregeln und die Assoziativität im Interpreter für L-Expr?
+Weitere Aufgabenteile:
 
-Notieren Sie, wie der mehrstellige Ausdruck `(/ 12 3 2)` gruppiert wird und welches
-Ergebnis er nach dieser Gruppierung hat.
-
-Wie wird die Division durch null behandelt? Brauchen wir hier eine explizite
-Fehlerbehandlung im Interpreter?
-
-Erstellen Sie außerdem mindestens zwei Testfälle:
-
--   einen Test, der die Java-Integer-Division sichtbar macht
--   einen Test für eine verschachtelte Division
+1.  Wie behandeln Sie Vorrangregeln und die Assoziativität im Interpreter für
+    L-Expr?
+2.  Notieren Sie, wie der mehrstellige Ausdruck `(/ 12 3 2)` gruppiert wird und
+    welches Ergebnis er nach dieser Gruppierung hat.
+3.  Wie wird die Division durch null behandelt? Brauchen wir hier eine explizite
+    Fehlerbehandlung im Interpreter?
+4.  Erstellen Sie außerdem mindestens zwei Testfälle:
+    -   einen Test, der die Java-Integer-Division sichtbar macht
+    -   einen Test für eine verschachtelte Division
 
 # A4.2: C-Expr: Vorrangregeln in einer gestuften Grammatik (\*\*)
 
