@@ -18,7 +18,32 @@ Dieses Blatt knüpft an folgende Vorlesungseinheiten an:
 -   L-Var: Interpreter mit Environments und Statements
 -   L-Var: Integration & Pipeline-Gesamtbild
 
-# A5.1: L-Var: `NameResolverLvar#resolve()` ergänzen (\*)
+# A5.1: L-Var: Scopes und Tiefenwerte verfolgen (\*)
+
+Betrachten Sie das folgende L-Var-Programm:
+
+``` clojure
+(def x : int 10)
+
+(let ((y : int 2))
+  (+ x y)
+  (let ((x : int 5))
+    (+ x y))
+  (+ x y))
+```
+
+Skizzieren Sie die Arbeit des Name-Resolvers:
+
+1.  Zeichnen Sie den Scope-Baum und tragen Sie in jeden Scope die dort definierten
+    Variablen ein.
+2.  Gehen Sie die Statements und Expressions in der Reihenfolge durch, in der der
+    Resolver sie besucht. Notieren Sie dabei, wann ein neuer Scope betreten und
+    wieder verlassen wird.
+3.  Ordnen Sie jede `VarExpr` der passenden `VarDecl` zu.
+4.  Geben Sie für jede `VarExpr` den von `scope.resolve(name, 0)` gelieferten
+    `depth`-Wert an.
+
+# A5.2: L-Var: `NameResolverLvar#resolve()` ergänzen (\*)
 
 Sie haben im Skript für L-Var den Name-Resolver `NameResolverLvar` kennengelernt.
 Dabei wurde die Implementierung für die AST-Knoten `ExprStmt` und `AssignStmt`
@@ -84,9 +109,9 @@ haben wir hier nur `Expr` - wie stellen Sie im Resolver sicher, dass wir hier
 tatsächlich nur eine Variable betrachten? Skizzieren Sie, wie der Resolver diese
 Zielvariable auflöst und wie er anschließend den rechten Ausdruck verarbeitet.
 
-# A5.2: L-Var: Scopes und Tiefenwerte verfolgen (\*)
+# A5.3: L-Var: Von `depth` zum Laufzeitwert (\*\*)
 
-Betrachten Sie das folgende L-Var-Programm:
+Betrachten Sie erneut das Programm von oben:
 
 ``` clojure
 (def x : int 10)
@@ -98,18 +123,30 @@ Betrachten Sie das folgende L-Var-Programm:
   (+ x y))
 ```
 
-Skizzieren Sie die Arbeit des Name-Resolvers:
+Der Name-Resolver hat für jede `VarExpr` eine Tiefe berechnet. Der Interpreter
+verwendet diese Tiefe, um vom aktuellen `Env` aus das passende Environment
+auszuwählen.
 
-1.  Zeichnen Sie den Scope-Baum und tragen Sie in jeden Scope die dort definierten
-    Variablen ein.
-2.  Gehen Sie die Statements und Expressions in der Reihenfolge durch, in der der
-    Resolver sie besucht. Notieren Sie dabei, wann ein neuer Scope betreten und
-    wieder verlassen wird.
-3.  Ordnen Sie jede `VarExpr` der passenden `VarDecl` zu.
-4.  Geben Sie für jede `VarExpr` den von `scope.resolve(name, 0)` gelieferten
-    `depth`-Wert an.
+1.  Skizzieren Sie die Environments während der Ausführung:
 
-# A5.3: L-Var: Fehlende Fälle im Interpreter ergänzen (\*)
+    -   nach der globalen Definition von `x`
+    -   im äußeren `let`-Block nach der Definition von `y`
+    -   im inneren `let`-Block nach der Definition des lokalen `x`
+
+2.  Erstellen Sie eine Tabelle und tragen Sie für jedes Variablenvorkommen ein:
+
+    -   das aktuelle Environment
+    -   den `depth`-Wert
+    -   das Environment, auf das der Interpreter zugreift
+    -   den dort gespeicherten Wert
+
+3.  Erklären Sie anhand des inneren `(+ x y)`, warum `x` und `y` über
+    unterschiedliche Tiefen aufgelöst werden.
+
+4.  Was würde im Interpreter schiefgehen, wenn für das innere Vorkommen von `x`
+    fälschlich die Tiefe des globalen `x` gespeichert wäre?
+
+# A5.4: L-Var: Fehlende Fälle im Interpreter ergänzen (\*)
 
 Im Skript wurde die Implementierung von `InterpreterLvar` für `AssignStmt` nicht
 gezeigt.
@@ -164,211 +201,205 @@ Skizzieren Sie den fehlenden Fall und erklären Sie die Arbeitsweise:
 -   Welche Aktion führt der Interpreter aus beziehungsweise welchen Wert liefert er
     zurück?
 
-# A5.4: L-Var: Von `depth` zum Laufzeitwert (\*\*)
+# A5.5: C-Var: Variablen, State und nested Scopes (\*\*)
 
-Betrachten Sie erneut das Programm von oben:
+Wir erweitern **C-Expr aus dem letzten Übungsblatt zu C-Var**. Dabei ergänzen wir
+u.a. Variablendeklarationen, Zuweisungen und Blöcke mit eigenen Scopes.
 
-``` clojure
-(def x : int 10)
-
-(let ((y : int 2))
-  (+ x y)
-  (let ((x : int 5))
-    (+ x y))
-  (+ x y))
-```
-
-Der Name-Resolver hat für jede `VarExpr` eine Tiefe berechnet. Der Interpreter
-verwendet diese Tiefe, um vom aktuellen `Env` aus das passende Environment
-auszuwählen.
-
-1.  Skizzieren Sie die Environments während der Ausführung:
-
-    -   nach der globalen Definition von `x`
-    -   im äußeren `let`-Block nach der Definition von `y`
-    -   im inneren `let`-Block nach der Definition des lokalen `x`
-
-2.  Erstellen Sie eine Tabelle und tragen Sie für jedes Variablenvorkommen ein:
-
-    -   das aktuelle Environment
-    -   den `depth`-Wert
-    -   das Environment, auf das der Interpreter zugreift
-    -   den dort gespeicherten Wert
-
-3.  Erklären Sie anhand des inneren `(+ x y)`, warum `x` und `y` über
-    unterschiedliche Tiefen aufgelöst werden.
-
-4.  Was würde im Interpreter schiefgehen, wenn für das innere Vorkommen von `x`
-    fälschlich die Tiefe des globalen `x` gespeichert wäre?
-
-------------------------------------------------------------------------------------
-
-TODO
-
-# (\*\*) C-Expr: Vorrangregeln in einer gestuften Grammatik
-
-Wir erstellen nun **C-Expr**, indem wir **C-Int vom letzten Blatt** um
-Multiplikation, Division, unäres Minus und geklammerte Ausdrücke erweitern.
-
-C-Expr soll analog zu L-Expr **Multiplikation und Division und unäres Minus und
-geklammerte Ausdrücke** erlauben, aber in C++-üblicher Infix-Notation und unter
-Beachtung der üblichen Vorrang- und Assoziativitätsregeln.
+Nutzen Sie Ihre bestehende **ANTLR-Pipeline** aus C-Expr als Ausgangspunkt.
+Erweitern Sie die ANTLR-Grammatik, leiten Sie den AST-Builder und die übrigen
+Komponenten von den entsprechenden C-Expr-Bausteinen ab und ergänzen Sie die neuen
+Fälle. Ein handgeschriebener Lexer oder RD-Parser ist ab diesem Blatt nicht (mehr)
+erforderlich.
 
 ::: important
 ## Waschzettel: In C++ sieht es so aus ...
 
-| Zweck          | L-Expr (Lispy)  | C-Expr (Mini-C++) |
-|:---------------|:----------------|:------------------|
-| Multiplikation | `(* 2 3)`       | `2 * 3`           |
-| Division       | `(/ 8 3)`       | `8 / 3`           |
-| Unäres Minus   | `(- 3)`         | `-3`              |
-| Klammerung     | `(* (+ 1 2) 3)` | `(1 + 2) * 3`     |
+| Zweck                                | L-Var (Lispy)                                              | C-Var (Mini-C++)                       |
+|:-------------------------------------|:-----------------------------------------------------------|:---------------------------------------|
+| Variable definieren                  | `(def x : int 10)`                                         | `int x = 10;`                          |
+| Zuweisung an Variablen               | `(let x 2)`                                                | `x = 2;`                               |
+| Variable lesen (Teil eines Ausdruck) | `x`                                                        | `x`                                    |
+| Nested Scopes                        | `(def x : int 10) (let ((a : int 2) (x : int 3)) (+ a x))` | `int x=10; { int a=2; int x=3; a+x; }` |
 
-Während in Lispy (L-Int, L-Expr) die Operatoren für `+`, `-`, `*`, `/` mehrstellig
-sein können, sind sie in C++ (C-Int, C-Expr) **binär** (bzw. `-` zusätzlich unär).
+Ein `let` kann in Lispy nicht nur eine Variable zuweisen, sondern auch einen neuen
+lokalen Scope öffnen mit lokalen Variablen. In C++ nutzen wir dafür die geschweiften
+Klammern.
+
+Für C-Var gelten die folgenden Festlegungen:
+
+-   Variablen haben den Typ `int` und werden bei der Definition initialisiert.
+-   Eine Variable darf in ihrer Initialisierung nicht auf sich selbst verweisen.
+-   Eine Variable darf innerhalb desselben Scopes nur einmal definiert werden.
+-   Eine Definition in einem inneren Scope darf eine Definition in einem äußeren
+    Scope verdecken (*shadowing*).
+-   Variablenzugriffe werden lexikalisch aufgelöst.
+-   Es darf keine Zugriffe (lesend, schreibend) auf nicht sichtbare Variablen geben.
+-   Zuweisungen dürfen in C-Var nur an Variablen erfolgen.
+-   Der Name-Resolver speichert für jede Variablenreferenz die Tiefe, die der
+    Interpreter später zum Zugriff auf das passende Environment verwendet.
+-   Abweichungen vom "echten" C++:
+    -   Zuweisungen sind in Mini-C++ Statements, keine Expressions.
+    -   Der Wert des zuletzt ausgewerteten Expression-Statements ist der
+        Rückgabewert des Interpreters.
 :::
 
-## Schritt 1: C-Expr ausprobieren: Vorrang und unäres Minus live testen
+## Schritt 1: C-Var ausprobieren
 
-Wir wollen zunächst die Vorrangregeln und unäres Minus **direkt in C++**
-ausprobieren.
+Wir wollen Variablendeklarationen, Zuweisungen und Blockverhalten zunächst direkt in
+C++ ausprobieren.
 
-Schreiben Sie ein C++-Programm `expr.cpp`, das folgende Ausdrücke auswertet und
-jeweils das Ergebnis über `std::cout` ausgibt:
+Schreiben Sie ein C++-Programm `var.cpp` mit den folgenden Statements:
 
-    1 + 2 * 3
-    (1 + 2) * 3
-    8 / 4 / 2
-    (8 / 4) / 2
-    8 / (4 / 2)
-    7 - 2 - 1
-    7 - (2 - 1)
-    -3 * 4
-    -(3 * 4)
-    -(1 + 2) * 3
+``` cpp
+int x = 10;
+x = x + 1;
+x + 2;
+{
+    int y = 3;
+    x + y;
+}
+```
+
+Ergänzen Sie an geeigneten Stellen `std::cout`-Ausgaben, sodass die Werte vor und
+nach der Zuweisung sowie im und nach dem Block sichtbar werden.
 
 Übersetzen Sie es mit g++/clang und prüfen Sie, ob jeweils das Ergebnis Ihren
 Erwartungen entspricht.
 
-## Schritt 2: Konkrete Syntax für C-Expr (gestufte Variante)
+## Schritt 2: C-Var-Grammatiken und AST ergänzen
 
-Definieren Sie eine **konkrete Grammatik für C-Expr** (in EBNF), die folgende
-Anforderungen erfüllt:
+Definieren Sie zunächst wieder die **konkrete** und die **abstrakte Grammatik** für
+C-Var. Orientieren Sie dabei am Vorgehen im Skript.
 
--   Zulässige Ausdrücke enthalten:
-    -   Integer-Literale
-    -   binäre Operatoren `+`, `-`, `*`, `/`
-    -   unäres Minus: `-x`
-    -   Klammern `(` und `)`
--   Vorrang:
-    -   `*` und `/` **binden stärker** als `+` und `-`
-    -   Unäres Minus und geklammerte Ausdrücke haben höchsten Vorrang
--   Alle vier Operatoren sind **linksassoziativ**
--   Whitespace darf an beliebigen sinnvollen Stellen stehen und wird ignoriert
--   Zeilenkommentare werden ab dem `//` bis zum Zeilenende ignoriert
+C-Var soll mindestens die folgenden Konstrukte unterstützen:
 
-Skizzieren Sie Ihre Grammatik ausdrücklich mit **gestuften Regeln**, z.B. mit den
-Ebenen `expr`/`term`/`atom`.
-
-Überprüfen Sie mit Ihrer Grammatik:
-
--   Wie wird `1 + 2 * 3` geparst und ausgewertet?
--   Wie wird `8 / 4 / 2` geparst und ausgewertet?
--   Wie wird `-3 * 4` geparst und ausgewertet?
--   Wie werden Klammern berücksichtigt, z.B. `(1 + 2) * 3`, `-(1 + 2) * 3`?
-
-Zeichnen Sie jeweils den Parse-Tree. Entspricht das dem Verhalten von C++ aus der
-vorigen Aufgabe?
-
-## Schritt 3: ANTLR-Grammatiken für C-Expr
-
-Definieren Sie zwei **ANTLR-Grammatiken** für **C-Expr**:
-
--   einmal mit **gestuften Regeln**, und
--   einmal mit **linksrekursiven Alternativen**.
-
-Berücksichtigen Sie dabei die für C-Expr formulierten Operatoren und Vorrangregeln
-und Assoziativitäten.
-
-## Schritt 4: Abstrakte Syntax für C-Expr
-
-Definieren Sie nun die **abstrakte Syntax für C-Expr**. Orientieren Sie sich an der
-Vorlesung und bauen Sie auf Ihrer abstrakten Syntax von C-Int auf.
-
-Diskutieren Sie: Welche neuen AST-Knoten sind notwendig und warum?
-
-## Schritt 5: Parsen von C-Expr und bauen des AST
-
-1.  Implementieren Sie für Ihre konkrete Grammatik (mit den gestuften Regeln) für
-    **C-Expr einen Lexer**. Erweitern Sie dazu die Tokendefinitionen passend.
-2.  Implementieren Sie einen **RD-Parser für C-Expr**, der als Ausgabe einen AST
-    erzeugt. Ergänzen Sie dazu die AST-Klassen entsprechend Ihrer abstrakten Syntax.
-3.  Lassen Sie sich von **ANTLR** für die beiden Grammatiken aus der vorigen Aufgabe
-    je einen **Lexer, Parser und Visitor generieren**.
-4.  Erstellen Sie **zwei AST-Builder**, die aus den beiden unterschiedlichen
-    ANTLR-Parse-Trees je einen AST entsprechend Ihrer abstrakten Syntax erzeugen.
-    Nutzen Sie das **Visitor-Pattern**. Diskutieren Sie:
-    -   Welchen generischen Typ brauchen Sie für das Ableiten des generierten
-        `XyzBaseVisitor`?
-    -   Welche der `visitXYZ()`-Methoden sollten Sie überschreiben, welche nicht?
-        Begründen Sie Ihre Aussage.
-5.  Implementieren Sie die **obigen Testfälle in JUnit** und führen Sie diese auf
-    **allen drei Varianten** aus (RD-Parser, ANTLR mit gestuften Regeln, ANTLR mit
-    linkrekursiven Alternativen). Was beobachten Sie?
-
-::: tip
-**Hinweis**: Sie können die Funktionalität aus dem Lexer und RD-Parser für C-Int als
-Basis per Copy&Paste übernehmen und für C-Expr ergänzen/umbauen. Die gestuften
-Regeln vertragen sich nicht gut mit dem sonst in diesem Kurs praktizierten Ableiten
-`class RdParserCexpr extends RdParserCint`, weshalb wir hier an dieser Stelle darauf
-verzichten.
-:::
-
-## Schritt 6: Interpreter-Pipeline für C-Expr
-
-Implementieren Sie nun den **Interpreter für C-Expr** in einer Klasse
-`InterpreterCexpr`. Dabei soll wie üblich in diesem Kurs gelten
-`class InterpreterCexpr extends InterpreterCint`.
-
-Ergänzen Sie die neuen Fälle für C-Expr durch Überschreiben von `eval()`. Rufen Sie
-für die bisherigen C-Int-Fälle `super.eval(expr)` auf.
-
-Testen Sie Ihren Interpreter mit JUnit mit den obigen Testfällen. Dabei soll wie bei
-L-Expr gelten: `class InterpreterCexprTest extends InterpreterCintTest`. Spielt es
-eine Rolle, ob Sie dafür den handgeschriebenen Lexer/RD-Parser oder einen der beiden
-ANTLR-Parser plus den passenden AST-Builder einsetzen?
-
-Vergleichen Sie die Resultate der Testfälle von `InterpreterCexpr` mit dem mit
-g++/clang übersetzten nativen C++-Code. Gibt es Unterschiede? Woran liegt das?
-
-# (\*\*\*) Vertiefung: ANTLR und Stolperfallen
-
-Betrachten Sie die folgende ANTLR-Grammatik:
-
-``` antlr
-foo  :  (ID '(' ')' '=' '0' | ID | NUM) EOF ;
-
-ID      : [a-z][a-zA-Z]* ;
-NUM     : [0-9]+ ;
-WS      : [ \t\n]+ -> skip ;
+``` cpp
+int x = 10;
+x = x + 1;
+x + 2;
+{
+    int y = 3;
+    x + y;
+}
 ```
 
-Was passiert bei der Eingabe von `10` und `01` und `a() = 0`, wie sieht der
-Parse-Tree aus? Was passiert bei der Eingabe von `0`?
+1.  Ergänzen Sie die **konkrete Grammatik** um passende Regeln für die neuen
+    Sprachkonstrukte.
 
-Erklären Sie die Resultate.
+2.  Leiten Sie aus der konkreten Grammatik die notwendigen Ergänzungen Ihrer
+    **ANTLR-Grammatik** vom letzten Blatt ab. Sie können die von Ihnen bevorzugte
+    Variante nutzen (gestufte Regeln vs. Auflösung der linksrekursiven Alternativen
+    in ANTLR4).
 
-<!--
-Antwort: `10` wird als `foo -> NUM(10)` erkannt, `01` als `foo -> NUM(01)`, und
-`a() = 0` wird zu einem `foo -> ID(a), (, ), =, 0`. Dagegen ist die Eingabe `0` ein
-Fehler!
+3.  Nutzen Sie die Definitionen in Ihrer **abstrakten Grammatik**, um den AST um die
+    benötigten neuen Knotentypen zu erweitern. Halten Sie dabei die Unterscheidung
+    zwischen Expressions und Statements aufrecht.
 
-Das liegt hier an überlappenden Token-Definitionen: Die `0` wird als implizites
-Token definiert, während die Integerzahlen als explizites Token `NUM` definiert
-werden. Damit ist die `0` in `NUM` enthalten. Da ANTLR die impliziten Token intern
-vor den expliziten Token definiert (egal, in welcher Reihenfolge wir die Grammatik
-aufbauen), fällt die Eingabe "0" an das implizite Token `0` und nicht an `NUM`. Da
-es keine Regel gibt, wo eine einzelne "0" erlaubt ist, bekommen wir einen Fehler.
-Sobald die Eingabe länger wird, greift wieder die Regel des längsten Matches und
-`NUM` "gewinnt".
--->
+4.  Leiten Sie Ihren C-Expr-AST-Builder zu einem **C-Var-AST-Builder** ab.
+    Überschreiben Sie die benötigten `visitXYZ()`-Methoden und erläutern Sie kurz,
+    welche bisherigen Methoden Sie weiterverwenden können.
+
+5.  Stellen Sie sicher, dass ein C-Var-Programm aus einer **Folge von Statements**
+    besteht.
+
+## Schritt 3: Name-Resolver und Scopes
+
+Implementieren Sie einen `NameResolverCvar`. Orientieren Sie sich am Vorgehen im
+Skript.
+
+Testen Sie den Resolver mindestens mit diesen Fällen:
+
+``` cpp
+int x = 1;
+x + 2;
+```
+
+``` cpp
+int x = 1;
+{
+    int y = x + 2;
+    y + x;
+}
+```
+
+``` cpp
+int x = 1;
+{
+    int x = 2;
+    x + 1;
+}
+```
+
+Prüfen Sie für diese Tests, ob die richtigen Namen im richtigen Scope gebunden
+wurden und die korrekte Tiefeninformation berechnet wurde.
+
+Erstellen Sie außerdem noch **Negativtests**: Welche Eingaben sollte der
+Name-Resolver zurückweisen?
+
+## Schritt 4: Interpreter und Environments
+
+Erweitern Sie Ihren C-Expr-Interpreter zu einem `InterpreterCvar`. Ergänzen Sie eine
+`Env`-Struktur, die Variablennamen und Laufzeitwerte speichert und auf das
+Eltern-Environment verweist.
+
+Erläutern Sie, welche Informationen der Interpreter aus der Sidetable benötigt.
+
+Legen Sie fest, welchen Wert Ihr Interpreter für ein Programm zurückgibt.
+Orientieren Sie sich dabei an der L-Var-Semantik: Der Wert des letzten ausgewerteten
+Expression-Statements wird zurückgegeben; falls keines vorkommt, wird ein
+Einheitswert zurückgegeben.
+
+Ergänzen Sie Ihre JUnit-Tests so, dass die neuen Sprachkonstrukte in der Pipeline
+getestet werden. Testen Sie insbesondere syntaktische Konstruktion, Namensauflösung
+und Laufzeitverhalten.
+
+Vergleichen Sie das beobachtbare Verhalten Ihres Interpreters mit einem
+entsprechenden C++-Programm (clang/g++). Welche Unterschiede ergeben sich durch die
+Festlegungen von Mini-C++?
+
+# A5.6: C-Var: Scopes, Tiefenwerte und Laufzeitwerte (\*\*)
+
+Betrachten Sie das folgende C-Var-Programm:
+
+``` cpp
+int x = 10;
+
+{
+    int y = 2;
+    x + y;
+
+    {
+        int x = 5;
+        x + y;
+    }
+
+    x + y;
+}
+```
+
+1.  Zeichnen Sie den Scope-Baum und notieren Sie, welche Variablen in jedem Scope
+    definiert werden.
+2.  Ordnen Sie jede Variablenreferenz ihrer Deklaration zu und geben Sie ihre
+    `depth`-Werte an.
+3.  Skizzieren Sie die Environments während der Ausführung:
+    -   nach der globalen Deklaration von `x`;
+    -   im äußeren Block nach der Deklaration von `y`;
+    -   im inneren Block nach der lokalen Deklaration von `x`.
+4.  Wählen Sie für jede Variablenreferenz ein Beispiel aus und beschreiben Sie, wie
+    der Interpreter mit dem `depth`-Wert das passende Environment findet.
+5.  Erklären Sie, warum die statische Auflösung im Resolver nicht von den
+    Laufzeitwerten abhängt, obwohl der Interpreter später mit Environments arbeitet.
+
+# A5.7: Vertiefung: Namensauflösung (\*\*\*)
+
+Betrachten Sie:
+
+``` cpp
+int x = 1;
+{
+    int x = x + 1;
+}
+```
+
+Was passiert bei der Namensauflösung des `x` im Initialisierungsausdruck?
