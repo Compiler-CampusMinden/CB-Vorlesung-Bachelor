@@ -120,17 +120,14 @@ public class LispyLexerLint {
 ```
 :::
 
-Implementieren Sie `skipIrrelevant()`. Die Methode soll Whitespace und die im Skript
-beschriebenen Kommentare überspringen und angeben, ob noch ein Token gelesen werden
-kann.
-
-Erstellen Sie außerdem mindestens vier Testfälle. Berücksichtigen Sie dabei
-mindestens:
-
--   eine Eingabe ohne Whitespace oder Kommentare;
--   eine Eingabe mit Whitespace vor einem Token;
--   eine Eingabe mit einem Kommentar;
--   eine Eingabe, die nach Whitespace oder einem Kommentar das Dateiende erreicht.
+1.  Zeichnen Sie den DFA für `skipIrrelevant()`.
+2.  Implementieren Sie `skipIrrelevant()`.
+3.  Erstellen Sie mindestens vier Testfälle. Berücksichtigen Sie dabei mindestens:
+    -   eine Eingabe ohne Whitespace oder Kommentare
+    -   eine Eingabe mit Whitespace vor einem Token
+    -   eine Eingabe mit einem Kommentar
+    -   eine Eingabe, die nach Whitespace oder einem Kommentar das Dateiende
+        erreicht
 
 # A3.3: C++ ausprobieren: Compiler und ein erstes Programm (\*)
 
