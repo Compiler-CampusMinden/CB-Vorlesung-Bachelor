@@ -56,7 +56,7 @@ Sprache.
 
 Erstellen Sie einen deterministischen PDA, der die Sprache
 
-$$L = \lbrace w \in \lbrace a, b \rbrace^* \mid w \quad \text{hat genauso viele a's wie b's} \rbrace$$
+$$L = \lbrace w \in \lbrace a, b \rbrace^* \mid w  \text{hat genauso viele a's wie b's} \rbrace$$
 
 akzeptiert.
 
