@@ -244,7 +244,7 @@ s != "123";     // ???
     ::: notes
     -   `operator+` und `operator+=` sind zwei verschiedene Operatoren!
     -   Implementierung ist prinzipiell unabhängig! `\newline`{=tex} =\> Erwartung:
-        `operator+=` $\;==\;$ (`operator+` $\;+\;$ `operator=`)
+        `operator+=  ==  (operator+  +  operator=)`
     :::
 
 \bigskip

@@ -36,7 +36,7 @@ mit
 
 $$\begin{eqnarray}
 P = \lbrace &&                                                                                                           \nonumber \\
-&\text{Statement}& \rightarrow \text{"if" Condition Statement} \; | \; \text{"if" Condition Statement "else" Statement}  \nonumber \\
+&\text{Statement}& \rightarrow \text{"if" Condition Statement} \mid \text{"if" Condition Statement "else" Statement}     \nonumber \\
 &\text{Condition}& \rightarrow \ldots                                                                                    \nonumber \\
 \rbrace                                                                                                                  \nonumber
 \end{eqnarray}$$
@@ -47,7 +47,7 @@ Ist die Grammatik mehrdeutig? Warum (nicht)?
 
 Entwickeln Sie eine kontextfreie Grammatik für die Sprache
 
-$$L = \lbrace a^ib^jc^k \; | \; i = j \lor j = k \rbrace$$
+$$L = \lbrace a^ib^jc^k \mid i = j \lor j = k \rbrace$$
 
 Zeigen Sie, dass die Grammatik mehrdeutig ist. Entwickeln Sie einen PDA für diese
 Sprache.
@@ -56,7 +56,7 @@ Sprache.
 
 Erstellen Sie einen deterministischen PDA, der die Sprache
 
-$$L = \lbrace w \in \lbrace a, b \rbrace^* \; | \; w \; \text{hat genauso viele a's wie b's} \rbrace$$
+$$L = \lbrace w \in \lbrace a, b \rbrace^* \mid w \quad \text{hat genauso viele a's wie b's} \rbrace$$
 
 akzeptiert.
 

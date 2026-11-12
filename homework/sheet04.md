@@ -246,8 +246,8 @@ mit
 
 $$\begin{eqnarray}
 P = \lbrace &&                        \nonumber \\
-&S& \rightarrow 1AS \; | \; 3         \nonumber \\
-&A& \rightarrow 2AS \; | \; \epsilon  \nonumber \\
+&S& \rightarrow 1AS \mid 3            \nonumber \\
+&A& \rightarrow 2AS \mid \epsilon     \nonumber \\
 \rbrace                               \nonumber
 \end{eqnarray}$$
 
