@@ -23,6 +23,11 @@ Wir verwenden für Division in allen Sprachstufen dieselbe Semantik wie in Java:
 ganzzahlige Division von `int`-Werten, bei der der Rest verworfen wird.
 :::
 
+::: youtube
+Vorlesung \[[YT](https://youtu.be/Xyunf8pCivU)\],
+\[[HSBI](https://www.hsbi.de/medienportal/video/cb-l-expr-multiplikationdivision-und-unres-minus/f6ba6f791b656e011994eb73abaef5ce)\]
+:::
+
 # Rückblick: L-Int
 
 -   Konkrete Syntax:
