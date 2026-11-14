@@ -282,10 +282,13 @@ T visitAddExpr(AddExprContext ctx) { return visitChildren(ctx); }
 ```
 
 ::: notes
-**Hinweis**: Eigener Code, der die in ANTLR enthaltene/generierte Methode
-`visitChildren()` in der Wirkung zusammenfasst. (Der gezeigte Code ist stark
-vereinfacht, die tatsächliche ANTLR-Implementierung ist generischer und arbeitet
-u.a. mit `defaultResult()`/`aggregateResult()`.)
+Wie sieht nun dieses `visitChildren()` aus?
+
+**Hinweis**: Die nachfolgend dargestellte Skizze von `visitChildren()` ist eigener
+Code, der die in ANTLR enthaltene/generierte Methode `visitChildren()` in der
+Wirkung zusammenfassen soll. Der gezeigte Code ist stark vereinfacht, die
+tatsächliche ANTLR-Implementierung ist generischer und arbeitet u.a. mit
+`defaultResult()` und `aggregateResult()`.
 :::
 
 ``` java
