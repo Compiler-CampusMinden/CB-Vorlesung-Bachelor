@@ -1,0 +1,33 @@
+- [**Syllabus**](readme.md)
+- **Vorlesungsunterlagen**
+  - **Überblick**
+    - [Struktur eines Compilers](lecture/00-intro/overview.md)
+    - [Bandbreite der Programmiersprachen](lecture/00-intro/languages.md)
+    - [Anwendungen](lecture/00-intro/applications.md)
+  - **Reguläre Sprachen, kontextfreie Grammatiken und Sprachen, lexikalische und syntaktische Analyse**
+    - [Reguläre Sprachen, Ausdrucksstärke (Teil 1)](lecture/01-theory/regular1.md)
+    - [Reguläre Sprachen, Ausdrucksstärke (Teil 2)](lecture/01-theory/regular2.md)
+    - [CFG](lecture/01-theory/cfg.md)
+    - [LL-Parser](lecture/01-theory/ll-parser.md)
+  - **Sprache L-Int: Integer, Addition, Subtraktion**
+    - [L-Int: Die Sprache Lispy](lecture/02-lint/01-lint.md)
+    - [L-Int: Konkrete und abstrakte Syntax](lecture/02-lint/02-grammar.md)
+    - [L-Int: Von Ausdrücken zum Interpreter](lecture/02-lint/03-interpreter.md)
+    - [L-Int: Lexer - Handcodierte Implementierung](lecture/02-lint/04-lexer.md)
+    - [L-Int: LL-Parser mit Recursive Descent](lecture/02-lint/05-rdparser.md)
+  - **Sprache L-Expr: erweiterte Ausdrücke, Vorrangregeln**
+    - [L-Expr: Multiplikation/Division und unäres Minus](lecture/03-lexpr/01-lexpr.md)
+    - [L-Expr: Vorrang und Assoziativität](lecture/03-lexpr/02-precedence.md)
+    - [L-Expr: ANTLR-Grammatik und Vorrangregeln](lecture/03-lexpr/03-antlr-grammar.md)
+    - [L-Expr: ANTLR-Visitoren und Rückgabewerte](lecture/03-lexpr/04-antlr-visitor.md)
+  - **Sprache L-Var: Variablen, Statments, nested Scopes**
+  - **Sprache L-If: Datentyp Boolean, Vergleiche, Kontrollstrukturen (if/else, while)**
+  - **Sprache L-Fun: Funktionen (Definition, Aufruf)**
+  - **Sprache L-Class: Klassen (Felder, Methoden, Objekte)**
+  - **Sprache L-Inherit: Einfachvererbung und dynamischer Dispatch**
+  - **Sprache L-Self: native Klassen (inkl. Vererbung)**
+- **Praktikum**
+  - [Blatt 01: Reguläre Sprachen](homework/sheet01.md)
+  - [Blatt 02: CFG](homework/sheet02.md)
+  - [Blatt 03: L-Int und C-Int (Integer, Addition, Subtraktion)](homework/sheet03-lint.md)
+  - [Blatt 04: L-Expr und C-Expr (Multiplikation/Division, Vorrang und ANTLR)](homework/sheet04-lexpr.md)
