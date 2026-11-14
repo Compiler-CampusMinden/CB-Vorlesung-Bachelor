@@ -271,7 +271,7 @@ protected String readWhile(Predicate<Character> pred) {
 }
 ```
 
-:::: notes
+::::: notes
 Um nicht immer wieder manuell mit dem Index `current` und der Eingabe `source`
 hantieren zu müssen (das hat sich als sehr fehlerträchtig herausgestellt), definiert
 man sich typischerweise einige Hilfsmethoden. Die hier gezeigten Namen sind
@@ -318,6 +318,45 @@ lediglich den Index `current`. "Zeichen werden aus der Eingabe entfernt" bedeute
 hier also, dass der Index `current` inkrementiert wird.
 
 ::: tip
+## Erkennen von Keywords: Alternative mit Look-up in einer Map oder switch/case
+
+Wenn im Lexer viele überlappende Schlüsselwörter unterschieden werden müssen, könnte
+man zunächst einfach nur einen String einlesen und diesen hinterher mit einer
+vordefinierten `Map<String, TokenKind>` vergleichen (hier nicht gezeigt) oder in
+einem `switch`/`case` prüfen (siehe nachfolgende Skizze) und damit die Keywords von
+den IDs unterscheiden und die passenden Token generieren:
+
+``` java
+...
+if (isIdentStart(c)) yield keywordOrIdentifier(c + readWhile(LispyLexerLint::isIdentPart));
+...
+
+
+private Token keywordOrIdentifier(String lexeme) {
+    return switch (lexeme) {
+        case "int" -> Token.from(INT, lexeme);
+
+        case "if" -> Token.from(KW_IF);
+        case "else" -> Token.from(KW_ELSE);
+
+        default -> Token.from(ID, lexeme);
+    };
+}
+```
+
+Die Funktionen `isIdentStart()` und `isIdentPart()` sind zwei Hilfsfunktionen, die
+für das übergebene Zeichen prüfen, ob dieses am Anfang bzw. innerhalb eines
+Identifier vorkommen darf. Da sich in vielen Sprachen Identifier und Keywords
+überlappen, kann man so zunächst einen String einlesen. Beim Vergleich mit
+vordefinierten Strings in einer Map bzw. (wie hier gezeigt) mit einem
+`switch`/`case` kann dann das korrekte Token gebaut werden.
+
+Das funktioniert nur, wenn die Identifier auch die Keywords enthalten. Dann ist es
+aber deutlich einfacher, als im Haupt-`switch` in `nextToken()` zeichenweise zu
+erraten, was hier vorliegt.
+:::
+
+::: tip
 ## Design-Diskussion: Index-Handling und Robustheit
 
 Das Hantieren mit dem Index und dem Weiterschalten muss gut aufeinander abgestimmt
@@ -335,7 +374,7 @@ Alternativ könnte man auch eine Exception auslösen beim Versuch, am Ende der E
 noch ein weiteres `advance()` zu machen. Dies zieht aber schnell eine relativ
 umständliche Fehlerbehandlung nach sich ...
 :::
-::::
+:::::
 
 # Typische Muster für die Definition von Token
 
