@@ -125,7 +125,7 @@ public class LispyAstBuilderLexpr extends LispyBaseVisitor<Object> {
 }
 ```
 
-::::: notes
+:::::: notes
 Wir leiten von `LispyBaseVisitor` ab und setzen den generischen Typ-Parameter auf
 `Object`. Wie oben diskutiert, wäre für L-Expr der Typ `Expr` die bessere Wahl -
 aber wir wollen später von diesem AST-Builder weiter ableiten
@@ -228,10 +228,21 @@ Traversieren von Kindknoten in der Regel **immer `visit(...)` verwenden**.
     Kontextklassen. Spätere Erweiterungen oder Umbenennungen der Grammatik werden so
     schwerer.
 
-**Faustregel**: Für rekursive Aufrufe auf Kindknoten immer **`visit(kind)`**
+**Faustregel**: Für rekursive Aufrufe auf Kindknoten immer **`visit(node)`**
 benutzen.
 :::
-:::::
+
+::: tip
+Wer sich an das klassische Visitor-Pattern erinnert, fragt sich vermutlich, warum
+wir **`visit(node)`** aufrufen und nicht `node.accept(this)` ...
+
+Es stellt sich heraus, dass die von ANTLR bereitgestellte `visit()`-Methode genau
+das (für uns) tut!
+
+**`visit(node)`** ist also nur eine Convenience-Methode, um nicht ständig das
+schlechter lesbare `node.accept(this)` schreiben/lesen zu müssen.
+:::
+::::::
 
 # ANTLR-Pipeline komplett
 
