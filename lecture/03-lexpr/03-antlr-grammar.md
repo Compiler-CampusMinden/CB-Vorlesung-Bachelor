@@ -31,6 +31,11 @@ nutzt diese u.a. zur automatischen Behandlung von **Operatorpräzedenz** und
 **Assoziativität**.
 :::
 
+::: youtube
+Vorlesung \[[YT](https://youtu.be/ksoiGliDBZs)\],
+\[[HSBI](https://www.hsbi.de/medienportal/video/cb-l-expr-antlr-grammatik-und-vorrangregeln/b66afbfbf3a1c9c9f25fb2c8f051ce13)\]
+:::
+
 # Von klassischer CFG zur ANTLR‑Grammatik
 
 ::: notes
