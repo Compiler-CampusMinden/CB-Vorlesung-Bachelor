@@ -22,6 +22,11 @@ Wiederholung `(...)*` in diesen Regeln erzeugt dabei automatisch
 `1+(2*3)` und nicht als `(1+2)*3` geparst wird.
 :::
 
+::: youtube
+Vorlesung \[[YT](https://youtu.be/JWP8-QvDufQ)\],
+\[[HSBI](https://www.hsbi.de/medienportal/video/cb-l-expr-vorrang-und-assoziativitt/7035167b1e93fd407e8d9948b7b9c421)\]
+:::
+
 # Java-artige Infix-Syntax: Vorrangregeln
 
 ::: notes
