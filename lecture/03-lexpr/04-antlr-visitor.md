@@ -36,6 +36,11 @@ der Kindknoten kombiniert werden. Nur bei reinen Durchleitungsregeln reicht meis
 die Default-Implementierung.
 :::
 
+::: youtube
+Vorlesung \[[YT](https://youtu.be/Ek4yxTOeQHQ)\],
+\[[HSBI](https://www.hsbi.de/medienportal/video/cb-l-expr-antlr-visitoren-und-rckgabewerte/ed313fae1fc86df97b00c26fe4c31b76)\]
+:::
+
 # Erinnerung: ANTLR-Toolchain: Von String zum Parse-Tree
 
 ``` java
