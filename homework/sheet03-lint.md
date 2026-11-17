@@ -91,8 +91,8 @@ public class LispyLexerLint {
                 return Token.from(INT, lexeme);
             }
             return switch (c) {
-                case '(' -> Token.from(LPAREN);
-                case '+' -> Token.from(PLUS);
+                case '(' -> new Token(TokenKind.LPAREN, "(");
+                case '+' -> new Token(TokenKind.PLUS, "+");
                 default -> throw new RuntimeException("unexpected character");
             };
         }
