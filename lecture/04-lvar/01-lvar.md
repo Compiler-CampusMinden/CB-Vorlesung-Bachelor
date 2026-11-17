@@ -326,7 +326,7 @@ ID    ::= [a-zA-Z][a-zA-Z_0-9]*
 lvar  ::= sform* EOF
 ```
 
-::: notes
+:::: notes
 Mit L-Var ergänzen wir eine neue Expression in der `eform`: lesender Zugriff auf
 eine Variable. D.h. ein Variablenname (hier als `ID`) stellt für sich eine
 Expression dar.
@@ -343,7 +343,42 @@ i.d.R. **Teile** von Statements (`sform`).
 
 Diese Definition wird uns zur Laufzeit im Interpreter noch etwas Kopfzerbrechen
 bereiten: Was genau liefert ein Programm zurück?
+
+::: tip
+Bei der Definition einer Variablen ist der Initialisierungsausdruck in Lispy *nicht*
+optional, d.h. er muss immer angegeben werden.
+
+Dennoch haben wir in der konkreten Syntax die Regel für die Definition einer
+Variablen als `'(' 'def' ID ':' type eform? ')'` (bzw. unten in der daraus
+abgeleiteten ANTLR-Grammatik analog die Regel
+`varDecl : '(' 'def' ID ':' type eform? ')' ;`) formuliert - d.h. die
+*Initialisierung wäre aus Sicht der Grammatik optional*!
+
+Damit prüft der Parser nicht, ob es eine Initialisierung gibt. Wir prüfen deshalb
+das Vorhandensein der Initialisierung bei der Variablendefinition separat im
+AST-Builder für L-Var. Auf diese Weise können wir dieselbe Grammatik-Regel später
+noch einmal in einem anderen Kontext wiederverwenden, wo keine Initialisierung
+erwünscht ist. (Auch dort müssen wir dann im AST-Builder prüfen, dass dann
+entsprechend keine Initialisierung erfolgt ist.)
+
+An diesem Beispiel zeigt sich deutlich:
+
+-   Die Wiederverwendung von Regeln
+    -   *kann* die Lesbarkeit erhöhen,
+    -   *kann* aber auch verwirrend sein.
+-   Im Lexer/Parser nicht geprüfte "Spezialeffekte" müssen dann separat in einem
+    anderen Baustein geprüft werden
+-   Wenn dadurch wie in diesem Beispiel offensichtlicher Erklärungsbedarf entsteht,
+    dann sollte man vermutlich besser separate Regeln spendieren
+
+Das Beispiel demonstriert gut das Sprichwort "*There is no such thing as a free
+lunch.*" ...
+
+**Was in der Grammatik (und damit im Lexer/Parser) problemlos erledigt werden kann,
+sollte dort auch passieren, um den Aufwand in späteren Bausteinen zu verringern und
+auch nicht den Bedarf für extra Erklärungen zu provozieren.**
 :::
+::::
 
 ::: notes
 # L-Var: Abstrakte Syntax (AST)
