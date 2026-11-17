@@ -539,7 +539,7 @@ beispielsweise für `exprStmt`, `varDecl`, `letStmt`:
 public class LispyAstBuilderLvar extends LispyAstBuilderLexpr {
     @Override
     public List<Stmt> visitLvar(LvarContext ctx) {
-        return ctx.sform().stream().map(this::visit).map(Stmt.class::cast).toList();
+        return ctx.sform().stream().map(this::visit).map(this::asStmt).toList();
     }
     @Override
     public Expr visitVarExpr(VarExprContext ctx) {
@@ -560,8 +560,13 @@ public class LispyAstBuilderLvar extends LispyAstBuilderLexpr {
 ```
 
 ::: notes
-Dazu brauchen wir noch ein Interface `Type` und ein initiales Enum `BuiltinType`
-o.ä. zur Repräsentation der eingebauten Typen, etwa so:
+Die Hilfsmethode `Stmt asStmt(Object o)` (nicht gezeigt) ist analog zur Hilfsmethode
+`Expr asExpr(Object o)` in L-Expr aufgebaut. Sie prüft, ob das übergebene Objekt ein
+`Stmt` ist und casted es dann zu diesem Typ um. Anderenfalls wird eine Exception
+geworfen.
+
+Zur Repräsentation der Typen brauchen wir noch ein Interface `Type` und ein
+initiales Enum `BuiltinType` o.ä. zur Repräsentation der eingebauten Typen, etwa so:
 
 ``` java
 public interface Type {}
