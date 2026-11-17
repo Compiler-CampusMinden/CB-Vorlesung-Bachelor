@@ -416,10 +416,21 @@ Dazu kommen nun die neuen Klassen für L-Var:
 
 ``` java
 public record VarExpr(String name) implements Expr {}
+
 public record VarDecl(String name, Type type, Expr init) implements Stmt, Decl {}
 public record AssignStmt(Expr target, Expr expr) implements Stmt {}
 public record ExprStmt(Expr expr) implements Stmt {}
 public record BlockStmt(List<Stmt> stmts) implements Stmt {}
+```
+
+::: notes
+Zur Repräsentation der Typen brauchen wir noch ein Interface `Type` und ein
+initiales Enum `BuiltinType` o.ä. zur Repräsentation der eingebauten Typen, etwa so:
+:::
+
+``` java
+public interface Type {}
+enum BuiltinType implements Type { INT }
 ```
 
 :::: notes
@@ -564,17 +575,6 @@ Die Hilfsmethode `Stmt asStmt(Object o)` (nicht gezeigt) ist analog zur Hilfsmet
 `Expr asExpr(Object o)` in L-Expr aufgebaut. Sie prüft, ob das übergebene Objekt ein
 `Stmt` ist und casted es dann zu diesem Typ um. Anderenfalls wird eine Exception
 geworfen.
-
-Zur Repräsentation der Typen brauchen wir noch ein Interface `Type` und ein
-initiales Enum `BuiltinType` o.ä. zur Repräsentation der eingebauten Typen, etwa so:
-
-``` java
-public interface Type {}
-
-enum BuiltinType implements Type {
-    INT
-}
-```
 :::
 
 # Wrap-up
