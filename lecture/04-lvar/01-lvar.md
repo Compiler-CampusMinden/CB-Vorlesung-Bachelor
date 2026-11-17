@@ -458,6 +458,8 @@ public record ExprStmt(Expr expr) implements Stmt {}
 public record BlockStmt(List<Stmt> stmts) implements Stmt {}
 ```
 
+\bigskip
+
 ::: notes
 Zur Repräsentation der Typen brauchen wir noch ein Interface `Type` und ein
 initiales Enum `BuiltinType` o.ä. zur Repräsentation der eingebauten Typen, etwa so:
