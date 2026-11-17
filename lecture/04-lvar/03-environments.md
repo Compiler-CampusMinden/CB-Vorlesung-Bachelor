@@ -63,7 +63,7 @@ Expressions, aber wir brauchen noch ein Konzept, wie wir mit dem Zustand umgehen
 
 # Zustände: Auswerten von Anweisungen
 
-::::: columns
+:::::: columns
 ::: {.column width="35%"}
 ``` clojure
 (def x : int 1)
@@ -77,7 +77,7 @@ Expressions, aber wir brauchen noch ein Konzept, wie wir mit dem Zustand umgehen
 ::: {.column width="10%"}
 :::
 
-:::  {.column width="35%"}
+::: {.column width="35%"}
     +-------------------+
     |    GLOBAL ENV     |
     +-------------------+
@@ -93,7 +93,7 @@ Expressions, aber wir brauchen noch ein Konzept, wie wir mit dem Zustand umgehen
     |           b : 3]  |
     +-------------------+
 :::
-:::::
+::::::
 
 ::: notes
 Das erinnert nicht nur zufällig an den Aufbau der Symboltabellen ...
@@ -551,19 +551,20 @@ Fehler hätten nämlich bereits in der semantischen Analyse auffallen müssen!
 
 \smallskip
 
--   `exec(stmt)`: führt Statements aus; zuletzt ausgewertetes `ExprStmt` ist
-    Rückgabewert des Interpreters
+-   `exec(stmt)`:
+    -   führt Statements aus (Zustand, Nebeneffekte)
+    -   zuletzt ausgewertetes `ExprStmt` ist Rückgabewert des Interpreters
 
 \smallskip
 
--   Block-Ausführung: beim `BlockStmt` neues `Env(env)` anlegen, nach dem Block
-    `env` auf `parent` zurücksetzen
-
--   `VarDecl`: Initialisierung per `eval()` berechnen, Name im aktuellen `Env` mit
+-   Block-Ausführung:
+    -   beim `BlockStmt` neues `Env(env)` anlegen
+    -   nach dem Block `env` auf `parent` zurücksetzen
+-   `VarDecl`: Initialisierung evaluieren, [Name im aktuellen `Env`]{.notes} mit
     `define(name, value)` eintragen
-
--   `VarExpr`: über vom Name-Resolver berechnete Tiefe das passende `Env` finden und
-    Wert mit `get(name, depth)` lesen
+-   `VarExpr`:
+    -   über vom Name-Resolver berechnete Tiefe das passende `Env` finden, und
+    -   Wert mit `get(name, depth)` lesen
 
 ::: readings
 Zur Interpretation von Statements kann man in [@Nystrom2021] in Kapitel 8
