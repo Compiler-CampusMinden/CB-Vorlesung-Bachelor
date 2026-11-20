@@ -588,7 +588,7 @@ Wenn man eine *direkt* linksrekursive Regel der Form hat:
 :::
 
 ``` ebnf
-ruleA ::= ruleA a1 | ... | ruleA am | b1 | ... | bn |
+ruleA ::= ruleA a1 | ... | ruleA am | b1 | ... | bn
 ```
 
 ::: notes
