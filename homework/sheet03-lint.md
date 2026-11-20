@@ -259,7 +259,7 @@ eingeführt.
 
 Syntaktisch und semantisch betrachten wir im Laufe des Semesters folgende Abstufung:
 
-    C++ <: C-Self <: C-Inherit <: C-Class <: C-Fun <: C-If <: C-Expr <: C-Int
+    C++ <: C-Self <: C-Inherit <: C-Class <: C-Fun <: C-If <: C-Var <: C-Expr <: C-Int
 
 In diesem Semester enden wir (voraussichtlich) bei C-Self.
 :::
