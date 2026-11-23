@@ -442,9 +442,9 @@ Betrachten Sie die beiden Varianten der Grammatik für `eform`:
 
     ``` antlr
     eform
-      : '(' '+' eform eform+ ')'  # addExpr
-      | '(' '*' eform eform+ ')'  # mulExpr
-      | INT                       # intLit
+      : '(' '+' eform eform+ ')'  #addExpr
+      | '(' '*' eform eform+ ')'  #mulExpr
+      | INT                       #intLit
       ;
     ```
 
@@ -467,8 +467,8 @@ arithmetische Ausdrücke:
 expr     : addExpr ;
 addExpr  : multExpr (('+' | '-') multExpr)* ;
 multExpr : atom (('*' | '/') atom)* ;
-atom     : INT
-         | '(' expr ')'   # parens
+atom     : INT                                   #int
+         | '(' expr ')'                          #parens
          ;
 ```
 
@@ -516,15 +516,15 @@ start
   ;
 
 stmt
-  : id=ID '=' value=expr ';'    # Assign
-  | expr ';'                    # ExprStmt
+  : id=ID '=' value=expr ';'    #Assign
+  | expr ';'                    #ExprStmt
   ;
 
 expr
-  : lhs=expr '*' rhs=expr       # Mul
-  | lhs=expr '+' rhs=expr       # Add
-  | ID                          # Name
-  | NUM                         # Number
+  : lhs=expr '*' rhs=expr       #Mul
+  | lhs=expr '+' rhs=expr       #Add
+  | ID                          #Name
+  | NUM                         #Number
   ;
 
 
