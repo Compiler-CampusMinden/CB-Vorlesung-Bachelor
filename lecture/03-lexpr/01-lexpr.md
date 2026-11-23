@@ -181,8 +181,8 @@ public class InterpreterLint {
             case IntLiteral(var v) -> new IntVal(v);
 
             case AddExpr(var l, var r) -> {
-                int a = Value.asInt(eval(l));
-                int b = Value.asInt(eval(r));
+                int a = asInt(eval(l));
+                int b = asInt(eval(r));
                 yield new IntVal(a + b);
             }
 
@@ -210,8 +210,8 @@ public class InterpreterLexpr extends InterpreterLint {
     public Value eval(Expr expr) {
         return switch (expr) {
             case MulExpr(var l, var r) -> {
-                int a = Value.asInt(eval(l));
-                int b = Value.asInt(eval(r));
+                int a = asInt(eval(l));
+                int b = asInt(eval(r));
                 yield new IntVal(a * b);
             }
 
