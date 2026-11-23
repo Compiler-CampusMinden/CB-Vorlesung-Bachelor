@@ -422,7 +422,7 @@ protected void exec(Stmt stmt) {
             s.forEach(this::exec);
             env = env.parent();
         }
-        default -> throw error("unexpected statement: " + stmt);
+        default -> throw new RuntimeException("unexpected statement: " + stmt);
     }
 }
 ```
@@ -652,7 +652,7 @@ Zuweisung? Wie sollte die Zuweisung durchgeführt werden?
 ```java
 case AssignStmt(var assignee, var expr) -> {
     if (!(assignee instanceof VarExpr v))
-        throw error("assignee should be a variable");
+        throw new RuntimeException("assignee should be a variable");
     Value value = eval(expr);
     int depth = sema.depths.get(v);
     env.assign(v.name(), value, depth);

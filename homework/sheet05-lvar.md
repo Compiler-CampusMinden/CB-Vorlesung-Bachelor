@@ -176,7 +176,7 @@ public class InterpreterLvar extends InterpreterLexpr {
                 s.forEach(this::exec);
                 env = env.parent();
             }
-            default -> throw error("unexpected statement: " + stmt);
+            default -> throw new RuntimeException("unexpected statement: " + stmt);
         }
     }
 
