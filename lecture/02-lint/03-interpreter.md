@@ -85,14 +85,7 @@ Value-Hierarchie einfach erweitern.
 # Value-Hierarchie in Java
 
 ``` java
-public interface Value {
-
-    static int asInt(Value v) {
-        if (v instanceof IntVal(int val)) return val;
-        throw new RuntimeException("number expected");
-    }
-}
-
+public interface Value {}
 
 public record IntVal(int v) implements Value {}
 ```
@@ -150,8 +143,8 @@ public class InterpreterLint {
             case IntLiteral(var v) -> new IntVal(v);
 
             case AddExpr(var l, var r) -> {
-                int a = Value.asInt(eval(l));
-                int b = Value.asInt(eval(r));
+                int a = asInt(eval(l));
+                int b = asInt(eval(r));
                 yield new IntVal(a + b);
             }
 
@@ -176,6 +169,17 @@ Wir nutzen Pattern Matching in einer `switch`-Expression über dem AST-Typ `Expr
 Wir könnten hier auch das Visitor-Pattern nutzen - wichtig ist nur, dass der Baum
 rekursiv traversiert wird und für jeden Knoten die richtige Aktion durchgeführt
 wird.
+
+## Hilfsmethode
+
+Die Hilfsmethode `asInt()` in `InterpreterLint` könnte so aussehen:
+
+``` java
+protected int asInt(Value v) {
+    if (v instanceof IntVal(int val)) return val;
+    throw new RuntimeException("number expected");
+}
+```
 
 ## Literale auswerten
 
