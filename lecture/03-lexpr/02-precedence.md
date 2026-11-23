@@ -188,7 +188,7 @@ expr ::= expr '+' expr
 
 **Assoziativität sichtbar machen**
 
-Betrachten Sie erneut die Grammatik aus dem Beispiel:
+Betrachten Sie die Grammatik aus dem Beispiel im Skript:
 
 ``` ebnf
 expr  ::= term ('+' term)*
@@ -201,7 +201,7 @@ atom  ::= '-' atom
     -   `1 + 2 + 3`
     -   `2 * 3 * 4`
     -   `1 + 2 * 3`
-    -   `8 * 4 * 2`
+    -   `4 * 5 + 6`
     -   `-3 * 4`
 2.  Schreiben Sie zu jedem Parse-Tree die explizite Klammerung des Ausdrucks dazu,
     z.B. `(1 + 2) + 3`.
@@ -209,31 +209,4 @@ atom  ::= '-' atom
     -   Warum sind die Bäume links-astig?
     -   Wie würde eine Grammatik aussehen, die `+` (oder `*`) **rechtsassoziativ**
         parst?
-
-**Vorrang durch Umformung der Grammatik**
-
-Starten Sie erneut mit der folgenden Grammatik:
-
-``` ebnf
-expr ::= expr '+' expr
-       | expr '*' expr
-       | INT
-```
-
-1.  Formulieren Sie eine neue Grammatik, die:
-
-    -   Multiplikation und Division stärker bindet als Addition und Subtraktion (wie
-        in Java/C++),
-    -   alle vier Operatoren linksassoziativ macht, und
-    -   geklammerte Ausdrücke erlaubt.
-
-2.  Verwenden Sie dazu die drei Stufen `expr`, `term`, `atom`.
-
-3.  Testen Sie Ihre Grammatik gedanklich an den Ausdrücken:
-
-        1 + 2 * 3
-        4 * 5 + 6
-        7 + 8 + 9
-
-4.  Notieren Sie für jeden Ausdruck die Klammerung, die Ihre Grammatik erzwingt.
 :::
