@@ -224,7 +224,7 @@ public class LispyParserLint {
         tokens = tokenList;  current = 0;
 
         Expr expr = parseEform();
-        if (!isAtEnd()) throw new RuntimeException("unexpected token");
+        match(EOF);
 
         return expr;
     }
@@ -408,6 +408,7 @@ protected Expr parseAddExpr() {
     match(PLUS);
 
     List<Expr> ops = new ArrayList<>();
+    ops.add(parseEform());
     ops.add(parseEform());
     while (!check(RPAREN)) ops.add(parseEform());
 
@@ -719,6 +720,7 @@ protected Expr parseAddExpr() {
     match(PLUS);
 
     List<Expr> ops = new ArrayList<>();
+    ops.add(parseEform());
     ops.add(parseEform());
     while (!check(RPAREN)) ops.add(parseEform());
 
