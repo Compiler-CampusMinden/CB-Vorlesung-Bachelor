@@ -658,7 +658,13 @@ einem Zeichen.
     `start : IF '(' ID ')' EOF ;` schreiben würden?
 
 3.  Variieren Sie nun die Reihenfolge der Lexer-Regeln:
-    `antlr  ID : [a-z][a-zA-Z0-9]* ;  IF : 'if' ;` Diskutieren Sie:
+
+    ``` antlr
+    ID : [a-z][a-zA-Z0-9]* ;
+    IF : 'if' ;
+    ```
+
+    Diskutieren Sie:
 
     -   Welche Tokenfolge erzeugt der Lexer nun für die Eingabe `if(x)`?
     -   Warum macht es aus Sicht der ANTLR-Spezifikation trotzdem einen Unterschied,
