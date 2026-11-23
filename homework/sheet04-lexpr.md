@@ -38,12 +38,7 @@ public record SubExpr(Expr left, Expr right) implements Expr {}
 public record MulExpr(Expr left, Expr right) implements Expr {}
 public record DivExpr(Expr left, Expr right) implements Expr {}
 
-public interface Value {
-    static int asInt(Value v) {
-        if (v instanceof IntVal(int val)) return val;
-        throw new RuntimeException("number expected");
-    }
-}
+public interface Value {}
 public record IntVal(int v) implements Value {}
 
 public class InterpreterLint {
@@ -52,8 +47,8 @@ public class InterpreterLint {
             case IntLiteral(var v) -> new IntVal(v);
 
             case AddExpr(var l, var r) -> {
-                int a = Value.asInt(eval(l));
-                int b = Value.asInt(eval(r));
+                int a = asInt(eval(l));
+                int b = asInt(eval(r));
                 yield new IntVal(a + b);
             }
 
@@ -61,6 +56,11 @@ public class InterpreterLint {
 
             default -> throw new RuntimeException("unexpected expression: " + expr);
         };
+    }
+
+    protected int asInt(Value v) {
+        if (v instanceof IntVal(var val)) return val;
+        throw new RuntimeException("number expected");
     }
 }
 
@@ -71,8 +71,8 @@ public class InterpreterLexpr extends InterpreterLint {
     public Value eval(Expr expr) {
         return switch (expr) {
             case MulExpr(var l, var r) -> {
-                int a = Value.asInt(eval(l));
-                int b = Value.asInt(eval(r));
+                int a = asInt(eval(l));
+                int b = asInt(eval(r));
                 yield new IntVal(a * b);
             }
 
