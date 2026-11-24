@@ -5,17 +5,17 @@ title: "L-Var: Interpreter mit Environments und Statements"
 
 ::: tldr
 In L-Var erweitern wir den Interpreter um Anweisungen (Statements) und modellieren
-dazu den Laufzeitzustand mit sogenannten Environments. Ein `Env` steht für einen
-lexikalischen Scope zur Laufzeit und enthält eine Zuordnung von Namen zu Werten
-sowie einen Zeiger auf das Eltern-Environment. Beim Betreten eines neuen Blocks
-(`BlockStmt`) erzeugen wir ein neues `Env` mit dem bisherigen Environment als
+dazu den Laufzeitzustand mit sogenannten Environments. Ein solches `Env` steht für
+einen lexikalischen Scope zur Laufzeit und enthält eine Zuordnung von Namen zu
+Werten sowie einen Zeiger auf das Eltern-Environment. Beim Betreten eines neuen
+Blocks (`BlockStmt`) erzeugen wir ein neues `Env` mit dem bisherigen Environment als
 Eltern, beim Verlassen setzen wir `env` wieder auf das vorherige Environment zurück.
 
 Variablen werden über `VarDecl` im aktuellen Environment definiert: Wir werten die
 Initialisierungsausdrücke aus und speichern den resultierenden Wert unter dem
 Variablennamen im aktuellen Environment. Lesezugriffe auf Variablen benutzen nicht
 mehr eine rekursive Suche durch die Environment-Struktur nach "oben", sondern
-greifen mithilfe der im Name-Resolver vorberechneten Tiefe direkt auf das passende
+greifen mithilfe der im Name-Resolver vorberechneten Tiefe gezielt auf das passende
 Environment zu. Der Name-Resolver hat bereits geprüft, ob Namen definiert und
 sichtbar sind und ob es keine Mehrfachdefinitionen gibt, sodass der Interpreter hier
 keine aufwändige Fehlerprüfung mehr benötigt.
@@ -78,21 +78,21 @@ Expressions, aber wir brauchen noch ein Konzept, wie wir mit dem Zustand umgehen
 :::
 
 ::: {.column width="35%"}
-    +-------------------+
-    |    GLOBAL ENV     |
-    +-------------------+
-    | values = [x : 1,  |
-    |           a : 2]  |
-    +-------------------+
-              ^
-              |
-              |
-    +-------------------+
-    |    LOCAL ENV      |
-    +-------------------+
-    | values = [b : 3,  |
-    |           x : 42] |
-    +-------------------+
+    +--------------------+
+    |     GLOBAL ENV     |
+    +--------------------+
+    | values = [x : 1,   |
+    |           a : 2]   |
+    +--------------------+
+               ^
+               |
+               |
+    +--------------------+
+    |     LOCAL ENV      |
+    +--------------------+
+    | values = [b : 3,   |
+    |           x : 42]  |
+    +--------------------+
 :::
 ::::::
 
@@ -164,14 +164,14 @@ Lebens **keine** neuen Werte zugewiesen werden. Deshalb müssen wir in `Env` kei
 Möglichkeit zum Ändern bereits gebundener Werte implementieren.
 
 ::: tip
-## Mini-C++ kennt Zuweisungen
+## (Mini-) C++ kennt Zuweisungen
 
-Wenn es wie in Mini-C++ Zuweisungen in der Sprache gibt, dann braucht man eine
+Wenn es wie in (Mini-) C++ Zuweisungen in der Sprache gibt, dann braucht man eine
 Möglichkeit, um Namen in einem `Env` einen neuen Wert zuzuweisen. Für diese
 Neuzuweisung von Namen kann man sich eine Methode
-`void assign(String name, Value value, int depth)` definieren, die analog zu `get()`
-das Elternenvironment in der Tiefe `depth` aufsucht und dort dem Namen `name` den
-neuen Wert `value` zuweist. (siehe Challenge/Hausaufgabe)
+`void assign(String name, Value value, int depth)` in der Klasse `Env` definieren,
+die analog zu `get()` das Elternenvironment in der Tiefe `depth` aufsucht und dort
+dem Namen `name` den neuen Wert `value` zuweist. (siehe Challenge/Hausaufgabe)
 :::
 
 ::: important
@@ -234,7 +234,7 @@ Eltern-Environment `Env parent` ist? (vgl. Challenges)
 :::
 
 ::: important
-## Unterscheidung Symboltabellen und Environments
+## Unterscheidung Symboltabellen (`Scope`) und Environments (`Env`)
 
 `Scope` beantwortet "Wo ist ein Name definiert?", `Env` beantwortet "Welchen Wert
 hat dieser Name gerade in diesem Aufrufkontext?".
@@ -249,7 +249,8 @@ einen Sichtbarkeitsbereich (Scope) in unserem zu verarbeitenden Programm.
 Der Unterschied liegt in der Benutzung:
 
 -   `Scope` ist eine **statische** Sicht auf die Sichtbarkeitsbereiche, d.h. sie
-    hängt nur von der Quelltextstruktur ab, nicht vom tatsächlichen Programmverlauf.
+    hängt **nur von der Quelltextstruktur** ab, nicht vom tatsächlichen
+    Programmverlauf.
 
     In einem `Scope`-Objekt ordnen wir während der semantischen Analyse jedem im
     Scope sichtbaren Namen genau seinen Deklarationsknoten (`Stmt`) im AST zu. Wir
@@ -263,37 +264,37 @@ Der Unterschied liegt in der Benutzung:
     Namen die Information der Definition, also den `Stmt`-Knoten des AST, der zu
     diesem Namen gehört. Wir werden später in L-Fun sehen, dass wir zwar die lokalen
     Variablen im Funktionskörper ganz normal auflösen, aber keine Funktionsaufrufe
-    verfolgen! Wir interpretieren in der semantischen Analyse keine Anweisungen oder
-    Ausdrücke, sondern prüfen nur die Sichtbarkeiten.
+    verfolgen! **Wir interpretieren in der semantischen Analyse keine Anweisungen
+    oder Ausdrücke, sondern prüfen nur die Sichtbarkeiten.**
 
 -   `Env` ist die **dynamische** Sicht auf die Sichtbarkeitsbereiche.
 
     Wir speichern bei der Interpretation zu jedem Namen den zugehörigen Wert in der
-    `Env`. Wir interpretieren nun die Ausdrücke und Anweisungen, d.h. wir berechnen
-    Werte und erzeugen Nebeneffekte. Jedes Env-Objekt entspricht einem **konkreten
-    Aktivierungskontext eines Scopes** im Programm (z.B. einem Funktionsaufruf).
-    Derselbe Funktionskörper kann also zur Laufzeit viele verschiedene `Env`-Objekte
-    haben - eine `Env` pro Aufruf. Die Environment-Struktur baut sich dynamisch
-    während der Verarbeitung auf und ab, und im Unterschied zur semantischen Analyse
-    verfolgen wir später in L-Fun dann (natürlich) auch die Funktionsaufrufe - jeder
-    Funktionsaufruf legt einen neuen "Scope" an, in dem die lokalen Variablen im
-    Funktionskörper für diesen Aufruf definiert sind. Dies nennt man auch oft "Call
-    Frame" oder "Stack Frame" - unsere `Env`-Objekte modellieren genau diese Call
-    Frames. In vielen Implementierungen wird dafür intern tatsächlich ein Stack von
-    Frames verwendet, aber manche Dinge gehen leider nur über die Struktur mit dem
-    Eltern-Zeiger - siehe Challenges. Unsere Eltern-Zeiger-Struktur bildet dasselbe
-    Konzept explizit im Heap nach. Wir führen hier im Gegensatz zur Namensauflösung
-    alle Schleifen und Funktionsaufrufe im verarbeiteten Programm aus und erzeugen
-    dabei die gewünschten Seiteneffekte. Wir haben jetzt Kontrollfluss und
-    interpretieren beispielsweise Fallunterscheidungen - je nachdem, wie die
-    Auswertung der Bedingung ausfällt, betrachten wir jetzt nur noch einen der
-    Branches ...
+    `Env`. **Wir interpretieren nun die Ausdrücke und Anweisungen**, d.h. wir
+    berechnen Werte und erzeugen Nebeneffekte. Jedes Env-Objekt entspricht einem
+    **konkreten Aktivierungskontext eines Scopes** im Programm (z.B. einem
+    Funktionsaufruf). Derselbe Funktionskörper kann also zur Laufzeit viele
+    verschiedene `Env`-Objekte haben - eine `Env` pro Aufruf. Die
+    Environment-Struktur baut sich dynamisch während der Verarbeitung auf und ab,
+    und im Unterschied zur semantischen Analyse verfolgen wir später in L-Fun dann
+    (natürlich) auch die Funktionsaufrufe - jeder Funktionsaufruf legt einen neuen
+    "Scope" an, in dem die lokalen Variablen im Funktionskörper für diesen Aufruf
+    definiert sind. Dies nennt man auch oft "Call Frame" oder "Stack Frame" - unsere
+    `Env`-Objekte modellieren genau diese Call Frames. In vielen Implementierungen
+    wird dafür intern tatsächlich ein Stack von Frames verwendet, aber manche Dinge
+    gehen leider nur über die Struktur mit dem Eltern-Zeiger - siehe Challenges.
+    Unsere Eltern-Zeiger-Struktur bildet dasselbe Konzept explizit im Heap nach. Wir
+    führen hier im Gegensatz zur Namensauflösung alle Schleifen und Funktionsaufrufe
+    im verarbeiteten Programm aus und erzeugen dabei die gewünschten Seiteneffekte.
+    Wir haben jetzt Kontrollfluss und interpretieren beispielsweise
+    Fallunterscheidungen - je nachdem, wie die Auswertung der Bedingung ausfällt,
+    betrachten wir jetzt nur noch einen der Branches ...
 
 **Merksatz**:
 
 -   `Scope` (semantische Analyse/Namensauflösung):
     -   Name $\to$ Deklaration (`*Decl`-Knoten im AST)
-    -   statisch, einmaliger Pass über den AST
+    -   statisch, ein oder mehrere Passes über den AST
     -   kein Kontrollfluss, keine Ausführung
 -   `Env` (Interpreter):
     -   Name $\to$ Wert zur Laufzeit
@@ -317,8 +318,8 @@ Zusätzlich haben wir in L-Var jetzt Statements. Da Statements "ausgeführt" wer
 und dabei Nebeneffekte erzeugen, werden wir analog zu den Expressions eine Methode
 `exec(stmt)` einführen, um die Statements zu verarbeiten.
 
-Außerdem besteht L-Var aus einer Liste von Statements: `Lvar = [Stmt]`. Wir
-benötigen entsprechend eine neue Einstiegsmethode und Felder, um den Zustand zu
+Außerdem besteht ein L-Var-Programm aus einer Liste von Statements: `Lvar = [Stmt]`.
+Wir benötigen entsprechend eine neue Einstiegsmethode und Felder, um den Zustand zu
 speichern. Wir bekommen zusätzlich aus der semantischen Analyse die Symboltabellen
 und die Sprunginformationen (gekapselt in einen Sidetable).
 
@@ -336,11 +337,11 @@ ausgewertete `ExprStmt`.
 ``` java
 public class InterpreterLvar extends InterpreterLexpr {
     protected SemaInfo sema;
-    protected Env env;
+    protected Env env;  // current environment
     protected Value last;
 
     public Value interpret(List<Stmt> stmts, SemaInfo semaInfo) {
-        sema = semaInfo;  env = sema.globalEnv;  last = UNIT;
+        sema = semaInfo;  env = sema.globalEnv;  last = null;
 
         stmts.forEach(this::exec);
 
@@ -427,7 +428,7 @@ protected void exec(Stmt stmt) {
 **Hinweis**: `exec(stmt)` hat keinen Rückgabewert, ist also `void`! Statements
 werden ausgeführt, und dabei ergibt sich kein Wert.
 
-Im Unterschied dazu ergeben Expressions bei der Auswertung einen Wert.
+Im Unterschied dazu ergeben Expressions bei der Auswertung einen Wert:
 
 ``` java
 void exec(Stmt stmt);
@@ -458,7 +459,7 @@ könnte in L-Var etwa so aussehen:
 
 ``` java
 protected Value defaultFor(Type t) {
-    if (t == INT) return new IntVal(0);
+    if (t == BuiltinType.INT) return new IntVal(0);
     throw new RuntimeException("(internal error) unsupported type");
 }
 ```
@@ -478,8 +479,8 @@ automatische Initialisierung vorgenommen, was zwar eine höhere Effizienz zur
 Laufzeit bewirkt, aber eben auch in meiner Erfahrung eine häufige Quelle für Fehler
 darstellt.
 
-Wir werden in unserem Mini-C++ deshalb abweichend vom echten C++ Variablen immer
-automatisch mit einem Defaultwert initialisieren, wenn es keinen
+Wir werden in unserem Mini-C++ deshalb abweichend vom echten C++ **Variablen immer
+automatisch mit einem Defaultwert initialisieren**, wenn es keinen
 Initialisierungsausdruck gibt.
 :::
 
@@ -489,8 +490,9 @@ Initialisierungsexpression.
 
 ## Auswerten eines `let`
 
-Ein `let` kapselt Statements, die in einem neuen lokalen Scope ausgeführt werden
-sollen. Im AST finden wir das als `BlockStmt`-Knoten.
+Ein `let`-Statement kapselt Statements, die in einem neuen lokalen Scope ausgeführt
+werden sollen und bindet ggf. noch lokale Variablen. Im AST finden wir das als
+`BlockStmt`-Knoten.
 
 Wir legen ein neues Environment an, wobei das bisherige Environment das
 Eltern-Environment wird, und halten es in `env` fest. Dann iterieren wir über alle
@@ -545,8 +547,8 @@ dort auf die Variable zugreifen und den dort gespeicherten Wert zurückliefern.
 Auch hier gilt: Die notwendigen Prüfungen sind bereits im Name-Resolver
 (`NameResolverLvar` in Verbindung mit `Scope`) erfolgt! Wenn es dabei einen Fehler
 gegeben hätte, wären wir nicht im Interpreter angekommen. Beispielsweise wenn die
-referenzierte Variable nicht sichtbar ist vom dem aktuellen Scope aus, dann hätte
-das der Name-Resolver bereits festgestellt.
+referenzierte Variable nicht sichtbar wäre vom aktuellen Scope aus, dann hätte das
+der Name-Resolver bereits vorher festgestellt.
 
 **Deshalb brauchen wir hier keine extra Fehlerprüfungen!**
 
@@ -571,8 +573,8 @@ Fehler hätten nämlich bereits in der semantischen Analyse auffallen müssen!
 -   Block-Ausführung:
     -   beim `BlockStmt` neues `Env(env)` anlegen
     -   nach dem Block `env` auf `parent` zurücksetzen
--   `VarDecl`: Initialisierung evaluieren, [Name im aktuellen `Env`]{.notes} mit
-    `define(name, value)` eintragen
+-   `VarDecl`: Initialisierung evaluieren, [Name und Wert im aktuellen
+    `Env`]{.notes} mit `define(name, value)` eintragen
 -   `VarExpr`:
     -   über vom Name-Resolver berechnete Tiefe das passende `Env` finden, und
     -   Wert mit `get(name, depth)` lesen
@@ -581,7 +583,7 @@ Fehler hätten nämlich bereits in der semantischen Analyse auffallen müssen!
 Zur Interpretation von Statements kann man in [@Nystrom2021] in Kapitel 8
 "Statements and State" nachlesen, dort noch ohne Tiefeninformation. In Kapitel 11
 "Resolving and Binding" wird dann die Namensauflösung und Berechnung der
-Tiefeninformation eingeführt. Dabei behandelt [@Nystrom2021] die Verbindung zwischen
+Tiefeninformation eingeführt. Dabei behandelt @Nystrom2021 die Verbindung zwischen
 Name-Resolver und Interpreter technisch anders als wir, aber das Grundprinzip der
 Namensauflösung ist ähnlich wie hier gezeigt.
 :::
