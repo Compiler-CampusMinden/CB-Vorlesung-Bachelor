@@ -4,14 +4,6 @@ no_beamer: true
 title: "Blatt 03: L-Int und C-Int (Integer, Addition, Subtraktion)"
 ---
 
-Dieses Blatt knüpft an folgende Vorlesungseinheiten an:
-
--   L-Int: Die Sprache Lispy
--   L-Int: Konkrete und abstrakte Syntax
--   L-Int: Lexer - Handcodierte Implementierung
--   L-Int: LL-Parser mit Recursive Descent
--   L-Int: Von Ausdrücken zum Interpreter
-
 # A3.1: L-Int: Subtraktion verstehen und ergänzen (\*)
 
 L-Int unterstützt Integer-Literale, Addition und Subtraktion. Im Skript wurde die

@@ -4,13 +4,6 @@ no_beamer: true
 title: "Blatt 05: L-Var und C-Var (Variablen, State, Scopes)"
 ---
 
-Dieses Blatt knüpft an folgende Vorlesungseinheiten an:
-
--   L-Var: Überblick, Syntax und AST
--   L-Var: Scopes, Name-Resolver und Symboltabellen
--   L-Var: Interpreter mit Environments und Statements
--   L-Var: Integration & Pipeline-Gesamtbild
-
 # A5.1: L-Var: Scopes und Tiefenwerte verfolgen (\*)
 
 Betrachten Sie das folgende L-Var-Programm:

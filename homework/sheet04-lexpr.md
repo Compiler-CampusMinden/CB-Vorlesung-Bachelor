@@ -4,13 +4,6 @@ no_beamer: true
 title: "Blatt 04: L-Expr und C-Expr (Multiplikation/Division, Vorrang und ANTLR)"
 ---
 
-Dieses Blatt knüpft an folgende Vorlesungseinheiten an:
-
--   L-Expr: Multiplikation/Division und unäres Minus
--   L-Expr: Vorrang und Assoziativität
--   L-Expr: ANTLR-Grammatik und Vorrangregeln
--   L-Expr: ANTLR-Visitoren und Rückgabewerte
-
 # A4.1: L-Expr: Division ergänzen (\*)
 
 Im Skript haben Sie L-Expr als Erweiterung von L-Int um Multiplikation und Division
