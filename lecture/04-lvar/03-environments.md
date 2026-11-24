@@ -13,12 +13,12 @@ Eltern, beim Verlassen setzen wir `env` wieder auf das vorherige Environment zur
 
 Variablen werden über `VarDecl` im aktuellen Environment definiert: Wir werten die
 Initialisierungsausdrücke aus und speichern den resultierenden Wert unter dem
-Variablennamen im aktuellen Environment. Zuweisungen und Lesezugriffe auf Variablen
-benutzen nicht mehr eine rekursive Suche durch die Environment-Struktur nach "oben",
-sondern greifen mithilfe der im Name-Resolver vorberechneten Tiefe direkt auf das
-passende Environment zu. Der Name-Resolver hat bereits geprüft, ob Namen definiert
-und sichtbar sind und ob es keine Mehrfachdefinitionen gibt, sodass der Interpreter
-hier keine aufwändige Fehlerprüfung mehr benötigt.
+Variablennamen im aktuellen Environment. Lesezugriffe auf Variablen benutzen nicht
+mehr eine rekursive Suche durch die Environment-Struktur nach "oben", sondern
+greifen mithilfe der im Name-Resolver vorberechneten Tiefe direkt auf das passende
+Environment zu. Der Name-Resolver hat bereits geprüft, ob Namen definiert und
+sichtbar sind und ob es keine Mehrfachdefinitionen gibt, sodass der Interpreter hier
+keine aufwändige Fehlerprüfung mehr benötigt.
 
 Expressions werten wir weiterhin mit `eval(expr)` aus, Statements mit einer neuen
 Methode `exec(stmt)`. Ein Programm in L-Var ist eine Liste von Statements; beim
@@ -37,8 +37,8 @@ public class InterpreterLexpr extends InterpreterLint {
     public Value eval(Expr expr) {
         return switch (expr) {
             case MulExpr(var l, var r) -> {
-                int a = Value.asInt(eval(l));
-                int b = Value.asInt(eval(r));
+                int a = asInt(eval(l));
+                int b = asInt(eval(r));
                 yield new IntVal(a * b);
             }
 
@@ -67,10 +67,10 @@ Expressions, aber wir brauchen noch ein Konzept, wie wir mit dem Zustand umgehen
 ::: {.column width="35%"}
 ``` clojure
 (def x : int 1)
-(let ((a : int 2)
-      (b : int 3))
-  (+ a b)
-  (let x (+ x b)))
+(def a : int 2)
+(let ((b : int 3)
+      (x : int 42))
+  (+ a x))
 ```
 :::
 
@@ -81,7 +81,8 @@ Expressions, aber wir brauchen noch ein Konzept, wie wir mit dem Zustand umgehen
     +-------------------+
     |    GLOBAL ENV     |
     +-------------------+
-    | values = [x : 1]  |
+    | values = [x : 1,  |
+    |           a : 2]  |
     +-------------------+
               ^
               |
@@ -89,8 +90,8 @@ Expressions, aber wir brauchen noch ein Konzept, wie wir mit dem Zustand umgehen
     +-------------------+
     |    LOCAL ENV      |
     +-------------------+
-    | values = [a : 2,  |
-    |           b : 3]  |
+    | values = [b : 3,  |
+    |           x : 42] |
     +-------------------+
 :::
 ::::::
@@ -111,7 +112,7 @@ aufzubauen: "Environments".
 
 ::: notes
 Wir benötigen analog zu `Scope` eine Datenstruktur, die einen Verweis auf das
-Eltern-Environment hat und die zu einem Namen Werte (also `Value` statt `Decl` wie
+Eltern-Environment hat und die zu einem Namen Werte (also `Value` statt `Stmt` wie
 in `Scope`) speichert. Nachfolgend die Kernfunktionalität (unvollständig):
 :::
 
@@ -124,27 +125,20 @@ public record Env(Env parent, Map<String, Value> values) {
         Env env = envAtDepth(depth);
         return env.values.get(name);
     }
-    public void assign(String name, Value value, int depth) {
-        Env env = envAtDepth(depth);
-        env.values.put(name, value);
-    }
 
     private Env envAtDepth(int depth) {
-        Env env = this;
-        for (int i = 0; i < depth && env != null; i++) env = env.parent();
-        return env;
+        return (depth == 0) ? this : parent.envAtDepth(depth - 1);
     }
 }
 ```
 
-::::::: notes
+:::::::: notes
 -   `Env` bildet **lexikalische Scopes zur *Laufzeit*** ab:
     -   `parent` zeigt auf das "umgebende" Environment ("Eltern-Environment")
     -   `values` speichert zu einem Namen den Wert für den aktuellen Scope
 -   Zugriffsmöglichkeiten:
     -   Definieren von Namen mit `define()`
     -   Abfrage von Werten mit `get()`
-    -   Neuzuweisung von Namen mit `assign()`
 
 Hier modellieren wir die Semantik von Lispy mit. Ein Name (Variable, ...) kann nur
 genau einmal pro Scope definiert werden - Mehrfachdefinitionen stellen einen Fehler
@@ -165,13 +159,20 @@ passende (Eltern-) Environment geben und rufen dort in der Hashmap `values` den
 gespeicherten Wert ab. Dass der Name vorhanden ist und in dieser "Tiefe", hatten wir
 bereits im Name-Resolver geprüft und müssen das hier nicht wiederholen.
 
-Wir haben eine *mutable* Semantik in Lispy, d.h. Variablen können im Laufe ihres
-Lebens neue Werte zugewiesen werden. Dies kann mit `assign()` erledigt werden. In
-Lispy ist es ein Fehler, einer bisher unbekannten Variable einen Wert zuweisen zu
-wollen - dies hatten wir bereits im Name-Resolver geprüft ... Jetzt brauchen wir nur
-noch die Tiefeninformation und gehen einfach entsprechend viele Environments nach
-"oben" und aktualisieren dort gespeicherten Wert für den Namen. Ein rekursives
-Suchen wie in `Scope#resolve()` brauchen wir hier also nicht mehr.
+Wir haben eine *immutable* Semantik in Lispy, d.h. Variablen können im Laufe ihres
+Lebens **keine** neuen Werte zugewiesen werden. Deshalb müssen wir in `Env` keine
+Möglichkeit zum Ändern bereits gebundener Werte implementieren.
+
+::: tip
+## Mini-C++ kennt Zuweisungen
+
+Wenn es wie in Mini-C++ Zuweisungen in der Sprache gibt, dann braucht man eine
+Möglichkeit, um Namen in einem `Env` einen neuen Wert zuzuweisen. Für diese
+Neuzuweisung von Namen kann man sich eine Methode
+`void assign(String name, Value value, int depth)` definieren, die analog zu `get()`
+das Elternenvironment in der Tiefe `depth` aufsucht und dort dem Namen `name` den
+neuen Wert `value` zuweist. (siehe Challenge/Hausaufgabe)
+:::
 
 ::: important
 ## Zusammenspiel semantische Analyse und Interpretation
@@ -182,14 +183,12 @@ geprüft:
 
 -   ob ein Name doppelt definiert (gebunden) werden soll: bei der Behandlung von
     `VarDecl` mit `Scope#bind()`
--   ob eine Zuweisung an eine nicht definierte Variable erfolgen soll: bei der
-    Behandlung von `AssignStmt` mit `Scope#resolve()`
 -   ob ein Name vom aktuellen Scope/Environment aus sichtbar ist: bei der Behandlung
     von `VarExpr` mit `Scope#resolve()`
 
-Für jedes `define()`, `assign()` und `get()` hier im Interpreter bzw. Environment
-haben wir (wenn wir alles richtig gemacht haben) bereits **vorher** im Name-Resolver
-und Symboltabelle ein entsprechendes `bind()` und `resolve()` geprüft.
+Für jedes `define()` und `get()` hier im Interpreter bzw. Environment haben wir
+(wenn wir alles richtig gemacht haben) bereits **vorher** im Name-Resolver und
+Symboltabelle ein entsprechendes `bind()` und `resolve()` geprüft.
 
 **Deshalb braucht der Code für `Env` für diese Punkte keine extra Fehlerprüfungen!**
 
@@ -201,17 +200,13 @@ Inkonsistenzen hätten nämlich bereits in der semantischen Analyse auffallen m�
 ::: tip
 ## Implementierungsdetail `Env`
 
-Es lohnt sich, der Klasse `Env` zwei extra Hilfskonstruktoren mitzugeben:
+Es lohnt sich, der Klasse `Env` wieder zwei extra Hilfskonstruktoren mitzugeben:
 
 ``` java
 public record Env(Env parent, Map<String, Value> values) {
-    public Env() {
-        this(null);
-    }
 
-    public Env(Env parent) {
-        this(parent, new HashMap<>());
-    }
+    public Env() { this(null); }
+    public Env(Env parent) { this(parent, new HashMap<>()); }
 
     // ...
 }
@@ -257,19 +252,19 @@ Der Unterschied liegt in der Benutzung:
     hängt nur von der Quelltextstruktur ab, nicht vom tatsächlichen Programmverlauf.
 
     In einem `Scope`-Objekt ordnen wir während der semantischen Analyse jedem im
-    Scope sichtbaren Namen genau seinen Deklarationsknoten (`Decl`) im AST zu. Wir
+    Scope sichtbaren Namen genau seinen Deklarationsknoten (`Stmt`) im AST zu. Wir
     bauen mit `Scope` die Symboltabellenstruktur im Name-Resolver auf. Dabei
     betreten wir jeden Scope im Quelltext (AST), beispielsweise das
     `let`-with-Scopes (oder später in L-Fun den Funktionskörper) und prüfen, ob wir
     semantischen Regeln der Sprache Lispy eingehalten wurden: Sind alle Namen
     sichtbar (ggf. über die Eltern-Beziehung bis zum globalen Scope hoch), werden
-    keine Namen im selben Scope mehrfach definiert, ist der Name bei einer Zuweisung
-    bereits vorher definiert worden? Entsprechend speichern wir zu einem Namen die
-    Information der Definition, also den `Decl`-Knoten des AST, der zu diesem Namen
-    gehört. Wir werden später in L-Fun sehen, dass wir zwar die lokalen Variablen im
-    Funktionskörper ganz normal auflösen, aber keine Funktionsaufrufe verfolgen! Wir
-    interpretieren in der semantischen Analyse keine Anweisungen oder Ausdrücke,
-    sondern prüfen nur die Sichtbarkeiten.
+    keine Namen im selben Scope mehrfach definiert, ist der Name bei einem
+    Lesevorgang bereits vorher definiert worden? Entsprechend speichern wir zu einem
+    Namen die Information der Definition, also den `Stmt`-Knoten des AST, der zu
+    diesem Namen gehört. Wir werden später in L-Fun sehen, dass wir zwar die lokalen
+    Variablen im Funktionskörper ganz normal auflösen, aber keine Funktionsaufrufe
+    verfolgen! Wir interpretieren in der semantischen Analyse keine Anweisungen oder
+    Ausdrücke, sondern prüfen nur die Sichtbarkeiten.
 
 -   `Env` ist die **dynamische** Sicht auf die Sichtbarkeitsbereiche.
 
@@ -297,7 +292,7 @@ Der Unterschied liegt in der Benutzung:
 **Merksatz**:
 
 -   `Scope` (semantische Analyse/Namensauflösung):
-    -   Name $\to$ Deklaration (`Decl`-Knoten im AST)
+    -   Name $\to$ Deklaration (`*Decl`-Knoten im AST)
     -   statisch, einmaliger Pass über den AST
     -   kein Kontrollfluss, keine Ausführung
 -   `Env` (Interpreter):
@@ -305,7 +300,7 @@ Der Unterschied liegt in der Benutzung:
     -   dynamisch, verändert sich während der Ausführung
     -   führt Kontrollfluss, Schleifen, Funktionsaufrufe tatsächlich aus
 :::
-:::::::
+::::::::
 
 # Interpreter für L-Var - Überblick
 
@@ -367,7 +362,7 @@ holen. Dazu ergänzen wir diese Klasse wie folgt:
 public class SemaInfo {
     public Scope globalScope = new Scope();
     public Map<Stmt, Scope> symbols = new IdentityHashMap<>();
-    public Map<VarExpr, Integer> depths = new IdentityHashMap<>();
+    public Map<Expr, Integer> depths = new IdentityHashMap<>();
 
     public Env globalEnv = new Env();  // NEU
 }
@@ -392,16 +387,14 @@ zurück.
 # Statements: Ausführen einer Variablendeklaration und eines 'let'-with-Scope
 
 ``` ebnf
-Stmt = ExprStmt(Expr) | VarDecl(String, Type, Expr)
-     | AssignStmt(Expr, Expr) | BlockStmt([Stmt])
+Stmt = ExprStmt(Expr) | VarDecl(String, Type, Expr?) | BlockStmt([Stmt])
 ```
 
 ::: notes
-Wie oben angeteasert haben wir vier neue Statements in L-Var:
+Wie oben angeteasert haben wir einige neue Statements in L-Var:
 
 -   `ExprStmt`: "Cast" einer Expression als Statement
--   `VarDecl`: Definiert eine neue Variable (samt Initialisierung)
--   `AssignStmt`: Weist einer existierenden Variablen einen neuen Wert zu
+-   `VarDecl`: Definiert eine neue Variable (samt potentieller Initialisierung)
 -   `BlockStmt`: Öffnet einen neuen lokalen Scope für die Ausführung der enthaltenen
     Statements
 
@@ -414,7 +407,7 @@ protected void exec(Stmt stmt) {
     switch (stmt) {
         case ExprStmt(var expr) -> last = eval(expr);
         case VarDecl(var name, var type, var init) -> {
-            Value i = eval(init);
+            Value i = init.map(this::eval).orElseGet(() -> defaultFor(type));
             env.define(name, i);
         }
         case BlockStmt(var s) -> {
@@ -422,12 +415,12 @@ protected void exec(Stmt stmt) {
             s.forEach(this::exec);
             env = env.parent();
         }
-        default -> throw new RuntimeException("unexpected statement: " + stmt);
+        default -> throw new RuntimeException("unexpected statement");
     }
 }
 ```
 
-:::: notes
+::::: notes
 ::: tip
 **Hinweis**: `exec(stmt)` hat keinen Rückgabewert, ist also `void`! Statements
 werden ausgeführt, und dabei ergibt sich kein Wert.
@@ -454,40 +447,54 @@ jeweils letzten Wert ...
 ## Auswertung einer Variablendefinition
 
 Eine Variablendefinition (`VarDecl`) besteht aus drei Teilen: einem Namen, dem Typ
-und der Initialisierung.
+und der potentiellen Initialisierung.
 
 Die Initialisierung ist eine Expression - diese werten wir wie gewohnt mit `eval()`
-aus.
+aus. Da es sich hier um ein `Optional<Expr>` handelt, müssen wir im Fall des
+Nichtvorhandenseins einen Defaultwert für den Typ der Variablen bestimmen. Das
+könnte in L-Var etwa so aussehen:
+
+``` java
+protected Value defaultFor(Type t) {
+    if (t == INT) return new IntVal(0);
+    throw new RuntimeException("(internal error) unsupported type");
+}
+```
 
 Als Typ kann in L-Var nur ein `int` vorkommen, mehr erlaubt die Grammatik nicht.
 Später werden wir noch weitere Typen ergänzen und in einem weiteren AST-Pass vor dem
 Interpreter prüfen - das ist der sogenannte "Type Checker". Für den Interpreter
 spielt der Typ an sich aber keine weitere Rolle - wir werten die
-Initialisierungsexpression aus, und der dabei entstehende Wert passt zum Typ der
-Variablen, anderenfalls hätte der Type-Checker einen Fehler gemeldet.
+Initialisierungsexpression aus oder nutzen alternativ einen typabhängigen
+Defaultwert, und der dabei entstehende Wert passt zum Typ der Variablen,
+anderenfalls hätte der Type-Checker einen Fehler gemeldet.
+
+::: tip
+Die Entscheidung für einen Wert als Defaultwert ist eine wichtige Entscheidung für
+die Semantik der Sprache! In C/C++ beispielsweise wird in vielen Fällen **keine**
+automatische Initialisierung vorgenommen, was zwar eine höhere Effizienz zur
+Laufzeit bewirkt, aber eben auch in meiner Erfahrung eine häufige Quelle für Fehler
+darstellt.
+
+Wir werden in unserem Mini-C++ deshalb abweichend vom echten C++ Variablen immer
+automatisch mit einem Defaultwert initialisieren, wenn es keinen
+Initialisierungsausdruck gibt.
+:::
 
 Da eine `VarDecl` einen neuen Namen (die Variable) im aktuellen Scope einführt,
 definieren wir den Namen im aktuellen Environment und speichern den Wert aus der
 Initialisierungsexpression.
 
-## Auswerten eines `let`-with-Scopes
+## Auswerten eines `let`
 
-Ein `let`-with-Scopes kapselt Statements, die in einem neuen lokalen Scope
-ausgeführt werden sollen. Im AST finden wir das als `BlockStmt`-Knoten.
+Ein `let` kapselt Statements, die in einem neuen lokalen Scope ausgeführt werden
+sollen. Im AST finden wir das als `BlockStmt`-Knoten.
 
 Wir legen ein neues Environment an, wobei das bisherige Environment das
 Eltern-Environment wird, und halten es in `env` fest. Dann iterieren wir über alle
 Statements im `BlockStmt` und rufen jeweils `exec()` auf. Am Ende setzen wir das
 Environment wieder auf das alte Environment zurück.
-
-## Ausführen einer Zuweisung
-
-Die Zuweisung an eine bereits existierende Variable erfolgt für den
-`AssignStmt`-Knoten.
-
-**Wichtig**: Der Fall für `AssignStmt` ist hier nicht gezeigt und verbleibt als
-Challenge/Hausaufgabe.
-::::
+:::::
 
 # Expressions: Lese-Zugriff auf Variablen
 
@@ -617,32 +624,37 @@ Betrachten Sie folgendes Lispy-Programm in der Sprachstufe L-Var:
 -   Erläutern Sie kurz, wie der `BlockStmt`‑Fall in `exec(stmt)` dafür sorgt, dass
     die richtigen Environments angelegt und wieder verlassen werden.
 
-**`Scope` vs. `Env`**
+**Mini-C++: Implementieren von `assign()` im Environment**
 
-Im Skript wurde behauptet, dass man zum Speichern der Werte während der
-Interpretation neue Datenstrukturen benötigt und nicht die bereits in der
-semantischen Analyse aufgebauten Symboltabellen dafür nutzen kann.
+Wenn es wie in Mini-C++ Zuweisungen in der Sprache gibt, dann braucht man eine
+Möglichkeit, um Namen in einem `Env` einen neuen Wert zuzuweisen.
 
-Demonstrieren Sie an einem praktischen Beispiel, warum dies so ist.
+Für diese Neuzuweisung von Namen in Mini-C++ kann man sich eine Methode
+`void assign(String name, Value value, int depth)` definieren, die analog zu `get()`
+das Elternenvironment in der Tiefe `depth` aufsucht und dort dem Namen `name` den
+neuen Wert `value` zuweist. Skizzieren Sie diese Methode.
+
+Beachten Sie die Semantik: Bei einer Zuweisung wie `c = 42;` muss die Variable vom
+aktuellen Scope aus sichtbar sein, aber sie muss nicht im aktuellen Scope selbst
+definiert sein. Im Name-Resolver hatten wir bereits die Sichtbarkeit geprüft und
+berechnet, wie viele Schritte man in der Scope-/Environment-Kette nach "oben" gehen
+muss bis zum Scope/Environment, in dem dieser Name definiert wurde. Nutzen Sie diese
+Information.
 
 <!--
-Symboltabellen (unsere `Scope`-Modellierung) sind **statisch** und verfolgen
-keine Aufrufe. D.h. für einen Funktionskörper werden alle Namen in der passenden
-Symboltabelle abgelegt und aufgelöst, aber keine Funktionsaufrufe verfolgt.
-
-Wenn man einen rekursiven Aufruf hat, hat man aber plötzlich pro Aufruf einen neuen
-Stackframe. Wenn man nun Werte in den Symboltabellen ablegen würde, würde man sich
-gegenseitig die Variablen überschreiben.
-
-Deshalb muss man zur Laufzeit des Interpreters **dynamisch** neue Environments
-anlegen und passend verknüpfen und füllen. Die statische Symboltabelle reicht nicht
-mehr.
+```java
+public void assign(String name, Value value, int depth) {
+    Env env = envAtDepth(depth);
+    env.values.put(name, value);
+}
+```
 -->
 
-**Implementieren von `AssignStmt` im Interpreter**
+**Mini-C++: Implementieren von `AssignStmt` im Interpreter**
 
-Im Skript wurde die Behandlung von `AssignStmt` in der Methode `exec(Stmt stmt)`
-bewusst ausgelassen. Ergänzen Sie diesen Fall.
+In L-Var gibt es keine Zuweisung, deshalb wurde die Behandlung von `AssignStmt` in
+der Methode `exec(Stmt stmt)` ausgelassen. In Mini-C++ existiert die Zuweisung -
+skizzieren Sie diesen Fall in Java.
 
 Welche Elemente hat ein `AssignStmt`-Knoten (wie sah der entsprechende Teil der
 konkreten und abstrakten Syntax aus)? Gab es Einschränkungen für die linke Seite der
@@ -679,12 +691,34 @@ Name-Resolver, sodass für einige `VarExpr`-Knoten keine oder eine falsche Tiefe
     -   `depth` für beide `VarExpr` fälschlicherweise 0 wäre,
     -   `depth` für `x` korrekt und für `y` zu groß ist.
 
-2.  Überlegen Sie, welche zusätzlichen Prüfungen man in `Env#get` und `Env#assign`
+2.  Überlegen Sie, welche zusätzlichen Prüfungen man in `Env#get` und `Env#define`
     ergänzen könnte, um solche internen Inkonsistenzen zu erkennen.
 
 3.  Formulieren Sie, wie eine Fehlermeldung in diesem Fall aussehen sollte, damit
     klar ist, dass es sich um einen **internen Fehler** des Compilers (und nicht um
     einen Fehler im Programm der User) handelt.
+
+**`Scope` vs. `Env`**
+
+Im Skript wurde behauptet, dass man zum Speichern der Werte während der
+Interpretation neue Datenstrukturen benötigt und nicht die bereits in der
+semantischen Analyse aufgebauten Symboltabellen dafür nutzen kann.
+
+Demonstrieren Sie an einem praktischen Beispiel, warum dies so ist.
+
+<!--
+Symboltabellen (unsere `Scope`-Modellierung) sind **statisch** und verfolgen
+keine Aufrufe. D.h. für einen Funktionskörper werden alle Namen in der passenden
+Symboltabelle abgelegt und aufgelöst, aber keine Funktionsaufrufe verfolgt.
+
+Wenn man einen rekursiven Aufruf hat, hat man aber plötzlich pro Aufruf einen neuen
+Stackframe. Wenn man nun Werte in den Symboltabellen ablegen würde, würde man sich
+gegenseitig die Variablen überschreiben.
+
+Deshalb muss man zur Laufzeit des Interpreters **dynamisch** neue Environments
+anlegen und passend verknüpfen und füllen. Die statische Symboltabelle reicht nicht
+mehr.
+-->
 
 **Nested Environments vs. Stack von Environments**
 
