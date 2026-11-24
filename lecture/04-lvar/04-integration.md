@@ -4,10 +4,9 @@ title: "L-Var: Integration & Pipeline-Gesamtbild"
 ---
 
 ::: tldr
-In L-Var fügen wir zu Lispy Variablen, Zuweisungen und Blöcke mit eigenen Scopes
-hinzu. Ein L-Var-Programm durchläuft eine feste Pipeline: Quelltext $\to$
-Lexer/Parser (ANTLR) $\to$ Parse-Tree $\to$ AST-Builder $\to$ AST $\to$
-Name-Resolver $\to$ Interpreter.
+In L-Var fügen wir zu Lispy Variablen und Blöcke mit eigenen Scopes hinzu. Ein
+L-Var-Programm durchläuft eine feste Pipeline: Quelltext $\to$ Lexer/Parser (ANTLR)
+$\to$ Parse-Tree $\to$ AST-Builder $\to$ AST $\to$ Name-Resolver $\to$ Interpreter.
 
 Der AST-Builder für L-Var (`LispyAstBuilderLvar`) erweitert den AST-Builder aus
 L-Expr und übersetzt den Parse-Tree in unsere abstrakte Syntax (AST).
@@ -18,9 +17,9 @@ anderem die Symboltabellen als auch die Tiefeninformationen ein.
 
 Im Interpreter (`InterpreterLvar`) als letztem Pass über den AST evaluieren wir nun
 nicht nur Ausdrücke, sondern führen nun auch Statements aus und verwalten zur
-Laufzeit verschachtelte Environments (`Env`). Bei Variablenzugriffen und Zuweisungen
-nutzt der Interpreter die im Resolver berechneten Tiefeninformationen, um direkt das
-richtige Environment zu finden, statt zur Laufzeit rekursiv suchen zu müssen.
+Laufzeit verschachtelte Environments (`Env`). Bei lesenden Variablenzugriffen nutzt
+der Interpreter die im Resolver berechneten Tiefeninformationen, um gezielt das
+richtige Environment auszuwählen, ohne zur Laufzeit rekursiv suchen zu müssen.
 
 Dieses Muster "AST $\to$ Resolver $\to$ Interpreter mit *side tables* (z.B. `depths`
 in `SemaInfo`)" wird sich in den späteren Sprachstufen (L-If, L-Fun, L-Class, ...)
@@ -46,7 +45,7 @@ neuen Sprachfeatures.
     -   `Scope`: statische Sicht (Namen $\to$ Deklarationen = Symboltabelle)
     -   AST $\to$ `SemaInfo` (Sidetable), gefüllt mit:
         -   `Map<Stmt, Scope> symbols`: Statement $\to$ Scope (Symboltabellen)
-        -   `Map<VarExpr, Integer> depths`: `VarExpr` $\to$ Tiefeninformation
+        -   `Map<Expr, Integer> depths`: `VarExpr` $\to$ Tiefeninformation
         -   `Scope globalScope`, `Env globalEnv`
     -   `resolve(expr)`, `resolve(stmt)` mit `switch`-Expressions und Pattern
         Matching
@@ -61,7 +60,7 @@ neuen Sprachfeatures.
 # Gesamtbild im Code
 
 ``` java
-var source = "(def x : int 10)  (let x (+ x 1))  (+ x 5)";
+var source = "(def x : int 10)  (let ((x : int 1)) (+ x 1))  (+ x 5)";
 
 var input = CharStreams.fromString(source);
 var lexer = new LispyLexer(input);
@@ -104,11 +103,12 @@ public class InterpreterLvar extends InterpreterLexpr {
 ```
 
 ::: notes
--   `sema.globalEnv` kann bereits vordefinierte Funktionen/Variablen enthalten
+-   `sema.globalEnv` kann bereits vordefinierte Klassen/Funktionen/Variablen
+    enthalten
 -   `exec(stmt)` & `eval(expr)`:
     -   Deklarationen binden Werte in `env`
     -   Blocks erzeugen neue `Env`-Instanzen
-    -   `VarExpr`/`AssignStmt` nutzen `sema.depths` zur Navigation
+    -   `VarExpr` nutzt `sema.depths` zur Navigation
 :::
 
 # Reflexion: Muster für spätere Sprachstufen
@@ -193,9 +193,8 @@ Gegeben sei das L-Var-Programm (vereinfacht, in Lispy-Notation):
 
 ``` clojure
 (def x : int 1)
-(let
-  (def y : int 2)
-  (assign x (+ x y)))
+(let ((y : int 2))
+  (+ x y))
 (+ x 10)
 ```
 
@@ -203,8 +202,8 @@ Gegeben sei das L-Var-Programm (vereinfacht, in Lispy-Notation):
     tragen Sie ein, wo `x` und `y` deklariert werden.
 2.  Skizzieren Sie die Environments zur Laufzeit:
     -   direkt nach `(def x : int 1)`
-    -   innerhalb von `let` vor der Zuweisung
-    -   nach der Zuweisung an `x`
+    -   innerhalb von `let` vor der Addition von `x` und `y`
+    -   nach Addition von `x` und `y`
 3.  Überlegen Sie:
     -   Welchen `depth`-Wert bekommt der Zugriff auf `x` innerhalb des `let`-Blocks?
     -   Wie nutzt der Interpreter diesen `depth`-Wert, um das richtige `Env` zu
@@ -232,16 +231,14 @@ Gegeben sei ein (vereinfachtes) L-Var-Programm:
 
 ``` clojure
 (def x : int 1)
-(let
-  (def y : int 2)
-  (let
-    (def z : int 3)
+(let ((y : int 2))
+  (let ((z : int 3))
     (+ x (+ y z))))
 ```
 
 1.  Zeichnen Sie den AST.
 2.  Überlegen Sie, welche `depth`-Werte der Resolver für die drei `VarExpr` (`x`,
     `y`, `z`) einträgt.
-3.  Beschreiben Sie in 2--3 Sätzen, wie der Interpreter mit einem `depth`-Wert von
-    z.B. 2 das richtige `Env` findet (ausgehend vom aktuellen `Env`).
+3.  Beschreiben Sie in 2-3 Sätzen, wie der Interpreter mit einem `depth`-Wert von
+    z.B. `2` das richtige `Env` findet (ausgehend vom aktuellen `Env`).
 :::
