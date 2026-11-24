@@ -41,19 +41,19 @@ neuen Sprachfeatures.
     -   Parse-Tree $\to$ AST: `LispyAstBuilderLvar`
         -   `class LispyAstBuilderLvar extends LispyAstBuilderLexpr`
         -   Visitor-Pattern
-3.  **NameResolverLvar**:
-    -   `Scope`: statische Sicht (Namen $\to$ Deklarationen = Symboltabelle)
+3.  **Name-Resolver**:
+    -   `Scope`: **statische** Sicht (Namen $\to$ Deklarationen = Symboltabelle)
     -   AST $\to$ `SemaInfo` (Sidetable), gefüllt mit:
         -   `Map<Stmt, Scope> symbols`: Statement $\to$ Scope (Symboltabellen)
         -   `Map<Expr, Integer> depths`: `VarExpr` $\to$ Tiefeninformation
         -   `Scope globalScope`, `Env globalEnv`
     -   `resolve(expr)`, `resolve(stmt)` mit `switch`-Expressions und Pattern
         Matching
-4.  **InterpreterLvar**:
+4.  **Interpreter**:
     -   AST + `SemaInfo` $\to$ Ausführung:
-        -   `Env env`: dynamische Sicht (Namen $\to$ Laufzeitwerte)
+        -   `Env env`: **dynamische** Sicht (Namen $\to$ Laufzeitwerte)
         -   `class InterpreterLvar extends InterpreterLexpr`
-        -   `eval(expr)` und `exec(stmt)` nutzen `depths` für direkte
+        -   `eval(expr)` und `exec(stmt)` nutzen `depths` für gezielte
             Environment-Zugriffe
 :::
 
@@ -66,10 +66,10 @@ var input = CharStreams.fromString(source);
 var lexer = new LispyLexer(input);
 var tokens = new CommonTokenStream(lexer);
 var parser = new LispyParser(tokens);
-var tree = parser.lvar();
+var parsetree = parser.lvar();
 
 var astBuilder = new LispyAstBuilderLvar();
-var ast = astBuilder.visitLvar(tree);
+var ast = astBuilder.visitLvar(parsetree);
 
 SemaInfo sema = new SemaInfo();
 new NameResolverLvar().resolve(ast, sema);
@@ -90,7 +90,7 @@ public class InterpreterLvar extends InterpreterLexpr {
     protected Value last;
 
     public Value interpret(List<Stmt> stmts, SemaInfo semaInfo) {
-        sema = semaInfo;  env = sema.globalEnv;  last = UNIT;
+        sema = semaInfo;  env = sema.globalEnv;  last = null;
 
         stmts.forEach(this::exec);
 
@@ -121,7 +121,7 @@ Das folgende Muster wird uns in L-If, L-Fun, L-Class usw. begleiten:
 2.  **Abstrakte Syntax** erweitern (AST, AST-Builder)
 3.  **Name-Resolver**:
     -   erster AST-Pass, baut Symboltabellen auf
-    -   neue Prüfungen, neue Scopes (z.B. Funktions-Scopes, Klassenscopes)
+    -   neue Prüfungen, neue Scopes (z.B. Funktions-Scopes, Klassen-Scopes)
     -   zusätzliche Einträge in `SemaInfo` (z.B. Funktions-Typen, Klasseninfos)
 4.  **Type-Checker**:
     -   weiterer AST-Pass
@@ -173,19 +173,14 @@ Das folgende Muster wird uns in L-If, L-Fun, L-Class usw. begleiten:
 ::: challenges
 **Pipeline für L-Var**
 
-1.  Zeichnen Sie für ein kleines L-Var-Programm (eigene Wahl mit `def`, `let`,
-    Block) die gesamte Pipeline als Kette von Kästen:
-    -   Quelltext
-    -   Parse-Tree
-    -   AST
-    -   Resolver (`Scope`, `SemaInfo.depths`)
-    -   Interpreter (`Env`, `Value`)
+1.  Zeichnen Sie für ein kleines L-Var-Programm die gesamte Pipeline als Kette von
+    Bausteinen. Was geht jeweils hinein, was kommt heraus? Welche Informationen
+    werden benötigt, wo kommen diese her?
 2.  Markieren Sie:
-    -   Wo werden **Namen gebunden**? (Resolver, `Scope.bind`)
-    -   Wo werden **Werte gespeichert**? (Interpreter, `Env.define`)
+    -   Wo werden **Namen gebunden**?
+    -   Wo werden **Werte gespeichert**?
     -   Wo werden **depth-Werte benutzt**?
-3.  Diskutieren Sie:
-    -   Welche Teile würden Sie gerne separiert vom Rest testen?
+3.  Diskutieren Sie: Welche Teile würden Sie gerne separiert vom Rest testen?
 
 **Scopes vs. Environments für ein L-Var-Beispiel**
 
@@ -222,8 +217,8 @@ Diskutieren Sie in der Gruppe:
 
 -   Welche dieser Fälle soll der Resolver erkennen? Begründen Sie.
 -   Welche Fälle können nur zur Laufzeit im Interpreter erkannt werden?
--   Markieren Sie die Stellen in der Pipeline (Resolver vs. Interpreter), an denen
-    Sie die jeweilige Prüfung implementieren würden.
+-   Markieren Sie die Stellen in der Pipeline, an denen Sie die jeweilige Prüfung
+    implementieren würden.
 
 **Tiefenberechnung verstehen**
 
@@ -239,6 +234,6 @@ Gegeben sei ein (vereinfachtes) L-Var-Programm:
 1.  Zeichnen Sie den AST.
 2.  Überlegen Sie, welche `depth`-Werte der Resolver für die drei `VarExpr` (`x`,
     `y`, `z`) einträgt.
-3.  Beschreiben Sie in 2-3 Sätzen, wie der Interpreter mit einem `depth`-Wert von
-    z.B. `2` das richtige `Env` findet (ausgehend vom aktuellen `Env`).
+3.  Beschreiben Sie kurz, wie der Interpreter mit einem `depth`-Wert von z.B. `2`
+    das richtige `Env` findet (ausgehend vom aktuellen `Env`).
 :::
