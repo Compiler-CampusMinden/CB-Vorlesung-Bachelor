@@ -330,7 +330,8 @@ Funktionsdefinitionen und in L-Class für Klassendefinitionen analog arbeiten.)
 In größeren Compilerprojekten würde man dies ein wenig typsicherer gestalten und ein
 Markerinterface `Decl` einführen, mit dem die relevanten AST-Klassen zusätzlich
 markiert werden. Dann könnte man hingehen und nur noch diese Typen in der
-Symboltabelle zulassen: `HashMap<String, Decl> symbols`.
+Symboltabelle `Scope` zulassen: `HashMap<String, Decl> symbols` (statt wie bei uns
+`HashMap<String, Stmt> symbols`).
 
 Der Vorteil ist für unseren kleinen Lispy-Interpreter aber nicht so stark, deshalb
 verzichten wir zugunsten der Übersicht auf dieses Markerinterface.
@@ -396,7 +397,7 @@ Namensauflösung immer beide Branches, weil wir rein strukturell prüfen, ob all
 Namen auflösbar sind - unabhängig davon, ob der Branch zur Laufzeit überhaupt
 erreicht wird.
 
-Es lohnt sich diesen Prozess als eigenständigen Pass über den AST durchzuführen und
+Es lohnt sich, diesen Prozess als eigenständigen Pass über den AST durchzuführen und
 vor dem Interpreter laufen zu lassen. Der Interpreter muss später die Schleifen
 durchlaufen und die Funktionsaufrufe ausführen - und wir müssten die Namensauflösung
 dann in jedem einzelnen Schleifendurchlauf oder Funktionsaufruf immer wieder
@@ -544,7 +545,7 @@ protected void resolve(Stmt stmt) {
     switch (stmt) {
         case VarDecl(var name, var type, var init) -> {
             init.ifPresent(this::resolve);  resolveType(type);
-            scope.bind((VarDecl) stmt);
+            scope.bind(name, stmt);
         }
         case BlockStmt(var s) -> {
             scope = new Scope(scope);
@@ -888,13 +889,13 @@ Name-Resolver (Pseudocode):
 case VarDecl(var name, var type, var init) -> {
     init.ifPresent(this::resolve);
     resolveType(type);
-    scope.bind(name, (VarDecl) stmt);
+    scope.bind(name, stmt);
 }
 ```
 
 ``` java
 case VarDecl(var name, var type, var init) -> {
-    scope.bind(name, (VarDecl) stmt);
+    scope.bind(name, stmt);
     init.ifPresent(this::resolve);
     resolveType(type);
 }

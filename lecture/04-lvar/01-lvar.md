@@ -292,21 +292,22 @@ L-Expr) angegeben. Danach folgen die neuen Regeln für L-Var:
 :::
 
 ``` ebnf
-eform ::= '(' '+' eform eform+ ')' | '(' '-' eform eform+ ')' | INT
-INT   ::= [0-9]+
+eform  ::= '(' '+' eform eform+ ')' | '(' '-' eform eform+ ')' | INT
+INT    ::= [0-9]+
 ---
-eform ::= '(' '*' eform eform+ ')' | '(' '/' eform eform+ ')' | '(' '-' eform ')'
+eform  ::= '(' '*' eform eform+ ')' | '(' '/' eform eform+ ')' | '(' '-' eform ')'
 ---
 
-eform ::= ID
-sform ::= eform
-        | '(' 'def' ID ':' type eform? ')'
-        | '(' 'let' '(' ltBdg+ ')' sform+ ')'
-ltBdg ::= '(' ID ':' type eform ')' ;
-type  ::= 'int'
-ID    ::= [a-zA-Z][a-zA-Z_0-9]*
+eform  ::= ID
+sform  ::= eform
+         | '(' 'def' ID ':' type eform? ')'
+         | '(' 'let' ltBdgs? sform+ ')'
+ltBdgs ::= '(' ltBdg+ ')'
+ltBdg  ::= '(' ID ':' type eform ')' ;
+type   ::= 'int'
+ID     ::= [a-zA-Z][a-zA-Z_0-9]*
 
-lvar  ::= sform* EOF
+lvar   ::= sform* EOF
 ```
 
 ::: notes
@@ -399,10 +400,7 @@ Dazu kommen nun die neuen Klassen für L-Var:
 ``` java
 public record VarExpr(String name) implements Expr {}
 
-public record VarDecl(String name, Type type, Optional<Expr> init) implements Stmt {
-    public VarDecl(String name, Type type) { this(name, type, Optional.empty()); }
-}
-
+public record VarDecl(String name, Type type, Optional<Expr> init) implements Stmt {}
 public record ExprStmt(Expr expr) implements Stmt {}
 public record BlockStmt(List<Stmt> stmts) implements Stmt {}
 ```

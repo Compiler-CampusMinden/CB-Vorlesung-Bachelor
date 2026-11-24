@@ -68,7 +68,7 @@ public class NameResolverLvar {
             case VarDecl(var name, var type, var init) -> {
                 init.ifPresent(this::resolve);
                 resolveType(type);
-                scope.bind((VarDecl) stmt);
+                scope.bind(name, stmt);
             }
             case BlockStmt(var s) -> {
                 scope = new Scope(scope);
