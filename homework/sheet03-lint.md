@@ -4,13 +4,6 @@ no_beamer: true
 title: "Blatt 03: L-Int und C-Int (Integer, Addition, Subtraktion)"
 ---
 
-::: important
-Für die erfolgreiche Bearbeitung dieses Übungsblattes müssen mindestens alle mit `*`
-und `**` markierten Aufgaben gelöst werden.
-
-Die Aufgaben mit `***` sind als Vertiefung gedacht.
-:::
-
 Dieses Blatt knüpft an folgende Vorlesungseinheiten an:
 
 -   L-Int: Die Sprache Lispy
@@ -196,15 +189,15 @@ für mindestens drei Beispiele.
 
 Zum Verständnis von `hello.cpp` benötigen Sie hier nur wenige Konstrukte:
 
-| Zweck                    | C++                            | Java                 | L-Int          | C-Int          |
-|:-------------------------|:-------------------------------|:---------------------|:---------------|:---------------|
-| Integer-Variable anlegen | `int result = 42;`             | `int result = 42;`   | n.a.           | n.a.           |
-| Addition                 | `1 + 2`                        | `1 + 2`              | `(+ 1 2)`      | `1 + 2`        |
-| Subtraktion              | `7 - 2`                        | `7 - 2`              | `(- 7 2)`      | `7 - 2`        |
-| Klammerung               | `(1 + 2)`                      | `(1 + 2)`            | `(+ 1 2)`      | `(1 + 2)`      |
-| Ausgabe einer Variablen  | `std::cout << result << '\n';` | `IO.println(result)` | n.a.           | n.a.           |
-| Zeilenkommentar          | `// Kommentar`                 | `// Kommentar`       | `;; Kommentar` | `// Kommentar` |
-| Import von Bibliotheken  | `#include <iostream>`          | `import ...;`        | n.a.           | n.a.           |
+| Zweck | C++ | Java | L-Int | C-Int |
+|:-------------------|:-----------------------|:----------------|:------------|:------------|
+| Integer-Variable anlegen | `int result = 42;` | `int result = 42;` | n.a. | n.a. |
+| Addition | `1 + 2` | `1 + 2` | `(+ 1 2)` | `1 + 2` |
+| Subtraktion | `7 - 2` | `7 - 2` | `(- 7 2)` | `7 - 2` |
+| Klammerung | `(1 + 2)` | `(1 + 2)` | `(+ 1 2)` | `(1 + 2)` |
+| Ausgabe einer Variablen | `std::cout << result << '\n';` | `IO.println(result)` | n.a. | n.a. |
+| Zeilenkommentar | `// Kommentar` | `// Kommentar` | `;; Kommentar` | `// Kommentar` |
+| Import von Bibliotheken | `#include <iostream>` | `import ...;` | n.a. | n.a. |
 :::
 
 # A3.4: C-Int: Addition und Subtraktion für Integer in C++ (\*\*)

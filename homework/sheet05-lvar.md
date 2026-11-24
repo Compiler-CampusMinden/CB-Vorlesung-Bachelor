@@ -4,13 +4,6 @@ no_beamer: true
 title: "Blatt 05: L-Var und C-Var (Variablen, State, Scopes)"
 ---
 
-::: important
-Für die erfolgreiche Bearbeitung dieses Übungsblattes müssen mindestens alle mit `*`
-und `**` markierten Aufgaben gelöst werden.
-
-Die Aufgaben mit `***` sind als Vertiefung gedacht.
-:::
-
 Dieses Blatt knüpft an folgende Vorlesungseinheiten an:
 
 -   L-Var: Überblick, Syntax und AST
@@ -135,13 +128,13 @@ erforderlich.
 ::: important
 ## Waschzettel: In C++ sieht es so aus ...
 
-| Zweck                                     | L-Var (Lispy)                                              | C-Var (Mini-C++)                       |
-|:------------------------------------------|:-----------------------------------------------------------|:---------------------------------------|
-| Variable definieren (mit Initialisierung) | `(def x : int 10)`                                         | `int x = 10;`                          |
-| Variable definieren (Defaultwert)         | `(def x : int)`                                            | `int x;`                               |
-| Zuweisung an Variablen                    | n.a.                                                       | `x = 2;`                               |
-| Variable lesen (Teil eines Ausdruck)      | `x`                                                        | `x`                                    |
-| Nested Scopes                             | `(def x : int 10) (let ((a : int 2) (x : int 3)) (+ a x))` | `int x=10; { int a=2; int x=3; a+x; }` |
+| Zweck | L-Var (Lispy) | C-Var (Mini-C++) |
+|:-------------------------|:----------------------------------|:-----------------------|
+| Variable definieren (mit Initialisierung) | `(def x : int 10)` | `int x = 10;` |
+| Variable definieren (Defaultwert) | `(def x : int)` | `int x;` |
+| Zuweisung an Variablen | n.a. | `x = 2;` |
+| Variable lesen (Teil eines Ausdruck) | `x` | `x` |
+| Nested Scopes | `(def x : int 10) (let ((a : int 2) (x : int 3)) (+ a x))` | `int x=10; { int a=2; int x=3; a+x; }` |
 
 Ein `let` öffnet in Lispy einen neuen lokalen Scope mit lokalen Variablen:
 

@@ -4,13 +4,6 @@ no_beamer: true
 title: "Blatt 04: L-Expr und C-Expr (Multiplikation/Division, Vorrang und ANTLR)"
 ---
 
-::: important
-Für die erfolgreiche Bearbeitung dieses Übungsblattes müssen mindestens alle mit `*`
-und `**` markierten Aufgaben gelöst werden.
-
-Die Aufgaben mit `***` sind als Vertiefung gedacht.
-:::
-
 Dieses Blatt knüpft an folgende Vorlesungseinheiten an:
 
 -   L-Expr: Multiplikation/Division und unäres Minus
