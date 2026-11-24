@@ -40,15 +40,14 @@ Skizzieren Sie die Arbeit des Name-Resolvers:
     Resolver sie besucht. Notieren Sie dabei, wann ein neuer Scope betreten und
     wieder verlassen wird.
 3.  Ordnen Sie jede `VarExpr` der passenden `VarDecl` zu.
-4.  Geben Sie für jede `VarExpr` den von `scope.resolve(name, 0)` gelieferten
+4.  Geben Sie für jede `VarExpr` den von `scope.resolve(name)` gelieferten
     `depth`-Wert an.
 
 # A5.2: L-Var: `NameResolverLvar#resolve()` ergänzen (\*)
 
 Sie haben im Skript für L-Var den Name-Resolver `NameResolverLvar` kennengelernt.
-Dabei wurde die Implementierung für die AST-Knoten `ExprStmt` und `AssignStmt`
-(beides `Stmt`) sowie `SubExpr`, `MulExpr` und `DivExpr` (alle drei `Expr`) nicht
-gezeigt.
+Dabei wurde die Implementierung für die AST-Knoten `ExprStmt` (`Stmt`) sowie
+`SubExpr`, `MulExpr` und `DivExpr` (alle drei `Expr`) nicht gezeigt.
 
 ::: details
 ``` java
@@ -67,7 +66,7 @@ public class NameResolverLvar {
 
         switch (stmt) {
             case VarDecl(var name, var type, var init) -> {
-                resolve(init);
+                init.ifPresent(this::resolve);
                 resolveType(type);
                 scope.bind((VarDecl) stmt);
             }
@@ -76,7 +75,7 @@ public class NameResolverLvar {
                 s.forEach(this::resolve);
                 scope = scope.parent();
             }
-            default -> throw new RuntimeException("unexpected statement: " + stmt);
+            default -> throw new RuntimeException("unexpected statement");
         }
     }
 
@@ -85,10 +84,10 @@ public class NameResolverLvar {
             case IntLiteral _ -> { } // nothing to do
             case AddExpr(var l, var r) -> List.of(l, r).forEach(this::resolve);
             case VarExpr e -> {
-                var res = scope.resolve(e.name(), 0);
+                var res = scope.resolve(e.name());
                 sema.depths.put(e, res.depth());
             }
-            default -> throw new RuntimeException("unexpected expression: " + expr);
+            default -> throw new RuntimeException("unexpected expression");
         }
     }
 }
@@ -96,18 +95,13 @@ public class NameResolverLvar {
 :::
 
 Skizzieren Sie die fehlenden Fälle in `resolve(stmt)` und `resolve(expr)` für
-`ExprStmt`, `AssignStmt`, `SubExpr`, `MulExpr` und `DivExpr`.
+`ExprStmt`, `SubExpr`, `MulExpr` und `DivExpr`.
 
 Geben Sie für jeden Fall an:
 
 -   welche Kindknoten rekursiv besucht werden
 -   ob ein Name über `scope.resolve()` aufgelöst wird
 -   ob und welche Information in `SemaInfo` gespeichert wird
-
-In L-Var ist das Ziel eines `AssignStmt` eine `VarExpr`. In der abstrakten Syntax
-haben wir hier nur `Expr` - wie stellen Sie im Resolver sicher, dass wir hier
-tatsächlich nur eine Variable betrachten? Skizzieren Sie, wie der Resolver diese
-Zielvariable auflöst und wie er anschließend den rechten Ausdruck verarbeitet.
 
 # A5.3: L-Var: Von `depth` zum Laufzeitwert (\*\*)
 
@@ -127,81 +121,13 @@ Der Name-Resolver hat für jede `VarExpr` eine Tiefe berechnet. Der Interpreter
 verwendet diese Tiefe, um vom aktuellen `Env` aus das passende Environment
 auszuwählen.
 
-1.  Skizzieren Sie die Environments während der Ausführung:
-
-    -   nach der globalen Definition von `x`
-    -   im äußeren `let`-Block nach der Definition von `y`
-    -   im inneren `let`-Block nach der Definition des lokalen `x`
-
-2.  Erstellen Sie eine Tabelle und tragen Sie für jedes Variablenvorkommen ein:
-
-    -   das aktuelle Environment
-    -   den `depth`-Wert
-    -   das Environment, auf das der Interpreter zugreift
-    -   den dort gespeicherten Wert
-
-3.  Erklären Sie anhand des inneren `(+ x y)`, warum `x` und `y` über
+1.  Skizzieren Sie die Environments während der Ausführung schrittweise.
+2.  Erklären Sie anhand des inneren `(+ x y)`, warum `x` und `y` über
     unterschiedliche Tiefen aufgelöst werden.
-
-4.  Was würde im Interpreter schiefgehen, wenn für das innere Vorkommen von `x`
+3.  Was würde im Interpreter schiefgehen, wenn für das innere Vorkommen von `x`
     fälschlich die Tiefe des globalen `x` gespeichert wäre?
 
-# A5.4: L-Var: Fehlende Fälle im Interpreter ergänzen (\*)
-
-Im Skript wurde die Implementierung von `InterpreterLvar` für `AssignStmt` nicht
-gezeigt.
-
-::: details
-``` java
-public class InterpreterLvar extends InterpreterLexpr {
-    protected SemaInfo sema;
-    protected Env env;
-    protected Value last;
-
-    public Value interpret(List<Stmt> stmts, SemaInfo semaInfo) {
-        sema = semaInfo;  env = sema.globalEnv;  last = UNIT;
-        stmts.forEach(this::exec);
-        return last;
-    }
-
-    protected void exec(Stmt stmt) {
-        switch (stmt) {
-            case ExprStmt(var expr) -> last = eval(expr);
-            case VarDecl(var name, var type, var init) -> {
-                Value i = eval(init);
-                env.define(name, i);
-            }
-            case BlockStmt(var s) -> {
-                env = new Env(env);
-                s.forEach(this::exec);
-                env = env.parent();
-            }
-            default -> throw new RuntimeException("unexpected statement: " + stmt);
-        }
-    }
-
-    @Override
-    protected Value eval(Expr expr) {
-        return switch (expr) {
-            case VarExpr v -> {
-                int depth = sema.depths.get(v);
-                yield env.get(v.name(), depth);
-            }
-            default -> super.eval(expr);
-        };
-    }
-}
-```
-:::
-
-Skizzieren Sie den fehlenden Fall und erklären Sie die Arbeitsweise:
-
--   Welche Kindknoten werden ausgewertet?
--   Welche Werte werden aus den Kindknoten benötigt?
--   Welche Aktion führt der Interpreter aus beziehungsweise welchen Wert liefert er
-    zurück?
-
-# A5.5: C-Var: Variablen, State und nested Scopes (\*\*)
+# A5.4: C-Var: Variablen, State und nested Scopes (\*\*)
 
 Wir erweitern **C-Expr aus dem letzten Übungsblatt zu C-Var**. Dabei ergänzen wir
 u.a. Variablendeklarationen, Zuweisungen und Blöcke mit eigenen Scopes.
@@ -217,13 +143,12 @@ erforderlich.
 
 | Zweck                                | L-Var (Lispy)                                              | C-Var (Mini-C++)                       |
 |:-------------------------------------|:-----------------------------------------------------------|:---------------------------------------|
-| Variable definieren                  | `(def x : int 10)`                                         | `int x = 10;`                          |
-| Zuweisung an Variablen               | `(let x 2)`                                                | `x = 2;`                               |
+| Variable definieren                  | `(def x : int 10)`, `(def x : int)`                        | `int x = 10;`, `int x;`                |
+| Zuweisung an Variablen               | n.a.                                                       | `x = 2;`                               |
 | Variable lesen (Teil eines Ausdruck) | `x`                                                        | `x`                                    |
 | Nested Scopes                        | `(def x : int 10) (let ((a : int 2) (x : int 3)) (+ a x))` | `int x=10; { int a=2; int x=3; a+x; }` |
 
-Ein `let` kann in Lispy nicht nur eine Variable zuweisen, sondern auch einen neuen
-lokalen Scope öffnen mit lokalen Variablen.
+Ein `let` öffnet in Lispy einen neuen lokalen Scope mit lokalen Variablen.
 
 ``` clojure
 (def x : int 10)
@@ -245,7 +170,8 @@ int x=10;
 
 Für C-Var gelten die folgenden Festlegungen:
 
--   Variablen haben den Typ `int` und werden bei der Definition initialisiert.
+-   Variablen haben den Typ `int` und können bei der Definition mit einem Ausdruck
+    initialisiert werden.
 -   Eine Variable darf in ihrer Initialisierung nicht auf sich selbst verweisen.
 -   Eine Variable darf innerhalb desselben Scopes nur einmal definiert werden.
 -   Eine Definition in einem inneren Scope darf eine Definition in einem äußeren
@@ -253,12 +179,16 @@ Für C-Var gelten die folgenden Festlegungen:
 -   Variablenzugriffe werden lexikalisch aufgelöst.
 -   Es darf keine Zugriffe (lesend, schreibend) auf nicht sichtbare Variablen geben.
 -   Zuweisungen dürfen in C-Var nur an Variablen erfolgen.
--   Der Name-Resolver speichert für jede Variablenreferenz die Tiefe, die der
-    Interpreter später zum Zugriff auf das passende Environment verwendet.
--   Abweichungen vom "echten" C++:
-    -   Zuweisungen sind in Mini-C++ Statements, keine Expressions.
+-   Der Name-Resolver speichert für jede Variablenreferenz (auch für die
+    Zielvariable einer Zuweisung!) die Tiefe, die der Interpreter später zum Zugriff
+    auf das passende Environment verwendet.
+-   **Abweichungen** vom "echten" C++:
+    -   Zuweisungen ergeben in Mini-C++ keinen Wert (sind also Statements und nicht
+        Expressions).
     -   Der Wert des zuletzt ausgewerteten Expression-Statements ist der
         Rückgabewert des Interpreters.
+    -   Der Interpreter nutzt für Integer-Variablen den Defaultwert `0`, falls eine
+        Variable nicht initialisiert wird.
 :::
 
 ## Schritt 1: C-Var ausprobieren
@@ -266,7 +196,8 @@ Für C-Var gelten die folgenden Festlegungen:
 Wir wollen Variablendeklarationen, Zuweisungen und Blockverhalten zunächst direkt in
 C++ ausprobieren.
 
-Schreiben Sie ein C++-Programm `var.cpp` mit den folgenden Statements:
+Schreiben Sie ein C++-Programm `var.cpp` mit dem üblichen `main()`-Block und den
+folgenden Statements:
 
 ``` cpp
 int x = 10;
@@ -289,25 +220,13 @@ Erwartungen entspricht.
 Definieren Sie zunächst wieder die **konkrete** und die **abstrakte Grammatik** für
 C-Var. Orientieren Sie dabei am Vorgehen im Skript.
 
-C-Var soll mindestens die folgenden Konstrukte unterstützen:
-
-``` cpp
-int x = 10;
-x = x + 1;
-x + 2;
-{
-    int y = 3;
-    x + y;
-}
-```
-
 1.  Ergänzen Sie die **konkrete Grammatik** um passende Regeln für die neuen
     Sprachkonstrukte.
 
 2.  Leiten Sie aus der konkreten Grammatik die notwendigen Ergänzungen Ihrer
-    **ANTLR-Grammatik** vom letzten Blatt ab. Sie können die von Ihnen bevorzugte
-    Variante nutzen (gestufte Regeln vs. Auflösung der linksrekursiven Alternativen
-    in ANTLR4).
+    **ANTLR-Grammatik** von C-Expr ab. Sie können die von Ihnen bevorzugte Variante
+    nutzen (gestufte Regeln vs. Auflösung der linksrekursiven Alternativen in
+    ANTLR4).
 
 3.  Nutzen Sie die Definitionen in Ihrer **abstrakten Grammatik**, um den AST um die
     benötigten neuen Knotentypen zu erweitern. Halten Sie dabei die Unterscheidung
@@ -357,8 +276,8 @@ Name-Resolver zurückweisen?
 ## Schritt 4: Interpreter und Environments
 
 Erweitern Sie Ihren C-Expr-Interpreter zu einem `InterpreterCvar`. Ergänzen Sie eine
-`Env`-Struktur, die Variablennamen und Laufzeitwerte speichert und auf das
-Eltern-Environment verweist.
+`Env`-Struktur, die Namen und Laufzeitwerte speichert und auf das Eltern-Environment
+verweist.
 
 Erläutern Sie, welche Informationen der Interpreter aus der Sidetable benötigt.
 
@@ -375,7 +294,7 @@ Vergleichen Sie das beobachtbare Verhalten Ihres Interpreters mit einem
 entsprechenden C++-Programm (clang/g++). Welche Unterschiede ergeben sich durch die
 Festlegungen von Mini-C++?
 
-# A5.6: C-Var: Scopes, Tiefenwerte und Laufzeitwerte (\*\*)
+# A5.5: C-Var: Scopes, Tiefenwerte und Laufzeitwerte (\*\*)
 
 Betrachten Sie das folgende C-Var-Programm:
 
@@ -408,7 +327,7 @@ int x = 10;
 5.  Erklären Sie, warum die statische Auflösung im Resolver nicht von den
     Laufzeitwerten abhängt, obwohl der Interpreter später mit Environments arbeitet.
 
-# A5.7: Vertiefung: Namensauflösung (\*\*\*)
+# A5.6: Vertiefung: Namensauflösung (\*\*\*)
 
 Betrachten Sie:
 
@@ -420,3 +339,4 @@ int x = 1;
 ```
 
 Was passiert bei der Namensauflösung des `x` im Initialisierungsausdruck?
+Vergleichen Sie das mit dem Verhalten des "echten" C++.
