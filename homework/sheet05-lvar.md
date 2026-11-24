@@ -83,7 +83,7 @@ public class NameResolverLvar {
 Skizzieren Sie die fehlenden Fälle in `resolve(stmt)` und `resolve(expr)` für
 `ExprStmt`, `SubExpr`, `MulExpr` und `DivExpr` in Java.
 
-# A5.3: L-Var: Von `depth` zum Laufzeitwert (\*\*)
+# A5.3: L-Var: Von `depth` zum Laufzeitwert (\*)
 
 Betrachten Sie erneut das Programm von oben:
 
@@ -112,22 +112,24 @@ auszuwählen.
 Wir erweitern **C-Expr aus dem letzten Übungsblatt zu C-Var**. Dabei ergänzen wir
 u.a. Variablendeklarationen, Zuweisungen und Blöcke mit eigenen Scopes.
 
+::: tip
 Nutzen Sie Ihre bestehende **ANTLR-Pipeline** aus C-Expr als Ausgangspunkt.
 Erweitern Sie die ANTLR-Grammatik, leiten Sie den AST-Builder und die übrigen
 Komponenten von den entsprechenden C-Expr-Bausteinen ab und ergänzen Sie die neuen
 Fälle. Ein handgeschriebener Lexer oder RD-Parser ist ab diesem Blatt nicht (mehr)
 erforderlich.
+:::
 
 ::: important
-## Waschzettel: In C++ sieht es so aus ...
+## Waschzettel: In (Mini-) C++ sieht es so aus ...
 
-| Zweck | L-Var (Lispy) | C-Var (Mini-C++) |
-|:-------------------------|:----------------------------------|:-----------------------|
-| Variable definieren (mit Initialisierung) | `(def x : int 10)` | `int x = 10;` |
-| Variable definieren (Defaultwert) | `(def x : int)` | `int x;` |
-| Zuweisung an Variablen | n.a. | `x = 2;` |
-| Variable lesen (Teil eines Ausdruck) | `x` | `x` |
-| Nested Scopes | `(def x : int 10) (let ((a : int 2) (x : int 3)) (+ a x))` | `int x=10; { int a=2; int x=3; a+x; }` |
+| Zweck                                     | L-Var (Lispy)                                              | C-Var (Mini-C++)                       |
+|:------------------------------------------|:-----------------------------------------------------------|:---------------------------------------|
+| Variable definieren (mit Initialisierung) | `(def x : int 10)`                                         | `int x = 10;`                          |
+| Variable definieren (Defaultwert)         | `(def x : int)`                                            | `int x;`                               |
+| Zuweisung an Variablen                    | n.a.                                                       | `x = 2;`                               |
+| Variable lesen (Teil eines Ausdruck)      | `x`                                                        | `x`                                    |
+| Nested Scopes                             | `(def x : int 10) (let ((a : int 2) (x : int 3)) (+ a x))` | `int x=10; { int a=2; int x=3; a+x; }` |
 
 Ein `let` öffnet in Lispy einen neuen lokalen Scope mit lokalen Variablen:
 
@@ -163,6 +165,7 @@ Für C-Var gelten die folgenden Festlegungen:
 -   Der Name-Resolver speichert für jede Variablenreferenz (auch für die
     Zielvariable einer Zuweisung!) die Tiefe, die der Interpreter später zum Zugriff
     auf das passende Environment verwendet.
+-   Ein C-Var-Programm besteht aus einer **Folge von Statements**.
 -   **Abweichungen** vom "echten" C++:
     -   Zuweisungen ergeben in Mini-C++ keinen Wert (sind also Statements und nicht
         Expressions).
@@ -210,9 +213,6 @@ Erwartungen entspricht.
 4.  Leiten Sie Ihren C-Expr-AST-Builder zu einem **C-Var-AST-Builder** ab.
     Überschreiben Sie die benötigten `visitXYZ()`-Methoden und erläutern Sie kurz,
     welche bisherigen Methoden Sie weiterverwenden können.
-
-5.  Stellen Sie sicher, dass ein C-Var-Programm aus einer **Folge von Statements**
-    besteht.
 
 ## Schritt 3: Name-Resolver und Scopes
 
