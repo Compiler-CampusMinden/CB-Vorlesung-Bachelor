@@ -91,6 +91,8 @@ und bekommt zur Laufzeit (im Interpreter) einen **Defaultwert** passend zu ihrem
 Typ.
 
 ::: tip
+## Exkurs: Statische vs. dynamische Typisierung
+
 Nicht in allen Sprachen ist der Typ direkt in der konkreten Syntax sichtbar.
 
 In vielen **statisch typisierten** Sprachen muss man ihn explizit angeben, etwa in
@@ -110,6 +112,8 @@ typisiert.
 :::
 
 ::: important
+## Exkurs: Variablendefinition als Statement
+
 Bisher hatten wir nur **Ausdrücke** (*expressions*) betrachtet. Alles in L-Int und
 L-Expr ergab einen Wert, d.h. alle Programme in L-Int und L-Expr wurden durch
 Ausdrücke gebildet.
@@ -125,12 +129,14 @@ hinzu.
 :::
 :::::
 
-::::: notes
 # L-Var: KEINE Zuweisung an Variablen
 
 In Lispy (im Gegensatz zu C++) können Variablen **NICHT** verändert werden.
 
+::::: notes
 ::: tip
+## Exkurs: Mutable vs. immutable Bezeichner
+
 Nicht in allen Sprachen ist der Wert und damit der Zustand von Variablen
 veränderbar.
 
@@ -146,19 +152,22 @@ werden, wenn sie einmal gesetzt wurden. Dies erlaubt klare und elegante
 Formulierungen, die an mathematische Notation erinnern können.
 
 In C++ führt die dynamische Speicherverwaltung in Kombination mit veränderlichen
-Variablen schnell zu Problemen. Moderne Sprachen wie Rust versuchen dies zu lösen,
-indem sie per Default Variablen als *immutable* betrachten (wenn man veränderliche
-Variablen möchte, muss man dies explizit deklarieren). Zusätzlich gibt es komplexe
-Modelle, um die Ownership einer Variablen exakt zu bestimmen (*borrow checker*).
+Variablen schnell zu interessanten Problemen. Moderne Sprachen wie Rust versuchen
+dies zu lösen, indem sie per Default Variablen als *immutable* betrachten (wenn man
+veränderliche Variablen möchte, muss man dies explizit deklarieren). Zusätzlich gibt
+es komplexe Modelle, um die Ownership einer Variablen exakt zu bestimmen (*borrow
+checker*).
 
 **In unserem (Mini-) C++ in der Übung werden wir Pointer und dynamische
 Speicherverwaltung nicht betrachten.**
 :::
 
 ::: important
-Es gibt Sprachen wie C oder C++, wo eine Zuweisung aber als Expression behandelt
-wird. Damit erschließt sich eine komplett neue und faszinierende Welt von
-potentiellen Fehlern:
+## Exkurs: Zuweisungen als Expression
+
+Es gibt Sprachen wie C oder C++, wo eine Zuweisung als Expression behandelt wird.
+Damit erschließt sich eine komplett neue und faszinierende Welt von potentiellen
+Fehlern:
 
 ``` c
 int i;
@@ -185,7 +194,7 @@ erlauben, und (b) Zuweisungen abweichend von C++ als Statements behandeln.**
 (let ((a : int 2)
       (b : int 3))
   (+ a b)
-  (+ x (+ x b)))
+  (+ x b))
 ```
 :::
 
@@ -222,7 +231,7 @@ sichtbar. Andersherum sind die Namen aus dem umgebenden Scope im lokalen Scope
 sichtbar (rekursiv bis hoch zum globalen Scope).
 
 ::: important
-## Scopes und Name Spaces
+## Exkurs: Scopes und Name Spaces
 
 **Def.:** Unter dem *Gültigkeitsbereich* (Sichtbarkeitsbereich, Scope) eines
 Bezeichners versteht man den Programmabschnitt, in dem der Bezeichner sichtbar und
@@ -241,13 +250,13 @@ Vorsicht: Diese Begriffe werden nicht immer gleich definiert und auch gerne
 verwechselt.
 :::
 
-Im Beispiel ist `x` eine **globale** Variable, die im gesamten Programm sichtbar
-ist. Dagegen sind `a` und `b` **lokale** Variablen, deren Gültigkeitsbereich sich
-auf den Körper der `let`-Form beschränkt. D.h. im Inneren der `let`-Form ist
-`(+ a b)` erlaubt - außerhalb nicht, weil dort `a` und `b` nicht existieren. `x` ist
-dagegen auch in dem durch die `let`-Form aufgespannten Scope sichtbar: Wir finden
-`x` nicht direkt im **lokalen Scope** der `let`-Form, aber im umgebenden Scope (hier
-der **globale Scope**).
+Im obigen Beispiel ist `x` eine **globale** Variable, die im gesamten Programm
+sichtbar ist. Dagegen sind `a` und `b` **lokale** Variablen, deren
+Gültigkeitsbereich sich auf den Körper der `let`-Form beschränkt. D.h. im Inneren
+der `let`-Form ist `(+ a b)` erlaubt - außerhalb nicht, weil dort `a` und `b` nicht
+existieren. `x` ist dagegen auch in dem durch die `let`-Form aufgespannten Scope
+sichtbar: Wir finden `x` nicht direkt im **lokalen Scope** der `let`-Form, aber im
+umgebenden Scope (hier der **globale Scope**).
 
 In Java würde das Snippet ungefähr so aussehen:
 
@@ -257,7 +266,7 @@ int x = 1;
     int a = 2;
     int b = 3;
     a + b;
-    x + x + b;
+    x + b;
 }
 ```
 
@@ -273,8 +282,8 @@ globale Variable `x`:
     (+ x 2)))
 ```
 
-Hier sollte das globale `x` in der Addition im Block nicht genutzt werden, d.h.
-Ergebnis sollte nicht vom globalen `x` abhängen. Im ersten `let`-Block wird ein
+Hier sollte das globale `x` in der Addition im innersten Block nicht genutzt werden,
+d.h. Ergebnis sollte nicht vom globalen `x` abhängen. Im ersten `let`-Block wird ein
 lokales `x` eingeführt und mit `2` initialisiert, und dann wird im zweiten
 `let`-Block noch einmal eine neue (überdeckende) lokale Variable `x` mit dem Wert
 `3` eingeführt. Für das Ergebnis sollte diese letzte (innere) Definition genutzt
@@ -448,6 +457,7 @@ Vereinfachung diese Feinheit nicht ausnutzen.
 
 **Vorsicht**: Die Begriffe werden oft auch anders verwendet, beispielsweise findet
 sich in der Java-Literatur der Begriff *Deklaration* anstelle von *Definition*.
+
 **Wir folgen in Lispy diesem unscharfen Sprachgebrauch: `def` in der konkreten
 Syntax kommt von "Definieren einer Variablen", in der abstrakten Syntax nutzen wir
 dafür dann aber `VarDecl` von "Deklarieren einer Variablen".**
@@ -500,7 +510,7 @@ C++ eine Expression erst dann ein Statement, wenn sie von einem Semikolon
 abgeschlossen wird.
 
 Ansonsten werden wie gewohnt die Regeln aus der konkreten Syntax in die
-ANTLR-Grammatik übersetzt. Dabei ist es hilfreich, für die Regeln und die Label auf
+ANTLR-Grammatik übersetzt. Dabei ist es hilfreich, für die Regeln und die Labels auf
 "sprechende" Namen zu achten. Dies unterstützt die Lesbarkeit der Grammatik, und da
 zu jeder Regel und jedem Label eine `visitXYZ()`-Methode generiert wird, erleichtert
 uns das auch das Zurechtfinden im AST-Builder.
@@ -582,8 +592,6 @@ hilfreich.
 ::: outcomes
 -   k1: Ich kann die Begriffe *Expression*, *Statement*, *Scope* und *Variable*
     definieren.
--   k2: Ich kann anhand von Beispielen erklären, warum Variablendefinitionen in
-    L-Var als Statements und nicht als Expressions behandelt werden.
 -   k2: Ich kann erläutern, wie Scopes die Sichtbarkeit von Variablen beeinflussen
     und wie globale und lokale Variablen sich unterscheiden.
 -   k3: Ich kann Lispy-L-Var-Programme in *konkrete* und *abstrakte* Syntax
@@ -629,18 +637,15 @@ Gegeben ist folgender Lispy-L-Var-Code:
 (+ x y)
 ```
 
-1.  Schreiben Sie die konkrete Grammatikableitung (Parse-Tree) in Form der
-    verwendeten Nonterminals (z.B. `sform`, `eform`, ...) für die äußere `let`-Form
-    (nicht das gesamte Programm, nur das `let`-Statement).
+1.  Schreiben Sie die konkrete Grammatikableitung (Parse-Tree) für die `let`-Form
+    auf.
 2.  Geben Sie den zugehörigen abstrakten Syntaxbaum (AST) für das `let`-Statement
     an:
-    -   Welche `Stmt`-Knoten entstehen (`VarDecl`, `BlockStmt`, `ExprStmt`, ...)?
-    -   Welche `Expr`-Knoten entstehen (`VarExpr`, `AddExpr`, `IntLiteral`, ...)?
+    -   Welche `Stmt`-Knoten entstehen?
+    -   Welche `Expr`-Knoten entstehen?
     -   Markieren Sie im AST, welche `VarExpr`-Knoten sich auf das innere `x` und
         welche sich auf das äußere `y` beziehen.
-
-Diskussion im Plenum: Wo wäre Shadowing möglich, und warum ist das im AST allein
-noch nicht aufgelöst?
+3.  Wo wäre Shadowing möglich, und warum ist das im AST allein noch nicht aufgelöst?
 
 **Statements aus Expressions bauen**
 
@@ -649,7 +654,7 @@ Betrachten Sie die folgenden Lispy-Fragmente (L-Var):
 ``` clojure
 (+ 1 2)
 (def a : int (+ 1 2))
-(let a (+ a 1))
+(let (+ a 1))
 (let ((b : int 10))
   (+ b 1)
   (+ b (+ b 2)))
@@ -660,7 +665,7 @@ Betrachten Sie die folgenden Lispy-Fragmente (L-Var):
     -   Statement,
     -   Block mit mehreren Statements.
 2.  Bestimmen Sie für jede Zeile/jeden Block:
-    -   Welche `Stmt`-Knoten entstehen (z.B. `ExprStmt`, `VarDecl`, `BlockStmt`)?
+    -   Welche `Stmt`-Knoten entstehen?
     -   Welche `Expr`-Knoten entstehen?
 3.  Diskutieren Sie kurz:
     -   Warum ist `(+ 1 2)` in L-Var alleine als Zeile ein Statement, obwohl es
