@@ -95,13 +95,7 @@ public class NameResolverLvar {
 :::
 
 Skizzieren Sie die fehlenden Fälle in `resolve(stmt)` und `resolve(expr)` für
-`ExprStmt`, `SubExpr`, `MulExpr` und `DivExpr`.
-
-Geben Sie für jeden Fall an:
-
--   welche Kindknoten rekursiv besucht werden
--   ob ein Name über `scope.resolve()` aufgelöst wird
--   ob und welche Information in `SemaInfo` gespeichert wird
+`ExprStmt`, `SubExpr`, `MulExpr` und `DivExpr` in Java.
 
 # A5.3: L-Var: Von `depth` zum Laufzeitwert (\*\*)
 
@@ -141,14 +135,15 @@ erforderlich.
 ::: important
 ## Waschzettel: In C++ sieht es so aus ...
 
-| Zweck                                | L-Var (Lispy)                                              | C-Var (Mini-C++)                       |
-|:-------------------------------------|:-----------------------------------------------------------|:---------------------------------------|
-| Variable definieren                  | `(def x : int 10)`, `(def x : int)`                        | `int x = 10;`, `int x;`                |
-| Zuweisung an Variablen               | n.a.                                                       | `x = 2;`                               |
-| Variable lesen (Teil eines Ausdruck) | `x`                                                        | `x`                                    |
-| Nested Scopes                        | `(def x : int 10) (let ((a : int 2) (x : int 3)) (+ a x))` | `int x=10; { int a=2; int x=3; a+x; }` |
+| Zweck                                     | L-Var (Lispy)                                              | C-Var (Mini-C++)                       |
+|:------------------------------------------|:-----------------------------------------------------------|:---------------------------------------|
+| Variable definieren (mit Initialisierung) | `(def x : int 10)`                                         | `int x = 10;`                          |
+| Variable definieren (Defaultwert)         | `(def x : int)`                                            | `int x;`                               |
+| Zuweisung an Variablen                    | n.a.                                                       | `x = 2;`                               |
+| Variable lesen (Teil eines Ausdruck)      | `x`                                                        | `x`                                    |
+| Nested Scopes                             | `(def x : int 10) (let ((a : int 2) (x : int 3)) (+ a x))` | `int x=10; { int a=2; int x=3; a+x; }` |
 
-Ein `let` öffnet in Lispy einen neuen lokalen Scope mit lokalen Variablen.
+Ein `let` öffnet in Lispy einen neuen lokalen Scope mit lokalen Variablen:
 
 ``` clojure
 (def x : int 10)
@@ -157,7 +152,7 @@ Ein `let` öffnet in Lispy einen neuen lokalen Scope mit lokalen Variablen.
   (+ a x))
 ```
 
-In C++ nutzen wir dafür die geschweiften Klammern.
+In C++ nutzen wir dafür die geschweiften Klammern:
 
 ``` cpp
 int x=10;
@@ -188,7 +183,7 @@ Für C-Var gelten die folgenden Festlegungen:
     -   Der Wert des zuletzt ausgewerteten Expression-Statements ist der
         Rückgabewert des Interpreters.
     -   Der Interpreter nutzt für Integer-Variablen den Defaultwert `0`, falls eine
-        Variable nicht initialisiert wird.
+        Variable nicht vom User initialisiert wird.
 :::
 
 ## Schritt 1: C-Var ausprobieren
@@ -217,20 +212,14 @@ Erwartungen entspricht.
 
 ## Schritt 2: C-Var-Grammatiken und AST ergänzen
 
-Definieren Sie zunächst wieder die **konkrete** und die **abstrakte Grammatik** für
-C-Var. Orientieren Sie dabei am Vorgehen im Skript.
-
 1.  Ergänzen Sie die **konkrete Grammatik** um passende Regeln für die neuen
-    Sprachkonstrukte.
+    Sprachkonstrukte. Orientieren Sie dabei am Vorgehen im Skript.
 
 2.  Leiten Sie aus der konkreten Grammatik die notwendigen Ergänzungen Ihrer
-    **ANTLR-Grammatik** von C-Expr ab. Sie können die von Ihnen bevorzugte Variante
-    nutzen (gestufte Regeln vs. Auflösung der linksrekursiven Alternativen in
-    ANTLR4).
+    **ANTLR-Grammatik** aus C-Expr ab.
 
-3.  Nutzen Sie die Definitionen in Ihrer **abstrakten Grammatik**, um den AST um die
-    benötigten neuen Knotentypen zu erweitern. Halten Sie dabei die Unterscheidung
-    zwischen Expressions und Statements aufrecht.
+3.  Ergänzen Sie die **abstrakte Grammatik** und leiten Sie daraus die neuen
+    Knotentypen für den AST ab.
 
 4.  Leiten Sie Ihren C-Expr-AST-Builder zu einem **C-Var-AST-Builder** ab.
     Überschreiben Sie die benötigten `visitXYZ()`-Methoden und erläutern Sie kurz,
@@ -287,47 +276,13 @@ Expression-Statements wird zurückgegeben; falls keines vorkommt, wird ein
 Einheitswert zurückgegeben.
 
 Ergänzen Sie Ihre JUnit-Tests so, dass die neuen Sprachkonstrukte in der Pipeline
-getestet werden. Testen Sie insbesondere syntaktische Konstruktion, Namensauflösung
-und Laufzeitverhalten.
+getestet werden.
 
 Vergleichen Sie das beobachtbare Verhalten Ihres Interpreters mit einem
 entsprechenden C++-Programm (clang/g++). Welche Unterschiede ergeben sich durch die
 Festlegungen von Mini-C++?
 
-# A5.5: C-Var: Scopes, Tiefenwerte und Laufzeitwerte (\*\*)
-
-Betrachten Sie das folgende C-Var-Programm:
-
-``` cpp
-int x = 10;
-
-{
-    int y = 2;
-    x + y;
-
-    {
-        int x = 5;
-        x + y;
-    }
-
-    x + y;
-}
-```
-
-1.  Zeichnen Sie den Scope-Baum und notieren Sie, welche Variablen in jedem Scope
-    definiert werden.
-2.  Ordnen Sie jede Variablenreferenz ihrer Deklaration zu und geben Sie ihre
-    `depth`-Werte an.
-3.  Skizzieren Sie die Environments während der Ausführung:
-    -   nach der globalen Deklaration von `x`;
-    -   im äußeren Block nach der Deklaration von `y`;
-    -   im inneren Block nach der lokalen Deklaration von `x`.
-4.  Wählen Sie für jede Variablenreferenz ein Beispiel aus und beschreiben Sie, wie
-    der Interpreter mit dem `depth`-Wert das passende Environment findet.
-5.  Erklären Sie, warum die statische Auflösung im Resolver nicht von den
-    Laufzeitwerten abhängt, obwohl der Interpreter später mit Environments arbeitet.
-
-# A5.6: Vertiefung: Namensauflösung (\*\*\*)
+# A5.5: Vertiefung: Namensauflösung (\*\*\*)
 
 Betrachten Sie:
 
