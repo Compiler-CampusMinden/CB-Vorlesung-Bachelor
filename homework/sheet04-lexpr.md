@@ -7,11 +7,10 @@ title: "Blatt 04: L-Expr und C-Expr (Multiplikation/Division, Vorrang und ANTLR)
 # A4.1: L-Expr: Division ergänzen (\*)
 
 Im Skript haben Sie L-Expr als Erweiterung von L-Int um Multiplikation und Division
-kennengelernt. In der Vorlesung wurde die Multiplikation im Detail behandelt.
+kennengelernt. Dabei wurde die Multiplikation im Detail behandelt.
 
-Wenden Sie das gezeigte Muster auf die Division an und skizzieren Sie in Java, wie
-die Auswertung einer `DivExpr` aussehen könnte. Geben Sie dabei an, welche
-Teil-Ausdrücke ausgewertet und wie ihre Ergebnisse kombiniert werden.
+Wenden Sie das im Skript gezeigte Muster auf die Division an und skizzieren Sie in
+Java, wie die Auswertung einer `DivExpr` aussehen könnte.
 
 Gegeben sei dazu der folgende Code-Rahmen.
 
@@ -40,7 +39,7 @@ public class InterpreterLint {
 
             // TODO: SubExpr
 
-            default -> throw new RuntimeException("unexpected expression: " + expr);
+            default -> throw new RuntimeException("unexpected expression");
         };
     }
 
@@ -71,29 +70,24 @@ public class InterpreterLexpr extends InterpreterLint {
 ```
 :::
 
-Weitere Aufgabenteile:
+Weitere Fragen:
 
 1.  Wie behandeln Sie Vorrangregeln und die Assoziativität im Interpreter für
     L-Expr?
-2.  Notieren Sie, wie der mehrstellige Ausdruck `(/ 12 3 2)` gruppiert wird und
-    welches Ergebnis er nach dieser Gruppierung hat.
+2.  Wie wird der mehrstellige Ausdruck `(/ 12 3 2)` gruppiert?
 3.  Wie wird die Division durch null behandelt? Brauchen wir hier eine explizite
     Fehlerbehandlung im Interpreter?
-4.  Erstellen Sie außerdem mindestens zwei Testfälle:
-    -   einen Test, der die Java-Integer-Division sichtbar macht
-    -   einen Test für eine verschachtelte Division
 
 # A4.2: C-Expr: Vorrangregeln in einer gestuften Grammatik (\*\*)
 
-Wir erstellen nun **C-Expr**, indem wir **C-Int vom letzten Blatt** um
-Multiplikation, Division, unäres Minus und geklammerte Ausdrücke erweitern.
+Wir erstellen nun **C-Expr**, indem wir **C-Int vom letzten Blatt** erweitern.
 
 C-Expr soll analog zu L-Expr **Multiplikation und Division und unäres Minus und
 geklammerte Ausdrücke** erlauben, aber in C++-üblicher Infix-Notation und unter
 Beachtung der üblichen Vorrang- und Assoziativitätsregeln.
 
 ::: important
-## Waschzettel: In C++ sieht es so aus ...
+## Waschzettel: In (Mini-) C++ sieht es so aus ...
 
 | Zweck          | L-Expr (Lispy)  | C-Expr (Mini-C++) |
 |:---------------|:----------------|:------------------|
@@ -130,8 +124,8 @@ Erwartungen entspricht.
 
 ## Schritt 2: Konkrete Syntax für C-Expr (gestufte Variante)
 
-Definieren Sie eine **konkrete Grammatik für C-Expr** (in EBNF), die folgende
-Anforderungen erfüllt:
+Ergänzen Sie Ihre **konkrete Grammatik** aus C-Int für C-Expr (in EBNF) mit
+folgenden Anforderungen:
 
 -   Zulässige Ausdrücke enthalten:
     -   Integer-Literale
@@ -141,7 +135,7 @@ Anforderungen erfüllt:
 -   Vorrang:
     -   `*` und `/` **binden stärker** als `+` und `-`
     -   Unäres Minus und geklammerte Ausdrücke haben höchsten Vorrang
--   Alle vier Operatoren sind **linksassoziativ**
+-   Alle vier binären Operatoren sind **linksassoziativ**
 -   Whitespace darf an beliebigen sinnvollen Stellen stehen und wird ignoriert
 -   Zeilenkommentare werden ab dem `//` bis zum Zeilenende ignoriert
 
@@ -158,46 +152,53 @@ Ebenen `expr`/`term`/`atom`.
 Zeichnen Sie jeweils den Parse-Tree. Entspricht das dem Verhalten von C++ aus der
 vorigen Aufgabe?
 
-## Schritt 3: ANTLR-Grammatiken für C-Expr
+## Schritt 3: ANTLR-Grammatik für C-Expr
 
-Definieren Sie nun ausgehend von der konkrete Grammatik aus der vorigen Aufgabe zwei
-**ANTLR-Grammatiken** für **C-Expr**:
-
--   einmal mit **gestuften Regeln**, und
--   einmal mit **linksrekursiven Alternativen**.
+Definieren Sie nun ausgehend von der konkreten Grammatik eine **ANTLR-Grammatik**
+für **C-Expr**.
 
 Berücksichtigen Sie dabei die für C-Expr formulierten Operatoren und Vorrangregeln
 und Assoziativitäten.
 
 ## Schritt 4: Abstrakte Syntax für C-Expr
 
-Definieren Sie nun die **abstrakte Syntax für C-Expr**. Orientieren Sie sich an der
-Vorlesung und bauen Sie auf Ihrer abstrakten Syntax von C-Int auf.
+Definieren Sie nun die **abstrakte Syntax für C-Expr**. Orientieren Sie sich am
+Skript und bauen Sie auf Ihrer abstrakten Syntax von C-Int auf.
 
 Diskutieren Sie: Welche neuen AST-Knoten sind notwendig und warum?
 
 ## Schritt 5: Parsen von C-Expr und bauen des AST
 
+### Handimplementierte Lexer und Parser
+
 1.  Implementieren Sie für Ihre konkrete Grammatik (mit den gestuften Regeln) für
     **C-Expr einen Lexer**. Erweitern Sie dazu die Tokendefinitionen passend.
+
 2.  Implementieren Sie einen **RD-Parser für C-Expr**, der als Ausgabe einen AST
     erzeugt. Ergänzen Sie dazu die AST-Klassen entsprechend Ihrer abstrakten Syntax.
-3.  Lassen Sie sich von **ANTLR** für die beiden Grammatiken aus der vorigen Aufgabe
-    je einen **Lexer, Parser und Visitor generieren**.
-4.  Erstellen Sie **zwei AST-Builder**, die aus den beiden unterschiedlichen
-    ANTLR-Parse-Trees je einen AST entsprechend Ihrer abstrakten Syntax erzeugen.
-    Nutzen Sie das **Visitor-Pattern**. Diskutieren Sie:
+
+### ANTLR und AST-Builder
+
+3.  Lassen Sie sich von **ANTLR** für die Grammatik aus der vorigen Aufgabe je einen
+    **Lexer, Parser und Visitor generieren**.
+
+4.  Erstellen Sie analog zum Skript einen **AST-Builder**, der aus dem
+    ANTLR-Parse-Tree einen AST entsprechend Ihrer abstrakten Syntax erzeugt. Nutzen
+    Sie das **Visitor-Pattern**. Diskutieren Sie:
+
     -   Welchen generischen Typ brauchen Sie für das Ableiten des generierten
         `XyzBaseVisitor`?
     -   Welche der `visitXYZ()`-Methoden sollten Sie überschreiben, welche nicht?
         Begründen Sie Ihre Aussage.
+
+## C-Expr Pipeline
+
 5.  Testen Sie die neue C-Expr-Pipeline: Implementieren Sie die **obigen Beispiele
-    in JUnit** und führen Sie diese auf **allen drei Varianten** aus (RD-Parser,
-    ANTLR mit gestuften Regeln, ANTLR mit linkrekursiven Alternativen). Was
-    beobachten Sie?
+    in JUnit** und führen Sie diese jeweils auf den **beiden Varianten** aus
+    (RD-Parser, ANTLR). Was beobachten Sie?
 
 ::: tip
-**Hinweis**: Sie können die Funktionalität aus dem Lexer und RD-Parser für C-Int als
+**Hinweis**: Sie können die Funktionalität aus dem C-Int-Lexer und -RD-Parser als
 Basis per Copy&Paste übernehmen und für C-Expr ergänzen/umbauen. Die gestuften
 Regeln vertragen sich nicht gut mit dem sonst in diesem Kurs praktizierten Ableiten
 `class RdParserCexpr extends RdParserCint`, weshalb wir hier an dieser Stelle darauf
@@ -210,8 +211,8 @@ Implementieren Sie nun den **Interpreter für C-Expr** in einer Klasse
 `InterpreterCexpr`. Dabei soll wie üblich in diesem Kurs gelten
 `class InterpreterCexpr extends InterpreterCint`.
 
-Ergänzen Sie die neuen Fälle für C-Expr durch Überschreiben von `eval()`. Rufen Sie
-für die bisherigen C-Int-Fälle `super.eval(expr)` auf.
+Ergänzen Sie analog zum Skript die neuen Fälle für C-Expr durch Überschreiben von
+`eval()`. Rufen Sie für die bisherigen C-Int-Fälle `super.eval(expr)` auf.
 
 Testen Sie Ihren Interpreter mit JUnit mit den obigen Beispielen. Dabei soll wie bei
 L-Expr gelten: `class InterpreterCexprTest extends InterpreterCintTest`.
@@ -221,7 +222,7 @@ Der Interpreter bekommt als Eingabe den AST und ist damit unabhängig vom konkre
 Parser!
 
 Testen Sie Ihren Interpreter sowohl mit dem handgeschriebenen RD-Parser als auch mit
-den beiden ANTLR-Parsern plus AST-Buildern.
+dem ANTLR-Parser plus AST-Builder.
 :::
 
 Vergleichen Sie die Resultate der Testfälle von `InterpreterCexpr` mit dem mit
