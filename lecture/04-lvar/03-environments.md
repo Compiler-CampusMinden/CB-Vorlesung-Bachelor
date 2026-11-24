@@ -402,6 +402,8 @@ Für diese Statements definieren wir nun die Methode `exec(stmt)` in
 `InterpreterLvar`:
 :::
 
+\bigskip
+
 ``` java
 protected void exec(Stmt stmt) {
     switch (stmt) {
@@ -507,6 +509,8 @@ In L-Var haben wir eine neue Expression: den lesenden Zugriff auf Variablen, d.h
 `VarExpr`. Diese bauen wir wie gewohnt ein, indem wir die `eval()`-Methode
 überschreiben und passend ergänzen:
 :::
+
+\bigskip
 
 ``` java
 @Override

@@ -61,7 +61,7 @@ Kontrollstrukturen (L-If) und Funktionen (L-Fun) ...
 \bigskip
 
 ::: slides
-Neue Idee: Namen binden Werte
+**Neue Idee**: Namen binden Werte
 :::
 
 ::::: notes
@@ -210,7 +210,7 @@ erlauben, und (b) Zuweisungen abweichend von C++ als Statements behandeln.**
 \bigskip
 
 ::: slides
-Neue Idee: Verschachtelung und Shadowing werden wichtig
+**Neue Idee**: Verschachtelung und Shadowing werden wichtig
 :::
 
 :::: notes

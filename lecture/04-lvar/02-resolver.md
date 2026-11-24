@@ -652,6 +652,8 @@ Erinnerung an die abstrakte Syntax in L-Var (nur ein kleiner Teil der
 Expr = IntLiteral(Int) | AddExpr(Expr, Expr) | VarExpr(String) | ...
 ```
 
+\bigskip
+
 ``` java
 protected void resolve(Expr expr) {
     switch (expr) {

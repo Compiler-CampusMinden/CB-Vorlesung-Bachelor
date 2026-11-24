@@ -117,16 +117,16 @@ public class InterpreterLvar extends InterpreterLexpr {
 Das folgende Muster wird uns in L-If, L-Fun, L-Class usw. begleiten:
 :::
 
--   **Konkrete Syntax** erweitern (ANTLR)
--   **Abstrakte Syntax** erweitern (AST, AST-Builder)
--   **Name-Resolver**:
+1.  **Konkrete Syntax** erweitern (ANTLR)
+2.  **Abstrakte Syntax** erweitern (AST, AST-Builder)
+3.  **Name-Resolver**:
     -   erster AST-Pass, baut Symboltabellen auf
     -   neue Prüfungen, neue Scopes (z.B. Funktions-Scopes, Klassenscopes)
     -   zusätzliche Einträge in `SemaInfo` (z.B. Funktions-Typen, Klasseninfos)
--   **Type-Checker**:
+4.  **Type-Checker**:
     -   weiterer AST-Pass
     -   Prüfung der Typen, statische vs. dynamische Polymorphie, ...
--   **Interpreter**:
+5.  **Interpreter**:
     -   finaler AST-Pass
     -   Behandlung der neuen Features
     -   "vertraut" auf Ergebnisse von semantischer Analyse (im Sidetable)
