@@ -13,22 +13,20 @@ typischerweise keinen Wert, aber einen Seiteneffekt haben.
 
 L-Var kennt Variablen und Scopes: Variablen haben einen Namen, einen Typ und einen
 Wert und müssen in Lispy bei der Definition mit `def` initialisiert werden. Mit
-`let` können wir den Wert existierender Variablen ändern oder neue lokale Variablen
-einführen und damit **lokale Scopes** aufspannen. Scopes bestimmen, welche Namen an
-welcher Programmposition sichtbar sind; äußere Variablen sind in inneren Scopes
-sichtbar, umgekehrt aber nicht.
+`let` können wir neue lokale Variablen einführen und damit **lokale Scopes**
+aufspannen. Scopes bestimmen, welche Namen an welcher Programmposition sichtbar
+sind; äußere Variablen sind in inneren Scopes sichtbar, umgekehrt aber nicht.
 
 Die konkrete Syntax von L-Var ergänzt L-Int/L-Expr um Variablennamen, `def`-, `let`-
 und Block-Formen sowie einen einfachen Typ `int`. In der abstrakten Syntax
 unterscheiden wir jetzt zwischen `Expr` und `Stmt` und führen neue AST-Knoten wie
-`VarExpr`, `VarDecl`, `AssignStmt`, `ExprStmt` und `BlockStmt` ein. Unsere
-ANTLR-Grammatik für Lispy wird modular erweitert, ohne die bisherigen Regeln zu
-zerstören, sodass alte Tools (z.B. der AST-Builder für L-Expr) weiter funktionieren.
-Ein spezialisierter AST-Builder für L-Var (`LispyAstBuilderLvar`) leitet vom
-L-Expr-Builder ab und erzeugt aus den neuen Parse-Bäumen die erweiterten
-AST-Klassen. Diese AST-Struktur bildet die Grundlage, um in den nächsten Schritten
-Namensauflösung mit Scopes und einen Interpreter mit Environments und Statements zu
-implementieren.
+`VarExpr`, `ExprStmt`, `VarDecl` und `BlockStmt` ein. Unsere ANTLR-Grammatik für
+Lispy wird modular erweitert, ohne die bisherigen Regeln zu zerstören, sodass alte
+Tools (z.B. der AST-Builder für L-Expr) weiter funktionieren. Ein spezialisierter
+AST-Builder für L-Var (`LispyAstBuilderLvar`) leitet vom L-Expr-Builder ab und
+erzeugt aus den neuen Parse-Bäumen die erweiterten AST-Klassen. Diese AST-Struktur
+bildet die Grundlage, um in den nächsten Schritten Namensauflösung mit Scopes und
+einen Interpreter mit Environments und Statements zu implementieren.
 :::
 
 # Erinnerung L-Int / L-Expr: Nur Ausdrücke
@@ -56,6 +54,8 @@ Kontrollstrukturen (L-If) und Funktionen (L-Fun) ...
 ``` clojure
 (def x : int 10)
 (+ x 5)
+
+(def y : int)  ;; Defaultwert!
 ```
 
 \bigskip
@@ -67,7 +67,7 @@ Neue Idee: Namen binden Werte
 ::::: notes
 Variablen haben einen **Namen**, einen **Typ** und einen **Wert**. Variablen sind
 nach ihrer Definition über ihren Namen zugreifbar (sofern "sichtbar", vgl.
-Scope-Diskussion weiter unten). In Lispy müssen Variablen bereits bei der
+Scope-Diskussion weiter unten). In Lispy *können* Variablen bereits bei der
 **Definition initialisiert** werden.
 
 Die `def`-Form definiert Variablen in Lispy.
@@ -86,7 +86,9 @@ korrekten Speicherort. Wir werden darüber im Interpreter noch einmal sprechen u
 Im Beispiel definieren wir in unserem Lispy-Dialekt L-Var eine Variable `x` vom Typ
 `int` und initialisieren sie mit dem Wert `5`. Dabei bedeutet der Typ `int` in L-Var
 offensichtlich Integer-Werte. Wenn wir später auf diese Variable lesend zugreifen,
-können wir diesen Wert abrufen.
+können wir diesen Wert abrufen. Die Variable `y` wird nicht explizit initialisiert
+und bekommt zur Laufzeit (im Interpreter) einen **Defaultwert** passend zu ihrem
+Typ.
 
 ::: tip
 Nicht in allen Sprachen ist der Typ direkt in der konkreten Syntax sichtbar.
@@ -123,26 +125,10 @@ hinzu.
 :::
 :::::
 
-# L-Var: "let" - Zuweisung an Variablen
-
-``` clojure
-(def x : int 10)
-(let x (+ x 1))
-(+ x 5)
-```
-
-\bigskip
-
-::: slides
-Neue Idee: Variablen können verändert werden
-:::
-
 ::::: notes
-In Lispy (wie auch in C++) können Variablen **verändert** werden. Das bedeutet, dass
-ihr gespeicherter Wert per Zuweisung geändert werden kann. An der Stelle der
-Zuweisung müssen die zu ändernden Variablen "sichtbar" sein. In Lispy ändert die
-`let`-Form den Wert von Variablen. (Spoiler: Die `let`-Form taucht gleich noch
-einmal mit einer etwas anderen Bedeutung auf, s.u.)
+# L-Var: KEINE Zuweisung an Variablen
+
+In Lispy (im Gegensatz zu C++) können Variablen **NICHT** verändert werden.
 
 ::: tip
 Nicht in allen Sprachen ist der Wert und damit der Zustand von Variablen
@@ -170,9 +156,6 @@ Speicherverwaltung nicht betrachten.**
 :::
 
 ::: important
-In Lispy ergibt die **Zuweisung an eine Variable keinen Wert**. Damit wird die
-Zuweisung in Lispy als **Statement** behandelt.
-
 Es gibt Sprachen wie C oder C++, wo eine Zuweisung aber als Expression behandelt
 wird. Damit erschließt sich eine komplett neue und faszinierende Welt von
 potentiellen Fehlern:
@@ -188,8 +171,8 @@ zudem Integer im booleschen Kontext ausgewertet werden dürfen (`0` wirkt wie
 `false`), würde der Bedingungsteil dieses `if` nie ausgeführt und `i` zudem auf `0`
 gesetzt. ... Fehler dieser Art findet man in der Regel nur sehr schlecht!
 
-**Wir werden in unserem Mini-C++ davon abweichen und Zuweisungen abweichend von C++
-als Statements behandeln.**
+**Wir werden in unserem Mini-C++ davon abweichen: Wir werden (a) Zuweisungen
+erlauben, und (b) Zuweisungen abweichend von C++ als Statements behandeln.**
 :::
 :::::
 
@@ -202,7 +185,7 @@ als Statements behandeln.**
 (let ((a : int 2)
       (b : int 3))
   (+ a b)
-  (let x (+ x b)))
+  (+ x (+ x b)))
 ```
 :::
 
@@ -231,10 +214,8 @@ Neue Idee: Verschachtelung und Shadowing werden wichtig
 :::
 
 :::: notes
-Die `let`-Form gibt es in zwei Varianten: (1) als Zuweisung an eine bereits
-existierende Variable (s.o.) und (2) als `let`-mit-Scopes, das neue **lokale
-Variablen** einführt und einen **Block (Scope)** aufspannt. Scopes sind
-Sichtbarkeitsbereiche für Bezeichner.
+Die `let`-Form führt neue **lokale Variablen** ein und spannt gleichzeitig einen
+neuen **Block (Scope)** auf. Scopes sind Sichtbarkeitsbereiche für Bezeichner.
 
 Die Namen im **lokalen Scope** sind vom umgebenden (hier globalen) Scope aus nicht
 sichtbar. Andersherum sind die Namen aus dem umgebenden Scope im lokalen Scope
@@ -276,7 +257,7 @@ int x = 1;
     int a = 2;
     int b = 3;
     a + b;
-    x = x + b;
+    x + x + b;
 }
 ```
 
@@ -288,13 +269,16 @@ globale Variable `x`:
 ``` clojure
 (def x : int 1)
 (let ((x : int 2))
-  (let x (+ x 2)))
+  (let ((x : int 3))
+    (+ x 2)))
 ```
 
-Hier sollte das globale `x` von der Addition im Block unberührt bleiben, d.h. das
-globale `x` sollte am Ende des Programms immer noch den ursprünglichen Wert `1`
-haben, während im `let`-Block das lokale `x` mit `2` initialisiert wird und dann per
-Zuweisung noch einmal im Wert auf `4` verändert wird.
+Hier sollte das globale `x` in der Addition im Block nicht genutzt werden, d.h.
+Ergebnis sollte nicht vom globalen `x` abhängen. Im ersten `let`-Block wird ein
+lokales `x` eingeführt und mit `2` initialisiert, und dann wird im zweiten
+`let`-Block noch einmal eine neue (überdeckende) lokale Variable `x` mit dem Wert
+`3` eingeführt. Für das Ergebnis sollte diese letzte (innere) Definition genutzt
+werden, da die Addition in diesem Scope stattfindet.
 
 Scopes können nahezu beliebig ineinander verschachtelt werden.
 ::::
@@ -317,7 +301,6 @@ eform ::= '(' '*' eform eform+ ')' | '(' '/' eform eform+ ')' | '(' '-' eform ')
 eform ::= ID
 sform ::= eform
         | '(' 'def' ID ':' type eform? ')'
-        | '(' 'let' ID eform ')'
         | '(' 'let' '(' ltBdg+ ')' sform+ ')'
 ltBdg ::= '(' ID ':' type eform ')' ;
 type  ::= 'int'
@@ -326,13 +309,13 @@ ID    ::= [a-zA-Z][a-zA-Z_0-9]*
 lvar  ::= sform* EOF
 ```
 
-:::: notes
+::: notes
 Mit L-Var ergänzen wir eine neue Expression in der `eform`: lesender Zugriff auf
 eine Variable. D.h. ein Variablenname (hier als `ID`) stellt für sich eine
 Expression dar.
 
-Zusätzlich haben wir aber nun auch Statements: Variablendefinition und Zuweisung
-sowie `let` mit lokalen Bindungen und einem lokalen Scope.
+Zusätzlich haben wir aber nun auch Statements: Variablendefinition und `let` mit
+lokalen Bindungen und einem lokalen Scope.
 
 Außerdem taucht zum ersten Mal ein expliziter Typ auf: Integer-Werte werden mit dem
 Typnamen `int` bezeichnet.
@@ -343,42 +326,7 @@ i.d.R. **Teile** von Statements (`sform`).
 
 Diese Definition wird uns zur Laufzeit im Interpreter noch etwas Kopfzerbrechen
 bereiten: Was genau liefert ein Programm zurück?
-
-::: tip
-Bei der Definition einer Variablen ist der Initialisierungsausdruck in Lispy *nicht*
-optional, d.h. er muss immer angegeben werden.
-
-Dennoch haben wir in der konkreten Syntax die Regel für die Definition einer
-Variablen als `'(' 'def' ID ':' type eform? ')'` (bzw. unten in der daraus
-abgeleiteten ANTLR-Grammatik analog die Regel
-`varDecl : '(' 'def' ID ':' type eform? ')' ;`) formuliert - d.h. die
-*Initialisierung wäre aus Sicht der Grammatik optional*!
-
-Damit prüft der Parser nicht, ob es eine Initialisierung gibt. Wir prüfen deshalb
-das Vorhandensein der Initialisierung bei der Variablendefinition separat im
-AST-Builder für L-Var. Auf diese Weise können wir dieselbe Grammatik-Regel später
-noch einmal in einem anderen Kontext wiederverwenden, wo keine Initialisierung
-erwünscht ist. (Auch dort müssen wir dann im AST-Builder prüfen, dass dann
-entsprechend keine Initialisierung erfolgt ist.)
-
-An diesem Beispiel zeigt sich deutlich:
-
--   Die Wiederverwendung von Regeln
-    -   *kann* die Lesbarkeit erhöhen,
-    -   *kann* aber auch verwirrend sein.
--   Im Lexer/Parser nicht geprüfte "Spezialeffekte" müssen dann separat in einem
-    anderen Baustein geprüft werden
--   Wenn dadurch wie in diesem Beispiel offensichtlicher Erklärungsbedarf entsteht,
-    dann sollte man vermutlich besser separate Regeln spendieren
-
-Das Beispiel demonstriert gut das Sprichwort "*There is no such thing as a free
-lunch.*" ...
-
-**Was in der Grammatik (und damit im Lexer/Parser) problemlos erledigt werden kann,
-sollte dort auch passieren, um den Aufwand in späteren Bausteinen zu verringern und
-auch nicht den Bedarf für extra Erklärungen zu provozieren.**
 :::
-::::
 
 ::: notes
 # L-Var: Abstrakte Syntax (AST)
@@ -402,8 +350,7 @@ Expr = MulExpr(Expr, Expr) | DivExpr(Expr, Expr)
 
 Expr = VarExpr(String)
 Stmt = ExprStmt(Expr)
-     | VarDecl(String, Type, Expr)
-     | AssignStmt(Expr, Expr)
+     | VarDecl(String, Type, Expr?)
      | BlockStmt([Stmt])
 Type = IntType
 
@@ -414,9 +361,9 @@ Lvar = [Stmt]
 Die Expressions bekommen eine neue `VarExpr` für den lesenden Zugriff auf
 Variablennamen.
 
-Die Statements sind komplett neu und modellieren die Variablendeklaration und die
-Zuweisung an eine Variable. Dazu kommen ein `BlockStmt` für die `let`-Form mit
-Scopes sowie der "Cast" einer Expression in ein Statement.
+Die Statements sind komplett neu und modellieren die Variablendeklaration und das
+`BlockStmt` für die `let`-Form mit Scopes sowie der "Cast" einer Expression in ein
+Statement.
 
 Das lässt sich wie bereits bei L-Int und L-Expr in die entsprechenden AST-Klassen
 übersetzen:
@@ -452,8 +399,10 @@ Dazu kommen nun die neuen Klassen für L-Var:
 ``` java
 public record VarExpr(String name) implements Expr {}
 
-public record VarDecl(String name, Type type, Expr init) implements Stmt, Decl {}
-public record AssignStmt(Expr target, Expr expr) implements Stmt {}
+public record VarDecl(String name, Type type, Optional<Expr> init) implements Stmt {
+    public VarDecl(String name, Type type) { this(name, type, Optional.empty()); }
+}
+
 public record ExprStmt(Expr expr) implements Stmt {}
 public record BlockStmt(List<Stmt> stmts) implements Stmt {}
 ```
@@ -466,7 +415,7 @@ initiales Enum `BuiltinType` o.ä. zur Repräsentation der eingebauten Typen, et
 :::
 
 ``` java
-public interface Type {}
+public interface Type { String name(); }
 enum BuiltinType implements Type { INT }
 ```
 
@@ -475,12 +424,7 @@ Damit lassen sich dann die neuen Features aus L-Var im AST modellieren:
 
 -   `VarExpr` - Lesen einer Variable
 -   `VarDecl` - Einführung/Binden einer Variable
--   `AssignStmt` - Zuweisung an eine Variable (später wichtig für Resolver)
 -   `BlockStmt` - Scope für mehrere Statements (aus der `let`-mit-Scopes-Form)
-
-**Anmerkung**: `AssignStmt` verwendet als Ziel (`target`) eine `Expr`. In L-Var
-werden wir hier nur einfache `VarExpr` zulassen; die allgemeinere Form wird erst in
-späteren Sprachstufen interessant.
 
 ::: tip
 ## Exkurs: Definitionen und Deklarationen von Bezeichnern
@@ -629,9 +573,7 @@ geworfen.
 
 -   Sprachfeatures in L-Var:
     -   `def`: definiert neue Variablen mit Typ und Initialwert
-    -   `let`:
-        -   Zuweisung für Variablen, oder‚
-        -   neue **lokale Variablen** mit eigenem lokalem Scope
+    -   `let`: neue **lokale Variablen** mit eigenem lokalem Scope
 
 ::: readings
 In [@Nystrom2021] kann man in Kapitel 8 "Statements and State" nachlesen. Auch die
@@ -642,8 +584,8 @@ hilfreich.
 ::: outcomes
 -   k1: Ich kann die Begriffe *Expression*, *Statement*, *Scope* und *Variable*
     definieren.
--   k2: Ich kann anhand von Beispielen erklären, warum Variablendefinitionen und
-    Zuweisungen in L-Var als Statements und nicht als Expressions behandelt werden.
+-   k2: Ich kann anhand von Beispielen erklären, warum Variablendefinitionen in
+    L-Var als Statements und nicht als Expressions behandelt werden.
 -   k2: Ich kann erläutern, wie Scopes die Sichtbarkeit von Variablen beeinflussen
     und wie globale und lokale Variablen sich unterscheiden.
 -   k3: Ich kann Lispy-L-Var-Programme in *konkrete* und *abstrakte* Syntax
@@ -712,7 +654,7 @@ Betrachten Sie die folgenden Lispy-Fragmente (L-Var):
 (let a (+ a 1))
 (let ((b : int 10))
   (+ b 1)
-  (let b (+ b 2)))
+  (+ b (+ b 2)))
 ```
 
 1.  Ordnen Sie jede Zeile bzw. jeden Block ein als:
@@ -720,36 +662,11 @@ Betrachten Sie die folgenden Lispy-Fragmente (L-Var):
     -   Statement,
     -   Block mit mehreren Statements.
 2.  Bestimmen Sie für jede Zeile/jeden Block:
-    -   Welche `Stmt`-Knoten entstehen (z.B. `ExprStmt`, `VarDecl`, `AssignStmt`,
-        `BlockStmt`)?
+    -   Welche `Stmt`-Knoten entstehen (z.B. `ExprStmt`, `VarDecl`, `BlockStmt`)?
     -   Welche `Expr`-Knoten entstehen?
 3.  Diskutieren Sie kurz:
     -   Warum ist `(+ 1 2)` in L-Var alleine als Zeile ein Statement, obwohl es
         syntaktisch wie eine Expression aussieht?
     -   Welche Sprache(n), die Sie kennen, erlauben ebenfalls "nackte" Expressions
         als Statements?
-
-**ANTLR-Regel-Design für `let`**
-
-Sie möchten die beiden `let`-Varianten in ANTLR so modellieren, dass der AST-Builder
-sie leicht unterscheiden kann:
-
-``` clojure
-(let x (+ x 1))                         ;; Zuweisung
-(let ((a : int 2) (b : int 3)) ... )    ;; lokaler Scope mit Bindungen
-```
-
-1.  Entwerfen Sie eine ANTLR-Regel `letStmt`, die beide Varianten unterscheidbar
-    macht, z.B. mit zwei Alternativen und Labels.
-2.  Skizzieren Sie (in Pseudocode oder Java-ähnlich), wie die entsprechenden
-    `visitXYZ()`-Methoden im `LispyAstBuilderLvar` aussehen könnten, um:
-    -   im ersten Fall einen `AssignStmt` zu erzeugen,
-    -   im zweiten Fall einen `BlockStmt` mit passenden `VarDecl`-Knoten und
-        Body-Statements zu erzeugen.
-3.  Diskutieren Sie in der Gruppe:
-    -   Welche Vor- und Nachteile hat es, eine `letStmt`-Regel mit zwei Alternativen
-        zu haben, im Vergleich zu zwei getrennten Regeln (z.B. `assignLet` und
-        `scopedLet`)?
-    -   Könnte man die `def`-Form auch noch zu einer `let`-Form (also einer dritten
-        Alternative) machen? Was spräche dafür, was spräche dagegen?
 :::
