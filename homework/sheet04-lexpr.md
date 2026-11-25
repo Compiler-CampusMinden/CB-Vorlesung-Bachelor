@@ -169,31 +169,33 @@ Diskutieren Sie: Welche neuen AST-Knoten sind notwendig und warum?
 
 ## Schritt 5: Parsen von C-Expr und bauen des AST
 
-### Handimplementierte Lexer und Parser
+1.  Handimplementierte Lexer und Parser
 
-1.  Implementieren Sie für Ihre konkrete Grammatik (mit den gestuften Regeln) für
-    **C-Expr einen Lexer**. Erweitern Sie dazu die Tokendefinitionen passend.
+    1.  Implementieren Sie für Ihre konkrete Grammatik (mit den gestuften Regeln)
+        für **C-Expr einen Lexer**. Erweitern Sie dazu die Tokendefinitionen
+        passend.
 
-2.  Implementieren Sie einen **RD-Parser für C-Expr**, der als Ausgabe einen AST
-    erzeugt. Ergänzen Sie dazu die AST-Klassen entsprechend Ihrer abstrakten Syntax.
+    2.  Implementieren Sie einen **RD-Parser für C-Expr**, der als Ausgabe einen AST
+        erzeugt. Ergänzen Sie dazu die AST-Klassen entsprechend Ihrer abstrakten
+        Syntax.
 
-### ANTLR und AST-Builder
+2.  ANTLR und AST-Builder
 
-3.  Lassen Sie sich von **ANTLR** für die Grammatik aus der vorigen Aufgabe je einen
-    **Lexer, Parser und Visitor generieren**.
+    1.  Lassen Sie sich von **ANTLR** für die Grammatik aus der vorigen Aufgabe je
+        einen **Lexer, Parser und Visitor generieren**.
 
-4.  Erstellen Sie analog zum Skript einen **AST-Builder**, der aus dem
-    ANTLR-Parse-Tree einen AST entsprechend Ihrer abstrakten Syntax erzeugt. Nutzen
-    Sie das **Visitor-Pattern**. Diskutieren Sie:
+    2.  Erstellen Sie analog zum Skript einen **AST-Builder**, der aus dem
+        ANTLR-Parse-Tree einen AST entsprechend Ihrer abstrakten Syntax erzeugt.
+        Nutzen Sie das **Visitor-Pattern**. Diskutieren Sie:
 
-    -   Welchen generischen Typ brauchen Sie für das Ableiten des generierten
-        `XyzBaseVisitor`?
-    -   Welche der `visitXYZ()`-Methoden sollten Sie überschreiben, welche nicht?
-        Begründen Sie Ihre Aussage.
+        -   Welchen generischen Typ brauchen Sie für das Ableiten des generierten
+            `XyzBaseVisitor`?
+        -   Welche der `visitXYZ()`-Methoden sollten Sie überschreiben, welche
+            nicht? Begründen Sie Ihre Aussage.
 
-## C-Expr Pipeline
+3.  C-Expr Pipeline
 
-5.  Testen Sie die neue C-Expr-Pipeline: Implementieren Sie die **obigen Beispiele
+    Testen Sie die neue C-Expr-Pipeline: Implementieren Sie die **obigen Beispiele
     in JUnit** und führen Sie diese jeweils auf den **beiden Varianten** aus
     (RD-Parser, ANTLR). Was beobachten Sie?
 
