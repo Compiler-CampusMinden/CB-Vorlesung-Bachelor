@@ -197,7 +197,7 @@ Diskutieren Sie: Welche neuen AST-Knoten sind notwendig und warum?
 
     Testen Sie die neue C-Expr-Pipeline: Implementieren Sie die **obigen Beispiele
     in JUnit** und führen Sie diese jeweils auf den **beiden Varianten** aus
-    (RD-Parser, ANTLR). Was beobachten Sie?
+    (RD-Parser, ANTLR + AST-Builder). Was beobachten Sie?
 
 ::: tip
 **Hinweis**: Sie können die Funktionalität aus dem C-Int-Lexer und -RD-Parser als
