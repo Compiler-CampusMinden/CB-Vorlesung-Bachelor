@@ -53,7 +53,7 @@ public class NameResolverLvar {
         switch (stmt) {
             case VarDecl(var name, var type, var init) -> {
                 init.ifPresent(this::resolve);
-                resolveType(type);
+                resolve(type);
                 scope.bind(name, stmt);
             }
             case BlockStmt(var s) -> {

@@ -556,7 +556,7 @@ protected void resolve(Stmt stmt) {
 
     switch (stmt) {
         case VarDecl(var name, var type, var init) -> {
-            init.ifPresent(this::resolve);  resolveType(type);
+            init.ifPresent(this::resolve);  resolve(type);
             scope.bind(name, stmt);
         }
         case BlockStmt(var s) -> {
@@ -580,23 +580,23 @@ in unserer Lispy-Sprache (Typ `Type`) und einer Expression für die Initialisier
 (Typ `Expr`).
 
 Wir müssen im Name-Resolver prüfen, ob es diesen Typ wirklich gibt und dieser vom
-aktuellen Scope aus sichtbar ist, d.h. wir rufen `resolveType(type)` auf.
+aktuellen Scope aus sichtbar ist, d.h. wir rufen `resolve(type)` auf.
 
 ::: tip
 In L-Var gibt es zunächst nur den "eingebauten" Typ `int` in Lispy. Hier müssen wir
 nichts prüfen bei der Namensauflösung:
 
 ``` java
-protected void resolveType(Type type) {} // nothing to do here
+protected void resolve(Type type) {} // nothing to do here
 ```
 
 Wir werden aber später kennenlernen, wie man in Lispy Klassen definiert (Sprachstufe
 L-Class). Diese nutzerdefinierten Klassen sind eigene Typen, die dynamisch im AST
 auftauchen. Dann müssen wir entsprechend prüfen, ob der Typname in der `VarDecl`
 tatsächlich sichtbar ist und ein Klassentyp ist - deshalb legen wir uns hier
-vorausschauend eine **Hook-Methode** `resolveType(Type type)` an. Da wir in L-Var
-nichts tun müssen, bleibt diese Hook-Methode zunächst leer - später in L-Class
-werden wir diese geeignet überschreiben.
+vorausschauend eine **Hook-Methode** `resolve(Type type)` an. Da wir in L-Var nichts
+tun müssen, bleibt diese Hook-Methode zunächst leer - später in L-Class werden wir
+diese geeignet überschreiben.
 :::
 
 Die Initialisierung der Variablen ist eine Expression, d.h. dort können Verweise auf
@@ -900,7 +900,7 @@ Name-Resolver (Pseudocode):
 ``` java
 case VarDecl(var name, var type, var init) -> {
     init.ifPresent(this::resolve);
-    resolveType(type);
+    resolve(type);
     scope.bind(name, stmt);
 }
 ```
@@ -909,7 +909,7 @@ case VarDecl(var name, var type, var init) -> {
 case VarDecl(var name, var type, var init) -> {
     scope.bind(name, stmt);
     init.ifPresent(this::resolve);
-    resolveType(type);
+    resolve(type);
 }
 ```
 
