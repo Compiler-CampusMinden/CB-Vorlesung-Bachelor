@@ -28,6 +28,11 @@ Interpreter etc. jeweils von der vorherigen Stufe ab und erweitern diese nur um 
 neuen Sprachfeatures.
 :::
 
+::: youtube
+Vorlesung \[[YT](https://youtu.be/BNTR3xAkt2w)\],
+\[[HSBI](https://www.hsbi.de/medienportal/video/cb-l-var-integration-pipeline-gesamtbild/209dc93d954c7087e8a65a4ff7c15f51)\]
+:::
+
 # Pipeline-Gesamtbild für L-Var
 
 ![](images/lvar-overview.png)
