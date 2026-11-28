@@ -363,7 +363,7 @@ holen. Dazu ergänzen wir diese Klasse wie folgt:
 public class SemaInfo {
     public Scope globalScope = new Scope();
     public Map<Stmt, Scope> symbols = new IdentityHashMap<>();
-    public Map<Expr, Integer> depths = new IdentityHashMap<>();
+    public Map<Expr, Resolution> decls = new IdentityHashMap<>();
 
     public Env globalEnv = new Env();  // NEU
 }
@@ -519,7 +519,7 @@ In L-Var haben wir eine neue Expression: den lesenden Zugriff auf Variablen, d.h
 protected Value eval(Expr expr) {
     return switch (expr) {
         case VarExpr v -> {
-            int depth = sema.depths.get(v);
+            int depth = sema.decls.get(v).depth();
             yield env.get(v.name(), depth);
         }
 
@@ -672,7 +672,7 @@ case AssignStmt(var assignee, var expr) -> {
     if (!(assignee instanceof VarExpr v))
         throw new RuntimeException("assignee should be a variable");
     Value value = eval(expr);
-    int depth = sema.depths.get(v);
+    int depth = sema.decls.get(v).depth();
     env.assign(v.name(), value, depth);
 }
 ```
@@ -682,7 +682,7 @@ case AssignStmt(var assignee, var expr) -> {
 
 Angenommen, in Ihrem L-Var-Compiler gäbe es (hypothetisch) einen Bug im
 Name-Resolver, sodass für einige `VarExpr`-Knoten keine oder eine falsche Tiefe in
-`sema.depths` eingetragen wird.
+`sema.decls` eingetragen wird.
 
 1.  Diskutieren Sie anhand eines kleinen Beispiels:
 
