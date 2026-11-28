@@ -71,7 +71,7 @@ public class NameResolverLvar {
             case AddExpr(var l, var r) -> List.of(l, r).forEach(this::resolve);
             case VarExpr e -> {
                 var res = scope.resolve(e.name());
-                sema.depths.put(e, res.depth());
+                sema.decls.put(e, res);
             }
             default -> throw new RuntimeException("unexpected expression");
         }
