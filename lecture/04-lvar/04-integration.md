@@ -21,7 +21,7 @@ Laufzeit verschachtelte Environments (`Env`). Bei lesenden Variablenzugriffen nu
 der Interpreter die im Resolver berechneten Tiefeninformationen, um gezielt das
 richtige Environment auszuwählen, ohne zur Laufzeit rekursiv suchen zu müssen.
 
-Dieses Muster "AST $\to$ Resolver $\to$ Interpreter mit *side tables* (z.B. `depths`
+Dieses Muster "AST $\to$ Resolver $\to$ Interpreter mit *side tables* (z.B. `decls`
 in `SemaInfo`)" wird sich in den späteren Sprachstufen (L-If, L-Fun, L-Class, ...)
 wiederholen. Alle Sprachstufen leiten ihre Grammatik, AST-Klassen, Resolver und
 Interpreter etc. jeweils von der vorherigen Stufe ab und erweitern diese nur um die
@@ -45,7 +45,7 @@ neuen Sprachfeatures.
     -   `Scope`: **statische** Sicht (Namen $\to$ Deklarationen = Symboltabelle)
     -   AST $\to$ `SemaInfo` (Sidetable), gefüllt mit:
         -   `Map<Stmt, Scope> symbols`: Statement $\to$ Scope (Symboltabellen)
-        -   `Map<Expr, Integer> depths`: `VarExpr` $\to$ Tiefeninformation
+        -   `Map<Expr, Resolution> decls`: `VarExpr` $\to$ Tiefeninformation
         -   `Scope globalScope`, `Env globalEnv`
     -   `resolve(expr)`, `resolve(stmt)` mit `switch`-Expressions und Pattern
         Matching
@@ -53,7 +53,7 @@ neuen Sprachfeatures.
     -   AST + `SemaInfo` $\to$ Ausführung:
         -   `Env env`: **dynamische** Sicht (Namen $\to$ Laufzeitwerte)
         -   `class InterpreterLvar extends InterpreterLexpr`
-        -   `eval(expr)` und `exec(stmt)` nutzen `depths` für gezielte
+        -   `eval(expr)` und `exec(stmt)` nutzen `decls` für gezielte
             Environment-Zugriffe
 :::
 
@@ -108,7 +108,7 @@ public class InterpreterLvar extends InterpreterLexpr {
 -   `exec(stmt)` & `eval(expr)`:
     -   Deklarationen binden Werte in `env`
     -   Blocks erzeugen neue `Env`-Instanzen
-    -   `VarExpr` nutzt `sema.depths` zur Navigation
+    -   `VarExpr` nutzt `sema.decls` zur Navigation
 :::
 
 # Reflexion: Muster für spätere Sprachstufen
@@ -145,11 +145,11 @@ Das folgende Muster wird uns in L-If, L-Fun, L-Class usw. begleiten:
 -   **Resolver** (`NameResolverLvar`):
     -   verwaltet Scopes (Symboltabellen) und prüft Namenssichtbarkeit
     -   befüllt `SemaInfo.symbols` (Statements $\to$ `Scope`)
-    -   berechnet `SemaInfo.depths` für alle `VarExpr` (lexikalische Tiefe)
+    -   berechnet `SemaInfo.decls` für alle `VarExpr` (lexikalische Tiefe)
 -   **Interpreter** (`InterpreterLvar`):
     -   führt Statements aus und evaluiert Expressions
     -   nutzt `Env`-Kette zur Laufzeit für Variablenwerte
-    -   verwendet `depths` für direkten Zugriff auf richtiges Environment
+    -   verwendet `decls` für direkten Zugriff auf richtiges Environment
 
 \smallskip
 
@@ -161,7 +161,7 @@ Das folgende Muster wird uns in L-If, L-Fun, L-Class usw. begleiten:
 -   k2: Ich kann beschreiben, welche Aufgaben der `NameResolverLvar` übernimmt und
     welche der `InterpreterLvar`.
 -   k3: Ich kann für ein gegebenes L-Var-Programm die Scopes und Environments
-    skizzieren und erklären, wie `depths` berechnet werden.
+    skizzieren und erklären, wie `decls` berechnet werden.
 -   k3: Ich kann einen bestehenden Resolver/Interpreter um ein einfaches neues
     Statement oder eine neue Ausdrucksform erweitern.
 -   k3: Ich kann den Datenfluss in der Pipeline (Quelltext $\to$ Parse-Tree $\to$
