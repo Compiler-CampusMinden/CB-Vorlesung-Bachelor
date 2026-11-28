@@ -271,7 +271,7 @@ public record Scope(Scope parent, Map<String, Stmt> symbols) {
 public record Resolution(Stmt decl, int depth) {}
 ```
 
-:::::::::: notes
+::::::::::: notes
 ## Implementierung mit hierarchischen (verketteten) Tabellen
 
 Pro Scope wird eine **Symboltabelle `Scope`** angelegt, dabei enthält jede
@@ -329,6 +329,7 @@ In L-Var betrifft das nur die `VarDecl`! (Später werden wir in L-Fun für
 Funktionsdefinitionen und in L-Class für Klassendefinitionen noch die `FunDecl` und
 die `ClassDecl` einführen.)
 
+::: tip
 In größeren Compilerprojekten würde man dies oft ein wenig typsicherer gestalten und
 ein Marker-Interface `Decl` einführen, mit dem die relevanten AST-Klassen zusätzlich
 markiert werden. Dann könnte man hingehen und nur noch diese Typen in der
@@ -337,6 +338,7 @@ großzügiger/unsicherer `Map<String, Stmt> symbols`).
 
 Der Vorteil ist für unseren kleinen Lispy-Interpreter aber nicht so stark, deshalb
 verzichten wir zugunsten der Übersicht auf dieses Marker-Interface.
+:::
 
 ## Vorgehen bei der Namensauflösung
 
@@ -414,7 +416,7 @@ durchlaufen und die Funktionsaufrufe ausführen - und wir müssten die Namensauf
 dann in jedem einzelnen Schleifendurchlauf oder Funktionsaufruf immer wieder
 durchführen!
 :::
-::::::::::
+:::::::::::
 
 # Name-Resolver - lexikalische Auflösung von Namen
 
@@ -442,7 +444,7 @@ dann wieder zurücksetzen.
 public class NameResolverLvar {
     public Scope scope = new Scope();  // current scope (initially global)
     public Map<Stmt, Scope> symbols = new IdentityHashMap<>();
-    public Map<Expr, Integer> depths = new IdentityHashMap<>();
+    public Map<Expr, Resolution> decls = new IdentityHashMap<>();
 
     public void resolve(List<Stmt> stmts) {
         stmts.forEach(this::resolve);
@@ -465,13 +467,14 @@ aktuellen Scope gefunden haben, d.h. wir berechnen die Anzahl der Schritte vom
 aktuellen Scope zu den Elternscopes hoch. Eine "0" bedeutet, dass wir den Namen im
 aktuellen Scope gefunden haben, "1" wäre dann der direkte Elternscope, usw. Diese
 Information wollen wir für den Interpreter speichern. Dazu legen wir das Feld
-`Map<Expr, Integer> depths` an.
+`Map<Expr, Resolution> decls` an.
 
 ::: important
-In der `Map<Expr, Integer> depths` speichern wir für jeden besuchten
-`VarExpr`-Knoten die Suchtiefe. Andere `Expr`-Knoten erhalten in unserer
-Implementierung in L-Var keinen Eintrag (wir werden später noch weitere Einträge
-haben ...).
+In der `Map<Expr, Resolution> decls` speichern wir für jeden besuchten
+`VarExpr`-Knoten (also für jeden Variablenzugriff) die Suchtiefe in der
+Scope-Hierarchie und den aufgelösten Deklarationsknoten aus dem AST. Andere
+`Expr`-Knoten erhalten in unserer Implementierung in L-Var keinen Eintrag (wir
+werden später noch weitere Einträge haben ...).
 
 Unsere Modellierung nutzt für `VarExpr` die Record-Klassen aus Java, d.h. hier wird
 vom Compiler/Laufzeitsystem automatisch eine `equals()`- und
@@ -479,8 +482,8 @@ vom Compiler/Laufzeitsystem automatisch eine `equals()`- und
 würden, würden zwei unterschiedliche `VarExpr`-Objekte mit dem selben Inhalt als
 gleich betrachtet und entsprechend in der Map zusammenfallen.
 
-Wir können aber im AST in unterschiedlichen Scopes Referenzen auf die selbe Variable
-haben bzw. sogar mit dem selben Namen auf unterschiedliche Variablen in
+Wir können aber im AST in unterschiedlichen Scopes Referenzen auf dieselbe Variable
+haben bzw. sogar mit demselben Namen auf unterschiedliche Variablen in
 unterschiedlichen Scopes verweisen (*shadowing*). D.h. wir haben deshalb
 unterschiedliche `VarExpr`-Objekte im AST, die aber über die automatische
 `equals()`- und `hashCode()`-Implementierung für die Record-Klassen bei gleichem
@@ -513,7 +516,8 @@ Wer genau hinschaut, wundert sich über die Sichtbarkeit der Felder im
 Programmierung unüblich ist. Der Hintergrund dafür ist, dass wir auf diese drei
 Felder später Zugriff brauchen - aber wir können in der Einstiegsmethode
 `resolve(List<Stmt> stmts)` leider nur ein Ergebnis zurückliefern und nicht alle
-drei ... Wir werden das Problem weiter unten über eine **Sidetable** lösen.
+drei ... Wir werden das Problem weiter unten über eine **Sidetable** lösen und dafür
+den "Kopf" der Klasse `NameResolverLvar` noch einmal anpassen.
 :::
 
 ## Ablauf
@@ -675,7 +679,7 @@ protected void resolve(Expr expr) {
 
         case VarExpr e -> {
             var res = scope.resolve(e.name());
-            depths.put(e, res.depth());
+            decls.put(e, res);
         }
 
         default -> throw new RuntimeException("unexpected expression");
@@ -707,8 +711,8 @@ Wir rufen entsprechend auf dem aktuellen Scope ein `resolve()` für den Namen au
 Wenn die Variable in diesem Scope oder in einem der darüber erreichbaren
 Elternscopes gebunden wurde, bekommen wir als Ergebnis den definierenden AST-Knoten
 (eine `VarDecl`) sowie die Tiefe (Anzahl der Schritte vom aktuellen Scope aus)
-zurück - anderenfalls wirft `Scope#resolve()` einen Fehler. Die Tiefe speichern wir
-für den Interpreter in unserem Feld `depths`.
+zurück - anderenfalls wirft `Scope#resolve()` einen Fehler. Diese Informationen
+speichern wir für den Interpreter in unserem Feld `decls`.
 
 ## Besonderheiten
 
@@ -722,7 +726,7 @@ eine unbehandelte Expression aus einer späteren Sprachstufe!
 
 ::: notes
 Wir haben im `NameResolverLvar` einige auf `public` gestellte Felder gesehen:
-`Scope scope`, `Map<Stmt, Scope> symbols` und `Map<Expr, Integer> depths`. Hier
+`Scope scope`, `Map<Stmt, Scope> symbols` und `Map<Expr, Resolution> decls`. Hier
 werden bei der Traversierung des AST im Name-Resolver Daten gesammelt, die in
 späteren AST-Passes (Type-Checker, Interpreter) relevant sind.
 
@@ -747,7 +751,7 @@ Wir definieren als Sidetable hier die Klasse `SemaInfo`:
 public class SemaInfo {
     public Scope globalScope = new Scope();
     public Map<Stmt, Scope> symbols = new IdentityHashMap<>();
-    public Map<Expr, Integer> depths = new IdentityHashMap<>();
+    public Map<Expr, Resolution> decls = new IdentityHashMap<>();
 }
 ```
 
@@ -788,9 +792,8 @@ Entsprechend sind im obigen Code in den `resolve()`-Methoden noch zwei weitere
 1.  In `resolve(Stmt stmt)` würden wir dann entsprechend
     `sema.symbols.put(stmt, scope);` ausführen (statt wie oben
     `symbols.put(stmt, scope);`).
-2.  Zusätzlich müssten wir in `resolve(Expr expr)` noch
-    `sema.depths.put(e, res.depth());` (statt `depths.put(e, res.depth());`, in
-    `case VarExpr e`) ändern.
+2.  Zusätzlich müssten wir in `resolve(Expr expr)` noch `sema.decls.put(e, res);`
+    (statt `decls.put(e, res);` in `case VarExpr e`) benutzen.
 :::
 
 # Wrap-Up
