@@ -28,6 +28,11 @@ statischer Namensauflösung mit `Scope` und dynamischer Ausführung mit `Env`, o
 beide Strukturen äußerlich ähnlich aussehen.
 :::
 
+::: youtube
+Vorlesung \[[YT](https://youtu.be/vlSmdEm3yBw)\],
+\[[HSBI](https://www.hsbi.de/medienportal/video/cb-l-var-interpreter-mit-environments-und-statements/9767a14ce4cf46a239a95246a432a3f3)\]
+:::
+
 # Erinnerung: Interpreter für L-Expr
 
 ``` java
