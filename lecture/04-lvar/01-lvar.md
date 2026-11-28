@@ -310,9 +310,8 @@ eform  ::= '(' '*' eform eform+ ')' | '(' '/' eform eform+ ')' | '(' '-' eform '
 eform  ::= ID
 sform  ::= eform
          | '(' 'def' ID ':' type eform? ')'
-         | '(' 'let' ltBdgs? sform+ ')'
-ltBdgs ::= '(' ltBdg+ ')'
-ltBdg  ::= '(' ID ':' type eform? ')' ;
+         | '(' 'let' '(' ltBdg* ')' sform+ ')'
+ltBdg  ::= '(' ID ':' type eform? ')
 type   ::= 'int'
 ID     ::= [a-zA-Z][a-zA-Z_0-9]*
 
