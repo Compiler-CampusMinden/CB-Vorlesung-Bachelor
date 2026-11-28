@@ -29,6 +29,11 @@ bildet die Grundlage, um in den nächsten Schritten Namensauflösung mit Scopes 
 einen Interpreter mit Environments und Statements zu implementieren.
 :::
 
+::: youtube
+Vorlesung \[[YT](https://youtu.be/1zlA1D3KH9U)\],
+\[[HSBI](https://www.hsbi.de/medienportal/video/cb-l-var-berblick-syntax-und-ast/1df2a787768cc9923eaf878886334369)\]
+:::
+
 # Erinnerung L-Int / L-Expr: Nur Ausdrücke
 
 ``` clojure
