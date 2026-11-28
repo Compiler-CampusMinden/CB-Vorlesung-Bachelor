@@ -280,7 +280,7 @@ Der Unterschied liegt in der Benutzung:
     (natürlich) auch die Funktionsaufrufe - jeder Funktionsaufruf legt einen neuen
     "Scope" an, in dem die lokalen Variablen im Funktionskörper für diesen Aufruf
     definiert sind. Dies nennt man auch oft "Call Frame" oder "Stack Frame" - unsere
-    `Env`-Objekte modellieren genau diese Call Frames. In vielen Implementierungen
+    `Env`-Objekte modellieren genau diese Call-Frames. In vielen Implementierungen
     wird dafür intern tatsächlich ein Stack von Frames verwendet, aber manche Dinge
     gehen leider nur über die Struktur mit dem Eltern-Zeiger - siehe Challenges.
     Unsere Eltern-Zeiger-Struktur bildet dasselbe Konzept explizit im Heap nach. Wir
