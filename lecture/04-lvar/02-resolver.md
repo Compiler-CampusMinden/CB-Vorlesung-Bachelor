@@ -29,6 +29,11 @@ Diese **lexikalische Namensauflösung** ist die Grundlage für weitere semantisc
 Prüfungen, Typprüfung und letztlich Interpretation oder Codegenerierung.
 :::
 
+::: youtube
+Vorlesung \[[YT](https://youtu.be/q6YLEXyQA74)\],
+\[[HSBI](https://www.hsbi.de/medienportal/video/cb-l-var-scopes-name-resolver-und-symboltabellen/af95127e4eac32d315b557dadfa286d5)\]
+:::
+
 # Was passiert nach der Syntaxanalyse?
 
 ::::: columns
